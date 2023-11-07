@@ -1,0 +1,2 @@
+com\itextos\beacon\commonlib\datarefresher\servlets\InitServlet.class
+com\itextos\beacon\commonlib\datarefresher\servlets\OnDemandRefreshServlet.class
