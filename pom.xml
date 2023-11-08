@@ -82,6 +82,38 @@
   	<module>common-dndchecker</module>
   	<module>common-stringprocessor</module>
   	<module>common-scheduler</module>
+  	<module>inmemory-accountdetails</module>
+  	<module>inmemory-appconfigparams</module>
+  	<module>inmemory-blocklistnumbers</module>
+  	<module>inmemory-carrierhandover</module>
+  	<module>inmemory-clientallowedheaders</module>
+  	<module>inmemory-clientdlrpreferences</module>
+  	<module>inmemory-commonheaders</module>
+  	<module>inmemory-customfeatures</module>
+  	<module>inmemory-dnpayload</module>
+  	<module>inmemory-governmentheaders</module>
+  	<module>inmemory-interfacesinfo</module>
+  	<module>inmemory-messageutility</module>
+  	<module>inmemory-msgtemplates</module>
+  	<module>inmemory-msgvalidity</module>
+  	<module>inmemory-optout</module>
+  	<module>inmemory-errorinfo</module>
+  	<module>inmemory-promoheaderpool</module>
+  	<module>inmemory-routeinfo</module>
+  	<module>inmemory-routeretryinfo</module>
+  	<module>inmemory-spamwordcheck</module>
+  	<module>inmemory-specificblockoutdata</module>
+  	<module>inmemory-userheader</module>
+  	<module>inmemory-visualizelink</module>
+  	<module>inmemory-whitelistnumbers</module>
+  	<module>inmemory-data</module>
+  	<module>inmemory-encryptinfo</module>
+  	<module>inmemory-intlrouteinfo</module>
+  	<module>inmemory-currencyconversion</module>
+  	<module>inmemory-smppaccountdetails</module>
+  	<module>inmemory-dlrquery</module>
+  	<module>inmemory-otpconfig</module>
+  	<module>inmemory-loader</module>
   </modules>
   
    <dependencies>
