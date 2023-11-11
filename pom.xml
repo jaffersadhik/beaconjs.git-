@@ -114,6 +114,68 @@
   	<module>inmemory-dlrquery</module>
   	<module>inmemory-otpconfig</module>
   	<module>inmemory-loader</module>
+  	<module>platform-elasticsearchutil</module>
+  	<module>platform-messageflowutility</module>
+  	<module>platform-blockoutprocess</module>
+  	<module>platform-iccore</module>
+  	<module>platform-duplicatecheckprocessor</module>
+  	<module>platform-msgtimeboundcheck</module>
+  	<module>platform-templatefinder</module>
+  	<module>platform-sbcvcore</module>
+  	<module>platform-vccore</module>
+  	<module>platform-faillistutil</module>
+  	<module>platform-rccore</module>
+  	<module>platform-carrierhandoverutility</module>
+  	<module>platform-dnplayloadutil</module>
+  	<module>platform-chcore</module>
+  	<module>platform-kannelstatusupdater</module>
+  	<module>platform-rchcore</module>
+  	<module>platform-dchcore</module>
+  	<module>platform-sbccore</module>
+  	<module>platform-prccore</module>
+  	<module>platform-dlrretrycore</module>
+  	<module>platform-dnr</module>
+  	<module>platform-dnpcore</module>
+  	<module>platform-sbpcore</module>
+  	<module>platform-dlrpayloadgen</module>
+  	<module>platform-billing</module>
+  	<module>platform-subbiller</module>
+  	<module>platform-t2ecore</module>
+  	<module>platform-topic2table</module>
+  	<module>platform-dn-t2tb</module>
+  	<module>platform-sub-t2tb</module>
+  	<module>platform-errorlog_t2tb</module>
+  	<module>platform-kannelstatusupdaterweb</module>
+  	<module>platform-clienthandovert2tbweb</module>
+  	<module>platform-r3ccore</module>
+  	<module>platform-messagetool</module>
+  	<module>platform-messagetoolweb</module>
+  	<module>platform-r3r</module>
+  	<module>platform-dnnopayload-t2tb</module>
+  	<module>platform-duplicatecheckremoval</module>
+  	<module>platform-fullmsg-t2tb</module>
+  	<module>platform-interim-failuers-t2tb</module>
+  	<module>platform-vcdltcore</module>
+  	<module>platform-vcprocess</module>
+  	<module>platform-dnrfallback</module>
+  	<module>platform-dnrfallbackpoller</module>
+  	<module>platform-walletprocess</module>
+  	<module>platform-walletconsumer</module>
+  	<module>platform-walletbase</module>
+  	<module>platform-smpputil</module>
+  	<module>platform-smppdlrhandover</module>
+  	<module>platform-wallet-prepaid-migration</module>
+  	<module>platform-promokannelrediscleaner</module>
+  	<module>platform-blockoutwalletconsumer</module>
+  	<module>platform-dnpostlog-t2tb</module>
+  	<module>platform-decimalutility</module>
+  	<module>platform-prepaiduidata</module>
+  	<module>platform-prepaiduIweb</module>
+  	<module>platform-pendingpayloadcountexporter</module>
+  	<module>platform-walletreminder</module>
+  	<module>platform-customkafkaprocessor</module>
+  	<module>platform-cappingcheck</module>
+  	<module>platform-singledn</module>
   </modules>
   
    <dependencies>
