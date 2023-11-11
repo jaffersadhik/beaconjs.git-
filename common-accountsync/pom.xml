@@ -12,5 +12,16 @@
 			<artifactId>common-redisconnectionprovider</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-commondbpool</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-pwdencryption</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

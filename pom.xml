@@ -210,7 +210,11 @@
 			<artifactId>commons-text</artifactId>
 			<version>${commons-text-version}</version>
 		</dependency>
-		
+				<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson-version}</version>
+		</dependency>
 			<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
