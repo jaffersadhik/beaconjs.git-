@@ -178,6 +178,11 @@
 		<module>ch-httpclienthandover</module>
 		<module>ch-clienthandoveracceptproject</module>
 		<module>platform-icweb</module>
+		<module>platform-vcweb</module>
+		<module>platform-chweb</module>
+		<module>platform-rcweb</module>
+		<module>platform-sbcvweb</module>
+		<module>docker-mw</module>
   </modules>
   
    <dependencies>
