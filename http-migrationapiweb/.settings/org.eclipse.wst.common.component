@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="http-migrationapiweb-1.0">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="http-generichttpapiprocessor-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/http-generichttpapiprocessor/http-generichttpapiprocessor">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-ipvalidationutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-ipvalidationutility/common-ipvalidationutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="http-interfaceparameters-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/http-interfaceparameters/http-interfaceparameters">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-loader-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-loader/inmemory-loader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-commondbpool/common-commondbpool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="http-generichttpapidata-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/http-generichttpapidata/http-generichttpapidata">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-prometheusmetricsutil-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-prometheusmetricsutil/common-prometheusmetricsutil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-timezoneutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-timezoneutility/common-timezoneutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-appconfigparams-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-appconfigparams/inmemory-appconfigparams">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-constants/common-constants">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-data/inmemory-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-accountsync-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-accountsync/common-accountsync">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-messageidentifier-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageidentifier/common-messageidentifier">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-interfacesinfo-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-interfacesinfo/inmemory-interfacesinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-encryptinfo-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-encryptinfo/inmemory-encryptinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-messagetool-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-messagetool/platform-messagetool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-msgtemplates-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-msgtemplates/inmemory-msgtemplates">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-messageobject-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageobject/common-messageobject">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-messageutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-messageutility/inmemory-messageutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-customfeatures-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-customfeatures/inmemory-customfeatures">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="http-interfaceutil-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/http-interfaceutil/http-interfaceutil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-utility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-utility/common-utility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commonpropertyloader-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-commonpropertyloader/common-commonpropertyloader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-componentconsumer-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-componentconsumer/common-componentconsumer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-messageprocessor-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageprocessor/common-messageprocessor">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-kafkaservice-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-kafkaservice/common-kafkaservice">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-daemonprocess-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-daemonprocess/common-daemonprocess">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="http-interfacefallback-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/http-interfacefallback/http-interfacefallback">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="http-migrationapiweb"/>
+        <property name="java-output-path" value="/http-migrationapiweb/target/classes"/>
+    </wb-module>
+</project-modules>

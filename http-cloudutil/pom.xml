@@ -6,4 +6,11 @@
     <version>1.0</version>
   </parent>
   <artifactId>http-cloudutil</artifactId>
+  <dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>http-interfaceutil</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>

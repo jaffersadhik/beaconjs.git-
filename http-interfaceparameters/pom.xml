@@ -6,4 +6,11 @@
     <version>1.0</version>
   </parent>
   <artifactId>http-interfaceparameters</artifactId>
+  	<dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-loader</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>
