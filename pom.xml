@@ -177,6 +177,7 @@
 		<module>smpp-utils</module>
 		<module>ch-httpclienthandover</module>
 		<module>ch-clienthandoveracceptproject</module>
+		<module>platform-icweb</module>
   </modules>
   
    <dependencies>
