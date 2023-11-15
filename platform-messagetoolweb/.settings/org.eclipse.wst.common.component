@@ -37,6 +37,12 @@
         <dependent-module archiveName="inmemory-appconfigparams-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-appconfigparams/inmemory-appconfigparams">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="platform-messagetool-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-messagetool/platform-messagetool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-msgtemplates-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-msgtemplates/inmemory-msgtemplates">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="common-messageobject-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageobject/common-messageobject">
             <dependency-type>uses</dependency-type>
         </dependent-module>

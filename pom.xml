@@ -157,6 +157,18 @@
 		<module>platform-customkafkaprocessor</module>
 		<module>platform-cappingcheck</module>
 		<module>platform-singledn</module>
+		<module>http-generichttpapidata</module>
+		<module>http-generichttpapiprocessor</module>
+		<module>http-generichttpapiweb</module>
+		<module>http-rcsr</module>
+		<module>http-interfaceparameters</module>
+		<module>http-interfacefallback</module>
+		<module>http-interfacefallbackpoller</module>
+		<module>http-interfaceutil</module>
+		<module>http-cloudacceptor</module>
+		<module>http-clouddataprocessor</module>
+		<module>http-cloudutil</module>
+		<module>http-migrationapiweb</module>
   </modules>
   
    <dependencies>
