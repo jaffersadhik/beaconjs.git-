@@ -6,4 +6,57 @@
     <version>1.0</version>
   </parent>
   <artifactId>platform-chcore</artifactId>
+  <properties>
+		<main.class>com.itextos.beacon.platform.ch.StartApplication</main.class>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin-version}</version>
+				<configuration>
+					<classifier>executable</classifier>
+					<mainClass>${main.class}</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<phase>package</phase>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-componentconsumer</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-carrierhandoverutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-blockoutprocess</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-kannelstatusupdater</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-messageflowutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>

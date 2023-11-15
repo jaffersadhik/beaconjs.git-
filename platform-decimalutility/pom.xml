@@ -6,4 +6,11 @@
     <version>1.0</version>
   </parent>
   <artifactId>platform-decimalutility</artifactId>
+  <dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-appconfigparams</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>

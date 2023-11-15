@@ -6,4 +6,27 @@
     <version>1.0</version>
   </parent>
   <artifactId>platform-messagetool</artifactId>
+  
+  <dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-msgtemplates</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-messageobject</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-messageutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-appconfigparams</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>

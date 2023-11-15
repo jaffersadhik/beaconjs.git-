@@ -6,4 +6,26 @@
     <version>1.0</version>
   </parent>
   <artifactId>platform-singledn</artifactId>
+  	<dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-redisconnectionprovider</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-messageobject</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-customfeatures</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-appconfigparams</artifactId>
+			<version>1.0</version>
+		</dependency>		
+	</dependencies>
 </project>

@@ -6,4 +6,42 @@
     <version>1.0</version>
   </parent>
   <artifactId>platform-dnplayloadutil</artifactId>
+  	<dependencies>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-messageutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-dnpayload</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-whitelistnumbers</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-customfeatures</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-messageobject</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-redisconnectionprovider</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-errorinfo</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>
