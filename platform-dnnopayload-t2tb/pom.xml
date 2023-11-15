@@ -38,6 +38,16 @@
 			<artifactId>platform-topic2table</artifactId>
 			<version>1.0</version>
 		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-constants</artifactId>
+			<version>1.0</version>
+		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-constants</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 </project>
