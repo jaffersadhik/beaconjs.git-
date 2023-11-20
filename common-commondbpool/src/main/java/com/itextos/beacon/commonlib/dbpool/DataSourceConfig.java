@@ -5,7 +5,7 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.encryption.Encryptor;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 
 class DataSourceConfig
         extends

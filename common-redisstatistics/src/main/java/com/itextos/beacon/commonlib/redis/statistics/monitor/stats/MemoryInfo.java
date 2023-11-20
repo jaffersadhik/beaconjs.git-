@@ -1,6 +1,6 @@
 package com.itextos.beacon.commonlib.redis.statistics.monitor.stats;
 
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 
 public class MemoryInfo
 {

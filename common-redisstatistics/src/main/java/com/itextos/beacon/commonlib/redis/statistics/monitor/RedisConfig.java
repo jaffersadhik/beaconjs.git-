@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.encryption.Encryptor;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 class RedisConfig

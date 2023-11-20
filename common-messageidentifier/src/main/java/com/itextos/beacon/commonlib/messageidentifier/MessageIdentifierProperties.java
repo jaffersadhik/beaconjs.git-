@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 
 class MessageIdentifierProperties
 {

@@ -5,8 +5,8 @@ import java.io.File;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.exception.ItextosException;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.QueueObject;
 import com.itextos.beacon.interfaces.generichttpapi.common.interfaces.IRequestProcessor;

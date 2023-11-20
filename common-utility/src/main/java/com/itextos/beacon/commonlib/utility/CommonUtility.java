@@ -27,7 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 
 public final class CommonUtility
 {

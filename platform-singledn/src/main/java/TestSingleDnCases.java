@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DNDeliveryMode;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;

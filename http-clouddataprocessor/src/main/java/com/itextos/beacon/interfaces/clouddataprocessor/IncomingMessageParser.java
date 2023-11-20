@@ -2,7 +2,7 @@ package com.itextos.beacon.interfaces.clouddataprocessor;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.interfaces.clouddatautil.common.RequestType;
 
 public class IncomingMessageParser

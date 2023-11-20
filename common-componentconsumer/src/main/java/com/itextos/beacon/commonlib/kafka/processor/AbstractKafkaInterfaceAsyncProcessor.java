@@ -6,12 +6,12 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
-import com.itextos.beacon.commonlib.exception.ItextosException;
-import com.itextos.beacon.commonlib.kafka.process.MessageProcessor;
-import com.itextos.beacon.commonlib.kafka.request.ProducerKafkaRequest;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaRequest;
 
 public abstract class AbstractKafkaInterfaceAsyncProcessor
         extends

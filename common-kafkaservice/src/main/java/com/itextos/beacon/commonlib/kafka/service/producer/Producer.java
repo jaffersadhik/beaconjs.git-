@@ -12,7 +12,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaUtility;

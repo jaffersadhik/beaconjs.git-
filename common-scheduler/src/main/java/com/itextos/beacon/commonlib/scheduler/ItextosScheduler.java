@@ -16,9 +16,9 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.scheduler.impl.ScheduleDataLoader;
 import com.itextos.beacon.commonlib.scheduler.job.ItextosJobListener;
 import com.itextos.beacon.commonlib.scheduler.logging.db.DatabaseJobLogging;

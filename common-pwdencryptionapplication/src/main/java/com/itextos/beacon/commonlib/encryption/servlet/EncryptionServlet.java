@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.encryption.EncryptedObject;
 import com.itextos.beacon.commonlib.encryption.process.Processor;
-import com.itextos.beacon.commonlib.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.pwdencryption.EncryptedObject;
 
 /**
  * Servlet implementation class EncryptionServlet

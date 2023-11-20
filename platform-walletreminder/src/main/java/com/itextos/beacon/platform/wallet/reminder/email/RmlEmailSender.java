@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.httputility.HTTPRequestUtility;
 import com.itextos.beacon.commonlib.httputility.HttpHeader;
 import com.itextos.beacon.commonlib.httputility.HttpResult;

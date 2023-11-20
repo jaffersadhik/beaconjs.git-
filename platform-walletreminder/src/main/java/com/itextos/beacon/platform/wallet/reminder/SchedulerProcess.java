@@ -1,8 +1,8 @@
 package com.itextos.beacon.platform.wallet.reminder;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
-import com.itextos.beacon.commonlib.exception.ItextosException;
 import com.itextos.beacon.platform.wallet.reminder.quartz.schedule.WalletBalanceScheduler;
 
 public class SchedulerProcess

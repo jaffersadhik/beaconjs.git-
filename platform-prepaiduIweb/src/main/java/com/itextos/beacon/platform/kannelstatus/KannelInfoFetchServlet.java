@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
 
 @WebServlet("/kannelinfofetchservlet")
 public class KannelInfoFetchServlet

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
 import com.itextos.beacon.r3r.data.R3CUserInfo;
 import com.itextos.beacon.r3r.process.UrlRedirectProcessor;
 

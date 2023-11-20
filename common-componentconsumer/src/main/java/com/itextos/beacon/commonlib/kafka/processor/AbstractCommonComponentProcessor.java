@@ -15,12 +15,12 @@ import org.json.simple.parser.JSONParser;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.exception.ItextosException;
-import com.itextos.beacon.commonlib.kafka.process.MessageProcessor;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.processor.extend.Utility;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaUtility;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public abstract class AbstractCommonComponentProcessor

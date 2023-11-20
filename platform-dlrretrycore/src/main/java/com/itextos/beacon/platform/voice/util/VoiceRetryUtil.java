@@ -14,7 +14,7 @@ import org.json.simple.parser.JSONParser;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.httputility.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httputility.HttpResult;
 import com.itextos.beacon.commonlib.message.DeliveryObject;

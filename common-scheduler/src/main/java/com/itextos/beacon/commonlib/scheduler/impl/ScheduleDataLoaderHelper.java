@@ -18,7 +18,7 @@ import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.scheduler.ItextosScheduler;
 import com.itextos.beacon.commonlib.scheduler.config.MisfireInstruction;
 import com.itextos.beacon.commonlib.scheduler.config.ParamInfo;

@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.platform.decimalutil.PlatformDecimalUtil;
 import com.itextos.beacon.platform.wallet.data.WalletInput;
 import com.itextos.beacon.platform.wallet.data.WalletResult;

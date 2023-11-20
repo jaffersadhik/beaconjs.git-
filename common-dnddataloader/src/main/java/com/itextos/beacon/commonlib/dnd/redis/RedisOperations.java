@@ -12,10 +12,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.dnd.common.DndInfo;
 import com.itextos.beacon.commonlib.dnd.enums.RedisRecordStatus;
 import com.itextos.beacon.commonlib.dnd.util.DndPropertyProvider;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;

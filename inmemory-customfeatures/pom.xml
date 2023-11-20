@@ -23,4 +23,24 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+		 <Dependencies>com.itextos.beacon.inmemory.loader</Dependencies>              
+        <Dependencies>com.itextos.beacon.commonlib.constants</Dependencies>
+        <Dependencies>com.itextos.beacon.commonlib.utility</Dependencies>
+        
+                    </manifestEntries>
+                </archive>
+            </configuration>
+      		  </plugin>
+		
+		</plugins>
+	</build>
 </project>

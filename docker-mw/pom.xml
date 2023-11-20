@@ -6,4 +6,63 @@
     <version>1.0</version>
   </parent>
   <artifactId>docker-mw</artifactId>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <!-- Specify the source folder -->
+                            <resources>
+                                <resource>
+                                    <directory>../platform-icweb/target</directory>
+                                    <!-- You can include or exclude specific files if needed -->
+                                     <includes>
+                                        <include>*.war</include>
+                                    </includes> -->
+                                 </resource>
+                                  <resource>
+                                    <directory>../platform-vcweb/target</directory>
+                                    <!-- You can include or exclude specific files if needed -->
+                                     <includes>
+                                        <include>*.war</include>
+                                    </includes> -->
+                                 </resource>
+                                  <resource>
+                                    <directory>../platform-rcweb/target</directory>
+                                    <!-- You can include or exclude specific files if needed -->
+                                     <includes>
+                                        <include>*.war</include>
+                                    </includes> -->
+                                 </resource>
+                                  <resource>
+                                    <directory>../platform-chweb/target</directory>
+                                    <!-- You can include or exclude specific files if needed -->
+                                     <includes>
+                                        <include>*.war</include>
+                                    </includes> -->
+                                 </resource>
+                                  <resource>
+                                    <directory>../platform-sbcvweb/target</directory>
+                                    <!-- You can include or exclude specific files if needed -->
+                                     <includes>
+                                        <include>*.war</include>
+                                    </includes> -->
+                                 </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

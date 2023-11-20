@@ -24,7 +24,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.ShortcodeLength;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
-import com.itextos.beacon.commonlib.shortcode.ShortcodeProvider;
+import com.itextos.beacon.commonlib.shortcodeprovider.ShortcodeProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;

@@ -2,7 +2,7 @@ package com.itextos.beacon.interfaces.generichttpapi.common.interfaces;
 
 import org.json.simple.JSONObject;
 
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceRequestStatus;

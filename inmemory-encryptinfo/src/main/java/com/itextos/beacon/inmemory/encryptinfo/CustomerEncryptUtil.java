@@ -3,9 +3,9 @@ package com.itextos.beacon.inmemory.encryptinfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.encryption.CryptoType;
-import com.itextos.beacon.commonlib.encryption.EncryptedObject;
-import com.itextos.beacon.commonlib.encryption.Encryptor;
+import com.itextos.beacon.commonlib.pwdencryption.CryptoType;
+import com.itextos.beacon.commonlib.pwdencryption.EncryptedObject;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

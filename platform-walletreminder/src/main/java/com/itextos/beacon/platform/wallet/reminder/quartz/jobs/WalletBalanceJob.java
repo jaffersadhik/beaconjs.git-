@@ -9,7 +9,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.platform.wallet.reminder.data.DataCollector;
 import com.itextos.beacon.platform.wallet.reminder.data.summary.FullSummary;

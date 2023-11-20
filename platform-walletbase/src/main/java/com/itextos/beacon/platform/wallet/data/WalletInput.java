@@ -2,7 +2,7 @@ package com.itextos.beacon.platform.wallet.data;
 
 import java.io.Serializable;
 
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 
 public abstract class WalletInput
         implements

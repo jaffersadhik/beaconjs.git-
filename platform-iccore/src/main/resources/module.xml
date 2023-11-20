@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.3" name="com.itextos.beacon.platform.ic">
+    <resources>
+        <resource-root path="platform-iccore-1.0.jar"/>
+    </resources>
+    <dependencies>
+        <module name="com.itextos.beacon.inmemory.customfeatures" />
+        <module name="com.itextos.beacon.inmemory.governmentheaders" />
+        <module name="com.itextos.beacon.inmemory.userheader" />
+        <module name="com.itextos.beacon.inmemory.spamcheck" />
+        <module name="com.itextos.beacon.inmemory.msgutil" />
+        <module name="com.itextos.beacon.inmemory.blocklistnumbers" />
+        <module name="com.itextos.beacon.inmemory.optout" />
+        
+        <module name="com.itextos.beacon.platform.msgflowutil" />
+        <module name="com.itextos.beacon.platform.blockoutprocess" />
+        
+        <module name="com.itextos.beacon.commonlib.dnd" />
+        <module name="com.itextos.beacon.commonlib.kafka" />
+
+    </dependencies>
+</module>

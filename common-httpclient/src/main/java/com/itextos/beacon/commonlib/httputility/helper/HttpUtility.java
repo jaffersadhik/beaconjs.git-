@@ -25,7 +25,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.itextos.beacon.commonlib.constants.Constants;
-import com.itextos.beacon.commonlib.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.httputility.HttpHeader;
 import com.itextos.beacon.commonlib.httputility.HttpParameter;
 import com.itextos.beacon.commonlib.httputility.HttpResult;

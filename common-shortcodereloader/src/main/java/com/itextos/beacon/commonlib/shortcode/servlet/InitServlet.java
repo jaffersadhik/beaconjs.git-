@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextos.beacon.commonlib.servlets.BasicServlet;
-import com.itextos.beacon.commonlib.shortcode.RedisShortCodeChecker;
+import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.shortcodeprovider.RedisShortCodeChecker;
 
 /**
  * Servlet implementation class InitServlet

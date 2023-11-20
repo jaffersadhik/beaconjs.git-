@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.platform.wallet.reminder.data.summary.DailySummary;
 

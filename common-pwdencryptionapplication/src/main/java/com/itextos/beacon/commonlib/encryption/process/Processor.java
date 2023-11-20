@@ -3,9 +3,9 @@ package com.itextos.beacon.commonlib.encryption.process;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.encryption.CryptoType;
-import com.itextos.beacon.commonlib.encryption.EncryptedObject;
-import com.itextos.beacon.commonlib.encryption.Encryptor;
+import com.itextos.beacon.commonlib.pwdencryption.CryptoType;
+import com.itextos.beacon.commonlib.pwdencryption.EncryptedObject;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 
 public class Processor
 {

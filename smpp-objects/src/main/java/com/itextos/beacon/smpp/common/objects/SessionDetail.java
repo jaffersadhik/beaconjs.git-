@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.AccountStatus;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.platfrom.smpputil.AbstractSmppInfo;
 import com.itextos.beacon.smpp.common.objects.counters.ServerRequestCounter;

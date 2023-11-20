@@ -1,6 +1,6 @@
 package com.itextos.beacon.platform.billing;
 
-import com.itextos.beacon.commonlib.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 
 public interface IBillingProcess
 {

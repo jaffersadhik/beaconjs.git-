@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
 import com.itextos.beacon.platform.dnr.process.DlrProcess;
 
 public class DLRReceiver
