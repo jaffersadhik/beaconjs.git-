@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.rr.util.RRUtil;
+import com.itextos.beacon.inmemory.routeretryinfo.util.RRUtil;
 import com.itextos.beacon.platform.dlrretry.util.SetNextComponent;
 import com.itextos.beacon.platform.dnprocess.AgingDnStatus;
 import com.itextos.beacon.platform.voice.redis.VoiceRedis;

@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.rr.cache;
+package com.itextos.beacon.inmemory.routeretryinfo.cache;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.rr.util;
+package com.itextos.beacon.inmemory.routeretryinfo.util;
 
 import java.util.List;
 import java.util.Map;
@@ -10,14 +10,14 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.rr.cache.LoadAlertWaitConfig;
-import com.itextos.beacon.inmemory.rr.cache.LoadCustomRetryMsgValidity;
-import com.itextos.beacon.inmemory.rr.cache.LoadCustomRetryRoutes;
-import com.itextos.beacon.inmemory.rr.cache.LoadGlobalRetryInfo;
-import com.itextos.beacon.inmemory.rr.cache.LoadGlobalRetryInterval;
-import com.itextos.beacon.inmemory.rr.cache.LoadGlobalRetryRoutes;
-import com.itextos.beacon.inmemory.rr.cache.LoadVoiceAccInfo;
-import com.itextos.beacon.inmemory.rr.cache.LoadVoiceMessageTemplate;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadAlertWaitConfig;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadCustomRetryMsgValidity;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadCustomRetryRoutes;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadGlobalRetryInfo;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadGlobalRetryInterval;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadGlobalRetryRoutes;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadVoiceAccInfo;
+import com.itextos.beacon.inmemory.routeretryinfo.cache.LoadVoiceMessageTemplate;
 
 public class RRUtil
 {

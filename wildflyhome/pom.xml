@@ -21,38 +21,7 @@
                         </goals>
                         <configuration>
                             <target>
-								<!-- 
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/accountsync/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/apperrorhandler/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dbpool/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/commonpropertyloader/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafka/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/constants/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/daemonprocess/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/datarefresher/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dndchecker/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dnd/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/httputility/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/ipvalidation/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafka/service/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageidentifier/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/message/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageprocessor/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/prometheus/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pwdencryption/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redis/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redis/statistics/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/scheduler/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodegenerator/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodeprovider/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/stringprocessor/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/timezone/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/urlhitter/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/utility/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pattern/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/unittest/main/" />
--->
+								
    								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/">		
                                     <fileset file="../common-accountinitialloader/target/common-accountinitialloader-1.0.jar"/>
                                     <fileset file="../common-accountinitialloader/src/main/resources/module.xml"/>
@@ -200,11 +169,206 @@
                                     <fileset file="../common-shortcodeprovider/target/common-shortcodeprovider-1.0.jar"/>
                                     <fileset file="../common-shortcodeprovider/src/main/resources/module.xml"/>
                                 </copy>
-                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/unittest/main/">		
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/common/unittest/main/">		
                                     <fileset file="../common-unittest/target/common-unittest-1.0.jar"/>
                                     <fileset file="../common-unittest/src/main/resources/module.xml"/>
                                 </copy>
                  				
+
+
+
+
+
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/accountdetails/main/">		
+                                    <fileset file="../inmemory-accountdetails/target/inmemory-accountdetails-1.0.jar"/>
+                                    <fileset file="../inmemory-accountdetails/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/appconfigparams/main/">		
+                                    <fileset file="../inmemory-appconfigparams/target/inmemory-appconfigparams-1.0.jar"/>
+                                    <fileset file="../inmemory-appconfigparams/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/blocklistnumbers/main/">		
+                                    <fileset file="../inmemory-blocklistnumbers/target/inmemory-blocklistnumbers-1.0.jar"/>
+                                    <fileset file="../inmemory-blocklistnumbers/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/carrierhandover/main/">		
+                                    <fileset file="../inmemory-carrierhandover/target/inmemory-carrierhandover-1.0.jar"/>
+                                    <fileset file="../inmemory-carrierhandover/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/clientallowedheaders/main/">		
+                                    <fileset file="../inmemory-clientallowedheaders/target/inmemory-clientallowedheaders-1.0.jar"/>
+                                    <fileset file="../inmemory-clientallowedheaders/src/main/resources/module.xml"/>
+                                </copy>
+
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/clientdlrpreferences/main/">		
+                                    <fileset file="../inmemory-clientdlrpreferences/target/inmemory-clientdlrpreferences-1.0.jar"/>
+                                    <fileset file="../inmemory-clientdlrpreferences/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/commonheaders/main/">		
+                                    <fileset file="../inmemory-commonheaders/target/inmemory-commonheaders-1.0.jar"/>
+                                    <fileset file="../inmemory-commonheaders/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/countryinfo/main/">		
+                                    <fileset file="../inmemory-countryinfo/target/inmemory-countryinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-countryinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/currencyconversion/main/">		
+                                    <fileset file="../inmemory-currencyconversion/target/inmemory-currencyconversion-1.0.jar"/>
+                                    <fileset file="../inmemory-currencyconversion/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/customfeatures/main/">		
+                                    <fileset file="../inmemory-customfeatures/target/inmemory-customfeatures-1.0.jar"/>
+                                    <fileset file="../inmemory-customfeatures/src/main/resources/module.xml"/>
+                                </copy>
+
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/data/main/">		
+                                    <fileset file="../inmemory-data/target/inmemory-data-1.0.jar"/>
+                                    <fileset file="../inmemory-data/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/dlrquery/main/">		
+                                    <fileset file="../inmemory-dlrquery/target/inmemory-dlrquery-1.0.jar"/>
+                                    <fileset file="../inmemory-dlrquery/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/dnpayload/main/">		
+                                    <fileset file="../inmemory-dnpayload/target/inmemory-dnpayload-1.0.jar"/>
+                                    <fileset file="../inmemory-dnpayload/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/encryptinfo/main/">		
+                                    <fileset file="../inmemory-encryptinfo/target/inmemory-encryptinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-encryptinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/errorinfo/main/">		
+                                    <fileset file="../inmemory-errorinfo/target/inmemory-errorinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-errorinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/governmentheaders/main/">		
+                                    <fileset file="../inmemory-governmentheaders/target/inmemory-governmentheaders-1.0.jar"/>
+                                    <fileset file="../inmemory-governmentheaders/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/indianp/main/">		
+                                    <fileset file="../inmemory-indianp/target/inmemory-indianp-1.0.jar"/>
+                                    <fileset file="../inmemory-indianp/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/interfacesinfo/main/">		
+                                    <fileset file="../inmemory-interfacesinfo/target/inmemory-interfacesinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-interfacesinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/intlcredit/main/">		
+                                    <fileset file="../inmemory-intlcredit/target/inmemory-intlcredit-1.0.jar"/>
+                                    <fileset file="../inmemory-intlcredit/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/intlrouteinfo/main/">		
+                                    <fileset file="../inmemory-intlrouteinfo/target/inmemory-intlrouteinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-intlrouteinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/loader/main/">		
+                                    <fileset file="../inmemory-loader/target/inmemory-loader-1.0.jar"/>
+                                    <fileset file="../inmemory-loader/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/messageutility/main/">		
+                                    <fileset file="../inmemory-messageutility/target/inmemory-messageutility-1.0.jar"/>
+                                    <fileset file="../inmemory-messageutility/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/msgtemplates/main/">		
+                                    <fileset file="../inmemory-msgtemplates/target/inmemory-msgtemplates-1.0.jar"/>
+                                    <fileset file="../inmemory-msgtemplates/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/msgvalidity/main/">		
+                                    <fileset file="../inmemory-msgvalidity/target/inmemory-msgvalidity-1.0.jar"/>
+                                    <fileset file="../inmemory-msgvalidity/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/optin/main/">		
+                                    <fileset file="../inmemory-optin/target/inmemory-optin-1.0.jar"/>
+                                    <fileset file="../inmemory-optin/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/optout/main/">		
+                                    <fileset file="../inmemory-optout/target/inmemory-optout-1.0.jar"/>
+                                    <fileset file="../inmemory-optout/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/otpconfig/main/">		
+                                    <fileset file="../inmemory-otpconfig/target/inmemory-otpconfig-1.0.jar"/>
+                                    <fileset file="../inmemory-otpconfig/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/promoheaderpool/main/">		
+                                    <fileset file="../inmemory-promoheaderpool/target/inmemory-promoheaderpool-1.0.jar"/>
+                                    <fileset file="../inmemory-promoheaderpool/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/routeinfo/main/">		
+                                    <fileset file="../inmemory-routeinfo/target/inmemory-routeinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-routeinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/routeretryinfo/main/">		
+                                    <fileset file="../inmemory-routeretryinfo/target/inmemory-routeretryinfo-1.0.jar"/>
+                                    <fileset file="../inmemory-routeretryinfo/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/smppaccountdetails/main/">		
+                                    <fileset file="../inmemory-smppaccountdetails/target/inmemory-smppaccountdetails-1.0.jar"/>
+                                    <fileset file="../inmemory-smppaccountdetails/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/spamwordcheck/main/">		
+                                    <fileset file="../inmemory-spamwordcheck/target/inmemory-spamwordcheck-1.0.jar"/>
+                                    <fileset file="../inmemory-spamwordcheck/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/specificblockoutdata/main/">		
+                                    <fileset file="../inmemory-specificblockoutdata/target/inmemory-specificblockoutdata-1.0.jar"/>
+                                    <fileset file="../inmemory-specificblockoutdata/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/userheader/main/">		
+                                    <fileset file="../inmemory-userheader/target/inmemory-userheader-1.0.jar"/>
+                                    <fileset file="../inmemory-userheader/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/visualizelink/main/">		
+                                    <fileset file="../inmemory-visualizelink/target/cinmemory-visualizelink-1.0.jar"/>
+                                    <fileset file="../inmemory-visualizelink/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/whitelistnumbers/main/">		
+                                    <fileset file="../inmemory-whitelistnumbers/target/inmemory-whitelistnumbers-1.0.jar"/>
+                                    <fileset file="../inmemory-whitelistnumbers/src/main/resources/module.xml"/>
+                                </copy>
 
      
                 
