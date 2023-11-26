@@ -55,6 +55,11 @@
 			<artifactId>inmemory-routeinfo</artifactId>
 			<version>1.0</version>
 		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-indianp</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-commonheaders</artifactId>

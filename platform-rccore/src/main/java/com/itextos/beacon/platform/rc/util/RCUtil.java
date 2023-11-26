@@ -11,15 +11,15 @@ import com.itextos.beacon.commonlib.constants.RouteConstants;
 import com.itextos.beacon.commonlib.constants.RouteLogic;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.clientheaders.ClientAllowedHeaders;
-import com.itextos.beacon.inmemory.commonheader.CommonHeaders;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.clientallowedheaders.ClientAllowedHeaders;
+import com.itextos.beacon.inmemory.commonheaders.CommonHeaders;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.governmentheaders.GovtHeaderBlockCheck;
+import com.itextos.beacon.inmemory.indianp.CarrierCircle;
+import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
-import com.itextos.beacon.inmemory.msgutil.util.MessageFlowUtil;
 import com.itextos.beacon.inmemory.msgvalidity.ClientMsgValidity;
 import com.itextos.beacon.inmemory.msgvalidity.CommonMsgValidity;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
@@ -334,7 +334,7 @@ public class RCUtil
 
             for (final String splitVal : lSplitArr)
             {
-                lCarrierCircle = MessageFlowUtil.getCarrierCircle(lMNumber.substring(0, Integer.parseInt(splitVal)));
+                lCarrierCircle = IndiaNPFinder.getCarrierCircle(lMNumber.substring(0, Integer.parseInt(splitVal)));
 
                 if (lCarrierCircle != null)
                 {

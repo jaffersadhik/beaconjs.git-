@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
 import com.itextos.beacon.r3r.process.DataProcessor;
 

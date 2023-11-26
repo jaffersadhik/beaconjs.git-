@@ -9,8 +9,25 @@
   <properties>
 		<main.class>com.itextos.beacon.commonlib.scheduler.StartApplication</main.class>
 	</properties>
+	
 	<build>
 		<plugins>
+			
+				<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+        <Dependencies>com.itextos.beacon.commonlib.redis</Dependencies>
+        <Dependencies>com.itextos.beacon.commonlib.daemonprocess</Dependencies>
+
+                    </manifestEntries>
+                </archive>
+            </configuration>
+      		  </plugin>
+      		  
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

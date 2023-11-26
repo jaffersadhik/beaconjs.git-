@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteConstants;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
-import com.itextos.beacon.inmemory.msgutil.util.MessageFlowUtil;
+import com.itextos.beacon.inmemory.indianp.CarrierCircle;
+import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.platform.billing.support.BillingProducer;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
@@ -89,7 +89,7 @@ public abstract class CommonProcess
         try
         {
             if (lMobileNumber.length() > 5)
-                return MessageFlowUtil.getCarrierCircle(lMobileNumber, true);
+                return IndiaNPFinder.getCarrierCircle(lMobileNumber, true);
             else
                 if (log.isInfoEnabled())
                     log.info("Cannot find the Carrier and circle for the dest : '" + lMobileNumber + "'");

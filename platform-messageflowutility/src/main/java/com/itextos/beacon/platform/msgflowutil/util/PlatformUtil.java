@@ -16,10 +16,10 @@ import com.itextos.beacon.commonlib.message.ErrorObject;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.pattern.PatternCache;
+import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCache;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCheckCategory;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

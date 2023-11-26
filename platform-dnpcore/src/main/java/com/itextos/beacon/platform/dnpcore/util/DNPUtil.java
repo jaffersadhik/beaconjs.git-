@@ -8,7 +8,7 @@ import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemAccountDnTypeMappingInfo;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.3" name="com.itextos.beacon.platform.ic">
+<module xmlns="urn:jboss:module:1.3" name="com.itextos.beacon.commonlib.shortcode">
     <resources>
-        <resource-root path="common-constants-1.0.jar"/>
+        <resource-root path="common-shortcodereloader-1.0.jar"/>
     </resources>
    
+     <dependencies>
+        <module name="com.itextos.beacon.commonlib.shortcodeprovider" />
+        <module name="com.itextos.beacon.commonlib.errorhandler" />
+       
+    </dependencies>
 </module>

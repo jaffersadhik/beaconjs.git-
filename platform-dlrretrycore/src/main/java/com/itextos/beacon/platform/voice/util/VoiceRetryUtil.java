@@ -19,7 +19,7 @@ import com.itextos.beacon.commonlib.httputility.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httputility.HttpResult;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.rr.util.RRUtil;

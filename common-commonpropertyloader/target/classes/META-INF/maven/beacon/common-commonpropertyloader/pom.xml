@@ -7,5 +7,27 @@
   </parent>
   <artifactId>common-commonpropertyloader</artifactId>
   
+  
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+        <Dependencies>com.itextos.beacon.commonlib.loader</Dependencies>
+        <Dependencies>com.itextos.beacon.commonlib.constants</Dependencies>
+        <Dependencies>com.itextos.beacon.commonlib.utility</Dependencies>
+
+                    </manifestEntries>
+                </archive>
+            </configuration>
+      		  </plugin>
+			
+		</plugins>
+	</build>
  
 </project>

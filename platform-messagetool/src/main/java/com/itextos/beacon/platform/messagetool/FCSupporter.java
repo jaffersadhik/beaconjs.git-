@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.constants.SpecialCharacters;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.msgutil.cache.MessageSuffixPrefix;
-import com.itextos.beacon.inmemory.msgutil.util.MessageFlowUtil;
+import com.itextos.beacon.inmemory.messageutility.cache.MessageSuffixPrefix;
+import com.itextos.beacon.inmemory.messageutility.util.MessageFlowUtil;
 import com.itextos.beacon.inmemory.templates.DLTMsgTemplatePrefixSuffix;
 import com.itextos.beacon.inmemory.templates.pojo.DLTMsgPrefixSuffixObj;
 

@@ -10,9 +10,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Constants;
+import com.itextos.beacon.commonlib.pattern.PatternCache;
+import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCache;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCheckCategory;
 import com.itextos.beacon.inmemory.loader.process.AbstractAutoRefreshInMemoryProcessor;
 import com.itextos.beacon.inmemory.loader.process.InmemoryInput;
 

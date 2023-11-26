@@ -21,7 +21,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemdata.account.UserInfo;
+import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.interfaces.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.common.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.common.objects.request.SmppMessageRequest;

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.platform.msgtool.util.JsonRequestReader;
 import com.itextos.beacon.platform.msgtool.util.MsgProcessUtil;
 

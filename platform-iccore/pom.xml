@@ -79,6 +79,11 @@
 			<artifactId>inmemory-optout</artifactId>
 			<version>1.0</version>
 		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-indianp</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-blocklistnumbers</artifactId>
@@ -92,6 +97,11 @@
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-messageflowutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-intlprice</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;

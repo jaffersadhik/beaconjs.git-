@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.platform.faillist.process.FileStats;
 
 import redis.clients.jedis.Jedis;

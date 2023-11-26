@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 import redis.clients.jedis.Jedis;

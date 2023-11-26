@@ -21,9 +21,10 @@
                         </goals>
                         <configuration>
                             <target>
+								<!-- 
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/accountsync/main/" />
-                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/errorhandler/main/" />
+                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/apperrorhandler/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dbpool/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/commonpropertyloader/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafka/main/" />
@@ -49,650 +50,177 @@
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/timezone/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/urlhitter/main/" />
                                 <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/utility/main/" />
+                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pattern/main/" />
+                                <mkdir dir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/unittest/main/" />
+-->
+   								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/">		
+                                    <fileset file="../common-accountinitialloader/target/common-accountinitialloader-1.0.jar"/>
+                                    <fileset file="../common-accountinitialloader/src/main/resources/module.xml"/>
+                                </copy>
+                				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/accountsync/main/">		
+                                    <fileset file="../common-accountsync/target/common-accountsync-1.0.jar"/>
+                                    <fileset file="../common-accountsync/src/main/resources/module.xml"/>
+                                </copy>
+     
+     							<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/modulecheck/main/">		
+                                    <fileset file="../common-modulecheck/target/common-modulecheck-1.0.jar"/>
+                                    <fileset file="../common-modulecheck/src/main/resources/module.xml"/>
+                                </copy>
+                                
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/apperrorhandler/main/">		
+                                    <fileset file="../common-apperrorhandler/target/common-apperrorhandler-1.0.jar"/>
+                                    <fileset file="../common-apperrorhandler/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/datarefresher/main/">		
+                                    <fileset file="../common-datarefresher/target/common-datarefresher-1.0.jar"/>
+                                    <fileset file="../common-datarefresher/src/main/resources/module.xml"/>
+                                </copy>
+     
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/constants/main/">		
+                                    <fileset file="../common-constants/target/common-constants-1.0.jar"/>
+                                    <fileset file="../common-constants/src/main/resources/module.xml"/>
+                                </copy>
+     
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/componentconsumer/main/">		
+                                    <fileset file="../common-componentconsumer/target/common-componentconsumer-1.0.jar"/>
+                                    <fileset file="../common-componentconsumer/src/main/resources/module.xml"/>
+                                </copy>
+     
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/commonpropertyloader/main/">		
+                                    <fileset file="../common-commonpropertyloader/target/common-commonpropertyloader-1.0.jar"/>
+                                    <fileset file="../common-commonpropertyloader/src/main/resources/module.xml"/>
+                                </copy>
+     
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/commondbpool/main/">		
+                                    <fileset file="../common-commondbpool/target/common-commondbpool-1.0.jar"/>
+                                    <fileset file="../common-commondbpool/src/main/resources/module.xml"/>
+                                </copy>
+                
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/prometheusmetricsutil/main/">		
+                                    <fileset file="../common-prometheusmetricsutil/target/common-prometheusmetricsutil-1.0.jar"/>
+                                    <fileset file="../common-prometheusmetricsutil/src/main/resources/module.xml"/>
+                                </copy>
 
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageprocessor/main/">		
+                                    <fileset file="../common-messageprocessor/target/common-messageprocessor-1.0.jar"/>
+                                    <fileset file="../common-messageprocessor/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageobject/main/">		
+                                    <fileset file="../common-messageobject/target/common-messageobject-1.0.jar"/>
+                                    <fileset file="../common-messageobject/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageidentifier/main/">		
+                                    <fileset file="../common-messageidentifier/target/common-messageidentifier-1.0.jar"/>
+                                    <fileset file="../common-messageidentifier/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafkaservice/main/">		
+                                    <fileset file="../common-kafkaservice/target/common-kafkaservice-1.0.jar"/>
+                                    <fileset file="../common-kafkaservice/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/ipvalidationutility/main/">		
+                                    <fileset file="../common-ipvalidationutility/target/common-ipvalidationutility-1.0.jar"/>
+                                    <fileset file="../common-ipvalidationutility/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/httpclient/main/">		
+                                    <fileset file="../common-httpclient/target/common-httpclient-1.0.jar"/>
+                                    <fileset file="../common-httpclient/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dnddataloader/main/">		
+                                    <fileset file="../common-dnddataloader/target/common-dnddataloader-1.0.jar"/>
+                                    <fileset file="../common-dnddataloader/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dndchecker/main/">		
+                                    <fileset file="../common-dndchecker/target/common-dndchecker-1.0.jar"/>
+                                    <fileset file="../common-dndchecker/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/daemonprocess/main/">		
+                                    <fileset file="../common-daemonprocess/target/common-daemonprocess-1.0.jar"/>
+                                    <fileset file="../common-daemonprocess/src/main/resources/module.xml"/>
+                                </copy>
+     
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodegenerator/main/">		
+                                    <fileset file="../common-shortcodegenerator/target/common-shortcodegenerator-1.0.jar"/>
+                                    <fileset file="../common-shortcodegenerator/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/scheduler/main/">		
+                                    <fileset file="../common-scheduler/target/common-dndchecker-1.0.jar"/>
+                                    <fileset file="../common-scheduler/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redisstatistics/main/">		
+                                    <fileset file="../common-redisstatistics/target/common-dndchecker-1.0.jar"/>
+                                    <fileset file="../common-redisstatistics/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redisconnectionprovider/main/">		
+                                    <fileset file="../common-redisconnectionprovider/target/common-redisconnectionprovider-1.0.jar"/>
+                                    <fileset file="../common-redisconnectionprovider/src/main/resources/module.xml"/>
+                                </copy>
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pwdencryption/main/">		
+                                    <fileset file="../common-pwdencryption/target/common-pwdencryption-1.0.jar"/>
+                                    <fileset file="../common-pwdencryption/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pattern/main/">		
+                                    <fileset file="../common-pattern/target/common-pattern-1.0.jar"/>
+                                    <fileset file="../common-pattern/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/utility/main/">		
+                                    <fileset file="../common-utility/target/common-utility-1.0.jar"/>
+                                    <fileset file="../common-utility/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/urlhitterthread/main/">		
+                                    <fileset file="../common-urlhitterthread/target/common-urlhitterthread-1.0.jar"/>
+                                    <fileset file="../common-urlhitterthread/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/timezoneutility/main/">		
+                                    <fileset file="../common-timezoneutility/target/common-timezoneutility-1.0.jar"/>
+                                    <fileset file="../common-timezoneutility/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/stringprocessor/main/">		
+                                    <fileset file="../common-stringprocessor/target/common-stringprocessor-1.0.jar"/>
+                                    <fileset file="../common-stringprocessor/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodeprovider/main/">		
+                                    <fileset file="../common-shortcodeprovider/target/common-shortcodeprovider-1.0.jar"/>
+                                    <fileset file="../common-shortcodeprovider/src/main/resources/module.xml"/>
+                                </copy>
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/unittest/main/">		
+                                    <fileset file="../common-unittest/target/common-unittest-1.0.jar"/>
+                                    <fileset file="../common-unittest/src/main/resources/module.xml"/>
+                                </copy>
+                 				
+
+     
+                
                             </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            
-               <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>common-accountinitialloader</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-accountinitialloader/target</directory>
-                                     <includes>
-                                        <include>common-accountinitialloader-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
+                          
                         </configuration>
                     </execution>
                     
-                        <execution>
-                        <id>common-accountsync</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/accountsync/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-accountsync/target</directory>
-                                     <includes>
-                                        <include>common-accountsync-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
+                 
                 
-                
-                    <execution>
-                        <id>common-apperrorhandler</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/errorhandler/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-apperrorhandler/target</directory>
-                                     <includes>
-                                        <include>common-apperrorhandler-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-commondbpool</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dbpool/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-commondbpool/target</directory>
-                                     <includes>
-                                        <include>common-commondbpool-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-commonpropertyloader</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/commonpropertyloader/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-commonpropertyloader/target</directory>
-                                     <includes>
-                                        <include>common-commonpropertyloader-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-componentconsumer</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafka/processor/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-componentconsumer/target</directory>
-                                     <includes>
-                                        <include>common-componentconsumer-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-constants</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/constants/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-constants/target</directory>
-                                     <includes>
-                                        <include>common-constants-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 <resource>
-                                    <directory>../common-constants/src/main/resources</directory>
-                                     <includes>
-                                        <include>module.xml</include>
-                                    </includes> 
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-daemonprocess</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/daemonprocess/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-daemonprocess/target</directory>
-                                     <includes>
-                                        <include>common-daemonprocess-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-datarefresher</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/datarefresher/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-datarefresher/target</directory>
-                                     <includes>
-                                        <include>common-datarefresher-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-dndchecker</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dndchecker/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-dndchecker/target</directory>
-                                     <includes>
-                                        <include>common-dndchecker-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-dnddataloader</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/dnd/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-dnddataloader/target</directory>
-                                     <includes>
-                                        <include>common-dnddataloader-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-httpclient</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/httputility/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-httpclient/target</directory>
-                                     <includes>
-                                        <include>common-httpclient-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-ipvalidationutility</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/ipvalidation/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-ipvalidationutility/target</directory>
-                                     <includes>
-                                        <include>common-ipvalidationutility-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-kafkaservice</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/kafka/service/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-kafkaservice/target</directory>
-                                     <includes>
-                                        <include>common-kafkaservice-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-messageidentifier</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageidentifier/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-messageidentifier/target</directory>
-                                     <includes>
-                                        <include>common-messageidentifier-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-messageobject</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/message/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-messageobject/target</directory>
-                                     <includes>
-                                        <include>common-messageobject-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-messageprocessor</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/messageprocessor/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-messageprocessor/target</directory>
-                                     <includes>
-                                        <include>common-messageprocessor-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-prometheusmetricsutil</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/prometheusmetricsutil/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-prometheusmetricsutil/target</directory>
-                                     <includes>
-                                        <include>common-prometheusmetricsutil-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-pwdencryption</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/pwdencryption/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-pwdencryption/target</directory>
-                                     <includes>
-                                        <include>common-pwdencryption-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-redisconnectionprovider</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redis/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-redisconnectionprovider/target</directory>
-                                     <includes>
-                                        <include>common-redisconnectionprovider-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-                
-                    <execution>
-                        <id>common-redisstatistics</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redis/statistics/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-redisstatistics/target</directory>
-                                     <includes>
-                                        <include>common-redisstatistics-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
                 
           
-          
-                 <execution>
-                        <id>common-scheduler</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/scheduler/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-scheduler/target</directory>
-                                     <includes>
-                                        <include>common-scheduler-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-shortcodegenerator</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodegenerator/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-shortcodegenerator/target</directory>
-                                     <includes>
-                                        <include>common-shortcodegenerator-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-shortcodeprovider</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/shortcodeprovider/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-shortcodeprovider/target</directory>
-                                     <includes>
-                                        <include>common-shortcodeprovider-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-stringprocessor</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/stringprocessor/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-stringprocessor/target</directory>
-                                     <includes>
-                                        <include>common-stringprocessor-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-timezoneutility</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/timezone/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-timezoneutility/target</directory>
-                                     <includes>
-                                        <include>common-timezoneutility-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-urlhitterthread</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/urlhitter/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-urlhitterthread/target</directory>
-                                     <includes>
-                                        <include>common-urlhitterthread-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-          
-                 <execution>
-                        <id>common-utility</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/utility/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>../common-utility/target</directory>
-                                     <includes>
-                                        <include>common-utility-1.0.jar</include>
-                                    </includes> 
-                                </resource>
-                             
-                                 
-                            </resources>
-                        </configuration>
-                    </execution>
-                
-          
-                
                 
                 </executions>
             </plugin>
+            
         </plugins>
     </build>
 </project>

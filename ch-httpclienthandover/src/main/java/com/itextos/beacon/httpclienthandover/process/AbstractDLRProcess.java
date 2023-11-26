@@ -28,7 +28,7 @@ import com.itextos.beacon.httpclienthandover.utils.ClientHandoverConstatnts;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 import com.itextos.beacon.httpclienthandover.utils.LogStatusEnum;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

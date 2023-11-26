@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.mobilevalidation.MobileNumberValidator;
 import com.itextos.beacon.inmemory.encryptinfo.CustomerEncryptUtil;
 import com.itextos.beacon.inmemory.encryptinfo.EncryptInfo;
-import com.itextos.beacon.inmemory.interfaces.util.IInterfaceUtil;
+import com.itextos.beacon.inmemory.interfacesinfo.util.IInterfaceUtil;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceRequestStatus;

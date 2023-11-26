@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
+import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.platform.prepaiddata.PrepaidData;
 import com.itextos.beacon.platform.prepaiddata.ReadRedisData;
 

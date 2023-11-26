@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
 import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
 import com.itextos.beacon.interfaces.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.interfaces.generichttpapi.common.utils.Utility;

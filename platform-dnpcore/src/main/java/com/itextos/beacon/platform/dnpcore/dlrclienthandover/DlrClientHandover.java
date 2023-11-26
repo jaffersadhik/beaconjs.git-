@@ -11,9 +11,9 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
-import com.itextos.beacon.inmemory.clidlrpref.ClientDlrAdminDelivery;
-import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
-import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
+import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrAdminDelivery;
+import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfig;
+import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfigUtil;
 
 public class DlrClientHandover
 {

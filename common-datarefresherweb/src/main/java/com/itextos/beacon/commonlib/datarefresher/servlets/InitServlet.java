@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.commonlib.datarefresher.DataRefresher;
-import com.itextos.beacon.commonlib.errorhandler.servlets.BasicServlet;
 
 @WebServlet(
         value = "/initservlet",

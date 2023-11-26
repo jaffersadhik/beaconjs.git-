@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="platform-chweb-1.0">
+                
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
             <dependency-type>uses</dependency-type>
@@ -64,6 +69,9 @@
         <dependent-module archiveName="common-messageobject-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageobject/common-messageobject">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="common-pattern-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-pattern/common-pattern">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="platform-kannelstatusupdater-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-kannelstatusupdater/platform-kannelstatusupdater">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -97,7 +105,11 @@
         <dependent-module archiveName="platform-decimalutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-decimalutility/platform-decimalutility">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+                
         <property name="context-root" value="platform-chweb"/>
+                
         <property name="java-output-path" value="/platform-chweb/target/classes"/>
+            
     </wb-module>
+    
 </project-modules>

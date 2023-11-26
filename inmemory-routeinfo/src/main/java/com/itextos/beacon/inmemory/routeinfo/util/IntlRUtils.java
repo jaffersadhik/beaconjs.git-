@@ -9,9 +9,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
+import com.itextos.beacon.commonlib.pattern.PatternCache;
+import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCache;
-import com.itextos.beacon.commonlib.utility.pattern.PatternCheckCategory;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.routeinfo.cache.ClientKeywordHeaderInfo;

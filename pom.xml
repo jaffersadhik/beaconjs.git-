@@ -94,7 +94,8 @@
   	<module>common-dndchecker</module>
   	<module>common-stringprocessor</module>
   	<module>common-scheduler</module>
-  
+  	<module>common-pattern</module>
+
   
   
 		<module>inmemory-loader</module>
@@ -128,12 +129,21 @@
 		<module>inmemory-currencyconversion</module>
 		<module>inmemory-smppaccountdetails</module>
 		<module>inmemory-dlrquery</module>
-		<module>inmemory-otpconfig</module> <!-- 31 -->
+		<module>inmemory-otpconfig</module> 
+		<module>inmemory-countryinfo</module>
+		<module>inmemory-optin</module>
+		<module>inmemory-indianp</module>
+		<module>inmemory-intlcredit</module>
+	<module>common-unittest</module>
+	<module>common-unittestweb</module>
+
+ 	<!-- 31 -->
 		<module>platform-elasticsearchutil</module>
 		<module>platform-decimalutility</module>
 		<module>platform-messageflowutility</module>
 		<module>platform-blockoutprocess</module>
 		<module>platform-iccore</module>
+		<module>platform-intlprice</module>
 		<module>platform-duplicatecheckprocessor</module>
 		<module>platform-msgtimeboundcheck</module>
 		<module>platform-templatefinder</module>
@@ -220,9 +230,36 @@
 		<module>docker-mw</module>
 		<module>docker-base</module>
 	<!--	<module>gw-smppclient</module>  -->
+	<module>docker-docker</module>
+
+	<module>common-modulecheck</module>
   </modules>
   
+  <repositories>
+    <repository>
+        <id>jboss-public-repository-group</id>
+        <name>JBoss Public Repository Group</name>
+        <url>https://repository.jboss.org/nexus/content/groups/public</url>
+    </repository>
+</repositories>
+
+ 
+
    <dependencies>
+	 <!-- https://mvnrepository.com/artifact/org.jboss/jboss-dmr -->
+<dependency>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-dmr</artifactId>
+    <version>1.7.0.Final</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.jboss.as/jboss-as-controller-client -->
+<dependency>
+    <groupId>org.jboss.as</groupId>
+    <artifactId>jboss-as-controller-client</artifactId>
+    <version>7.2.0.Final</version>
+</dependency>
+
 	   	<dependency>
 			<groupId>com.cloudhopper</groupId>
 			<artifactId>ch-smpp</artifactId>

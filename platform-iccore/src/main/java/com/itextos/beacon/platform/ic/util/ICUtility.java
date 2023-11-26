@@ -22,17 +22,17 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
+import com.itextos.beacon.inmemory.indianp.CarrierCircle;
+import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
-import com.itextos.beacon.inmemory.msgutil.util.MessageFlowUtil;
 import com.itextos.beacon.inmemory.spamcheck.util.IntlSpamCheckUtility;
 import com.itextos.beacon.inmemory.spamcheck.util.SpamCheckUtility;
 import com.itextos.beacon.inmemory.userheader.DomesticUserHeaderInfo;
-import com.itextos.beacon.platform.msgflowutil.billing.CalculateBillingPrice;
-import com.itextos.beacon.platform.msgflowutil.billing.CurrencyUtil;
+import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
+import com.itextos.beacon.platform.intlprice.CurrencyUtil;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class ICUtility
@@ -299,7 +299,7 @@ public class ICUtility
 
                     try
                     {
-                        lCarrierCircle = MessageFlowUtil.getCarrierCircle(lMobileNo.substring(0, seriesValue));
+                        lCarrierCircle = IndiaNPFinder.getCarrierCircle(lMobileNo.substring(0, seriesValue));
                     }
                     catch (final Exception e)
                     {

@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
-import com.itextos.beacon.inmemory.msgutil.util.MessageFlowUtil;
+import com.itextos.beacon.inmemory.indianp.CarrierCircle;
+import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.platform.dnpcore.redis.RedisProcess;
 import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
 
@@ -299,7 +299,7 @@ public class AgingDlrProcessUtil
 
             try
             {
-                final CarrierCircle lCarrierCircle = MessageFlowUtil.getCarrierCircle(aBaseMessage.getMobileNumber());
+                final CarrierCircle lCarrierCircle = IndiaNPFinder.getCarrierCircle(aBaseMessage.getMobileNumber());
 
                 if (lCarrierCircle != null)
                     lCarrierCircelInfo = null;// TODO Have to work on this.

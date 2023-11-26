@@ -12,6 +12,11 @@
 			<artifactId>common-messageprocessor</artifactId>
 			<version>1.0</version>
 		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-pattern</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-appconfigparams</artifactId>
@@ -22,6 +27,7 @@
 			<artifactId>inmemory-messageutility</artifactId>
 			<version>1.0</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-customfeatures</artifactId>

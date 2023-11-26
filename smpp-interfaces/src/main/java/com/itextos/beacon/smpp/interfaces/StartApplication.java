@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.interfaces.ifb.inmem.FallbackQReaper;
 import com.itextos.beacon.platfrom.smpputil.ISmppInfo;

@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
-import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.dnpayload.cache.AgingInfo;
 import com.itextos.beacon.inmemory.dnpayload.cache.ClientIngoreDnGenerate;
 import com.itextos.beacon.inmemory.dnpayload.cache.CustomSlabs;

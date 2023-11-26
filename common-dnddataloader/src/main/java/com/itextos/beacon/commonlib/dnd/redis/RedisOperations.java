@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.dnd.common.DndInfo;
 import com.itextos.beacon.commonlib.dnd.enums.RedisRecordStatus;
 import com.itextos.beacon.commonlib.dnd.util.DndPropertyProvider;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;

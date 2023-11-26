@@ -2,7 +2,7 @@ package com.itextos.beacon.smpp.redis;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.redis.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;
 

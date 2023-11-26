@@ -21,8 +21,8 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
-import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
-import com.itextos.beacon.inmemdata.account.UserInfo;
+import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
+import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.platform.sbp.dao.DBPoller;
 import com.itextos.beacon.platform.sbp.util.SBPProducer;
 
