@@ -1,7 +1,7 @@
 package com.itextos.beacon.commonlib.kafka.processor;
 
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 
 class FallbackMessage
 {

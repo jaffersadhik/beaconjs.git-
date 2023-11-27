@@ -1,6 +1,6 @@
 package com.itextos.beacon.platform.dnrfallback;
 
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.platform.dnrfallback.inmem.DlrFallbackQ;
 
 public class DlrFallbackProcessor

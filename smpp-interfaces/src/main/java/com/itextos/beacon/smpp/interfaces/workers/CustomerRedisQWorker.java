@@ -10,7 +10,7 @@ import com.cloudhopper.commons.util.windowing.WindowFuture;
 import com.cloudhopper.smpp.pdu.PduRequest;
 import com.cloudhopper.smpp.pdu.PduResponse;
 import com.google.gson.Gson;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
 import com.itextos.beacon.platfrom.smpputil.SmppDnStatus;

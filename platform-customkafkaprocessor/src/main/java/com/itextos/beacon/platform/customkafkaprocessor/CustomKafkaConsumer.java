@@ -15,7 +15,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.errors.WakeupException;
 
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.customkafkaprocessor.util.CustomKafkaProperties;
 

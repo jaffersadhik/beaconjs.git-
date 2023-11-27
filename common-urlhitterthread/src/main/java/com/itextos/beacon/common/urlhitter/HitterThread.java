@@ -14,10 +14,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
-import com.itextos.beacon.commonlib.httputility.HTTPRequestUtility;
-import com.itextos.beacon.commonlib.httputility.HttpHeader;
-import com.itextos.beacon.commonlib.httputility.HttpParameter;
-import com.itextos.beacon.commonlib.httputility.HttpResult;
+import com.itextos.beacon.commonlib.httpclient.HTTPRequestUtility;
+import com.itextos.beacon.commonlib.httpclient.HttpHeader;
+import com.itextos.beacon.commonlib.httpclient.HttpParameter;
+import com.itextos.beacon.commonlib.httpclient.HttpResult;
 
 public class HitterThread
         implements

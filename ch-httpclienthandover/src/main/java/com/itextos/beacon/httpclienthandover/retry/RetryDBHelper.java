@@ -13,8 +13,8 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
-import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.message.ClientHandoverObject;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.ClientHandoverObject;
 
 public class RetryDBHelper
 {

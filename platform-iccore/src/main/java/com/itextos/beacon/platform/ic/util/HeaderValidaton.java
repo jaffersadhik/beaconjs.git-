@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
-import com.itextos.beacon.commonlib.message.MessageRequest;
-import com.itextos.beacon.commonlib.message.utility.MessageUtil;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.governmentheaders.GovtHeaderBlockCheck;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;

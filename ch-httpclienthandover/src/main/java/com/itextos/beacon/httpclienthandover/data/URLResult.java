@@ -1,6 +1,6 @@
 package com.itextos.beacon.httpclienthandover.data;
 
-import com.itextos.beacon.commonlib.httputility.HttpResult;
+import com.itextos.beacon.commonlib.httpclient.HttpResult;
 
 public class URLResult
 {

@@ -14,7 +14,7 @@ import com.itextos.beacon.inmemory.intlcredit.IntlCredits;
 import com.itextos.beacon.inmemory.intlcredit.IntlSmsRates;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.platform.decimalutil.PlatformDecimalUtil;
+import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
 
 public class CurrencyUtil
 {

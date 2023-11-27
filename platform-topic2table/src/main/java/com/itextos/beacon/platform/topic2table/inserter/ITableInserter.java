@@ -1,6 +1,6 @@
 package com.itextos.beacon.platform.topic2table.inserter;
 
-import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.platform.topic2table.utils.ExceptionHandlerType;
 
 public interface ITableInserter

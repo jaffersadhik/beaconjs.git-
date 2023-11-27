@@ -2,7 +2,7 @@ package com.itextos.beacon.httpclienthandover.common;
 
 import java.util.List;
 
-import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverConstatnts;

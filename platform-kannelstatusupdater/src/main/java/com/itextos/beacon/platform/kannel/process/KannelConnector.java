@@ -9,8 +9,8 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.httputility.BasicHttpConnector;
-import com.itextos.beacon.commonlib.httputility.HttpResult;
+import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
+import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.kannel.beans.KannelStatusInfo;
 import com.itextos.beacon.platform.kannel.xmlparser.Gateway;

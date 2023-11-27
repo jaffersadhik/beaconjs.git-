@@ -3,7 +3,7 @@ package com.itextos.beacon.platform.ch.util;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;

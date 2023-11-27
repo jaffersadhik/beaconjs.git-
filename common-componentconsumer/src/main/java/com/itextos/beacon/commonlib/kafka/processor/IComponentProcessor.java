@@ -1,6 +1,6 @@
 package com.itextos.beacon.commonlib.kafka.processor;
 
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 
 public interface IComponentProcessor
         extends

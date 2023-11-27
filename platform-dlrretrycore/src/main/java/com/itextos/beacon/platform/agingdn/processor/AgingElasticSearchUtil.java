@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 
-import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 
 public class AgingElasticSearchUtil
 {

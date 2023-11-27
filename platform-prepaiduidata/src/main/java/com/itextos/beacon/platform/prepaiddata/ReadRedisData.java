@@ -22,7 +22,7 @@ import com.itextos.beacon.inmemory.data.account.dao.AccountInfo;
 import com.itextos.beacon.inmemory.data.redis.RedisHandler;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.platform.decimalutil.PlatformDecimalUtil;
+import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
 import com.itextos.beacon.platform.prepaiddata.inmemory.CurrencyMaster;
 
 import redis.clients.jedis.Jedis;

@@ -7,8 +7,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.JsonArray;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
-import com.itextos.beacon.commonlib.message.utility.MessageUtil;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
 
 import redis.clients.jedis.Jedis;

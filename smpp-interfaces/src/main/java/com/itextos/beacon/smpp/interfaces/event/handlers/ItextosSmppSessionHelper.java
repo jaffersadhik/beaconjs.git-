@@ -28,7 +28,7 @@ import com.cloudhopper.smpp.pdu.SubmitSmResp;
 import com.cloudhopper.smpp.pdu.Unbind;
 import com.cloudhopper.smpp.pdu.UnbindResp;
 import com.google.gson.Gson;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheus.smpp.SmppPrometheusInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;

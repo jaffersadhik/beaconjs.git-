@@ -2,7 +2,7 @@ package com.itextos.beacon.platform.esutil.data;
 
 import java.util.List;
 
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 
 public interface IEsInmemoryCollection
 {

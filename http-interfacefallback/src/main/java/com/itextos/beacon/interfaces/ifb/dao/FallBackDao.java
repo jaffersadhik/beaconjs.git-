@@ -15,8 +15,8 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
-import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class FallBackDao

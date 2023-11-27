@@ -19,7 +19,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.processor.extend.Utility;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaUtility;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 

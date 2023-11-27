@@ -6,7 +6,7 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaRedisHandler;
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 
 public class ProducerCallback
         implements

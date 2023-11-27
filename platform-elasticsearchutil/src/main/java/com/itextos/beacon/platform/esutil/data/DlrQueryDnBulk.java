@@ -8,8 +8,8 @@ import org.elasticsearch.common.xcontent.XContentType;
 
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.platform.esutil.types.EsConstant;
 import com.itextos.beacon.platform.esutil.types.EsCreateTimeStamp;
 import com.itextos.beacon.platform.esutil.types.EsOperation;

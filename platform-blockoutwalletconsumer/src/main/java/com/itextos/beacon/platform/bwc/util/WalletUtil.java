@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
@@ -23,11 +23,11 @@ import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CalculateIntlBillingPrice;
 import com.itextos.beacon.platform.intlprice.CurrencyUtil;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
-import com.itextos.beacon.platform.wallet.data.WalletDeductInput;
-import com.itextos.beacon.platform.wallet.data.WalletInput;
-import com.itextos.beacon.platform.wallet.data.WalletRefundInput;
-import com.itextos.beacon.platform.wallet.data.WalletResult;
-import com.itextos.beacon.platform.wallet.processor.WalletDeductRefundProcessor;
+import com.itextos.beacon.platform.walletbase.data.WalletDeductInput;
+import com.itextos.beacon.platform.walletbase.data.WalletInput;
+import com.itextos.beacon.platform.walletbase.data.WalletRefundInput;
+import com.itextos.beacon.platform.walletbase.data.WalletResult;
+import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
 
 public class WalletUtil
 {

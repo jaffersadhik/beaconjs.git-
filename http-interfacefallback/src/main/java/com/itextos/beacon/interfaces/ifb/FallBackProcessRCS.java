@@ -1,6 +1,6 @@
 package com.itextos.beacon.interfaces.ifb;
 
-import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.interfaces.ifb.inmem.FallbackQ;
 
 public class FallBackProcessRCS

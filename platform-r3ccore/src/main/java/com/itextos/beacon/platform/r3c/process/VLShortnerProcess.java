@@ -3,7 +3,7 @@ package com.itextos.beacon.platform.r3c.process;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.platform.r3c.util.R3CUtil;
 import com.itextos.beacon.platform.r3c.util.VLRepository;
 

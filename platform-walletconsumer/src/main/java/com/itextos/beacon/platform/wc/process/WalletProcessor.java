@@ -9,15 +9,15 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
-import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platform.wallet.data.WalletDeductInput;
-import com.itextos.beacon.platform.wallet.data.WalletInput;
-import com.itextos.beacon.platform.wallet.data.WalletResult;
-import com.itextos.beacon.platform.wallet.processor.WalletDeductRefundProcessor;
-import com.itextos.beacon.platform.wallet.util.WalletUtil;
+import com.itextos.beacon.platform.walletbase.data.WalletDeductInput;
+import com.itextos.beacon.platform.walletbase.data.WalletInput;
+import com.itextos.beacon.platform.walletbase.data.WalletResult;
+import com.itextos.beacon.platform.walletbase.util.WalletUtil;
+import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
 import com.itextos.beacon.platform.wc.util.WCProducer;
 
 public class WalletProcessor

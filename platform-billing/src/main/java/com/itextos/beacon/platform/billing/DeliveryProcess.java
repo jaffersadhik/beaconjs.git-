@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.BillType;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.errorinfo.ErrorCodeUtil;
 import com.itextos.beacon.inmemory.errorinfo.data.ErrorCategory;

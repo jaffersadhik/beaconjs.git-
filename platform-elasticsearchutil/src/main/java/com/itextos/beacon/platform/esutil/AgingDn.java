@@ -1,8 +1,8 @@
 package com.itextos.beacon.platform.esutil;
 
-import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.message.DeliveryObject;
-import com.itextos.beacon.commonlib.message.SubmissionObject;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.platform.esutil.types.EsOperation;
 
 public class AgingDn

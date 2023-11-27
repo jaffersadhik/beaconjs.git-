@@ -8,9 +8,9 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafka.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
-import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.commonlib.message.SubmissionObject;
+import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.platform.billing.SubmissionProcess;
 
 public class BillerProcessor

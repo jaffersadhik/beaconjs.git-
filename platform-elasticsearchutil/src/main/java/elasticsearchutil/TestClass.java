@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
-import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.platform.esutil.EsProcess;
 import com.itextos.beacon.platform.esutil.data.R3Info;
 import com.itextos.beacon.platform.esutil.types.DlrQueryMulti;

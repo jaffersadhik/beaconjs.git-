@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.message.MessageRequest;
-import com.itextos.beacon.commonlib.message.utility.MessageUtil;
+import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.commonlib.pattern.PatternCache;
 import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
