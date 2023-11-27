@@ -3,8 +3,8 @@ package com.itextos.beacon.platform.dltvc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.kafka.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
 import com.itextos.beacon.platform.templatefinder.data.DltTemplatesDataLoader;
 

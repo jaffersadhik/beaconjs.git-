@@ -16,7 +16,7 @@ import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.dnrfallback.DlrFallbackProcessor;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 
 public class DlrProcess
 {

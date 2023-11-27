@@ -3,10 +3,10 @@ package com.itextos.beacon.platform.dch.processor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.kafka.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dch.util.DCHUtil;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 
 public class DummyCarrierHandoverProcess
         extends

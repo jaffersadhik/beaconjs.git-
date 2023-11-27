@@ -3,8 +3,8 @@ package com.itextos.beacon.platform.sbc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.kafka.processor.ProcessorInfo;
 import com.itextos.beacon.platform.sbc.data.InmemBlockoutQReaper;
 import com.itextos.beacon.platform.sbc.data.InmemoryBlockoutReaper;
 import com.itextos.beacon.platform.sbc.data.InmemoryScheduleReaper;

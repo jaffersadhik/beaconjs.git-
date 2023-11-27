@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfigUtil;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 
 public class DNPProducer
 {

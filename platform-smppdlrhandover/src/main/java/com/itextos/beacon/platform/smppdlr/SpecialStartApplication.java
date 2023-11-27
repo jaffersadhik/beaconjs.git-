@@ -3,10 +3,10 @@ package com.itextos.beacon.platform.smppdlr;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.componentconsumer.processor.ModuleProcessorInfo;
+import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.kafka.processor.ModuleProcessorInfo;
-import com.itextos.beacon.commonlib.kafka.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.platform.smppdlr.fbp.SmppDlrFallbackPollerHolder;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueueReaper;

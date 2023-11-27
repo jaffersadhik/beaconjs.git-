@@ -5,9 +5,9 @@ import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaInterfaceAsyncProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.kafka.processor.AbstractKafkaInterfaceAsyncProcessor;
 import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageobject.AsyncRequestObject;
 import com.itextos.beacon.commonlib.messageobject.IMessage;

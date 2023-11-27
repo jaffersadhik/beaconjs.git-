@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.intlrouteinfo.util.IntlRouteUtil;
 import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CalculateIntlBillingPrice;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 
 public class IntlMsgVerifyProcessor

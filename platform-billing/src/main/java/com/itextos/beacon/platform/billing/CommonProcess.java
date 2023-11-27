@@ -14,7 +14,7 @@ import com.itextos.beacon.inmemory.indianp.CarrierCircle;
 import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.platform.billing.support.BillingProducer;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
-import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
+import com.itextos.beacon.platform.messageflowutility.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletRefundInput;
 import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;

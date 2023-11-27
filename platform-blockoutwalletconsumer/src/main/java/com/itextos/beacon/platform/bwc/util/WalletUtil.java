@@ -22,7 +22,7 @@ import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CalculateIntlBillingPrice;
 import com.itextos.beacon.platform.intlprice.CurrencyUtil;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 import com.itextos.beacon.platform.walletbase.data.WalletDeductInput;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletRefundInput;

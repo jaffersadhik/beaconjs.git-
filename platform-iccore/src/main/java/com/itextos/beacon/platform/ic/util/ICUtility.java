@@ -33,7 +33,7 @@ import com.itextos.beacon.inmemory.spamcheck.util.SpamCheckUtility;
 import com.itextos.beacon.inmemory.userheader.DomesticUserHeaderInfo;
 import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CurrencyUtil;
-import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 
 public class ICUtility
 {
