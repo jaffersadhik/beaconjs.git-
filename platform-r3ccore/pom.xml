@@ -8,7 +8,7 @@
   <artifactId>platform-r3ccore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.r3c.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.r3ccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

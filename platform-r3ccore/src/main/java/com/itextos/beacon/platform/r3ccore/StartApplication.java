@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c;
+package com.itextos.beacon.platform.r3ccore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

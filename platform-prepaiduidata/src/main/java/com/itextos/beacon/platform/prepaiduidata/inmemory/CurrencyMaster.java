@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.prepaiddata.inmemory;
+package com.itextos.beacon.platform.prepaiduidata.inmemory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

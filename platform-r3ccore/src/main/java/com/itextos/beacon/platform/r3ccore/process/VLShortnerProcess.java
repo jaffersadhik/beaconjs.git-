@@ -1,11 +1,11 @@
-package com.itextos.beacon.platform.r3c.process;
+package com.itextos.beacon.platform.r3ccore.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.platform.r3c.util.R3CUtil;
-import com.itextos.beacon.platform.r3c.util.VLRepository;
+import com.itextos.beacon.platform.r3ccore.util.R3CUtil;
+import com.itextos.beacon.platform.r3ccore.util.VLRepository;
 
 public class VLShortnerProcess
 {

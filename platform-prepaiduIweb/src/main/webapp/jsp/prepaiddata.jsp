@@ -2,9 +2,9 @@
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Map"%>
 <%@page
-	import="com.itextos.beacon.platform.prepaiddata.inmemory.CurrencyData"%>
-<%@page import="com.itextos.beacon.platform.prepaiddata.PrepaidData"%>
-<%@page import="com.itextos.beacon.platform.prepaiddata.ReadRedisData"%>
+	import="com.itextos.beacon.platform.prepaiduidata.inmemory.CurrencyData"%>
+<%@page import="com.itextos.beacon.platform.prepaiduidata.PrepaidData"%>
+<%@page import="com.itextos.beacon.platform.prepaiduidata.ReadRedisData"%>
 <%@page import="com.itextos.beacon.commonlib.utility.CommonUtility"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>

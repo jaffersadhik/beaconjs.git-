@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c.process;
+package com.itextos.beacon.platform.r3ccore.process;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.visualizelink.util.VLUtil;
-import com.itextos.beacon.platform.r3c.util.R3CUtil;
+import com.itextos.beacon.platform.r3ccore.util.R3CUtil;
 
 public class ShortnerCache
 {

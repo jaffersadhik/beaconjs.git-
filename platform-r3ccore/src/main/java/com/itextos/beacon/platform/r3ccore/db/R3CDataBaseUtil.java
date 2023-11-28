@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c.db;
+package com.itextos.beacon.platform.r3ccore.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,8 +16,8 @@ import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.platform.r3c.util.R3CUtil;
-import com.itextos.beacon.platform.r3c.util.VLRepository;
+import com.itextos.beacon.platform.r3ccore.util.R3CUtil;
+import com.itextos.beacon.platform.r3ccore.util.VLRepository;
 
 public class R3CDataBaseUtil
 {

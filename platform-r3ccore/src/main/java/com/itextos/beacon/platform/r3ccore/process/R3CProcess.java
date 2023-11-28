@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c.process;
+package com.itextos.beacon.platform.r3ccore.process;
 
 import java.util.Date;
 
@@ -19,9 +19,9 @@ import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.MessagePart;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.platform.r3c.util.R3CProducer;
-import com.itextos.beacon.platform.r3c.util.R3CUtil;
-import com.itextos.beacon.platform.r3c.util.SmartlinkIdReplacer;
+import com.itextos.beacon.platform.r3ccore.util.R3CProducer;
+import com.itextos.beacon.platform.r3ccore.util.R3CUtil;
+import com.itextos.beacon.platform.r3ccore.util.SmartlinkIdReplacer;
 
 public class R3CProcess
         extends

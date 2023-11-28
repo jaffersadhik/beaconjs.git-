@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.prepaiddata;
+package com.itextos.beacon.platform.prepaiduidata;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ import com.itextos.beacon.inmemory.data.redis.RedisHandler;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
-import com.itextos.beacon.platform.prepaiddata.inmemory.CurrencyMaster;
+import com.itextos.beacon.platform.prepaiduidata.inmemory.CurrencyMaster;
 
 import redis.clients.jedis.Jedis;
 

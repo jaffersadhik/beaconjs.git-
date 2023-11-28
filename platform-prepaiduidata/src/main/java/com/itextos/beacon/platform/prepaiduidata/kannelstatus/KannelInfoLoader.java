@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.kannelstatus;
+package com.itextos.beacon.platform.prepaiduidata.kannelstatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

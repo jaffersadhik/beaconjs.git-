@@ -1,8 +1,8 @@
-package com.itextos.beacon.platform.prepaiddata.inmemory;
+package com.itextos.beacon.platform.prepaiduidata.inmemory;
 
 import java.util.Comparator;
 
-import com.itextos.beacon.platform.prepaiddata.PrepaidData;
+import com.itextos.beacon.platform.prepaiduidata.PrepaidData;
 
 public class ListCompare
         implements

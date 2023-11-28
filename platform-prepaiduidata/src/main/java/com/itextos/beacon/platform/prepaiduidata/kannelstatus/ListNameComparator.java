@@ -1,8 +1,8 @@
-package com.itextos.beacon.platform.kannelstatus;
+package com.itextos.beacon.platform.prepaiduidata.kannelstatus;
 
 import java.util.Comparator;
 
-public class ListStoresizeComparator
+public class ListNameComparator
         implements
         Comparator<KannelInfo>
 {
@@ -18,7 +18,8 @@ public class ListStoresizeComparator
         if (aO2 == null)
             return -1;
 
-        return aO1.getStoreSize() < aO2.getStoreSize() ? 1 : (aO1.getStoreSize() == aO2.getStoreSize() ? 0 : -1);
+        final int nameCompare = aO1.getOperator().compareTo(aO2.getOperator());
+        return nameCompare == 0 ? aO1.getRoute().compareTo(aO2.getRoute()) : nameCompare;
     }
 
 }

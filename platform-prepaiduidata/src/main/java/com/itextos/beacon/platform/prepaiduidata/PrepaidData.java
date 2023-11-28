@@ -1,9 +1,9 @@
-package com.itextos.beacon.platform.prepaiddata;
+package com.itextos.beacon.platform.prepaiduidata;
 
 import java.io.Serializable;
 
 import com.itextos.beacon.commonlib.constants.AccountStatus;
-import com.itextos.beacon.platform.prepaiddata.inmemory.CurrencyData;
+import com.itextos.beacon.platform.prepaiduidata.inmemory.CurrencyData;
 
 public class PrepaidData
         implements

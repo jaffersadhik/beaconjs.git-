@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c.util;
+package com.itextos.beacon.platform.r3ccore.util;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

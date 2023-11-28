@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.r3c.util;
+package com.itextos.beacon.platform.r3ccore.util;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +32,7 @@ import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.visualizelink.util.VLUtil;
 import com.itextos.beacon.platform.duplicatecheckprocessor.DuplicateCheck;
-import com.itextos.beacon.platform.r3c.db.R3CDataBaseUtil;
+import com.itextos.beacon.platform.r3ccore.db.R3CDataBaseUtil;
 
 public class R3CUtil
 {
