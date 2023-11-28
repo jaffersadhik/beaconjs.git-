@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rc;
+package com.itextos.beacon.platform.rchcore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,7 +10,7 @@ public class StartApplication
 {
 
     private static final Log       log            = LogFactory.getLog(StartApplication.class);
-    private static final Component THIS_COMPONENT = Component.RC;
+    private static final Component THIS_COMPONENT = Component.RCH;
 
     public static void main(
             String[] args)

@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rc.process;
+package com.itextos.beacon.platform.rccore.process;
 
 import java.util.Map;
 
@@ -20,8 +20,8 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.IntlRUtils;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
-import com.itextos.beacon.platform.rc.util.RCProducer;
-import com.itextos.beacon.platform.rc.util.RCUtil;
+import com.itextos.beacon.platform.rccore.util.RCProducer;
+import com.itextos.beacon.platform.rccore.util.RCUtil;
 
 public class RCIntlProcessor
 {

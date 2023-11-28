@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rch.processor;
+package com.itextos.beacon.platform.rchcore.processor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.inmemory.routeinfo.util.HeaderValidation;
 import com.itextos.beacon.platform.chutility.util.CHUtil;
-import com.itextos.beacon.platform.rch.util.RCHProcessUtil;
-import com.itextos.beacon.platform.rch.util.RCHProducer;
+import com.itextos.beacon.platform.rchcore.util.RCHProcessUtil;
+import com.itextos.beacon.platform.rchcore.util.RCHProducer;
 
 public class RetryProcessor
         extends

@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rch.processor;
+package com.itextos.beacon.platform.rchcore.processor;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -29,8 +29,8 @@ import com.itextos.beacon.platform.chutility.util.CHUtil;
 import com.itextos.beacon.platform.chutility.util.GenerateDNUrl;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannel.process.response.KannelStatsCollector;
-import com.itextos.beacon.platform.rch.util.RCHProcessUtil;
-import com.itextos.beacon.platform.rch.util.RCHProducer;
+import com.itextos.beacon.platform.rchcore.util.RCHProcessUtil;
+import com.itextos.beacon.platform.rchcore.util.RCHProducer;
 
 public class RetryCarrierHandover
 {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
-import com.itextos.beacon.platform.rc.StartApplication;
+import com.itextos.beacon.platform.rccore.StartApplication;
 
 /**
  * Servlet implementation class InitServlet

@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rc.process;
+package com.itextos.beacon.platform.rccore.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,9 +11,9 @@ import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.HeaderValidation;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteFinder;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
-import com.itextos.beacon.platform.rc.util.RCProducer;
-import com.itextos.beacon.platform.rc.util.RCUtil;
-import com.itextos.beacon.platform.rc.util.RFinder;
+import com.itextos.beacon.platform.rccore.util.RCProducer;
+import com.itextos.beacon.platform.rccore.util.RCUtil;
+import com.itextos.beacon.platform.rccore.util.RFinder;
 
 public class RProcessor
 {

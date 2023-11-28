@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rc.util;
+package com.itextos.beacon.platform.rccore.util;
 
 import java.util.List;
 import java.util.Map;

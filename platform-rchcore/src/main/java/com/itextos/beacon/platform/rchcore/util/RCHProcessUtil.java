@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rch.util;
+package com.itextos.beacon.platform.rchcore.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

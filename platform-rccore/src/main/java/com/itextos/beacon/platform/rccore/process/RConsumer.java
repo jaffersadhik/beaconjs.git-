@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.rc.process;
+package com.itextos.beacon.platform.rccore.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollecti
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.platform.rc.util.RCProducer;
-import com.itextos.beacon.platform.rc.util.RCUtil;
+import com.itextos.beacon.platform.rccore.util.RCProducer;
+import com.itextos.beacon.platform.rccore.util.RCUtil;
 
 public class RConsumer
         extends

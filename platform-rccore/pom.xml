@@ -9,7 +9,7 @@
   
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.rc.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.rccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>
