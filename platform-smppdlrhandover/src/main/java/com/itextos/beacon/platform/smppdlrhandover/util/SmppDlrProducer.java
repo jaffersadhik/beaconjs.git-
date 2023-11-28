@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.util;
+package com.itextos.beacon.platform.smppdlrhandover.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

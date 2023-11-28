@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.inmemq;
+package com.itextos.beacon.platform.smppdlrhandover.inmemq;
 
 import java.util.ArrayList;
 import java.util.List;

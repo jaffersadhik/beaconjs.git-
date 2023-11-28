@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.fbp;
+package com.itextos.beacon.platform.smppdlrhandover.fbp;
 
 public class SmppDlrFallbackPoller
         extends

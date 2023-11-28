@@ -8,7 +8,7 @@
   <artifactId>platform-smppdlrhandover</artifactId>
   
   	<properties>
-		<main.class>com.itextos.beacon.platform.smppdlr.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.smppdlrhandover.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

@@ -1,21 +1,20 @@
-package com.itextos.beacon.platform.smppdlr;
+package com.itextos.beacon.platform.smppdlrhandover;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.componentconsumer.processor.ModuleProcessorInfo;
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
-import com.itextos.beacon.platform.smppdlr.fbp.SmppDlrFallbackPollerHolder;
-import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueueReaper;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrRedis;
+import com.itextos.beacon.platform.smppdlrhandover.fbp.SmppDlrFallbackPollerHolder;
+import com.itextos.beacon.platform.smppdlrhandover.inmemq.InmemoryQueueReaper;
+import com.itextos.beacon.platform.smppdlrhandover.util.SmppDlrRedis;
 
-public class SpecialStartApplication
+public class StartApplication
 {
 
-    private static final Log       log            = LogFactory.getLog(SpecialStartApplication.class);
+    private static final Log       log            = LogFactory.getLog(StartApplication.class);
     private static final Component THIS_COMPONENT = Component.SMPP_DLR;
 
     public static void main(
@@ -40,7 +39,7 @@ public class SpecialStartApplication
             	System.setProperty("modvalue", System.getenv("modvalue"));
 
             }
-            final ModuleProcessorInfo lProcessor = new ModuleProcessorInfo(THIS_COMPONENT);
+            final ProcessorInfo lProcessor = new ProcessorInfo(THIS_COMPONENT);
             lProcessor.process();
 
             // ClientWiseCounter.getInstance().init(null, 0);

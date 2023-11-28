@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.process;
+package com.itextos.beacon.platform.smppdlrhandover.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollecti
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
-import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueue;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrProducer;
+import com.itextos.beacon.platform.smppdlrhandover.inmemq.InmemoryQueue;
+import com.itextos.beacon.platform.smppdlrhandover.util.SmppDlrProducer;
 
 public class SMPPDlrProcessor
         extends

@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.fbp;
+package com.itextos.beacon.platform.smppdlrhandover.fbp;
 
 import java.util.ArrayList;
 import java.util.List;

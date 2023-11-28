@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.inmemq;
+package com.itextos.beacon.platform.smppdlrhandover.inmemq;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
+import com.itextos.beacon.platform.smppdlrhandover.util.SmppDlrUtil;
 
 public class InmemoryQueueReaper
         implements
