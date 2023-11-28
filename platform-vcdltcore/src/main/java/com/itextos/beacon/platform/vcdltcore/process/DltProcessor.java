@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dltvc.process;
+package com.itextos.beacon.platform.vcdltcore.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

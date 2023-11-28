@@ -8,7 +8,7 @@
   <artifactId>platform-vccore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.vc.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.vccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

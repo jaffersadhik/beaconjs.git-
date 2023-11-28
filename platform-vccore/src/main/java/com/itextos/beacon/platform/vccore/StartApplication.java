@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.vc;
+package com.itextos.beacon.platform.vccore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
