@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfig;
@@ -25,9 +25,9 @@ import com.itextos.beacon.inmemory.errorinfo.data.IErrorInfo;
 import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
 import com.itextos.beacon.inmemory.indianp.CarrierCircle;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
+import com.itextos.beacon.platform.cappingcheck.CappingIntervalType;
+import com.itextos.beacon.platform.cappingcheck.CappingMessageChecker;
 import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
-import com.itextos.beacon.platform.msgcapping.CappingIntervalType;
-import com.itextos.beacon.platform.msgcapping.CappingMessageChecker;
 
 public class SubmissionProcess
         extends

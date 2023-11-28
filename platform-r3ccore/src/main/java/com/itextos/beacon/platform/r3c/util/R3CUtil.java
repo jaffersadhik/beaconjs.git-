@@ -31,7 +31,7 @@ import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.visualizelink.util.VLUtil;
-import com.itextos.beacon.platform.duplicatecheck.DuplicateCheck;
+import com.itextos.beacon.platform.duplicatecheckprocessor.DuplicateCheck;
 import com.itextos.beacon.platform.r3c.db.R3CDataBaseUtil;
 
 public class R3CUtil

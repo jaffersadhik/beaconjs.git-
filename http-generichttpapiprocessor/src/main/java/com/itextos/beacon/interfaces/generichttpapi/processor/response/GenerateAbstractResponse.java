@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;
 import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponseCodeMapping;

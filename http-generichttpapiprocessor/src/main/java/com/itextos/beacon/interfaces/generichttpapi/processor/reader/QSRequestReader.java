@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceRequestStatus;

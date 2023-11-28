@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollecti
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 
 import io.prometheus.client.Histogram.Timer;
 

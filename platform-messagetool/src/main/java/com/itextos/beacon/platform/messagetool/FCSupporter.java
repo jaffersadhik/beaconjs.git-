@@ -14,8 +14,8 @@ import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.messageutility.cache.MessageSuffixPrefix;
 import com.itextos.beacon.inmemory.messageutility.util.MessageFlowUtil;
-import com.itextos.beacon.inmemory.templates.DLTMsgTemplatePrefixSuffix;
-import com.itextos.beacon.inmemory.templates.pojo.DLTMsgPrefixSuffixObj;
+import com.itextos.beacon.inmemory.msgtemplates.DLTMsgTemplatePrefixSuffix;
+import com.itextos.beacon.inmemory.msgtemplates.pojo.DLTMsgPrefixSuffixObj;
 
 abstract class FCSupporter
 {

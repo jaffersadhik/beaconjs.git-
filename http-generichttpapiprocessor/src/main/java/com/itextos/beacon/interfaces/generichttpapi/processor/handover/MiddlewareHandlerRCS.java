@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.messageobject.MessagePart;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;

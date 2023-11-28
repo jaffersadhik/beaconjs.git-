@@ -37,7 +37,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 

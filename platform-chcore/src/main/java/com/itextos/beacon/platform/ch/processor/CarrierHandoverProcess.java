@@ -24,7 +24,7 @@ import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.carrierhandover.RouteKannelInfo;

@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.interfaces.generichttpapi.common.data.InterfaceRequestStatus;
 import com.itextos.beacon.interfaces.generichttpapi.common.interfaces.IRequestProcessor;

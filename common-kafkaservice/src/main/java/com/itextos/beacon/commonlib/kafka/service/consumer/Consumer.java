@@ -29,7 +29,7 @@ import com.itextos.beacon.commonlib.kafka.service.consumer.partitionlogger.Parti
 import com.itextos.beacon.commonlib.kafka.service.consumer.partitionlogger.PartitionInfoCollection;
 import com.itextos.beacon.commonlib.kafka.service.producer.Producer;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class Consumer

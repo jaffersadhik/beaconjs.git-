@@ -14,6 +14,32 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>inmemory-data</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-userheader</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-messagetool</artifactId>
+			<version>1.0</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-messageflowutility</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-intlrouteinfo</artifactId>
+			<version>1.0</version>
+		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>platform-duplicatecheckprocessor</artifactId>
 			<version>1.0</version>
 		</dependency>
@@ -33,31 +59,7 @@
 			<artifactId>platform-templatefinder</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>inmemory-data</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-messagetool</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>inmemory-userheader</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-messageflowutility</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>inmemory-intlrouteinfo</artifactId>
-			<version>1.0</version>
-		</dependency>
+	
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-cappingcheck</artifactId>

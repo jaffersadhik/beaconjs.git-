@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.kafka.service.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafka.service.common.KafkaUtility;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class Producer

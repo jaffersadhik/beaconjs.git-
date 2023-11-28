@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
-import com.itextos.beacon.commonlib.prometheus.PrometheusMetrics;
+import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.interfaces.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.interfaces.ifb.inmem.FallbackQReaperRCS;
