@@ -14,10 +14,10 @@ import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryQ;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
-import com.itextos.beacon.platform.dnprocess.PayloadProcessor;
 
 public class DlrReceiveProcessor
         extends

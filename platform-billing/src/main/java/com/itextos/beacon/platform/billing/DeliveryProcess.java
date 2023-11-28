@@ -16,7 +16,7 @@ import com.itextos.beacon.inmemory.errorinfo.data.ErrorCategory;
 import com.itextos.beacon.inmemory.errorinfo.data.IErrorInfo;
 import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
-import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
+import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
 
 public class DeliveryProcess
         extends

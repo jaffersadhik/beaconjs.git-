@@ -27,7 +27,7 @@ import com.itextos.beacon.inmemory.indianp.CarrierCircle;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.cappingcheck.CappingIntervalType;
 import com.itextos.beacon.platform.cappingcheck.CappingMessageChecker;
-import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
+import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
 
 public class SubmissionProcess
         extends

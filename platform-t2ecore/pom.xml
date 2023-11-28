@@ -8,7 +8,7 @@
   <artifactId>platform-t2ecore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.t2e.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.t2ecore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

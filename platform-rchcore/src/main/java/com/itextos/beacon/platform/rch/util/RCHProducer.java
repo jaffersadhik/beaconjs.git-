@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platform.dnprocess.PayloadProcessor;
+import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.messageflowutility.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 

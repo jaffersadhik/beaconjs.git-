@@ -16,7 +16,7 @@ import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.msgvalidity.CommonMsgValidity;
 import com.itextos.beacon.inmemory.routeretryinfo.util.RRUtil;
-import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
+import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
 
 public class DlrRetryUtil
 {

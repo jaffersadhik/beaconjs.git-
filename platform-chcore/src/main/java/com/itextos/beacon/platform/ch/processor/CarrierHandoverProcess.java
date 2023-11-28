@@ -33,7 +33,7 @@ import com.itextos.beacon.platform.ch.util.CHProcessUtil;
 import com.itextos.beacon.platform.ch.util.CHProducer;
 import com.itextos.beacon.platform.chutility.util.CHUtil;
 import com.itextos.beacon.platform.chutility.util.GenerateDNUrl;
-import com.itextos.beacon.platform.dnprocess.PayloadProcessor;
+import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannel.process.response.KannelStatsCollector;
 
 import io.prometheus.client.Histogram.Timer;

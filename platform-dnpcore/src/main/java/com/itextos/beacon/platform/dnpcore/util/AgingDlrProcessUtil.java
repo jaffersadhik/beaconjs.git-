@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.indianp.CarrierCircle;
 import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
+import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
 import com.itextos.beacon.platform.dnpcore.redis.RedisProcess;
-import com.itextos.beacon.platform.dnprocess.common.TimeAdjustmentUtility;
 
 public class AgingDlrProcessUtil
 {

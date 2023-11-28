@@ -17,12 +17,12 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryUpdateQ;
 import com.itextos.beacon.platform.dnpcore.process.DlrProcessUtil;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
-import com.itextos.beacon.platform.dnprocess.PayloadProcessor;
 
 public abstract class AbstractDataPoller
         implements

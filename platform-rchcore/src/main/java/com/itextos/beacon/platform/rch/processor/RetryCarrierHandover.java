@@ -27,7 +27,7 @@ import com.itextos.beacon.inmemory.carrierhandover.RouteKannelInfo;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.platform.chutility.util.CHUtil;
 import com.itextos.beacon.platform.chutility.util.GenerateDNUrl;
-import com.itextos.beacon.platform.dnprocess.PayloadProcessor;
+import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannel.process.response.KannelStatsCollector;
 import com.itextos.beacon.platform.rch.util.RCHProcessUtil;
 import com.itextos.beacon.platform.rch.util.RCHProducer;
