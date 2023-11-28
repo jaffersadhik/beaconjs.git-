@@ -5,7 +5,7 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-sub-t2tb</artifactId>
+  <artifactId>platform-subt2tb</artifactId>
   
 	<properties>
 		<main.class>com.itextos.beacon.platform.subt2tb.StartApplication</main.class>
