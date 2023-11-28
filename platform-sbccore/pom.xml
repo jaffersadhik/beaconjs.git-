@@ -8,7 +8,7 @@
   <artifactId>platform-sbccore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.sbc.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.sbccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

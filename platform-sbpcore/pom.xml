@@ -8,7 +8,7 @@
   <artifactId>platform-sbpcore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.sbp.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.sbpcore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>
