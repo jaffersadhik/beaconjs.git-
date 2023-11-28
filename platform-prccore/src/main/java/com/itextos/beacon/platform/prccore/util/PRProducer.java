@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.prc.util;
+package com.itextos.beacon.platform.prccore.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.prc.process;
+package com.itextos.beacon.platform.prccore.process;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
-import com.itextos.beacon.platform.prc.util.PRCUtil;
-import com.itextos.beacon.platform.prc.util.PRProducer;
+import com.itextos.beacon.platform.prccore.util.PRCUtil;
+import com.itextos.beacon.platform.prccore.util.PRProducer;
 
 public class RejectionProcess
         extends

@@ -8,7 +8,7 @@
   <artifactId>platform-prccore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.prc.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.prccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

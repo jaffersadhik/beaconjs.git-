@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.prc.util;
+package com.itextos.beacon.platform.prccore.util;
 
 import java.util.Date;
 import java.util.List;
