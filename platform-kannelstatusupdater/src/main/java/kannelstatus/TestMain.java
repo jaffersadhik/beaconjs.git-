@@ -1,7 +1,7 @@
 package kannelstatus;
 
-import com.itextos.beacon.platform.kannel.process.KannelStatusRefresher;
-import com.itextos.beacon.platform.kannel.process.response.KannelAvailability;
+import com.itextos.beacon.platform.kannelstatusupdater.process.KannelStatusRefresher;
+import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelAvailability;
 
 public class TestMain
 {

@@ -7,7 +7,7 @@
   </parent>
   <artifactId>platform-pendingpayloadcountexporter</artifactId>
   <properties>
-		<main.class>com.itextos.beacon.platform.payload.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.pendingpayloadcountexporter.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

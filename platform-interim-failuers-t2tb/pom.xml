@@ -5,10 +5,10 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-interim-failuers-t2tb</artifactId>
+  <artifactId>platform-interimfailuerst2tb</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.interimfailuers.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.interimfailuerst2tb.StartApplication</main.class>
 	</properties>
 
 	<build>

@@ -8,7 +8,7 @@
   <artifactId>platform-iccore</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.ic.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.iccore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

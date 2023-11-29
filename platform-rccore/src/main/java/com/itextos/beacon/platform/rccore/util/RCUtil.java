@@ -25,7 +25,7 @@ import com.itextos.beacon.inmemory.msgvalidity.CommonMsgValidity;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 import com.itextos.beacon.inmemory.userheader.IntlUserHeaderInfo;
 import com.itextos.beacon.inmemory.whitelistnumbers.MobileWhitelistNumbers;
-import com.itextos.beacon.platform.faillist.FaillistFinder;
+import com.itextos.beacon.platform.faillistutil.FaillistFinder;
 
 public class RCUtil
 {

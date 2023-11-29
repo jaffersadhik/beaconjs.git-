@@ -9,7 +9,7 @@
   
   	
 	<properties>
-		<main.class> com.itextos.beacon.platform.kannel.StartApplication</main.class>
+		<main.class> com.itextos.beacon.platform.kannelstatusupdater.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

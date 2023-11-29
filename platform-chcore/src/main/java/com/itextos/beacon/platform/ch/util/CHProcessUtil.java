@@ -8,7 +8,7 @@ import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.platform.kannel.process.response.KannelAvailability;
+import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelAvailability;
 
 public class CHProcessUtil
 {

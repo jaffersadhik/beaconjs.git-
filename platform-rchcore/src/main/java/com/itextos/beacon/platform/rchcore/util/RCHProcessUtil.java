@@ -14,7 +14,7 @@ import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
-import com.itextos.beacon.platform.kannel.process.response.KannelAvailability;
+import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelAvailability;
 
 public class RCHProcessUtil
 {
