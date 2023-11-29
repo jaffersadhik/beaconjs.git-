@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.removedupcheck.start;
+package com.itextos.beacon.platform.duplicatecheckremoval.start;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
-import com.itextos.beacon.platform.removedupcheck.ExpiryRemovalTask;
+import com.itextos.beacon.platform.duplicatecheckremoval.ExpiryRemovalTask;
 
 public class StartApplication
 {

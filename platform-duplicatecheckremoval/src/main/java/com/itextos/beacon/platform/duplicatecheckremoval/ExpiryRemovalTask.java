@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.removedupcheck;
+package com.itextos.beacon.platform.duplicatecheckremoval;
 
 import java.util.Set;
 

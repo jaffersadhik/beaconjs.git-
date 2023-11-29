@@ -5,7 +5,7 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-dnpostlog-t2tb</artifactId>
+  <artifactId>platform-dnpostlogt2tb</artifactId>
   <properties>
 		<main.class>com.itextos.beacon.platform.dnpostlogt2tb.StartApplication</main.class>
 	</properties>

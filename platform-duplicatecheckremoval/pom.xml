@@ -7,7 +7,7 @@
   </parent>
   <artifactId>platform-duplicatecheckremoval</artifactId>
   <properties>
-		<main.class>com.itextos.beacon.platform.removedupcheck.start.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

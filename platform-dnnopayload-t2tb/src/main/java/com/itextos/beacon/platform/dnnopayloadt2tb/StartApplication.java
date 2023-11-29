@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.nopayloaddn;
+package com.itextos.beacon.platform.dnnopayloadt2tb;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
