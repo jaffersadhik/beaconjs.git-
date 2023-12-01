@@ -22,6 +22,11 @@
                         <configuration>
                             <target>
 								
+   								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/k8s/namespace/main/">		
+                                    <fileset file="../k8s-namespace/target/k8s-namespace-1.0.jar"/>
+                                    <fileset file="../k8s-namespace/src/main/resources/module.xml"/>
+                                </copy>
+  								
    								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/">		
                                     <fileset file="../common-accountinitialloader/target/common-accountinitialloader-1.0.jar"/>
                                     <fileset file="../common-accountinitialloader/src/main/resources/module.xml"/>
@@ -370,7 +375,10 @@
                                     <fileset file="../inmemory-whitelistnumbers/src/main/resources/module.xml"/>
                                 </copy>
 
-     
+    						 	<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/">		
+                                    <fileset dir="../thirdpartyjar/wildfly/modules/system/layers/base/"/>
+                                </copy>
+
                 
                             </target>
                           

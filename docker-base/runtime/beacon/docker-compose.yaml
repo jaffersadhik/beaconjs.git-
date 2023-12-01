@@ -1,0 +1,14 @@
+services:
+  ic:
+    image: dk-reg.mas:5000/beacon-base:2.0
+    environment: [
+       id=1, _JAVA_OPTIONS=-Xmx256m -Xms256m]
+    restart: always
+    volumes: ['../platform:/platform','./logs:/logs','../global.properties:/instance/global.properties','../log4j2-common.xml:/instance/log4j2-common.xml']
+    ports: ['20125:20000']
+    networks:
+      - beacon-network
+version: '3'
+networks:
+  beacon-network:
+    driver: bridge

@@ -36,6 +36,9 @@
         <dependent-module archiveName="common-accountsync-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-accountsync/common-accountsync">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="inmemory-accountdetails-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-accountdetails/inmemory-accountdetails">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="platform-decimalutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-decimalutility/platform-decimalutility">
             <dependency-type>uses</dependency-type>
         </dependent-module>

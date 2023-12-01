@@ -1,0 +1,15 @@
+<jboss-deployment-structure>
+
+
+    <deployment>
+        <dependencies>
+            <module name="javax.servlet.api"/>
+            <module name="org.apache.commons.logging"/>
+ 
+            <module name="com.itextos.beacon.commonlib.apperrorhandler"/>
+            <module name="com.itextos.beacon.k8s.namespace"/>
+            
+            <!-- Add other dependencies as needed -->
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

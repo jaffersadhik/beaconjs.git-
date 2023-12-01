@@ -51,7 +51,7 @@
                             <target>
                                 <!-- Copy the source-folder to target-folder -->
                                 <copy todir="${project.build.directory}/">
-                                    <fileset file="../common-unittestweb/target/common-unittestweb-1.0.war"/>
+                                    <fileset file="../k8s-web/target/k8s-web-1.0.war"/>
                                     
                                 </copy>
                                 

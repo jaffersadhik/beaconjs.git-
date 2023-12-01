@@ -163,7 +163,9 @@
         		
         		<module name="com.itextos.beacon.commonlib.apperrorhandler" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.unittest" slot="main"/>   
-        		<module name="com.itextos.beacon.commonlib.modulecheck" slot="main"/>       		
+        		<module name="com.itextos.beacon.commonlib.modulecheck" slot="main"/>
+        		<module name="io.kubernetes.client-java" slot="main" />
+        		       		
     		
          	</global-modules>
             <concurrent>

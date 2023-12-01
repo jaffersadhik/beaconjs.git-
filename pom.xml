@@ -95,6 +95,12 @@
   	<module>common-stringprocessor</module>
   	<module>common-scheduler</module>
   	<module>common-pattern</module>
+  		<module>common-modulecheck</module>
+	<module>k8s-namespace</module>
+	<module>thirdpartyjar</module>
+	<module>k8s-web</module>
+
+
 
   
   
@@ -232,7 +238,6 @@
 	<!--	<module>gw-smppclient</module>  -->
 	<module>docker-docker</module>
 
-	<module>common-modulecheck</module>
   </modules>
   
   <repositories>
