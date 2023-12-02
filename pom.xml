@@ -158,7 +158,7 @@
 		<module>platform-faillistutil</module>
 		<module>platform-rccore</module>
 		<module>platform-carrierhandoverutility</module>
-		<module>platform-dnplayloadutil</module>
+		<module>platform-dnpayloadutil</module>
 		<module>platform-chcore</module>
 		<module>platform-kannelstatusupdater</module>
 		<module>platform-rchcore</module>
@@ -174,19 +174,19 @@
 		<module>platform-subbiller</module>
 		<module>platform-t2ecore</module>
 		<module>platform-topic2table</module>
-		<module>platform-dn-t2tb</module>
-		<module>platform-sub-t2tb</module>
-		<module>platform-errorlog_t2tb</module>
+		<module>platform-dnt2tb</module>
+		<module>platform-subt2tb</module>
+		<module>platform-errorlogt2tb</module>
 		<module>platform-kannelstatusupdaterweb</module>
 		<module>platform-clienthandovert2tbweb</module>
 		<module>platform-r3ccore</module>
 		<module>platform-messagetool</module>
 		<module>platform-messagetoolweb</module>
 		<module>platform-r3r</module>
-		<module>platform-dnnopayload-t2tb</module>
+		<module>platform-dnnopayloadt2tb</module>
 		<module>platform-duplicatecheckremoval</module>
-		<module>platform-fullmsg-t2tb</module>
-		<module>platform-interim-failuers-t2tb</module>
+		<module>platform-fullmsgt2tb</module>
+		<module>platform-interimfailuerst2tb</module>
 		<module>platform-vcdltcore</module>
 		<module>platform-vcprocess</module>
 		<module>platform-dnrfallback</module>
@@ -196,10 +196,10 @@
 		<module>platform-walletbase</module>
 		<module>platform-smpputil</module>
 		<module>platform-smppdlrhandover</module>
-		<module>platform-wallet-prepaid-migration</module>
+		<module>platform-walletprepaidmigration</module>
 		<module>platform-promokannelrediscleaner</module>
 		<module>platform-blockoutwalletconsumer</module>
-		<module>platform-dnpostlog-t2tb</module>
+		<module>platform-dnpostlogt2tb</module>
 		<module>platform-prepaiduidata</module>
 		<module>platform-prepaiduIweb</module>
 		<module>platform-pendingpayloadcountexporter</module>
@@ -209,8 +209,6 @@
 		<module>platform-singledn</module>
 		<module>http-generichttpapidata</module>
 		<module>http-generichttpapiprocessor</module>
-		<module>http-generichttpapiweb</module>
-		<module>http-rcsr</module>
 		<module>http-interfaceparameters</module>
 		<module>http-interfacefallback</module>
 		<module>http-interfacefallbackpoller</module>
@@ -218,7 +216,6 @@
 		<module>http-cloudacceptor</module>
 		<module>http-clouddataprocessor</module>
 		<module>http-cloudutil</module>
-		<module>http-migrationapiweb</module>
 		<module>smpp-concatenate</module>
 		<module>smpp-dboperations</module>
 		<module>smpp-interfaces</module>
@@ -232,6 +229,10 @@
 		<module>platform-chweb</module>
 		<module>platform-rcweb</module>
 		<module>platform-sbcvweb</module>
+		<module>web-generichttpapi</module>
+		<module>web-migrationapi</module>
+		<module>web-rcsr</module>
+
 		<module>wildflyhome</module>
 		<module>docker-mw</module>
 		<module>docker-base</module>

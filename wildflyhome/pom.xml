@@ -385,7 +385,7 @@
                                     <fileset file="../platform-walletprocess/src/main/resources/module.xml"/>
                                 </copy>
 
-
+ 
                  				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletprepaidmigration/main/">		
                                     <fileset file="../platform-walletprepaidmigration/target/platform-walletprepaidmigration-1.0.jar"/>
                                     <fileset file="../platform-walletprepaidmigration/src/main/resources/module.xml"/>
@@ -704,8 +704,86 @@
                                     <fileset file="../platform-billing/src/main/resources/module.xml"/>
                                 </copy>    
                                 
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/concatenate/main/">		
+                                    <fileset file="../smpp-concatenate/target/smpp-concatenate-1.0.jar"/>
+                                    <fileset file="../smpp-concatenate/src/main/resources/module.xml"/>
+                                </copy>    
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smpp/dboperations/">		
+                                    <fileset file="../smpp-dboperations/target/smpp-dboperations-1.0.jar"/>
+                                    <fileset file="../smpp-dboperations/src/main/resources/module.xml"/>
+                                </copy>    
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smpp/interfaces/">		
+                                    <fileset file="../smpp-interfaces/target/smpp-interfaces-1.0.jar"/>
+                                    <fileset file="../smpp-interfaces/src/main/resources/module.xml"/>
+                                </copy>    
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/objects/main/">		
+                                    <fileset file="../smpp-objects/target/smpp-objects-1.0.jar"/>
+                                    <fileset file="../smpp-objects/src/main/resources/module.xml"/>
+                                </copy>    
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/redisoperations/main/">		
+                                    <fileset file="../smpp-redisoperations/target/smpp-redisoperations-1.0.jar"/>
+                                    <fileset file="../smpp-redisoperations/src/main/resources/module.xml"/>
+                                </copy>    
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/utils/main/">		
+                                    <fileset file="../smpp-utils/target/smpp-utils-1.0.jar"/>
+                                    <fileset file="../smpp-utils/src/main/resources/module.xml"/>
+                                </copy>    
 
-    						 	<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/">		
+
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/interfaceutil/main/">		
+                                    <fileset file="../http-interfaceutil/target/http-interfaceutil-1.0.jar"/>
+                                    <fileset file="../http-interfaceutil/src/main/resources/module.xml"/>
+                                </copy>    
+
+
+
+               				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/interfaceparameters/main/">		
+                                    <fileset file="../http-interfaceparameters/target/http-interfaceparameters-1.0.jar"/>
+                                    <fileset file="../http-interfaceparameters/src/main/resources/module.xml"/>
+                                </copy>    
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/interfacefallbackpoller/main/">		
+                                    <fileset file="../http-interfacefallbackpoller/target/http-interfacefallbackpoller-1.0.jar"/>
+                                    <fileset file="../http-interfacefallbackpoller/src/main/resources/module.xml"/>
+                                </copy>    
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/interfacefallback/main/">		
+                                    <fileset file="../http-interfacefallback/target/http-interfacefallback-1.0.jar"/>
+                                    <fileset file="../http-interfacefallback/src/main/resources/module.xml"/>
+                                </copy>    
+
+
+
+               				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/generichttpapiprocessor/main/">		
+                                    <fileset file="../http-generichttpapiprocessor/target/http-generichttpapiprocessor-1.0.jar"/>
+                                    <fileset file="../http-generichttpapiprocessor/src/main/resources/module.xml"/>
+                                </copy>    
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/generichttpapidata/main/">		
+                                    <fileset file="../http-generichttpapidata/target/http-generichttpapidata-1.0.jar"/>
+                                    <fileset file="../http-generichttpapidata/src/main/resources/module.xml"/>
+                                </copy>    
+
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/cloudutil/main/">		
+                                    <fileset file="../http-cloudutil/target/http-cloudutil-1.0.jar"/>
+                                    <fileset file="../http-cloudutil/src/main/resources/module.xml"/>
+                                </copy>    
+
+
+
+               				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/clouddataprocessor/main/">		
+                                    <fileset file="../http-clouddataprocessor/target/http-clouddataprocessor-1.0.jar"/>
+                                    <fileset file="../http-clouddataprocessor/src/main/resources/module.xml"/>
+                                </copy>    
+
+             				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/http/cloudacceptor/main/">		
+                                    <fileset file="../http-cloudacceptor/target/http-cloudacceptor-1.0.jar"/>
+                                    <fileset file="../http-cloudacceptor/src/main/resources/module.xml"/>
+                                </copy>    
+
+  						 	<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/">		
 
                                     <fileset dir="../thirdpartyjar/wildfly/modules/system/layers/base/"/>
                                 </copy>

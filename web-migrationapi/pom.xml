@@ -5,9 +5,8 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>http-generichttpapiweb</artifactId>
-  	<packaging>war</packaging>
-
+  <artifactId>web-migrationapi</artifactId>
+  <packaging>war</packaging>
   <dependencies>
 		<dependency>
 			<groupId>beacon</groupId>
@@ -20,7 +19,6 @@
 			<version>1.0</version>
 		</dependency>		
 	</dependencies>	
-	
 	<build>
 	<plugins>
 	<plugin>

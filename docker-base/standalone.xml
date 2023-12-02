@@ -158,15 +158,109 @@
             <spec-descriptor-property-replacement>false</spec-descriptor-property-replacement>
             
             <global-modules>
+            	<module name="io.kubernetes.client-java" slot="main" />
+            
         		<module name="javax.servlet.api" slot="main"/>
         		<module name="org.apache.commons.logging" slot="main"/>
         		
+        		<module name="com.itextos.beacon.commonlib.accountinitialloader" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.accountsync" slot="main"/>   
         		<module name="com.itextos.beacon.commonlib.apperrorhandler" slot="main"/>
-        		<module name="com.itextos.beacon.commonlib.unittest" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.commondbpool" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.commonpropertyloader" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.componentconsumer" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.constants" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.daemonprocess" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.datarefresher" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.dndchecker" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.dnddataloader" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.httpclient" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.ipvalidationutility" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.kafkaservice" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.messageidentifier" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.messageobject" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.messageprocessor" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.modulecheck" slot="main"/>
-        		<module name="io.kubernetes.client-java" slot="main" />
-        		       		
-    		
+        		<module name="com.itextos.beacon.commonlib.pattern" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.prometheusmetricsutil" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.pwdencryption" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.redisconnectionprovider" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.redisstatistics" slot="main"/>
+          		       		
+        		<module name="com.itextos.beacon.commonlib.scheduler" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.shortcodegenerator" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.shortcodeprovider" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.shortcodereloader" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.stringprocessor" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.timezoneutility" slot="main"/>   
+        		<module name="com.itextos.beacon.commonlib.unittest" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.urlhitterthread" slot="main"/>
+        		<module name="com.itextos.beacon.commonlib.utility" slot="main"/>   
+        		
+        		
+        		<module name="com.itextos.beacon.http.cloudacceptor" slot="main"/>
+       			<module name="com.itextos.beacon.http.clouddataprocessor" slot="main"/>
+        		<module name="com.itextos.beacon.http.cloudutil" slot="main"/>
+        		<module name="com.itextos.beacon.http.generichttpapidata" slot="main"/>
+       			<module name="com.itextos.beacon.http.generichttpapiprocessor" slot="main"/>
+        		<module name="com.itextos.beacon.http.interfacefallback" slot="main"/>
+        		<module name="com.itextos.beacon.http.interfacefallbackpoller" slot="main"/>
+       			<module name="com.itextos.beacon.http.interfaceparameters" slot="main"/>
+        		<module name="com.itextos.beacon.http.interfaceutil" slot="main"/>
+
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.dboperations" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.interfaces" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.objects" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.redisoperations" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.utils" slot="main"/>
+
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
+       		
          	</global-modules>
             <concurrent>
                 <context-services>
