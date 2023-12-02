@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.ifbpoller.process;
+package com.itextos.beacon.http.interfacefallbackpoller.process;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;

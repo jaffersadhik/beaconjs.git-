@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.ifbpoller.process;
+package com.itextos.beacon.http.interfacefallbackpoller.process;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
-import com.itextos.beacon.http.ifb.dao.FallBackDao;
+import com.itextos.beacon.http.interfacefallback.dao.FallBackDao;
 
 public abstract class AbstractDataPoller
         implements

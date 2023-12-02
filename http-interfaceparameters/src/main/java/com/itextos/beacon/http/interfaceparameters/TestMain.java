@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.parameters;
+package com.itextos.beacon.http.interfaceparameters;
 
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 

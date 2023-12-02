@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.processor.pollers.FilePoller;
-import com.itextos.beacon.http.ifb.inmem.FallbackQReaper;
+import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 
 public final class InitServlet
         extends

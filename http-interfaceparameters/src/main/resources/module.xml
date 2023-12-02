@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.3" name="com.itextos.beacon.inmemory.whitelistnumbers">
+<module xmlns="urn:jboss:module:1.3" name="com.itextos.beacon.http.interfaceparameters">
     <resources>
-        <resource-root path="inmemory-whitelistnumbers-1.0.jar"/>
+        <resource-root path="http-interfaceparameters-1.0.jar"/>
     </resources>
      <dependencies>
         <module name="com.itextos.beacon.inmemory.loader" />
-        <module name="com.itextos.beacon.commonlib.constants" />
-        <module name="com.itextos.beacon.commonlib.utilities" />
-        
+         
     </dependencies>
    
 </module>

@@ -8,7 +8,7 @@
   <artifactId>http-interfacefallbackpoller</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.interfaces.ifbpoller.StartApplication</main.class>
+		<main.class>com.itextos.beacon.interfaces.interfacefallbackpoller.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

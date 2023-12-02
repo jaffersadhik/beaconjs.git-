@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.ifb.dao;
+package com.itextos.beacon.http.interfacefallback.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

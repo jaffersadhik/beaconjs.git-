@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.ifbpoller.process;
+package com.itextos.beacon.http.interfacefallbackpoller.process;
 
 import java.util.ArrayList;
 import java.util.List;

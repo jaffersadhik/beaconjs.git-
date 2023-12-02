@@ -1,9 +1,9 @@
-package com.itextos.beacon.http.ifbpoller;
+package com.itextos.beacon.http.interfacefallbackpoller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.http.ifbpoller.process.FallbackPollerHolder;
+import com.itextos.beacon.http.interfacefallbackpoller.process.FallbackPollerHolder;
 
 public class StartApplication
 {

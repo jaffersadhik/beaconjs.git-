@@ -23,9 +23,9 @@ import com.itextos.beacon.http.generichttpapi.common.utils.InterfaceInputParamet
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.generichttpapi.processor.request.JSONRequestProcessor;
 import com.itextos.beacon.http.generichttpapi.processor.request.RCSJSONRequestProcessor;
+import com.itextos.beacon.http.interfaceparameters.InterfaceParameter;
+import com.itextos.beacon.http.interfaceparameters.InterfaceParameterLoader;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
-import com.itextos.beacon.http.parameters.InterfaceParameter;
-import com.itextos.beacon.http.parameters.InterfaceParameterLoader;
 
 import io.prometheus.client.Histogram.Timer;
 

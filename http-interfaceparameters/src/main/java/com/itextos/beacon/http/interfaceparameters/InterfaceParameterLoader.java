@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.parameters;
+package com.itextos.beacon.http.interfaceparameters;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

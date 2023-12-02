@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.ifb.inmem;
+package com.itextos.beacon.http.interfacefallback.inmem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,25 +7,25 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 
-public class FallbackQRCS
+public class FallbackQ
 {
 
     private static class SingletonHolder
     {
 
         @SuppressWarnings("synthetic-access")
-        static final FallbackQRCS INSTANCE = new FallbackQRCS();
+        static final FallbackQ INSTANCE = new FallbackQ();
 
     }
 
-    public static FallbackQRCS getInstance()
+    public static FallbackQ getInstance()
     {
         return SingletonHolder.INSTANCE;
     }
 
     private final BlockingQueue<IMessage> mFallBackQ = new LinkedBlockingQueue<>();
 
-    private FallbackQRCS()
+    private FallbackQ()
     {}
 
     public BlockingQueue<IMessage> getBlockingQueue()
