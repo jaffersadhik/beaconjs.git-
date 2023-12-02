@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.ItextosSessionManager;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.objects.SessionRoundRobin;
-import com.itextos.beacon.smpp.redis.SessionInfoRedisUpdate;
+import com.itextos.beacon.smpp.redisoperations.SessionInfoRedisUpdate;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 
 public class SessionCountUpdateTask

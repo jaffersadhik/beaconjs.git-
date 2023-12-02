@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
 import com.itextos.beacon.inmemory.smpp.util.SmppAccUtil;
 import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
-import com.itextos.beacon.smpp.common.objects.SmppUserInfo;
+import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.enums.SmppCharset;
 import com.itextos.beacon.smpp.utils.generator.SequenceNumber;

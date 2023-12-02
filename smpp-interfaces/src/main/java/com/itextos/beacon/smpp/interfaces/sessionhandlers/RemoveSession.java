@@ -12,13 +12,13 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
-import com.itextos.beacon.smpp.common.objects.SmppObjectType;
-import com.itextos.beacon.smpp.common.objects.SmppRequestType;
-import com.itextos.beacon.smpp.common.objects.bind.UnbindInfo;
-import com.itextos.beacon.smpp.common.objects.inmem.InfoCollection;
-import com.itextos.beacon.smpp.db.DbBindOperation;
+import com.itextos.beacon.smpp.dboperations.DbBindOperation;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.objects.SessionRoundRobin;
+import com.itextos.beacon.smpp.objects.SmppObjectType;
+import com.itextos.beacon.smpp.objects.SmppRequestType;
+import com.itextos.beacon.smpp.objects.bind.UnbindInfo;
+import com.itextos.beacon.smpp.objects.inmem.InfoCollection;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 
 public class RemoveSession

@@ -35,11 +35,6 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>inmemory-data</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
 			<artifactId>inmemory-smppaccountdetails</artifactId>
 			<version>1.0</version>
 		</dependency>

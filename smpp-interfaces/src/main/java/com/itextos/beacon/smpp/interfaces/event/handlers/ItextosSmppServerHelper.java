@@ -14,10 +14,10 @@ import com.cloudhopper.smpp.SmppSessionHandler;
 import com.cloudhopper.smpp.pdu.BaseBind;
 import com.cloudhopper.smpp.pdu.BaseBindResp;
 import com.cloudhopper.smpp.type.SmppProcessingException;
-import com.itextos.beacon.smpp.common.objects.SessionDetail;
 import com.itextos.beacon.smpp.interfaces.event.ItextosBindUnbindInterface;
 import com.itextos.beacon.smpp.interfaces.util.Communicator;
 import com.itextos.beacon.smpp.interfaces.validation.ValidateRequest;
+import com.itextos.beacon.smpp.objects.SessionDetail;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 
 abstract class ItextosSmppServerHelper

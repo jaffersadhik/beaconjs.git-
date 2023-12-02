@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smpp.common.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 
 public class ConcatExpiryUtil

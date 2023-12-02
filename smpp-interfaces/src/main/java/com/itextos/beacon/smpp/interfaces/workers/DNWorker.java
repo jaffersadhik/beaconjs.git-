@@ -11,9 +11,9 @@ import com.cloudhopper.smpp.pdu.PduResponse;
 import com.cloudhopper.smpp.type.SmppTimeoutException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
-import com.itextos.beacon.smpp.common.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
 import com.itextos.beacon.smpp.interfaces.util.Communicator;
+import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 

@@ -15,7 +15,7 @@ import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
 import com.itextos.beacon.inmemory.smpp.util.SmppAccUtil;
 import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
 import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
-import com.itextos.beacon.smpp.redis.SmppRedisConnectionProvider;
+import com.itextos.beacon.smpp.redisoperations.SmppRedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;
 

@@ -18,7 +18,7 @@ import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandl
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.ItextosSessionManager;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.objects.DelvierySmWindowFutureHolder;
 import com.itextos.beacon.smpp.interfaces.util.counters.ClientCounter;
-import com.itextos.beacon.smpp.redis.DeliverySmRedisOps;
+import com.itextos.beacon.smpp.redisoperations.DeliverySmRedisOps;
 import com.itextos.beacon.smpp.utils.SmppKafkaProducer;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 

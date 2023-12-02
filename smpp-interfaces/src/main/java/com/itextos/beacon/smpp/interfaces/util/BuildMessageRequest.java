@@ -18,9 +18,9 @@ import com.itextos.beacon.commonlib.messageobject.MessagePart;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.interfaces.interfaceutil.InterfaceUtil;
-import com.itextos.beacon.smpp.common.objects.SessionDetail;
-import com.itextos.beacon.smpp.common.objects.request.SmppMessageRequest;
+import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
+import com.itextos.beacon.smpp.objects.SessionDetail;
+import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 
 public class BuildMessageRequest

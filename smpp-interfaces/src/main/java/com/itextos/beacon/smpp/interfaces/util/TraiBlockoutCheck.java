@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.smpp.common.objects.SessionDetail;
-import com.itextos.beacon.smpp.common.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.objects.SessionDetail;
+import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.properties.SmppUtilConstants;
 

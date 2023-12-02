@@ -16,9 +16,9 @@ import com.itextos.beacon.commonlib.messageobject.MessagePart;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
-import com.itextos.beacon.interfaces.interfaceutil.InterfaceUtil;
-import com.itextos.beacon.smpp.common.objects.SmppUserInfo;
-import com.itextos.beacon.smpp.common.objects.request.SmppMessageRequest;
+import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
+import com.itextos.beacon.smpp.objects.SmppUserInfo;
+import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 
 public class OrphanExpiryMessageProcessor
         implements

@@ -369,16 +369,350 @@
                                     <fileset file="../inmemory-visualizelink/src/main/resources/module.xml"/>
                                 </copy>
 
-
-                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/whitelistnumbers/main/">		
+			      				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/whitelistnumbers/main/">		
                                     <fileset file="../inmemory-whitelistnumbers/target/inmemory-whitelistnumbers-1.0.jar"/>
                                     <fileset file="../inmemory-whitelistnumbers/src/main/resources/module.xml"/>
                                 </copy>
 
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletreminder/main/">		
+                                    <fileset file="../platform-walletreminder/target/platform-walletreminder-1.0.jar"/>
+                                    <fileset file="../platform-walletreminder/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletprocess/main/">		
+                                    <fileset file="../platform-walletprocess/target/platform-walletprocess-1.0.jar"/>
+                                    <fileset file="../platform-walletprocess/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletprepaidmigration/main/">		
+                                    <fileset file="../platform-walletprepaidmigration/target/platform-walletprepaidmigration-1.0.jar"/>
+                                    <fileset file="../platform-walletprepaidmigration/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletconsumer/main/">		
+                                    <fileset file="../platform-walletconsumer/target/platform-walletconsumer-1.0.jar"/>
+                                    <fileset file="../platform-walletconsumer/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/walletbase/main/">		
+                                    <fileset file="../platform-walletbase/target/platform-walletbase-1.0.jar"/>
+                                    <fileset file="../platform-walletbase/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/vcprocess/main/">		
+                                    <fileset file="../platform-vcprocess/target/platform-vcprocess-1.0.jar"/>
+                                    <fileset file="../platform-vcprocess/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/vcdltcore/main/">		
+                                    <fileset file="../platform-vcdltcore/target/platform-vcdltcore-1.0.jar"/>
+                                    <fileset file="../platform-vcdltcore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/vccore/main/">		
+                                    <fileset file="../platform-vccore/target/platform-vccore-1.0.jar"/>
+                                    <fileset file="../platform-vccore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/topic2table/main/">		
+                                    <fileset file="../platform-topic2table/target/platform-topic2table-1.0.jar"/>
+                                    <fileset file="../platform-topic2table/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/templatefinder/main/">		
+                                    <fileset file="../platform-templatefinder/target/platform-templatefinder-1.0.jar"/>
+                                    <fileset file="../platform-templatefinder/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/t2ecore/main/">		
+                                    <fileset file="../platform-t2ecore/target/platform-t2ecore-1.0.jar"/>
+                                    <fileset file="../platform-t2ecore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/subt2tb/main/">		
+                                    <fileset file="../platform-subt2tb/target/platform-subt2tb-1.0.jar"/>
+                                    <fileset file="../platform-subt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/subbiller/main/">		
+                                    <fileset file="../platform-subbiller/target/platform-subbiller-1.0.jar"/>
+                                    <fileset file="../platform-subbiller/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smpputil/main/">		
+                                    <fileset file="../platform-smpputil/target/platform-smpputil-1.0.jar"/>
+                                    <fileset file="../platform-smpputil/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smppdlrhandover/main/">		
+                                    <fileset file="../platform-smppdlrhandover/target/platform-smppdlrhandover-1.0.jar"/>
+                                    <fileset file="../platform-smppdlrhandover/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/singledn/main/">		
+                                    <fileset file="../platform-singledn/target/platform-singledn-1.0.jar"/>
+                                    <fileset file="../platform-singledn/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/sbpcore/main/">		
+                                    <fileset file="../platform-sbpcore/target/platform-sbpcore-1.0.jar"/>
+                                    <fileset file="../platform-sbpcore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/sbcvcore/main/">		
+                                    <fileset file="../platform-sbcvcore/target/platform-sbcvcore-1.0.jar"/>
+                                    <fileset file="../platform-sbcvcore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/sbccore/main/">		
+                                    <fileset file="../platform-sbccore/target/platform-sbccore-1.0.jar"/>
+                                    <fileset file="../platform-sbccore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/rchcore/main/">		
+                                    <fileset file="../platform-rchcore/target/platform-rchcore-1.0.jar"/>
+                                    <fileset file="../platform-rchcore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/rccore/main/">		
+                                    <fileset file="../platform-rccore/target/platform-rccore-1.0.jar"/>
+                                    <fileset file="../platform-rccore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/r3ccore/main/">		
+                                    <fileset file="../platform-r3ccore/target/platform-r3ccore-1.0.jar"/>
+                                    <fileset file="../platform-r3ccore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/promokannelrediscleaner/main/">		
+                                    <fileset file="../platform-promokannelrediscleaner/target/platform-promokannelrediscleaner-1.0.jar"/>
+                                    <fileset file="../platform-promokannelrediscleaner/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/prepaiduidata/main/">		
+                                    <fileset file="../platform-prepaiduidata/target/platform-prepaiduidata-1.0.jar"/>
+                                    <fileset file="../platform-prepaiduidata/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/prccore/main/">		
+                                    <fileset file="../platform-prccore/target/platform-prccore-1.0.jar"/>
+                                    <fileset file="../platform-prccore/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/pendingpayloadcountexporter/main/">		
+                                    <fileset file="../platform-pendingpayloadcountexporter/target/platform-pendingpayloadcountexporter-1.0.jar"/>
+                                    <fileset file="../platform-pendingpayloadcountexporter/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/msgtimeboundcheck/main/">		
+                                    <fileset file="../platform-msgtimeboundcheck/target/platform-msgtimeboundcheck-1.0.jar"/>
+                                    <fileset file="../platform-msgtimeboundcheck/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/messagetool/main/">		
+                                    <fileset file="../platform-messagetool/target/platform-messagetool-1.0.jar"/>
+                                    <fileset file="../platform-messagetool/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/messageflowutility/main/">		
+                                    <fileset file="../platform-messageflowutility/target/platform-messageflowutility-1.0.jar"/>
+                                    <fileset file="../platform-messageflowutility/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/kannelstatusupdater/main/">		
+                                    <fileset file="../platform-kannelstatusupdater/target/platform-kannelstatusupdater-1.0.jar"/>
+                                    <fileset file="../platform-kannelstatusupdater/src/main/resources/module.xml"/>
+                                </copy>
+
+
+                 				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/intlprice/main/">		
+                                    <fileset file="../platform-intlprice/target/platform-intlprice-1.0.jar"/>
+                                    <fileset file="../platform-intlprice/src/main/resources/module.xml"/>
+                                </copy>
+
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/interimfailuerst2tb/main/">		
+                                    <fileset file="../platform-interimfailuerst2tb/target/platform-interimfailuerst2tb-1.0.jar"/>
+                                    <fileset file="../platform-interimfailuerst2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/iccore/main/">		
+                                    <fileset file="../platform-iccore/target/platform-iccore-1.0.jar"/>
+                                    <fileset file="../platform-iccore/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/fullmsgt2tb/main/">		
+                                    <fileset file="../platform-fullmsgt2tb/target/platform-fullmsgt2tb-1.0.jar"/>
+                                    <fileset file="../platform-fullmsgt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/faillistutil/main/">		
+                                    <fileset file="../platform-faillistutil/target/platform-faillistutil-1.0.jar"/>
+                                    <fileset file="../platform-faillistutil/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/errorlogt2tb/main/">		
+                                    <fileset file="../platform-errorlogt2tb/target/platform-errorlogt2tb-1.0.jar"/>
+                                    <fileset file="../platform-errorlogt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+           
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/elasticsearchutil/main/">		
+                                    <fileset file="../platform-elasticsearchutil/target/platform-elasticsearchutil-1.0.jar"/>
+                                    <fileset file="../platform-elasticsearchutil/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/duplicatecheckremoval/main/">		
+                                    <fileset file="../platform-duplicatecheckremoval/target/platform-duplicatecheckremoval-1.0.jar"/>
+                                    <fileset file="../platform-duplicatecheckremoval/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/duplicatecheckprocessor/main/">		
+                                    <fileset file="../platform-duplicatecheckprocessor/target/platform-duplicatecheckprocessor-1.0.jar"/>
+                                    <fileset file="../platform-duplicatecheckprocessor/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnt2tb/main/">		
+                                    <fileset file="../platform-dnt2tb/target/platform-dnt2tb-1.0.jar"/>
+                                    <fileset file="../platform-dnt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnrfallbackpoller/main/">		
+                                    <fileset file="../platform-dnrfallbackpoller/target/platform-dnrfallbackpoller-1.0.jar"/>
+                                    <fileset file="../platform-dnrfallbackpoller/src/main/resources/module.xml"/>
+                                </copy>
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnrfallback/main/">		
+                                    <fileset file="../platform-dnrfallback/target/platform-dnrfallback-1.0.jar"/>
+                                    <fileset file="../platform-dnrfallback/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnpostlogt2tb/main/">		
+                                    <fileset file="../platform-dnpostlogt2tb/target/platform-dnpostlogt2tb-1.0.jar"/>
+                                    <fileset file="../platform-dnpostlogt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnpcore/main/">		
+                                    <fileset file="../platform-dnpcore/target/platform-dnpcore-1.0.jar"/>
+                                    <fileset file="../platform-dnpcore/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnpayloadutil/main/">		
+                                    <fileset file="../platform-dnpayloadutil/target/platform-dnpayloadutil-1.0.jar"/>
+                                    <fileset file="../platform-dnpayloadutil/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dnnopayloadt2tb/main/">		
+                                    <fileset file="../platform-dnnopayloadt2tb/target/platform-dnnopayloadt2tb-1.0.jar"/>
+                                    <fileset file="../platform-dnnopayloadt2tb/src/main/resources/module.xml"/>
+                                </copy>
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dlrretrycore/main/">		
+                                    <fileset file="../platform-dlrretrycore/target/platform-dlrretrycore-1.0.jar"/>
+                                    <fileset file="../platform-dlrretrycore/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dlrpayloadgen/main/">		
+                                    <fileset file="../platform-dlrpayloadgen/target/platform-dlrpayloadgen-1.0.jar"/>
+                                    <fileset file="../platform-dlrpayloadgen/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/decimalutility/main/">		
+                                    <fileset file="../platform-decimalutility/target/platform-decimalutility-1.0.jar"/>
+                                    <fileset file="../platform-decimalutility/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/dchcore/main/">		
+                                    <fileset file="../platform-dchcore/target/platform-dchcore-1.0.jar"/>
+                                    <fileset file="../platform-dchcore/src/main/resources/module.xml"/>
+                                </copy>
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/customkafkaprocessor/main/">		
+                                    <fileset file="../platform-customkafkaprocessor/target/platform-customkafkaprocessor-1.0.jar"/>
+                                    <fileset file="../platform-customkafkaprocessor/src/main/resources/module.xml"/>
+                                </copy>
+  						 
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/chcore/main/">		
+                                    <fileset file="../platform-chcore/target/platform-chcore-1.0.jar"/>
+                                    <fileset file="../platform-chcore/src/main/resources/module.xml"/>
+                                </copy>
+                               
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/carrierhandoverutility/main/">		
+                                    <fileset file="../platform-carrierhandoverutility/target/platform-carrierhandoverutility-1.0.jar"/>
+                                    <fileset file="../platform-carrierhandoverutility/src/main/resources/module.xml"/>
+                                </copy>
+                                
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/cappingcheck/main/">		
+                                    <fileset file="../platform-cappingcheck/target/platform-cappingcheck-1.0.jar"/>
+                                    <fileset file="../platform-cappingcheck/src/main/resources/module.xml"/>
+                                </copy>    
+
+
+
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/blockoutwalletconsumer/main/">		
+                                    <fileset file="../platform-blockoutwalletconsumer/target/platform-blockoutwalletconsumer-1.0.jar"/>
+                                    <fileset file="../platform-blockoutwalletconsumer/src/main/resources/module.xml"/>
+                                </copy>
+                               
+
+            				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/blockoutprocess/main/">		
+                                    <fileset file="../platform-blockoutprocess/target/platform-blockoutprocess-1.0.jar"/>
+                                    <fileset file="../platform-blockoutprocess/src/main/resources/module.xml"/>
+                                </copy>
+                                
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/billing/main/">		
+                                    <fileset file="../platform-billing/target/platform-billing-1.0.jar"/>
+                                    <fileset file="../platform-billing/src/main/resources/module.xml"/>
+                                </copy>    
+                                
+
     						 	<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/">		
+
                                     <fileset dir="../thirdpartyjar/wildfly/modules/system/layers/base/"/>
                                 </copy>
 
+       
+       
+       
                 
                             </target>
                           

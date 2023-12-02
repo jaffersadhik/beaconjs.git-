@@ -8,7 +8,7 @@ import com.cloudhopper.smpp.pdu.PduRequest;
 import com.cloudhopper.smpp.pdu.PduResponse;
 import com.cloudhopper.smpp.type.RecoverablePduException;
 import com.cloudhopper.smpp.type.UnrecoverablePduException;
-import com.itextos.beacon.smpp.common.objects.SessionDetail;
+import com.itextos.beacon.smpp.objects.SessionDetail;
 
 public class ItextosSmppSessionHandler
         extends
