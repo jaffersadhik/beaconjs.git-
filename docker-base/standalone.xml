@@ -267,30 +267,34 @@
         		<module name="com.itextos.beacon.platform.kannelstatusupdater" slot="main"/>
         		<module name="com.itextos.beacon.platform.messageflowutility" slot="main"/>
         		<module name="com.itextos.beacon.platform.messagetool" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		<module name="com.itextos.beacon.smpp.concatenate" slot="main"/>
-        		
+        		<module name="com.itextos.beacon.platform.msgtimeboundcheck" slot="main"/>
+        		<module name="com.itextos.beacon.platform.pendingpayloadcountexporter" slot="main"/>
+        		<module name="com.itextos.beacon.platform.prccore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.prepaiduidata" slot="main"/>
+        		<module name="com.itextos.beacon.platform.promokannelrediscleaner" slot="main"/>
+        		<module name="com.itextos.beacon.platform.r3ccore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.rccore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.rchcore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.sbccore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.sbcvcore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.sbpcore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.singledn" slot="main"/>
+        		<module name="com.itextos.beacon.platform.smppdlrhandover" slot="main"/>
+        		<module name="com.itextos.beacon.platform.smpputil" slot="main"/>
+        		<module name="com.itextos.beacon.platform.subbiller" slot="main"/>
+        		<module name="com.itextos.beacon.platform.subt2tb" slot="main"/>
+        		<module name="com.itextos.beacon.platform.t2ecore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.templatefinder" slot="main"/>
+        		<module name="com.itextos.beacon.platform.topic2table" slot="main"/>
+        		<module name="com.itextos.beacon.platform.vccore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.vcdltcore" slot="main"/>
+        		<module name="com.itextos.beacon.platform.vcprocess" slot="main"/>
+        		<module name="com.itextos.beacon.platform.walletbase" slot="main"/>
+        		<module name="com.itextos.beacon.platform.walletconsumer" slot="main"/>
+        		<module name="com.itextos.beacon.platform.walletprepaidmigration" slot="main"/>
+        		<module name="com.itextos.beacon.platform.walletprocess" slot="main"/>
+        		<module name="com.itextos.beacon.platform.walletreminder" slot="main"/>
+        			
         		
         		<module name="com.itextos.beacon.http.cloudacceptor" slot="main"/>
        			<module name="com.itextos.beacon.http.clouddataprocessor" slot="main"/>
