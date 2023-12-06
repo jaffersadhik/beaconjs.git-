@@ -4,8 +4,12 @@
         <resource-root path="common-commondbpool-1.0.jar"/>
     </resources>
     <dependencies>
+        <module name="org.apache.commons.logging" />
+    
         <module name="com.itextos.beacon.inmemory.loader" />              
         <module name="com.itextos.beacon.commonlib.constants" />
+        <module name="com.itextos.beacon.commonlib.commonpropertyloader" />
+        
         <module name="com.itextos.beacon.commonlib.utility" />
     </dependencies>
 </module>

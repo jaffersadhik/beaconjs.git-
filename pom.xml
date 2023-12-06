@@ -102,7 +102,8 @@
 
 
 
-  <!--
+  <!--  -->
+  
   
 		<module>inmemory-loader</module>
 		<module>inmemory-accountdetails</module>
@@ -228,7 +229,7 @@
 		<module>platform-chweb</module>
 		<module>platform-rcweb</module>
 		<module>platform-sbcvweb</module>
- -->
+
 		<module>web-generichttpapi</module>
 		<module>web-migrationapi</module>
 		<module>web-rcsr</module>

@@ -5,7 +5,7 @@
     </resources>
      <dependencies>
         <module name="com.itextos.beacon.commonlib.accountsync" />
-        <module name="com.itextos.beacon.commonlib.dbpool" />
+        <module name="com.itextos.beacon.commonlib.commondbpool" />
         <module name="com.itextos.beacon.commonlib.pwdencryption" />
         
     </dependencies>
