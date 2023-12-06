@@ -7,7 +7,7 @@
   </parent>
   <artifactId>platform-chcore</artifactId>
   <properties>
-		<main.class>com.itextos.beacon.platform.ch.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.chcore.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>

@@ -3,7 +3,7 @@ package com.itextos.beacon.smpp.interfaces.sessionhandlers.objects;
 import com.cloudhopper.commons.util.windowing.WindowFuture;
 import com.cloudhopper.smpp.pdu.PduRequest;
 import com.cloudhopper.smpp.pdu.PduResponse;
-import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
+import com.itextos.beacon.platform.smpputil.DeliverSmInfo;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
 
 public class DelvierySmWindowFutureHolder

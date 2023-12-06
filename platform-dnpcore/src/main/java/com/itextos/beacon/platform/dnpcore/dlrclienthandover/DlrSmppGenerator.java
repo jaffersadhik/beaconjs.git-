@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
-import com.itextos.beacon.inmemory.smpp.util.SmppAccUtil;
+import com.itextos.beacon.inmemory.smppaccountdetails.SmppAccInfo;
+import com.itextos.beacon.inmemory.smppaccountdetails.util.SmppAccUtil;
 import com.itextos.beacon.platform.dnpcore.util.DnStatus;
 
 public class DlrSmppGenerator

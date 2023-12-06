@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.concatenate.CompletedMessageChecker;
 import com.itextos.beacon.smpp.concatenate.CompletedMessagePoller;
 import com.itextos.beacon.smpp.concatenate.DbInmemoryCollectionFactory;

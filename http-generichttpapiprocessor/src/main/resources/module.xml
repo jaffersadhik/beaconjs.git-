@@ -10,7 +10,7 @@
 
   
         <module name="com.itextos.beacon.commonlib.ipvalidationutility" />
-        <module name="com.itextos.beacon.commonlib.utilities" />
+        <module name="com.itextos.beacon.commonlib.utility" />
         
     </dependencies>
    

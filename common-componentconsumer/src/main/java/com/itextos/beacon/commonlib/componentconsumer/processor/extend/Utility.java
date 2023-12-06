@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
+import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 
 public class Utility
 {

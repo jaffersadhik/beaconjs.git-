@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.dboperations.DbBindOperation;
 import com.itextos.beacon.smpp.objects.SmppObjectType;
 

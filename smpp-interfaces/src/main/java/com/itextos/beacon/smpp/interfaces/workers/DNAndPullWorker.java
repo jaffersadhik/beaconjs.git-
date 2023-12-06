@@ -10,7 +10,7 @@ import com.cloudhopper.smpp.pdu.DeliverSmResp;
 import com.cloudhopper.smpp.pdu.PduRequest;
 import com.cloudhopper.smpp.pdu.PduResponse;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
+import com.itextos.beacon.platform.smpputil.DeliverSmInfo;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 

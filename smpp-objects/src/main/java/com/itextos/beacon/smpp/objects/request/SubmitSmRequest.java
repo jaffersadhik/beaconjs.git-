@@ -21,7 +21,7 @@ import com.itextos.beacon.commonlib.constants.FeatureCode;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.MessageClass;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.timezone.TimeZoneUtility;
+import com.itextos.beacon.commonlib.timezoneutility.TimeZoneUtility;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.smpp.objects.SessionDetail;

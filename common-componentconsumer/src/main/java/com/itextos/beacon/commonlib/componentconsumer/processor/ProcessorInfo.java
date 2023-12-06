@@ -29,7 +29,7 @@ import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
-import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
+import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDBConstants;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoaderUtility;

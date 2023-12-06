@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.objects.bind.BindInfoValid;
 import com.itextos.beacon.smpp.objects.bind.UnbindInfo;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;

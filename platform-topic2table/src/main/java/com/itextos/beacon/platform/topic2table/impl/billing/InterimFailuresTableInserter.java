@@ -3,7 +3,7 @@ package com.itextos.beacon.platform.topic2table.impl.billing;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
-import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
+import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.platform.topic2table.impl.AbstractTableInserterWrapper;
 
 public class InterimFailuresTableInserter

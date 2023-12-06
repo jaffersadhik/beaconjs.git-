@@ -14,7 +14,7 @@
         <module name="com.itextos.beacon.commonlib.messageobject" />
         <module name="com.itextos.beacon.commonlib.pattern" />
         
-        <module name="com.itextos.beacon.commonlib.utilities" />
+        <module name="com.itextos.beacon.commonlib.utility" />
          
     </dependencies>
    

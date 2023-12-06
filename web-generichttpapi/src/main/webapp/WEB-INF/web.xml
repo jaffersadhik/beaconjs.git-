@@ -7,56 +7,56 @@
 		<description></description>
 		<display-name>JSONCustomReceiver</display-name>
 		<servlet-name>JSONCustomReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.JSONCustomReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.JSONCustomReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>JSONGenericReceiver</display-name>
 		<servlet-name>JSONGenericReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.JSONGenericReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.JSONGenericReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>QSCustomReceiver</display-name>
 		<servlet-name>QSCustomReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.QSCustomReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.QSCustomReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>QSGenericReceiver</display-name>
 		<servlet-name>QSGenericReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.QSGenericReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.QSGenericReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>XMLReceiver</display-name>
 		<servlet-name>XMLReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.XMLReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.XMLReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>MJsonRequestReceiver</display-name>
 		<servlet-name>MJsonRequestReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.migration.servlet.MJsonRequestReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.migration.servlet.MJsonRequestReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>MQSRequestReceiver</display-name>
 		<servlet-name>MQSRequestReceiver</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.migration.servlet.MQSRequestReceiver</servlet-class>
+		<servlet-class>com.itextos.beacon.web.migration.servlet.MQSRequestReceiver</servlet-class>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>InitServlet</display-name>
 		<servlet-name>InitServlet</servlet-name>
-		<servlet-class>com.itextos.beacon.interfaces.generichttpapi.servlet.InitServlet</servlet-class>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>ErrorServlet</display-name>
 		<servlet-name>ErrorServlet</servlet-name>
-		<servlet-class>com.itextos.beacon.commonlib.servlets.errorhandler.ErrorServlet</servlet-class>
+		<servlet-class>com.itextos.beacon.commonlib.apperrorhandler.servlets.ErrorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ErrorServlet</servlet-name>
@@ -66,7 +66,7 @@
 		<description></description>
 		<display-name>ExceptionServlet</display-name>
 		<servlet-name>ExceptionServlet</servlet-name>
-		<servlet-class>com.itextos.beacon.commonlib.servlets.errorhandler.ExceptionServlet</servlet-class>
+		<servlet-class>com.itextos.beacon.commonlib.apperrorhandler.servlets.ExceptionServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>InitServlet</servlet-name>

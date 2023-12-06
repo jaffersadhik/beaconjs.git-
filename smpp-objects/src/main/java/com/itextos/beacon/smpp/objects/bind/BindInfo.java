@@ -1,7 +1,7 @@
 package com.itextos.beacon.smpp.objects.bind;
 
 import com.cloudhopper.smpp.SmppBindType;
-import com.itextos.beacon.platfrom.smpputil.AbstractSmppInfo;
+import com.itextos.beacon.platform.smpputil.AbstractSmppInfo;
 import com.itextos.beacon.smpp.objects.SmppRequestType;
 
 class BindInfo

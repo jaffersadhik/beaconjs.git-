@@ -1,6 +1,6 @@
 package com.itextos.beacon.smpp.objects.bind;
 
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 
 public class UnbindInfoRedis
         implements

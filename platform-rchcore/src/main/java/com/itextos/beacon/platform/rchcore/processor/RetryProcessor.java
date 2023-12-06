@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
-import com.itextos.beacon.commonlib.kafka.service.consumer.ConsumerInMemCollection;
+import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
@@ -20,7 +20,7 @@ import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.inmemory.routeinfo.util.HeaderValidation;
-import com.itextos.beacon.platform.chutility.util.CHUtil;
+import com.itextos.beacon.platform.carrierhandoverutility.util.CHUtil;
 import com.itextos.beacon.platform.rchcore.util.RCHProcessUtil;
 import com.itextos.beacon.platform.rchcore.util.RCHProducer;
 

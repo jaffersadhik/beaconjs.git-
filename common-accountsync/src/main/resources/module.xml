@@ -4,7 +4,7 @@
         <resource-root path="common-accountsync-1.0.jar"/>
     </resources>
     <dependencies>
-        <module name="com.itextos.beacon.commonlib.redis" />
+        <module name="com.itextos.beacon.commonlib.redisconnectionprovider" />
         <module name="com.itextos.beacon.commonlib.dbpool" />
         <module name="com.itextos.beacon.commonlib.pwdencryption" />
         

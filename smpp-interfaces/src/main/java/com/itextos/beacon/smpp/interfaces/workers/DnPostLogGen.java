@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.platform.messageflowutility.billing.BillingDatabaseTableIndentifier;
-import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
+import com.itextos.beacon.platform.smpputil.DeliverSmInfo;
 import com.itextos.beacon.smpp.objects.SessionDetail;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;

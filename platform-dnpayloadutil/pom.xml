@@ -5,7 +5,7 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-dnplayloadutil</artifactId>
+  <artifactId>platform-dnpayloadutil</artifactId>
   	<dependencies>
 	
 		<dependency>

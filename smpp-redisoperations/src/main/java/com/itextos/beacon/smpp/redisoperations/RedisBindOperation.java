@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;

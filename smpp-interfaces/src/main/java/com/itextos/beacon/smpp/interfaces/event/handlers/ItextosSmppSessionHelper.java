@@ -32,7 +32,7 @@ import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
+import com.itextos.beacon.platform.smpputil.DeliverSmInfo;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.ItextosSessionManager;
 import com.itextos.beacon.smpp.interfaces.util.Communicator;
 import com.itextos.beacon.smpp.interfaces.validation.ValidateRequest;

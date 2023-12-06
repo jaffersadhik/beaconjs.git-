@@ -8,7 +8,7 @@
   <artifactId>platform-dlrpayloadgen</artifactId>
   
 	<properties>
-		<main.class>com.itextos.beacon.platform.dlrpg.process.StartApplication</main.class>
+		<main.class>com.itextos.beacon.platform.dlrpayloadgen.process.StartApplication</main.class>
 	</properties>
 	<build>
 		<plugins>
@@ -41,7 +41,7 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>platform-dnplayloadutil</artifactId>
+			<artifactId>platform-dnpayloadutil</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

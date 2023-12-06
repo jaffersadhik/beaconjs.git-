@@ -1,0 +1,10 @@
+<module xmlns="urn:jboss:module:1.5" name="org.apache.commons.configuration">
+    <resources>
+        <resource-root path="commons-configuration-1.10.jar"/>
+    </resources>
+    <dependencies>
+        <module name="org.apache.commons.lang" />
+        <module name="org.apache.commons.logging" />
+        
+    </dependencies>
+</module>

@@ -162,6 +162,8 @@
             
         		<module name="javax.servlet.api" slot="main"/>
         		<module name="org.apache.commons.logging" slot="main"/>
+        		<module name="org.apache.commons.configuration" slot="main"/>
+        		<module name="org.apache.commons.lang" slot="main"/>
         		
         		<module name="com.itextos.beacon.commonlib.accountinitialloader" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.accountsync" slot="main"/>   
@@ -190,10 +192,8 @@
         		<module name="com.itextos.beacon.commonlib.scheduler" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.shortcodegenerator" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.shortcodeprovider" slot="main"/>   
-        		<module name="com.itextos.beacon.commonlib.shortcodereloader" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.stringprocessor" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.timezoneutility" slot="main"/>   
-        		<module name="com.itextos.beacon.commonlib.unittest" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.urlhitterthread" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.utility" slot="main"/>   
         		
@@ -242,12 +242,10 @@
         		<module name="com.itextos.beacon.platform.cappingcheck" slot="main"/>
         		<module name="com.itextos.beacon.platform.carrierhandoverutility" slot="main"/>
         		<module name="com.itextos.beacon.platform.chcore" slot="main"/>
-        		<module name="com.itextos.beacon.platform.clienthandovert2tbweb" slot="main"/>
         		<module name="com.itextos.beacon.platform.customkafkaprocessor" slot="main"/>
         		<module name="com.itextos.beacon.platform.dchcore" slot="main"/>
         		<module name="com.itextos.beacon.platform.decimalutility" slot="main"/>
         		<module name="com.itextos.beacon.platform.dlrpayloadgen" slot="main"/>
-        		<module name="com.itextos.beacon.platform.dlrretrycore" slot="main"/>
         		<module name="com.itextos.beacon.platform.dnnopayloadt2tb" slot="main"/>
         		<module name="com.itextos.beacon.platform.dnpayloadutil" slot="main"/>
         		<module name="com.itextos.beacon.platform.dnpcore" slot="main"/>
@@ -296,7 +294,6 @@
         		<module name="com.itextos.beacon.platform.walletreminder" slot="main"/>
         			
         		
-        		<module name="com.itextos.beacon.http.cloudacceptor" slot="main"/>
        			<module name="com.itextos.beacon.http.clouddataprocessor" slot="main"/>
         		<module name="com.itextos.beacon.http.cloudutil" slot="main"/>
         		<module name="com.itextos.beacon.http.generichttpapidata" slot="main"/>

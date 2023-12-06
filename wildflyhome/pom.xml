@@ -27,7 +27,7 @@
                                     <fileset file="../k8s-namespace/src/main/resources/module.xml"/>
                                 </copy>
   								
-   								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/loader/main/">		
+   								<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/accountinitialloader/main/">		
                                     <fileset file="../common-accountinitialloader/target/common-accountinitialloader-1.0.jar"/>
                                     <fileset file="../common-accountinitialloader/src/main/resources/module.xml"/>
                                 </copy>
@@ -132,12 +132,12 @@
                                 </copy>
 
                  				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/scheduler/main/">		
-                                    <fileset file="../common-scheduler/target/common-dndchecker-1.0.jar"/>
+                                    <fileset file="../common-scheduler/target/common-scheduler-1.0.jar"/>
                                     <fileset file="../common-scheduler/src/main/resources/module.xml"/>
                                 </copy>
 
                  				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/commonlib/redisstatistics/main/">		
-                                    <fileset file="../common-redisstatistics/target/common-dndchecker-1.0.jar"/>
+                                    <fileset file="../common-redisstatistics/target/common-redisstatistics-1.0.jar"/>
                                     <fileset file="../common-redisstatistics/src/main/resources/module.xml"/>
                                 </copy>
 
@@ -365,7 +365,7 @@
                                 </copy>
 
                  				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/inmemory/visualizelink/main/">		
-                                    <fileset file="../inmemory-visualizelink/target/cinmemory-visualizelink-1.0.jar"/>
+                                    <fileset file="../inmemory-visualizelink/target/inmemory-visualizelink-1.0.jar"/>
                                     <fileset file="../inmemory-visualizelink/src/main/resources/module.xml"/>
                                 </copy>
 
@@ -708,11 +708,11 @@
                                     <fileset file="../smpp-concatenate/target/smpp-concatenate-1.0.jar"/>
                                     <fileset file="../smpp-concatenate/src/main/resources/module.xml"/>
                                 </copy>    
-              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smpp/dboperations/">		
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/dboperations/main/">		
                                     <fileset file="../smpp-dboperations/target/smpp-dboperations-1.0.jar"/>
                                     <fileset file="../smpp-dboperations/src/main/resources/module.xml"/>
                                 </copy>    
-              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/platform/smpp/interfaces/">		
+              				<copy todir="${project.build.directory}/wildfly/modules/system/layers/base/com/itextos/beacon/smpp/interfaces/main/">		
                                     <fileset file="../smpp-interfaces/target/smpp-interfaces-1.0.jar"/>
                                     <fileset file="../smpp-interfaces/src/main/resources/module.xml"/>
                                 </copy>    

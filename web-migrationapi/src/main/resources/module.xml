@@ -6,7 +6,7 @@
      <dependencies>
         <module name="com.itextos.beacon.inmemory.loader" />
         <module name="com.itextos.beacon.commonlib.constants" />
-        <module name="com.itextos.beacon.commonlib.utilities" />
+        <module name="com.itextos.beacon.commonlib.utility" />
         
     </dependencies>
    

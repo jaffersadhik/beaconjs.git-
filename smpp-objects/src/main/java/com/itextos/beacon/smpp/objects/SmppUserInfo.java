@@ -16,8 +16,8 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.ipvalidation.IPValidator;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.data.account.UserInfo;
-import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
-import com.itextos.beacon.inmemory.smpp.util.SmppAccUtil;
+import com.itextos.beacon.inmemory.smppaccountdetails.SmppAccInfo;
+import com.itextos.beacon.inmemory.smppaccountdetails.util.SmppAccUtil;
 import com.itextos.beacon.smpp.utils.properties.SmppUtilConstants;
 
 public class SmppUserInfo

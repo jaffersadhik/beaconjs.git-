@@ -11,10 +11,10 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
-import com.itextos.beacon.inmemory.smpp.util.SmppAccUtil;
+import com.itextos.beacon.inmemory.smppaccountdetails.SmppAccInfo;
+import com.itextos.beacon.inmemory.smppaccountdetails.util.SmppAccUtil;
 import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
-import com.itextos.beacon.platfrom.smpputil.DeliverSmInfo;
+import com.itextos.beacon.platform.smpputil.DeliverSmInfo;
 import com.itextos.beacon.smpp.redisoperations.SmppRedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;

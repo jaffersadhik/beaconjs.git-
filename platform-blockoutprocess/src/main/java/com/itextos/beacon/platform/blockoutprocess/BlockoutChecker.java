@@ -18,8 +18,8 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
-import com.itextos.beacon.inmemory.specificblockout.SpecificBlockoutData;
-import com.itextos.beacon.inmemory.specificblockout.SpecificBlockoutDataMap;
+import com.itextos.beacon.inmemory.specificblockoutdata.SpecificBlockoutData;
+import com.itextos.beacon.inmemory.specificblockoutdata.SpecificBlockoutDataMap;
 
 public class BlockoutChecker
 {

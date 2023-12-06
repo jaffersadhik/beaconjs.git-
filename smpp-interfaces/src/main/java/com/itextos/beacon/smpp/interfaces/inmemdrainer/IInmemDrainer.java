@@ -2,7 +2,7 @@ package com.itextos.beacon.smpp.interfaces.inmemdrainer;
 
 import java.util.List;
 
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 
 public interface IInmemDrainer
 {

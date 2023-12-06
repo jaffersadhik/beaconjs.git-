@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.platfrom.smpputil.ISmppInfo;
+import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.dboperations.DbBindOperation;
 import com.itextos.beacon.smpp.objects.SessionDetail;
 import com.itextos.beacon.smpp.objects.SmppObjectType;

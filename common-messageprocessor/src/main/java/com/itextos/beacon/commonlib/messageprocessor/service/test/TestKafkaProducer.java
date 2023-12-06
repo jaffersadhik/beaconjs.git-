@@ -9,7 +9,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.kafka.service.common.KafkaUtility;
+import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
 import com.itextos.beacon.commonlib.messageobject.IMessage;
 
 public class TestKafkaProducer
