@@ -1,7 +1,7 @@
 package com.itextos.beacon.inmemory.loader.process;
 
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 
 public class InmemoryInput
 {

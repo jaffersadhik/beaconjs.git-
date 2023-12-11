@@ -2,7 +2,7 @@ package com.itextos.beacon.platform.topic2table.tablename;
 
 import java.util.Map;
 
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 
 public interface ITablenameFinder
 {

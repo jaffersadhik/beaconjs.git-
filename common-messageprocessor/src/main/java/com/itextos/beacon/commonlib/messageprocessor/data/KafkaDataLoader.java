@@ -17,6 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
@@ -24,8 +26,6 @@ import com.itextos.beacon.commonlib.constants.ItextosEnum;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterInfo;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;

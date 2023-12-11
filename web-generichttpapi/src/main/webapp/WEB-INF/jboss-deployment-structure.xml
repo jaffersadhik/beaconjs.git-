@@ -6,8 +6,16 @@
         	<module name="io.kubernetes.client-java" slot="main" />
             
         		<module name="javax.servlet.api" slot="main"/>
-        		<module name="org.apache.commons.logging" slot="main"/>
      
+             <module name="org.apache.commons.logging"  slot="main"/>
+        <module name="org.apache.commons.lang"  slot="main"/>
+        <module name="org.apache.commons.configuration"  slot="main"/>
+        <module name="org.apache.commons.dbcp2"  slot="main"/>
+            <module name="org.apache.commons.pool2"  slot="main"/>
+            <module name="org.mariadb.jdbc"  slot="main"/>
+        <module name="redis.clients.jedis"  slot="main"/>
+        <module name="org.slf4j"  slot="main"/>
+    
          	<module name="com.itextos.beacon.commonlib.accountinitialloader" slot="main"/>
         		<module name="com.itextos.beacon.commonlib.accountsync" slot="main"/>   
         		<module name="com.itextos.beacon.commonlib.apperrorhandler" slot="main"/>

@@ -7,9 +7,16 @@
      <dependencies>
      
         <module name="org.apache.commons.logging" />
-     
+        <module name="org.apache.commons.lang" />
+        <module name="org.apache.commons.configuration" />
+        <module name="org.apache.commons.dbcp2" />
+        <module name="org.apache.commons.pool2" />
+        <module name="redis.clients.jedis" />
+    
+        <module name="com.itextos.beacon.commonlib.constants" />
         <module name="com.itextos.beacon.commonlib.pwdencryption" />
         <module name="com.itextos.beacon.commonlib.commondbpool" />
+        <module name="com.itextos.beacon.commonlib.utility" />
         
     </dependencies>
 </module>

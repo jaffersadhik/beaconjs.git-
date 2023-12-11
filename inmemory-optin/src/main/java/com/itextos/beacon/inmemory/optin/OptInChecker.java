@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.RedisKeys;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.data.redis.RedisHandler;
 

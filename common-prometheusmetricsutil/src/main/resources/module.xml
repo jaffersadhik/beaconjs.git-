@@ -3,9 +3,21 @@
     <resources>
         <resource-root path="common-prometheusmetricsutil-1.0.jar"/>
     </resources>
-   
-     <dependencies>
+      <dependencies>
+        <module name="org.apache.commons.lang" />
+        <module name="org.apache.commons.logging" />
+        <module name="org.apache.commons.pool2" />
+        <module name="org.slf4j" />
+        <module name="org.eclipse.jetty" />
+        <module name="org.apache.commons.configuration" />
+        
         <module name="com.itextos.beacon.commonlib.utility" />
+        <module name="com.itextos.beacon.commonlib.constants" />
+        <module name="com.itextos.beacon.commonlib.commonpropertyloader" />
+        
+   
+        <module name="javax.servlet.api" />
         
     </dependencies>
+   
 </module>

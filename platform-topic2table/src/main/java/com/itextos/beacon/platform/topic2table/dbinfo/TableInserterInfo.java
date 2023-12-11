@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class TableInserterInfo

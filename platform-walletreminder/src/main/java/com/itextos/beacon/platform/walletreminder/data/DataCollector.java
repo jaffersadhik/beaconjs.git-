@@ -18,9 +18,9 @@ import java.util.TreeSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.walletprocess.WalletUpdateProcessor;
 import com.itextos.beacon.platform.walletreminder.utils.WalletReminderProperties;

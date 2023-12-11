@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 
 public abstract class InmemoryProcessor
         implements

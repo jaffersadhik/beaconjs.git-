@@ -1,0 +1,13 @@
+<module xmlns="urn:jboss:module:1.5" name="org.eclipse.jetty">
+    <resources>
+        <resource-root path="jetty-util-9.4.22.v20191022.jar"/>
+        <resource-root path="jetty-server-9.4.30.v20200611.jar"/>
+        
+    </resources>
+    <dependencies>
+        <module name="org.apache.commons.lang" />
+        <module name="org.apache.commons.logging" />
+        <module name="javax.servlet.api" />
+        
+    </dependencies>
+</module>

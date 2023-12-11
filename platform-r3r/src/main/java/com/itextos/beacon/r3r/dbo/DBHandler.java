@@ -16,12 +16,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.r3r.data.R3RObject;

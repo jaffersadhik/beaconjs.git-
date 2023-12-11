@@ -14,12 +14,12 @@ import java.util.StringJoiner;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.datarefresher.dataobjects.DataOperation;
 import com.itextos.beacon.commonlib.datarefresher.dataobjects.DataRefresherMasterData;
 import com.itextos.beacon.commonlib.datarefresher.dataobjects.IDataRefresher;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;

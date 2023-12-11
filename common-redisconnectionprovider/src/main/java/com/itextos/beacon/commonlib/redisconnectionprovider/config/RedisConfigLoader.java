@@ -11,10 +11,10 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class RedisConfigLoader

@@ -11,8 +11,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.dnddataloader.common.CountHolder;
 import com.itextos.beacon.commonlib.dnddataloader.db.Db2RedisThreadBased;
 import com.itextos.beacon.commonlib.dnddataloader.redis.RedisOperations;

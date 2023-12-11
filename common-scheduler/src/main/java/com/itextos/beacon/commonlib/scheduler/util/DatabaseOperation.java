@@ -15,9 +15,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobKey;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.JndiInfo;
 import com.itextos.beacon.commonlib.scheduler.config.DataType;
 import com.itextos.beacon.commonlib.scheduler.config.MisfireInstruction;
 import com.itextos.beacon.commonlib.scheduler.config.ParamInfo;

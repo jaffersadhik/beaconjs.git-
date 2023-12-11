@@ -9,10 +9,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.dbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.dbpool.DatabaseSchema;
-import com.itextos.beacon.commonlib.dbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.ClientHandoverObject;
 
