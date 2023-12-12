@@ -7,24 +7,4 @@
   </parent>
   <artifactId>common-modulecheck</artifactId>
   
-  
-  			<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
-			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.1.0</version>
-            <configuration>
-                <archive>
-                    <manifestEntries>
-        <Dependencies>org.jboss.dmr,org.jboss.as.controller-client</Dependencies>
-
-                    </manifestEntries>
-                </archive>
-            </configuration>
-      		  </plugin>
-			
-		</plugins>
-	</build>
-</project>
+  </project>

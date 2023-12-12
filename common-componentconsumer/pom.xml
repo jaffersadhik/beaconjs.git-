@@ -24,25 +24,5 @@
 		</dependency>
 	</dependencies>
 	
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
-			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.1.0</version>
-            <configuration>
-                <archive>
-                    <manifestEntries>
-        <Dependencies>com.itextos.beacon.commonlib.daemonprocess</Dependencies>
-        <Dependencies>com.itextos.beacon.commonlib.messageprocessor</Dependencies>
-        <Dependencies>com.itextos.beacon.commonlib.prometheus</Dependencies>
-
-                    </manifestEntries>
-                </archive>
-            </configuration>
-      		  </plugin>
-			
-		</plugins>
-	</build>
+	
 </project>
