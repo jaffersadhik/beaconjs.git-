@@ -1,4 +1,4 @@
-FROM dk-reg.mas:5000/beacon-base:2.0
+FROM jboss/wildfly:25.0.0.Final
 ENV TZ="Asia/Kolkata"
 EXPOSE 8080/tcp
 

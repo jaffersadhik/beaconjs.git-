@@ -2,6 +2,11 @@
     <resources>
         <resource-root path="jetty-util-9.4.22.v20191022.jar"/>
         <resource-root path="jetty-server-9.4.30.v20200611.jar"/>
+        <resource-root path="jetty-servlet-9.4.22.v20191022.jar"/>
+        <resource-root path="jetty-http-9.4.22.v20191022.jar"/>
+        <resource-root path="jetty-io-9.4.22.v20191022.jar"/>
+        <resource-root path="jetty-security-9.2.0.v20140526.jar"/>
+
         
     </resources>
     <dependencies>

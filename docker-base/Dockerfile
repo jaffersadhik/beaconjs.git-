@@ -17,6 +17,9 @@ COPY ./target/wildfly/modules/system/layers/base/org/apache/commons/dbcp2  /opt/
 COPY ./target/wildfly/modules/system/layers/base/org/apache/commons/lang  /opt/jboss/wildfly/modules/system/layers/base/org/apache/commons/lang
 COPY ./target/wildfly/modules/system/layers/base/org/apache/commons/configuration  /opt/jboss/wildfly/modules/system/layers/base/org/apache/commons/configuration
 COPY ./target/wildfly/modules/system/layers/base/io/kubernetes  /opt/jboss/wildfly/modules/system/layers/base/io/kubernetes
+
+COPY ./target/wildfly/modules/system/layers/base/io/prometheus  /opt/jboss/wildfly/modules/system/layers/base/io/prometheus
+
 COPY ./target/wildfly/modules/system/layers/base/com/itextos  /opt/jboss/wildfly/modules/system/layers/base/com/itextos
 VOLUME ["/logs"]
 CMD ["/opt/jboss/wildfly/bin/standalone.sh","-b","0.0.0.0","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/platform/properties/bulk/global.properties"]

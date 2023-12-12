@@ -161,12 +161,17 @@
             	<module name="io.kubernetes.client-java" slot="main" />
             
         		<module name="javax.servlet.api" slot="main"/>
+        		
         		<module name="org.apache.commons.logging" slot="main"/>
         		<module name="org.apache.commons.configuration" slot="main"/>
         		<module name="org.apache.commons.lang" slot="main"/>
         		<module name="org.apache.commons.dbcp2"  slot="main"/>
         		<module name="org.apache.commons.pool2"  slot="main"/>
         		<module name="org.slf4j"  slot="main"/>
+        		
+        		<module name="io.prometheus.client"  slot="main"/>
+        		
+        		
         		
         		<module name="org.eclipse.jetty"  slot="main"/>
         		
