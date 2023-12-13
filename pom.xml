@@ -95,9 +95,12 @@
   	<module>common-stringprocessor</module>
   	<module>common-scheduler</module>
   	<module>common-pattern</module>
-  
+  <!--
+  	<module>common-unittest</module>
+	<module>common-unittestweb</module>
+
   		<module>common-modulecheck</module>
-<!--	<module>k8s-namespace</module>
+	<module>k8s-namespace</module>
 	<module>thirdpartyjar</module>
 	<module>k8s-web</module>
 
@@ -142,8 +145,6 @@
 		<module>inmemory-optin</module>
 		<module>inmemory-indianp</module>
 		<module>inmemory-intlcredit</module>
-	<module>common-unittest</module>
-	<module>common-unittestweb</module>
 
 		<module>platform-elasticsearchutil</module>
 		<module>platform-decimalutility</module>
