@@ -44,7 +44,7 @@ import com.itextos.beacon.http.generichttpapi.common.data.response.ObjectFactory
 import com.itextos.beacon.http.generichttpapi.common.data.response.ResponseObject;
 import com.itextos.beacon.http.generichttpapi.common.data.response.Root;
 import com.itextos.beacon.http.generichttpapi.common.data.response.Root.Status;
-import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.countryinfo.CountryInfo;
 import com.itextos.beacon.inmemory.countryinfo.CountryInfoCollection;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;

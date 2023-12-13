@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.utility.mobilevalidation.AccountMobileInfo;
 import com.itextos.beacon.commonlib.utility.mobilevalidation.MobileNumberValidator;
 import com.itextos.beacon.http.interfacefallback.FallBackProcess;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQ;
-import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.countryinfo.CountryInfo;
 import com.itextos.beacon.inmemory.countryinfo.CountryInfoCollection;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;

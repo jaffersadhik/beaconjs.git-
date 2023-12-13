@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.appconfigparams;
+package com.itextos.beacon.inmemory.configvalues;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.httpclient.HTTPRequestUtility;
 import com.itextos.beacon.commonlib.httpclient.HttpHeader;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
 import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;

@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.constants.MessageClass;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
-import com.itextos.beacon.inmemory.appconfigparams.ApplicationConfiguration;
+import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
 import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
