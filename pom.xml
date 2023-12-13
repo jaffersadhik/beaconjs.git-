@@ -55,7 +55,7 @@
 		<maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version> 
 		<maven-war-plugin>3.3.2</maven-war-plugin> 
 
-		<spring-boot-maven-plugin-version>2.5.2</spring-boot-maven-plugin-version>
+		<spring-boot-maven-plugin-version>2.6.2</spring-boot-maven-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<jdk-build-version>11</jdk-build-version>
 
@@ -245,6 +245,7 @@
 	<module>docker-docker</module>  -->
 
   	<module>common-message</module>
+  	<module>docker-ic</module>
   </modules>
   
 
