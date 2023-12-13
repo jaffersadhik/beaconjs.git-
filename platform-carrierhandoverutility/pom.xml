@@ -9,7 +9,7 @@
   	<dependencies>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>platform-dnplayloadutil</artifactId>
+			<artifactId>platform-dnpayloadutil</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>

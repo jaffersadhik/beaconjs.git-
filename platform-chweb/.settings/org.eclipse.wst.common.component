@@ -59,6 +59,9 @@
         <dependent-module archiveName="platform-carrierhandoverutility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-carrierhandoverutility/platform-carrierhandoverutility">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="platform-dnpayloadutil-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-dnpayloadutil/platform-dnpayloadutil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="inmemory-dnpayload-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-dnpayload/inmemory-dnpayload">
             <dependency-type>uses</dependency-type>
         </dependent-module>
