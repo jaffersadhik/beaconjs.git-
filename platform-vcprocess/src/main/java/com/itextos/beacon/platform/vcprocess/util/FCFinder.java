@@ -6,10 +6,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.platform.messageflowutility.util.MessageSpliter;
-import com.itextos.beacon.platform.messageflowutility.util.UdhProcessor;
 import com.itextos.beacon.platform.messagetool.FeatureCodeFinder;
 import com.itextos.beacon.platform.messagetool.MessageSplitRequest;
+import com.itextos.beacon.platform.msgflowutil.util.MessageSpliter;
+import com.itextos.beacon.platform.msgflowutil.util.UdhProcessor;
 
 public class FCFinder
 {

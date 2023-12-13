@@ -1,9 +1,9 @@
 <%@ page import="com.itextos.beacon.commonlib.utility.CommonUtility"%>
-<%@ page import="com.itextos.beacon.platform.prepaiduidata.kannelstatus.KannelInfo"%>
+<%@ page import="com.itextos.beacon.platform.prepaiddata.kannelstatus.KannelInfo"%>
 <%@ page
-	import="com.itextos.beacon.platform.prepaiduidata.kannelstatus.KannelInfoLoader"%>
+	import="com.itextos.beacon.platform.prepaiddata.kannelstatus.KannelInfoLoader"%>
 <%@ page
-	import="com.itextos.beacon.platform.prepaiduidata.kannelstatus.ReadKannelInfo"%>
+	import="com.itextos.beacon.platform.prepaiddata.kannelstatus.ReadKannelInfo"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Arrays"%>

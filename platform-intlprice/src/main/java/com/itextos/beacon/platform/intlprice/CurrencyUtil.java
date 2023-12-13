@@ -7,13 +7,13 @@ import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
-import com.itextos.beacon.inmemory.currencyconversion.CurrencyReloader;
+import com.itextos.beacon.inmemory.currency.conversion.CurrencyReloader;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
-import com.itextos.beacon.inmemory.intlcredit.ClientIntlCredits;
-import com.itextos.beacon.inmemory.intlcredit.IntlCredits;
-import com.itextos.beacon.inmemory.intlcredit.IntlSmsRates;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.inmemory.msgutil.cache.ClientIntlCredits;
+import com.itextos.beacon.inmemory.msgutil.cache.IntlCredits;
+import com.itextos.beacon.inmemory.msgutil.cache.IntlSmsRates;
 import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
 
 public class CurrencyUtil

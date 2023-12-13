@@ -15,8 +15,8 @@ import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
-import com.itextos.beacon.platform.messageflowutility.billing.BillingDatabaseTableIndentifier;
-import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
+import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
+import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class RCHProducer
 {

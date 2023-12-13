@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponseCodeMapping;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponse;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponseCodeMapping;
 import com.itextos.beacon.inmemory.loader.process.AbstractAutoRefreshInMemoryProcessor;
 import com.itextos.beacon.inmemory.loader.process.InmemoryInput;
 

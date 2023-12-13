@@ -1,6 +1,6 @@
 package com.itextos.beacon.platform.intlprice;
 
-import com.itextos.beacon.inmemory.intlcredit.IntlSmsRates;
+import com.itextos.beacon.inmemory.msgutil.cache.IntlSmsRates;
 
 public class CalculateIntlBillingPrice
 {

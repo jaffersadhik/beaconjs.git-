@@ -15,8 +15,8 @@ import com.itextos.beacon.commonlib.utility.mobilevalidation.MobileNumberValidat
 import com.itextos.beacon.http.interfacefallback.FallBackProcessRCS;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQRCS;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
-import com.itextos.beacon.inmemory.countryinfo.CountryInfo;
-import com.itextos.beacon.inmemory.countryinfo.CountryInfoCollection;
+import com.itextos.beacon.inmemory.inmemdata.country.CountryInfo;
+import com.itextos.beacon.inmemory.inmemdata.country.CountryInfoCollection;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

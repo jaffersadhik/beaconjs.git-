@@ -17,9 +17,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
-import com.itextos.beacon.platform.prepaiduidata.kannelstatus.KannelInfo;
-import com.itextos.beacon.platform.prepaiduidata.kannelstatus.KannelInfoLoader;
-import com.itextos.beacon.platform.prepaiduidata.kannelstatus.ReadKannelInfo;
+import com.itextos.beacon.platform.prepaiddata.kannelstatus.KannelInfo;
+import com.itextos.beacon.platform.prepaiddata.kannelstatus.KannelInfoLoader;
+import com.itextos.beacon.platform.prepaiddata.kannelstatus.ReadKannelInfo;
 
 @WebServlet("/kannelinfofetchservlet")
 public class KannelInfoFetchServlet

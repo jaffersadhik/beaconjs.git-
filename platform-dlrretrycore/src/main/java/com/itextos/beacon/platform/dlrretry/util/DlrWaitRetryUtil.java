@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.utility.ItextosClient;
 import com.itextos.beacon.inmemory.routeinfo.util.HeaderValidation;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteFinder;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
-import com.itextos.beacon.inmemory.routeretryinfo.util.RRUtil;
+import com.itextos.beacon.inmemory.rr.util.RRUtil;
 
 public class DlrWaitRetryUtil
 {

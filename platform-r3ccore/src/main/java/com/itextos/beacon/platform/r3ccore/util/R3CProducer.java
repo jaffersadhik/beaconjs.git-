@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.messageobject.BaseMessage;
 import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
+import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class R3CProducer
 {

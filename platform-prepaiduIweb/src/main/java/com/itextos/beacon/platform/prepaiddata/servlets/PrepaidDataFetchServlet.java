@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
-import com.itextos.beacon.platform.prepaiduidata.PrepaidData;
-import com.itextos.beacon.platform.prepaiduidata.ReadRedisData;
+import com.itextos.beacon.platform.prepaiddata.PrepaidData;
+import com.itextos.beacon.platform.prepaiddata.ReadRedisData;
 
 /**
  * Servlet implementation class PrepaidDataFetchServlet

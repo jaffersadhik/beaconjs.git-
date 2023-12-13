@@ -29,10 +29,10 @@ import com.itextos.beacon.http.generichttpapi.common.utils.InterfaceMessageClass
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtilRCS;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponse;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponseCodeMapping;
 import com.itextos.beacon.inmemory.interfaces.cache.GenericResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponseCodeMapping;
-import com.itextos.beacon.inmemory.interfacesinfo.util.IInterfaceUtil;
+import com.itextos.beacon.inmemory.interfaces.util.IInterfaceUtil;
 
 public class MiddlewareHandlerRCS
 {

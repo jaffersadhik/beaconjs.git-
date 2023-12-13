@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.messageobject.IMessage;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dch.util.DCHUtil;
-import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
+import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class DummyCarrierHandoverProcess
         extends

@@ -17,10 +17,10 @@ import com.itextos.beacon.http.generichttpapi.common.data.response.ResponseObjec
 import com.itextos.beacon.http.generichttpapi.common.interfaces.IResponseProcessor;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponse;
+import com.itextos.beacon.inmemory.interfaces.bean.InterfaceResponseCodeMapping;
 import com.itextos.beacon.inmemory.interfaces.cache.GenericResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponseCodeMapping;
-import com.itextos.beacon.inmemory.interfacesinfo.util.IInterfaceUtil;
+import com.itextos.beacon.inmemory.interfaces.util.IInterfaceUtil;
 
 abstract class GenerateAbstractResponse
         implements

@@ -24,7 +24,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.inmemory.encryptinfo.CustomerEncryptUtil;
 import com.itextos.beacon.inmemory.encryptinfo.EncryptInfo;
-import com.itextos.beacon.inmemory.interfacesinfo.util.IInterfaceUtil;
+import com.itextos.beacon.inmemory.interfaces.util.IInterfaceUtil;
 
 public class MessageValidater
 {

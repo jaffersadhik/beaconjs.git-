@@ -11,9 +11,9 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemory.smppaccountdetails.SmppAccInfo;
-import com.itextos.beacon.inmemory.smppaccountdetails.util.SmppAccUtil;
-import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
+import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
+import com.itextos.beacon.inmemory.smpp.account.util.SmppAccUtil;
+import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class ClientWiseCounter
 {

@@ -19,8 +19,8 @@ import com.itextos.beacon.commonlib.messageobject.MessageRequest;
 import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfig;
-import com.itextos.beacon.inmemory.clientdlrpreferences.ClientDlrConfigUtil;
+import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
+import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.errorinfo.ErrorCodeUtil;
 import com.itextos.beacon.inmemory.errorinfo.data.ErrorCategory;
@@ -28,7 +28,7 @@ import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.whitelistnumbers.MobileWhitelistNumbers;
-import com.itextos.beacon.platform.messageflowutility.util.PlatformUtil;
+import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class PRCUtil
 {
