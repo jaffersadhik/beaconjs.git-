@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 
 abstract class InmemoryQueue
 {

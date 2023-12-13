@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MessageType;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.pattern.PatternCache;
 import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;

@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ParamDataType;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorMaster;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorParams;

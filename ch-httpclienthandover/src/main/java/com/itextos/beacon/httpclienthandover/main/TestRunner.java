@@ -12,8 +12,8 @@ import org.json.simple.parser.ParseException;
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.httpclienthandover.common.Inmemorydata;
 

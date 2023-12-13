@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorMaster;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorParams;
 

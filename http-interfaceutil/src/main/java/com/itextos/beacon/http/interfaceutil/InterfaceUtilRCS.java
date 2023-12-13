@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.mobilevalidation.AccountMobileInfo;

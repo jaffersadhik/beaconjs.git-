@@ -8,10 +8,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
+import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class RouteFinder

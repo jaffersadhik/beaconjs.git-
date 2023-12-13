@@ -7,8 +7,8 @@ import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaCom
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 
 public class VoiceRetryProcess
         extends

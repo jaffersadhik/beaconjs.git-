@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 

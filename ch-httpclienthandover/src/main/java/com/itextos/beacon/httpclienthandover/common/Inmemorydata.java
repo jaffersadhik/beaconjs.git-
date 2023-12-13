@@ -10,8 +10,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.retry.ExpiredMessageLogger;

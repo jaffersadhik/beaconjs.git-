@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.RouteConstants;
 import com.itextos.beacon.commonlib.constants.RouteLogic;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.clientallowedheaders.ClientAllowedHeaders;
 import com.itextos.beacon.inmemory.commonheaders.CommonHeaders;

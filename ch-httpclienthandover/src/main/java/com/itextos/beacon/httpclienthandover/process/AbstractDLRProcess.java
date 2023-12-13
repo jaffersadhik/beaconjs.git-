@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.httpclient.HTTPRequestUtility;
 import com.itextos.beacon.commonlib.httpclient.HttpHeader;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.httpclient.helper.HttpConstants;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;

@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.smppdlrhandover.dao.SmppDlrFallBackDao;
 

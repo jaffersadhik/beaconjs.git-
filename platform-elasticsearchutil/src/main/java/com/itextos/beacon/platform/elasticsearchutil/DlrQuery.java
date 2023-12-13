@@ -25,8 +25,8 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
-import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.platform.elasticsearchutil.types.DlrQueryMulti;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsConstant;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsOperation;

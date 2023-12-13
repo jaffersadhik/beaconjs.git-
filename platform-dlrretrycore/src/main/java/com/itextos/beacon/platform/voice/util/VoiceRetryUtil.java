@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;

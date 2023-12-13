@@ -11,10 +11,10 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
-import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
+import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.platform.prccore.util.PRCUtil;
 import com.itextos.beacon.platform.prccore.util.PRProducer;
 

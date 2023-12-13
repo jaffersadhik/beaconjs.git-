@@ -16,8 +16,8 @@ import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class DlrFallBackDao

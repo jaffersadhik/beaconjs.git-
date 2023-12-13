@@ -4,7 +4,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsConstant;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsCreateTimeStamp;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsOperation;

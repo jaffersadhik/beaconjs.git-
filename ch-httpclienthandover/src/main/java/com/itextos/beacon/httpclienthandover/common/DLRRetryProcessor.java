@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.process.IDLRProcess;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;

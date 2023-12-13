@@ -28,7 +28,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.partitionlogger.KafkaP
 import com.itextos.beacon.commonlib.kafkaservice.consumer.partitionlogger.PartitionEventType;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.partitionlogger.PartitionInfoCollection;
 import com.itextos.beacon.commonlib.kafkaservice.producer.Producer;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 

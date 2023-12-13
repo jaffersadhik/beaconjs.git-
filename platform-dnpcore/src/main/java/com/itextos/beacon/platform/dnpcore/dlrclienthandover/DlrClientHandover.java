@@ -7,8 +7,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DlrHandoverMode;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
-import com.itextos.beacon.commonlib.messageobject.utility.MessageUtil;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrAdminDelivery;

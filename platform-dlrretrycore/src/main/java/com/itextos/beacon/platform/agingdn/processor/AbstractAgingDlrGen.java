@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 

@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.messageobject;
+package com.itextos.beacon.commonlib.message;
 
 public abstract class AbstractMessage
         implements

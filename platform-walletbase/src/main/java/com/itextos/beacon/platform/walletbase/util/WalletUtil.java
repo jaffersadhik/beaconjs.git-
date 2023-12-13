@@ -1,6 +1,6 @@
 package com.itextos.beacon.platform.walletbase.util;
 
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 
 public final class WalletUtil
 {

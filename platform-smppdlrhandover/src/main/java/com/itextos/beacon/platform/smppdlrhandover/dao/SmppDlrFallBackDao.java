@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.messageobject.DeliveryObject;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class SmppDlrFallBackDao

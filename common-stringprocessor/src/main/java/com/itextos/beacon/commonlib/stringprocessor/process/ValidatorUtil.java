@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
-import com.itextos.beacon.commonlib.messageobject.BaseMessage;
+import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ParamDataType;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorMaster;
 import com.itextos.beacon.commonlib.stringprocessor.dto.ValidatorParams;

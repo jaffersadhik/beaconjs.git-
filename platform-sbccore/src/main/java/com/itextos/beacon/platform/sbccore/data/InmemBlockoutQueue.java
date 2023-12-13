@@ -3,7 +3,7 @@ package com.itextos.beacon.platform.sbccore.data;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 
 public class InmemBlockoutQueue
         extends

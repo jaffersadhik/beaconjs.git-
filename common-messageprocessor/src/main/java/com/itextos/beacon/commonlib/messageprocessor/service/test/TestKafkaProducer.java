@@ -10,7 +10,7 @@ import org.apache.kafka.common.KafkaException;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 
 public class TestKafkaProducer
 {

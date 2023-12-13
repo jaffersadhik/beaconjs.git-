@@ -1,6 +1,6 @@
 package com.itextos.beacon.http.interfacefallback;
 
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQ;
 
 public class FallBackProcess

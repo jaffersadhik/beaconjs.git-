@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.messageobject.utility;
+package com.itextos.beacon.commonlib.message.utility;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
@@ -6,8 +6,8 @@ import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.RouteType;
-import com.itextos.beacon.commonlib.messageobject.MessagePart;
-import com.itextos.beacon.commonlib.messageobject.MessageRequest;
+import com.itextos.beacon.commonlib.message.MessagePart;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 
 public class TestMain
 {

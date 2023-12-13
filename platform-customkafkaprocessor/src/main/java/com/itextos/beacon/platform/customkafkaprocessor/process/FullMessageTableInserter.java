@@ -11,8 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
-import com.itextos.beacon.commonlib.messageobject.SubmissionObject;
+import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 

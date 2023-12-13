@@ -1,7 +1,7 @@
 package com.itextos.beacon.commonlib.componentconsumer.processor;
 
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.messageobject.IMessage;
+import com.itextos.beacon.commonlib.message.IMessage;
 
 class FallbackMessage
 {
