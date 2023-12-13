@@ -50,12 +50,6 @@
 			<version>1.0</version>
 	</dependency>
 	
-	
-	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-clienthandovert2tbweb</artifactId>
-			<version>1.0</version>
-	</dependency>
 
 	
 	<dependency>
@@ -113,11 +107,6 @@
 	</dependency>
 	
 	
-	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-dnr</artifactId>
-			<version>1.0</version>
-	</dependency>
 	
 	
 	<dependency>
@@ -209,11 +198,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-kannelstatusupdater</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-kannelstatusupdaterweb</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-messageflowutility</artifactId>
 			<version>1.0</version>
@@ -221,11 +207,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-messagetool</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-messagetoolweb</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-msgtimeboundcheck</artifactId>
 			<version>1.0</version>
@@ -237,11 +220,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-prepaiduidata</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-prepaiduIweb</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-promokannelrediscleaner</artifactId>
 			<version>1.0</version>
@@ -263,19 +243,11 @@
 			<version>1.0</version>
 	</dependency><dependency>
 			<groupId>beacon</groupId>
-			<artifactId>platform-rcweb</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
 			<artifactId>platform-sbccore</artifactId>
 			<version>1.0</version>
 	</dependency><dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-sbcvcore</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-sbcvweb</artifactId>
 			<version>1.0</version>
 	</dependency><dependency>
 			<groupId>beacon</groupId>
@@ -335,11 +307,7 @@
 			<artifactId>platform-vcprocess</artifactId>
 			<version>1.0</version>
 	</dependency>
-	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-vcweb</artifactId>
-			<version>1.0</version>
-	</dependency>
+	
 	
 	<dependency>
 			<groupId>beacon</groupId>
@@ -385,21 +353,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>smpp-utils</artifactId>
 			<version>1.0</version>
-	</dependency>	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>web-generichttpapi</artifactId>
-			<version>1.0</version>
-	</dependency>	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>web-migrationapi</artifactId>
-			<version>1.0</version>
 	</dependency>	
-
-<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>web-rcsr</artifactId>
-			<version>1.0</version>
-	</dependency>
 	
 	
 	<dependency>
@@ -448,11 +402,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-datarefresher</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>common-datarefresherweb</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-dndchecker</artifactId>
 			<version>1.0</version>
@@ -539,10 +490,6 @@
 	</dependency><dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-unittest</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>common-unittestweb</artifactId>
 			<version>1.0</version>
 	</dependency><dependency>
 			<groupId>beacon</groupId>
