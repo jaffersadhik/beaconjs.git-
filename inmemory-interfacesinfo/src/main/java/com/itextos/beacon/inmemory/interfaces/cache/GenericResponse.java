@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.interfacesinfo.cache;
+package com.itextos.beacon.inmemory.interfaces.cache;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

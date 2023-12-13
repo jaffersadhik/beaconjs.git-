@@ -28,9 +28,9 @@ import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.InterfaceMessageClass;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
+import com.itextos.beacon.inmemory.interfaces.cache.GenericResponse;
 import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponse;
 import com.itextos.beacon.inmemory.interfacesinfo.bean.InterfaceResponseCodeMapping;
-import com.itextos.beacon.inmemory.interfacesinfo.cache.GenericResponse;
 import com.itextos.beacon.inmemory.interfacesinfo.util.IInterfaceUtil;
 
 public class MiddlewareHandler

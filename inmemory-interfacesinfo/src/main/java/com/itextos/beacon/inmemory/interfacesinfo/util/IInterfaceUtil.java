@@ -1,7 +1,7 @@
 package com.itextos.beacon.inmemory.interfacesinfo.util;
 
-import com.itextos.beacon.inmemory.interfacesinfo.cache.GenericResponse;
-import com.itextos.beacon.inmemory.interfacesinfo.cache.InterfaceSMSTemplate;
+import com.itextos.beacon.inmemory.interfaces.cache.GenericResponse;
+import com.itextos.beacon.inmemory.interfaces.cache.InterfaceSMSTemplate;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.data.account.dao;
+package com.itextos.beacon.inmemdata.account.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
