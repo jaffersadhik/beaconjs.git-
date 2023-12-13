@@ -244,6 +244,7 @@
 		<module>gw-smppclient</module> 
 	<module>docker-docker</module>  -->
 
+  	<module>common-message</module>
   </modules>
   
 

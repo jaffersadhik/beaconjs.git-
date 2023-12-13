@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.messageobject.serialize;
+package com.itextos.beacon.commonlib.message.serialize;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
@@ -7,12 +7,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.kafka.common.serialization.Serializer;
 
-public class ValueSerializer
+public class KeySerializer
         implements
         Serializer<Object>
 {
 
-    private static final Log log = LogFactory.getLog(ValueSerializer.class);
+    private static final Log log = LogFactory.getLog(KeySerializer.class);
 
     @Override
     public byte[] serialize(
@@ -31,7 +31,7 @@ public class ValueSerializer
             }
             catch (final Exception exp)
             {
-                log.error("Problem serializing value '" + aTopic + "' in Topic '" + aTopic + "' due to...", exp);
+                log.error("Problem serializing key '" + aTopic + "' in Topic '" + aTopic + "' due to...", exp);
             }
         return result;
     }

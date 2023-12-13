@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.messageobject.serialize;
+package com.itextos.beacon.commonlib.message.serialize;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
