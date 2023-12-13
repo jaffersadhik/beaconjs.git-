@@ -5,7 +5,6 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
 	<relativePath /> <!-- lookup parent from repository -->
-
   </parent>
   <artifactId>platform-iccore</artifactId>
   
