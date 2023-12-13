@@ -7,7 +7,7 @@
   </parent>
   <artifactId>docker-ic</artifactId>
   <properties>
-		<main.class>com.itextos.beacon.platform.iccore.StartApplication</main.class>
+		<main.class>com.itextos.beacon.App</main.class>
 	</properties>
 
 <dependencies>
@@ -15,6 +15,38 @@
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-iccore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-sbcvcore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-vccore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-rccore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-chcore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-walletconsumer</artifactId>
 			<version>1.0</version>
 	</dependency>
 </dependencies>	
