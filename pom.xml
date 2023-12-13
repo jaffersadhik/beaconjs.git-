@@ -571,7 +571,6 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -595,6 +594,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.3.1</version>
+	</plugin>
 		</plugins>
 	</build>
+
 	</project>
