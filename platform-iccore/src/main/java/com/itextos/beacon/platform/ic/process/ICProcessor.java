@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.iccore.process;
+package com.itextos.beacon.platform.ic.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,9 +16,9 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.platform.iccore.util.HeaderValidaton;
-import com.itextos.beacon.platform.iccore.util.ICProducer;
-import com.itextos.beacon.platform.iccore.util.ICUtility;
+import com.itextos.beacon.platform.ic.util.HeaderValidaton;
+import com.itextos.beacon.platform.ic.util.ICProducer;
+import com.itextos.beacon.platform.ic.util.ICUtility;
 
 public class ICProcessor
         extends

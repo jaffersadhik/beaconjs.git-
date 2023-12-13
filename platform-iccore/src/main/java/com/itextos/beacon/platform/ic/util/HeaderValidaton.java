@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.iccore.util;
+package com.itextos.beacon.platform.ic.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -9,7 +9,7 @@ public class App {
 
 		if(module.equals("ic")){
 			
-			com.itextos.beacon.platform.iccore.StartApplication.main(args);
+			com.itextos.beacon.platform.ic.StartApplication.main(args);
 			
 		}else if(module.equals("sbcv")){
 			
