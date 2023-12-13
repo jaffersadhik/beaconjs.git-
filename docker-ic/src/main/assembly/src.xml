@@ -13,7 +13,7 @@
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>true</unpack>
             <scope>runtime</scope>
-             <useTransitiveDependencies>false</useTransitiveDependencies>
+             <useTransitiveDependencies>true</useTransitiveDependencies>
         <excludes>
             <exclude>xsom:xsom</exclude>
         </excludes>
