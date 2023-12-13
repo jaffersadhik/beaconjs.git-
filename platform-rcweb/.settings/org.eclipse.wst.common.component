@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
+            
+    
     <wb-module deploy-name="platform-rcweb-1.0">
-                
+                        
+        
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-                
+                        
+        
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                
+                        
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                
+                        
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <dependent-module archiveName="platform-rccore-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-rccore/platform-rccore">
             <dependency-type>uses</dependency-type>
@@ -19,6 +24,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-kafkaservice-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-kafkaservice/common-kafkaservice">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-message-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-message/common-message">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-daemonprocess-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-daemonprocess/common-daemonprocess">
@@ -108,11 +116,15 @@
         <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                
+                        
+        
         <property name="context-root" value="platform-rcweb"/>
-                
+                        
+        
         <property name="java-output-path" value="/platform-rcweb/target/classes"/>
-            
-    </wb-module>
+                    
     
+    </wb-module>
+        
+
 </project-modules>

@@ -9,6 +9,11 @@
   <dependencies>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-message</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-messageobject</artifactId>
