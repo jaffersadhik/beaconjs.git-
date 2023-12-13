@@ -1,4 +1,4 @@
-package com.itextos.beacon.http.generichttpapi.processor.async;
+package com.itextos.beacon.interfaces.generichttpapi.processor.async;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
