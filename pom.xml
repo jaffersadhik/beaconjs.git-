@@ -380,6 +380,42 @@
 			<artifactId>jetty-servlet</artifactId>
 			<version>${jetty-servlet-version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>9.4.30.v20200611</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-io</artifactId>
+			<version>9.4.30.v20200611</version>
+		</dependency>
+		
+				<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-security</artifactId>
+			<version>9.4.22.v20191022</version>
+		</dependency>
+				<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-http</artifactId>
+			<version>9.4.30.v20200611</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>9.4.30.v20200611</version>
+		</dependency>
+				<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>9.4.22.v20191022</version>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>io.prometheus</groupId>
 			<artifactId>simpleclient_httpserver</artifactId>
@@ -533,6 +569,14 @@
 			<artifactId>commons-csv</artifactId>
 			<version>${commons-csv-version}</version>
 		</dependency>
+		
+			<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		
 				<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
