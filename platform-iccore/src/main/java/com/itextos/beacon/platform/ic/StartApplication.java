@@ -14,9 +14,11 @@ public class StartApplication
     public static void main(
             String[] args)
     {
+    	System.out.println("Starting ....");
         if (log.isDebugEnabled())
             log.debug("Starting the application " + Component.IC);
 
+        /*
         try
         {
             final ProcessorInfo lProcessor = new ProcessorInfo(Component.IC);
@@ -26,6 +28,23 @@ public class StartApplication
         {
             log.error("Exception while starting the Interface Consumer.", e);
             System.exit(-1);
+        }
+        
+        */
+        
+        
+        while(true) {
+        	
+        	try {
+				Thread.sleep(10000L);
+				
+				   if (log.isDebugEnabled())
+			            log.debug("Starting the application " + Component.IC);
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 
