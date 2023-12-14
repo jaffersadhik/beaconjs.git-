@@ -343,6 +343,12 @@
 			<artifactId>commons-csv</artifactId>
 			<version>${commons-csv-version}</version>
 		</dependency>
+		<dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>5.0.0</version> <!-- Use the latest version available -->
+        <scope>provided</scope>
+    </dependency>
 			<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
