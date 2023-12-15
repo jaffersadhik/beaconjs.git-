@@ -1,5 +1,5 @@
 version: "3.1"
 services:
   beacon-ic:
-    image: dk-reg.mas:5000/beacon-ic:15dec2023       
+    image: dk-reg.mas:5000/beacon:15dec2023       
     build: .
