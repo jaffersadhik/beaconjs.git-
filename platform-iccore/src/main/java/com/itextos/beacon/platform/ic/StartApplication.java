@@ -18,7 +18,7 @@ public class StartApplication
         if (log.isDebugEnabled())
             log.debug("Starting the application " + Component.IC);
 
-        /*
+      
         try
         {
             final ProcessorInfo lProcessor = new ProcessorInfo(Component.IC);
@@ -30,23 +30,7 @@ public class StartApplication
             System.exit(-1);
         }
         
-        */
-        
-        while(true) {
-        	
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.IC);
-
-            try {
-            	
-            	Thread.sleep(10000L);
-            	}catch(Exception r) {
-            	
-            }
-            
-        	
-        }
-        
+       
     }
 
 }
