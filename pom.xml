@@ -436,11 +436,7 @@
 			<version>${quartz-scheduler-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.6.1</version>
-		</dependency>
+
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -580,6 +576,40 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson-version}</version>
+		</dependency>
+		
+		<!-- SMPP JAR -->
+
+		<dependency>
+			<groupId>com.cloudhopper</groupId>
+			<artifactId>ch-smpp</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.11</version>
+		</dependency>
+
+	
+	
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cloudhopper</groupId>
+			<artifactId>ch-smpp</artifactId>
+			<version>${ch-smpp-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${json-simple-version}</version>
 		</dependency>
 	</dependencies>
 	<build>
