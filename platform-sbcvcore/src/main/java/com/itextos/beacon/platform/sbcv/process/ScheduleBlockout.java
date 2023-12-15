@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.sbcvcore.process;
+package com.itextos.beacon.platform.sbcv.process;
 
 import java.util.Date;
 

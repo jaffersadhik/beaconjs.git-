@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.sbcvcore.util;
+package com.itextos.beacon.platform.sbcv.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

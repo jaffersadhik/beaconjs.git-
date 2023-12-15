@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.sbcvcore.process;
+package com.itextos.beacon.platform.sbcv.process;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
-import com.itextos.beacon.platform.sbcvcore.util.SBCVProducer;
+import com.itextos.beacon.platform.sbcv.util.SBCVProducer;
 
 public class SBCVProcess
         extends

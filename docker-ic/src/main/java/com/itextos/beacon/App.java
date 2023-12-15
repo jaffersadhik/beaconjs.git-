@@ -22,7 +22,7 @@ public class App {
 			
 		}else if(module.equals("sbcv")){
 			
-			com.itextos.beacon.platform.sbcvcore.StartApplication.main(args);
+			com.itextos.beacon.platform.sbcv.StartApplication.main(args);
 			
 			return true;
 			
