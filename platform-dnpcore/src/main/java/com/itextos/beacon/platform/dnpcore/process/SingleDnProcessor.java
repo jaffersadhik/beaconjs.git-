@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.platform.dnpcore.dlrclienthandover.DlrClientHandover;
+import com.itextos.beacon.platform.dnpcore.dlrclienthandover.process.DlrClientHandover;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
 import com.itextos.beacon.platform.singledn.data.DeliveryInfo;
 import com.itextos.beacon.platform.singledn.data.SingleDnInfo;

@@ -6,29 +6,56 @@ public class App {
 		
 		String module=System.getenv("module");
 
+		if(!isMW(module,args)) {
+			
+		}
+	}
+
+	private static boolean isMW(String module,String[] args) {
+		
 
 		if(module.equals("ic")){
 			
 			com.itextos.beacon.platform.ic.StartApplication.main(args);
 			
+			return true;
+			
 		}else if(module.equals("sbcv")){
 			
 			com.itextos.beacon.platform.sbcvcore.StartApplication.main(args);
 			
+			return true;
+			
 		}else if(module.equals("vc")){
 			
-			com.itextos.beacon.platform.vccore.StartApplication.main(args);
+			com.itextos.beacon.platform.vc.StartApplication.main(args);
+			
+			return true;
+			
+		}else if(module.equals("rc")){
+			
+			com.itextos.beacon.platform.rc.StartApplication.main(args);
+			
+			return true;
 			
 		}else if(module.equals("ch")){
 			
-			com.itextos.beacon.platform.chcore.StartApplication.main(args);
+			com.itextos.beacon.platform.ch.StartApplication.main(args);
 			
-		}else if(module.equals("wc")){
+			return true;
+		}else if(module.equals("rch")){
 			
-			com.itextos.beacon.platform.walletconsumer.StartApplication.main(args);
+			com.itextos.beacon.platform.rch.StartApplication.main(args);
 			
+			return true;
+		}else if(module.equals("dch")){
+			
+			com.itextos.beacon.platform.dch.StartApplication.main(args);
+			
+			return true;
 		}
-
+		
+		return false;
 	}
 
 }

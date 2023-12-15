@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.billing.DeliveryProcess;
-import com.itextos.beacon.platform.dnpcore.dlrclienthandover.DlrClientHandover;
+import com.itextos.beacon.platform.dnpcore.dlrclienthandover.process.DlrClientHandover;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
 import com.itextos.beacon.platform.dnpcore.util.DlrConstants;
 
