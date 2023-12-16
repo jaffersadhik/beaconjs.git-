@@ -21,12 +21,7 @@ public class StartApplication
         try
         {
         	
-        	String cluster=System.getProperty("pf.cluster");
-        	
-        	 if(cluster==null) {
-                 
-             	System.setProperty("pf.cluster", System.getenv("cluster"));
-             }
+      
             final ProcessorInfo lProcessor = new ProcessorInfo(THIS_COMPONENT);
             
             lProcessor.process();
