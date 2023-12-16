@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:ubi
+FROM openjdk:11-jre
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 

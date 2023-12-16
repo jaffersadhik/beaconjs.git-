@@ -67,10 +67,15 @@
 			<artifactId>platform-carrierhandoverutility</artifactId>
 			<version>1.0</version>
 	</dependency>
-	
-			<dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-chcore</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-clienthandovert2tbweb</artifactId>
 			<version>1.0</version>
 	</dependency>
 	

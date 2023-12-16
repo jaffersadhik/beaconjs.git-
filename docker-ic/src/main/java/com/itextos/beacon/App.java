@@ -8,7 +8,69 @@ public class App {
 
 		if(!isMW(module,args)) {
 			
+			
+			if(!isBiller(module,args)) {
+				
+			}
 		}
+	}
+
+	private static boolean isBiller(String module, String[] args) {
+		
+		if(module.equals("subbiller")) {
+			
+			com.itextos.beacon.platform.subbiller.StartApplication.main(args);
+			
+			return true;
+			
+		}else if(module.equals("subt2tb")) {
+			
+			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("dnt2tb")) {
+			
+			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("fullmsgt2tb")) {
+			
+			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("errorlogt2tb")) {
+			
+			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("dnpostlogt2tb")) {
+			
+			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("dnnopayloadt2tb")) {
+			
+			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("sbc")) {
+			
+			com.itextos.beacon.platform.sbc.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("t2e")) {
+			
+			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("clienthandovert2tb")) {
+			
+			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+			
+			return true;			
+		}
+		
+		return false;
 	}
 
 	private static boolean isMW(String module,String[] args) {
