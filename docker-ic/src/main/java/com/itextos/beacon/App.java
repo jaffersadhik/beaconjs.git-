@@ -11,8 +11,57 @@ public class App {
 			
 			if(!isBiller(module,args)) {
 				
+				if(!isAux(module,args)) {
+					
+				}
 			}
 		}
+	}
+
+	private static boolean isAux(String module, String[] args) {
+
+		
+		if(module.equals("wc")) {
+			
+			com.itextos.beacon.platform.wc.StartApplication.main(args);
+			
+			return true;
+			
+		}else if(module.equals("dnp")) {
+			
+			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("r3c")) {
+			
+			com.itextos.beacon.platform.r3c.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("prc")) {
+			
+			com.itextos.beacon.platform.prc.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("dltc")) {
+			
+			com.itextos.beacon.platform.dltvc.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("smppdlrhandover")) {
+			
+			com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			
+			return true;			
+		}else if(module.equals("httpclienthandover")) {
+			
+			com.itextos.beacon.httpclienthandover.StartApplication.main(args);
+			
+			return true;			
+		}
+		
+		
+		return false;
+	
 	}
 
 	private static boolean isBiller(String module, String[] args) {
