@@ -85,33 +85,14 @@ public class ProcessorInfo
 
         ShutdownHandler.getInstance().addHook(aComponent.toString(), this);
 
-        startPrometheusServer(aStartJettyServer);
+    //    startPrometheusServer(aStartJettyServer);
 
         // Processing the Fallback Data
         /** This is not required now as it will be taken there itself. */
         // new FallbackProducerDataProcess(aComponent);
     }
 
-    private static void startPrometheusServer(
-            boolean aStartJettyServer)
-    {
-
-        try
-        {
-
-            if (aStartJettyServer)
-            {
-                PrometheusMetrics.registerServer();
-                PrometheusMetrics.registerPlatformMetrics();
-            }
-        }
-        catch (final Exception e)
-        {
-            // Add this exception in INFO mode.
-            if (log.isInfoEnabled())
-                log.info("IGNORE: Exception while working on prometheus counter", e);
-        }
-    }
+   
 
     public void process()
             throws Exception

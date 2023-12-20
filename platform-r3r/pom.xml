@@ -53,6 +53,9 @@
 	<plugin>
     <artifactId>maven-war-plugin</artifactId>
     <version>3.3.1</version>
+     <configuration>
+                <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+            </configuration>
 	</plugin>
 	</plugins>
     </build>

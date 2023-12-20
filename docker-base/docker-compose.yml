@@ -1,7 +1,0 @@
-version: "3.1"
-services:
-  beacon-base:
-    image: dk-reg.mas:5000/beacon-base:2.0
-    ports: ['9001:8080']      
-    build: .
-    volumes: ['./etc/hosts:/etc/hosts','./platform:/platform','./logs:/logs','./global.properties:/instance/global.properties','./log4j2-common.xml:/instance/log4j2-common.xml','./smpp-interface.properties:/instance/smpp-interface.properties']
