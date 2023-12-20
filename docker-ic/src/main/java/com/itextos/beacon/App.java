@@ -13,9 +13,24 @@ public class App {
 				
 				if(!isAux(module,args)) {
 					
+					if(!isSMPP(module,args)) {
+						
+					}
 				}
 			}
 		}
+	}
+
+	private static boolean isSMPP(String module, String[] args) {
+		
+		if(module.equals("smpp")) {
+			
+			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
+			
+			return true;
+			
+		}
+		return false;
 	}
 
 	private static boolean isAux(String module, String[] args) {
