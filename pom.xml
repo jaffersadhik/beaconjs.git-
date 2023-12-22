@@ -16,7 +16,7 @@
 		<commons-net-version>3.6</commons-net-version>
 		<commons-validator-version>1.6</commons-validator-version>
 		<commons-codec-version>1.10</commons-codec-version>
-		<jetty-servlet-version>9.2.0.v20140526</jetty-servlet-version>
+		<jetty-servlet-version>9.4.40.v20210413</jetty-servlet-version>
 		<simpleclient_httpserver-version>0.9.0</simpleclient_httpserver-version>
 		<simpleclient_servlet-version>0.9.0</simpleclient_servlet-version>
 		<jedis-version>3.3.0</jedis-version>
