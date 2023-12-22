@@ -1,4 +1,4 @@
-FROM openjdk:11-jre
+FROM openjdk:17-jdk-slim
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
