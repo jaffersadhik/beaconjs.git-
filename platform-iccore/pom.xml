@@ -13,7 +13,14 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-componentconsumer</artifactId>
 			<version>1.0</version>
-		</dependency>
+			</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-daemonprocess</artifactId>
+			<version>1.0</version>
+			</dependency>
+
+
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-dndchecker</artifactId>

@@ -8,6 +8,11 @@
   <artifactId>common-unittestweb</artifactId>
   <packaging>war</packaging>
      <dependencies>
+		  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>thirdpartyjar</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-unittest</artifactId>
@@ -24,17 +29,5 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
-	<build>
-	<plugins>
-	<plugin>
-    <artifactId>maven-war-plugin</artifactId>
-    <version>3.3.1</version>
-     <configuration>
-                    <packagingExcludes>
-                        WEB-INF/lib/*.jar
-                    </packagingExcludes>
-                </configuration>
-	</plugin>
-	</plugins>
-    </build>
+	
 </project>

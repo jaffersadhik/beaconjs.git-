@@ -11,11 +11,15 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-utility</artifactId>
 			<version>1.0</version>
+						<scope>provided</scope>
+
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-messageobject</artifactId>
 			<version>1.0</version>
+						<scope>provided</scope>
+
 		</dependency>
 	
 	</dependencies>

@@ -8,7 +8,11 @@
   <artifactId>common-messageobject</artifactId>
   
   	<dependencies>
-		
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-constants</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-utility</artifactId>

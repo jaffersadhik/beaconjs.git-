@@ -11,6 +11,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-redisconnectionprovider</artifactId>
 			<version>1.0</version>
+						<scope>provided</scope>
+
 		</dependency>
 	</dependencies>
 		

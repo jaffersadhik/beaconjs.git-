@@ -39,7 +39,7 @@
         
         
         <property name="context-root" value="web-generichttpapi"/>
-        <property name="component.exclusion.patterns" value="WEB-INF/lib/*.jar"/>
+        <property name="component.exclusion.patterns"/>
                                             
     
     

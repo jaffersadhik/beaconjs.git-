@@ -7,6 +7,12 @@
   </parent>
   <artifactId>common-componentconsumer</artifactId>
   <dependencies>
+	  
+	  		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>thirdpartyjar</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-messageprocessor</artifactId>
@@ -16,11 +22,13 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-daemonprocess</artifactId>
 			<version>1.0</version>
+
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-prometheusmetricsutil</artifactId>
 			<version>1.0</version>
+
 		</dependency>
 	</dependencies>
 	

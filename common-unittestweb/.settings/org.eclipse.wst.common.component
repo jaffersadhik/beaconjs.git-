@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="common-unittestweb-1.0">
+                
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="thirdpartyjar-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/thirdpartyjar/thirdpartyjar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-unittest-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-unittest/common-unittest">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-pattern-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-pattern/common-pattern">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-modulecheck-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-modulecheck/common-modulecheck">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+                
         <property name="context-root" value="common-unittestweb"/>
+                
         <property name="java-output-path" value="/common-unittestweb/target/classes"/>
-        <property name="component.exclusion.patterns" value="WEB-INF/lib/*.jar"/>
+        <property name="component.exclusion.patterns"/>
+            
     </wb-module>
+    
 </project-modules>

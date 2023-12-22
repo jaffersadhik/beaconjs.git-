@@ -10,28 +10,7 @@
 	<properties>
 		<main.class>com.itextos.beacon.platform.subt2tb.StartApplication</main.class>
 	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot-maven-plugin-version}</version>
-				<configuration>
-					<classifier>executable</classifier>
-					<mainClass>${main.class}</mainClass>
-				</configuration>
-				<executions>
-					<execution>
-						<id>repackage</id>
-						<phase>package</phase>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+
 
 	<dependencies>
 		<dependency>
