@@ -14,6 +14,9 @@
         <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jakarta.servlet-api-5.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="thirdpartyjar-1.0.jar" deploy-path="/lib" handle="module:/resource/thirdpartyjar/thirdpartyjar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

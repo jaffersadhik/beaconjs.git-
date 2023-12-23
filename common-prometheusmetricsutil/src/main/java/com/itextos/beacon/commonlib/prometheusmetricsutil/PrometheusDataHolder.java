@@ -39,34 +39,8 @@ class PrometheusDataHolder
 
     static void startPrometheusServer()
     {
-
-        try
-        {
-            final String aPort               = System.getProperty("prometheus.jetty.port");
-            final int    prometheusJettyPort = Integer.parseInt(aPort);
-
-            if (log.isDebugEnabled())
-                log.debug(" Jetty Port : '" + prometheusJettyPort + "'");
-
-            if (prometheusJettyPort > 0)
-            {
-                final Server                server  = new Server(prometheusJettyPort);
-                final ServletContextHandler context = new ServletContextHandler();
-                context.setContextPath("/");
-                context.addServlet(new ServletHolder(new MetricsServlet()), "/metrics");
-                server.setHandler(context);
-                server.start();
-
-                if (log.isDebugEnabled())
-                    log.debug("Prometheus server started... in port " + prometheusJettyPort);
-            }
-            else
-                log.warn("Invalid Port Specified for the Prometheus server..." + prometheusJettyPort);
-        }
-        catch (final Throwable arg4)
-        {
-            log.error("Something went wrong when starting the Prometheus Server. Please have a look.", arg4);
-        }
+    	
+    	PrometheusStartup.getInstance();
     }
 
     String createMetrics(

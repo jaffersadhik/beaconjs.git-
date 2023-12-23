@@ -183,7 +183,6 @@
 		<module>platform-dnt2tb</module>
 		<module>platform-subt2tb</module>
 		<module>platform-errorlogt2tb</module>
-		<module>platform-kannelstatusupdaterweb</module>
 		<module>platform-clienthandovert2tbweb</module>
 		<module>platform-r3ccore</module>
 		<module>platform-messagetool</module>
@@ -230,16 +229,10 @@
 		<module>smpp-utils</module>
 		<module>ch-httpclienthandover</module>
 		<module>ch-clienthandoveracceptproject</module>
-		<module>platform-icweb</module>
-		<module>platform-vcweb</module>
-		<module>platform-chweb</module>
-		<module>platform-rcweb</module>
-		<module>platform-sbcvweb</module>
-
+	
 
 		<module>web-generichttpapi</module>
 		<module>web-migrationapi</module>
-		<module>web-rcsr</module>
 <!--
 
 		<module>wildflyhome</module>

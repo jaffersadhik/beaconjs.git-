@@ -9,6 +9,7 @@
   	<packaging>war</packaging>
 
   <dependencies>
+	  
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-apperrorhandler</artifactId>

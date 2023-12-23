@@ -3,7 +3,7 @@ package com.itextos.beacon.platform.msgtool.util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
