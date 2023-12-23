@@ -5,10 +5,69 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
+  <dependencies>
+	  
+	  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>web-generichttpapi</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>	
+		
+			  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-r3r</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		
+			  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-dnr</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		
+  </dependencies>
   <artifactId>docker-beaconweb</artifactId>
+      <packaging>ear</packaging>
+       <build>
+        <plugins>
+            <!-- Maven EAR Plugin Configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <version>8</version> <!-- Use Java EE 8 -->
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <!-- Maven WAR Plugin Configuration for Module 1 -->
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>web-generichttpapi</artifactId>
+                            <contextRoot>/genericapi</contextRoot>
+                        </webModule>
+                        <!-- Maven WAR Plugin Configuration for Module 2 -->
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-r3r</artifactId>
+                            <contextRoot>/</contextRoot>
+                        </webModule>
+                        <!-- Maven WAR Plugin Configuration for Module 3 -->
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-dnr</artifactId>
+                            <contextRoot>/dnr</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+<!-- 
      <build>
         <plugins>
-            <!-- Configure the maven-antrun-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -45,4 +104,6 @@
             
         </plugins>
     </build>
+    
+    -->
 </project>

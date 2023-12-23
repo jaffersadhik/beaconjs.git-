@@ -13,8 +13,6 @@ RUN rm wildfly-$WILDFLY_VERSION.tar.gz
 
 # Expose the ports needed by WildFly
 EXPOSE 8080 9990
-COPY ./target/web-generichttpapi-1.0.war /opt/wildfly/standalone/deployments/web-generichttpapi-1.0.war
-COPY ./target/platform-dnr-1.0.war /opt/wildfly/standalone/deployments/platform-dnr-1.0.war
-COPY ./target/platform-r3r-1.0.war /opt/wildfly/standalone/deployments/platform-r3r-1.0.war
+COPY ./target/docker-beaconweb-1.0.ear /opt/wildfly/standalone/deployments/docker-beaconweb-1.0.ear
 VOLUME ["/logs"]
 CMD ["/opt/wildfly/bin/standalone.sh","-b","0.0.0.0","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/platform/properties/bulk/global.properties"]
