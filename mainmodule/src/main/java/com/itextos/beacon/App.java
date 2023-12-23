@@ -25,13 +25,13 @@ public class App {
 					
 					if(!isSMPP(module,args)) {
 
-						boolean result=isHTTP(module,args);
-						
-						if(!result) {
+					
+
+						if(!isALL(module,args)) {
+
 							
-						}else {
 							
-							IS_START_PROMETHEUS=true;
+
 						}
 
 					}
@@ -46,7 +46,113 @@ public class App {
 		}
 	}
 	
-	 private static boolean isHTTP(String module, String[] args) {
+	 private static boolean isALL(String module, String[] args) {
+
+			
+			if(module.equals("all")) {
+				
+				
+				allMW(null);
+				allAUX(null);
+				allBiller(null);
+
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
+			}
+			return false;
+		
+	}
+
+	private static void allBiller(String args[]) {
+
+		
+		
+			
+			com.itextos.beacon.platform.subbiller.StartApplication.main(args);
+
+	
+			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+
+			
+			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+
+				
+			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+
+			
+			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+		
+			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+
+			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+
+			com.itextos.beacon.platform.sbc.StartApplication.main(args);
+
+			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+				
+			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+			
+		
+	}
+
+	private static void allAUX(String args []) {
+
+
+			com.itextos.beacon.platform.wc.StartApplication.main(args);
+			
+			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
+			
+			com.itextos.beacon.platform.r3c.StartApplication.main(args);
+
+			com.itextos.beacon.platform.prc.StartApplication.main(args);
+
+			com.itextos.beacon.platform.dltvc.StartApplication.main(args);
+
+			
+			com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+
+			com.itextos.beacon.httpclienthandover.StartApplication.main(args);
+
+	
+	}
+
+	private static void allMW(String args[]) {
+		
+
+			com.itextos.beacon.platform.ic.StartApplication.main(args);
+	
+			com.itextos.beacon.platform.sbcv.StartApplication.main(args);
+			
+			
+			com.itextos.beacon.platform.vc.StartApplication.main(args);
+			
+			
+			com.itextos.beacon.platform.rc.StartApplication.main(args);
+			
+			
+			com.itextos.beacon.platform.ch.StartApplication.main(args);
+			
+			
+			com.itextos.beacon.platform.rch.StartApplication.main(args);
+			
+			
+			com.itextos.beacon.platform.dch.StartApplication.main(args);
+			
+	
+		
+	}
+
+	private static void allSMPP(String args[]) {
+		
+		
+			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
+
+		
+	}
+
+	private static boolean isHTTP(String module, String[] args) {
 
 		return com.itextos.beacon.jetty.server.MultiWarDeployment.deploy(module);
 
