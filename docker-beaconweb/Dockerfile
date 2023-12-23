@@ -1,9 +1,20 @@
-FROM jboss/wildfly:25.0.0.Final
-ENV TZ="Asia/Kolkata"
-EXPOSE 8080/tcp
+FROM openjdk:17-jdk-slim
 
-COPY ./target/web-generichttpapi-1.0.war /opt/jboss/wildfly/standalone/deployments/web-generichttpapi-1.0.war
-COPY ./target/platform-dnr-1.0.war /opt/jboss/wildfly/standalone/deployments/platform-dnr-1.0.war
-COPY ./target/platform-r3r-1.0.war /opt/jboss/wildfly/standalone/deployments/platform-r3r-1.0.war
+# Set environment variables
+ENV WILDFLY_VERSION 24.0.1.Final
+ENV WILDFLY_HOME /opt/wildfly
+
+# Download and install WildFly
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN curl -O https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz
+RUN tar xf wildfly-$WILDFLY_VERSION.tar.gz -C /opt
+RUN mv /opt/wildfly-$WILDFLY_VERSION $WILDFLY_HOME
+RUN rm wildfly-$WILDFLY_VERSION.tar.gz
+
+# Expose the ports needed by WildFly
+EXPOSE 8080 9990
+COPY ./target/web-generichttpapi-1.0.war /opt/wildfly/standalone/deployments/web-generichttpapi-1.0.war
+COPY ./target/platform-dnr-1.0.war /opt/wildfly/standalone/deployments/platform-dnr-1.0.war
+COPY ./target/platform-r3r-1.0.war /opt/wildfly/standalone/deployments/platform-r3r-1.0.war
 VOLUME ["/logs"]
-CMD ["/opt/jboss/wildfly/bin/standalone.sh","-b","0.0.0.0","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/platform/properties/bulk/global.properties"]
+CMD ["/opt/wildfly/bin/standalone.sh","-b","0.0.0.0","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/platform/properties/bulk/global.properties"]
