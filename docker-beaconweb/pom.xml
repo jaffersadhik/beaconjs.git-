@@ -100,6 +100,13 @@
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>	
+		
+			  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-dnr</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
 		<!-- 
 			  	<dependency>
 			<groupId>beacon</groupId>
@@ -108,12 +115,7 @@
 			<type>war</type>
 		</dependency>
 		
-			  	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-dnr</artifactId>
-			<version>1.0</version>
-			<type>war</type>
-		</dependency>
+		
 		-->
   </dependencies>
   <artifactId>docker-beaconweb</artifactId>
@@ -135,17 +137,19 @@
                             <artifactId>web-generichttpapi</artifactId>
                             <contextRoot>/genericapi</contextRoot>
                         </webModule>
+                        
+                            <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-dnr</artifactId>
+                            <contextRoot>/dnr</contextRoot>
+                        </webModule> 
                         <!-- 
                         <webModule>
                             <groupId>beacon</groupId>
                             <artifactId>platform-r3r</artifactId>
                             <contextRoot>/</contextRoot>
                         </webModule>
-                        <webModule>
-                            <groupId>beacon</groupId>
-                            <artifactId>platform-dnr</artifactId>
-                            <contextRoot>/dnr</contextRoot>
-                        </webModule>  -->
+                     -->
                     </modules>
                 </configuration>
             </plugin>
