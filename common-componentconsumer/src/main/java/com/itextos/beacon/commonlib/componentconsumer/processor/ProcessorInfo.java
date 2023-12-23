@@ -718,6 +718,7 @@ public class ProcessorInfo
 
     private void createLockFile()
     {
+    	/*
         final File lFile = new File(getLockFilename());
 
         if (!lFile.exists())
@@ -742,6 +743,8 @@ public class ProcessorInfo
         createNewLockFile();
         final String s = mComponent + " Lock file created ...";
         logContent(s);
+        
+        */
     }
 
     private void createNewLockFile()
