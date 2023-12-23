@@ -135,18 +135,17 @@
                             <artifactId>web-generichttpapi</artifactId>
                             <contextRoot>/genericapi</contextRoot>
                         </webModule>
-                        <!-- Maven WAR Plugin Configuration for Module 2 -->
+                        <!-- 
                         <webModule>
                             <groupId>beacon</groupId>
                             <artifactId>platform-r3r</artifactId>
                             <contextRoot>/</contextRoot>
                         </webModule>
-                        <!-- Maven WAR Plugin Configuration for Module 3 -->
                         <webModule>
                             <groupId>beacon</groupId>
                             <artifactId>platform-dnr</artifactId>
                             <contextRoot>/dnr</contextRoot>
-                        </webModule>
+                        </webModule>  -->
                     </modules>
                 </configuration>
             </plugin>
