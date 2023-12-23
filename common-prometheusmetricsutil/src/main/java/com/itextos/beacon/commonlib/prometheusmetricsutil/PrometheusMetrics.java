@@ -127,92 +127,17 @@ public class PrometheusMetrics
     public static void registerApiMetrics()
     {
 
-        if (PrometheusController.getInstance().isPrometheusEnabled(PrometheusMetricProvider.API))
-        {
-            registerAPIAcceptCounter();
-            registerAPIStatusCounter();
-            regsiterAPILatency();
-        }
+       RegisterApiMetrics.getInstance();
     }
 
-    private static void registerAPIAcceptCounter()
-    {
+ 
 
-        try
-        {
 
-            if (PrometheusController.getInstance().getApiController().isApiAllAcceptEnabled()
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificApis() && PrometheusController.getInstance().getApiController().isApiListAcceptEnabled())
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificUsers() && PrometheusController.getInstance().getApiController().isApiUsersAcceptEnabled()))
-            {
-                regiterUserApiAcceptCounter();
-                if (log.isDebugEnabled())
-                    log.debug("Prometheus API Accept counter registered.");
-            }
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception while registering Prometheus metrics for API Request Counter. It should not impact the application process.", e);
-        }
-    }
+   
 
-    private static void registerAPIStatusCounter()
-    {
+ 
 
-        try
-        {
-
-            if (PrometheusController.getInstance().getApiController().isApiAllStatusEnabled()
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificApis() && PrometheusController.getInstance().getApiController().isApiListStatusEnabled())
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificUsers() && PrometheusController.getInstance().getApiController().isApiUsersStatusEnabled()))
-            {
-                registerUserApiStatusCounter();
-                if (log.isDebugEnabled())
-                    log.debug("Prometheus API Status counter registered.");
-            }
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception while registering Prometheus metrics for API Status Counter. It should not impact the application process.", e);
-        }
-    }
-
-    private static void regsiterAPILatency()
-    {
-
-        try
-        {
-
-            if (PrometheusController.getInstance().getApiController().isApiAllLatencyEnabled()
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificApis() && PrometheusController.getInstance().getApiController().isApiListLatencyEnabled())
-                    || (PrometheusController.getInstance().getApiController().isMetricsEnabledForSpecificUsers() && PrometheusController.getInstance().getApiController().isApiUsersLatencyEnabled()))
-            {
-                registerUserApiLatency();
-                if (log.isDebugEnabled())
-                    log.debug("Prometheus API Latency registered.");
-            }
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception while registering Prometheus metrics for API Latency . It should not impact the application process.", e);
-        }
-    }
-
-    private static void registerUserApiLatency()
-    {
-        PrometheusDataHolder.getInstance().createMetrics(MetricType.HISTOGRAM, API_USER_PROCESS_LATENCY, PrometheusController.getInstance().getHistogramBuckgets(), "API request processing latency",
-                API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, USER);
-    }
-
-    private static void registerUserApiStatusCounter()
-    {
-        PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, API_USER_STATUS_COUNT, "Status Counter for Messages", API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, STATUS_CODE, USER);
-    }
-
-    private static void regiterUserApiAcceptCounter()
-    {
-        PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, API_USER_ACCEPT_COUNT, "Accept Counter for Messages", API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, USER);
-    }
+ 
 
     public static void registerUIMetrics()
     {
