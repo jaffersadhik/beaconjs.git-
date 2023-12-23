@@ -15,6 +15,8 @@ public class App {
 		
 		
 		String module=System.getenv("module");
+		
+		System.out.println("module : "+module);
 
 		if(!isMW(module,args)) {
 			
@@ -52,9 +54,9 @@ public class App {
 			if(module.equals("all")) {
 				
 				
-				allMW(null);
-				allAUX(null);
-				allBiller(null);
+				allMW(args);
+				allAUX(args);
+				allBiller(args);
 
 				IS_START_PROMETHEUS=true;
 
