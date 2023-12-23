@@ -58,7 +58,7 @@
 
 		<spring-boot-maven-plugin-version>2.6.2</spring-boot-maven-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
-		<jdk-build-version>11</jdk-build-version>
+		<jdk-build-version>17</jdk-build-version>
 
 	</properties>
 
@@ -250,10 +250,10 @@
   	<module>mainmodule</module>
 
   	<module>common-message</module>
-  	<module>jetty-server</module>
   	<module>docker-beacon</module>
   	<module>http-japi</module>
   	<module>commonwardependency</module>
+  	<module>docker-beaconweb</module>
   </modules>
   
 

@@ -24,9 +24,7 @@
 								
    								<copy todir="${project.build.directory}/">		
                                     <fileset file="../mainmodule/target/mainmodule-1.0-executable.jar"/>
-                                    <fileset file="../web-generichttpapi/target/web-generichttpapi-1.0.war"/>
-                                    <fileset file="../platform-r3r/target/platform-r3r-1.0.war"/>
-
+    
                                 </copy>
 
                 
