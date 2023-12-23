@@ -13,6 +13,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-apperrorhandler</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -20,6 +21,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-elasticsearchutil</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -27,6 +29,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-httpclient</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -34,6 +37,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-utility</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -41,6 +45,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-appconfigparams</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -48,6 +53,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-data</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
@@ -56,6 +62,7 @@
 			<groupId>beacon</groupId>
 			<artifactId>common-prometheusmetricsutil</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>   
 							         
 
 		</dependency>
