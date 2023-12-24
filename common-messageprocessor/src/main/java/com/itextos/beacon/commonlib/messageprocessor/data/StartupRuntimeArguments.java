@@ -193,7 +193,7 @@ public class StartupRuntimeArguments
         if (log.isInfoEnabled())
             log.info("Startup argument for '" + aTypeString + "' is : '" + lProperty + "'");
    
-        if(lProperty==null||lProperty.trim().length()<1) {
+        if(RUNTIME_ARG_PF_CLUSTER.equals(aRuntimeArg)&&(lProperty==null||lProperty.trim().length()<1)) {
         	
             return CommonUtility.nullCheck(System.getenv("cluster"), true);
 
