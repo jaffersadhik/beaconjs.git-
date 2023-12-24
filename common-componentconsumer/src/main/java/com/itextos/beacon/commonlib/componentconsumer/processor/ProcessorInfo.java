@@ -270,7 +270,7 @@ public class ProcessorInfo
 
                 	}
 
-                }else if(!topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)){
+                }else{
 
                 	
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
