@@ -266,7 +266,7 @@ public class ProcessorInfo
                         startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                     }
                     
-                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
+                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
 
                 	}
 
@@ -280,7 +280,7 @@ public class ProcessorInfo
                         startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                     }
                     
-                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
+                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
 
 
                 }
