@@ -32,7 +32,9 @@ public class StartApplication
             
             if(cluster==null) {
             
-            	System.setProperty("cluster", System.getenv("cluster"));
+            	if(System.getenv("cluster")!=null) {
+            		System.setProperty("cluster", System.getenv("cluster"));
+            	}
             }
 
             final String modvalue=System.getProperty("modvalue");
