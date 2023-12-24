@@ -270,6 +270,33 @@ public class ProcessorInfo
 
                 	}
 
+                }else if(topicName.endsWith(KafkaDBConstants.HIGH_SUFFIX)) {
+                	
+                	if(System.getenv("priority")!=null&&System.getenv("priority").equals("high")) {
+                		
+                        final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+
+                        for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                        {
+                            totalThreadsCount++;
+                            startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                        }
+                        
+                        log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
+
+                    	}
+                } else if(topicName.endsWith(KafkaDBConstants.OTP_SUFFIX)) {
+                	
+                	  final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+
+                      for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                      {
+                          totalThreadsCount++;
+                          startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                      }
+                      
+                      log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
+
                 }else{
 
                 	
