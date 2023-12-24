@@ -270,7 +270,7 @@ public class ProcessorInfo
 
                 	}
 
-                }else {
+                }else if(!topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)){
 
                     final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
 
