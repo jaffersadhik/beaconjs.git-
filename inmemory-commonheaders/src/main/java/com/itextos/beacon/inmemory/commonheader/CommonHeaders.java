@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.commonheaders;
+package com.itextos.beacon.inmemory.commonheader;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

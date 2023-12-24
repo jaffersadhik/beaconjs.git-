@@ -12,7 +12,7 @@ import com.itextos.beacon.commonlib.constants.RouteLogic;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.clientallowedheaders.ClientAllowedHeaders;
-import com.itextos.beacon.inmemory.commonheaders.CommonHeaders;
+import com.itextos.beacon.inmemory.commonheader.CommonHeaders;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.governmentheaders.GovtHeaderBlockCheck;
