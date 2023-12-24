@@ -227,7 +227,6 @@ public class ProcessorInfo
             KafkaComponentInfo aKafkaComponentInfo,
             Map<String, Map<String, ConsumerInMemCollection>> aConsumerInmemCollection)
     {
-        int totalThreadsCount = 0;
 
         for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
         {
@@ -246,10 +245,13 @@ public class ProcessorInfo
             final List<String>                         topics                   = entry.getValue();
             final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(clusterName);
 
+
             for (final String topicName : topics)
             {
                 if (log.isDebugEnabled())
                     log.debug("Working for the topic '" + topicName + "'");
+
+                int totalThreadsCount = 0;
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
@@ -260,9 +262,11 @@ public class ProcessorInfo
                     totalThreadsCount++;
                     startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                 }
+                
+                log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
+
             }// for (final String topicName : topics)
         }// for (final Entry<String, List<String>> entry : topicsToConsume.entrySet())
-        log.error("For component " + mComponent + " Total thread created " + totalThreadsCount);
     }
 
     private Map<String, Map<String, ConsumerInMemCollection>> createConsumersBeforeStartingThread(
