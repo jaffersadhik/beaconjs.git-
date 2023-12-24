@@ -272,6 +272,9 @@ public class ProcessorInfo
 
                 }else if(!topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)){
 
+                	
+                	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
+
                     final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
 
                     for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
@@ -281,7 +284,7 @@ public class ProcessorInfo
                     }
                     
                     log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
-
+                	}
 
                 }
            }// for (final String topicName : topics)
