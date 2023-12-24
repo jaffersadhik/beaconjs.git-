@@ -255,10 +255,11 @@ public class ProcessorInfo
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                if(topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)) {
+                if(topicName.contains(KafkaDBConstants.INTL_SUFFIX)) {
           
                 	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
-                    final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                		
+                    final int                     tempThreadCount =intlThreadsCount;
 
                     for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                     {
@@ -270,11 +271,12 @@ public class ProcessorInfo
 
                 	}
 
-                }else if(topicName.endsWith(KafkaDBConstants.HIGH_SUFFIX)) {
+                }else if(topicName.contains(KafkaDBConstants.HIGH_SUFFIX)) {
                 	
                 	if(System.getenv("priority")!=null&&System.getenv("priority").equals("high")) {
                 		
-                        final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                        //final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                		final int                     tempThreadCount =  threadsCount;
 
                         for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                         {
@@ -285,11 +287,11 @@ public class ProcessorInfo
                         log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
 
                     	}
-                } else if(topicName.endsWith(KafkaDBConstants.OTP_SUFFIX)) {
+                } else if(topicName.contains(KafkaDBConstants.OTP_SUFFIX)) {
                 	
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
 
-                	  final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                	  final int                     tempThreadCount =  threadsCount;
 
                       for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                       {
@@ -307,7 +309,7 @@ public class ProcessorInfo
 
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
 
-                    final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                    final int                     tempThreadCount =  threadsCount;
 
                     for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                     {
