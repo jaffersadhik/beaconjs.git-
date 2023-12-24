@@ -189,6 +189,15 @@ public class StartupRuntimeArguments
             String aTypeString)
     {
         final String lProperty = System.getProperty(aRuntimeArg);
+  
+        if (log.isInfoEnabled())
+            log.info("Startup argument for '" + aTypeString + "' is : '" + lProperty + "'");
+   
+        if(lProperty==null) {
+        	
+            return CommonUtility.nullCheck(System.getenv("cluster"), true);
+
+        }
         if (log.isInfoEnabled())
             log.info("Startup argument for '" + aTypeString + "' is : '" + lProperty + "'");
         return CommonUtility.nullCheck(lProperty, true);
