@@ -255,17 +255,36 @@ public class ProcessorInfo
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+                if(topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)) {
+          
+                	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
+                    final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
 
-                for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                {
-                    totalThreadsCount++;
-                    startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                    for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                    {
+                        totalThreadsCount++;
+                        startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                    }
+                    
+                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
+
+                	}
+
+                }else {
+
+                    final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
+
+                    for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                    {
+                        totalThreadsCount++;
+                        startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                    }
+                    
+                    log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
+
+
                 }
-                
-                log.error("For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName);
-
-            }// for (final String topicName : topics)
+           }// for (final String topicName : topics)
         }// for (final Entry<String, List<String>> entry : topicsToConsume.entrySet())
     }
 
