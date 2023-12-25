@@ -38,9 +38,9 @@ import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArgument
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
-import com.itextos.beacon.commonlib.splog.SPLog;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.splog.SPLog;
 
 public class ProcessorInfo
         implements

@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.splog;
+package com.itextos.beacon.splog;
 
 import java.util.List;
 import java.util.Map;
