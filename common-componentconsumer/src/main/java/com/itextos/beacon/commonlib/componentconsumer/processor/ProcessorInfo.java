@@ -258,7 +258,7 @@ public class ProcessorInfo
 
                 if(topicName.indexOf(KafkaDBConstants.INTL_SUFFIX)>-1) {
                 	
-                	System.out.println("intl createConsumerThreads");
+                	log.debug("intl createConsumerThreads");
 
           
                 	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
