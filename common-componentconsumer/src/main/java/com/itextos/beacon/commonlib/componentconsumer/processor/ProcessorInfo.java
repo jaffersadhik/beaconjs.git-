@@ -246,7 +246,21 @@ public class ProcessorInfo
             final List<String>                         topics                   = entry.getValue();
             final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(clusterName);
 
+            String intl=System.getenv("intl");
+            String priority=System.getenv("priority");
+            
+            log.debug("intl" + intl );
 
+            log.debug("priority" + priority );
+            
+            if(intl==null) {
+            	intl="";
+            }
+
+            if(priority==null) {
+            	priority="";
+            }
+            
             for (final String topicName : topics)
             {
                 if (log.isDebugEnabled())
@@ -261,7 +275,7 @@ public class ProcessorInfo
                 	log.debug("intl createConsumerThreads");
 
           
-                	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
+                	if(intl.equals("1")) {
                 		
                     	log.debug("intl createConsumerThreads going to Thread Create");
 
@@ -281,7 +295,7 @@ public class ProcessorInfo
                 	
                 	log.debug("high createConsumerThreads");
 
-                	if(System.getenv("priority")!=null&&System.getenv("priority").equals("high")) {
+                	if(priority.equals("high")) {
                 		
                     	log.debug("high createConsumerThreads going to Thread Create");
 
@@ -301,7 +315,7 @@ public class ProcessorInfo
                 	
                 	log.debug("otp createConsumerThreads");
 
-                	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
+                	if(intl.equals("0")) {
 
                     	log.debug("otp createConsumerThreads going to Thread Create");
 
@@ -319,11 +333,11 @@ public class ProcessorInfo
                 }else{
 
                 	log.debug("default createConsumerThreads");
-                	if(System.getenv("priority")==null&&System.getenv("priority").equals("low")) {
+                	if(priority.equals("low")) {
 
                     	log.debug("default createConsumerThreads going to Thread Create");
 
-                	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
+                	if(intl.equals("0")) {
 
                     final int                     tempThreadCount =  threadsCount;
 
