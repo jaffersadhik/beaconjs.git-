@@ -257,6 +257,9 @@ public class ProcessorInfo
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
                 if(topicName.contains(KafkaDBConstants.INTL_SUFFIX)) {
+                	
+                	System.out.println("intl createConsumerThreads");
+
           
                 	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
                 		
@@ -274,6 +277,8 @@ public class ProcessorInfo
 
                 }else if(topicName.contains(KafkaDBConstants.HIGH_SUFFIX)) {
                 	
+                	System.out.println("high createConsumerThreads");
+
                 	if(System.getenv("priority")!=null&&System.getenv("priority").equals("high")) {
                 		
                         //final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
@@ -290,6 +295,8 @@ public class ProcessorInfo
                     	}
                 } else if(topicName.contains(KafkaDBConstants.OTP_SUFFIX)) {
                 	
+                	System.out.println("otp createConsumerThreads");
+
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
 
                 	  final int                     tempThreadCount =  threadsCount;
@@ -305,7 +312,7 @@ public class ProcessorInfo
                 	}
                 }else{
 
-                	
+                	System.out.println("default createConsumerThreads");
                 	if(System.getenv("priority")==null&&System.getenv("priority").equals("low")) {
 
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
