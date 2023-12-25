@@ -1,8 +1,5 @@
 package com.itextos.beacon.splog;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -13,6 +10,7 @@ public class SPLog {
 
     public static void log(String data) {
     	
+    	System.out.println("SPLOG WRITE");
     	log.error(data);
     }
 }
