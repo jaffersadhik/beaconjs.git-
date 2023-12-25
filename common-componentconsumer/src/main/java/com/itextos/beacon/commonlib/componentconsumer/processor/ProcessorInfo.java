@@ -263,6 +263,8 @@ public class ProcessorInfo
           
                 	if(System.getenv("intl")!=null&&System.getenv("intl").equals("1")) {
                 		
+                    	log.debug("intl createConsumerThreads going to Thread Create");
+
                     final int                     tempThreadCount =intlThreadsCount;
 
                     for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
@@ -277,10 +279,12 @@ public class ProcessorInfo
 
                 }else if(topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
                 	
-                	System.out.println("high createConsumerThreads");
+                	log.debug("high createConsumerThreads");
 
                 	if(System.getenv("priority")!=null&&System.getenv("priority").equals("high")) {
                 		
+                    	log.debug("high createConsumerThreads going to Thread Create");
+
                         //final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
                 		final int                     tempThreadCount =  threadsCount;
 
@@ -295,9 +299,11 @@ public class ProcessorInfo
                     	}
                 } else if(topicName.indexOf(KafkaDBConstants.OTP_SUFFIX)>-1) {
                 	
-                	System.out.println("otp createConsumerThreads");
+                	log.debug("otp createConsumerThreads");
 
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
+
+                    	log.debug("otp createConsumerThreads going to Thread Create");
 
                 	  final int                     tempThreadCount =  threadsCount;
 
@@ -312,8 +318,10 @@ public class ProcessorInfo
                 	}
                 }else{
 
-                	System.out.println("default createConsumerThreads");
+                	log.debug("default createConsumerThreads");
                 	if(System.getenv("priority")==null&&System.getenv("priority").equals("low")) {
+
+                    	log.debug("default createConsumerThreads going to Thread Create");
 
                 	if(System.getenv("intl")==null|| System.getenv("intl").equals("0")) {
 
