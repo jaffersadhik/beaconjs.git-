@@ -332,12 +332,13 @@ public class ProcessorInfo
                 	}
                 }else{
 
-                	log.debug("default createConsumerThreads");
+                	log.debug("default createConsumerThreads : priority : "+priority+" intl : "+intl);
                 	if(priority.equals("low")) {
 
-                    	log.debug("default createConsumerThreads going to Thread Create");
 
                 	if(intl.equals("0")) {
+
+                    	log.debug("default createConsumerThreads going to Thread Create");
 
                     final int                     tempThreadCount =  threadsCount;
 
@@ -475,11 +476,12 @@ public class ProcessorInfo
     {
         final String threadName = CommonUtility.combine("Thread", aClusterName, mComponent.getKey(), aTopicName, Integer.toString(aThreadIndex));
 
-        SPLog.log("aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
- 
-        if (log.isDebugEnabled())
+         if (log.isDebugEnabled())
             log.debug("Creating a thread with name '" + threadName + "' for the class '" + aClassName + "'");
 
+         SPLog.log("aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
+         
+         
         try
         {
             final Class<?>            cls                       = Class.forName(aClassName);
