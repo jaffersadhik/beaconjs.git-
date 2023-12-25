@@ -256,7 +256,7 @@ public class ProcessorInfo
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                if(topicName.contains(KafkaDBConstants.INTL_SUFFIX)) {
+                if(topicName.indexOf(KafkaDBConstants.INTL_SUFFIX)>-1) {
                 	
                 	System.out.println("intl createConsumerThreads");
 
@@ -275,7 +275,7 @@ public class ProcessorInfo
 
                 	}
 
-                }else if(topicName.contains(KafkaDBConstants.HIGH_SUFFIX)) {
+                }else if(topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
                 	
                 	System.out.println("high createConsumerThreads");
 
@@ -293,7 +293,7 @@ public class ProcessorInfo
                         log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
 
                     	}
-                } else if(topicName.contains(KafkaDBConstants.OTP_SUFFIX)) {
+                } else if(topicName.indexOf(KafkaDBConstants.OTP_SUFFIX)>-1) {
                 	
                 	System.out.println("otp createConsumerThreads");
 
