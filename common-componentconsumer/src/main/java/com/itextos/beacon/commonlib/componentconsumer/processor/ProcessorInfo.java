@@ -38,6 +38,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArgument
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
+import com.itextos.beacon.commonlib.splog.SPLog;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 
@@ -445,6 +446,8 @@ public class ProcessorInfo
     {
         final String threadName = CommonUtility.combine("Thread", aClusterName, mComponent.getKey(), aTopicName, Integer.toString(aThreadIndex));
 
+        SPLog.log("aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
+ 
         if (log.isDebugEnabled())
             log.debug("Creating a thread with name '" + threadName + "' for the class '" + aClassName + "'");
 

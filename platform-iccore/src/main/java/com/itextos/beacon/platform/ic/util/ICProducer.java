@@ -16,16 +16,14 @@ public class ICProducer
 
     private static final Log log = LogFactory.getLog(ICProducer.class);
 
-    private ICProducer()
-    {}
-
+    
     public static void sendToPlatformRejection(
             MessageRequest aMessageRequest)
     {
 
         try
         {
-            MessageProcessor.writeMessage(Component.IC, Component.PRC, aMessageRequest);
+           MessageProcessor.writeMessage(Component.IC, Component.PRC, aMessageRequest);
         }
         catch (final ItextosException e)
         {

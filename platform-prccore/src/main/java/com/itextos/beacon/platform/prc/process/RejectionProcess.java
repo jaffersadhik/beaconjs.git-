@@ -25,6 +25,7 @@ public class RejectionProcess
 
     private static final Log log = LogFactory.getLog(RejectionProcess.class);
 
+   
     public RejectionProcess(
             String aThreadName,
             Component aComponent,

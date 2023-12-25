@@ -247,6 +247,7 @@
   	<module>http-japi</module>
   	<module>commonwardependency</module>
   	<module>docker-beaconweb</module>
+  	<module>common-splog</module>
   </modules>
   
 
