@@ -75,72 +75,150 @@ public class CountrySeriesHeaderInfo
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 1), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, aCountry, CommonUtility.REST_OF_THE_SERIES, aHeader);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 2), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, aCarrier, aHeader);
+ 
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 3), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, CommonUtility.REST_OF_THE_SERIES, aHeader);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 4), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, aCountry, Constants.NULL_STRING, aHeader);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 5), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, Constants.NULL_STRING, aHeader);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 6), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, aCountry, aCarrier, Constants.NULL_STRING);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 7), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, aCountry, CommonUtility.REST_OF_THE_SERIES, Constants.NULL_STRING);
+       
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 8), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, aCarrier, Constants.NULL_STRING);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
+        
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 9), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, CommonUtility.REST_OF_THE_SERIES, Constants.NULL_STRING);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 10), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, aCountry, Constants.NULL_STRING, Constants.NULL_STRING);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 11), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, Constants.NULL_STRING, Constants.NULL_STRING, aHeader);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
             return constructDerivedRoute(lRouteIdWithDefaultHeader, (aLogicIndicator - 12), lKey);
 
         lKey                      = CommonUtility.combine(aClientId, CommonUtility.REST_OF_THE_WORLD, Constants.NULL_STRING, Constants.NULL_STRING);
+        
+        if (log.isDebugEnabled())
+        {
+            log.debug("Key :'" + lKey + "'");
+            log.debug("intl_client_route_info Map data :" + mClientCountrySeriesHeaderInfo);
+        }
         lRouteIdWithDefaultHeader = mClientCountrySeriesHeaderInfo.get(lKey);
 
         if (lRouteIdWithDefaultHeader != null)
