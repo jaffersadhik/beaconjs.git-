@@ -1,5 +1,5 @@
 FROM quay.io/wildfly/wildfly:latest-jdk17
-
+ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
 COPY ./target/docker-beaconweb-1.0.ear /opt/jboss/wildfly/standalone/deployments/docker-beaconweb-1.0.ear
