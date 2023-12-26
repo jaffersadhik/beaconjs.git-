@@ -229,6 +229,8 @@ public class ProcessorInfo
             Map<String, Map<String, ConsumerInMemCollection>> aConsumerInmemCollection)
     {
 
+        int totalThreadsCount = 0;
+
         for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
         {
             final String      clusterName     = entry.getKey();
@@ -246,114 +248,29 @@ public class ProcessorInfo
             final List<String>                         topics                   = entry.getValue();
             final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(clusterName);
 
-            String intl=System.getenv("intl");
-            String priority=System.getenv("priority");
-            
-            log.debug("intl" + intl );
-
-            log.debug("priority" + priority );
-            
-            if(intl==null) {
-            	intl="";
-            }
-
-            if(priority==null) {
-            	priority="";
-            }
+      
             
             for (final String topicName : topics)
             {
+
                 if (log.isDebugEnabled())
                     log.debug("Working for the topic '" + topicName + "'");
 
-                int totalThreadsCount = 0;
-
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                if(topicName.indexOf(KafkaDBConstants.INTL_SUFFIX)>-1) {
-                	
-                	log.debug("intl createConsumerThreads");
+                final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
 
-          
-                	if(intl.equals("1")) {
-                		
-                    	log.debug("intl createConsumerThreads going to Thread Create");
-
-                    final int                     tempThreadCount =intlThreadsCount;
-
-                    for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                    {
-                        totalThreadsCount++;
-                        startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                    }
-                    
-                    log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
-
-                	}
-
-                }else if(topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
-                	
-                	log.debug("high createConsumerThreads");
-
-                	if(priority.equals("high")) {
-                		
-                    	log.debug("high createConsumerThreads going to Thread Create");
-
-                        //final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
-                		final int                     tempThreadCount =  threadsCount;
-
-                        for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                        {
-                            totalThreadsCount++;
-                            startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                        }
-                        
-                        log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
-
-                    	}
-                } else if(topicName.indexOf(KafkaDBConstants.OTP_SUFFIX)>-1) {
-                	
-                	log.debug("otp createConsumerThreads");
-
-                	if(intl.equals("0")) {
-
-                    	log.debug("otp createConsumerThreads going to Thread Create");
-
-                	  final int                     tempThreadCount =  threadsCount;
-
-                      for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                      {
-                          totalThreadsCount++;
-                          startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                      }
-                      
-                      log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
-
-                	}
-                }else{
-
-                	log.debug("default createConsumerThreads : priority : "+priority+" intl : "+intl);
-                	if(priority.equals("low")) {
-
-
-                	if(intl.equals("0")) {
-
-                    	log.debug("default createConsumerThreads going to Thread Create");
-
-                    final int                     tempThreadCount =  threadsCount;
-
-                    for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                    {
-                        totalThreadsCount++;
-                        startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                    }
-                    
-                    log.error("clusterName : " +clusterName+" platformCluster : "+platformCluster+"For component " + mComponent + " Total thread created " + totalThreadsCount+" topicName : "+topicName+ " KafkaDBConstants.INTL_SUFFIX "+topicName.endsWith(KafkaDBConstants.INTL_SUFFIX));
-                	}
-                	}
+                for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                {
+                    totalThreadsCount++;
+                    startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                 }
-           }// for (final String topicName : topics)
+            
+            }// for (final String topicName : topics)
         }// for (final Entry<String, List<String>> entry : topicsToConsume.entrySet())
+        
+        log.error("For component " + mComponent + " Total thread created " + totalThreadsCount);
+
     }
 
     private Map<String, Map<String, ConsumerInMemCollection>> createConsumersBeforeStartingThread(
