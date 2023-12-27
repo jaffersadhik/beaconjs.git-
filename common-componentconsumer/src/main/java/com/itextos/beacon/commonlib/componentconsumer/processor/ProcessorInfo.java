@@ -274,50 +274,41 @@ public class ProcessorInfo
 
                 String intl =System.getenv("intl");
                 
-                if(intl==null) {
-                	intl="";
-                }
+               
                 
                 String priority =System.getenv("priority");
+             
                 
-                if(priority==null) {
-                	priority="";
-                }
-                
-                log.debug("intl: "+intl +" : priority :  "+priority+" : ");
-                /*
-                if(isInternational) {
+                if(intl==null || priority ==null) {
                 	
-                	if(intl.equals("1")) {
-                        if (log.isDebugEnabled())
-                            log.debug("Working for the topic '" + topicName + "'");
-
-                	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                      {
-                          totalThreadsCount++;
-                          startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                      }
-                	}
-                }else if(isHigh) {
                 	
-                	if(intl.equals("0")&&priority.equals("high")) {
-                		
-                        if (log.isDebugEnabled())
-                            log.debug("Working for the topic '" + topicName + "'");
+                	  if (log.isDebugEnabled())
+                          log.debug("Working for the topic '" + topicName + "'");
 
-                        
                   	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                         {
                             totalThreadsCount++;
                             startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                         }
-                  	}
+           
+                     
                 }else {
                 	
-                  	if(intl.equals("0")&&priority.equals("normal")) {
-                  		
-                        if (log.isDebugEnabled())
-                            log.debug("Working for the topic '" + topicName + "'");
+                	
+                	 if(intl==null) {
+                      	intl="";
+                      }
+                 	 
+                 	   
+                      if(priority==null) {
+                      	priority="";
+                      }
+                      
+                    if(isInternational) {
+                    	
+                    	if(intl.equals("1")) {
+                            if (log.isDebugEnabled())
+                                log.debug("Working for the topic '" + topicName + "'");
 
                     	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                           {
@@ -325,19 +316,41 @@ public class ProcessorInfo
                               startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
                           }
                     	}
-                }
-                
-                */
-                
-                
-                if (log.isDebugEnabled())
-                    log.debug("Working for the topic '" + topicName + "'");
+                    }else if(isHigh) {
+                    	
+                    	if(intl.equals("0")&&priority.equals("high")) {
+                    		
+                            if (log.isDebugEnabled())
+                                log.debug("Working for the topic '" + topicName + "'");
 
-            	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                  {
-                      totalThreadsCount++;
-                      startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                  }
+                            
+                      	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                            {
+                                totalThreadsCount++;
+                                startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                            }
+                      	}
+                    }else {
+                    	
+                      	if(intl.equals("0")&&priority.equals("normal")) {
+                      		
+                            if (log.isDebugEnabled())
+                                log.debug("Working for the topic '" + topicName + "'");
+
+                        	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                              {
+                                  totalThreadsCount++;
+                                  startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                              }
+                        	}
+                    }
+                    
+                   
+                }
+                log.debug("intl: "+intl +" : priority :  "+priority+" : ");
+                
+                
+              
             	
               
             
