@@ -412,35 +412,128 @@ public class KafkaInformation
         final String                  ip                      = CommonUtility.getApplicationServerIp();
 
         final ConsumerInMemCollection consumerInMemCollection = new ConsumerInMemCollection(topicName);
-
-        for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
-        {
-            final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer", Integer.toString(consumerClientIndex), ip);
-
-            if (log.isDebugEnabled())
-                log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
-
-            consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, topicName);
-            consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaCLusterInformation.getKafkaConsumerGroupName());
-            consumerProps.setProperty(PROPERTY_CLIENT_ID, clientId);
-
-            if (log.isDebugEnabled())
-                log.debug("Creating Kafka Consumer Client with the client Id '" + clientId + "' for the topic '" + topicName + "'");
-
-            final Consumer consumer = new Consumer(aComponent, topicName, new KafkaConsumerProperties(consumerProps), consumerInMemCollection, consumerClientIndex);
-            consumersList.add(consumer);
-            componentConsumersList.add(consumer);
-
-            mTotalConsumersCount++;
-
-            final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
-            consumerThread.start();
-
-            SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
-            
-            if (log.isDebugEnabled())
-                log.debug("Started consumer " + clientId);
+        
+        
+        boolean isInternational=false;
+        
+        if( topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)) {
+        
+        	isInternational=true;
         }
+
+        boolean isHigh=false;
+
+        if( topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
+            
+        	isHigh=true;
+        }
+
+        if(isInternational) {
+        	
+        	if(System.getenv("intl").equals("1")) {
+
+                for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
+                {
+                    final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer", Integer.toString(consumerClientIndex), ip);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
+
+                    consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, topicName);
+                    consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaCLusterInformation.getKafkaConsumerGroupName());
+                    consumerProps.setProperty(PROPERTY_CLIENT_ID, clientId);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Creating Kafka Consumer Client with the client Id '" + clientId + "' for the topic '" + topicName + "'");
+
+                    final Consumer consumer = new Consumer(aComponent, topicName, new KafkaConsumerProperties(consumerProps), consumerInMemCollection, consumerClientIndex);
+                    consumersList.add(consumer);
+                    componentConsumersList.add(consumer);
+
+                    mTotalConsumersCount++;
+
+                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
+                    consumerThread.start();
+
+                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    
+                    if (log.isDebugEnabled())
+                        log.debug("Started consumer " + clientId);
+                }
+
+        	}
+        }else if(isHigh) {
+        	
+        	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("high")) {
+
+                for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
+                {
+                    final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer", Integer.toString(consumerClientIndex), ip);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
+
+                    consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, topicName);
+                    consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaCLusterInformation.getKafkaConsumerGroupName());
+                    consumerProps.setProperty(PROPERTY_CLIENT_ID, clientId);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Creating Kafka Consumer Client with the client Id '" + clientId + "' for the topic '" + topicName + "'");
+
+                    final Consumer consumer = new Consumer(aComponent, topicName, new KafkaConsumerProperties(consumerProps), consumerInMemCollection, consumerClientIndex);
+                    consumersList.add(consumer);
+                    componentConsumersList.add(consumer);
+
+                    mTotalConsumersCount++;
+
+                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
+                    consumerThread.start();
+
+                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    
+                    if (log.isDebugEnabled())
+                        log.debug("Started consumer " + clientId);
+                }
+
+        	}
+        }else {
+        	
+          	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("normaL")) {
+
+                for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
+                {
+                    final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer", Integer.toString(consumerClientIndex), ip);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
+
+                    consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, topicName);
+                    consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaCLusterInformation.getKafkaConsumerGroupName());
+                    consumerProps.setProperty(PROPERTY_CLIENT_ID, clientId);
+
+                    if (log.isDebugEnabled())
+                        log.debug("Creating Kafka Consumer Client with the client Id '" + clientId + "' for the topic '" + topicName + "'");
+
+                    final Consumer consumer = new Consumer(aComponent, topicName, new KafkaConsumerProperties(consumerProps), consumerInMemCollection, consumerClientIndex);
+                    consumersList.add(consumer);
+                    componentConsumersList.add(consumer);
+
+                    mTotalConsumersCount++;
+
+                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
+                    consumerThread.start();
+
+                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    
+                    if (log.isDebugEnabled())
+                        log.debug("Started consumer " + clientId);
+                }
+
+          	}
+        }
+      
+
+
         return consumerInMemCollection;
     }
 
