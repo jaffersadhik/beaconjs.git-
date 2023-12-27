@@ -259,12 +259,50 @@ public class ProcessorInfo
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
                 final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
-
-                for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
-                {
-                    totalThreadsCount++;
-                    startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                
+                boolean isInternational=false;
+                
+                if( topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)) {
+                
+                	isInternational=true;
                 }
+
+                boolean isHigh=false;
+
+                if( topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
+                    
+                	isHigh=true;
+                }
+
+                if(isInternational) {
+                	
+                	if(System.getenv("intl").equals("1")) {
+                	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                      {
+                          totalThreadsCount++;
+                          startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                      }
+                	}
+                }else if(isHigh) {
+                	
+                	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("high")) {
+                  	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                        {
+                            totalThreadsCount++;
+                            startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                        }
+                  	}
+                }else {
+                	
+                  	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("normaL")) {
+                    	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                          {
+                              totalThreadsCount++;
+                              startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                          }
+                    	}
+                }
+              
             
             }// for (final String topicName : topics)
         }// for (final Entry<String, List<String>> entry : topicsToConsume.entrySet())
