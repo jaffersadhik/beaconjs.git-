@@ -326,6 +326,7 @@ public class ProcessorInfo
             {
                 final ConsumerInMemCollection temp = KafkaInformation.getInstance().createConsumer(mComponent, platformCluster, topicName);
                 topicInMemCollection.put(topicName, temp);
+                
             }
         }
         return clusterInMemCollection;
@@ -434,7 +435,7 @@ public class ProcessorInfo
          if (log.isDebugEnabled())
             log.debug("Creating a thread with name '" + threadName + "' for the class '" + aClassName + "'");
 
-         SPLog.log("aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
+         SPLog.log("createConsumerThreads : aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
          
          
         try

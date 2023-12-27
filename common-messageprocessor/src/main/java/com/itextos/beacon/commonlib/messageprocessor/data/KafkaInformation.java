@@ -29,6 +29,7 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaReques
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
+import com.itextos.beacon.splog.SPLog;
 
 public class KafkaInformation
 {
@@ -435,6 +436,8 @@ public class KafkaInformation
             final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
             consumerThread.start();
 
+            SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+            
             if (log.isDebugEnabled())
                 log.debug("Started consumer " + clientId);
         }
