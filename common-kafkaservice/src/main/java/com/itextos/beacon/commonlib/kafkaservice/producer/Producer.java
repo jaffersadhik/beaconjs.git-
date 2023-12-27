@@ -19,6 +19,7 @@ import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.splog.SPLog;
 
 public class Producer
 {
@@ -55,6 +56,8 @@ public class Producer
 
         final Thread t = new Thread(new FlushMonitor(this), "FM-" + mTopicName + "-" + Thread.currentThread().getId());
         t.start();
+        
+        SPLog.log("Producer : "+t.getName());
     }
 
     private void createProducer()
