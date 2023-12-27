@@ -32,7 +32,12 @@ public class App {
 						if(!isALL(module,args)) {
 
 							
-							
+							if(!isMWALL(module,args)) {
+
+								
+								
+
+							}
 
 						}
 
@@ -48,7 +53,23 @@ public class App {
 		}
 	}
 	
-	 private static boolean isALL(String module, String[] args) {
+	 private static boolean isMWALL(String module, String[] args) {
+
+			if(module.equals("all")) {
+
+					allMW(args);
+					
+					IS_START_PROMETHEUS=true;
+
+					return true;
+
+			}
+			
+			
+		return false;
+	}
+
+	private static boolean isALL(String module, String[] args) {
 
 			
 			if(module.equals("all")) {
