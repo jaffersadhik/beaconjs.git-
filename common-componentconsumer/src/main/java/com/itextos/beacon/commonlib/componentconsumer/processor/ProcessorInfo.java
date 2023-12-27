@@ -285,7 +285,7 @@ public class ProcessorInfo
                 }
                 
                 log.debug("intl: "+intl +" : priority :  "+priority+" : ");
-                
+                /*
                 if(isInternational) {
                 	
                 	if(intl.equals("1")) {
@@ -326,6 +326,19 @@ public class ProcessorInfo
                           }
                     	}
                 }
+                
+                */
+                
+                
+                if (log.isDebugEnabled())
+                    log.debug("Working for the topic '" + topicName + "'");
+
+            	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                  {
+                      totalThreadsCount++;
+                      startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+                  }
+            	
               
             
             }// for (final String topicName : topics)
