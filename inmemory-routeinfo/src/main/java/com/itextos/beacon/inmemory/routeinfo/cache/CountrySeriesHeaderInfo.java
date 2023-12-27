@@ -274,12 +274,26 @@ public class CountrySeriesHeaderInfo
 
         while (aResultSet.next())
         {
-            final String lClientId            = CommonUtility.nullCheck(aResultSet.getString("cli_id"), true);
-            final String lCountry             = CommonUtility.nullCheck(aResultSet.getString("country"), true).toLowerCase();
-            final String lCountryCodeNWSeries = CommonUtility.nullCheck(aResultSet.getString("carrier_network"), true).toLowerCase();
-            final String lHeader              = CommonUtility.nullCheck(aResultSet.getString("header"), true).toLowerCase();
-            final String lRouteId             = CommonUtility.nullCheck(aResultSet.getString("route_id"), true);
-            final String lDefaultHeader       = CommonUtility.nullCheck(aResultSet.getString("default_header"), true);
+            String lClientId            = CommonUtility.nullCheck(aResultSet.getString("cli_id"), true);
+            lClientId = lClientId.isBlank() ? Constants.NULL_STRING : lClientId;
+
+            String lCountry             = CommonUtility.nullCheck(aResultSet.getString("country"), true).toLowerCase();
+            lCountry = lCountry.isBlank() ? Constants.NULL_STRING : lCountry;
+
+            String lCountryCodeNWSeries = CommonUtility.nullCheck(aResultSet.getString("carrier_network"), true).toLowerCase();
+            
+            lCountryCodeNWSeries = lCountryCodeNWSeries.isBlank() ? Constants.NULL_STRING : lCountryCodeNWSeries;
+
+            String lHeader              = CommonUtility.nullCheck(aResultSet.getString("header"), true).toLowerCase();
+            lHeader = lHeader.isBlank() ? Constants.NULL_STRING : lHeader;
+
+            
+            String lRouteId             = CommonUtility.nullCheck(aResultSet.getString("route_id"), true);
+            lRouteId = lRouteId.isBlank() ? Constants.NULL_STRING : lRouteId;
+
+             String lDefaultHeader       = CommonUtility.nullCheck(aResultSet.getString("default_header"), true);
+
+             lDefaultHeader = lDefaultHeader.isBlank() ? Constants.NULL_STRING : lDefaultHeader;
 
             if (lRouteId.isEmpty())
                 continue;
