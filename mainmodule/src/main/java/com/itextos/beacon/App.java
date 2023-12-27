@@ -55,7 +55,7 @@ public class App {
 	
 	 private static boolean isMWALL(String module, String[] args) {
 
-			if(module.equals("all")) {
+			if(module.equals("mw")) {
 
 					allMW(args);
 					
