@@ -427,10 +427,26 @@ public class KafkaInformation
             
         	isHigh=true;
         }
+        
+        
+        String intl =System.getenv("intl");
+        
+        if(intl==null) {
+        	intl="";
+        }
+        
+        String priority =System.getenv("priority");
+        
+        if(priority==null) {
+        	priority="";
+        }
+        
+        log.debug("intl: "+intl +" : priority :  "+priority+" : ");
+        
 
         if(isInternational) {
         	
-        	if(System.getenv("intl").equals("1")) {
+        	if(intl.equals("1")) {
 
                 for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
                 {
@@ -464,7 +480,7 @@ public class KafkaInformation
         	}
         }else if(isHigh) {
         	
-        	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("high")) {
+        	if(intl.equals("0")&&priority.equals("high")) {
 
                 for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
                 {
@@ -498,7 +514,7 @@ public class KafkaInformation
         	}
         }else {
         	
-          	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("normaL")) {
+          	if(intl.equals("0")&&priority.equals("normal")) {
 
                 for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
                 {

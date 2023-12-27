@@ -253,8 +253,6 @@ public class ProcessorInfo
             for (final String topicName : topics)
             {
 
-                if (log.isDebugEnabled())
-                    log.debug("Working for the topic '" + topicName + "'");
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
@@ -274,9 +272,26 @@ public class ProcessorInfo
                 	isHigh=true;
                 }
 
+                String intl =System.getenv("intl");
+                
+                if(intl==null) {
+                	intl="";
+                }
+                
+                String priority =System.getenv("priority");
+                
+                if(priority==null) {
+                	priority="";
+                }
+                
+                log.debug("intl: "+intl +" : priority :  "+priority+" : ");
+                
                 if(isInternational) {
                 	
-                	if(System.getenv("intl").equals("1")) {
+                	if(intl.equals("1")) {
+                        if (log.isDebugEnabled())
+                            log.debug("Working for the topic '" + topicName + "'");
+
                 	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                       {
                           totalThreadsCount++;
@@ -285,7 +300,12 @@ public class ProcessorInfo
                 	}
                 }else if(isHigh) {
                 	
-                	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("high")) {
+                	if(intl.equals("0")&&priority.equals("high")) {
+                		
+                        if (log.isDebugEnabled())
+                            log.debug("Working for the topic '" + topicName + "'");
+
+                        
                   	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                         {
                             totalThreadsCount++;
@@ -294,7 +314,11 @@ public class ProcessorInfo
                   	}
                 }else {
                 	
-                  	if(System.getenv("intl").equals("0")&&System.getenv("priority").equals("normaL")) {
+                  	if(intl.equals("0")&&priority.equals("normal")) {
+                  		
+                        if (log.isDebugEnabled())
+                            log.debug("Working for the topic '" + topicName + "'");
+
                     	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
                           {
                               totalThreadsCount++;
