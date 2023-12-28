@@ -236,9 +236,7 @@ public class ProcessorInfo
             final String      clusterName     = entry.getKey();
             final ClusterType platformCluster = ClusterType.getCluster(clusterName);
 
-            if (log.isInfoEnabled())
-                log.info("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster);
-
+  
             final KafkaClusterComponentMap             lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, platformCluster);
             final String                               className                = aKafkaComponentInfo.getComponentProcessClass();
             final int                                  threadsCount             = lKafkaCLusterInformation.getThreadsCount();
@@ -248,7 +246,9 @@ public class ProcessorInfo
             final List<String>                         topics                   = entry.getValue();
             final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(clusterName);
 
-      
+            if (log.isInfoEnabled())
+                log.info("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster+ " topics : "+topics+" topicInMemCollection : "+topicInMemCollection);
+    
             
             for (final String topicName : topics)
             {
