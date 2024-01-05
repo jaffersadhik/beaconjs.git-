@@ -39,6 +39,7 @@ public enum InmemoryId
     JAPI_GENERIC_RESPONSE("japi_generic_response"),
     INTERFACE_MSG_TEMPLATE("interface_msg_template"),
     COUNTRY_INFO("country_info"),
+    MCC_MNC("mcc_mnc"),
     ACCOUNT_MSG_PREFIX_SUFFIX("account_msg_prefix_suffix"),
     CLIENT_INTL_RATES("client_intl_rates"),
     INTL_COUNTRY_RATES("intl_country_rates"),

@@ -151,6 +151,8 @@ public enum MiddlewareConstant
     MW_PLATFROM_REJECTED("pf_reject", "plat_reject", "Platform Reject Flag"),
     MW_CIRCLE("cir", "circle", "Carrier Circle"),
     MW_CARRIER("car", "carrier", "Carrier Name"),
+    MW_MCC("mcc", "mcc", "mcc"),
+    MW_MNC("mnc", "mnc", "mnc"),
     MW_DLR_FROM_INTERNAL("dlr_from_intl", "dlr_from_internal", "DLR from Internal"),
     MW_CARRIER_SUBMIT_TIME("car_sub_ts", "carrier_sub_time", "Carrier Submission Time"),
     MW_ACTUAL_CARRIER_SUBMIT_TIME("a_car_sub_ts", "act_carrier_sub_time", "Actual Carrier Submission Time"),

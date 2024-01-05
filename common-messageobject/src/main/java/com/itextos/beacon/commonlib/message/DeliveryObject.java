@@ -95,6 +95,17 @@ public class DeliveryObject
     {
         return getValue(MiddlewareConstant.MW_CARRIER);
     }
+    
+    
+    public String getMcc()
+    {
+        return getValue(MiddlewareConstant.MW_MCC);
+    }
+    
+    public String getMnc()
+    {
+        return getValue(MiddlewareConstant.MW_MNC);
+    }
 
     public String getCarrierAcknowledgeId()
     {
@@ -354,6 +365,8 @@ public class DeliveryObject
         lMessageRequest.setSmsPriority(getSmsPriority());
         lMessageRequest.setFileId(getFileId());
         lMessageRequest.setCarrier(getCarrier());
+        lMessageRequest.setMcc(getMcc());
+        lMessageRequest.setMnc(getMnc());
         lMessageRequest.setCircle(getCircle());
         lMessageRequest.setClientMessageId(getClientMessageId());
         lMessageRequest.setMessageTotalParts(getMessageTotalParts());
@@ -736,6 +749,18 @@ public class DeliveryObject
             String aCarrier)
     {
         putValue(MiddlewareConstant.MW_CARRIER, aCarrier);
+    }
+    
+    public void setMcc(
+            String aMcc)
+    {
+        putValue(MiddlewareConstant.MW_MCC, aMcc);
+    }
+    
+    public void setMnc(
+            String aMnc)
+    {
+        putValue(MiddlewareConstant.MW_MNC, aMnc);
     }
 
     public void setCarrierAcknowledgeId(

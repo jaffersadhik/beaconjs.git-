@@ -401,6 +401,9 @@
         <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="common-splog-1.0.jar" deploy-path="/lib" handle="module:/resource/common-splog/common-splog">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="common-daemonprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/common-daemonprocess/common-daemonprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>

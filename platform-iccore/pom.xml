@@ -48,6 +48,11 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>inmemory-countryinfo</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>inmemory-messageutility</artifactId>
 			<version>1.0</version>
 		</dependency>
@@ -81,6 +86,11 @@
 			<artifactId>inmemory-customfeatures</artifactId>
 			<version>1.0</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-countryinfo</artifactId>
+			<version>1.0</version>
+		</dependency>
+		</dependencies>
 
 </project>

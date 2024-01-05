@@ -126,9 +126,20 @@ public class MessageRequest
         return getValue(MiddlewareConstant.MW_CAMP_NAME);
     }
 
+    
     public String getCarrier()
     {
         return getValue(MiddlewareConstant.MW_CARRIER);
+    }
+    
+    public String getMnc()
+    {
+        return getValue(MiddlewareConstant.MW_MNC);
+    }
+    
+    public String getMcc()
+    {
+        return getValue(MiddlewareConstant.MW_MCC);
     }
 
     public String getCarrierDateTimeFormat()
@@ -672,6 +683,8 @@ public class MessageRequest
         subObj.setBlacklistCheck(getBlacklistCheck());
         subObj.setBlockoutType(getBlockoutType());
         subObj.setCarrier(getCarrier());
+        subObj.setMcc(getMcc());
+        subObj.setMnc(getMnc());
         subObj.setCarrierDateTimeFormat(getCarrierDateTimeFormat());
         subObj.setCircle(getCircle());
         subObj.setClientDomesticSmsBlockoutEnabled(getClientDomesticSmsBlockoutEnabled());
@@ -1153,6 +1166,18 @@ public class MessageRequest
         putValue(MiddlewareConstant.MW_CARRIER, aCarrier);
     }
 
+    public void setMcc(
+            String aMcc)
+    {
+        putValue(MiddlewareConstant.MW_MCC, aMcc);
+    }
+    
+    public void setMnc(
+            String aMnc)
+    {
+        putValue(MiddlewareConstant.MW_MNC, aMnc);
+    }
+    
     public void setCarrierDateTimeFormat(
             String aCarrierDateTimeFormat)
     {

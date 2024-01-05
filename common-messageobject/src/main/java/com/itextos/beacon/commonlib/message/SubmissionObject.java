@@ -91,6 +91,17 @@ public class SubmissionObject
         return getValue(MiddlewareConstant.MW_CARRIER);
     }
 
+    public String getMcc()
+    {
+        return getValue(MiddlewareConstant.MW_MCC);
+    }
+    
+    public String getMnc()
+    {
+        return getValue(MiddlewareConstant.MW_MNC);
+    }
+    
+    
     public String getCarrierAcknowledgeId()
     {
         return getValue(MiddlewareConstant.MW_CARRIER_ACKNOWLEDGE_ID);
@@ -179,6 +190,8 @@ public class SubmissionObject
         lDeliveryObject.setSmsPriority(getSmsPriority());
         lDeliveryObject.setFileId(getFileId());
         lDeliveryObject.setCarrier(getCarrier());
+        lDeliveryObject.setMcc(getMcc());
+        lDeliveryObject.setMnc(getMnc());
         lDeliveryObject.setCircle(getCircle());
         lDeliveryObject.setClientMessageId(getClientMessageId());
         lDeliveryObject.setMessageTotalParts(getMessageTotalParts());
@@ -701,6 +714,19 @@ public class SubmissionObject
             String aCarrier)
     {
         putValue(MiddlewareConstant.MW_CARRIER, aCarrier);
+    }
+
+    public void setMcc(
+            String aMcc)
+    {
+        putValue(MiddlewareConstant.MW_MCC, aMcc);
+    }
+
+    
+    public void setMnc(
+            String aMnc)
+    {
+        putValue(MiddlewareConstant.MW_MNC, aMnc);
     }
 
     public void setCarrierAcknowledgeId(

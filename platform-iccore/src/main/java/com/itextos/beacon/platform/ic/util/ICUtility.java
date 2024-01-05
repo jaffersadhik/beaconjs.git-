@@ -26,6 +26,8 @@ import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.indianp.CarrierCircle;
 import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
+import com.itextos.beacon.inmemory.inmemdata.mccmnc.MCCMNCFinder;
+import com.itextos.beacon.inmemory.inmemdata.mccmnc.MccMncInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.spamcheck.util.IntlSpamCheckUtility;
@@ -268,6 +270,25 @@ public class ICUtility
         return SpamCheckUtility.validateRequest(lClientId, lLongMsg, aMessageRequest.getMessageType(), lSpamFilterChk, lBaseMssageId);
     }
 
+    public static void setMccMnc(MessageRequest aMessageRequest) {
+    	
+        final String  lMobileNo             = aMessageRequest.getMobileNumber();
+
+    	
+    	for(int i=8;i>0;i--) {
+    		
+    		MccMncInfo mccmnc=MCCMNCFinder.getMccMnc(lMobileNo.substring(0, i));
+    		
+    		if(mccmnc!=null) {
+    			
+    			aMessageRequest.setMcc(mccmnc.getMcc());
+    			aMessageRequest.setMnc(mccmnc.getMnc());
+    			
+    			return ;
+    		}
+    		
+    	}
+    }
     public static boolean isValidDomesticNumber(
             MessageRequest aMessageRequest)
     {

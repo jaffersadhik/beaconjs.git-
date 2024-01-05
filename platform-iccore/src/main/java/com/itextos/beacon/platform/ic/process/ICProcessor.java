@@ -66,6 +66,8 @@ public class ICProcessor
             if (!lDoPlatformValidation)
                 return;
 
+            ICUtility.setMccMnc(lMessageRequest);
+            
             doVLCheck(lMessageRequest);
         }
         catch (final Exception e)
