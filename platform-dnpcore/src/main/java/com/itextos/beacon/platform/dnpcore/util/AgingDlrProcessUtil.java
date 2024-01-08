@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.indianp.CarrierCircle;
-import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
+import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
+import com.itextos.beacon.inmemory.msgutil.util.IndiaNPFinder;
 import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
 import com.itextos.beacon.platform.dnpcore.redis.RedisProcess;
 

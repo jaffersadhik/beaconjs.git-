@@ -23,7 +23,7 @@ import com.itextos.beacon.inmemory.errorinfo.ErrorCodeUtil;
 import com.itextos.beacon.inmemory.errorinfo.data.ErrorCategory;
 import com.itextos.beacon.inmemory.errorinfo.data.IErrorInfo;
 import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
-import com.itextos.beacon.inmemory.indianp.CarrierCircle;
+import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.cappingcheck.CappingIntervalType;
 import com.itextos.beacon.platform.cappingcheck.CappingMessageChecker;

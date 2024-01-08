@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.indianp;
+package com.itextos.beacon.inmemory.msgutil.cache;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

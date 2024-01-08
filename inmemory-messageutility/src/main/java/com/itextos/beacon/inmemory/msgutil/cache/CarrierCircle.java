@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.indianp;
+package com.itextos.beacon.inmemory.msgutil.cache;
 
 public class CarrierCircle
 {

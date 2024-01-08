@@ -24,12 +24,12 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
-import com.itextos.beacon.inmemory.indianp.CarrierCircle;
-import com.itextos.beacon.inmemory.indianp.IndiaNPFinder;
 import com.itextos.beacon.inmemory.inmemdata.mccmnc.MCCMNCFinder;
 import com.itextos.beacon.inmemory.inmemdata.mccmnc.MccMncInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
+import com.itextos.beacon.inmemory.msgutil.util.IndiaNPFinder;
 import com.itextos.beacon.inmemory.spamcheck.util.IntlSpamCheckUtility;
 import com.itextos.beacon.inmemory.spamcheck.util.SpamCheckUtility;
 import com.itextos.beacon.inmemory.userheader.DomesticUserHeaderInfo;
@@ -281,6 +281,7 @@ public class ICUtility
     		
     		if(mccmnc!=null) {
     			
+    			log.debug(" mccmnc : "+mccmnc);
     			aMessageRequest.setMcc(mccmnc.getMcc());
     			aMessageRequest.setMnc(mccmnc.getMnc());
     			
