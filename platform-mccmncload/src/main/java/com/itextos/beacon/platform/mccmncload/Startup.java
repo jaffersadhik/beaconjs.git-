@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
@@ -16,13 +19,28 @@ import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 public class Startup {
 
-	public static void main(String[] args) throws IOException {
+    public static final Log log = LogFactory.getLog(Startup.class);
+
+	public static void main(String[] args){
 		
 		String jsonString=getJsonSTringFromFile();
 
-		List<Map<String, Object>> datalist=convertJsonStringToListMap(jsonString);
+		log.debug("jsonString : "+jsonString);
 		
+		List<Map<String, Object>> datalist=null;
+		try {
+			datalist = convertJsonStringToListMap(jsonString);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.error(e);
+		}
+		
+		log.debug("bean : "+datalist);
+
 		persisttoDB(datalist);
+		
+		log.debug("persisted : ");
+
 	}
 
 	 private static void persisttoDB(List<Map<String, Object>> datalist) {
@@ -61,7 +79,8 @@ public class Startup {
 			connection.commit();
 			
 		}catch(Exception e) {
-			
+			log.error(e);
+
 		}finally {
 			
 			
@@ -101,7 +120,8 @@ public class Startup {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
+
 		}
         return "";
 
