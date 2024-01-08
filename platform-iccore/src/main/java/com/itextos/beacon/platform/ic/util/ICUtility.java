@@ -282,7 +282,7 @@ public class ICUtility
     		
     		if(mccmnc!=null) {
     			
-    			log.debug("lMobileNo : "+lMobileNo+"searchPrefix : "+searchPrefix+lMobileNo+" mccmnc : "+mccmnc);
+    			log.debug("lMobileNo : "+lMobileNo+" searchPrefix : "+searchPrefix+" mccmnc : "+mccmnc);
     		
     			aMessageRequest.setMcc(mccmnc.getMcc());
     			aMessageRequest.setMnc(mccmnc.getMnc());
