@@ -277,11 +277,13 @@ public class ICUtility
     	
     	for(int i=8;i>0;i--) {
     		
-    		MccMncInfo mccmnc=MCCMNCFinder.getMccMnc(lMobileNo.substring(0, i));
+    		final String searchPrefix=lMobileNo.substring(0, i);
+    		MccMncInfo mccmnc=MCCMNCFinder.getMccMnc(searchPrefix);
     		
     		if(mccmnc!=null) {
     			
-    			log.debug(" mccmnc : "+mccmnc);
+    			log.debug("lMobileNo : "+lMobileNo+"searchPrefix : "+searchPrefix+lMobileNo+" mccmnc : "+mccmnc);
+    		
     			aMessageRequest.setMcc(mccmnc.getMcc());
     			aMessageRequest.setMnc(mccmnc.getMnc());
     			
