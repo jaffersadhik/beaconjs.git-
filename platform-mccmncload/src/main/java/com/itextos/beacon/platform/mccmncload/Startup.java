@@ -66,7 +66,7 @@ public class Startup {
 				statement.setObject(4, data.get("mcc"));
 				statement.setObject(5, data.get("mnc"));
 				statement.setObject(6, data.get("brand"));
-				statement.setObject(7, data.get("operator"));
+				statement.setObject(7, data.get("operator")==null?"":data.get("operator"));
 				statement.setObject(8, data.get("status"));
 				statement.setObject(9, data.get("bands"));
 				statement.setObject(10, data.get("notes"));
