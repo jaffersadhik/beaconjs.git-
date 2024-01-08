@@ -38,7 +38,7 @@ public class MccMncInfo
    
     public String getPrefix()
     {
-        return mnc;
+        return prefix;
     }
     
 	@Override
