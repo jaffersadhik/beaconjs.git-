@@ -55,6 +55,11 @@
 	
 	<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>platform-mccmncload</artifactId>
+			<version>1.0</version>
+	</dependency>
+	<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>jetty-server</artifactId>
 			<version>1.0</version>
 	</dependency>

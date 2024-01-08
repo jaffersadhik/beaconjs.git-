@@ -1,5 +1,7 @@
 package com.itextos.beacon;
 
+import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -11,7 +13,7 @@ public class App {
 
     private static boolean IS_START_PROMETHEUS=false;
     
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		
 		String module=System.getenv("module");
@@ -354,7 +356,7 @@ public class App {
 		return false;
 	}
 
-	private static boolean isMW(String module,String[] args) {
+	private static boolean isMW(String module,String[] args) throws IOException {
 		
 
 		if(module.equals("ic")){
@@ -369,6 +371,14 @@ public class App {
 			com.itextos.beacon.platform.sbcv.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
+
+			return true;
+			
+		}else if(module.equals("mccmncload")){
+			
+			com.itextos.beacon.platform.mccmncload.Startup.main(args);
+			
+			IS_START_PROMETHEUS=false;
 
 			return true;
 			
