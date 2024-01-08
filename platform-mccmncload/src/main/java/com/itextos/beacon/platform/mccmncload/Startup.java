@@ -45,7 +45,7 @@ public class Startup {
 
 	 private static void persisttoDB(List<Map<String, Object>> datalist) {
 		 
-		String sql="insert into configuration.mccmnclist(type,countryname,countrycode,mcc,mnc,brand,operator,status,bands,notes) values(?,?,?,?,?,?,?,?,?,?)";
+		String sql="insert into carrier_handover.mccmnclist(type,countryname,countrycode,mcc,mnc,brand,operator,status,bands,notes) values(?,?,?,?,?,?,?,?,?,?)";
 		
 		Connection connection=null;
 		PreparedStatement statement=null;
