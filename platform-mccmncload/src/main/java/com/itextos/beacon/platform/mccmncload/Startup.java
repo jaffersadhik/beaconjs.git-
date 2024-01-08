@@ -61,7 +61,7 @@ public class Startup {
 				Map<String, Object> data=datalist.get(i);
 				
 				statement.setObject(1, data.get("type"));
-				statement.setObject(2, data.get("countryName"));
+				statement.setObject(2, data.get("countryName")==null?"":data.get("countryName"));
 				statement.setObject(3, data.get("countryCode"));
 				statement.setObject(4, data.get("mcc"));
 				statement.setObject(5, data.get("mnc"));
