@@ -99,9 +99,9 @@ public class T2TUtility
                     // This log has to be removed....
                     if ((temp == null) || temp.isBlank())
                         if (log.isDebugEnabled())
-                            log.debug("This log has to be removed.... Column value " + keyIndex + " '" + aAllMiddlewareConstantNames.get(keyIndex) + "' '"
+                            /*log.debug("This log has to be removed.... Column value " + keyIndex + " '" + aAllMiddlewareConstantNames.get(keyIndex) + "' '"
                                     + getMwConstant(aAllMiddlewareConstantNames, keyIndex) + "' messageValue '" + getStringValue(aCurrentMessage, aAllMiddlewareConstantNames, keyIndex)
-                                    + "' column info " + ci + " Message " + aCurrentMessage + " >>>>>>>>>>> " + aAllMiddlewareConstantNames);
+                                    + "' column info " + ci + " Message " + aCurrentMessage + " >>>>>>>>>>> " + aAllMiddlewareConstantNames); */
 
                     aPstmt.setString((keyIndex + 1), temp);
                     break;

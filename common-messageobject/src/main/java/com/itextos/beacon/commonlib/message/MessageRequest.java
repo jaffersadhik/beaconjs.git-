@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,6 +28,9 @@ public class MessageRequest
 {
 
     private static final long       serialVersionUID   = 7823937163094202459L;
+    
+    private static final Log log = LogFactory.getLog(MessageRequest.class);
+
 
     private Date                    mFirstReceivedTime = null;
     private Date                    mLastReceivedTime  = null;
@@ -683,8 +688,6 @@ public class MessageRequest
         subObj.setBlacklistCheck(getBlacklistCheck());
         subObj.setBlockoutType(getBlockoutType());
         subObj.setCarrier(getCarrier());
-        subObj.setMcc(getMcc());
-        subObj.setMnc(getMnc());
         subObj.setCarrierDateTimeFormat(getCarrierDateTimeFormat());
         subObj.setCircle(getCircle());
         subObj.setClientDomesticSmsBlockoutEnabled(getClientDomesticSmsBlockoutEnabled());
@@ -859,7 +862,11 @@ public class MessageRequest
         subObj.putValue(MiddlewareConstant.MW_CAPPING_INTERVAL, getValue(MiddlewareConstant.MW_CAPPING_INTERVAL));
         subObj.putValue(MiddlewareConstant.MW_CAPPING_MAX_REQ_COUNT, getValue(MiddlewareConstant.MW_CAPPING_MAX_REQ_COUNT));
         subObj.putValue(MiddlewareConstant.MW_CREDIT_CHECK, getValue(MiddlewareConstant.MW_CREDIT_CHECK));
-        System.out.println(subObj);
+        subObj.putValue(MiddlewareConstant.MW_CREDIT_CHECK, getValue(MiddlewareConstant.MW_CREDIT_CHECK));
+        subObj.putValue(MiddlewareConstant.MW_MCC, getValue(MiddlewareConstant.MW_MCC));
+        subObj.putValue(MiddlewareConstant.MW_MNC, getValue(MiddlewareConstant.MW_MNC));
+
+        log.debug("subObj : "+subObj);
         return subObj;
     }
 
