@@ -688,6 +688,8 @@ public class MessageRequest
         subObj.setBlacklistCheck(getBlacklistCheck());
         subObj.setBlockoutType(getBlockoutType());
         subObj.setCarrier(getCarrier());
+        subObj.setMnc(getMnc());
+        subObj.setMcc(getMcc());
         subObj.setCarrierDateTimeFormat(getCarrierDateTimeFormat());
         subObj.setCircle(getCircle());
         subObj.setClientDomesticSmsBlockoutEnabled(getClientDomesticSmsBlockoutEnabled());
