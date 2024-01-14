@@ -37,6 +37,13 @@ public class SBCVProcess
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
+        SBCVProcess.forSBCV(lMessageRequest);
+    }
+
+    public static void forSBCV(MessageRequest lMessageRequest) {
+    	
+
+
         if (log.isDebugEnabled())
             log.debug("SBCV Receive the request : " + lMessageRequest);
 
@@ -68,8 +75,9 @@ public class SBCVProcess
         {
             e.printStackTrace();
         }
+    
     }
-
+    
     private static void sendToNextProcess(
             MessageRequest aMessageRequest)
     {

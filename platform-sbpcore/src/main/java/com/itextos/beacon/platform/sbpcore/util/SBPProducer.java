@@ -39,6 +39,7 @@ public class SBPProducer
         try
         {
             MessageProcessor.writeMessage(Component.SBP, Component.CH, aMessageRequest);
+
         }
         catch (final ItextosException e)
         {
@@ -66,10 +67,13 @@ public class SBPProducer
 
         try
         {
-            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl())
+            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
                 MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
-            else
+            		
+            }else {
                 MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);
+        
+            }
         }
         catch (final ItextosException e)
         {

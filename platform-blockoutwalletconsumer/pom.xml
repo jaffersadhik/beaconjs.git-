@@ -22,7 +22,8 @@
 			<artifactId>inmemory-data</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
+	
+				<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-messageflowutility</artifactId>
 			<version>1.0</version>

@@ -292,6 +292,8 @@ public enum MiddlewareConstant
     MW_MSG_TAG5("m_tag5", "msg_tag5", "Message Tag5"),
     MW_ACC_IS_ASYNC("acc_is_async", "acc_is_async", "Account Enabled Async"),
     MW_NEXT_COMPONENT("nxt_comp", "next_component", "Next component for this message to be processed."),
+    MW_FROM_COMPONENT("from_comp", "from_component", "From component for this message to be processed."),
+    MW_PRCOESSOR_COMPONENT("proc_comp", "processor_component", "Processor component for this message to be processed."),
     MW_PROGRAM_MESSAGE_TYPE("pro_msg_ty", "program_message_type", "To specify the program message type"),
     MW_BYPASS_DLT_TEMPLATE_CHECK("bp_dlt_chk", "bypass_dlt_chk", "By pass DLR template Check"),
     MW_ADD_ERROR_INFO("add_err_info", "add_error_info", "add_error_info"),

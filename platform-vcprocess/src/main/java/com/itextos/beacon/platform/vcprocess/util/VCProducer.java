@@ -111,6 +111,7 @@ public class VCProducer
                 log.debug("Request sending to RC topic .. " + aMessageRequest);
 
             MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
+            
         }
         catch (final ItextosException e)
         {

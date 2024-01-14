@@ -16,5 +16,17 @@ public interface IMessage
 
     void setNextComponent(
             String aNextComponentKey);
+    
 
+    String getFromComponent();
+
+    void setFromComponent(
+            String aFromComponentKey);
+    
+    
+    String getProcessorComponent();
+
+    void setProcessorComponent(
+            String aFromComponentKey);
+    
 }

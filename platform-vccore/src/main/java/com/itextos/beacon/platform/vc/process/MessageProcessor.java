@@ -37,11 +37,18 @@ public class MessageProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
+        if (log.isDebugEnabled())
+            log.debug("Message received : " + aBaseMessage);
+
+        MessageProcessor.forVC(mComponent,lMessageRequest);
+    }
+
+    
+    public static void forVC(Component mComponent,MessageRequest lMessageRequest) {
+    	
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Message received : " + aBaseMessage);
-
+      
             final MsgVerifyProcessor lMsgVerifyProcessor = new MsgVerifyProcessor(mComponent, lMessageRequest);
             lMsgVerifyProcessor.process();
         }
@@ -52,7 +59,6 @@ public class MessageProcessor
             VCProducer.sendToErrorLog(mComponent, lMessageRequest, e);
         }
     }
-
     @Override
     public void doCleanup()
     {

@@ -40,7 +40,8 @@ public class RCProducer
         try
         {
             aMessageRequest.setActualRouteId(aMessageRequest.getRouteId());
-            MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
+           MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
+
         }
         catch (final ItextosException e)
         {

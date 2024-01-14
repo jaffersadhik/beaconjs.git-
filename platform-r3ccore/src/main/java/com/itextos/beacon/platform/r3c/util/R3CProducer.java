@@ -38,6 +38,7 @@ public class R3CProducer
             {
                 if (log.isDebugEnabled())
                     log.debug("Request sending to SBCV..");
+                
                 MessageProcessor.writeMessage(Component.R3C, Component.SBCV, aMessageRequest);
             }
         }
@@ -54,11 +55,14 @@ public class R3CProducer
 
         try
         {
-            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl())
+            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
                 MessageProcessor.writeMessage(Component.R3C, Component.VC, aMessageRequest);
-            else
+            	
+            }else {
                 MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);
-        }
+            }
+            
+        }    
         catch (final ItextosException e)
         {
             log.error("Exception while sending the message to Verify Consumer topic.", e);

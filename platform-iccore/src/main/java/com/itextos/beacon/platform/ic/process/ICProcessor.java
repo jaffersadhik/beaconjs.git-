@@ -19,6 +19,9 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.ic.util.HeaderValidaton;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
+import com.itextos.beacon.platform.rc.process.RConsumer;
+import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
+import com.itextos.beacon.platform.vc.process.MessageProcessor;
 
 public class ICProcessor
         extends
@@ -45,7 +48,12 @@ public class ICProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-        try
+      	   ICProcessor.forIC(lMessageRequest);
+    }
+
+    public static void forIC(MessageRequest lMessageRequest) {
+    	
+    	try
         {
             setClientHeader(lMessageRequest);
             setClietDltParams(lMessageRequest);
@@ -75,8 +83,8 @@ public class ICProcessor
             log.error("Exception occer while processing the request .." + lMessageRequest, e);
             ICProducer.sendToErrorLog(lMessageRequest, e);
         }
-    }
 
+    }
     private static void setClietDltParams(
             MessageRequest aMessageRequest)
     {

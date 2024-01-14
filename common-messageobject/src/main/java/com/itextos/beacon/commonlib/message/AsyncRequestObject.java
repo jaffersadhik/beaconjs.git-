@@ -26,6 +26,8 @@ public class AsyncRequestObject
     private final String        mMessageContent;
     private final long          mRequestedTime;
     private String              mNextComponent;
+    private String              mFromComponent;
+    private String              mProcessorComponent;
     private final String        mMessageSource;
 
     public AsyncRequestObject(
@@ -108,12 +110,39 @@ public class AsyncRequestObject
     {
         return mNextComponent;
     }
+    
+    @Override
+    public String getProcessorComponent()
+    {
+        return mProcessorComponent;
+    }
+    
+    @Override
+    public String getFromComponent()
+    {
+        return mFromComponent;
+    }
 
     @Override
     public void setNextComponent(
             String aNextComponentKey)
     {
         mNextComponent = aNextComponentKey;
+    }
+    
+    @Override
+    public void setProcessorComponent(
+            String aProcessorComponentKey)
+    {
+        mProcessorComponent = aProcessorComponentKey;
+    }
+    
+    
+    @Override
+    public void setFromComponent(
+            String aFromComponentKey)
+    {
+        mFromComponent = aFromComponentKey;
     }
 
     public String getMessageSource()

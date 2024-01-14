@@ -81,10 +81,13 @@ public class ICProducer
 
         try
         {
-            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl() || aMessageRequest.isIldo())
+            if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl() || aMessageRequest.isIldo()) {
                 MessageProcessor.writeMessage(Component.IC, Component.VC, aMessageRequest);
-            else
+            	
+            }
+            else {
                 MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
+            }
         }
         catch (final ItextosException e)
         {

@@ -65,294 +65,299 @@ public class CarrierHandoverProcess
         if (log.isDebugEnabled())
             log.debug("HC Received Object .. " + lMessageRequest.getJsonString());
 
-        try
-        {
-            final Timer   lPlatformRejection = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "platformRejection");
-            final boolean isHexMsg           = lMessageRequest.isHexMessage();
-
-            if (isHexMsg)
-            {
-                final boolean isValidHexMessage = CHUtil.isValidHexMessage(lMessageRequest.getLongMessage());
-
-                if (!isValidHexMessage)
-                {
-                    log.error("Invalid HEX Message : " + lMessageRequest);
-                    sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.INVALID_HEX_MESSAGE);
-                    PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
-                    return;
-                }
-            }
-
-            final String lFeatureCode = CommonUtility.nullCheck(lMessageRequest.getFeatureCode(), true);
-            final String lRouteId     = CommonUtility.nullCheck(lMessageRequest.getRouteId(), true);
-
-            if (lRouteId.isEmpty())
-            {
-                log.error("Unable to find out the Route Id : " + lMessageRequest);
-                sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_ROUTE_ID);
-                PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
-                return;
-            }
-
-            if (lFeatureCode.isBlank())
-            {
-                log.error("Unable to find out the Feature Code : " + lMessageRequest);
-                sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_FEATURE_CODE);
-                PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
-                return;
-            }
-            PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
-
-            final Timer   lBlockoutTimer = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "isMessageBlockout");
-            final boolean isBlockout     = CHProcessUtil.isMessageBlockout(lMessageRequest);
-            PrometheusMetrics.componentMethodEndTimer(Component.CH, lBlockoutTimer);
-
-            if (isBlockout)
-                return;
-
-            final Timer   lExpiredtimer = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "isExpired");
-            final boolean isExpired     = CHUtil.isExpired(lMessageRequest);
-            PrometheusMetrics.componentMethodEndTimer(Component.CH, lExpiredtimer);
-
-            if (isExpired)
-            {
-                log.error("Message Expired :" + lMessageRequest);
-                sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EXPIRED_MESSAGE);
-                return;
-            }
-
-            final Timer           lDeliveryRouteInfo = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "getDeliveryRouteInfo");
-            final RouteKannelInfo lKannelRouteInfo   = ICHUtil.getDeliveryRouteInfo(lRouteId, lFeatureCode);
-            PrometheusMetrics.componentMethodEndTimer(Component.CH, lDeliveryRouteInfo);
-
-            if (lKannelRouteInfo == null)
-            {
-                log.error("Unable to find  Route Kannel Template for  route : " + lRouteId + " feature cd : " + lFeatureCode + " BaseMessage = : \t" + lMessageRequest);
-                sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.KANNEL_TEMPLATE_NOT_FOUND);
-                return;
-            }
-
-            lMessageRequest.setRouteType(lKannelRouteInfo.getRouteType());
-
-            final List<BaseMessage> lBaseMessageList  = lMessageRequest.getSubmissions();
-
-            boolean                 isFirstPartFailed = false;
-            boolean                 isPartialSuccess  = false;
-
-            final boolean           canDoMsgRetry     = CHUtil.canMsgRetry(lMessageRequest);
-
-            for (final BaseMessage baseMssage : lBaseMessageList)
-            {
-                final SubmissionObject lSubmissionObject = (SubmissionObject) baseMssage;
-                if (log.isDebugEnabled())
-                    log.debug("Splited Message Object : " + lSubmissionObject);
-
-                try
-                {
-
-                    if (isFirstPartFailed && !isPartialSuccess)
-                    {
-                        // log.fatal("First part carrier handover is failed, Hence ignoring the remining
-                        // part messages...Message Id :" + lSubmissionObject.getMessageId());
-                        log.fatal("First part carrier handover is failed, Hence ignoring the remining part messages...Message Id :" + lSubmissionObject.getMessageId());
-                        return;
-                    }
-
-                    if (isPartialSuccess && isFirstPartFailed)
-                    {
-                        if (log.isDebugEnabled())
-                            log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
-                        sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
-                        continue;
-                    }
-
-                    final String lMessageId = lSubmissionObject.getMessageId();
-
-                    String       lUdh       = CommonUtility.nullCheck(lSubmissionObject.getUdh(), true);
-
-                    if (!lUdh.isEmpty())
-                    {
-                        if (log.isDebugEnabled())
-                            log.debug("Udh Value : " + lUdh);
-
-                        if (CHUtil.isValidUDH(lUdh))
-                            lUdh = CHUtil.addKannelSpecCharToHex(lUdh);
-                        else
-                        {
-                            log.error("Invalid UDH : " + lSubmissionObject);
-                            sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.INVALID_UDH);
-                            continue;
-                        }
-                    }
-
-                    // msg_replace_chk value from account table.
-                    final boolean isDLTEnable = CommonUtility.isEnabled(CHUtil.getAppConfigValueAsString(ConfigParamConstants.DLT_ENABLE));
-
-                    if (!isDLTEnable)
-                        messageReplaceCheck(lSubmissionObject, lMessageRequest, lRouteId);
-
-                    int           lRetryAttempt          = lMessageRequest.getRetryAttempt();
-               
-                    if (lKannelRouteInfo.isDummyRoute() && (!lKannelRouteInfo.getCarrierFullDn().isEmpty()))
-                    {
-                    	sendDummyRoute(lSubmissionObject,lKannelRouteInfo,lMessageRequest);
-                    	continue;
-                    }
-
-                    final boolean isKannelAvailable = CHProcessUtil.isKannelAvailable(lRouteId);
-
-                    if (log.isDebugEnabled())
-                        log.debug("Kannel Available Status : " + isKannelAvailable);
-
-                    final String lActualRouteId = lMessageRequest.getActualRouteId();
-
-                    if ((lSubmissionObject.getMtMessageRetryIdentifier() == null) || !lRouteId.equals(lActualRouteId))
-                        setCallBackUrl(lMessageRequest, lSubmissionObject);
-
-                    final String lKannelUrl = getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable);
-
-                    if (log.isDebugEnabled())
-                        log.debug("kannel URL--->" + lKannelUrl);
-
-                    if (!isKannelAvailable && canDoMsgRetry)
-                    {
-                        // Set the isFirstPartFailed flag to 'true' for Multipart Request.
-                        if (lMessageRequest.getMessageTotalParts() > 1)
-                            isFirstPartFailed = true;
-
-                        doMessageRetry(lMessageRequest, lSubmissionObject);
-                        continue;
-                    }
-
-                    final Timer      lKannelConnect = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "KannelConnect");
-
-                    final HttpResult lHttpResult    = BasicHttpConnector.connect(lKannelUrl);
-                    final boolean    lResponse      = lHttpResult.isSuccess();
-
-                    PrometheusMetrics.componentMethodEndTimer(Component.CH, lKannelConnect);
-
-                    if (log.isDebugEnabled())
-                        log.debug("URL : '" + lKannelUrl + "', Response : '" + lResponse + "'");
-
-                    setKannelResponseTime(lKannelUrl, lRouteId, lResponse);
-
-                    if (lResponse)
-                    {
-                        isPartialSuccess = true;
-                        lRetryAttempt    = lSubmissionObject.getRetryAttempt();
-                        final String lRoute_Id = lMessageRequest.getRouteId();
-                        if (log.isDebugEnabled())
-                            log.debug("Route ID : " + lRoute_Id);
-
-                        if (lRetryAttempt != 0)
-                        {
-                            // retry msg send to INTERIM_FAILURE topic
-                            CHProducer.sendToInterim(lSubmissionObject);
-                            if (log.isDebugEnabled())
-                                log.debug("send to interm queue success mid:" + lMessageId);
-                        }
-
-                        lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.SUCCESS.getStatusCode());
-
-                        if (log.isDebugEnabled())
-                            log.debug("Retry Attempt Count : " + lRetryAttempt);
-
-                        if (lRetryAttempt == 0)
-                        {
-                            CHProducer.sendToSubBilling(lSubmissionObject);
-                            if (log.isDebugEnabled())
-                                log.debug("Sent to submission biller topic.. success");
-                        }
-                    }
-                    else
-                    {
-                        if (log.isDebugEnabled())
-                            log.debug("\n url : " + lKannelUrl + " : \n response : " + lResponse);
-
-                        isFirstPartFailed = true;
-
-                        if (isPartialSuccess && isFirstPartFailed)
-                        {
-                            if (log.isDebugEnabled())
-                                log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
-                            sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
-                        }
-                        else
-                        {
-                            if (log.isDebugEnabled())
-                                log.debug("");
-
-                            if (isFirstPartFailed)
-                            {
-                                if (log.isDebugEnabled())
-                                    log.debug("First part failed ...");
-
-                                if (canDoMsgRetry)
-                                {
-                                    if (log.isDebugEnabled())
-                                        log.debug("Message Retry Enabled & First part failed ...:'" + isFirstPartFailed + "', Hence sending to Message Retry..");
-
-                                    doMessageRetry(lMessageRequest, lSubmissionObject);
-                                }
-                                else
-                                {
-                                    if (log.isDebugEnabled())
-                                        log.debug("Message Retry Disabled, Unable to send the Multipart request to kannel for the route '" + lRouteId + "' , Hence rejecting the request..");
-
-                                    sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, lMessageRequest, PlatformStatusCode.CARRIER_HANDOVER_FAILED);
-                                }
-                            }
-                        }
-                    }
-                    if (log.isDebugEnabled())
-                        log.debug("Message Id : " + lMessageId + " udh : " + lUdh);
-                }
-                catch (final Exception e2)
-                {
-                    log.error("Exception occer while processing Carrier Handover ...", e2);
-                    isFirstPartFailed = true;
-
-                    if (isPartialSuccess && isFirstPartFailed)
-                    {
-                        lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED.getStatusCode());
-                        lSubmissionObject.setAdditionalErrorInfo("CH :" + e2.getMessage());
-                        CHProducer.sendToNextLevel(lSubmissionObject, lMessageRequest, true);
-                    }
-                    else
-                    {
-                        if (log.isDebugEnabled())
-                            log.debug("");
-
-                        if (isFirstPartFailed)
-                        {
-                            if (log.isDebugEnabled())
-                                log.debug("Due to exception sending to PRC..., Base Mid :'" + lMessageRequest.getBaseMessageId() + "'");
-
-                            lMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.CARRIER_HANDOVER_FAILED.getStatusCode());
-                            lMessageRequest.setAdditionalErrorInfo("CH :" + e2.getMessage());
-
-                            CHProducer.sendToNextLevel(lSubmissionObject, lMessageRequest, false);
-                        }
-                    }
-                }
-            }
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception occer while processing Carrier Handover ...", e);
-
-            try
-            {
-                CHProducer.sendToErrorLog(lMessageRequest, e);
-            }
-            catch (final Exception e1)
-            {
-                e1.printStackTrace();
-            }
-        }
+        CarrierHandoverProcess.forCH(lMessageRequest,mPlatformCluster);
     }
 
-    private void sendDummyRoute(final SubmissionObject lSubmissionObject,final RouteKannelInfo lKannelRouteInfo,final MessageRequest lMessageRequest) {
+    public static void forCH(MessageRequest lMessageRequest,ClusterType mPlatformCluster) {
+    	
+    	   try
+           {
+               final Timer   lPlatformRejection = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "platformRejection");
+               final boolean isHexMsg           = lMessageRequest.isHexMessage();
+
+               if (isHexMsg)
+               {
+                   final boolean isValidHexMessage = CHUtil.isValidHexMessage(lMessageRequest.getLongMessage());
+
+                   if (!isValidHexMessage)
+                   {
+                       log.error("Invalid HEX Message : " + lMessageRequest);
+                       sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.INVALID_HEX_MESSAGE);
+                       PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
+                       return;
+                   }
+               }
+
+               final String lFeatureCode = CommonUtility.nullCheck(lMessageRequest.getFeatureCode(), true);
+               final String lRouteId     = CommonUtility.nullCheck(lMessageRequest.getRouteId(), true);
+
+               if (lRouteId.isEmpty())
+               {
+                   log.error("Unable to find out the Route Id : " + lMessageRequest);
+                   sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_ROUTE_ID);
+                   PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
+                   return;
+               }
+
+               if (lFeatureCode.isBlank())
+               {
+                   log.error("Unable to find out the Feature Code : " + lMessageRequest);
+                   sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_FEATURE_CODE);
+                   PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
+                   return;
+               }
+               PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
+
+               final Timer   lBlockoutTimer = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "isMessageBlockout");
+               final boolean isBlockout     = CHProcessUtil.isMessageBlockout(lMessageRequest);
+               PrometheusMetrics.componentMethodEndTimer(Component.CH, lBlockoutTimer);
+
+               if (isBlockout)
+                   return;
+
+               final Timer   lExpiredtimer = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "isExpired");
+               final boolean isExpired     = CHUtil.isExpired(lMessageRequest);
+               PrometheusMetrics.componentMethodEndTimer(Component.CH, lExpiredtimer);
+
+               if (isExpired)
+               {
+                   log.error("Message Expired :" + lMessageRequest);
+                   sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EXPIRED_MESSAGE);
+                   return;
+               }
+
+               final Timer           lDeliveryRouteInfo = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "getDeliveryRouteInfo");
+               final RouteKannelInfo lKannelRouteInfo   = ICHUtil.getDeliveryRouteInfo(lRouteId, lFeatureCode);
+               PrometheusMetrics.componentMethodEndTimer(Component.CH, lDeliveryRouteInfo);
+
+               if (lKannelRouteInfo == null)
+               {
+                   log.error("Unable to find  Route Kannel Template for  route : " + lRouteId + " feature cd : " + lFeatureCode + " BaseMessage = : \t" + lMessageRequest);
+                   sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.KANNEL_TEMPLATE_NOT_FOUND);
+                   return;
+               }
+
+               lMessageRequest.setRouteType(lKannelRouteInfo.getRouteType());
+
+               final List<BaseMessage> lBaseMessageList  = lMessageRequest.getSubmissions();
+
+               boolean                 isFirstPartFailed = false;
+               boolean                 isPartialSuccess  = false;
+
+               final boolean           canDoMsgRetry     = CHUtil.canMsgRetry(lMessageRequest);
+
+               for (final BaseMessage baseMssage : lBaseMessageList)
+               {
+                   final SubmissionObject lSubmissionObject = (SubmissionObject) baseMssage;
+                   if (log.isDebugEnabled())
+                       log.debug("Splited Message Object : " + lSubmissionObject);
+
+                   try
+                   {
+
+                       if (isFirstPartFailed && !isPartialSuccess)
+                       {
+                           // log.fatal("First part carrier handover is failed, Hence ignoring the remining
+                           // part messages...Message Id :" + lSubmissionObject.getMessageId());
+                           log.fatal("First part carrier handover is failed, Hence ignoring the remining part messages...Message Id :" + lSubmissionObject.getMessageId());
+                           return;
+                       }
+
+                       if (isPartialSuccess && isFirstPartFailed)
+                       {
+                           if (log.isDebugEnabled())
+                               log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
+                           sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
+                           continue;
+                       }
+
+                       final String lMessageId = lSubmissionObject.getMessageId();
+
+                       String       lUdh       = CommonUtility.nullCheck(lSubmissionObject.getUdh(), true);
+
+                       if (!lUdh.isEmpty())
+                       {
+                           if (log.isDebugEnabled())
+                               log.debug("Udh Value : " + lUdh);
+
+                           if (CHUtil.isValidUDH(lUdh))
+                               lUdh = CHUtil.addKannelSpecCharToHex(lUdh);
+                           else
+                           {
+                               log.error("Invalid UDH : " + lSubmissionObject);
+                               sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.INVALID_UDH);
+                               continue;
+                           }
+                       }
+
+                       // msg_replace_chk value from account table.
+                       final boolean isDLTEnable = CommonUtility.isEnabled(CHUtil.getAppConfigValueAsString(ConfigParamConstants.DLT_ENABLE));
+
+                       if (!isDLTEnable)
+                           messageReplaceCheck(lSubmissionObject, lMessageRequest, lRouteId);
+
+                       int           lRetryAttempt          = lMessageRequest.getRetryAttempt();
+                  
+                       if (lKannelRouteInfo.isDummyRoute() && (!lKannelRouteInfo.getCarrierFullDn().isEmpty()))
+                       {
+                       	sendDummyRoute(lSubmissionObject,lKannelRouteInfo,lMessageRequest,mPlatformCluster);
+                       	continue;
+                       }
+
+                       final boolean isKannelAvailable = CHProcessUtil.isKannelAvailable(lRouteId);
+
+                       if (log.isDebugEnabled())
+                           log.debug("Kannel Available Status : " + isKannelAvailable);
+
+                       final String lActualRouteId = lMessageRequest.getActualRouteId();
+
+                       if ((lSubmissionObject.getMtMessageRetryIdentifier() == null) || !lRouteId.equals(lActualRouteId))
+                           setCallBackUrl(lMessageRequest, lSubmissionObject);
+
+                       final String lKannelUrl = getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable);
+
+                       if (log.isDebugEnabled())
+                           log.debug("kannel URL--->" + lKannelUrl);
+
+                       if (!isKannelAvailable && canDoMsgRetry)
+                       {
+                           // Set the isFirstPartFailed flag to 'true' for Multipart Request.
+                           if (lMessageRequest.getMessageTotalParts() > 1)
+                               isFirstPartFailed = true;
+
+                           doMessageRetry(lMessageRequest, lSubmissionObject);
+                           continue;
+                       }
+
+                       final Timer      lKannelConnect = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "KannelConnect");
+
+                       final HttpResult lHttpResult    = BasicHttpConnector.connect(lKannelUrl);
+                       final boolean    lResponse      = lHttpResult.isSuccess();
+
+                       PrometheusMetrics.componentMethodEndTimer(Component.CH, lKannelConnect);
+
+                       if (log.isDebugEnabled())
+                           log.debug("URL : '" + lKannelUrl + "', Response : '" + lResponse + "'");
+
+                       setKannelResponseTime(lKannelUrl, lRouteId, lResponse);
+
+                       if (lResponse)
+                       {
+                           isPartialSuccess = true;
+                           lRetryAttempt    = lSubmissionObject.getRetryAttempt();
+                           final String lRoute_Id = lMessageRequest.getRouteId();
+                           if (log.isDebugEnabled())
+                               log.debug("Route ID : " + lRoute_Id);
+
+                           if (lRetryAttempt != 0)
+                           {
+                               // retry msg send to INTERIM_FAILURE topic
+                               CHProducer.sendToInterim(lSubmissionObject);
+                               if (log.isDebugEnabled())
+                                   log.debug("send to interm queue success mid:" + lMessageId);
+                           }
+
+                           lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.SUCCESS.getStatusCode());
+
+                           if (log.isDebugEnabled())
+                               log.debug("Retry Attempt Count : " + lRetryAttempt);
+
+                           if (lRetryAttempt == 0)
+                           {
+                               CHProducer.sendToSubBilling(lSubmissionObject);
+                               if (log.isDebugEnabled())
+                                   log.debug("Sent to submission biller topic.. success");
+                           }
+                       }
+                       else
+                       {
+                           if (log.isDebugEnabled())
+                               log.debug("\n url : " + lKannelUrl + " : \n response : " + lResponse);
+
+                           isFirstPartFailed = true;
+
+                           if (isPartialSuccess && isFirstPartFailed)
+                           {
+                               if (log.isDebugEnabled())
+                                   log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
+                               sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
+                           }
+                           else
+                           {
+                               if (log.isDebugEnabled())
+                                   log.debug("");
+
+                               if (isFirstPartFailed)
+                               {
+                                   if (log.isDebugEnabled())
+                                       log.debug("First part failed ...");
+
+                                   if (canDoMsgRetry)
+                                   {
+                                       if (log.isDebugEnabled())
+                                           log.debug("Message Retry Enabled & First part failed ...:'" + isFirstPartFailed + "', Hence sending to Message Retry..");
+
+                                       doMessageRetry(lMessageRequest, lSubmissionObject);
+                                   }
+                                   else
+                                   {
+                                       if (log.isDebugEnabled())
+                                           log.debug("Message Retry Disabled, Unable to send the Multipart request to kannel for the route '" + lRouteId + "' , Hence rejecting the request..");
+
+                                       sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, lMessageRequest, PlatformStatusCode.CARRIER_HANDOVER_FAILED);
+                                   }
+                               }
+                           }
+                       }
+                       if (log.isDebugEnabled())
+                           log.debug("Message Id : " + lMessageId + " udh : " + lUdh);
+                   }
+                   catch (final Exception e2)
+                   {
+                       log.error("Exception occer while processing Carrier Handover ...", e2);
+                       isFirstPartFailed = true;
+
+                       if (isPartialSuccess && isFirstPartFailed)
+                       {
+                           lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED.getStatusCode());
+                           lSubmissionObject.setAdditionalErrorInfo("CH :" + e2.getMessage());
+                           CHProducer.sendToNextLevel(lSubmissionObject, lMessageRequest, true);
+                       }
+                       else
+                       {
+                           if (log.isDebugEnabled())
+                               log.debug("");
+
+                           if (isFirstPartFailed)
+                           {
+                               if (log.isDebugEnabled())
+                                   log.debug("Due to exception sending to PRC..., Base Mid :'" + lMessageRequest.getBaseMessageId() + "'");
+
+                               lMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.CARRIER_HANDOVER_FAILED.getStatusCode());
+                               lMessageRequest.setAdditionalErrorInfo("CH :" + e2.getMessage());
+
+                               CHProducer.sendToNextLevel(lSubmissionObject, lMessageRequest, false);
+                           }
+                       }
+                   }
+               }
+           }
+           catch (final Exception e)
+           {
+               log.error("Exception occer while processing Carrier Handover ...", e);
+
+               try
+               {
+                   CHProducer.sendToErrorLog(lMessageRequest, e);
+               }
+               catch (final Exception e1)
+               {
+                   e1.printStackTrace();
+               }
+           }
+
+    }
+    private static void sendDummyRoute(final SubmissionObject lSubmissionObject,final RouteKannelInfo lKannelRouteInfo,final MessageRequest lMessageRequest,ClusterType mPlatformCluster) {
 		
 
         lSubmissionObject.setCarrierFullDn(lKannelRouteInfo.getCarrierFullDn());

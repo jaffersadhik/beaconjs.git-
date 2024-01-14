@@ -361,12 +361,40 @@ public abstract class BaseMessage
     {
         return getValue(MiddlewareConstant.MW_NEXT_COMPONENT);
     }
+    
+    @Override
+    public String getFromComponent()
+    {
+        return getValue(MiddlewareConstant.MW_FROM_COMPONENT);
+    }
+    
+    @Override
+    public String getProcessorComponent()
+    {
+        return getValue(MiddlewareConstant.MW_PRCOESSOR_COMPONENT);
+    }
+    
+    
 
     @Override
     public void setNextComponent(
             String aNextComponentKey)
     {
         putValue(MiddlewareConstant.MW_NEXT_COMPONENT, aNextComponentKey);
+    }
+    
+    @Override
+    public void setProcessorComponent(
+            String aProcessorComponentKey)
+    {
+        putValue(MiddlewareConstant.MW_PRCOESSOR_COMPONENT, aProcessorComponentKey);
+    }
+    
+    @Override
+    public void setFromComponent(
+            String aFromComponentKey)
+    {
+        putValue(MiddlewareConstant.MW_FROM_COMPONENT, aFromComponentKey);
     }
 
     @Override

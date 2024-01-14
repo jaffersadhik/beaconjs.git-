@@ -27,6 +27,7 @@ public class WCProducer
                 log.debug("Request sending to RC topic .. " + aMessageRequest);
 
             MessageProcessor.writeMessage(Component.WC, Component.RC, aMessageRequest);
+          
         }
         catch (final ItextosException e)
         {

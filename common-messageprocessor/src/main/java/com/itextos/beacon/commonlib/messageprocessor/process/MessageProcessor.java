@@ -119,6 +119,8 @@ public class MessageProcessor
             if (producer != null)
             {
                 aIMessage.setNextComponent(aProducerKafkaRequest.getNextComponent().getKey());
+                aIMessage.setFromComponent(aProducerKafkaRequest.getFromComponent().getKey());
+
                 producer.sendAsync(aIMessage, aFallbackQueue);
             }
             else
@@ -157,6 +159,7 @@ public class MessageProcessor
             if (producer != null)
             {
                 aIMessage.setNextComponent(aNextComponent.getKey());
+                aIMessage.setFromComponent(aFromComponent.getKey());
                 if (aFallbackQueue != null)
                     producer.sendAsync(aIMessage, aFallbackQueue);
                 else

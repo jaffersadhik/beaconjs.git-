@@ -26,7 +26,8 @@ public class BWCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to CH topic .. " + aMessageRequest);
 
-            MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
+          MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
+            
         }
         catch (final ItextosException e)
         {

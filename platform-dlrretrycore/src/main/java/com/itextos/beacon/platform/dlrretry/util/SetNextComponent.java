@@ -114,6 +114,7 @@ public class SetNextComponent
         try
         {
             MessageProcessor.writeMessage(Component.DLRR, Component.CH, aMessageRequest);
+          
         }
         catch (final ItextosException e)
         {

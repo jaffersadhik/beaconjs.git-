@@ -40,24 +40,30 @@ public class DummyCarrierHandoverProcess
     {
         final SubmissionObject lSubmissionObject = (SubmissionObject) aBaseMessage;
 
-        try
-        {
-            if (log.isDebugEnabled())
-                log.debug("Dummy Carrier Handover receiver  : " + lSubmissionObject.getJsonString());
+        if (log.isDebugEnabled())
+            log.debug("Dummy Carrier Handover receiver  : " + lSubmissionObject.getJsonString());
 
-            final DeliveryObject lDeliveryObject = DCHUtil.processDR(lSubmissionObject);
-
-            if (log.isDebugEnabled())
-                log.debug("Before handover to Dlr Internal process : " + lSubmissionObject.getJsonString());
-
-            sendToDlrReceiver(lDeliveryObject);
-        }
-        catch (final Exception e)
-        {
-            e.printStackTrace();
-        }
+        DummyCarrierHandoverProcess.forDCH(lSubmissionObject);
     }
 
+    
+    public static void forDCH(SubmissionObject lSubmissionObject) {
+    	
+    	 try
+         {
+      
+             final DeliveryObject lDeliveryObject = DCHUtil.processDR(lSubmissionObject);
+
+             if (log.isDebugEnabled())
+                 log.debug("Before handover to Dlr Internal process : " + lSubmissionObject.getJsonString());
+
+             sendToDlrReceiver(lDeliveryObject);
+         }
+         catch (final Exception e)
+         {
+             e.printStackTrace();
+         }
+    }
     public static void sendToDlrReceiver(
             DeliveryObject aDeliveryObject)
     {

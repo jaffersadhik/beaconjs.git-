@@ -18,7 +18,7 @@ public class RConsumer
         AbstractKafkaComponentProcessor
 {
 
-    private final Log log = LogFactory.getLog(RConsumer.class);
+    private static final Log log = LogFactory.getLog(RConsumer.class);
 
     public RConsumer(
             String aThreadName,
@@ -39,6 +39,11 @@ public class RConsumer
         if (log.isDebugEnabled())
             log.debug("doProcess() RC Received Object .. " + lMessageRequest);
 
+        RConsumer.forRC(lMessageRequest);
+   }
+
+    public static void forRC(MessageRequest lMessageRequest) {
+    	
         try
         {
             RCUtil.setMessageValidityPeriod(lMessageRequest);
@@ -62,8 +67,8 @@ public class RConsumer
                 e1.printStackTrace();
             }
         }
-    }
 
+    }
     @Override
     public void doCleanup()
     {}
