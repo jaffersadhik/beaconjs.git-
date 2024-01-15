@@ -29,6 +29,11 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>platform-dchcore</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>platform-blockoutprocess</artifactId>
 			<version>1.0</version>
 		</dependency>

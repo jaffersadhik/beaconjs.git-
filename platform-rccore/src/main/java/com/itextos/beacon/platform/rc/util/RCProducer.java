@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class RCProducer
@@ -40,10 +41,12 @@ public class RCProducer
         try
         {
             aMessageRequest.setActualRouteId(aMessageRequest.getRouteId());
-           MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
-
+         //  MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
+           aMessageRequest.setFromComponent(Component.RC.getKey());
+           aMessageRequest.setNextComponent(Component.CH.getKey());
+           CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Carrier Handover topic..", e);
             sendToErrorLog(aMessageRequest, e);

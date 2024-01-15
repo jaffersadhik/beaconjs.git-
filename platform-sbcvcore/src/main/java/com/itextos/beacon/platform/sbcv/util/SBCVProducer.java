@@ -41,13 +41,19 @@ public class SBCVProducer
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
               
-            	MessageProcessor.writeMessage(Component.SBCV, Component.VC, aMessageRequest);
-            	
+            //	MessageProcessor.writeMessage(Component.SBCV, Component.VC, aMessageRequest);
+              	aMessageRequest.setFromComponent(Component.SBCV.getKey());
+            	aMessageRequest.setNextComponent(Component.VC.getKey());
+            	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
+   
             }else {
             
             	if(aMessageRequest.isIldo()) {
-                    MessageProcessor.writeMessage(Component.SBCV, Component.VC, aMessageRequest);
-
+               //     MessageProcessor.writeMessage(Component.SBCV, Component.VC, aMessageRequest);
+                  	aMessageRequest.setFromComponent(Component.SBCV.getKey());
+                	aMessageRequest.setNextComponent(Component.VC.getKey());
+                	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
+       
             	}else {
             		MessageProcessor.writeMessage(Component.SBCV, Component.DLTVC, aMessageRequest);
             	}

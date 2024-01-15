@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.dch.processor.DummyCarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
@@ -78,9 +79,13 @@ public class RCHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.RCH, Component.DCH, aSubmissionObject);
+         //   MessageProcessor.writeMessage(Component.RCH, Component.DCH, aSubmissionObject);
+            aSubmissionObject.setFromComponent(Component.RCH.getKey());
+            aSubmissionObject.setNextComponent(Component.DCH.getKey());
+            DummyCarrierHandoverProcess.forDCH(aSubmissionObject);
+  
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Dummy Carrier Handover topic..", e);
             sendToErrorLog(aSubmissionObject, e);

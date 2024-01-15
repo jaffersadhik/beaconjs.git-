@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.rc.process.RConsumer;
 
 public class VCProducer
 {
@@ -110,10 +111,12 @@ public class VCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to RC topic .. " + aMessageRequest);
 
-            MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
-            
+            //MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
+            aMessageRequest.setFromComponent(aComponent.getKey());
+            aMessageRequest.setNextComponent(Component.RC.getKey());
+            RConsumer.forRC(aMessageRequest);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Route Consumer topic ..", e);
             sendToErrorLog(aComponent, aMessageRequest, e);

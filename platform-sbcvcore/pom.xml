@@ -17,7 +17,11 @@
 			<artifactId>common-daemonprocess</artifactId>
 			<version>1.0</version>
 			</dependency>
-
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-vccore</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-componentconsumer</artifactId>

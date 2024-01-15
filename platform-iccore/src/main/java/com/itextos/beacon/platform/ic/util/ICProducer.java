@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 
 public class ICProducer
 {
@@ -65,10 +66,14 @@ public class ICProducer
             {
                 if (log.isDebugEnabled())
                     log.debug("Request sending to SBCV..");
-                MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
+             //   MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
+                
+                aMessageRequest.setFromComponent(Component.IC.getKey());
+                aMessageRequest.setNextComponent(Component.SBCV.getKey());
+                SBCVProcess.forSBCV(aMessageRequest);
             }
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to SBCV Process topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -82,8 +87,12 @@ public class ICProducer
         try
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl() || aMessageRequest.isIldo()) {
-                MessageProcessor.writeMessage(Component.IC, Component.VC, aMessageRequest);
+               
             	
+            	//MessageProcessor.writeMessage(Component.IC, Component.VC, aMessageRequest);
+            	aMessageRequest.setFromComponent(Component.IC.getKey());
+            	aMessageRequest.setNextComponent(Component.VC.getKey());
+            	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             }
             else {
                 MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
