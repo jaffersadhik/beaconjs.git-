@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 
@@ -67,11 +68,17 @@ public class R3CProducer
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             	
             }else {
-                MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);
+              //  MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);
+            
+             	aMessageRequest.setFromComponent(Component.R3C.getKey());
+            	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
+
+                DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
+ 
             }
             
         }    
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);

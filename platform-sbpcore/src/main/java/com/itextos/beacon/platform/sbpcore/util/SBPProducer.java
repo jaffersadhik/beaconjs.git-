@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.bwc.process.BlockoutWalletProcessor;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
+import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class SBPProducer
@@ -80,16 +81,20 @@ public class SBPProducer
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
  //               MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
-              	aMessageRequest.setFromComponent(Component.R3C.getKey());
+              	aMessageRequest.setFromComponent(Component.SBP.getKey());
             	aMessageRequest.setNextComponent(Component.VC.getKey());
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             		
             }else {
-                MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);
-        
+            //    MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);
+              	aMessageRequest.setFromComponent(Component.SBP.getKey());
+            	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
+
+                DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
+
             }
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
         }

@@ -9,7 +9,9 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.r3c.process.R3CProcess;
 import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 
 public class ICProducer
@@ -39,9 +41,13 @@ public class ICProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.IC, Component.R3C, aMessageRequest);
+        //    MessageProcessor.writeMessage(Component.IC, Component.R3C, aMessageRequest);
+        
+        	aMessageRequest.setFromComponent(Component.IC.getKey());
+        	aMessageRequest.setNextComponent(Component.R3C.getKey());
+        	R3CProcess.forR3C(aMessageRequest);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to URL Shortner topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -95,10 +101,15 @@ public class ICProducer
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             }
             else {
-                MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
+           //     MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
+            	aMessageRequest.setFromComponent(Component.IC.getKey());
+            	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
+
+                DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
+            
             }
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);

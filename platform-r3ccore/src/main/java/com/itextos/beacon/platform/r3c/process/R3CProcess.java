@@ -51,20 +51,25 @@ public class R3CProcess
         if (log.isDebugEnabled())
             log.debug("doProcess() R3C Received Object .. " + lMessageRequest);
 
-        if (R3CUtil.isDuplicate(lMessageRequest))
-        {
-            lMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.DUPLICATE_CHECK_FAILED.getStatusCode());
-            R3CProducer.sendToPrc(lMessageRequest);
-            return;
-        }
-
-        lMessageRequest.setUrlShortned(false);
-
-        urlShortnerCheckProcess(lMessageRequest);
-
-        smartLinkCheckProcess(lMessageRequest);
+     
+        R3CProcess.forR3C(lMessageRequest);
     }
 
+    public static void forR3C(MessageRequest lMessageRequest) {
+    	
+    	   if (R3CUtil.isDuplicate(lMessageRequest))
+           {
+               lMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.DUPLICATE_CHECK_FAILED.getStatusCode());
+               R3CProducer.sendToPrc(lMessageRequest);
+               return;
+           }
+
+           lMessageRequest.setUrlShortned(false);
+
+           urlShortnerCheckProcess(lMessageRequest);
+
+           smartLinkCheckProcess(lMessageRequest);
+    }
     private static void urlShortnerCheckProcess(
             MessageRequest aMessageRequest)
     {

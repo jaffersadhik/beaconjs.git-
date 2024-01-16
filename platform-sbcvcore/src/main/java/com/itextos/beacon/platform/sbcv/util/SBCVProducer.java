@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class SBCVProducer
@@ -55,12 +56,18 @@ public class SBCVProducer
                 	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
        
             	}else {
-            		MessageProcessor.writeMessage(Component.SBCV, Component.DLTVC, aMessageRequest);
+            	//	MessageProcessor.writeMessage(Component.SBCV, Component.DLTVC, aMessageRequest);
+            	
+                   	aMessageRequest.setFromComponent(Component.SBCV.getKey());
+                	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
+
+                    DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
+     
             	}
             }
             	
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);

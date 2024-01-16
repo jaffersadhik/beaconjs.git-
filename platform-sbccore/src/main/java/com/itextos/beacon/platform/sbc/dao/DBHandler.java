@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.sbc.util.ConsumerId;
 
 public abstract class DBHandler
 {
@@ -82,7 +83,8 @@ public abstract class DBHandler
 
         for (final MessageRequest lMessageRequest : aMessageRequestList)
         {
-            aPstmt.setString(1, CommonUtility.nullCheck(lMessageRequest.getAppInstanceId(), true));
+        //    aPstmt.setString(1, CommonUtility.nullCheck(lMessageRequest.getAppInstanceId(), true));
+            aPstmt.setString(1, ConsumerId.getInstance().getConsumerId());
             aPstmt.setString(2, lMessageRequest.getClientId());
 
             final Date processTime = getProcessTime(lMessageRequest);

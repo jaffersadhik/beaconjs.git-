@@ -36,27 +36,33 @@ public class DltProcessor
     public void doProcess(
             BaseMessage aBaseMessage)
     {
+        if (log.isDebugEnabled())
+            log.debug("Message received : " + aBaseMessage);
+
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-        try
-        {
-            TemplateScrubber.setComponent(mComponent);
-            TemplateScrubber.setClusterType(lMessageRequest.getClusterType());
-
-            if (log.isDebugEnabled())
-                log.debug("Message received : " + aBaseMessage);
-
-            final DltMessageVerifyProcessor lDltMessageVerifyProcessor = new DltMessageVerifyProcessor(mComponent, lMessageRequest);
-            lDltMessageVerifyProcessor.process();
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception occer while processing the message in DLT Verify Consumer ....", e);
-
-            VCProducer.sendToErrorLog(mComponent, lMessageRequest, e);
-        }
+        DltProcessor.forDLT(lMessageRequest, mComponent);
+     
     }
 
+    public static void forDLT(MessageRequest lMessageRequest,Component mComponent) {
+    	
+    	   try
+           {
+               TemplateScrubber.setComponent(mComponent);
+               TemplateScrubber.setClusterType(lMessageRequest.getClusterType());
+
+      
+               final DltMessageVerifyProcessor lDltMessageVerifyProcessor = new DltMessageVerifyProcessor(mComponent, lMessageRequest);
+               lDltMessageVerifyProcessor.process();
+           }
+           catch (final Exception e)
+           {
+               log.error("Exception occer while processing the message in DLT Verify Consumer ....", e);
+
+               VCProducer.sendToErrorLog(mComponent, lMessageRequest, e);
+           }
+    }
     @Override
     public void doCleanup()
     {
