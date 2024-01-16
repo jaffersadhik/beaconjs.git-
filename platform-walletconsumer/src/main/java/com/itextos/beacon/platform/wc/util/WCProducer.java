@@ -8,6 +8,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.rc.process.RConsumer;
 
 public class WCProducer
@@ -49,9 +50,13 @@ public class WCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to PRC topic .. " + aMessageRequest);
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.WC, Component.PRC, aMessageRequest);
+         //   MessageProcessor.writeMessage(Component.WC, Component.PRC, aMessageRequest);
+            aMessageRequest.setFromComponent(Component.WC.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Platfrom Rejection topic ..", e);
             sendToErrorLog(Component.WC, aMessageRequest, e);

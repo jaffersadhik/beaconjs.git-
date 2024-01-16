@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 
 public class BWCProducer
 {
@@ -49,9 +50,13 @@ public class BWCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to PRC topic .. " + aMessageRequest);
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.BWC, Component.PRC, aMessageRequest);
+   //         MessageProcessor.writeMessage(Component.BWC, Component.PRC, aMessageRequest);
+            aMessageRequest.setFromComponent(Component.BWC.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Platfrom Rejection topic ..", e);
             sendToErrorLog(Component.BWC, aMessageRequest, e);

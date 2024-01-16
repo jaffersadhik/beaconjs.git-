@@ -11,6 +11,7 @@ import com.itextos.beacon.platform.bwc.process.BlockoutWalletProcessor;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 
 public class SBPProducer
 {
@@ -27,9 +28,14 @@ public class SBPProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.SBP, Component.PRC, aMessageRequest);
+       //     MessageProcessor.writeMessage(Component.SBP, Component.PRC, aMessageRequest);
+            
+            aMessageRequest.setFromComponent(Component.SBP.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
         }

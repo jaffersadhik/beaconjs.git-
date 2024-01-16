@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 
 public class SBCVProducer
 {
@@ -25,9 +26,14 @@ public class SBCVProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.SBCV, Component.PRC, aMessageRequest);
+   //         MessageProcessor.writeMessage(Component.SBCV, Component.PRC, aMessageRequest);
+            
+            aMessageRequest.setFromComponent(Component.SBCV.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Platform Reject topic.", e);
             sendToErrorLog(aMessageRequest, e);

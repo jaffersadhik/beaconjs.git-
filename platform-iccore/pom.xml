@@ -24,6 +24,19 @@
 			<artifactId>platform-vccore</artifactId>
 			<version>1.0</version>
 			</dependency>
+			
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-prccore</artifactId>
+			<version>1.0</version>
+			</dependency>
+
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-prccore</artifactId>
+			<version>1.0</version>
+			</dependency>
+
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-r3ccore</artifactId>

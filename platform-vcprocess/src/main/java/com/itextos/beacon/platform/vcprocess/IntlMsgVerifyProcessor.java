@@ -14,6 +14,7 @@ import com.itextos.beacon.inmemory.intlrouteinfo.util.IntlRouteUtil;
 import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CalculateIntlBillingPrice;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 
 public class IntlMsgVerifyProcessor
@@ -160,7 +161,11 @@ public class IntlMsgVerifyProcessor
                 log.debug("Intl Rejected Status Code : " + lErrorCode);
 
             mMessageRequest.setSubOriginalStatusCode(lErrorCode.getStatusCode());
-            VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);
+          //  VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);
+            mMessageRequest.setFromComponent(mSourceComponent.getKey());
+            mMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(mMessageRequest);
+
             return false;
         }
 

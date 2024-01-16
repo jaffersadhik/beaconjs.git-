@@ -18,6 +18,7 @@ import com.itextos.beacon.platform.dch.processor.DummyCarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 
 public class CHProducer
 {
@@ -64,9 +65,13 @@ public class CHProducer
         try
         {
             aSubmissionObject.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.CH, Component.PRC, aSubmissionObject);
+      //      MessageProcessor.writeMessage(Component.CH, Component.PRC, aSubmissionObject);
+            aSubmissionObject.setFromComponent(Component.CH.getKey());
+            aSubmissionObject.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aSubmissionObject);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Platform Rejection topic ..", e);
             sendToErrorLog(aSubmissionObject, e);
@@ -80,9 +85,14 @@ public class CHProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.CH, Component.PRC, aMessageRequest);
+         //   MessageProcessor.writeMessage(Component.CH, Component.PRC, aMessageRequest);
+        
+            aMessageRequest.setFromComponent(Component.CH.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Platform Rejection topic ..", e);
             sendToErrorLog(aMessageRequest, e);

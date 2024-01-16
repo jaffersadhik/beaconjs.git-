@@ -44,13 +44,19 @@ public class RejectionProcess
         if (log.isDebugEnabled())
             log.debug("Message received from PRC : " + aBaseMessage);
 
+        RejectionProcess.forPRC(aBaseMessage);
+    }
+
+    public static void forPRC(BaseMessage aBaseMessage) {
+    	
         if (aBaseMessage instanceof MessageRequest)
             processMessageRequest((MessageRequest) aBaseMessage);
 
         if (aBaseMessage instanceof SubmissionObject)
             processSubmissionRequest((SubmissionObject) aBaseMessage);
+ 
     }
-
+    
     private static void processMessageRequest(
             MessageRequest aMessageRequest)
     {

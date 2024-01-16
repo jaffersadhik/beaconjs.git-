@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.rc.process.RConsumer;
 import com.itextos.beacon.platform.wc.process.WalletProcessor;
 
@@ -74,9 +75,13 @@ public class VCProducer
                 log.debug("Request sending to PRC topic .. " + aMessageRequest);
 
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(aComponent, Component.PRC, aMessageRequest);
+            aMessageRequest.setFromComponent(aComponent.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
+//            MessageProcessor.writeMessage(aComponent, Component.PRC, aMessageRequest);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Platfrom Rejection topic ..", e);
             sendToErrorLog(aComponent, aMessageRequest, e);
@@ -93,13 +98,13 @@ public class VCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to WC topic .. " + aMessageRequest);
 
-            MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
+         //   MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
             
             aMessageRequest.setFromComponent(aComponent.getKey());
             aMessageRequest.setNextComponent(Component.WC.getKey());
             WalletProcessor.forWC(aMessageRequest);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Prepaid topic ..", e);
             sendToErrorLog(aComponent, aMessageRequest, e);

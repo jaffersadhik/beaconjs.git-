@@ -8,6 +8,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 import com.itextos.beacon.platform.vcprocess.util.VCUtil;
 
@@ -67,7 +68,11 @@ public class DltMessageVerifyProcessor
         if (statusDLT != null)
         {
             mMessageRequest.setSubOriginalStatusCode(statusDLT);
-            VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);
+    //        VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);
+            mMessageRequest.setFromComponent(mSourceComponent.getKey());
+            mMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(mMessageRequest);
+
             return;
         }
 

@@ -12,6 +12,7 @@ import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 
 public class R3CProducer
@@ -102,9 +103,13 @@ public class R3CProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.R3C, Component.PRC, aMessageRequest);
+         //   MessageProcessor.writeMessage(Component.R3C, Component.PRC, aMessageRequest);
+            aMessageRequest.setFromComponent(Component.R3C.getKey());
+            aMessageRequest.setNextComponent(Component.PRC.getKey());
+            RejectionProcess.forPRC(aMessageRequest);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Platform Reject topic.", e);
             sendToErrorLog(aMessageRequest, e);

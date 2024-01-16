@@ -12,6 +12,14 @@
 	</properties>
 
 	<dependencies>
+		
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-prccore</artifactId>
+			<version>1.0</version>
+			</dependency>
+
+
 			<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-vcdltcore</artifactId>
