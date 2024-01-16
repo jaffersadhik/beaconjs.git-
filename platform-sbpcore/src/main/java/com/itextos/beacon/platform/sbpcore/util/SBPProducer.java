@@ -7,6 +7,8 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.bwc.process.BlockoutWalletProcessor;
+import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class SBPProducer
@@ -38,10 +40,15 @@ public class SBPProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.SBP, Component.CH, aMessageRequest);
+   //         MessageProcessor.writeMessage(Component.SBP, Component.CH, aMessageRequest);
+            
+            aMessageRequest.setFromComponent(Component.SBP.getKey());
+            aMessageRequest.setNextComponent(Component.CH.getKey());
+            CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
+
 
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
         }
@@ -53,9 +60,13 @@ public class SBPProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.SBP, Component.BWC, aMessageRequest);
+      //      MessageProcessor.writeMessage(Component.SBP, Component.BWC, aMessageRequest);
+            
+        	aMessageRequest.setFromComponent(Component.SBP.getKey());
+        	aMessageRequest.setNextComponent(Component.BWC.getKey());
+            BlockoutWalletProcessor.forBWC(aMessageRequest);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
         }
@@ -68,7 +79,10 @@ public class SBPProducer
         try
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
-                MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
+ //               MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
+              	aMessageRequest.setFromComponent(Component.R3C.getKey());
+            	aMessageRequest.setNextComponent(Component.VC.getKey());
+            	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             		
             }else {
                 MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);

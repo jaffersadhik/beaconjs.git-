@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class BWCProducer
@@ -26,10 +27,13 @@ public class BWCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to CH topic .. " + aMessageRequest);
 
-          MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
+//         MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
+          aMessageRequest.setFromComponent(Component.BWC.getKey());
+          aMessageRequest.setNextComponent(Component.CH.getKey());
+          CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
             
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Carrier Handover Consumer topic ..", e);
             sendToErrorLog(Component.BWC, aMessageRequest, e);

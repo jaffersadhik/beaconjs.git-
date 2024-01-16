@@ -23,6 +23,12 @@
 			<artifactId>platform-rccore</artifactId>
 			<version>1.0</version>
 		</dependency>	
+
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-walletconsumer</artifactId>
+			<version>1.0</version>
+		</dependency>	
 		
 		<dependency>
 			<groupId>beacon</groupId>

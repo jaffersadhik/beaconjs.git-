@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class SetNextComponent
@@ -113,10 +114,13 @@ public class SetNextComponent
 
         try
         {
-            MessageProcessor.writeMessage(Component.DLRR, Component.CH, aMessageRequest);
+//            MessageProcessor.writeMessage(Component.DLRR, Component.CH, aMessageRequest);
+            aMessageRequest.setFromComponent(Component.DLRR.getKey());
+            aMessageRequest.setNextComponent(Component.CH.getKey());
+            CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
           
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
         }

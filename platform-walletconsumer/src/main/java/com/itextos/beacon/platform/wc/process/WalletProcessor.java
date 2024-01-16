@@ -48,6 +48,11 @@ public class WalletProcessor
         if (log.isDebugEnabled())
             log.debug("WC Message received : " + lMessageRequest);
 
+        WalletProcessor.forWC(lMessageRequest);
+    }
+
+    public static void forWC(MessageRequest lMessageRequest) {
+   
         try
         {
             /*
@@ -129,8 +134,10 @@ public class WalletProcessor
             log.error("Exception occer while processing Wallet deduct..", e);
             WCProducer.sendToErrorLog(Component.WC, lMessageRequest, e);
         }
-    }
 
+    }
+    
+    
     @Override
     public void doCleanup()
     {

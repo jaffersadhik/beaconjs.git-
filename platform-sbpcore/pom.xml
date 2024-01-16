@@ -26,9 +26,21 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>platform-blockoutwalletconsumer</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>platform-messageflowutility</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-vccore</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-data</artifactId>

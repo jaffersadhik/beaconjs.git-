@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 
 public class R3CProducer
 {
@@ -39,10 +40,14 @@ public class R3CProducer
                 if (log.isDebugEnabled())
                     log.debug("Request sending to SBCV..");
                 
-                MessageProcessor.writeMessage(Component.R3C, Component.SBCV, aMessageRequest);
+         //       MessageProcessor.writeMessage(Component.R3C, Component.SBCV, aMessageRequest);
+           
+                aMessageRequest.setFromComponent(Component.R3C.getKey());
+                aMessageRequest.setNextComponent(Component.SBCV.getKey());
+                SBCVProcess.forSBCV(aMessageRequest);
             }
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Platform Reject topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -56,7 +61,10 @@ public class R3CProducer
         try
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
-                MessageProcessor.writeMessage(Component.R3C, Component.VC, aMessageRequest);
+         //       MessageProcessor.writeMessage(Component.R3C, Component.VC, aMessageRequest);
+              	aMessageRequest.setFromComponent(Component.R3C.getKey());
+            	aMessageRequest.setNextComponent(Component.VC.getKey());
+            	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
             	
             }else {
                 MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);

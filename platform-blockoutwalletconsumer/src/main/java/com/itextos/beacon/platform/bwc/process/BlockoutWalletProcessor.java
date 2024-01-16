@@ -43,29 +43,35 @@ public class BlockoutWalletProcessor
         if (log.isDebugEnabled())
             log.debug("BWC Message received : " + lMessageRequest);
 
-        try
-        {
-            WalletUtil.prepaidRefund(lMessageRequest);
+        BlockoutWalletProcessor.forBWC(lMessageRequest);
+     }
 
-            if (log.isDebugEnabled())
-                log.debug("Successfully refund the balance...");
-            final boolean lStatus = WalletUtil.resetWalletInfo(lMessageRequest);
+    public static void forBWC(MessageRequest lMessageRequest) {
+    
+    	  try
+          {
+              WalletUtil.prepaidRefund(lMessageRequest);
 
-            if (!lStatus)
-                return;
+              if (log.isDebugEnabled())
+                  log.debug("Successfully refund the balance...");
+              final boolean lStatus = WalletUtil.resetWalletInfo(lMessageRequest);
 
-            WalletUtil.prepaidDeduct(lMessageRequest);
+              if (!lStatus)
+                  return;
 
-            if (log.isDebugEnabled())
-                log.debug("Successfully deduct the balance...");
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception occer while processing Wallet deduct..", e);
-            BWCProducer.sendToErrorLog(Component.BWC, lMessageRequest, e);
-        }
+              WalletUtil.prepaidDeduct(lMessageRequest);
+
+              if (log.isDebugEnabled())
+                  log.debug("Successfully deduct the balance...");
+          }
+          catch (final Exception e)
+          {
+              log.error("Exception occer while processing Wallet deduct..", e);
+              BWCProducer.sendToErrorLog(Component.BWC, lMessageRequest, e);
+          }
+
     }
-
+    
     @Override
     public void doCleanup()
     {

@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.rc.process.RConsumer;
+import com.itextos.beacon.platform.wc.process.WalletProcessor;
 
 public class VCProducer
 {
@@ -93,6 +94,10 @@ public class VCProducer
                 log.debug("Request sending to WC topic .. " + aMessageRequest);
 
             MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
+            
+            aMessageRequest.setFromComponent(aComponent.getKey());
+            aMessageRequest.setNextComponent(Component.WC.getKey());
+            WalletProcessor.forWC(aMessageRequest);
         }
         catch (final ItextosException e)
         {
