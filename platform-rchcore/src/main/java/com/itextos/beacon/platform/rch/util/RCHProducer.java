@@ -19,6 +19,7 @@ import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
+import com.itextos.beacon.platform.sbc.processor.SBConsumer;
 
 public class RCHProducer
 {
@@ -34,9 +35,14 @@ public class RCHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
+       //     MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
+        
+            aMessageRequest.setFromComponent(Component.CH.getKey());
+            aMessageRequest.setNextComponent(Component.SBC.getKey());
+            SBConsumer.forSPC(aMessageRequest);
+  
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Schedule/Blockout topic..", e);
             sendToErrorLog(aMessageRequest, e);

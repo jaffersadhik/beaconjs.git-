@@ -223,7 +223,7 @@ public class MessageIdentifier
         return DECIMAL_FORMATTER_2.format(ym) + DECIMAL_FORMATTER_3.format(dhh) + DATE_FORMATER.format(cal.getTime());
     }
 
-    private String getNextIndex()
+    private synchronized String getNextIndex()
     {
 
         if (mCurrentIndex >= MAX_INDEX)

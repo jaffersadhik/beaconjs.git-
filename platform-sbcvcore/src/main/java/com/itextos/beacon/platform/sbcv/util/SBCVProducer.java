@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
+import com.itextos.beacon.platform.sbc.processor.SBConsumer;
 
 public class SBCVProducer
 {
@@ -86,9 +87,14 @@ public class SBCVProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
+          //  MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
+            
+            aMessageRequest.setFromComponent(Component.SBCV.getKey());
+            aMessageRequest.setNextComponent(Component.SBC.getKey());
+            SBConsumer.forSPC(aMessageRequest);
+ 
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Schedule topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -101,9 +107,14 @@ public class SBCVProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
+          //  MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
+        	
+            aMessageRequest.setFromComponent(Component.SBCV.getKey());
+            aMessageRequest.setNextComponent(Component.SBC.getKey());
+            SBConsumer.forSPC(aMessageRequest);
+  
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception while sending the message to Blockout topic.", e);
             sendToErrorLog(aMessageRequest, e);

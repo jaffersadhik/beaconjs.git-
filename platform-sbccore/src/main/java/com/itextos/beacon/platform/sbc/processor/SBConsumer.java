@@ -44,6 +44,12 @@ public class SBConsumer
         if (log.isDebugEnabled())
             log.debug("SBC Message Received : " + lMessageRequest);
 
+        SBConsumer.forSPC(lMessageRequest);
+   
+    }
+    
+    public static void forSPC( MessageRequest lMessageRequest) {
+    	
         try
         {
             final String lScheduleBlockOutFrom = CommonUtility.nullCheck(lMessageRequest.getFromScheduleBlockout(), true);
