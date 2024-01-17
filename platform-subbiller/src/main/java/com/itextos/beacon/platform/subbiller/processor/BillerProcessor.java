@@ -38,17 +38,21 @@ public class BillerProcessor
         if (log.isDebugEnabled())
             log.debug("Biller Received Object .. " + aBaseMessage);
 
-        try
-        {
-            final SubmissionProcess lSubProcessor = new SubmissionProcess((SubmissionObject) aBaseMessage);
-            lSubProcessor.process();
-        }
-        catch (final ItextosException e)
-        {
-            log.error("Exception occure while process the submission billing : ", e);
-        }
+        BillerProcessor.forSUBPC(aBaseMessage);
     }
 
+    public static void forSUBPC(BaseMessage aBaseMessage) {
+    	
+    	 try
+         {
+             final SubmissionProcess lSubProcessor = new SubmissionProcess((SubmissionObject) aBaseMessage);
+             lSubProcessor.process();
+         }
+         catch (final ItextosException e)
+         {
+             log.error("Exception occure while process the submission billing : ", e);
+         }
+    }
     @Override
     public void doCleanup()
     {}

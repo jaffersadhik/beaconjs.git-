@@ -25,6 +25,13 @@
 			<artifactId>platform-sbccore</artifactId>
 			<version>1.0</version>
 			</dependency>
+			
+						<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-subbiller</artifactId>
+			<version>1.0</version>
+			</dependency>
+
 			<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-daemonprocess</artifactId>

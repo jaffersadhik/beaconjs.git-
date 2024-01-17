@@ -20,6 +20,7 @@ import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableInden
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.sbc.processor.SBConsumer;
+import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
 
 public class CHProducer
 {
@@ -175,9 +176,15 @@ public class CHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
+         //   MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
+            
+            
+            aBaseMessage.setFromComponent(Component.CH.getKey());
+            aBaseMessage.setNextComponent(Component.SUBBC.getKey());
+            BillerProcessor.forSUBPC(aBaseMessage);
+
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Final Process for MT topic ..", e);
             sendToErrorLog(aBaseMessage, e);

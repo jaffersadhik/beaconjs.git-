@@ -20,6 +20,7 @@ import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableInden
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.sbc.processor.SBConsumer;
+import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
 
 public class RCHProducer
 {
@@ -161,7 +162,12 @@ public class RCHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
+        //    MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
+            
+            aSubmissionObject.setFromComponent(Component.RCH.getKey());
+            aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
+            BillerProcessor.forSUBPC(aSubmissionObject);
+ 
         }
         catch (final Exception e1)
         {

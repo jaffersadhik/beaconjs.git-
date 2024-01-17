@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
 
 public class PRProducer
 {
@@ -25,9 +26,13 @@ public class PRProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
+      //      MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
+            
+            aSubmissionObject.setFromComponent(Component.PRC.getKey());
+            aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
+            BillerProcessor.forSUBPC(aSubmissionObject);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while Final Processor MT ..", e);
             sendToErrorLog(aSubmissionObject, e);
