@@ -37,7 +37,9 @@ public class App {
 							if(!isMWALL(module,args)) {
 
 								
-								
+								if(!isAllBiller(module, args)) {
+									
+								}
 
 							}
 
@@ -119,6 +121,8 @@ public class App {
 				
 			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
 			
+			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
+
 		
 	}
 
@@ -276,6 +280,30 @@ public class App {
 		
 		return false;
 	
+	}
+	
+	
+	private static boolean isAllBiller(String module, String[] args) {
+		
+		if(module.equals("biller")) {
+			
+			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+
+
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
+		}
+		
+		return false;
 	}
 
 	private static boolean isBiller(String module, String[] args) {
