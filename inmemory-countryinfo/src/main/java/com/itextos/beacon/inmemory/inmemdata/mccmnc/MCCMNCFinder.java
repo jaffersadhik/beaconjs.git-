@@ -15,7 +15,7 @@ public class MCCMNCFinder
             String aMNumberSeries)
     {
         final MccMncCollection lMccMncCollection = (MccMncCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC);
-        return lMccMncCollection.getMccMncData(aMNumberSeries);
+        return lMccMncCollection==null?null:lMccMncCollection.getMccMncData(aMNumberSeries);
     }
 
   
