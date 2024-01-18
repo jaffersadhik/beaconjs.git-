@@ -66,8 +66,14 @@ public class RejectionProcess
             boolean       canProcessMultiple = false;
             final boolean lprocessDNCarrier  = PRCUtil.processDNDToCarrier(aMessageRequest);
 
+            aMessageRequest.setBaseSmsRate(0);
+            aMessageRequest.setBaseAddFixedRate(0);
+            
             aMessageRequest.setBillingAddFixedRate(0);
             aMessageRequest.setBillingSmsRate(0);
+            
+            aMessageRequest.setRefAddFixedRate(0);
+            aMessageRequest.setRefSmsRate(0);
             if (log.isDebugEnabled())
                 log.debug("Is Process DN Carrier for DND Fail :" + lprocessDNCarrier);
 
