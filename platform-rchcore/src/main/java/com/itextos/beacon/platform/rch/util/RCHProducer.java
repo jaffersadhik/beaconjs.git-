@@ -36,12 +36,13 @@ public class RCHProducer
 
         try
         {
-       //     MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
+            MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
         
+        	/*
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
-  
+  	*/
         }
         catch (final Exception e)
         {
