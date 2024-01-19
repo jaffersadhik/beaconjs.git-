@@ -69,6 +69,7 @@ public abstract class DBPoller
                 final Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.MESSAGING.getKey()));
                 final PreparedStatement pstmt = con.prepareStatement(sql);)
         {
+        	log.debug("sql : "+sql);
             pstmt.setInt(1, aAppInstanceId);
             rs = pstmt.executeQuery();
 
