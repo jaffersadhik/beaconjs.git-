@@ -21,6 +21,8 @@ public class StartApplication
       
         try
         {
+        	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
+
             final ProcessorInfo lProcessor = new ProcessorInfo(Component.IC);
             lProcessor.process();
         }

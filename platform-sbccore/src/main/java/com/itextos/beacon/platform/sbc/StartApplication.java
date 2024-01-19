@@ -23,7 +23,7 @@ public class StartApplication
 
         try
         {
-            startInutialParam();
+        	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
 
             final ProcessorInfo lProcessor = new ProcessorInfo(THIS_COMPONENT);
             lProcessor.process();
@@ -35,7 +35,7 @@ public class StartApplication
         }
     }
 
-    private static void startInutialParam()
+    public static void startInutialParam()
     {
         if (log.isDebugEnabled())
             log.debug("Starting the application InmemReapers ...");
