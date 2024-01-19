@@ -29,7 +29,7 @@ public abstract class DBPoller
     public static final String  TABLE_NAME_SCHEDULE = "schedule_data";
     public static final String  TABLE_NAME_BLOCKOUT = "blockout_data";
 
-    private static final String MOD_VALUE           = System.getProperty("modvalue"); // valid values are 0,1,2,3
+    private static final String MOD_VALUE           = System.getProperty("modvalue")==null?System.getenv("modvalue"):System.getProperty("modvalue"); // valid values are 0,1,2,3
 
     private static final String SQL_SELECT          = "select * from {0} where  date_time_to_process <= now() and instance_id = ? and mod(sno,4) in (" + MOD_VALUE + ") limit 500";
     private static final String SQL_DELETE          = "delete from {0} where  sno=?";
