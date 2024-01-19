@@ -449,7 +449,7 @@ public class App {
 			return true;
 		}else if(module.equals("sbp")){
 			
-			com.itextos.beacon.platform.dch.StartApplication.main(args);
+			com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
 
