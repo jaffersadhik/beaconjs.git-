@@ -14,7 +14,7 @@ public class ConsumerId {
 	
 	static {
 		
-		for(int i=1;i<26;i++) {
+		for(int i=1;i<6;i++) {
 			
 			COUNSUMERIDLIST.add(i+"");
 		}
@@ -31,7 +31,7 @@ public class ConsumerId {
 			 obj=new ConsumerId();
 		}
 		
-		return null;
+		return obj;
 	}
 	
 	public synchronized String getConsumerId() {
