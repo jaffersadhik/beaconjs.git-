@@ -295,7 +295,7 @@ public class App {
 			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.t2e.StartApplication.main(args);
 			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
-
+			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
