@@ -244,7 +244,7 @@ public class KafkaInformation
             Producer aProducer)
     {
         String componentClusterTypeKey = CommonUtility.combine(aComponent.getKey(), KafkaDataLoaderUtility.getNameOrDefault(aClusterType));
-        log.fatal("Trying to attach producer " + aProducer + " to the consumers of '" + componentClusterTypeKey + "', '" + mKafkaConsumerCollectionAtClusterComponentLevel + "'");
+        log.fatal("Trying to attach producer " + aProducer + " to the consumers of '" + componentClusterTypeKey );
 
         List<Consumer> consumersList = mKafkaConsumerCollectionAtClusterComponentLevel.get(componentClusterTypeKey);
 

@@ -47,7 +47,7 @@ public abstract class AbstractInMemCollection
                 return;
 
             if (log.isDebugEnabled())
-                log.debug("mCanAccept : " + mCanAccept + " IMessage : " + aIMessage);
+                log.debug("mCanAccept : " + mCanAccept );
 
             if (!mCanAccept)
                 log.fatal("Adding message after stop invoked. " + aIMessage);

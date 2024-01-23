@@ -868,7 +868,6 @@ public class MessageRequest
         subObj.putValue(MiddlewareConstant.MW_MCC, getValue(MiddlewareConstant.MW_MCC));
         subObj.putValue(MiddlewareConstant.MW_MNC, getValue(MiddlewareConstant.MW_MNC));
 
-        log.debug("subObj : "+subObj);
         return subObj;
     }
 

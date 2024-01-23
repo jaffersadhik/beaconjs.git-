@@ -147,9 +147,26 @@ public class MessageProcessor
             {
                 final boolean canContinue = checkForRetryAndRemoveMessage(aFromComponent, aNextComponent, aIMessage);
 
+                if(aIMessage instanceof MessageRequest) {
                 if (log.isDebugEnabled())
-                    log.debug("Can continue " + canContinue + " for the message " + aIMessage);
+                    log.debug("Can continue " + canContinue + " for the message "+((MessageRequest)aIMessage).getBaseMessageId() );
 
+                }else if(aIMessage instanceof SubmissionObject){
+           
+                    if (log.isDebugEnabled())
+                        log.debug("Can continue " + canContinue + " for the message "+((SubmissionObject)aIMessage).getBaseMessageId() );
+
+                }else if(aIMessage instanceof DeliveryObject){
+           
+                    if (log.isDebugEnabled())
+                        log.debug("Can continue " + canContinue + " for the message "+((DeliveryObject)aIMessage).getBaseMessageId() );
+
+                }else {
+                
+                    if (log.isDebugEnabled())
+                        log.debug("Can continue " + canContinue + " for the message " );
+
+                }
                 if (!canContinue)
                     return;
             }

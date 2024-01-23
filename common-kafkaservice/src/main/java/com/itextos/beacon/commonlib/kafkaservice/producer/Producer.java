@@ -81,7 +81,7 @@ public class Producer
                 if (log.isDebugEnabled())
                 {
                     log.debug(mLogTopicName + "Kafka Non-Trans Producer initialized successfully ");
-                    log.debug(mLogTopicName + "Kafka Non-Trans Producer Configuration : " + mProducer.metrics());
+                    log.debug(mLogTopicName + "Kafka Non-Trans Producer Configuration : " );
                 }
                 mInitialized = true;
             }
