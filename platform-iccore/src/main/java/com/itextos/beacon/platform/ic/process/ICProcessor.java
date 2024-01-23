@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaCom
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.Services;
 import com.itextos.beacon.commonlib.constants.SubServices;
@@ -16,12 +17,14 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.ic.util.HeaderValidaton;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
 import com.itextos.beacon.platform.rc.process.RConsumer;
 import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
 import com.itextos.beacon.platform.vc.process.MessageProcessor;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class ICProcessor
         extends
@@ -48,8 +51,22 @@ public class ICProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-      	   ICProcessor.forIC(lMessageRequest);
+        	   
+        	
+        	lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
+          
+           long starttime=System.currentTimeMillis();
+           		ICProcessor.forIC(lMessageRequest);
+      	   
+      	   lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Time Taken For process :"+(System.currentTimeMillis()-starttime)+" Milli Second"); 
+      	
+     	
+      	   
+      	   lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
+
+           SMSLog.log(lMessageRequest.getLogBuffer().toString());
     }
+
 
     public static void forIC(MessageRequest lMessageRequest) {
     	
@@ -59,18 +76,17 @@ public class ICProcessor
             setClietDltParams(lMessageRequest);
 
             final boolean lDoInterfaceValidation = doInterfaceValidation(lMessageRequest);
-            if(log.isDebugEnabled()) {
+           
             
-            	log.debug(lMessageRequest.getBaseMessageId()+" lDoInterfaceValidation : "+lDoInterfaceValidation);
-            }
+            lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" lDoInterfaceValidation : "+lDoInterfaceValidation);
+           
             if (!lDoInterfaceValidation)
                 return;
 
             final boolean lDoPlatformValidation = doPlatformValidation(lMessageRequest);
             
-            if(log.isDebugEnabled()) {
-        	log.debug(lMessageRequest.getBaseMessageId()+" lDoPlatformValidation : "+lDoPlatformValidation);
-            }
+            lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" lDoPlatformValidation : "+lDoPlatformValidation);
+            
             if (!lDoPlatformValidation)
                 return;
 
@@ -80,23 +96,26 @@ public class ICProcessor
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while processing the request .." + lMessageRequest, e);
+        	
+        	lMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Exception occer while processing the request \t "+ErrorMessage.getStackTraceAsString(e));
+            log.error("Exception occer while processing the request ." + lMessageRequest, e);
             ICProducer.sendToErrorLog(lMessageRequest, e);
         }
 
     }
-    private static void setClietDltParams(
+  
+
+	private static void setClietDltParams(
             MessageRequest aMessageRequest)
     {
         final String lDltEntityId   = CommonUtility.nullCheck(aMessageRequest.getDltEntityId(), true);
         final String lDltTemplateId = CommonUtility.nullCheck(aMessageRequest.getDltTemplateId(), true);
 
-        if(log.isDebugEnabled()) {
         	
-        	log.debug(aMessageRequest.getBaseMessageId()+" lDltEntityId By Client : "+lDltEntityId);
-        	log.debug(aMessageRequest.getBaseMessageId()+" lDltTemplateId By Client : "+lDltTemplateId);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" lDltEntityId By Client : "+lDltEntityId);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" lDltTemplateId By Client : "+lDltTemplateId);
 
-        }
+        
         aMessageRequest.setClientDltEntityId(lDltEntityId);
         aMessageRequest.setClientDltTemplateId(lDltTemplateId);
     }
@@ -106,9 +125,8 @@ public class ICProcessor
     {
         final String lHeader = CommonUtility.nullCheck(MessageUtil.getHeaderId(aMessageRequest), true);
 
-        if(log.isDebugEnabled()) {
-        	log.debug(aMessageRequest.getBaseMessageId()+" Header Sent By Client : "+lHeader);
-        }
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Header Sent By Client : "+lHeader);
+       
         if (!lHeader.isEmpty())
             aMessageRequest.setClientHeader(lHeader);
     }
@@ -119,13 +137,11 @@ public class ICProcessor
 
         if (!aMessageRequest.isIsIntl())
         {
-            if (log.isDebugEnabled())
-                log.debug("Validating Series lookup for Domestic Number ...");
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Validating Series lookup for Domestic Number ..");
 
             if (!ICUtility.isValidDomesticNumber(aMessageRequest))
             {
-                if (log.isDebugEnabled())
-                    log.debug("Rejecting due to Invalid Destination..");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :Rejecting due to Invalid Destination.");
                 aMessageRequest.setPlatfromRejected(true);
                 aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.MOBILE_NUMBER_IS_NOT_VALID.getKey());
                 processRejections(aMessageRequest);
@@ -143,8 +159,7 @@ public class ICProcessor
 
         if (ICUtility.isVLFeatureEnabled(aMessageRequest))
         {
-            if (log.isDebugEnabled())
-                log.debug("Request sending to R3C...");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to R3C..");
 
             ICProducer.sendToUrlShortner(aMessageRequest);
         }
@@ -153,15 +168,13 @@ public class ICProcessor
                 handleIntlService(aMessageRequest);
             else
             {
-                if (log.isDebugEnabled())
-                    log.debug("Handling non domestic cases. Base Message Id :" + aMessageRequest.getBaseMessageId());
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("Handling non domestic cases. Base Message Id :" + aMessageRequest.getBaseMessageId());
 
                 /*
                  * if (aMessageRequest.getValue(MiddlewareConstant.MW_UDHI) == null)
                  * aMessageRequest.putValue(MiddlewareConstant.MW_UDHI, "0");
                  */
-                if (log.isDebugEnabled())
-                    log.debug("Request sent to Schedule/Blockout Verify Component ..");
+                aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId() +" : Request sent to Schedule/Blockout Verify Component .");
 
                 ICProducer.sendToSBCVProcessor(aMessageRequest);
             }
@@ -176,13 +189,11 @@ public class ICProcessor
         boolean isSuccess       = ICUtility.doCommonValidation(aMessageRequest);
         boolean lPlatformReject = aMessageRequest.isPlatfromRejected();
 
-        if(log.isDebugEnabled()) {
         	
-        	log.debug(aMessageRequest.getBaseMessageId()+" ICUtility.doCommonValidation(aMessageRequest) :"+isSuccess);
-        	log.debug(aMessageRequest.getBaseMessageId()+" lPlatformReject :"+lPlatformReject);
-        	log.debug(aMessageRequest.getBaseMessageId()+" aMessageRequest.isIsIntl() :"+aMessageRequest.isIsIntl());
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ICUtility.doCommonValidation(aMessageRequest) :"+isSuccess);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" lPlatformReject :"+lPlatformReject);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" aMessageRequest.isIsIntl() :"+aMessageRequest.isIsIntl());
 
-        }
         if (!isSuccess && lPlatformReject)
         {
             processRejections(aMessageRequest);
@@ -194,12 +205,10 @@ public class ICProcessor
             isSuccess       = new HeaderValidaton(aMessageRequest).validate();
             lPlatformReject = aMessageRequest.isPlatfromRejected();
 
-            if(log.isDebugEnabled()) {
             	
-            	log.debug(aMessageRequest.getBaseMessageId()+" HeaderValidaton(aMessageRequest).validate() :"+isSuccess);
-            	log.debug(aMessageRequest.getBaseMessageId()+" lPlatformReject :"+lPlatformReject);
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" HeaderValidaton(aMessageRequest).validate() :"+isSuccess);
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" lPlatformReject :"+lPlatformReject);
 
-            }
       
             if (!isSuccess && lPlatformReject)
             {
@@ -208,11 +217,9 @@ public class ICProcessor
             }
         }else {
         	
-        	   if(log.isDebugEnabled()) {
                	
-               	log.debug(aMessageRequest.getBaseMessageId()+" SKIP HeaderValidaton(aMessageRequest).validate() :");
+        		   aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" SKIP HeaderValidaton(aMessageRequest).validate() :");
 
-               }
         }
         return true;
     }
@@ -231,16 +238,14 @@ public class ICProcessor
     private static boolean doInterfaceValidation(
             MessageRequest aMessageRequest)
     {
-        if (log.isDebugEnabled())
-            log.debug(aMessageRequest.getBaseMessageId()+" Calling Interface Validation ..............");
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Calling Interface Validation .......");
 
         ICUtility.doInterfaceValidation(aMessageRequest);
 
         final boolean lInterfaceReject = aMessageRequest.isInterfaceRejected();
 
         
-        if (log.isDebugEnabled())
-            log.debug(aMessageRequest.getBaseMessageId()+" After Basic Validation Interface Reject " + lInterfaceReject);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" After Basic Validation Interface Reject " + lInterfaceReject);
 
         if (lInterfaceReject)
         {
@@ -255,14 +260,13 @@ public class ICProcessor
     {
         final String lStatusId = CommonUtility.nullCheck(aMessageRequest.getSubOriginalStatusCode(), true);
 
-        if (log.isDebugEnabled())
-            log.debug(aMessageRequest.getBaseMessageId()+" Rejected Message. Sending to Platfrom Rejection  StatusId:" + lStatusId);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Rejected Message. Sending to Platfrom Rejection  StatusId:" + lStatusId);
 
         if (lStatusId.isEmpty())
             aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.BAD_REQUEST.getStatusCode());
 
-        if (log.isDebugEnabled())
-            log.debug(aMessageRequest.getBaseMessageId()+" Sending to Platform Rejection Queue : " );
+       
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Sending to Platform Rejection Queue : " );
         ICProducer.sendToPlatformRejection(aMessageRequest);
     }
 
@@ -275,8 +279,7 @@ public class ICProcessor
             aMessageRequest.setPlatfromRejected(true);
             aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.INTL_SERVICE_DISABLED.getStatusCode());
 
-            if (log.isDebugEnabled())
-                log.debug("Intl service disabled: rejecting req sending to biller: " + aMessageRequest.getBaseMessageId());
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("Intl service disabled: rejecting req sending to biller: " + aMessageRequest.getBaseMessageId());
 
             ICProducer.sendToPlatformRejection(aMessageRequest);
         }

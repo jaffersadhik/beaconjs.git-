@@ -26,7 +26,7 @@ public class WCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to RC topic .. " + aMessageRequest);
+                log.debug("Request sending to RC topic .. " + aMessageRequest.getBaseMessageId());
 
 //            MessageProcessor.writeMessage(Component.WC, Component.RC, aMessageRequest);
             aMessageRequest.setFromComponent(Component.WC.getKey());
@@ -48,7 +48,7 @@ public class WCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to PRC topic .. " + aMessageRequest);
+                log.debug("Request sending to PRC topic .. " + aMessageRequest.getBaseMessageId());
             aMessageRequest.setPlatfromRejected(true);
          //   MessageProcessor.writeMessage(Component.WC, Component.PRC, aMessageRequest);
             aMessageRequest.setFromComponent(Component.WC.getKey());
@@ -72,7 +72,7 @@ public class WCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to ERROR topic .. " + aBaseMessage);
+                log.debug("Request sending to ERROR topic .. " + aBaseMessage.getBaseMessageId());
 
             PlatformUtil.sendToErrorLog(aComponent, aBaseMessage, aErrorMsg);
         }

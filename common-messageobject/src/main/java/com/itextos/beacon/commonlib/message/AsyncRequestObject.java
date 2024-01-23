@@ -28,6 +28,9 @@ public class AsyncRequestObject
     private String              mNextComponent;
     private String              mFromComponent;
     private String              mProcessorComponent;
+    
+    private StringBuffer        mLogBuffer;
+
     private final String        mMessageSource;
 
     public AsyncRequestObject(
@@ -188,5 +191,15 @@ public class AsyncRequestObject
             return "INVALID JSON";
         }
     }
+
+	@Override
+	public StringBuffer getLogBuffer() {
+
+		if(mLogBuffer==null) {
+			
+			mLogBuffer=new StringBuffer();
+		}
+		return mLogBuffer;
+	}
 
 }

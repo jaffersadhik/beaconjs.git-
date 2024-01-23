@@ -299,6 +299,8 @@ public enum MiddlewareConstant
     MW_ADD_ERROR_INFO("add_err_info", "add_error_info", "add_error_info"),
     MW_SUB_STATUS("sub_status", "sub_status", "Submission Status"),
 
+    MW_LOG_BUFFER("log_buff", "log_buffer", "Log Buffer for this message to be processed."),
+
     MW_R3C_URL("url", "url", "URL"),
     MW_R3C_SHORTNER_URL("s_url", "shortner_url", " Shortner Url"),
     MW_R3C_SMARTLINK_ID("smt_id", "smartlink_id", "Smartlink Id"),

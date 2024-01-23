@@ -375,8 +375,29 @@ public abstract class BaseMessage
     }
     
     
-
     @Override
+    public StringBuffer getLogBuffer()
+    {
+        return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    }
+
+    private StringBuffer getLogBufferValue(MiddlewareConstant aLogBufferKey) {
+    	  if (aLogBufferKey == null)
+              return null;
+
+          Object value = messageAttributes.get(aLogBufferKey.getKey());
+          
+          if(value==null) {
+        	  
+        	  value=new StringBuffer();
+        	  messageAttributes.put(aLogBufferKey.getKey(), value);
+          }
+          return (StringBuffer)value;
+
+	}
+    
+  
+	@Override
     public void setNextComponent(
             String aNextComponentKey)
     {

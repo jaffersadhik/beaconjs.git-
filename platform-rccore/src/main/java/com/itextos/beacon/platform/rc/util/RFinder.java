@@ -95,12 +95,13 @@ public class RFinder
     private boolean setRouteTryWithMobileRoute()
     {
 
+        final String lMobileNumber = mMessageRequest.getMobileNumber();
+
         try
         {
-            final String lMobileNumber = mMessageRequest.getMobileNumber();
 
             if (log.isDebugEnabled())
-                log.debug("setRouteTryWithMobileRoute()");
+                log.debug(mMessageRequest.getBaseMessageId()+" : setRouteTryWithMobileRoute() : "+lMobileNumber);
             String            lStrMsgType = "";
 
             final MessageType lMsgType    = mMessageRequest.getMessageType();
@@ -115,9 +116,7 @@ public class RFinder
 
                 String lMobileRoute = RouteUtil.getFirstAttemptMobileRoute(lMobileRange);
 
-                if (log.isDebugEnabled())
-                    log.debug("mobilnorange : " + lMobileRange + " mobileRoutes : " + lMobileRoute);
-
+         
                 if (lMobileRoute == null)
                     continue;
 
@@ -140,7 +139,7 @@ public class RFinder
                 mMessageRequest.setRouteLogicId(CommonUtility.getInteger(RouteLogic.LOGICID.getKey()));
 
                 if (log.isDebugEnabled())
-                    log.debug("Mobile route set " + lMobileRoute + " MessageRequest " + mMessageRequest);
+                    log.debug("Mobile route set " + lMobileRoute + " MessageRequest " + mMessageRequest.getBaseMessageId());
 
                 return true;
             }
@@ -150,6 +149,10 @@ public class RFinder
             log.error("setRouteTryWithMobileRoute() exception ", e);
             e.printStackTrace();
         }
+        if (log.isDebugEnabled())
+            log.debug("Mobile route Not Avilable for MessageRequest " + mMessageRequest.getBaseMessageId()+" : lMobileNumber : "+lMobileNumber);
+
+
         return false;
     }
 
@@ -250,14 +253,17 @@ public class RFinder
             int aLogicid,
             String aKey)
     {
+    	
+    	/*
         if (log.isDebugEnabled())
             log.debug(" mapkey " + aLogicid + " : " + aKey);
-
+    	 */
         String lRouteId = CommonUtility.nullCheck(RouteUtil.getSecondAttemptCustomRoute(aKey), true);
 
         if (lRouteId.isEmpty())
             return false;
 
+        
         if (StringUtils.isNumeric(lRouteId))
         {
             final MessageType lMsgType = mMessageRequest.getMessageType();
@@ -273,6 +279,12 @@ public class RFinder
                 final int lIndex = RouteUtil.getRRPointer(aKey, routelist.size());
                 lRouteId = routelist.get(lIndex - 1);
             }
+        }else {
+        
+
+            if (log.isDebugEnabled())
+                log.debug(" checkForCustomRoutes Matched Logicid " + aLogicid + " : " + aKey+ " : lRouteId : "+lRouteId);
+        
         }
 
         mMessageRequest.setRouteId(lRouteId);

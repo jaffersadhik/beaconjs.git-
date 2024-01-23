@@ -72,7 +72,7 @@ public class VCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to PRC topic .. " + aMessageRequest);
+                log.debug("Request sending to PRC topic .. " + aMessageRequest.getBaseMessageId());
 
             aMessageRequest.setPlatfromRejected(true);
             aMessageRequest.setFromComponent(aComponent.getKey());
@@ -96,7 +96,7 @@ public class VCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to WC topic .. " + aMessageRequest);
+                log.debug("Request sending to WC topic .. " + aMessageRequest.getBaseMessageId());
 
          //   MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
             
@@ -142,7 +142,7 @@ public class VCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to ERROR topic .. " + aBaseMessage);
+                log.debug("Request sending to ERROR topic .. " + aBaseMessage.getBaseMessageId());
 
             PlatformUtil.sendToErrorLog(aComponent, aBaseMessage, aErrorMsg);
         }
