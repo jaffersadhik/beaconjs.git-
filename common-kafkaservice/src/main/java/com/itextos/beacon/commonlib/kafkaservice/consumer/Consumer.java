@@ -90,7 +90,7 @@ public class Consumer
             {
             	
                 if (log.isDebugEnabled()) {
-                	if((System.currentTimeMillis()-starttime)>240000) {
+                	if((System.currentTimeMillis()-starttime)>4000) {
                 		starttime=System.currentTimeMillis();
                     log.debug("Started consuming messages from '" + mTopicName + "'");
                 	}

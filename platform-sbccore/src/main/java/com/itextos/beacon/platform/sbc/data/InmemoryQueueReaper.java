@@ -24,6 +24,8 @@ public abstract class InmemoryQueueReaper
     private final TimedProcessor mTimedProcessor;
     private boolean              canContinue               = true;
 
+    private long starttime=System.currentTimeMillis();
+    
     protected InmemoryQueueReaper(
             InmemoryQueue aInMemoryQueue,
             String aTableName)
@@ -43,8 +45,13 @@ public abstract class InmemoryQueueReaper
     @Override
     public boolean processNow()
     {
-        if (log.isDebugEnabled())
-            log.debug("Queue size ......: " + mInmemoryQueue.isEmpty());
+        if (log.isDebugEnabled()) {
+         
+        	if((System.currentTimeMillis()-starttime)>4000) {
+        		starttime=System.currentTimeMillis();
+        		log.debug("Queue size ......: " + mInmemoryQueue.isEmpty());
+        	}
+        }
 
         if (!mInmemoryQueue.isEmpty())
         {
