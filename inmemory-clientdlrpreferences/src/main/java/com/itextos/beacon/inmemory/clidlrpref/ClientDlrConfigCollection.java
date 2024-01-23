@@ -78,12 +78,14 @@ public class ClientDlrConfigCollection
     {
         final String lKey = generateClientMediaKey(aClientId, aApp, aInterfaceType);
 
+        /*
         if (log.isDebugEnabled())
         {
             log.debug("getDlrHandoverConfig() - Key : " + lKey);
             log.debug("getDlrHandoverConfig() - userMediaMap  : " + userMediaMap);
         }
-
+		*/
+        
         final ClientDlrConfig lClientDlrConf = userMediaMap.get(lKey);
 
         if (log.isDebugEnabled())

@@ -33,9 +33,7 @@ public class LoadFirstAttemptMobileRoute
     public String getFirstMobileRoute(
             String aMobileNumber)
     {
-        if (log.isDebugEnabled())
-            log.debug("Mobile Route Map Info : " + mMobileRoutes);
-
+     
         return mMobileRoutes.get(aMobileNumber);
     }
 

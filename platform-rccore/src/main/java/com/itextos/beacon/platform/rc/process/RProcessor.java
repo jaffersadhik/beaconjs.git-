@@ -209,8 +209,11 @@ public class RProcessor
         aMessageRequest.setSubOriginalStatusCode(aPlatformStatusCode.getStatusCode());
         RCProducer.sendToPlatformRejection(aMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Sent To Biller " + aMessageRequest);
+        if (log.isDebugEnabled()) {
+          //  log.debug("Sent To Biller " + aMessageRequest);
+            log.debug("Sent To Biller " );
+
+        }
     }
 
     private static void sendToQueue(
@@ -241,8 +244,11 @@ public class RProcessor
             aMessageRequest.setCarrierDateTimeFormat(lRouteConfigInfo.getDtimeFormat());
 
         RCProducer.sendToCarrierHandover(aMessageRequest);
-        if (log.isDebugEnabled())
-            log.debug("Sent to Carrier Handover " + lRouteId + " Success. " + aMessageRequest);
+        if (log.isDebugEnabled()) {
+           // log.debug("Sent to Carrier Handover " + lRouteId + " Success. " + aMessageRequest);
+        	 log.debug("Sent to Carrier Handover " + lRouteId + " Success. " );
+             
+        }
     }
 
 }

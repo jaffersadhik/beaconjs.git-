@@ -129,7 +129,7 @@ public class PRCUtil
                 }
 
                 if (log.isDebugEnabled())
-                    log.debug("Request sending Biller Topic : " + aSubmissionObject);
+                    log.debug("Request sending Biller Topic : " );
 
                 PRProducer.sendToBillerTopic(aSubmissionObject);
 

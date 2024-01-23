@@ -30,7 +30,7 @@ public class MsgVerifyProcessor
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Message received : " + mMessageRequest);
+                log.debug("Message received : " + mMessageRequest.getBaseMessageId());
 
             if (!doDuplicateCheck())
                 return;

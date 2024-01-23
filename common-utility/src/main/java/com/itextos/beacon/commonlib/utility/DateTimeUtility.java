@@ -117,8 +117,10 @@ public final class DateTimeUtility
         }
         catch (final Exception e)
         {
+        	/*
             if (log.isWarnEnabled())
                 log.warn("Exception while converting date '" + aDate + "' to String in the format '" + aOutputDateFormat + "'", e);
+        	*/
         }
         return returnValue;
     }

@@ -262,7 +262,7 @@ public class ICProcessor
             aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.BAD_REQUEST.getStatusCode());
 
         if (log.isDebugEnabled())
-            log.debug(aMessageRequest.getBaseMessageId()+"Sending to Platform Rejection Queue : " );
+            log.debug(aMessageRequest.getBaseMessageId()+" Sending to Platform Rejection Queue : " );
         ICProducer.sendToPlatformRejection(aMessageRequest);
     }
 

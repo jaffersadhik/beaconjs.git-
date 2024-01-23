@@ -119,7 +119,7 @@ public class VCProducer
         try
         {
             if (log.isDebugEnabled())
-                log.debug("Request sending to RC topic .. " + aMessageRequest);
+                log.debug("Request sending to RC topic .. " + aMessageRequest.getBaseMessageId());
 
             //MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
             aMessageRequest.setFromComponent(aComponent.getKey());

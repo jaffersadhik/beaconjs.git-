@@ -45,7 +45,7 @@ public class SBCVProcess
 
 
         if (log.isDebugEnabled())
-            log.debug("SBCV Receive the request : " + lMessageRequest);
+            log.debug("SBCV Receive the request : " + lMessageRequest.getBaseMessageId());
 
         try
         {
