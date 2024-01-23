@@ -1,5 +1,5 @@
 version: "3.1"
 services:
-  beacon-generichttpapi:
-    image: dk-reg.mas:5000/beaconweb:26dec2023
+  beaconwebear:
+    image: dk-reg.mas:5000/beaconwebear:19jan2024
     build: .
