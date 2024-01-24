@@ -64,6 +64,7 @@ public class ICProcessor
       	   
       	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
 
+      	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
            SMSLog.log(lMessageRequest.getLogBuffer().toString());
     }
 

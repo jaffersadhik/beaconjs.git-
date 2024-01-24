@@ -397,6 +397,13 @@ public abstract class BaseMessage
 	}
     
   
+    public void setLogBufferValue(StringBuffer obj) {
+
+      	  
+      	  messageAttributes.put(MiddlewareConstant.MW_LOG_BUFFER.getKey(), obj);
+       
+
+	}
 	@Override
     public void setNextComponent(
             String aNextComponentKey)

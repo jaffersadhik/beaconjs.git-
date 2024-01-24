@@ -677,6 +677,7 @@ public class MessageRequest
         final SubmissionObject subObj = new SubmissionObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // Set Parent Object
+        subObj.setLogBufferValue(getLogBuffer());
         subObj.setActualRouteId(getActualRouteId());
         subObj.setAddSubClientHeader(isAddSubClientHeader());
         subObj.setAlpha(getAlpha());

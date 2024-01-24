@@ -174,6 +174,7 @@ public class SubmissionObject
         final DeliveryObject lDeliveryObject = new DeliveryObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // TODO Need to add the remaining data
+        lDeliveryObject.setLogBufferValue(getLogBuffer());
         lDeliveryObject.setClientId(getClientId());
         lDeliveryObject.setBaseMessageId(getBaseMessageId());
         lDeliveryObject.setMessage(getMessage());
