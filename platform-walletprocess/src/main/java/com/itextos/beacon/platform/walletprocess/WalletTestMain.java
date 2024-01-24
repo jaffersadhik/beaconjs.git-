@@ -13,7 +13,7 @@ public class WalletTestMain
     public static void main(
             String[] args)
     {
-        walletDeduct();
+    //    walletDeduct();
         refundWallet();
         // updateWallet();
         // updateWalletList();
@@ -60,7 +60,7 @@ public class WalletTestMain
             try
             {
                 final WalletInput         lWalletInput        = WalletInput.getDeductInput("6000000200000000", "fileid", "baseMessageid", "messageid", 3, 0.75d, 2.25d, "Msg Processing", false);
-                final WalletResult        lDeductWalletForSMS = WalletDeductRefundProcessor.deductWalletForSMS(lWalletInput);
+                final WalletResult        lDeductWalletForSMS = null;;//WalletDeductRefundProcessor.deductWalletForSMS(lWalletInput);
                 final Map<String, String> mapMessage          = new HashMap<>();// Sample message
 
                 if (lDeductWalletForSMS.isSuccess())

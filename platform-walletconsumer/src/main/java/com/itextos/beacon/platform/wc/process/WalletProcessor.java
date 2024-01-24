@@ -1,11 +1,13 @@
 package com.itextos.beacon.platform.wc.process;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
@@ -13,6 +15,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.walletbase.data.WalletDeductInput;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletResult;
@@ -45,8 +48,8 @@ public class WalletProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-        if (log.isDebugEnabled())
-            log.debug("WC Message received : " + lMessageRequest);
+    
+    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  ::: WC Message received : ");
 
         WalletProcessor.forWC(lMessageRequest);
     }
@@ -68,11 +71,12 @@ public class WalletProcessor
             final double  lBillingAddFixedRate = lMessageRequest.getBillingAddFixedRate();
             final boolean isIntl               = lMessageRequest.isIsIntl();
 
-            if (lTotalMsgParts == 0)
+            if (lTotalMsgParts == 0) {
                 lTotalMsgParts = 1;
+            }
 
-            if (log.isDebugEnabled())
-                log.debug("Client Id: '" + lClientId + "', Total Parts:'" + lTotalMsgParts + "', BillingSmsRate:'" + lBillingSmsRate + "', BillingAddFixedRate:'" + lBillingAddFixedRate + "'");
+        
+        	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  :::: Client Id: '" + lClientId + "', Total Parts:'" + lTotalMsgParts + "', BillingSmsRate:'" + lBillingSmsRate + "', BillingAddFixedRate:'" + lBillingAddFixedRate + "'");
 
             boolean hasWallectDeductStatus = false;
             boolean hasWallectBallance     = false;
@@ -81,14 +85,14 @@ public class WalletProcessor
                 try
                 {
                     final WalletDeductInput lWalletInput        = WalletInput.getDeductInput(lClientId, lFileId, lBaseMsgId, lMsgId, lTotalMsgParts, lBillingSmsRate, lBillingAddFixedRate, "", isIntl);
-                    final WalletResult      lDeductWalletForSMS = WalletDeductRefundProcessor.deductWalletForSMS(lWalletInput);
+                    final WalletResult      lDeductWalletForSMS = WalletDeductRefundProcessor.deductWalletForSMS(lMessageRequest,lWalletInput);
 
                     if (lDeductWalletForSMS.isSuccess())
                     {
                         hasWallectDeductStatus = true;
 
-                        if (log.isDebugEnabled())
-                            log.debug("Wallet Deduct status : " + hasWallectDeductStatus);
+                    
+                    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  ::: Wallet Deduct status : " + hasWallectDeductStatus);
 
                         lMessageRequest.setIsWalletDeduct(true);
                     }
@@ -99,6 +103,9 @@ public class WalletProcessor
                 }
                 catch (final ItextosException ite)
                 {
+                	
+                	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  ::: Error : " +ErrorMessage.getStackTraceAsString(ite));
+
                     log.error(ite.getMessage());
                     hasWallectDeductStatus = false;
                     lStatus                = true;
@@ -108,7 +115,9 @@ public class WalletProcessor
 
                     try
                     {
-                        log.fatal(" Sleeping 2 sec since redis is not reachable.. ");
+                    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" ::: Sleeping 2 sec since redis is not reachable.. ");
+
+                        log.fatal(" ::: Sleeping 2 sec since redis is not reachable.. ");
                         Thread.sleep(2000);
                     }
                     catch (final InterruptedException e2)
@@ -131,7 +140,10 @@ public class WalletProcessor
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while processing Wallet deduct..", e);
+        	
+        	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  ::: Exception occer while processing Wallet deduct.."+ErrorMessage.getStackTraceAsString(e));
+
+            log.error("  ::: Exception occer while processing Wallet deduct..", e);
             WCProducer.sendToErrorLog(Component.WC, lMessageRequest, e);
         }
 
