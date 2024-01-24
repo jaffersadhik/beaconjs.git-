@@ -1,18 +1,15 @@
 package com.itextos.beacon.platform.ch.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.blockoutprocess.BlockoutChecker;
 import com.itextos.beacon.platform.blockoutprocess.BlockoutType;
 
 public class BlockoutCheck
 {
 
-    private static final Log     log = LogFactory.getLog(BlockoutCheck.class);
     private final MessageRequest mMessageRequest;
 
     public BlockoutCheck(
@@ -27,8 +24,8 @@ public class BlockoutCheck
 
         if (isBlockoutMessage())
         {
-            if (log.isDebugEnabled())
-                log.debug("sendBlockoutQueueMessage() start Message Id : " + mMessageRequest.getBaseMessageId());
+       
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: sendBlockoutQueueMessage() start Message Id : ");
 
             mMessageRequest.setFromScheduleBlockout("RC_SCHDBLOCK");
             mMessageRequest.setScheduleBlockoutMessage(Constants.BLOCKOUT_MSG);
@@ -75,16 +72,16 @@ public class BlockoutCheck
 
         if (lBlockOutPurge)
         {
-            if (log.isDebugEnabled())
-                log.debug("isBlockoutMessage() Rejected Promo msg purge due to trai : " + mMessageRequest.getBaseMessageId());
+      
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() Rejected Promo msg purge due to trai : ");
 
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.TRAI_BLOCKOUT_FAILED.getStatusCode());
             CHProducer.sendToNextLevel(mMessageRequest);
             return true;
         }
 
-        if (log.isDebugEnabled())
-            log.debug("isBlockoutMessage() sending to Trai Blockout Queue : " + mMessageRequest.getBaseMessageId());
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() sending to Trai Blockout Queue : ");
+
         CHProducer.sendToBlockout(mMessageRequest);
         return true;
     }
@@ -100,8 +97,8 @@ public class BlockoutCheck
 
         if ((lDomesticSmsBlockout == 2) || (lIntlSmsBlockout == 2))
         {
-            if (log.isDebugEnabled())
-                log.debug("Rejected Due to sms_blockout value is 2 " + mMessageRequest.getBaseMessageId());
+      
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Rejected Due to sms_blockout value is 2 ");
 
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.SMS_BLOCKOUT_FAILED.getStatusCode());
             mMessageRequest.setPlatfromRejected(true);
@@ -110,8 +107,8 @@ public class BlockoutCheck
             return true;
         }
 
-        if (log.isDebugEnabled())
-            log.debug("Sending to Custom Blockout Queue : " + mMessageRequest.getBaseMessageId());
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Sending to Custom Blockout Queue : ");
+
         CHProducer.sendToBlockout(mMessageRequest);
         return true;
     }
@@ -126,8 +123,8 @@ public class BlockoutCheck
         else
             if (lSpecificDrop)
             {
-                if (log.isDebugEnabled())
-                    log.debug("Message getting dropped due to specific blockout drop Message Id : " + mMessageRequest.getBaseMessageId());
+      
+                mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Message getting dropped due to specific blockout drop Message Id : ");
 
                 mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.SPECIFIC_BLOCKOUT_FAILED.getStatusCode());
                 mMessageRequest.setPlatfromRejected(true);
@@ -139,16 +136,16 @@ public class BlockoutCheck
 
     private boolean doSpecificBlockout()
     {
-        if (log.isDebugEnabled())
-            log.debug("Sending to specific Blockout Queue : " + mMessageRequest.getBaseMessageId());
+      
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Sending to specific Blockout Queue : ");
 
         return true;
     }
 
     private boolean isBlockoutMessage()
     {
-        if (log.isDebugEnabled())
-            log.debug("isBlockoutMessage() start Message Id : " + mMessageRequest.getBaseMessageId());
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() start Message Id : ");
+
         return BlockoutChecker.blockoutCheck(mMessageRequest);
     }
 

@@ -1,13 +1,10 @@
 package com.itextos.beacon.platform.vcprocess.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
-import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.rc.process.RConsumer;
@@ -16,7 +13,7 @@ import com.itextos.beacon.platform.wc.process.WalletProcessor;
 public class VCProducer
 {
 
-    private static final Log log = LogFactory.getLog(VCProducer.class);
+ //   private static final Log log = LogFactory.getLog(VCProducer.class);
 
     private VCProducer()
     {}
@@ -71,8 +68,7 @@ public class VCProducer
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Request sending to PRC topic .. " + aMessageRequest.getBaseMessageId());
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to PRC topic ..");
 
             aMessageRequest.setPlatfromRejected(true);
             aMessageRequest.setFromComponent(aComponent.getKey());
@@ -83,7 +79,8 @@ public class VCProducer
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while sending to Platfrom Rejection topic ..", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to Platfrom Rejection topic .."+ ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aComponent, aMessageRequest, e);
         }
     }
@@ -95,8 +92,7 @@ public class VCProducer
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Request sending to WC topic .. " + aMessageRequest.getBaseMessageId());
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to WC topic ..");
 
          //   MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
             
@@ -106,7 +102,8 @@ public class VCProducer
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while sending to Prepaid topic ..", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to Prepaid topic .."+ ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aComponent, aMessageRequest, e);
         }
     }
@@ -118,8 +115,8 @@ public class VCProducer
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Request sending to RC topic .. " + aMessageRequest.getBaseMessageId());
+ 
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to RC topic ..");
 
             //MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
             aMessageRequest.setFromComponent(aComponent.getKey());
@@ -128,27 +125,30 @@ public class VCProducer
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while sending to Route Consumer topic ..", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to Route Consumer topic .."+ ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aComponent, aMessageRequest, e);
         }
     }
 
     public static void sendToErrorLog(
             Component aComponent,
-            MessageRequest aBaseMessage,
+            MessageRequest aMessageRequest,
             Exception aErrorMsg)
     {
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Request sending to ERROR topic .. " + aBaseMessage.getBaseMessageId());
+       
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to ERROR topic ..");
 
-            PlatformUtil.sendToErrorLog(aComponent, aBaseMessage, aErrorMsg);
+            PlatformUtil.sendToErrorLog(aComponent, aMessageRequest, aErrorMsg);
         }
         catch (final Exception e)
         {
-            log.error("Exception while sending request to error log", e);
+    
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to ERROR topic .."+ ErrorMessage.getStackTraceAsString(e));
+
         }
     }
 

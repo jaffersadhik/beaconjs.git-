@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
@@ -27,6 +28,7 @@ import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.carrierhandover.RouteKannelInfo;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.platform.carrierhandoverutility.util.CHUtil;
@@ -43,7 +45,6 @@ public class CarrierHandoverProcess
         AbstractKafkaComponentProcessor
 {
 
-    private static final Log log = LogFactory.getLog(CarrierHandoverProcess.class);
 
     public CarrierHandoverProcess(
             String aThreadName,
@@ -62,8 +63,8 @@ public class CarrierHandoverProcess
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-        if (log.isDebugEnabled())
-            log.debug("HC Received Object .. " + lMessageRequest.getJsonString());
+     
+    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" : Message Received ");
 
         CarrierHandoverProcess.forCH(lMessageRequest,mPlatformCluster);
     }
@@ -81,7 +82,8 @@ public class CarrierHandoverProcess
 
                    if (!isValidHexMessage)
                    {
-                       log.error("Invalid HEX Message : " + lMessageRequest);
+                   	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Invalid HEX Message : ");
+
                        sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.INVALID_HEX_MESSAGE);
                        PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
                        return;
@@ -93,7 +95,8 @@ public class CarrierHandoverProcess
 
                if (lRouteId.isEmpty())
                {
-                   log.error("Unable to find out the Route Id : " + lMessageRequest);
+               	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Unable to find out the Route Id : ");
+
                    sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_ROUTE_ID);
                    PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
                    return;
@@ -101,7 +104,9 @@ public class CarrierHandoverProcess
 
                if (lFeatureCode.isBlank())
                {
-                   log.error("Unable to find out the Feature Code : " + lMessageRequest);
+            	   
+                  	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Unable to find out the Feature Code : ");
+
                    sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EMPTY_FEATURE_CODE);
                    PrometheusMetrics.componentMethodEndTimer(Component.CH, lPlatformRejection);
                    return;
@@ -121,7 +126,9 @@ public class CarrierHandoverProcess
 
                if (isExpired)
                {
-                   log.error("Message Expired :" + lMessageRequest);
+                  
+                 	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Message Expired :" + isExpired);
+
                    sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.EXPIRED_MESSAGE);
                    return;
                }
@@ -132,7 +139,8 @@ public class CarrierHandoverProcess
 
                if (lKannelRouteInfo == null)
                {
-                   log.error("Unable to find  Route Kannel Template for  route : " + lRouteId + " feature cd : " + lFeatureCode + " BaseMessage = : \t" + lMessageRequest);
+                	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Unable to find  Route Kannel Template for  route : " + lRouteId + " feature cd : " + lFeatureCode );
+
                    sendToPlatfromRejection(lMessageRequest, PlatformStatusCode.KANNEL_TEMPLATE_NOT_FOUND);
                    return;
                }
@@ -149,9 +157,7 @@ public class CarrierHandoverProcess
                for (final BaseMessage baseMssage : lBaseMessageList)
                {
                    final SubmissionObject lSubmissionObject = (SubmissionObject) baseMssage;
-                   if (log.isDebugEnabled())
-                       log.debug("Splited Message Object : " + lSubmissionObject);
-
+                  
                    try
                    {
 
@@ -159,14 +165,15 @@ public class CarrierHandoverProcess
                        {
                            // log.fatal("First part carrier handover is failed, Hence ignoring the remining
                            // part messages...Message Id :" + lSubmissionObject.getMessageId());
-                           log.fatal("First part carrier handover is failed, Hence ignoring the remining part messages...Message Id :" + lSubmissionObject.getMessageId());
+                       	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :; First part carrier handover is failed, Hence ignoring the remining part messages...Message Id :" + lSubmissionObject.getMessageId() );
+
                            return;
                        }
 
                        if (isPartialSuccess && isFirstPartFailed)
                        {
-                           if (log.isDebugEnabled())
-                               log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
+                           	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request.." );
+
                            sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
                            continue;
                        }
@@ -177,14 +184,16 @@ public class CarrierHandoverProcess
 
                        if (!lUdh.isEmpty())
                        {
-                           if (log.isDebugEnabled())
-                               log.debug("Udh Value : " + lUdh);
+                          
+
+                          	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Udh Value : " + lUdh );
 
                            if (CHUtil.isValidUDH(lUdh))
                                lUdh = CHUtil.addKannelSpecCharToHex(lUdh);
                            else
                            {
-                               log.error("Invalid UDH : " + lSubmissionObject);
+                             	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Udh Value : " + lUdh +" ::: Invalid UDH : ");
+
                                sendToPlatfromRejection(lSubmissionObject, PlatformStatusCode.INVALID_UDH);
                                continue;
                            }
@@ -206,8 +215,8 @@ public class CarrierHandoverProcess
 
                        final boolean isKannelAvailable = CHProcessUtil.isKannelAvailable(lRouteId);
 
-                       if (log.isDebugEnabled())
-                           log.debug("Kannel Available Status : " + isKannelAvailable);
+        
+                     	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Kannel Available Status : " + isKannelAvailable );
 
                        final String lActualRouteId = lMessageRequest.getActualRouteId();
 
@@ -216,8 +225,9 @@ public class CarrierHandoverProcess
 
                        final String lKannelUrl = getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable);
 
-                       if (log.isDebugEnabled())
-                           log.debug("kannel URL--->" + lKannelUrl);
+                    
+
+                    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: kannel URL--->" + lKannelUrl );
 
                        if (!isKannelAvailable && canDoMsgRetry)
                        {
@@ -236,85 +246,92 @@ public class CarrierHandoverProcess
 
                        PrometheusMetrics.componentMethodEndTimer(Component.CH, lKannelConnect);
 
-                       if (log.isDebugEnabled())
-                           log.debug("URL : '" + lKannelUrl + "', Response : '" + lResponse + "'");
+                      
+                   	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: kannel URL--->" + lKannelUrl + "', Response : '" + lResponse + "'");
 
-                       setKannelResponseTime(lKannelUrl, lRouteId, lResponse);
+                       setKannelResponseTime(lMessageRequest,lKannelUrl, lRouteId, lResponse);
 
                        if (lResponse)
                        {
                            isPartialSuccess = true;
                            lRetryAttempt    = lSubmissionObject.getRetryAttempt();
                            final String lRoute_Id = lMessageRequest.getRouteId();
-                           if (log.isDebugEnabled())
-                               log.debug("Route ID : " + lRoute_Id);
+                           	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Route ID : " + lRoute_Id);
 
                            if (lRetryAttempt != 0)
                            {
                                // retry msg send to INTERIM_FAILURE topic
                                CHProducer.sendToInterim(lSubmissionObject);
-                               if (log.isDebugEnabled())
-                                   log.debug("send to interm queue success mid:" + lMessageId);
+                               
+                              	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: send to interm queue success :"  );
+
+                            
                            }
 
                            lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.SUCCESS.getStatusCode());
 
-                           if (log.isDebugEnabled())
-                               log.debug("Retry Attempt Count : " + lRetryAttempt);
+                   
+                         	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Retry Attempt Count : " + lRetryAttempt  );
 
                            if (lRetryAttempt == 0)
                            {
                                CHProducer.sendToSubBilling(lSubmissionObject);
-                               if (log.isDebugEnabled())
-                                   log.debug("Sent to submission biller topic.. success");
+                               
+                            	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Sent to submission biller topic.. success"  );
+
+                           
                            }
                        }
                        else
                        {
-                           if (log.isDebugEnabled())
-                               log.debug("\n url : " + lKannelUrl + " : \n response : " + lResponse);
+                          
+
+                       	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  url : " + lKannelUrl + " : \n response : " + lResponse );
 
                            isFirstPartFailed = true;
 
                            if (isPartialSuccess && isFirstPartFailed)
                            {
-                               if (log.isDebugEnabled())
-                                   log.debug("Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request..");
+                             
+                              
+                              	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Unable to process the Multipart request to kannel for the route '" + lRouteId + ", partially failed' , Hence rejecting the request.." );
+
+                               
                                sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED);
                            }
                            else
                            {
-                               if (log.isDebugEnabled())
-                                   log.debug("");
-
+                           
                                if (isFirstPartFailed)
                                {
-                                   if (log.isDebugEnabled())
-                                       log.debug("First part failed ...");
+                                   	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: First part failed ..." );
 
                                    if (canDoMsgRetry)
                                    {
-                                       if (log.isDebugEnabled())
-                                           log.debug("Message Retry Enabled & First part failed ...:'" + isFirstPartFailed + "', Hence sending to Message Retry..");
+                                  
+                                      	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Message Retry Enabled & First part failed ...:'" + isFirstPartFailed + "', Hence sending to Message Retry.." );
 
                                        doMessageRetry(lMessageRequest, lSubmissionObject);
                                    }
                                    else
                                    {
-                                       if (log.isDebugEnabled())
-                                           log.debug("Message Retry Disabled, Unable to send the Multipart request to kannel for the route '" + lRouteId + "' , Hence rejecting the request..");
+                                  
+                                     	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Message Retry Disabled, Unable to send the Multipart request to kannel for the route '" + lRouteId + "' , Hence rejecting the request.." );
 
                                        sendToPlatfromRejectionWithRemovePayload(lSubmissionObject, lMessageRequest, PlatformStatusCode.CARRIER_HANDOVER_FAILED);
                                    }
                                }
                            }
                        }
-                       if (log.isDebugEnabled())
-                           log.debug("Message Id : " + lMessageId + " udh : " + lUdh);
+                    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" udh : " + lUdh );
+
                    }
                    catch (final Exception e2)
                    {
-                       log.error("Exception occer while processing Carrier Handover ...", e2);
+                      
+                   	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Exception occer while processing Carrier Handover ..."+ErrorMessage.getStackTraceAsString(e2) );
+
+                       
                        isFirstPartFailed = true;
 
                        if (isPartialSuccess && isFirstPartFailed)
@@ -325,13 +342,10 @@ public class CarrierHandoverProcess
                        }
                        else
                        {
-                           if (log.isDebugEnabled())
-                               log.debug("");
-
+                        
                            if (isFirstPartFailed)
                            {
-                               if (log.isDebugEnabled())
-                                   log.debug("Due to exception sending to PRC..., Base Mid :'" + lMessageRequest.getBaseMessageId() + "'");
+                           	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Due to exception sending to PRC..., Base Mid :'" );
 
                                lMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.CARRIER_HANDOVER_FAILED.getStatusCode());
                                lMessageRequest.setAdditionalErrorInfo("CH :" + e2.getMessage());
@@ -344,8 +358,8 @@ public class CarrierHandoverProcess
            }
            catch (final Exception e)
            {
-               log.error("Exception occer while processing Carrier Handover ...", e);
 
+              	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Exception occer while processing Carrier Handover ..."+ErrorMessage.getStackTraceAsString(e) );
                try
                {
                    CHProducer.sendToErrorLog(lMessageRequest, e);
@@ -371,13 +385,11 @@ public class CarrierHandoverProcess
 
         final Timer dummyHandover = PrometheusMetrics.componentMethodStartTimer(Component.CH, mPlatformCluster, "DummyHandover");
 
-        if (log.isDebugEnabled())
-            log.debug("Sending to dummy route q:" + lSubmissionObject.getMessageId() + " retry attempt:" + lMessageRequest.getRetryAttempt());
+ 
+      	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Sending to dummy route q:" + lSubmissionObject.getMessageId() + " retry attempt:" + lMessageRequest.getRetryAttempt() );
 
    
-            if (log.isInfoEnabled())
-                log.info("Request sending to dummy route....");
-            CHProducer.sendToDummyRoute(lSubmissionObject);
+           CHProducer.sendToDummyRoute(lSubmissionObject);
        
 
         if (lMessageRequest.getRetryAttempt() == 0)
@@ -393,7 +405,7 @@ public class CarrierHandoverProcess
 	}
 
 	private static void setKannelResponseTime(
-            String aKannelUrl,
+            MessageRequest lMessageRequest, String aKannelUrl,
             String aRouteId,
             boolean aResponse)
     {
@@ -405,15 +417,18 @@ public class CarrierHandoverProcess
 
             final boolean isResponseCheck     = CommonUtility.isEnabled(CHProcessUtil.getAppConfigValueAsString(ConfigParamConstants.KANNEL_CONN_RESP_CHK));
 
-            if (log.isDebugEnabled())
-                log.debug("Check Respone Time '" + isResponseCheck + "'");
+        
+
+          	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  :; Check Respone Time '" + isResponseCheck + "'" );
 
             if (isResponseCheck)
                 KannelStatsCollector.getInstance().verifyKannelResponseTime(aKannelUrl, aRouteId, lKannelHitStartTime, lKannelHitEndTime, aResponse);
         }
         catch (final Exception e)
         {
-            log.error("Some error in calculating the times.", e);
+        	
+          	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Some error in calculating the times. :: "+ErrorMessage.getStackTraceAsString(e) );
+
         }
     }
 
@@ -432,13 +447,14 @@ public class CarrierHandoverProcess
 
         final String additionalInfoString = CHUtil.getCallBackParams(aSubmissionObject);
 
-        if (log.isDebugEnabled())
-            log.debug("additionalInfoString===>" + additionalInfoString);
+
+      	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: additionalInfoString===>" + additionalInfoString );
 
         final String encodedAdditionalInfo = URLEncoder.encode(additionalInfoString, Constants.ENCODER_FORMAT);
         lDlrUrl = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo);
-        if (log.isDebugEnabled())
-            log.debug("Kannel dn URL--->" + lDlrUrl);
+       
+      	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Kannel dn URL--->" + lDlrUrl );
+
         aSubmissionObject.setCallBackUrl(lDlrUrl);
     }
 
@@ -448,11 +464,12 @@ public class CarrierHandoverProcess
     {
         String lPayloadRid = null;
 
-        if (log.isDebugEnabled())
-            log.debug("Attempting to remove payload....");
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :; Attempting to remove payload...." );
+
         PayloadProcessor.removePayload(aSubmissionObject);
-        if (log.isDebugEnabled())
-            log.debug("remove payload.... finished");
+  
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :; Attempting to remove payload.... finished" );
+
 
         while (lPayloadRid == null)
         {
@@ -460,13 +477,15 @@ public class CarrierHandoverProcess
 
             if (lPayloadRid == null)
             {
-                if (log.isDebugEnabled())
-                    log.debug("payload rid null retrying after 100 millis...");
+               
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :: payload rid null retrying after 100 millis..." );
+
                 Thread.sleep(100);
             }
         }
-        if (log.isDebugEnabled())
-            log.debug("payload storing to redis succesful for payloadrid=" + lPayloadRid);
+
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :: payload storing to redis succesful for payloadrid=" + lPayloadRid );
+
         aSubmissionObject.setPayloadRedisId(lPayloadRid);
     }
 
@@ -486,8 +505,9 @@ public class CarrierHandoverProcess
             {
                 final String lReplaceMsg = ICHUtil.getReplacedMessage(aMessageRequest.getClientId(), aSubmissionObject.getMessage());
 
-                if (log.isInfoEnabled())
-                    log.info("Altered Message :" + lReplaceMsg);
+              
+
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :: Altered Message :" + lReplaceMsg );
 
                 aSubmissionObject.setAlterMessage(lReplaceMsg);
             }
@@ -552,10 +572,8 @@ public class CarrierHandoverProcess
             MessageRequest aMessageRequest,
             SubmissionObject aSubmissionObject)
     {
-        if (log.isDebugEnabled())
-            log.debug("Message request Object : " + aMessageRequest);
+         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sending to retry queue due to kannel down/storesize/latency route:" + aMessageRequest.getRouteId());
 
-        log.error("Sending to retry queue due to kannel down/storesize/latency route:" + aMessageRequest.getRouteId());
 
         try
         {
@@ -564,7 +582,9 @@ public class CarrierHandoverProcess
         }
         catch (final Exception e)
         {
-            log.error("Exception while removing payload ..", e);
+            
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Exception while removing payload .. :: "+ErrorMessage.getStackTraceAsString(e));
+
         }
 
         CHProducer.sendToRetryRoute(aMessageRequest);
@@ -582,7 +602,9 @@ public class CarrierHandoverProcess
         }
         catch (final Exception e)
         {
-            log.error("Exception while removing payload ..", e);
+            
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" Exception while removing payload .. :: "+ErrorMessage.getStackTraceAsString(e));
+
         }
 
         sendToPlatfromRejection(aSubmissionObject, aStatusId);
@@ -601,7 +623,9 @@ public class CarrierHandoverProcess
         }
         catch (final Exception e)
         {
-            log.error("Exception while removing payload ..", e);
+            
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" Exception while removing payload .. :: "+ErrorMessage.getStackTraceAsString(e));
+
         }
 
         sendToPlatfromRejection(aMessageRequest, aStatusId);

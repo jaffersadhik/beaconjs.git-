@@ -1,8 +1,5 @@
 package com.itextos.beacon.platform.sbcv.process;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
@@ -11,6 +8,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.sbcv.util.SBCVProducer;
 
 public class SBCVProcess
@@ -18,7 +16,6 @@ public class SBCVProcess
         AbstractKafkaComponentProcessor
 {
 
-    private static final Log log = LogFactory.getLog(SBCVProcess.class);
 
     public SBCVProcess(
             String aThreadName,
@@ -44,8 +41,8 @@ public class SBCVProcess
     	
 
 
-        if (log.isDebugEnabled())
-            log.debug("SBCV Receive the request : " + lMessageRequest.getBaseMessageId());
+    	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" : SBCV Receive the request");
+        	
 
         try
         {
@@ -55,8 +52,8 @@ public class SBCVProcess
             {
                 final boolean isRejectedMessage = lMessageRequest.isPlatfromRejected();
 
-                if (log.isDebugEnabled())
-                    log.debug("Is Message drop based on Schedule / Blockout ? " + isRejectedMessage);
+            	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :Is Message drop based on Schedule / Blockout ? " + isRejectedMessage);
+
 
                 if (isRejectedMessage)
                     SBCVProducer.sendToPlatformRejection(lMessageRequest);
@@ -65,9 +62,7 @@ public class SBCVProcess
             }
             else
             {
-                if (log.isDebugEnabled())
-                    log.debug("Request sending to VC topic : " + lMessageRequest.getBaseMessageId());
-
+            	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :Request sending to VC topic" );
                 SBCVProducer.sendToVerifyConsumerTopic(lMessageRequest);
             }
         }
@@ -81,13 +76,11 @@ public class SBCVProcess
     private static void sendToNextProcess(
             MessageRequest aMessageRequest)
     {
-        if (log.isDebugEnabled())
-            log.debug("Sending to Schedule/ Blockout Topic : " + aMessageRequest.getBaseMessageId());
 
         final int lBlockOutScheduel = aMessageRequest.getScheduleBlockoutMessage();
 
-        if (log.isDebugEnabled())
-            log.debug("Is message sending Schedule / Blockout ? " + lBlockOutScheduel);
+
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Sending to Schedule/ Blockout Topic :  "+lBlockOutScheduel );
 
         if (Constants.SCHEDULE_MSG == lBlockOutScheduel)
             SBCVProducer.sendToScheduleTopic(aMessageRequest);

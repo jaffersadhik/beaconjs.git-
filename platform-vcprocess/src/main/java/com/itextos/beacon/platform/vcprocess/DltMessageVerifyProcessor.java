@@ -5,9 +5,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.BillType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 import com.itextos.beacon.platform.vcprocess.util.VCUtil;
@@ -31,8 +33,7 @@ public class DltMessageVerifyProcessor
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Message received : " + mMessageRequest);
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message Received :  " );
 
             if (!doDuplicateCheck())
                 return;
@@ -46,6 +47,8 @@ public class DltMessageVerifyProcessor
         {
             log.error("Exception occer while processing the message in Verify Consumer ....", e);
 
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Exception occer while processing the message in Verify Consumer :  " +ErrorMessage.getStackTraceAsString(e));
+
             VCProducer.sendToErrorLog(mSourceComponent, mMessageRequest, e);
         }
     }
@@ -54,9 +57,9 @@ public class DltMessageVerifyProcessor
             MessageRequest aMessageRequest)
             throws Exception
     {
-        if (log.isDebugEnabled())
-            log.debug("doDomesticMessageProcess() - Message Object : " + aMessageRequest);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Message Received :  " );
 
+     
         dltMsgProcess();
     }
 
@@ -78,8 +81,8 @@ public class DltMessageVerifyProcessor
 
         final boolean isCreditCheckEnabled = CommonUtility.isEnabled(mMessageRequest.getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
-        if (log.isDebugEnabled())
-            log.debug("Credit Check Enabled : " + isCreditCheckEnabled);
+
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Credit Check Enabled : " + isCreditCheckEnabled);
 
         final BillType lBillType = BillType.getBillType(Integer.toString(mMessageRequest.getBillType()));
 
@@ -87,15 +90,16 @@ public class DltMessageVerifyProcessor
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.WC, mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message sendToPrepaidComponent: Successfully");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message sendToPrepaidComponent: Successfully : ");
+
         }
         else
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.RC, mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message  sendToRouterComponent: Successfully");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message  sendToRouterComponent: Successfully : ");
+
+           
         }
     }
 

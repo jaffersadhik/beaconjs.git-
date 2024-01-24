@@ -6,10 +6,12 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.templatefinder.TemplateScrubber;
 import com.itextos.beacon.platform.vcprocess.DltMessageVerifyProcessor;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
@@ -19,7 +21,7 @@ public class DltProcessor
         AbstractKafkaComponentProcessor
 {
 
-    private static final Log log = LogFactory.getLog(DltProcessor.class);
+   private static final Log log = LogFactory.getLog(DltProcessor.class);
 
     public DltProcessor(
             String aThreadName,
@@ -36,10 +38,10 @@ public class DltProcessor
     public void doProcess(
             BaseMessage aBaseMessage)
     {
-        if (log.isDebugEnabled())
-            log.debug("Message received : " + aBaseMessage);
-
+     
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
+
+        lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" : Message Received :  " );
 
         DltProcessor.forDLT(lMessageRequest, mComponent);
      
@@ -58,6 +60,8 @@ public class DltProcessor
            }
            catch (final Exception e)
            {
+               lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" : Exception occer while processing the message in DLT Verify Consumer :  " +ErrorMessage.getStackTraceAsString(e));
+
                log.error("Exception occer while processing the message in DLT Verify Consumer ....", e);
 
                VCProducer.sendToErrorLog(mComponent, lMessageRequest, e);

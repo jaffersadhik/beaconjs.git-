@@ -8,12 +8,14 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.dch.processor.DummyCarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
@@ -44,7 +46,9 @@ public class CHProducer
         }
         catch (final Exception e)
         {
-            log.error("Exception occer while sending to Schedule/Blockout topic ..", e);
+            
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to Schedule/Blockout topic .."+ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -59,7 +63,8 @@ public class CHProducer
         }
         catch (final ItextosException e)
         {
-            log.error("Exception occer while sending to Retry Carrier Handover topic ..", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to Retry Carrier Handover topic .."+ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -80,6 +85,8 @@ public class CHProducer
         catch (final Exception e)
         {
             log.error("Exception occer while sending to Platform Rejection topic ..", e);
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  Exception occer while sending to Platform Rejection topic .."+ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aSubmissionObject, e);
         }
     }
@@ -101,6 +108,8 @@ public class CHProducer
         catch (final Exception e)
         {
             log.error("Exception occer while sending to Platform Rejection topic ..", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to  Platform Rejection topic .."+ErrorMessage.getStackTraceAsString(e));
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -294,6 +303,7 @@ public class CHProducer
         }
         catch (final Exception e)
         {
+        	
             log.error("Exception occer while identifying table suffix...", e);
         }
     }

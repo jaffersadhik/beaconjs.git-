@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.RouteConstants;
@@ -19,6 +20,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
@@ -33,7 +35,7 @@ import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 public class PRCUtil
 {
 
-    private static final Log log = LogFactory.getLog(PRCUtil.class);
+  //  private static final Log log = LogFactory.getLog(PRCUtil.class);
 
     private PRCUtil()
     {}
@@ -59,9 +61,7 @@ public class PRCUtil
 
         if (isMultiple)
         {
-            if (log.isDebugEnabled())
-                log.debug("");
-
+           
             for (final BaseMessage msg : lSubmissions)
             {
                 final SubmissionObject sb = (SubmissionObject) msg;
@@ -109,9 +109,10 @@ public class PRCUtil
 
             if (lRetryAttempt == 0)
             {
-                if (log.isInfoEnabled())
-                    log.info("Attempting to sending biller queue..for mid=" + lMessageId);
+            	
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Attempting to sending biller queue.." );
 
+      
                 if (aIsProcessDNCarrier)
                 {
                     setSTSAndActualts(aSubmissionObject);
@@ -128,13 +129,13 @@ public class PRCUtil
                     // "y");
                 }
 
-                if (log.isDebugEnabled())
-                    log.debug("Request sending Biller Topic : " );
+        
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Request sending Biller Topic : ");
 
                 PRProducer.sendToBillerTopic(aSubmissionObject);
 
-                if (log.isDebugEnabled())
-                    log.debug("sending to biller topic succesful..for mid=" + lMessageId);
+         
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: sending to biller topic succesful..for mid=");
 
                 final boolean         lNoPayloadForPromoMsg = CommonUtility.isEnabled(getAppConfigValueAsString(ConfigParamConstants.NOPAYLOAD_FOR_PROMO_MSG));
 
@@ -145,20 +146,23 @@ public class PRCUtil
                 if (lClientDlrConfig != null)
                     isDlrOnPlatformFail = lClientDlrConfig.isDlrOnPlatformFail();
 
-                if (log.isDebugEnabled())
-                    log.debug("Client : '" + aSubmissionObject.getClientId() + "', Dlr Handover on Platform fail : " + isDlrOnPlatformFail);
+        
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Client : '" + aSubmissionObject.getClientId() + "', Dlr Handover on Platform fail : " + isDlrOnPlatformFail);
 
                 if (aIsProcessDNCarrier && (lNoPayloadForPromoMsg || isDlrOnPlatformFail) && (aSubmissionObject.getMessageType() == MessageType.PROMOTIONAL))
                 {
-                    if (log.isInfoEnabled())
-                        log.info("No need to send dlr for promotional account for mid=" + lMessageId);
+                	
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: No need to send dlr for promotional account " );
+
                     return;
                 }
             }
         }
         catch (final Exception exp)
         {
-            log.error("problem sending to billerq due to...", exp);
+        	
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: problem sending to billerq due to..."+ErrorMessage.getStackTraceAsString(exp) );
+
             throw exp;
         }
 
@@ -194,8 +198,8 @@ public class PRCUtil
 
             final String lCluster = lDeliveryObject.getClusterType().getKey();
 
-            if (log.isInfoEnabled())
-                log.info("sending message to Kafka cluster=" + lCluster + " : Message : " + lDeliveryObject);
+     
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: sending delivery Object message to Kafka cluster=" + lCluster );
 
             // Setting submittion error code to delivery error code when platform
             // rejections.
@@ -207,7 +211,8 @@ public class PRCUtil
         }
         catch (final Exception exp)
         {
-            log.error("problem sending to Dlr internal topic due to...", exp);
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: problem sending to Dlr internal topic due to... "+ErrorMessage.getStackTraceAsString(exp));
+
             throw exp;
         }
     }
@@ -231,11 +236,13 @@ public class PRCUtil
 
             if (lSts < lSTimelong)
             {
-                log.error("Looks Platform time is less than the time received from client (stime) so adjusting sts with random number");
+                
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Looks Platform time is less than the time received from client (stime) so adjusting sts with random number");
+
                 final int maxRandomSeed = CommonUtility.getInteger(PlatformUtil.getPropertyConfigValue(ConfigParamConstants.GLOBAL_DN_ADJUSTMENT_IN_SEC.getKey()), 10);
                 lSts = lSTimelong + (lRandomGen.nextInt(maxRandomSeed) * 1000);
-                if (log.isDebugEnabled())
-                    log.debug("Adjusted sts:" + lSts + " for stime:" + lSTimelong);
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" Adjusted sts:" + lSts + " for stime:" + lSTimelong);
+
             }
             final String lDNAdjuestStr = CommonUtility.nullCheck(aSubmissionObject.getDnAdjustEnabled(), true);
 
@@ -244,7 +251,8 @@ public class PRCUtil
                 final long    lDnAdjustMills = CommonUtility.getLong(lDNAdjuestStr) * 1000;
                 final boolean isWhiteListed  = checkNumberWhiteListed(CommonUtility.nullCheck(aSubmissionObject.getMobileNumber(), true));
 
-                log.debug("isWhiteListed:" + isWhiteListed);
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: isWhiteListed:" + isWhiteListed);
+
                 if (((lSts - lSTimelong) > lDnAdjustMills) && !isWhiteListed)
                     lSts = lSTimelong + (lRandomGen.nextInt((CommonUtility.getInteger(lDNAdjuestStr) + 1)) * 1000);
             }
@@ -254,7 +262,8 @@ public class PRCUtil
         }
         catch (final Exception e)
         {
-            log.error("setSTSAndActualts", e);
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: error setSTSAndActualts ::: "+ErrorMessage.getStackTraceAsString(e));
+
             aSubmissionObject.setCarrierSubmitTime(new Date(lSysdate));
             aSubmissionObject.setActualCarrierSubmitTime(new Date(lSysdate));
         }
@@ -265,8 +274,10 @@ public class PRCUtil
     {
         final String lSubOrgErrorCode = CommonUtility.nullCheck(aSubmissionObject.getSubOriginalStatusCode(), true);
 
-        if (log.isDebugEnabled())
-            log.debug("Sub Original Error Code :" + lSubOrgErrorCode);
+        
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Sub Original Error Code :" + lSubOrgErrorCode);
+
+       
 
         ErrorCategory lCategory = ErrorCategory.PLATFORM;
         if (aSubmissionObject.isInterfaceRejected())
@@ -282,8 +293,8 @@ public class PRCUtil
     {
         final String lSubOrgErrorCode = CommonUtility.nullCheck(aDeliveryObject.getSubOriStatusCode(), true);
 
-        if (log.isDebugEnabled())
-            log.debug("Sub Original Error Code :" + lSubOrgErrorCode);
+    
+        aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aDeliveryObject).getBaseMessageId()+" :: Sub Original Error Code :" + lSubOrgErrorCode);
 
         ErrorCategory lCategory = ErrorCategory.PLATFORM;
         if (aDeliveryObject.isInterfaceRejected())

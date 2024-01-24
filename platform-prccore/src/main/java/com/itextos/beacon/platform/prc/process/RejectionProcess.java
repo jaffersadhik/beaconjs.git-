@@ -15,6 +15,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.prc.util.PRCUtil;
 import com.itextos.beacon.platform.prc.util.PRProducer;
 
@@ -23,7 +24,7 @@ public class RejectionProcess
         AbstractKafkaComponentProcessor
 {
 
-    private static final Log log = LogFactory.getLog(RejectionProcess.class);
+  //  private static final Log log = LogFactory.getLog(RejectionProcess.class);
 
    
     public RejectionProcess(
@@ -41,19 +42,23 @@ public class RejectionProcess
     public void doProcess(
             BaseMessage aBaseMessage)
     {
-        if (log.isDebugEnabled())
-            log.debug("Message received from PRC : " + aBaseMessage);
-
+     
         RejectionProcess.forPRC(aBaseMessage);
     }
 
     public static void forPRC(BaseMessage aBaseMessage) {
     	
-        if (aBaseMessage instanceof MessageRequest)
-            processMessageRequest((MessageRequest) aBaseMessage);
+        if (aBaseMessage instanceof MessageRequest) {
+        	aBaseMessage.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((MessageRequest)aBaseMessage).getBaseMessageId()+" :: Message received from PRC");
 
-        if (aBaseMessage instanceof SubmissionObject)
+            processMessageRequest((MessageRequest) aBaseMessage);
+        }
+
+        if (aBaseMessage instanceof SubmissionObject) {
+        	aBaseMessage.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((SubmissionObject)aBaseMessage).getBaseMessageId()+" :: Message received from PRC");
+
             processSubmissionRequest((SubmissionObject) aBaseMessage);
+        }
  
     }
     
@@ -74,13 +79,14 @@ public class RejectionProcess
             
             aMessageRequest.setRefAddFixedRate(0);
             aMessageRequest.setRefSmsRate(0);
-            if (log.isDebugEnabled())
-                log.debug("Is Process DN Carrier for DND Fail :" + lprocessDNCarrier);
+         
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((MessageRequest)aMessageRequest).getBaseMessageId()+" :: Is Process DN Carrier for DND Fail :" + lprocessDNCarrier);
 
             final List<BaseMessage> lSubmissionRequestLst = aMessageRequest.getSubmissions();
 
-            if (log.isInfoEnabled())
-                log.info("msglist:" + lSubmissionRequestLst.size());
+          
+
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((MessageRequest)aMessageRequest).getBaseMessageId()+" : msglist size :" + lSubmissionRequestLst.size());
 
             if (PlatformStatusCode.PARTIALLY_CARRIER_HANDOVER_FAILED.getStatusCode().equals(aMessageRequest.getSubOriginalStatusCode()) || lprocessDNCarrier)
                 canProcessMultiple = true;
@@ -90,8 +96,8 @@ public class RejectionProcess
 
             if ((lSubmissionRequestLst.size() > 1) && canProcessMultiple)
             {
-                if (log.isDebugEnabled())
-                    log.debug("Multipart Message request... ");
+            
+                aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((MessageRequest)aMessageRequest).getBaseMessageId()+" :: Multipart Message request... ");
 
                 PRCUtil.processReq(aMessageRequest, lprocessDNCarrier, true);
             }
@@ -107,8 +113,9 @@ public class RejectionProcess
     private static void processSubmissionRequest(
             SubmissionObject aSubmissionObject)
     {
-        if (log.isDebugEnabled())
-            log.debug("Processing Submission Object : " + aSubmissionObject);
+        
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Processing Submission Object : " );
+
 
         try
         {

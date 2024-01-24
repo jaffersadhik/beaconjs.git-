@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.intlrouteinfo.util.IntlRouteUtil;
 import com.itextos.beacon.platform.intlprice.CalculateBillingPrice;
 import com.itextos.beacon.platform.intlprice.CalculateIntlBillingPrice;
@@ -20,7 +21,7 @@ import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 public class IntlMsgVerifyProcessor
 {
 
-    private final Log            log = LogFactory.getLog(IntlMsgVerifyProcessor.class);
+ //   private final Log            log = LogFactory.getLog(IntlMsgVerifyProcessor.class);
 
     private final MessageRequest mMessageRequest;
     private final Component      mSourceComponent;
@@ -45,13 +46,11 @@ public class IntlMsgVerifyProcessor
         final String  lPlatformBaseCurrency     = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.BASE_CURRENCY);
         final String  lPlatformIntlBaseCurrency = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.INTL_BASE_CURRENCY);
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("Country :" + lCountry);
-            log.debug("Intl From Currency : " + lPlatformIntlBaseCurrency);
-            log.debug("Billing Currency : " + mMessageRequest.getBillingCurrency());
-            log.debug("Reffrence Currency : " + lPlatformBaseCurrency);
-        }
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Country : " + lCountry );
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl From Currency : " + lPlatformIntlBaseCurrency);
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Billing Currency : " + mMessageRequest.getBillingCurrency());
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Reffrence Currency : " + lPlatformBaseCurrency);
+
 
         final CalculateIntlBillingPrice lBillingPrice = new CalculateIntlBillingPrice(lClientId, lCountry, mMessageRequest.getBillingCurrency(), lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
                 lConvertDatewise);
@@ -63,11 +62,11 @@ public class IntlMsgVerifyProcessor
         
             lCalculateBillingPrice = lBillingPrice.calculate();
 
-            if (log.isDebugEnabled())
-            {
-                log.debug("Intl Billing SMS Rate : " + lCalculateBillingPrice.getBillingSmsRate());
-                log.debug("Intl Billing Additional Rate : " + lCalculateBillingPrice.getBillingAdditionalFixedRate());
-            }
+
+            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Billing SMS Rate : " + lCalculateBillingPrice.getBillingSmsRate() );
+
+            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Billing Additional Rate : " + lCalculateBillingPrice.getBillingAdditionalFixedRate() );
+
 
             mMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
             mMessageRequest.setBaseAddFixedRate(lCalculateBillingPrice.getBaseAdditionalFixedRate());
@@ -131,23 +130,23 @@ public class IntlMsgVerifyProcessor
 
         final boolean isCreditCheckEnabled = CommonUtility.isEnabled(mMessageRequest.getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
-        if (log.isDebugEnabled())
-            log.debug("Credit Check Enabled : " + isCreditCheckEnabled);
+   
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Credit Check Enabled : " + isCreditCheckEnabled );
 
         if ((mMessageRequest.getBillType() == 1) || isCreditCheckEnabled)
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.WC, mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message Send to Wallet Topic: Successfully");
-        }
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message Send to Wallet Topic: Successfully");
+
+         }
         else
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.RC, mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message  sendtoIntlRouteQueue: Successfully");
-        }
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message  sendtoIntlRouteQueue: Successfully : " );
+
+         }
     }
 
     private boolean checkIntlRequirements()
@@ -157,8 +156,8 @@ public class IntlMsgVerifyProcessor
 
         if (lErrorCode != null)
         {
-            if (log.isDebugEnabled())
-                log.debug("Intl Rejected Status Code : " + lErrorCode);
+         	
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Rejected Status Code : " + lErrorCode);
 
             mMessageRequest.setSubOriginalStatusCode(lErrorCode.getStatusCode());
           //  VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);

@@ -4,9 +4,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
@@ -37,6 +39,8 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Platform Reject topic.", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Platform Reject topic. :  "+ErrorMessage.getStackTraceAsString(e) );
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -76,6 +80,9 @@ public class SBCVProducer
         }
         catch (final Exception e)
         {
+        	
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Verify Consumer topic :  "+ErrorMessage.getStackTraceAsString(e) );
+
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
@@ -97,6 +104,8 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Schedule topic.", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Schedule topic :  "+ErrorMessage.getStackTraceAsString(e) );
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -117,6 +126,8 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Blockout topic.", e);
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Blockout topic :  "+ErrorMessage.getStackTraceAsString(e) );
+
             sendToErrorLog(aMessageRequest, e);
         }
     }
@@ -132,6 +143,8 @@ public class SBCVProducer
         }
         catch (final Exception e)
         {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to error log topic :  "+ErrorMessage.getStackTraceAsString(e) );
+
             log.error("Exception while sending request to error log. " + aMessageRequest, e);
         }
     }

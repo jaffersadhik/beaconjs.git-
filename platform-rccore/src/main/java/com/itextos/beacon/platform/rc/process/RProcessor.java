@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.RouteLogic;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.HeaderValidation;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteFinder;
@@ -18,7 +19,7 @@ import com.itextos.beacon.platform.rc.util.RFinder;
 public class RProcessor
 {
 
-    private static final Log     log = LogFactory.getLog(RProcessor.class);
+  //  private static final Log     log = LogFactory.getLog(RProcessor.class);
     private final MessageRequest mMessageRequest;
 
     public RProcessor(
@@ -43,8 +44,7 @@ public class RProcessor
 
         if (lError == null)
         {
-            if (log.isDebugEnabled())
-                log.debug("To Validate Govt Route...");
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: To Validate Govt Route...");
 
             lError = doGovtRouteIdentifying(lFailListRouteId, isSpecialSeries);
         }
@@ -91,8 +91,10 @@ public class RProcessor
                     final RFinder lRFinder        = new RFinder(mMessageRequest);
                     final boolean lMaskGovtHeader = lRFinder.maskGovtHeader();
 
-                    if (lMaskGovtHeader && log.isDebugEnabled())
-                        log.debug("apping found in govt_header_masking****** mid:" + lBaseMessageId);
+                   	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: mapping found in govt_header_masking****** mid:"+ lMaskGovtHeader );
+
+                 
+                
                 }
 
                 final String lRouteId = CommonUtility.nullCheck(mMessageRequest.getRouteId(), true);
@@ -131,8 +133,8 @@ public class RProcessor
 
         if (aFailListRouteId.isEmpty())
         {
-            if (log.isDebugEnabled())
-                log.debug("Going to execute normal routing logics");
+       
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Going to execute normal routing logics" );
 
             final RFinder lRFinder = new RFinder(mMessageRequest);
             lRFinder.findAndSetRoute();
@@ -151,8 +153,9 @@ public class RProcessor
         // route/header is whitelisted in header_route_status
         if (!isValidHeader)
         {
-            if (log.isDebugEnabled())
-                log.debug(lHeader + " Header blocked for route " + lRouteId);
+            
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ::"+lHeader + " Header blocked for route " + lRouteId );
+
             // checking in
             // header_fixed_routes/header_alternate_routes/header_priority_open_routes
             // for alternative routes
@@ -191,8 +194,9 @@ public class RProcessor
     {
         final String lRouteId = CommonUtility.nullCheck(aMessageRequest.getRouteId(), true);
 
-        if (log.isDebugEnabled())
-            log.debug("validateRoutes() - Route Id : " + lRouteId);
+
+
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: validateRoutes() - Route Id : " + lRouteId);
 
         if (RCUtil.isExpiredRoute(lRouteId))
             return PlatformStatusCode.INTL_ROUTE_EXPIRED;
@@ -209,11 +213,10 @@ public class RProcessor
         aMessageRequest.setSubOriginalStatusCode(aPlatformStatusCode.getStatusCode());
         RCProducer.sendToPlatformRejection(aMessageRequest);
 
-        if (log.isDebugEnabled()) {
-          //  log.debug("Sent To Biller " + aMessageRequest);
-            log.debug("Sent To Biller " );
 
-        }
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sent To Biller ");
+
+       
     }
 
     private static void sendToQueue(
@@ -221,13 +224,12 @@ public class RProcessor
     {
         final String lRouteId = CommonUtility.nullCheck(aMessageRequest.getRouteId(), true);
 
-        if (log.isDebugEnabled())
-            log.debug("sendToQueue() - Route Id : " + lRouteId);
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: sendToQueue() - Route Id : " + lRouteId);
 
         final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(lRouteId);
 
-        if (log.isDebugEnabled())
-            log.debug("sendToQueue() - Route Configuration : " + lRouteConfigInfo);
+  
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: sendToQueue() - Route Configuration : " + lRouteConfigInfo);
 
         final String lRouteType = lRouteConfigInfo.getRouteType();
 
@@ -244,11 +246,11 @@ public class RProcessor
             aMessageRequest.setCarrierDateTimeFormat(lRouteConfigInfo.getDtimeFormat());
 
         RCProducer.sendToCarrierHandover(aMessageRequest);
-        if (log.isDebugEnabled()) {
-           // log.debug("Sent to Carrier Handover " + lRouteId + " Success. " + aMessageRequest);
-        	 log.debug("Sent to Carrier Handover " + lRouteId + " Success. " );
+    
              
-        }
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sent to Carrier Handover " + lRouteId + " Success. ");
+
+       
     }
 
 }

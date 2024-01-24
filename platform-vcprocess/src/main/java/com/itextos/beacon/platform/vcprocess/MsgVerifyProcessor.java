@@ -5,9 +5,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.BillType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.vcprocess.util.VCProducer;
 
 public class MsgVerifyProcessor
@@ -29,8 +31,7 @@ public class MsgVerifyProcessor
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Message received : " + mMessageRequest.getBaseMessageId());
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message Received ");
 
             if (!doDuplicateCheck())
                 return;
@@ -49,6 +50,7 @@ public class MsgVerifyProcessor
         catch (final Exception e)
         {
             log.error("Exception occer while processing the message in Verify Consumer ....", e);
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Exception occer while processing the message in Verify Consumer "+ErrorMessage.getStackTraceAsString(e));
 
             VCProducer.sendToErrorLog(mSourceComponent, mMessageRequest, e);
         }
@@ -60,8 +62,8 @@ public class MsgVerifyProcessor
     {
         final boolean isCreditCheckEnabled = CommonUtility.isEnabled(aMessageRequest.getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
-        if (log.isDebugEnabled())
-            log.debug("Credit Check Enabled : " + isCreditCheckEnabled);
+     
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Credit Check Enabled : " + isCreditCheckEnabled);
 
         final BillType lBillType = BillType.getBillType(Integer.toString(aMessageRequest.getBillType()));
 
@@ -69,16 +71,17 @@ public class MsgVerifyProcessor
         {
             VCProducer.sendToNextComponent(aSourceComponent, Component.WC, aMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message sendToPrepaidComponent: Successfully");
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"Message sendToPrepaidComponent: Successfully" );
+
+        
         }
         else
         {
             VCProducer.sendToNextComponent(aSourceComponent, Component.RC, aMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Message  sendToRouterComponent: Successfully");
-        }
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"Message sendToRouterComponent: Successfully" );
+
+         }
     }
 
 }

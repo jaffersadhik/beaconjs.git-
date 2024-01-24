@@ -24,4 +24,16 @@ public class Name {
 
 	}
     
+    
+    public static int getLineNumber() {
+    	// Get the stack trace
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+
+        StackTraceElement callingMethod = stackTrace[2];
+
+        return callingMethod.getLineNumber();
+
+	}
+    
+   
 }

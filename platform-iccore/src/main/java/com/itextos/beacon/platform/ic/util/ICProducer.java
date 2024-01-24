@@ -5,10 +5,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.dltvc.process.DltProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
@@ -36,6 +38,8 @@ public class ICProducer
         }
         catch (final Exception e)
         {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Platform Reject topic : "+ErrorMessage.getStackTraceAsString(e));
+
             log.error(aMessageRequest.getBaseMessageId()+ " : Exception while sending the message to Platform Reject topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
@@ -55,6 +59,8 @@ public class ICProducer
         }
         catch (final Exception e)
         {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to URL Shortner topic. : "+ErrorMessage.getStackTraceAsString(e));
+
             log.error("Exception while sending the message to URL Shortner topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
@@ -69,15 +75,13 @@ public class ICProducer
 
             if (ClusterType.OTP == aMessageRequest.getClusterType())
             {
-                if (log.isDebugEnabled())
-                    log.debug("Bypassing the Schedule/Blockout funcationality for OTP request.., Hence request sending to VC");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"Bypassing the Schedule/Blockout funcationality for OTP request.., Hence request sending to VC");
 
                 sendToVerifyConsumerTopic(aMessageRequest);
             }
             else
             {
-                if (log.isDebugEnabled())
-                    log.debug("Request sending to SBCV..");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to SBCV..");
              //   MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
                 
                 aMessageRequest.setFromComponent(Component.IC.getKey());
@@ -87,6 +91,8 @@ public class ICProducer
         }
         catch (final Exception e)
         {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to SBCV Process topic. : "+ErrorMessage.getStackTraceAsString(e));
+
             log.error("Exception while sending the message to SBCV Process topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
@@ -117,6 +123,8 @@ public class ICProducer
         }
         catch (final Exception e)
         {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Verify Consumer topic : "+ErrorMessage.getStackTraceAsString(e));
+
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
@@ -133,6 +141,9 @@ public class ICProducer
         }
         catch (final Exception e)
         {
+        	if(aBaseMessage instanceof MessageRequest) {
+        	aBaseMessage.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(((MessageRequest)aBaseMessage).getBaseMessageId()+" : Exception while sending the message to error log topic : "+ErrorMessage.getStackTraceAsString(e));
+        	}
             log.error("Exception while sending request to error log. " + aBaseMessage, e);
         }
     }

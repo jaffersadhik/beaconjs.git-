@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.HeaderSubType;
 import com.itextos.beacon.commonlib.constants.HeaderType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
@@ -17,6 +18,7 @@ import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.pattern.PatternCache;
 import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.IntlRUtils;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
@@ -26,7 +28,6 @@ import com.itextos.beacon.platform.rc.util.RCUtil;
 public class RCIntlProcessor
 {
 
-    private static final Log     log = LogFactory.getLog(RCIntlProcessor.class);
 
     private final MessageRequest mMessageRequest;
 
@@ -49,21 +50,20 @@ public class RCIntlProcessor
 
         isFailedListNumber = RCUtil.checkIntlFaillistNumber(mMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Is Fail List number  : '" + isFailedListNumber + "'");
+ 
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: checkIntlFaillistNumber Is Fail List number  : '" + isFailedListNumber + "'");
 
         if (isFailedListNumber)
             isMessageInGlobalTemplate = IntlRUtils.canProcessMessageByGlobalTemplate(mMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Is Message By GlobalTemplate for MID :'" + lBaseMessageId + "' - " + isMessageInGlobalTemplate);
+         mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Is Message By GlobalTemplate " + isMessageInGlobalTemplate);
 
         if (isMessageInGlobalTemplate)
         {
             isRouteFound = IntlRUtils.setRouteUsingMobileNumber(mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Route found based on intl_mobile_routes : '" + isRouteFound + "'");
+    
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Route found based on intl_mobile_routes : '" + isRouteFound + "'");
 
             if (!isRouteFound)
             {
@@ -72,22 +72,25 @@ public class RCIntlProcessor
                 isInvalidIntlMobileLength = result[1];
                 isCCNotInRange            = result[2];
 
-                if (log.isDebugEnabled())
-                    log.debug("Route found based on route_intl : '" + isRouteFound + "'");
+      
+                mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Route found based on route_intl : '" + isRouteFound + "'");
 
-                if (isRouteFound)
+                if (isRouteFound) {
                     IntlRUtils.setRouteBasesdOnOtherCriteria(mMessageRequest);
-                else
-                    if (log.isDebugEnabled())
-                        log.debug("No need to check again here for the Fail List number. Use the same variable:::::: Is Fail List number : '" + isFailedListNumber + "'");
-            } // end of the mobile number route found.
+
+                }else {
+        
+                	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: No need to check again here for the Fail List number. Use the same variable:::::: Is Fail List number : '" + isFailedListNumber + "'");
+
+                }
+                } // end of the mobile number route found.
 
             if (isRouteFound)
             {
                 final String lRouteId = CommonUtility.nullCheck(mMessageRequest.getRouteId(), true);
 
-                if (log.isDebugEnabled())
-                    log.debug("Route found : '" + isRouteFound + "' Route ID '" + lRouteId + "'");
+        
+            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Route found : '" + isRouteFound + "' Route ID '" + lRouteId + "'");
 
                 if (lRouteId != null)
                 {
@@ -105,17 +108,18 @@ public class RCIntlProcessor
                 }
                 else
                 {
-                    if (log.isDebugEnabled())
-                        log.debug("Since route found based on the intl_route_config, setting the standard route as the Route id for this message. MessageId : '" + lBaseMessageId + "'");
+              
+                	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Since route found based on the intl_route_config, setting the standard route as the Route id for this message. MessageId : '" + lBaseMessageId + "'");
 
                     mMessageRequest.setRouteId(mMessageRequest.getIntlStandardRouteId());
                 }
             }
         }
 
-        if (log.isDebugEnabled())
-            log.debug("Route ID '" + mMessageRequest.getRouteId() + "', FoundRoute: '" + isRouteFound + "', isFailedListNumber: '" + isFailedListNumber + "', isExpired: '" + isExpired
-                    + "', isInvalidIntlMobileLength : '" + isInvalidIntlMobileLength + "', isCCNotInRange : '" + isCCNotInRange + "'");
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Route ID '" + mMessageRequest.getRouteId() + "', FoundRoute: '" + isRouteFound + "', isFailedListNumber: '" + isFailedListNumber + "', isExpired: '" + isExpired
+                + "', isInvalidIntlMobileLength : '" + isInvalidIntlMobileLength + "', isCCNotInRange : '" + isCCNotInRange + "'");
+
+    
 
         splitAndSendMessage(isFailedListNumber, isRouteFound, isExpired, isInvalidIntlMobileLength, isCCNotInRange);
     }
@@ -165,9 +169,9 @@ public class RCIntlProcessor
         else
             sendToBillerQueue(lErrorCode, mMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Sent to Route " + mMessageRequest.getRouteId() + " Success " + mMessageRequest);
-    }
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Sent to Route " + mMessageRequest.getRouteId() + " Success ");
+
+     }
 
     private void setCarrierDTimeFormat(
             MessageRequest aMessageRequest)
@@ -188,13 +192,12 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for checkforAbosulteRouteHeader. MID : " + aMessageId);
+     	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Checking for checkforAbosulteRouteHeader. MID : " );
 
         final boolean isHeader = setHeader(mMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Is Valid INTL Header [ '" + mMessageRequest.getHeader() + "'] ?" + isHeader);
+    
+     	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Is Valid INTL Header [ '" + mMessageRequest.getHeader() + "'] ?" + isHeader );
 
         boolean isValidHeaderLength = true;
 
@@ -202,21 +205,23 @@ public class RCIntlProcessor
         {
             final String lHeaderRegEx = CommonUtility.nullCheck(IntlRUtils.getIntlHeaderInfo(mMessageRequest.getCountry()), true);
 
-            if (log.isDebugEnabled())
-                log.debug("Header Regex Value : " + lHeaderRegEx);
+         
+         	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Header Regex Value : " + lHeaderRegEx );
 
             isValidHeaderLength = isValidHeaderLength(mMessageRequest, lHeaderRegEx);
 
             // isValidHeaderLength = isValidHeaderLength(mMessageRequest);
 
-            if (log.isDebugEnabled())
-                log.debug("Header Length Validation Status : " + isValidHeaderLength);
+      
         }
+
+     	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Header Length Validation Status : " + isValidHeaderLength );
 
         if (!isHeader || !isValidHeaderLength)
         {
-            if (log.isDebugEnabled())
-                log.debug("Valid header Length ::  " + isValidHeaderLength);
+          
+
+         	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Valid header Length ::  " + isValidHeaderLength );
 
             if (aIsFailedListNumber)
             {
@@ -238,15 +243,15 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for checkforAbosulteRouteIntlRoute. MID : " + aMessageId);
+
+     	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Checking for checkforAbosulteRouteIntlRoute. ::  "  );
 
         final boolean isIntlRoute = isINTLRoute(mMessageRequest);
 
         if (!isIntlRoute)
         {
-            if (log.isDebugEnabled())
-                log.debug("Is Intl Route : " + isIntlRoute);
+        
+         	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Is Intl Route : " + isIntlRoute  );
 
             if (aIsFailedListNumber)
             {
@@ -266,15 +271,16 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for checkforAbosulteRouteFailList. MID : " + aMessageId);
+
+
+     	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Checking for checkforAbosulteRouteFailList.  : " );
 
         boolean isAbsoluteRoute = isAbsoluteRoute(mMessageRequest);
 
         if (!isAbsoluteRoute)
         {
-            if (log.isDebugEnabled())
-                log.debug("Absolute Route Status : " + isAbsoluteRoute);
+     
+         	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Absolute Route Status : " + isAbsoluteRoute );
 
             if (aIsFailedListNumber)
             {
@@ -296,13 +302,11 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for Invalid Intl M Number. MessageId : " + aMessageId);
+     
+      	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Invalid Mobile Length ...." + aIsInvalidIntlMobileLength );
 
         if (aIsInvalidIntlMobileLength)
         {
-            if (log.isDebugEnabled())
-                log.debug("Invalid Mobile Length ...." + aIsInvalidIntlMobileLength);
 
             if (aIsFailedListNumber)
                 setDummyRouteAndHeader(mMessageRequest, aIsRouteFound);
@@ -318,14 +322,12 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for CC Not in Range. MessageId : " + aMessageId);
+     
+      	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Checking for CC Not in Range. aIsCCNotInRange : " + aIsCCNotInRange );
 
         if (aIsCCNotInRange)
         {
-            if (log.isDebugEnabled())
-                log.debug("CC Not in Range : " + aIsCCNotInRange);
-
+         
             if (aIsFailedListNumber)
                 setDummyRouteAndHeader(mMessageRequest, aIsRouteFound);
             else
@@ -339,13 +341,10 @@ public class RCIntlProcessor
             boolean aIsRouteFound,
             boolean aIsFailedListNumber)
     {
-        if (log.isDebugEnabled())
-            log.debug("Checking for Record Not Found. MessageId : " + aMessageId);
-
+      
         if (!aIsRouteFound)
         {
-            if (log.isDebugEnabled())
-                log.debug("Route Not found  MessageId : " + aIsRouteFound);
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Checking for Record Not Found. MessageId : " + aIsRouteFound );
 
             if (aIsFailedListNumber)
                 setDummyRouteAndHeader(mMessageRequest, false);
@@ -359,21 +358,23 @@ public class RCIntlProcessor
             String aMessageId,
             boolean aIsFailedListNumber)
     {
-        if (log.isDebugEnabled())
-            log.debug("Setting Route Type. MessageId : " + aMessageId);
+      
+       	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Setting Route Type.  : ");
 
         final RouteConfigInfo lRouteConfigMap = RouteUtil.getRouteConfiguration(mMessageRequest.getRouteId());
 
         if (lRouteConfigMap != null)
         {
-            if (log.isDebugEnabled())
-                log.debug("Found Route Config. MessageId : " + aMessageId);
+     
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Found Route Config.  : ");
 
             mMessageRequest.setRouteType(lRouteConfigMap.getRouteType());
         }
         else
         {
-            log.error("When the route config is not found then treat it as Route Not found case and send to Biller");
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: When the route config is not found then treat it as Route Not found case and send to Biller");
+
+            
             if (aIsFailedListNumber)
                 setDummyRouteAndHeader(mMessageRequest, false);
             else
@@ -388,13 +389,12 @@ public class RCIntlProcessor
             boolean aIsFailedListNumber,
             boolean aIsRouteFound)
     {
-        if (log.isDebugEnabled())
-            log.debug("Check for expired message");
+       
+       	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Check for expired message");
 
         if (aIsExpired)
         {
-            if (log.isDebugEnabled())
-                log.debug("Expired message. MessageId : " + aMessageId);
+           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: message Expired .  : " + aIsExpired);
 
             if (aIsFailedListNumber)
                 setDummyRouteAndHeader(mMessageRequest, aIsRouteFound);
@@ -407,8 +407,8 @@ public class RCIntlProcessor
     private static void setRouteBasedOnRouteGroup(
             MessageRequest aMessageRequest)
     {
-        if (log.isDebugEnabled())
-            log.debug("Setting route based on route group.");
+   
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Setting route based on route group.");
 
         final String lGroupBasedRouteId = IntlRUtils.getRouteBasedOnRouteGroupID(aMessageRequest);
 
@@ -453,29 +453,32 @@ public class RCIntlProcessor
                 lLogicId      = RouteLogic.INTL_GLOBAL_FAILLIST_LOGICID;
             }
 
-            if (log.isDebugEnabled())
-                log.debug("DummyRouteid Details : '" + lDummyRouteid + "'");
+  
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: DummyRouteid Details : '" + lDummyRouteid + "'");
 
             if (lDummyRouteid != null)
             {
                 final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(lDummyRouteid);
 
-                if (log.isDebugEnabled())
-                    log.debug("Route Config Info for Dummy Route :'" + lDummyRouteid + "' is : '" + lRouteConfigInfo + "'" + " logicId:" + lLogicId);
+        
+               	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Route Config Info for Dummy Route :'" + lDummyRouteid + "' is : '" + lRouteConfigInfo + "'" + " logicId:" + lLogicId);
 
                 aMessageRequest.setRouteId(lDummyRouteid);
                 if ((lRouteConfigInfo != null) && (lRouteConfigInfo.getRouteType() != null))
                     aMessageRequest.setRouteType(lRouteConfigInfo.getRouteType());
             }
-            else
-                log.error("Dummy Routeid is not configured in app_configuration for the key");
+            else {
+               	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Dummy Routeid is not configured in app_configuration for the key");
 
+            }
             if (lLogicId != null)
                 aMessageRequest.setRouteLogicId(CommonUtility.getInteger(lLogicId.getKey()));
         }
         catch (final Exception e)
         {
-            log.error("Excception while setting dummyRouteid for the Messaage : '" + aMessageRequest + "'");
+        	
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Excception while setting dummyRouteid '" +ErrorMessage.getStackTraceAsString(e));
+
         }
     }
 
@@ -493,8 +496,8 @@ public class RCIntlProcessor
         final String              key             = CommonUtility.combine(aMessageRequest.getCountry(), aMessageRequest.getRouteId());
         final Map<String, String> lIntlHeaderInfo = IntlRUtils.getIntlRouteHeaderInfo(key);
 
-        if (log.isDebugEnabled())
-            log.debug("For the Country '" + aMessageRequest.getCountry() + "' and Route ID '" + aMessageRequest.getRouteId() + "' the Header logic is : '" + lIntlHeaderInfo + "'");
+    
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: For the Country '" + aMessageRequest.getCountry() + "' and Route ID '" + aMessageRequest.getRouteId() + "' the Header logic is : '" + lIntlHeaderInfo + "'");
 
         HeaderType    lHeaderType    = HeaderType.DYNAMIC;
         HeaderSubType lHeaderSubType = HeaderSubType.NA;
@@ -512,8 +515,9 @@ public class RCIntlProcessor
             final HeaderSubType lDefaultHeaderSubType = HeaderSubType.getHeaderSubType(aMessageRequest.getIntlHeaderSubType());
             final String        lDefaultHeader        = aMessageRequest.getIntlDefaultHeader();
 
-            if (log.isDebugEnabled())
-                log.debug("DefaultSenderidType : '" + lDefaultHeaderType + "', DefaultHeader : '" + lDefaultHeader + "'");
+         
+
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: DefaultSenderidType : '" + lDefaultHeaderType + "', DefaultHeader : '" + lDefaultHeader + "'");
 
             if (lDefaultHeaderType != null)
                 lHeaderType = lDefaultHeaderType;
@@ -525,8 +529,8 @@ public class RCIntlProcessor
                 lStaticHeader = lDefaultHeader;
         }
 
-        if (log.isDebugEnabled())
-            log.debug("After setting HeaderType : '" + lHeaderType + "' - staticHeader '" + lStaticHeader + "'");
+    
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: After setting HeaderType : '" + lHeaderType + "' - staticHeader '" + lStaticHeader + "'");
 
         if (HeaderType.STATIC == lHeaderType)
         {
@@ -707,8 +711,9 @@ public class RCIntlProcessor
             MessageRequest aMessageRequest)
     {
         aMessageRequest.setSubOriginalStatusCode(aPlatformStatusCode.getStatusCode());
-        if (log.isDebugEnabled())
-            log.debug("sendToPlatformRejection" + aMessageRequest);
+       
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: sendToPlatformRejection");
+
         RCProducer.sendToPlatformRejection(aMessageRequest);
     }
 
@@ -720,16 +725,16 @@ public class RCIntlProcessor
         if (IntlRUtils.getCarrierSupportHeaders().containsKey(lKey))
         {
             MessageUtil.setHeaderId(aMessageRequest, IntlRUtils.getCarrierSupportHeaders().get(lKey));
-            if (log.isDebugEnabled())
-                log.debug("CarrierSupportHeader found for the key:" + lKey + " swapped carrier Header:" + MessageUtil.getHeaderId(aMessageRequest));
+          
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: CarrierSupportHeader found for the key:" + lKey + " swapped carrier Header:" + MessageUtil.getHeaderId(aMessageRequest));
+
         }
     }
 
     private static String getVaidateUserHeader(
             MessageRequest aMessageRequest)
     {
-        if (log.isDebugEnabled())
-            log.debug("getVaidateUserHeader() Message Id" + aMessageRequest.getBaseMessageId());
+       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" getVaidateUserHeader()");
 
         final boolean isHeaderChk = aMessageRequest.isDefailtHeaderEnable();
         final String  lAccHeader  = CommonUtility.nullCheck(aMessageRequest.getClientDefaultHeader(), true);
@@ -741,16 +746,15 @@ public class RCIntlProcessor
 
         if (isHeaderChk && !lHeader.isEmpty() && RCUtil.isValidUserHeader(lClientId, lHeader))
         {
-            if (log.isDebugEnabled())
-                log.debug("getVaidateUserHeader Success");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: getVaidateUserHeader Success");
+
             return lHeader;
         }
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("getVaidateUserHeader false");
-            log.debug("Default Header : " + lAccHeader);
-        }
+     
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: getVaidateUserHeader false");
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Default Header : " + lAccHeader);
+
         if (lAccHeader.isEmpty())
             return null;
 

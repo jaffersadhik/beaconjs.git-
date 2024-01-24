@@ -6,11 +6,13 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
@@ -42,22 +44,22 @@ public class VCUtil
         final String lMessageId            = aMessageRequest.getBaseMessageId();
         final int    lDuplicateChkInterval = aMessageRequest.getDuplicateCheckInterval();
 
-        if (log.isDebugEnabled())
-            log.debug("Duplicate Checking for Client : '" + lClientId + "' :: Message Id : '" + lMessageId + "'");
+      
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Duplicate Checking for Client : " + lClientId );
 
         if (aMessageRequest.getDupCheckForUI() == 1)
         {
             final String lCampId = CommonUtility.nullCheck(aMessageRequest.getCampaignId(), true);
 
-            if (log.isDebugEnabled())
-                log.debug("Duplicate Checking for Client : '" + lClientId + "' :: Campiagn Id : '" + lCampId + "'");
+      
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Duplicate Checking for Client : '" + lClientId + "' :: Campiagn Id : '" + lCampId + "'" );
 
             final String lMobileNumber = aMessageRequest.getMobileNumber();
             return DuplicateCheck.isDuplicatCampiagn(lClientId, lMobileNumber, lCampId);
         }
 
-        if (log.isDebugEnabled())
-            log.debug("Duplicate Check for other applications ..");
+  
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"Duplicate Check for other applications .." );
 
         if (DUPLICATE_BASED_ON_CUST_MID == lDuplicateType)
         {
@@ -87,19 +89,16 @@ public class VCUtil
 
         final boolean isTimeBoundEnable = aMessageRequest.getTimeboundCheck();
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("Processing Timebound check for Message Id : " + aMessageRequest.getBaseMessageId());
-            log.debug("Time boundCheck Enable :" + isTimeBoundEnable);
-        }
+  
+         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Time boundCheck Enable :" + isTimeBoundEnable );
+
 
         if (isTimeBoundEnable)
         {
             final int lTimeBoundInterval = aMessageRequest.getTimeboundInterval();
             final int lTimeBoundMaxCount = aMessageRequest.getTimeboundMaxReqCount();
 
-            if (log.isDebugEnabled())
-                log.debug("Timebound interval : '" + lTimeBoundInterval + "', TimeBound Max Count:'" + lTimeBoundMaxCount + "'");
+          	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Timebound interval : '" + lTimeBoundInterval + "', TimeBound Max Count:'" + lTimeBoundMaxCount + "'");
 
             return TimeBoundMessageChecker.increaseMsgCounter(lClientId, CommonUtility.getLong(lMobileNumber), lTimeBoundInterval, lTimeBoundMaxCount);
         }
@@ -116,8 +115,7 @@ public class VCUtil
         final String lTemplateGroupId   = CommonUtility.nullCheck(aMessageRequest.getDltTemplateGroupId(), true);
         final String lHeader            = MessageUtil.getHeaderId(aMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("cust_dlt_entityId:'" + lCustDltEntityId + "', cust_dlt_templateId:'" + lCustDltTemplateId + "', TemplateGroupId :'" + lTemplateGroupId + "', header:'" + lHeader + "'");
+     	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: cust_dlt_entityId:'" + lCustDltEntityId + "', cust_dlt_templateId:'" + lCustDltTemplateId + "', TemplateGroupId :'" + lTemplateGroupId + "', header:'" + lHeader + "'" );
 
         final DomesticUserHeaderInfo lDomesticUserHeaderInfo = (DomesticUserHeaderInfo) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.DOMESTIC_USER_HEADERS);
         final String                 lHeaderBasedEntity      = CommonUtility.nullCheck(lDomesticUserHeaderInfo.getEntityId(lTemplateGroupId, lHeader.toLowerCase()));
@@ -143,8 +141,9 @@ public class VCUtil
 
         if (CommonUtility.nullCheck(lHeaderBasedEntity, true).equals(""))
         {
-            if (log.isDebugEnabled())
-                log.debug("No entity id found in dlt_template_group_header_entity_map against Template Group Id:'" + lTemplateGroupId + "', Header:'" + lHeader + "'");
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: No entity id found in dlt_template_group_header_entity_map against Template Group Id:'" + lTemplateGroupId + "', Header:'" + lHeader + "'" );
+
+            
             return PlatformStatusCode.INVALID_DLT_ENTITY_ID.getStatusCode();
         }
 
@@ -156,9 +155,9 @@ public class VCUtil
 
         if (!isFetchTemplateId)
         {
-            if (log.isDebugEnabled())
-                log.debug("No template id found in DLT_Templates table against entityid:'" + lHeaderBasedEntity + "', header:'" + lHeader + "', dlt_templte_group_id:'" + lTemplateGroupId + "'");
-            return PlatformStatusCode.REJECTED_IN_DLT_TEMPLATE_CHECK.getStatusCode();
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  :: No template id found in DLT_Templates table against entityid:'" + lHeaderBasedEntity + "', header:'" + lHeader + "', dlt_templte_group_id:'" + lTemplateGroupId + "'" );
+
+             return PlatformStatusCode.REJECTED_IN_DLT_TEMPLATE_CHECK.getStatusCode();
         }
 
         return null;
@@ -175,8 +174,8 @@ public class VCUtil
             final String lDltTemplateGrpId = CommonUtility.nullCheck(aMessageRequest.getDltTemplateGroupId(), true);
 
             final String lLongMessage      = CommonUtility.nullCheck(aMessageRequest.getLongMessage(), true);
-            if (log.isDebugEnabled())
-                log.debug("DltTemplateGrpId:'" + lDltTemplateGrpId + "',  Header:'" + lHeader + "', Long Message:'" + lLongMessage + "'");
+
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: DltTemplateGrpId:'" + lDltTemplateGrpId + "',  Header:'" + lHeader + "', Long Message:'" + lLongMessage + "'" );
 
             TemplateResult lTemplateResult = null;
 
@@ -187,13 +186,12 @@ public class VCUtil
             else
                 lTemplateResult = TemplateScrubber.getTemplate(lDltTemplateGrpId, lHeader, lLongMessage);
 
-            if (log.isInfoEnabled())
-                log.info("lTemplateRresult==" + lTemplateResult);
+      
+
 
             if (lTemplateResult != null)
             {
-                if (log.isDebugEnabled())
-                    log.debug("Template Result : " + lTemplateResult);
+               	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"lTemplateRresult==" + lTemplateResult );
 
                 final Result lResult = lTemplateResult.getResult();
 
@@ -219,7 +217,9 @@ public class VCUtil
         {
             aMessageRequest.setAdditionalErrorInfo(exp.getMessage());
 
-            log.error("problem finding the templates due to...", exp);
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ::  problem finding the templates due to..."+ ErrorMessage.getStackTraceAsString(exp));
+
+            log.error("", exp);
         }
         return templateMatchStatus;
     }
@@ -287,11 +287,10 @@ public class VCUtil
 
         final boolean isCappingEnable = CommonUtility.isEnabled(aMessageRequest.getValue(MiddlewareConstant.MW_CAPPING_CHK_ENABLED));
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("Processing Capping check for Message Id : " + aMessageRequest.getBaseMessageId());
-            log.debug("Capping Enable :" + isCappingEnable);
-        }
+     
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Capping Enable :" + isCappingEnable);
+
+         
 
         if (isCappingEnable)
         {
@@ -299,8 +298,7 @@ public class VCUtil
             int        lTotalMsgParts      = aMessageRequest.getMessageTotalParts();
             lTotalMsgParts = (lTotalMsgParts == 0) ? 1 : lTotalMsgParts;
 
-            if (log.isDebugEnabled())
-                log.debug("Capping Max Request Allow Count : '" + lCappingMaxReqCount + "', Message Part Count :'" + lTotalMsgParts + "'");
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Capping Max Request Allow Count : '" + lCappingMaxReqCount + "', Message Part Count :'" + lTotalMsgParts + "'");
 
             return CappingMessageChecker.doCappingCheck(lClientId, lCappingMaxReqCount, lTotalMsgParts);
         }
@@ -315,9 +313,9 @@ public class VCUtil
 
         if (!doCappingChk(aMessageRequest))
         {
-            if (log.isDebugEnabled())
-                log.debug("Message Rejected Capping Check Failed .. Message Id : " + aMessageRequest.getBaseMessageId());
-            aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.REJECT_CAPPING_CHECK.getStatusCode());
+           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Message Rejected Capping Check Failed");
+
+              aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.REJECT_CAPPING_CHECK.getStatusCode());
             VCProducer.sendToPlatformRejection(aSourceComponent, aMessageRequest);
             return false;
         }
