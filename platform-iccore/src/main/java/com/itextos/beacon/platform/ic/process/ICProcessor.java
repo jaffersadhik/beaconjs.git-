@@ -8,6 +8,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.Services;
 import com.itextos.beacon.commonlib.constants.SubServices;
@@ -48,11 +49,12 @@ public class ICProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
-        	   
+        	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
         	
         	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
           
            long starttime=System.currentTimeMillis();
+           
            		ICProcessor.forIC(lMessageRequest);
       	   
       	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Time Taken For process :"+(System.currentTimeMillis()-starttime)+" Milli Second"); 
@@ -99,7 +101,7 @@ public class ICProcessor
             ICProducer.sendToErrorLog(lMessageRequest, e);
         }
 
-   	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+   	//   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
 
     }
   

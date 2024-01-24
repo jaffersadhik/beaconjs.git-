@@ -378,10 +378,10 @@ public abstract class BaseMessage
     @Override
     public StringBuffer getLogBuffer()
     {
-        return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+        return (StringBuffer)messageAttributes.get(MiddlewareConstant.MW_LOG_BUFFER.getKey());
     }
 
-    private StringBuffer getLogBufferValue(MiddlewareConstant aLogBufferKey) {
+    public StringBuffer getLogBufferValue(MiddlewareConstant aLogBufferKey) {
     	  if (aLogBufferKey == null)
               return null;
 
