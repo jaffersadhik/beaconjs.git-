@@ -392,6 +392,10 @@ public abstract class BaseMessage
         	  System.out.println("Log Buffer null");
         	  value=new StringBuffer();
         	  messageAttributes.put(aLogBufferKey.getKey(), value);
+          }else {
+        	 
+        	  System.out.println("Log Buffer not null");
+
           }
           return (StringBuffer)value;
 
