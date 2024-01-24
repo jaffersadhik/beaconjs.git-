@@ -15,7 +15,6 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
-import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
@@ -44,6 +43,8 @@ public class CarrierHandoverProcess
         extends
         AbstractKafkaComponentProcessor
 {
+
+    private static final Log log = LogFactory.getLog(CarrierHandoverProcess.class);
 
 
     public CarrierHandoverProcess(
@@ -369,6 +370,9 @@ public class CarrierHandoverProcess
                    e1.printStackTrace();
                }
            }
+    	   
+     	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+
 
     }
     private static void sendDummyRoute(final SubmissionObject lSubmissionObject,final RouteKannelInfo lKannelRouteInfo,final MessageRequest lMessageRequest,ClusterType mPlatformCluster) {

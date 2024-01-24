@@ -103,6 +103,8 @@ public class ICProcessor
             ICProducer.sendToErrorLog(lMessageRequest, e);
         }
 
+   	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+
     }
   
 

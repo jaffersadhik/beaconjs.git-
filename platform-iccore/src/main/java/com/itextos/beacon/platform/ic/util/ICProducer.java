@@ -96,6 +96,8 @@ public class ICProducer
             log.error("Exception while sending the message to SBCV Process topic.", e);
             sendToErrorLog(aMessageRequest, e);
         }
+        
+
     }
 
     public static void sendToVerifyConsumerTopic(

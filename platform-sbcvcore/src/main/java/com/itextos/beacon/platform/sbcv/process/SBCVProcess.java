@@ -1,5 +1,8 @@
 package com.itextos.beacon.platform.sbcv.process;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
@@ -9,12 +12,15 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.platform.ic.process.ICProcessor;
 import com.itextos.beacon.platform.sbcv.util.SBCVProducer;
 
 public class SBCVProcess
         extends
         AbstractKafkaComponentProcessor
 {
+
+    private static final Log log = LogFactory.getLog(SBCVProcess.class);
 
 
     public SBCVProcess(
@@ -71,6 +77,8 @@ public class SBCVProcess
             e.printStackTrace();
         }
     
+    	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+
     }
     
     private static void sendToNextProcess(

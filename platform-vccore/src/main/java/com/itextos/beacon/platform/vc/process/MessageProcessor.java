@@ -62,6 +62,9 @@ public class MessageProcessor
 
             VCProducer.sendToErrorLog(mComponent, lMessageRequest, e);
         }
+        
+ 	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+
     }
     @Override
     public void doCleanup()

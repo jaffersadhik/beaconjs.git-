@@ -73,6 +73,8 @@ public class RConsumer
             }
         }
 
+  	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+
     }
     @Override
     public void doCleanup()
