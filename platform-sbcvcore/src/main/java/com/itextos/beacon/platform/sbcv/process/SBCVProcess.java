@@ -12,7 +12,6 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.Name;
-import com.itextos.beacon.platform.ic.process.ICProcessor;
 import com.itextos.beacon.platform.sbcv.util.SBCVProducer;
 
 public class SBCVProcess
