@@ -20,6 +20,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
@@ -28,6 +29,7 @@ import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
 import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.platform.dnpayloadutil.common.PayloadUtil;
@@ -78,8 +80,8 @@ public class PayloadProcessor
 
         if (lSts < lSTimelong)
         {
-            if (log.isWarnEnabled())
-                log.warn("Looks Platfrom time is less than the time received from client (stime) so adjusting sts with random number");
+   
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" :: Looks Platfrom time is less than the time received from client (stime) so adjusting sts with random number");
 
             final int lMaxRandomInSec = CommonUtility.getInteger(PayloadUtil.getAppConfigValueAsString(ConfigParamConstants.GLOBAL_DN_ADJUSTMENT_IN_SEC), 10);
 
@@ -88,8 +90,10 @@ public class PayloadProcessor
             else
                 lSts = lSTimelong;
 
-            if (log.isWarnEnabled())
-                log.warn("Adjusted sts:" + lSts + " for stime:" + lSTimelong);
+         
+            
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" ::: Adjusted sts:" + lSts + " for stime:" + lSTimelong);
+
         }
 
         if (lDNAdjust != 0)
@@ -98,8 +102,7 @@ public class PayloadProcessor
             final boolean isWhiteListed      = PayloadUtil.checkNumberWhiteListed(aSubmissionObject.getMobileNumber());
             final boolean lExcludeCircleList = PayloadUtil.isCircleInExcludeList(lClientId, aSubmissionObject.getCircle());
 
-            if (log.isInfoEnabled())
-                log.info("isWhiteListed:" + isWhiteListed + " circleInExcludeList:" + lExcludeCircleList);
+             aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" ::: isWhiteListed:" + isWhiteListed + " circleInExcludeList:" + lExcludeCircleList);
 
             if (((lSts - lSTimelong) > lDNAdjustMills) && !isWhiteListed && !lExcludeCircleList)
                 lSts = lSTimelong + (CommonUtility.getRandomNumber(0, lDNAdjust + 1) * 1000);
@@ -126,9 +129,7 @@ public class PayloadProcessor
             final String lPayloadParamkey = lIterator.next();
             final String lKeyValue        = CommonUtility.nullCheck(aSubmissionObject.getValue(MiddlewareConstant.getMiddlewareConstantByName(lPayloadParamkey)), true);
 
-            if (log.isDebugEnabled())
-                log.debug("Key : " + lPayloadParamkey + " :: Value :" + lKeyValue);
-
+      
             if (lKeyValue.isEmpty())
                 continue;
 
@@ -153,8 +154,8 @@ public class PayloadProcessor
 
         final String json = new JSONObject(lPayloadMap).toString();
 
-        if (log.isInfoEnabled())
-            log.info("payload json:-->" + json);
+
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: payload json:-->" + json);
 
         return json;
     }
@@ -164,8 +165,8 @@ public class PayloadProcessor
     {
         final boolean isNoPayloadForPromoMsg = CommonUtility.isEnabled(PayloadUtil.getAppConfigValueAsString(ConfigParamConstants.NOPAYLOAD_FOR_PROMO_MSG));
 
-        if (log.isInfoEnabled())
-            log.info(aSubmissionObject.getMessageId() + " : app_config_params promo.nopayload=" + isNoPayloadForPromoMsg);
+    
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+" : app_config_params promo.nopayload=" + isNoPayloadForPromoMsg);
 
         final MessageType lMsgType = aSubmissionObject.getMessageType();
 
@@ -197,8 +198,9 @@ public class PayloadProcessor
             final String      lMessageId   = aSubmissionObject.getMessageId();
             final ClusterType lClusterType = aSubmissionObject.getClusterType();
 
-            if (log.isInfoEnabled())
-                log.info("storing payload--->" + lMessageId + " user cluster--->" + lClusterType.getKey());
+         
+
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: storing payload--->" + lMessageId + " user cluster--->" + lClusterType.getKey());
 
             final Date   expireDateTime       = getExpiryDateTime(aSubmissionObject);
             final String payloadExpiryTime    = DateTimeUtility.getFormattedDateTime(expireDateTime, DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH);
@@ -219,35 +221,37 @@ public class PayloadProcessor
             try (
                     Jedis lJedisConn = RedisConnectionProvider.getInstance().getConnection(lClusterType, Component.DN_PAYLOAD, lPayloadRedisIndex);)
             {
-                if (log.isInfoEnabled())
-                    log.info("Jedis payload connection = " + lJedisConn);
-
+             
                 final String key    = REDISKEY_PREFIX_NEW + payloadExpiryTime;
                 final String lField = CommonUtility.combine(lMessageId, String.valueOf(lRetryAttempt));
 
                 final long   lCnt   = lJedisConn.hset(key, lField, lPayload);
 
-                if (log.isInfoEnabled())
-                    log.info("payload added successfully-->" + key);
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  :: payload added successfully-->" + key);
 
                 if (lCnt > 0)
                 {
-                    if (log.isDebugEnabled())
-                        log.debug(lClusterType + ", Added in Redis Index Value : '" + lRedisIndex + "', Field '" + lField + "', Mid :'" + lMessageId + "'");
+                     
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::" + lClusterType + ", Added in Redis Index Value : '" + lRedisIndex + "', Field '" + lField + "', Mid :'" + lMessageId + "'");
+
                     returnValue = lRedisIndex;
                 }
                 else
                 {
                     isDBIsert   = true;
                     returnValue = storePayloadInDB(lMessageId, lRetryAttempt, dateStime.getTime(), lClusterType.getKey(), lPayload, expireDateTime.getTime());
-                    log.error("Cluster:'" + lClusterType.getKey() + "', MessageId:'" + lMessageId + "', Key:'" + key + "', Field :'" + lField + "', Redis Insert Status:'" + lCnt + "'");
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  :: Cluster:'" + lClusterType.getKey() + "', MessageId:'" + lMessageId + "', Key:'" + key + "', Field :'" + lField + "', Redis Insert Status:'" + lCnt + "'");
+
+                
                 }
 
                 isDone = true;
             }
             catch (final Exception exp)
             {
-                log.error("Some problem in inserting into " + (isDBIsert ? "Database.. Will try after 100 ms" : "Redis. Will try with DB Insert."), exp);
+                log.error("  :: Some problem in inserting into " + (isDBIsert ? "Database.. Will try after 100 ms" : "Redis. Will try with DB Insert."), exp);
+
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  :: Some problem in inserting into " + (isDBIsert ? "Database.. Will try after 100 ms" : "Redis. Will try with DB Insert.")+" ::: "+ErrorMessage.getStackTraceAsString(exp));
 
                 try
                 {
@@ -260,7 +264,9 @@ public class PayloadProcessor
                 }
                 catch (final Exception e)
                 {
-                    log.error("problem storing to redis and DB retrying after 100 millis due to...", e);
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: problem storing to redis and DB retrying after 100 millis due to..."+ ErrorMessage.getStackTraceAsString(e));
+
+                    log.error("  ::: problem storing to redis and DB retrying after 100 millis due to...", e);
                 }
             }
             if (!isDone)
@@ -293,9 +299,9 @@ public class PayloadProcessor
         lCalExpiry.set(Calendar.SECOND, 0);
         lCalExpiry.set(Calendar.MILLISECOND, 0);
 
-        // TODO What is the logic here
-        if (log.isInfoEnabled())
-            log.info("calculated expiry=" + lCalExpiry);
+       
+        aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: calculated expiry=" + lCalExpiry );
+
 
         return lCalExpiry.getTime();
     }
@@ -309,13 +315,13 @@ public class PayloadProcessor
             final String lMessageId    = aDeliveryObject.getMessageId();
             final int    lRetryAttempt = aDeliveryObject.getRetryAttempt();
             final String lRedisIndex   = aDeliveryObject.getPayloadRedisId();
-            if (log.isDebugEnabled())
-                log.debug("Payload Redis Index : " + lRedisIndex);
+        
+            aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: Payload Redis Index : " + lRedisIndex );
 
             String lKeyPartDateTime = aDeliveryObject.getPayloadExpiry();
 
-            if (log.isDebugEnabled())
-                log.debug("Payload Expiry ..Key : " + lKeyPartDateTime);
+        
+            aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: Payload Expiry ..Key : " + lKeyPartDateTime );
 
             if (lKeyPartDateTime == null)
             {
@@ -328,21 +334,23 @@ public class PayloadProcessor
 
             if (lRedisIndex.equals(REDIS_INDEX_REFER_DB))
             {
-                if (log.isInfoEnabled())
-                    log.info("retriving payload from mysql for key--->" + lRedisKey);
+                 
+                aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: retriving payload from mysql for key--->" + lRedisKey);
+
                 lJsonPayload = PayloadInsertInDB.retrivePayload(lMessageId, lRetryAttempt);
             }
             else
             {
-                if (log.isDebugEnabled())
-                    log.debug("Going to verify from redis.....");
+    
+                aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+" ::: Going to verify from redis.....");
 
                 if (!REDIS_INDEX_NOT_APPLICABLE.equals(lRedisIndex))
                 {
                     lJsonPayload = getPayloadFromRedis(aDeliveryObject, lRedisIndex, lMessageId, lRetryAttempt, lRedisKey);
 
-                    if (log.isDebugEnabled())
-                        log.debug("Payload from redis ---> " + lJsonPayload);
+                    
+                    aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: Payload from redis ---> " + lJsonPayload);
+
                 }
             }
 
@@ -352,7 +360,7 @@ public class PayloadProcessor
                 return aDeliveryObject;
             }
 
-            final Map<String, String> payload = getAsHashMap(lJsonPayload);
+            final Map<String, String> payload = getAsHashMap(aDeliveryObject,lJsonPayload);
 
             if (log.isDebugEnabled())
                 log.debug("Payload from Redis/DB :: " + payload);
@@ -388,8 +396,7 @@ public class PayloadProcessor
         {
             final String lRedisField = CommonUtility.combine(lMessageId, String.valueOf(lRetryAttempt));
 
-            if (log.isInfoEnabled())
-                log.info("Retriving payload from redis for key--->" + lRedisKey + " field==>" + lRedisField);
+             aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: Retriving payload from redis for key--->" + lRedisKey + " field==>" + lRedisField);
 
             final Response<String> resp  = pipe.hget(lRedisKey, lRedisField);
             final Response<Long>   lHdel = pipe.hdel(lRedisKey, lRedisField);
@@ -418,22 +425,25 @@ public class PayloadProcessor
 
             if (lRedisIndex.equals(REDIS_INDEX_REFER_DB))
             {
-                if (log.isInfoEnabled())
-                    log.info("retriving payload from mysql for key--->" + lRedisKey);
+         
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: retriving payload from mysql for key--->" + lRedisKey);
 
                 PayloadInsertInDB.deletePayload(lMessageId, lRetryAttempt);
             }
             else
             {
-                if (log.isDebugEnabled())
-                    log.debug("Calling Payload Redis option to remove the payload :'" + lRedisIndex + "', Redis Key:'" + lRedisKey + "', Mid:'" + lMessageId + "'");
+      
+                
+                aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: Calling Payload Redis option to remove the payload :'" + lRedisIndex + "', Redis Key:'" + lRedisKey + "', Mid:'" + lMessageId + "'");
 
                 if (!REDIS_INDEX_NOT_APPLICABLE.equals(lRedisIndex))
                     deletePayloadFromRedis(aSubmissionObject, lRedisIndex, lRedisKey, lMessageId, lRetryAttempt);
                 else
                 {
                     aSubmissionObject.setDnPayloadStatus(REDIS_INDEX_NOT_APPLICABLE);
-                    log.info("payload not deleted for redisindex NA");
+                    
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: payload not deleted for redisindex NA");
+
                 }
             }
         }
@@ -459,14 +469,12 @@ public class PayloadProcessor
         {
             final String lFileId = CommonUtility.combine(lMid, String.valueOf(lRetryAttempt));
 
-            if (log.isInfoEnabled())
-                log.info("deleting payload from redis for key--->" + lRedisKey + " field==>" + lFileId);
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: deleting payload from redis for key--->" + lRedisKey + " field==>" + lFileId);
 
             final long lDeleted = lJedisConn.hdel(lRedisKey, lFileId);
 
-            if (log.isInfoEnabled())
-                log.info("delete for key=" + lRedisKey + " field=" + lFileId + " status=" + lDeleted);
-
+      
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: delete for key=" + lRedisKey + " field=" + lFileId + " status=" + lDeleted);
             if (lDeleted > 0)
                 aSubmissionObject.setDnPayloadStatus(PAYLOAD_OPERATION_SUCCESS);
             else
@@ -491,9 +499,12 @@ public class PayloadProcessor
                 deletePayload(aSubmissionObject);
                 final String lPayloadStatus = CommonUtility.nullCheck(aSubmissionObject.getDnPayloadStatus(), true);
 
-                if (!PAYLOAD_OPERATION_SUCCESS.equals(lPayloadStatus))
-                    log.error("problem deleting payload for mid --->" + lMessageId + " retry attempt=" + lRetryAttempt + " payloadrid=" + lPayloadRid + " payload_expiry=" + lPayloadExpiry + " stime="
+                if (!PAYLOAD_OPERATION_SUCCESS.equals(lPayloadStatus)) {
+                     
+                    aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: problem deleting payload for mid --->" + lMessageId + " retry attempt=" + lRetryAttempt + " payloadrid=" + lPayloadRid + " payload_expiry=" + lPayloadExpiry + " stime="
                             + lStime);
+
+                }
 
                 if (PAYLOAD_OPERATION_FAILED.equals(lPayloadStatus))
                     PayloadRedisDeleteTask.getInstance().addToInmemQueue(aSubmissionObject);
@@ -501,13 +512,14 @@ public class PayloadProcessor
         }
         catch (final Exception exp)
         {
-            log.error("Remove payload error on message retry blockout/expire... Message Id --->" + lMessageId + " retry attempt=" + lRetryAttempt + " payloadrid=" + lPayloadRid + " stime=" + lStime,
+            aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aSubmissionObject.getBaseMessageId()+"  ::: Remove payload error on message retry blockout/expire... Message Id --->" + lMessageId + " retry attempt=" + lRetryAttempt + " payloadrid=" + lPayloadRid + " stime=" + lStime+" ::: "+ErrorMessage.getStackTraceAsString(exp));
+            log.error("  ::: Remove payload error on message retry blockout/expire... Message Id --->" + lMessageId + " retry attempt=" + lRetryAttempt + " payloadrid=" + lPayloadRid + " stime=" + lStime,
                     exp);
         }
     }
 
     private static Map<String, String> getAsHashMap(
-            String json)
+            DeliveryObject aDeliveryObject, String json)
     {
 
         try
@@ -517,7 +529,10 @@ public class PayloadProcessor
         }
         catch (final Exception exp)
         {
-            log.error("json to hashmap conversion problem..." + json, exp);
+        	
+        	aDeliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aDeliveryObject.getBaseMessageId()+"  ::: json to hashmap conversion problem..." + json+"  ::: "+ErrorMessage.getStackTraceAsString(exp));
+
+            log.error("  ::: json to hashmap conversion problem..." + json, exp);
         }
         return new HashMap<>();
     }

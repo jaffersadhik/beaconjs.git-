@@ -73,7 +73,7 @@ public class RConsumer
             }
         }
 
-  	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+  	//   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
 
     }
     @Override

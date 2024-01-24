@@ -62,7 +62,7 @@ public class WalletUtil
             try
             {
                 final WalletDeductInput lWalletInput        = WalletInput.getDeductInput(lClientId, lFileId, lBaseMsgId, lMsgId, lTotalMsgParts, lSmsRate, lDltRate, "", isIntl);
-                final WalletResult      lDeductWalletForSMS = WalletDeductRefundProcessor.deductWalletForSMS(lWalletInput);
+                final WalletResult      lDeductWalletForSMS = WalletDeductRefundProcessor.deductWalletForSMS(aMessageRequest,lWalletInput);
 
                 if (lDeductWalletForSMS.isSuccess())
                 {

@@ -21,9 +21,6 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.ic.util.HeaderValidaton;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
-import com.itextos.beacon.platform.rc.process.RConsumer;
-import com.itextos.beacon.platform.sbcv.process.SBCVProcess;
-import com.itextos.beacon.platform.vc.process.MessageProcessor;
 import com.itextos.beacon.smslog.SMSLog;
 
 public class ICProcessor
@@ -64,7 +61,6 @@ public class ICProcessor
       	   
       	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
 
-      	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
            SMSLog.log(lMessageRequest.getLogBuffer().toString());
     }
 

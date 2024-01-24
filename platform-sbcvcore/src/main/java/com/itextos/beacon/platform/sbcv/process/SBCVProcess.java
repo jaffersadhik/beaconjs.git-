@@ -76,7 +76,7 @@ public class SBCVProcess
             e.printStackTrace();
         }
     
-    	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+    	//   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
 
     }
     

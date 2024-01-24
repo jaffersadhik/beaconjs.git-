@@ -4,7 +4,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletResult;
@@ -18,11 +21,11 @@ public class WalletDeductRefundProcessor
     {}
 
     public static WalletResult deductWalletForSMS(
-            WalletInput aWalletInput)
+            MessageRequest aMessageRequest, WalletInput aWalletInput)
             throws Exception
     {
-        if (log.isDebugEnabled())
-            log.debug("Dedut Wallet For SMS called for " + aWalletInput);
+   
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Dedut Wallet For SMS called for " + aWalletInput);
 
         try
         {
@@ -33,8 +36,8 @@ public class WalletDeductRefundProcessor
 
             final boolean isIntl    = aWalletInput.isIntl();
 
-            if (log.isDebugEnabled())
-                log.debug("Is Intl Request :" + isIntl);
+       
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Is Intl Request :" + isIntl);
 
             if (StringUtils.isEmpty(clientId))
                 throw new ItextosException("ERROR: Client id cannot be empty => " + clientId);
@@ -53,17 +56,15 @@ public class WalletDeductRefundProcessor
 
             final double amountTobeDeducted = PlatformDecimalUtil.getRoundedValueForProcess((smsRate + dltRate) * noOfParts);
 
-            if (log.isDebugEnabled())
-                log.debug("Deducting amount from redis for user " + clientId + " and amount to be deducted is [" + amountTobeDeducted + "] ...");
+        
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  ::: Deducting amount from redis for user " + clientId + " and amount to be deducted is [" + amountTobeDeducted + "] ...");
 
             // STEP:1 deduct the amount from the wallet
             final double decrementedVal = RedisProcess.addOrDeduct(clientId, -amountTobeDeducted);
 
             sendToQueue(aWalletInput);
 
-            if (log.isDebugEnabled())
-                log.debug(
-                        "Deducting amount from redis for user " + clientId + " and amount to be deducted is [" + amountTobeDeducted + "] ... SUCCESS and balance after deduction is " + decrementedVal);
+             aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  ::: Deducting amount from redis for user " + clientId + " and amount to be deducted is [" + amountTobeDeducted + "] ... SUCCESS and balance after deduction is " + decrementedVal);
 
             // STEP:2 check if wallet has enough balance, which can be identified based on
             // the decrementedVal (+ve - has bal, -ve - no bal)
@@ -71,10 +72,11 @@ public class WalletDeductRefundProcessor
             {
                 final WalletInput newDeductRefundInput = aWalletInput.getRefundObject();
 
-                log.error("Since the balance after deduction went to negative, returning the amount to wallet and failing the message. Balance after deduction " + decrementedVal + " for the input "
+
+                aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ::: Since the balance after deduction went to negative, returning the amount to wallet and failing the message. Balance after deduction " + decrementedVal + " for the input "
                         + aWalletInput);
 
-                returnDeductedAmount(clientId, amountTobeDeducted);
+                returnDeductedAmount(aMessageRequest,clientId, amountTobeDeducted);
                 newDeductRefundInput.updateReason(newDeductRefundInput.getReason().isBlank() ? "Wallet Went Negative refund." : newDeductRefundInput.getReason() + " :: Wallet Went Negative refund.");
 
                 sendToQueue(newDeductRefundInput);
@@ -86,7 +88,8 @@ public class WalletDeductRefundProcessor
         }
         catch (final Exception e)
         {
-            log.error("ERROR to be propagated to the caller. Failed deducting amount for " + aWalletInput, e);
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  ::: ERROR to be propagated to the caller. Failed deducting amount for " + aWalletInput+" ::: "+ ErrorMessage.getStackTraceAsString(e));
+            log.error("  ::: ERROR to be propagated to the caller. Failed deducting amount for " + aWalletInput, e);
             throw e;
         }
     }
@@ -99,21 +102,21 @@ public class WalletDeductRefundProcessor
     }
 
     private static void returnDeductedAmount(
-            String aClientId,
+            MessageRequest aMessageRequest, String aClientId,
             double aAmountTobeDeducted)
     {
 
         try
         {
-            // return back the amount
-            if (log.isDebugEnabled())
-                log.debug("[Out of Credits] returning amount for user " + aClientId + " and amount to be returned is [" + aAmountTobeDeducted + "] ...");
+     
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  :: [Out of Credits] returning amount for user " + aClientId + " and amount to be returned is [" + aAmountTobeDeducted + "] ...");
 
             final double curBal = RedisProcess.addOrDeduct(aClientId, aAmountTobeDeducted);
 
-            if (log.isDebugEnabled())
-                log.debug(
-                        "[Out of Credits] returning amount for user " + aClientId + " and amount to be returned is [" + aAmountTobeDeducted + "] ... SUCCESS and balance after deduction is " + curBal);
+
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  :: [Out of Credits] returning amount for user " + aClientId + " and amount to be returned is [" + aAmountTobeDeducted + "] ... SUCCESS and balance after deduction is " + curBal);
+
+        
         }
         catch (final Exception e1)
         {
@@ -138,6 +141,7 @@ public class WalletDeductRefundProcessor
             if (log.isDebugEnabled())
                 log.debug("Incoming params => clientid [" + clientId + "], smsrate [" + smsRate + "], dltrate [" + dltRate + "], noOfSplits [" + noOfParts + "]");
 
+            
             amountTobeRefunded = PlatformDecimalUtil.getRoundedValueForProcess((smsRate + dltRate) * noOfParts);
 
             if (log.isInfoEnabled())

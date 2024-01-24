@@ -371,7 +371,7 @@ public class CarrierHandoverProcess
                }
            }
     	   
-     	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
+     //	   log.debug(" smslog : "+lMessageRequest.getLogBuffer().toString());
 
 
     }
