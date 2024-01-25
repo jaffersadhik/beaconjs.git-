@@ -58,6 +58,8 @@ public abstract class BaseMessage
 
         //
         IGNORE_JSON_OR_MAPKEYS.add("REDIS_LAST_UPDATED");
+        IGNORE_JSON_OR_MAPKEYS.add(MiddlewareConstant.MW_LOG_BUFFER.getKey());
+
     }
 
     private final ClusterType         mClusterType;
