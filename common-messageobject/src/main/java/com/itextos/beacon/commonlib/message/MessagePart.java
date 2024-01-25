@@ -133,6 +133,7 @@ public class MessagePart
     JSONObject getJson()
     {
         final JSONObject jsonObj = new JSONObject();
+        mAttributes.remove(MiddlewareConstant.MW_LOG_BUFFER.getKey());
         jsonObj.putAll(mAttributes);
         return jsonObj;
     }
