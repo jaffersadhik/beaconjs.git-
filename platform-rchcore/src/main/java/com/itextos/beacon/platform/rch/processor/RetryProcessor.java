@@ -51,6 +51,8 @@ public class RetryProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
+    	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+
         if (log.isDebugEnabled())
             log.debug("RHC Received Object .. " + lMessageRequest);
 

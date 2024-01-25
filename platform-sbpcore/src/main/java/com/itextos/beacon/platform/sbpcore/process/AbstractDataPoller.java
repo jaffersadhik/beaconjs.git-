@@ -95,6 +95,8 @@ public abstract class AbstractDataPoller
 
         for (final MessageRequest lMessageRequest : aToProcess)
         {
+        	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+
             final String lScheduleBlockOutFrom = CommonUtility.nullCheck(lMessageRequest.getFromScheduleBlockout(), true);
 
             if (log.isDebugEnabled())

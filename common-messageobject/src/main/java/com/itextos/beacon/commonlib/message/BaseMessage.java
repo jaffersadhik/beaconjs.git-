@@ -378,8 +378,8 @@ public abstract class BaseMessage
     @Override
     public StringBuffer getLogBuffer()
     {
-     //   return (StringBuffer)messageAttributes.get(MiddlewareConstant.MW_LOG_BUFFER.getKey());
-    	   return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+        return (StringBuffer)messageAttributes.get(MiddlewareConstant.MW_LOG_BUFFER.getKey());
+    //	   return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
     	    
     }
 

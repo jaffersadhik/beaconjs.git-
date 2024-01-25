@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MessageType;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
@@ -29,6 +30,8 @@ public class DlrRequestProcess
             Map<Component, DeliveryObject> nextComponentMap)
             throws Exception
     {
+    	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+
         if (log.isDebugEnabled())
             log.debug(" Begin Message Id:" + aDeliveryObject.getMessageId());
         final DeliveryObject lNewDeliveryObj = aDeliveryObject.getClonedDeliveryObject();

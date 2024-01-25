@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
@@ -46,6 +47,8 @@ public class SingleDnProcessor
             log.debug("SIngle DN Received Message : " + aBaseMessage);
 
         final DeliveryObject lDeliveryObject = (DeliveryObject) aBaseMessage;
+
+        lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
 
         try
 
