@@ -445,7 +445,7 @@ public abstract class BaseMessage
     {
         final JSONObject jsonObj = new JSONObject();
         jsonObj.putAll(messageAttributes);
-
+        jsonObj.remove(MiddlewareConstant.MW_LOG_BUFFER.getKey());
         jsonObj.remove(MiddlewareConstant.MW_PLATFORM_CLUSTER.getKey());
         jsonObj.remove(MiddlewareConstant.MW_INTERFACE_TYPE.getKey());
         jsonObj.remove(MiddlewareConstant.MW_INTERFACE_GROUP_TYPE.getKey());
