@@ -14,6 +14,7 @@
 
     </properties>
 
+
     <build>
         <plugins>
             <!-- Frontend Maven Plugin -->
@@ -22,49 +23,37 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.10.0</version>
                 <executions>
-      <execution>
+                    <execution>
                         <id>install node and npm</id>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <npmVersion>${npm.version}</npmVersion>
+                            <nodeVersion>v14.18.1</nodeVersion>
+                            <npmVersion>6.14.15</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>install yarn</id>
+                        <id>npm install</id>
                         <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <configuration>
-                            <yarnVersion>${yarn.version}</yarnVersion>
-                        </configuration>
-                    </execution>
-                    
-           	    <execution>
-                        <id>yarn install</id>
-                        <goals>
-                            <goal>yarn</goal>
+                            <goal>npm</goal>
                         </goals>
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
-                    </execution> 
-                    
-                    
+                    </execution>
                     <execution>
-                        <id>yarn build</id>
+                        <id>npm run build</id>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
-                    </execution> 
-                    <!-- Add more executions for other yarn commands as needed -->
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    
 </project>
