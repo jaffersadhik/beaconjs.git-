@@ -54,6 +54,7 @@ public abstract class BaseMessage
         IGNORE_CONSTANT.add(MiddlewareConstant.MW_SMS_PRIORITY);
         IGNORE_CONSTANT.add(MiddlewareConstant.MW_INTL_MESSAGE);
         IGNORE_CONSTANT.add(MiddlewareConstant.MW_MESSAGE_CREATED_TIMESTAMP);
+        IGNORE_CONSTANT.add(MiddlewareConstant.MW_LOG_BUFFER);
 
         //
         IGNORE_JSON_OR_MAPKEYS.add("REDIS_LAST_UPDATED");
