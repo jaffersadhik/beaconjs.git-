@@ -18,12 +18,14 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
 import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
 import com.itextos.beacon.platform.sbpcore.util.SBPProducer;
+import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class AbstractDataPoller
         implements
@@ -97,8 +99,13 @@ public abstract class AbstractDataPoller
     		
     		final MessageRequest lMessageRequest =aToProcess.get(seqNo);
     		
-
-        	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+    		lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+        	
+        	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
+          
+        	long starttime=System.currentTimeMillis();
+           
+ 
 
             final String lScheduleBlockOutFrom = CommonUtility.nullCheck(lMessageRequest.getFromScheduleBlockout(), true);
 
@@ -154,6 +161,17 @@ public abstract class AbstractDataPoller
             }
             
             DBPoller.deleteRecordsFromTable(mTableName, seqNo);
+            
+     	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Message Deleted From "+mTableName); 
+
+    	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Time Taken For process :"+(System.currentTimeMillis()-starttime)+" Milli Second"); 
+      	
+     	
+      	   
+      	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
+
+           SMSLog.log(lMessageRequest.getLogBuffer().toString());
+  
 
             } catch(Exception e) {
             	
