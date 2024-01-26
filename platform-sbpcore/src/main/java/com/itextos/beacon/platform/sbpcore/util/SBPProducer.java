@@ -22,7 +22,7 @@ public class SBPProducer
     {}
 
     public static void sendToPlatformRejection(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest) throws Exception
     {
 
         try
@@ -38,11 +38,13 @@ public class SBPProducer
         catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
+            
+            throw e;
         }
     }
 
     public static void sendToRouterComponent(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest) throws Exception
     {
 
         try
@@ -58,11 +60,13 @@ public class SBPProducer
         catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
+            
+            throw e;
         }
     }
 
     public static void sendToBlockoutWCComponent(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest) throws Exception
     {
 
         try
@@ -76,11 +80,13 @@ public class SBPProducer
         catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
+            
+            throw e;
         }
     }
 
     public static void sendToVerifyConsumer(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest) throws Exception
     {
 
         try
@@ -103,6 +109,9 @@ public class SBPProducer
         catch (final Exception e)
         {
             sendToErrorLog(aMessageRequest, e);
+            
+            throw e;
+            
         }
     }
 

@@ -31,9 +31,9 @@ public abstract class DBPoller
 
     private static final String MOD_VALUE           = System.getProperty("modvalue")==null?System.getenv("modvalue"):System.getProperty("modvalue"); // valid values are 0,1,2,3
 
-    private static final String SQL_SELECT          = "select * from {0} where  date_time_to_process <= now() and instance_id = ? and mod(sno,4) in (" + MOD_VALUE + ") limit 500";
+    private static final String SQL_SELECT          = "select * from {0} where  date_time_to_process < now() and instance_id = ? and mod(sno,4) in (" + MOD_VALUE + ") limit 50";
     private static final String SQL_DELETE          = "delete from {0} where  sno=?";
-    private static final String SQL_SELECT_INSTANCE = "select  DISTINCT 'schedule' as type, instance_id from messaging.schedule_data sd union all select  DISTINCT 'blockout' as type, instance_id from messaging.blockout_data bd ";
+    private static final String SQL_SELECT_INSTANCE = "select  DISTINCT 'schedule' as type, instance_id from messaging.schedule_data sd where date_time_to_process < now() union all select  DISTINCT 'blockout' as type, instance_id from messaging.blockout_data bd where date_time_to_process < now()";
 
     private DBPoller()
     {
@@ -59,16 +59,19 @@ public abstract class DBPoller
             int aAppInstanceId,
             String aTableName)
     {
+    	
+    	Connection        con        = null;
+        PreparedStatement pstmt      = null;
         final Map<Long, MessageRequest> returnValue = new HashMap<>();
         final String                    sql         = MessageFormat.format(SQL_SELECT, aTableName);
         ResultSet                       rs          = null;
 
         JndiInfoHolder.getInstance();
 
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.MESSAGING.getKey()));
-                final PreparedStatement pstmt = con.prepareStatement(sql);)
+        try 
         {
+        	con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.MESSAGING.getKey()));
+            pstmt = con.prepareStatement(sql);
         	log.debug("sql : "+sql);
             pstmt.setInt(1, aAppInstanceId);
             rs = pstmt.executeQuery();
@@ -87,6 +90,9 @@ public abstract class DBPoller
         finally
         {
             CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+      
         }
         return returnValue;
     }
@@ -117,6 +123,51 @@ public abstract class DBPoller
 
                 pstmt.executeBatch();
                 con.commit();
+                isDone = true;
+            }
+            catch (final Exception e)
+            {
+                retryCount++;
+
+                try
+                {
+                    if (con != null)
+                        con.rollback();
+                }
+                catch (final SQLException e1)
+                {
+                    //
+                }
+                log.error("Exception while deleting the records from table '" + aTableName + "'", e);
+                log.error("Retry count " + retryCount + ". Will try after a second.");
+                CommonUtility.sleepForAWhile(1000);
+            }
+            finally
+            {
+                CommonUtility.closeStatement(pstmt);
+                CommonUtility.closeConnection(con);
+            }
+    }
+
+    
+    public static void deleteRecordsFromTable(
+            String aTableName,
+            Long aSeqNo)
+    {
+        Connection        con        = null;
+        PreparedStatement pstmt      = null;
+        boolean           isDone     = false;
+        int               retryCount = 0;
+
+        while (!isDone)
+            try
+            {
+                final String sql = MessageFormat.format(SQL_DELETE, aTableName);
+                JndiInfoHolder.getInstance();
+                con   = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.MESSAGING.getKey()));
+                pstmt = con.prepareStatement(sql);
+                pstmt.setLong(1, aSeqNo);
+                pstmt.execute();
                 isDone = true;
             }
             catch (final Exception e)

@@ -1,7 +1,6 @@
 package com.itextos.beacon.platform.sbpcore.process;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -76,12 +75,9 @@ public abstract class AbstractDataPoller
             if (log.isDebugEnabled())
                 log.debug("Records list : " + lRecords.size());
 
-            final List<Long>           toDelete  = new ArrayList<>(lRecords.keySet());
-            final List<MessageRequest> toProcess = new ArrayList<>(lRecords.values());
+       
+            sendToNextQueue(lRecords,mTableName);
 
-            sendToNextQueue(toProcess);
-
-            DBPoller.deleteRecordsFromTable(mTableName, toDelete);
         }
         catch (final Exception e)
         {
@@ -90,17 +86,26 @@ public abstract class AbstractDataPoller
     }
 
     private static void sendToNextQueue(
-            List<MessageRequest> aToProcess)
+    		Map<Long, MessageRequest> aToProcess, String mTableName)
     {
 
-        for (final MessageRequest lMessageRequest : aToProcess)
-        {
+    	Iterator itr=aToProcess.keySet().iterator();
+    	
+    	while(itr.hasNext()) {
+    		
+    		Long seqNo=(Long)itr.next();
+    		
+    		final MessageRequest lMessageRequest =aToProcess.get(seqNo);
+    		
+
         	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
 
             final String lScheduleBlockOutFrom = CommonUtility.nullCheck(lMessageRequest.getFromScheduleBlockout(), true);
 
             if (log.isDebugEnabled())
                 log.debug("Schedule / Blockout Message Received from : " + lScheduleBlockOutFrom);
+            
+            try {
 
             if (!verifyAccountStatus(lMessageRequest))
             {
@@ -147,7 +152,15 @@ public abstract class AbstractDataPoller
 
                 SBPProducer.sendToVerifyConsumer(lMessageRequest);
             }
-        }
+            
+            DBPoller.deleteRecordsFromTable(mTableName, seqNo);
+
+            } catch(Exception e) {
+            	
+            }
+        
+    	}
+      
     }
 
     private static void updatePriceDetails(
