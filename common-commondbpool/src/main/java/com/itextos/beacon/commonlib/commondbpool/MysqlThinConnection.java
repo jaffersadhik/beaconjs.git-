@@ -35,6 +35,18 @@ public class MysqlThinConnection {
 	    
 	    if(aDBConID.getId()==1) {
 	    	url+="configuration";
+	    }else if(aDBConID.getId()==2) {
+	    	url+="accounts";
+
+	    }else if(aDBConID.getId()==3) {
+	    	url+="listing";
+
+	    }else if(aDBConID.getId()==4) {
+	    	url+="carrier_handover";
+
+	    }else if(aDBConID.getId()==9) {
+	    	url+="carrier_handover";
+
 	    }
 		con=DriverManager.getConnection(  
 				url,masterdbproperties.getProperty("username"),masterdbproperties.getProperty("password"));
@@ -61,9 +73,10 @@ public class MysqlThinConnection {
 		Connection con=null;
 		try{
 			
+			 String url=prop.getProperty("url")+"sysconfig";
 		masterdbproperties=prop;
 		con=DriverManager.getConnection(  
-				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
+				url,prop.getProperty("username"),prop.getProperty("password"));
 	    return con;
 		
 		}catch(Exception e){
