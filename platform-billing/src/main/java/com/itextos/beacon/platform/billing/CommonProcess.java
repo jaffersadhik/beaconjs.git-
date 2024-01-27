@@ -9,6 +9,8 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteConstants;
 import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
 import com.itextos.beacon.inmemory.msgutil.util.IndiaNPFinder;
@@ -62,18 +64,19 @@ public abstract class CommonProcess
         if (log.isDebugEnabled())
             log.debug("Send to next topic '" + aNextTopic + "'");
 
+        BaseMessage aBaseMessage=getBaseMessage();
         switch (aNextTopic)
         {
             case FULL_MESSAGE_INSERT:
-                BillingProducer.sendToFullMessageTopic(mBaseMessage);
+                BillingProducer.sendToFullMessageTopic(aBaseMessage);
                 break;
 
             case DLR_QUERY:
-                BillingProducer.sendToDlrQueryTopic(mBaseMessage);
+                BillingProducer.sendToDlrQueryTopic(aBaseMessage);
                 break;
 
             case SUB_BILLING:
-                BillingProducer.sendToBillingTopic(mBaseMessage);
+                BillingProducer.sendToBillingTopic(aBaseMessage);
                 break;
 
             default:
@@ -81,7 +84,32 @@ public abstract class CommonProcess
         }
     }
 
-    protected CarrierCircle getDefaultCarrierCircle()
+    private BaseMessage getBaseMessage() {
+
+    	String json=mBaseMessage.getJsonString();
+    	try {
+    	if(mBaseMessage instanceof SubmissionObject) {
+    		
+    		
+				return new SubmissionObject(json);
+			
+    		
+    	}else if(mBaseMessage instanceof DeliveryObject) {
+    		
+    		return new DeliveryObject(json);
+    	}else {
+    		
+    		return mBaseMessage;
+    	}
+    	
+    	} catch (Exception e) {
+			
+    		return mBaseMessage;
+		}
+    	
+	}
+
+	protected CarrierCircle getDefaultCarrierCircle()
     {
         final CarrierCircle carrierAndCircle = null;
         final String        lMobileNumber    = mBaseMessage.getValue(MiddlewareConstant.MW_MOBILE_NUMBER);

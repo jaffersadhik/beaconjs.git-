@@ -3,6 +3,7 @@ package com.itextos.beacon.commonlib.message;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
@@ -33,6 +34,14 @@ public class SubmissionObject
             RouteType aIsInt)
     {
         super(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aIsInt, "SubmissionObject");
+    }
+    
+    
+    public SubmissionObject(
+            String aJsonString)
+            throws Exception
+    {
+        super(aJsonString, "SubmissionObject");
     }
 
     public Date getActualCarrierSubmitTime()
