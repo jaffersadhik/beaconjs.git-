@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class MysqlThinConnection {
@@ -19,7 +20,7 @@ public class MysqlThinConnection {
 		try{
 			
 			Properties prop=dataSourceConfig.getConfigAsProperties();
-			
+			prop.setProperty("password", Encryptor.getDecryptedDbPassword(prop.getProperty("password")));
 		Class.forName(prop.getProperty("driverClassName")); 
 		con=DriverManager.getConnection(  
 				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
