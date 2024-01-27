@@ -210,12 +210,12 @@ final class InitializeConnectionPool
         {
         	
         	log.info(" props : "+props);
-			props.setProperty("password", Encryptor.getDecryptedDbPassword(props.getProperty("password")));
+			//props.setProperty("password", Encryptor.getDecryptedDbPassword(props.getProperty("password")));
 
         	log.info(" props : "+props);
 
-        	// con = getConnection(JndiInfo.SYSTEM_DB);
-        		con=MysqlThinConnection.getConnection(props);
+        	 con = getConnection(JndiInfo.SYSTEM_DB);
+       // 		con=MysqlThinConnection.getConnection(props);
         	   pstmt=   con.prepareStatement(sql);
         	   rs= pstmt.executeQuery();
             if (log.isInfoEnabled())
@@ -293,7 +293,7 @@ final class InitializeConnectionPool
             JndiInfo aDBConID)
             throws Exception
     {
-        final Connection con = DBDataSourceFactory.getConnectionFromThin(aDBConID);
+        final Connection con = DBDataSourceFactory.getConnection(aDBConID);
 
         con.setAutoCommit(true);
         return con;
