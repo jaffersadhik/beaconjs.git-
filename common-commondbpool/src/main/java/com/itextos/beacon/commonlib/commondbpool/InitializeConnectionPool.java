@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 final class InitializeConnectionPool
@@ -202,6 +203,10 @@ final class InitializeConnectionPool
         {
         	
         	log.info(" props : "+props);
+			props.setProperty("password", Encryptor.getDecryptedDbPassword(props.getProperty("password")));
+
+        	log.info(" props : "+props);
+
         	// con = getConnection(JndiInfo.SYSTEM_DB);
         		con=MysqlThinConnection.getConnection(props);
         	   pstmt=   con.prepareStatement(sql);

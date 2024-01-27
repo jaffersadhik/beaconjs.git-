@@ -37,7 +37,6 @@ public class MysqlThinConnection {
 		Connection con=null;
 		try{
 			
-			
 		Class.forName(prop.getProperty("driverClassName")); 
 		con=DriverManager.getConnection(  
 				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
