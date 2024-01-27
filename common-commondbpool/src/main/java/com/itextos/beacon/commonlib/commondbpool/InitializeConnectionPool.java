@@ -99,7 +99,7 @@ final class InitializeConnectionPool
         createCommonPool(props);
 
         addJndiInfo(JndiInfo.SYSTEM_DB);
-        addJndiInfo(JndiInfo.CONFIGURARION_DB);
+      //  addJndiInfo(JndiInfo.CONFIGURARION_DB);
         
 
         populateOtherConfigInfo(props);
