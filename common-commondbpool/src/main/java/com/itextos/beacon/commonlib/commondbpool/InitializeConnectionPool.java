@@ -281,7 +281,8 @@ final class InitializeConnectionPool
             JndiInfo aDBConID)
             throws Exception
     {
-        final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
+        final Connection con = DBDataSourceFactory.getConnectionFromThin(aDBConID);
+
         con.setAutoCommit(true);
         return con;
     }
