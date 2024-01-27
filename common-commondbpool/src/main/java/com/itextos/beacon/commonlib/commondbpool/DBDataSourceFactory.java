@@ -49,13 +49,8 @@ public class DBDataSourceFactory
         if (aDBConID == null)
             throw new ItextosException("JndiInfo cannot be null.");
 
-    	DBDataSource dbDataSource=DataSourceCollection.getInstance().getDataSourceHolderInfo(aDBConID);
-        if (dbDataSource == null)
-            throw new ItextosException("Configuration is not initialised. ConnectionID : " + aDBConID);
-
-    
-    	DataSourceConfig dataSourceConfig= dbDataSource.getDataSourceConfig();
-    	return MysqlThinConnection.getConnection(dataSourceConfig);
+   
+    	return MysqlThinConnection.getConnection(aDBConID);
     	
     }
 

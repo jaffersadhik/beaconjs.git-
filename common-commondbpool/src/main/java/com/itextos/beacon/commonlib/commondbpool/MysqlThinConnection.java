@@ -14,17 +14,30 @@ public class MysqlThinConnection {
 	
     private static final Log log = LogFactory.getLog(MysqlThinConnection.class);
 
+	private static Properties masterdbproperties=null;
 	
-	public static Connection getConnection(DataSourceConfig dataSourceConfig){
+	static {
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+	}
+	public static Connection getConnection(JndiInfo aDBConID){
 		Connection con=null;
 		try{
-			
-			Properties prop=dataSourceConfig.getConfigAsProperties();
-			log.debug("prop : "+prop);
-	//		prop.setProperty("password", Encryptor.getDecryptedDbPassword(prop.getProperty("password")));
-		Class.forName(prop.getProperty("driverClassName")); 
+	        waitForPropertiesLoad();
+
+	    String url=masterdbproperties.getProperty("url"); 
+	    
+	    if(aDBConID.getId()==1) {
+	    	url+="configuration";
+	    }
 		con=DriverManager.getConnection(  
-				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
+				url,masterdbproperties.getProperty("username"),masterdbproperties.getProperty("password"));
 	    return con;
 		
 		}catch(Exception e){
@@ -33,11 +46,22 @@ public class MysqlThinConnection {
 
 		}
 	}
+	private static void waitForPropertiesLoad() {
+		
+		  while (masterdbproperties==null)
+	        {
+	            if (log.isDebugEnabled())
+	                log.debug("Waiting for Properties load to complete.");
+
+	            CommonUtility.sleepForAWhile(1);
+	        }
+		
+	}
 	public static Connection getConnection(Properties prop) throws Exception {
 		Connection con=null;
 		try{
 			
-		Class.forName(prop.getProperty("driverClassName")); 
+		masterdbproperties=prop;
 		con=DriverManager.getConnection(  
 				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
 	    return con;

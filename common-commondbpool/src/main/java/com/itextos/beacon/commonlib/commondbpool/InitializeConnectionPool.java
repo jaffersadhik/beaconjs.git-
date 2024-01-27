@@ -184,7 +184,12 @@ final class InitializeConnectionPool
             Properties properties)
     {
         final DataSourceConfig config = new DataSourceConfig(JndiInfo.SYSTEM_DB, properties);
+        
         DataSourceCollection.getInstance().createDataSource(config.getDbConID(), config);
+
+        final DataSourceConfig config2 = new DataSourceConfig(JndiInfo.CONFIGURARION_DB, properties);
+        
+        DataSourceCollection.getInstance().createDataSource(config2.getDbConID(), config);
 
         if (log.isInfoEnabled())
             log.info("Common datasource configuration is done");
