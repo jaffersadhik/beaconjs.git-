@@ -20,7 +20,8 @@ public class MysqlThinConnection {
 		try{
 			
 			Properties prop=dataSourceConfig.getConfigAsProperties();
-			prop.setProperty("password", Encryptor.getDecryptedDbPassword(prop.getProperty("password")));
+			log.debug("prop : "+prop);
+	//		prop.setProperty("password", Encryptor.getDecryptedDbPassword(prop.getProperty("password")));
 		Class.forName(prop.getProperty("driverClassName")); 
 		con=DriverManager.getConnection(  
 				prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
