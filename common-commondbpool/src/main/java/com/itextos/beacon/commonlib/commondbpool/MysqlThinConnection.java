@@ -44,9 +44,21 @@ public class MysqlThinConnection {
 	    }else if(aDBConID.getId()==4) {
 	    	url+="carrier_handover";
 
+	    }else if(aDBConID.getId()==5)  {
+	    	
+	    	return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
+	    }else if(aDBConID.getId()==7)  {
+	    	
+	    	return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.MESSAGING.getKey()));
+	    }else if(aDBConID.getId()==8)  {
+	    	
+	    	return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.LOGGING.getKey()));
 	    }else if(aDBConID.getId()==9) {
-	    	url+="carrier_handover";
+	    	return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
 
+	    }else if(aDBConID.getId()==10)  {
+	    	
+	    	return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.R3C.getKey()));
 	    }
 		con=DriverManager.getConnection(  
 				url,masterdbproperties.getProperty("username"),masterdbproperties.getProperty("password"));
