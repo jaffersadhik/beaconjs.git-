@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 
-class DataSourceCollection
+public class DataSourceCollection
 {
 
     private static Log log = LogFactory.getLog(DataSourceCollection.class);
@@ -24,18 +24,25 @@ class DataSourceCollection
 
     }
 
-    static DataSourceCollection getInstance()
+    public static DataSourceCollection getInstance()
     {
         return SingletonHolder.INSTANCE;
     }
 
+    
     private final Map<JndiInfo, DBDataSource> dataSourceHolder = new ConcurrentHashMap<>();
     private boolean                           trackerEnabled   = false;
 
     private DataSourceCollection()
     {}
 
-    void addDataSource(
+    
+    public DBDataSource getDataSourceHolderInfo(JndiInfo jundiInfo) {
+		return dataSourceHolder.get(jundiInfo);
+	}
+
+
+	void addDataSource(
             JndiInfo aJndiInfo,
             DBDataSource aDataSource)
     {
@@ -108,7 +115,8 @@ class DataSourceCollection
             DataSourceConfig aDatabaseConfig)
     {
         final DBDataSource dataSource = new DBDataSource(aJndiInfo, aDatabaseConfig);
-        addDataSource(aJndiInfo, dataSource);
+
+;
     }
 
     void closeAllConnectionPool()

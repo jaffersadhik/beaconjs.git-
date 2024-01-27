@@ -102,13 +102,18 @@ public class InmemDlrQuery
         final Map<String, Map<Integer, DlrBodyParam>> localBodyParam = new HashMap<>();
 
         JndiInfoHolder.getInstance();
+        
+      	Connection con =null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs=null;
+   
 
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
-                final PreparedStatement pstmt = con.prepareStatement(CONFIG_BODY_PARAM);
-                final ResultSet rs = pstmt.executeQuery();)
+        try
         {
 
+        	 con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
+              pstmt = con.prepareStatement(CONFIG_BODY_PARAM);
+             rs = pstmt.executeQuery();
             while (rs.next())
             {
                 final Map<Integer, DlrBodyParam> map          = localBodyParam.computeIfAbsent(CommonUtility.nullCheck(rs.getString(COL_INDEX_BODY_PARAM_RESPONSE_HDR_ID), true), k -> new HashMap<>());
@@ -132,6 +137,10 @@ public class InmemDlrQuery
         catch (final Exception e1)
         {
             log.error("Exception while getting the DLR header param details", e1);
+        }finally {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
         }
         if (!localBodyParam.isEmpty())
             mBodyParam = localBodyParam;
@@ -162,11 +171,15 @@ public class InmemDlrQuery
     {
         final Map<String, DlrConfigDetail> localConfigDetail = new HashMap<>();
 
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
-                final PreparedStatement pstmt = con.prepareStatement(CONFIG_DETAIL);
-                final ResultSet rs = pstmt.executeQuery();)
+        Connection con =null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs=null;
+       
+        try 
         {
+             con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
+             pstmt = con.prepareStatement(CONFIG_DETAIL);
+             rs = pstmt.executeQuery();
             while (rs.next())
                 localConfigDetail.put(CommonUtility.nullCheck(rs.getString(COL_INDEX_CONFIG_DETAIL_RESPONSE_HDR_ID), true),
                         new DlrConfigDetail(CommonUtility.nullCheck(rs.getString(COL_INDEX_CONFIG_DETAIL_HANDOVER_TEMPLATE), true),
@@ -181,6 +194,11 @@ public class InmemDlrQuery
         catch (final Exception e1)
         {
             log.error("Exception while getting the DLR header param details", e1);
+        }finally {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+     
         }
         if (!localConfigDetail.isEmpty())
             mConfigDetail = localConfigDetail;
@@ -191,11 +209,15 @@ public class InmemDlrQuery
     {
         final Map<String, List<DlrHeaderParam>> localResponseHeaderParams = new HashMap<>();
 
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
-                final PreparedStatement pstmt = con.prepareStatement(HEADER_PARAM);
-                final ResultSet rs = pstmt.executeQuery();)
+        Connection con =null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs=null;
+   
+        try 
         {
+        	 con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
+             pstmt = con.prepareStatement(HEADER_PARAM);
+             rs = pstmt.executeQuery();
 
             while (rs.next())
             {
@@ -211,6 +233,11 @@ public class InmemDlrQuery
         catch (final Exception e1)
         {
             log.error("Exception while getting the DLR header param details", e1);
+        }finally {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+     
         }
         if (!localResponseHeaderParams.isEmpty())
             mResponseHeaderParams = localResponseHeaderParams;

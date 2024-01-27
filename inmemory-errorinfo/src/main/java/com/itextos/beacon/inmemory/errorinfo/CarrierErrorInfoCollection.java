@@ -136,11 +136,15 @@ public class CarrierErrorInfoCollection
     {
         final Map<String, CarrierRouteMap> tempCarrierRouteMap = new ConcurrentHashMap<>();
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CARRIER_HANDOVER.getKey()));
-                PreparedStatement pstmt = con.prepareStatement(SQL_CARRIER_ROUTE_MAP);
-                ResultSet rs = pstmt.executeQuery();)
+        ResultSet                 rs             = null;
+     	Connection con =null;
+    	PreparedStatement pstmt = null;
+   
+        try 
         {
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CARRIER_HANDOVER.getKey()));
+              pstmt = con.prepareStatement(SQL_CARRIER_ROUTE_MAP);
+              rs = pstmt.executeQuery();
 
             while (rs.next())
             {
@@ -153,6 +157,12 @@ public class CarrierErrorInfoCollection
         catch (final Exception e)
         {
             log.error("Exception while loading the carrier and route map information.", e);
+        }finally
+        {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
 
         if (!tempCarrierRouteMap.isEmpty())

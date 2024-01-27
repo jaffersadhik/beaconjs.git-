@@ -48,7 +48,7 @@ abstract class AbstractDataSource
         return conId;
     }
 
-    DataSourceConfig getDataSourceConfig()
+    public DataSourceConfig getDataSourceConfig()
     {
         return dataSourceConfig;
     }

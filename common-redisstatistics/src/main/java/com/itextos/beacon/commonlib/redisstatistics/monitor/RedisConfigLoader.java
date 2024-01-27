@@ -85,17 +85,26 @@ class RedisConfigLoader
     private void loadDBData()
     {
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                PreparedStatement pstmt = con.prepareStatement(REDIS_SQL);
-                ResultSet rs = pstmt.executeQuery();)
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try 
         {
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+              pstmt = con.prepareStatement(REDIS_SQL);
+              rs = pstmt.executeQuery();
             clusterComponentRedisConfigMap = getRedisConfigMap(rs);
             clusterComponentMap            = getClusterComponentMap(clusterComponentRedisConfigMap);
         }
         catch (final Exception e)
         {
             log.error("", e);
+        }finally
+        {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
     }
 

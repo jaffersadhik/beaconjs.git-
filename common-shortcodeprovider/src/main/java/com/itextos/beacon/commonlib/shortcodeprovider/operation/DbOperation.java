@@ -34,11 +34,13 @@ public class DbOperation
         ResultSet rs       = null;
         FileInfo  fileInfo = null;
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                PreparedStatement pstmt = con.prepareStatement(SELECT_SQL);)
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        try 
         {
-            if (log.isDebugEnabled())
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+              pstmt = con.prepareStatement(SELECT_SQL);
+        	if (log.isDebugEnabled())
                 log.debug("Request for next file to load for the string length " + aShortcodeType);
 
             pstmt.setInt(1, aShortcodeType.getLength());
@@ -74,6 +76,9 @@ public class DbOperation
         finally
         {
             CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
 
         if (log.isDebugEnabled())
@@ -106,11 +111,12 @@ public class DbOperation
     {
         if (log.isDebugEnabled())
             log.debug("Updating short_code_data_info for the id '" + aId + "'");
-
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                PreparedStatement pstmt = con.prepareStatement(UPDATE_SQL);)
+        Connection con =null;
+        PreparedStatement pstmt = null;
+        try 
         {
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+              pstmt = con.prepareStatement(UPDATE_SQL);
             pstmt.setString(1, aId);
             final int lExecuteUpdate = pstmt.executeUpdate();
             if (log.isDebugEnabled())
@@ -121,6 +127,10 @@ public class DbOperation
             final String s = "Exception while updating the short_code_data_info table.";
             log.error(s, e);
             throw new ItextosException(s, e);
+        }finally {
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
     }
 

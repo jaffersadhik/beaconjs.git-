@@ -210,7 +210,7 @@ public class FullMessageTableInserter
     private static Connection getConnection()
             throws Exception
     {
-        return DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+        return DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
     }
 
 }

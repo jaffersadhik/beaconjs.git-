@@ -186,7 +186,7 @@ public class RetryDBHelper
     private static Connection getClientHandoverConnection()
             throws Exception
     {
-        return DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
+        return DBDataSourceFactory.getConnectionFromPool(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CLIENT_HANDOVER.getKey()));
     }
 
 }

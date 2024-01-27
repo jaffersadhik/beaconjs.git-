@@ -136,13 +136,16 @@ public class PayloadInsertInDB
             log.debug("select sql::" + SQL_SELECT_PAYLOAD);
             log.debug("MessageId:" + aMessageId + " rp:" + aRetryAttempt);
         }
+    	Connection lCon =null;
+    	PreparedStatement lPstmt = null;
+    	ResultSet lResultSet = null;
+ 
 
-        ResultSet lResultSet = null;
-
-        try (
-                Connection lCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
-                PreparedStatement lPstmt = lCon.prepareStatement(SQL_SELECT_PAYLOAD);)
+        try
         {
+        	  lCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
+              lPstmt = lCon.prepareStatement(SQL_SELECT_PAYLOAD);
+             
             lPstmt.setString(1, String.valueOf(aMessageId));
             lPstmt.setString(2, String.valueOf(aRetryAttempt));
 
@@ -167,6 +170,8 @@ public class PayloadInsertInDB
         finally
         {
             CommonUtility.closeResultSet(lResultSet);
+            CommonUtility.closeStatement(lPstmt);
+            CommonUtility.closeConnection(lCon);
         }
     }
 
@@ -174,10 +179,14 @@ public class PayloadInsertInDB
     {
         int lDeletedCount = 0;
 
-        try (
-                Connection lCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
-                PreparedStatement lPstmt = lCon.prepareStatement(SQL_DELETE_PAYLOAD);)
+     	Connection lCon =null;
+    	PreparedStatement lPstmt = null;
+     
+        try
         {
+        	 lCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
+             lPstmt = lCon.prepareStatement(SQL_DELETE_PAYLOAD);
+            
             lDeletedCount = lPstmt.executeUpdate();
 
             if (log.isDebugEnabled())
@@ -186,6 +195,10 @@ public class PayloadInsertInDB
         catch (final Exception exp)
         {
             log.error("Problem selecting payload from mysql...", exp);
+        }finally {
+            CommonUtility.closeStatement(lPstmt);
+            CommonUtility.closeConnection(lCon);
+   
         }
 
         return lDeletedCount;
@@ -196,11 +209,13 @@ public class PayloadInsertInDB
             int aRetryAttempt)
     {
         int lDeletedCount = 0;
-
-        try (
-                Connection lSqlCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
-                PreparedStatement lPstmt = lSqlCon.prepareStatement(SQL_DELETE_PAYLOAD_SPECIFIC);)
+      	Connection lSqlCon =null;
+    	PreparedStatement lPstmt = null;
+   
+        try
         {
+        	lSqlCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
+            lPstmt = lSqlCon.prepareStatement(SQL_DELETE_PAYLOAD_SPECIFIC);
             lPstmt.setString(1, aMessageId);
             lPstmt.setInt(2, aRetryAttempt);
 
@@ -212,6 +227,10 @@ public class PayloadInsertInDB
         catch (final Exception exp)
         {
             log.error("Problem selecting payload from mysql...", exp);
+        }finally {
+            CommonUtility.closeStatement(lPstmt);
+            CommonUtility.closeConnection(lSqlCon);
+   
         }
 
         return lDeletedCount;
@@ -225,11 +244,16 @@ public class PayloadInsertInDB
 
         final Map<String, String> lResult = new ConcurrentHashMap<>();
 
-        try (
-                Connection lSqlCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
-                PreparedStatement lPstmt = lSqlCon.prepareStatement(SQL_CUSTOMER_EXPIRE_DURATION);
-                ResultSet lResultSet = lPstmt.executeQuery();)
+      	Connection lSqlCon =null;
+    	PreparedStatement lPstmt = null;
+    	ResultSet lResultSet = null;
+   
+        try 
         {
+
+             lSqlCon = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
+             lPstmt = lSqlCon.prepareStatement(SQL_CUSTOMER_EXPIRE_DURATION);
+             lResultSet = lPstmt.executeQuery();
             while (lResultSet.next())
                 lResult.put(lResultSet.getString("esmeaddr"), lResultSet.getString("payload_expiry_in_hr"));
         }
@@ -237,6 +261,10 @@ public class PayloadInsertInDB
         {
             log.error("problem selecting payload from mysql...", exp);
             throw exp;
+        }finally {
+        	  CommonUtility.closeResultSet(lResultSet);
+        	  CommonUtility.closeStatement(lPstmt);
+              CommonUtility.closeConnection(lSqlCon);
         }
 
         if (log.isDebugEnabled())

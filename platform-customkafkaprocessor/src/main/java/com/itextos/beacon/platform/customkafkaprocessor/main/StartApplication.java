@@ -22,12 +22,13 @@ public class StartApplication
             String[] args)
     {
 
+/*
         try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);)
+                Connection con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);)
         {}
         catch (final Exception e)
         {}
-
+*/
         final CustomKafkaProperties lCustomKafkaProperties = CustomKafkaProperties.getInstance();
 
         final boolean               lStartConsumers        = startConsumers(lCustomKafkaProperties);

@@ -17,8 +17,9 @@ public class DBDataSourceFactory
     {
         InitializeConnectionPool.getInstance();
     }
-
-    public static Connection getConnection(
+    
+    
+    public static Connection getConnectionFromPool(
             JndiInfo aDBConID)
             throws Exception
     {
@@ -26,6 +27,28 @@ public class DBDataSourceFactory
         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
         con.setAutoCommit(true);
         return con;
+    }
+
+    public static Connection getConnection(
+            JndiInfo aDBConID)
+            throws Exception
+    {
+    	 waitForJndiLoad();
+         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
+         con.setAutoCommit(true);
+         return con;
+
+    }
+
+    public static Connection getConnectionFromThin(
+            JndiInfo aDBConID)
+            throws Exception
+    {
+        waitForJndiLoad();
+    	DBDataSource dbDataSource=DataSourceCollection.getInstance().getDataSourceHolderInfo(aDBConID);
+    	DataSourceConfig dataSourceConfig= dbDataSource.getDataSourceConfig();
+    	return MysqlThinConnection.getConnection(dataSourceConfig);
+
     }
 
     public static Map<ConnectionCount, Integer> getDataSourceStatistics(

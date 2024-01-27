@@ -177,12 +177,13 @@ public class HttpCustomerInfoCollection
     {
         final Map<Long, List<ClientHandoverMaster>> tempClientHandoverMasterMap = new HashMap<>();
         ResultSet                                   resultSet                   = null;
-
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(mInmemoryInput.getJNDIInfo());
-                final PreparedStatement pstmt = con.prepareStatement(MASTER_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);)
+    	Connection con =null;
+    	PreparedStatement pstmt = null;
+    
+        try 
         {
-            pstmt.setFetchSize(1000);
+        	 con = DBDataSourceFactory.getConnectionFromThin(mInmemoryInput.getJNDIInfo());
+             pstmt = con.prepareStatement(MASTER_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             resultSet = pstmt.executeQuery();
 
             while (resultSet.next())
@@ -209,6 +210,9 @@ public class HttpCustomerInfoCollection
         finally
         {
             CommonUtility.closeResultSet(resultSet);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+     
         }
         return tempClientHandoverMasterMap;
     }
@@ -217,13 +221,16 @@ public class HttpCustomerInfoCollection
             throws ItextosException
     {
         final Map<String, List<ClientHandoverHeaderParams>> tempClientHandoverHeaderMap = new HashMap<>();
-        ResultSet                                           resultSet                   = null;
 
-        try (
-                final Connection con = DBDataSourceFactory.getConnection(mInmemoryInput.getJNDIInfo());
-                final PreparedStatement pstmt = con.prepareStatement(HEADER_PARAMS_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);)
+     	Connection con =null;
+    	PreparedStatement pstmt = null;
+    	ResultSet resultSet=null;
+  
+        try 
         {
-            pstmt.setFetchSize(1000);
+        	
+        	 con = DBDataSourceFactory.getConnectionFromThin(mInmemoryInput.getJNDIInfo());
+             pstmt = con.prepareStatement(HEADER_PARAMS_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             resultSet = pstmt.executeQuery();
 
             while (resultSet.next())
@@ -254,6 +261,9 @@ public class HttpCustomerInfoCollection
         finally
         {
             CommonUtility.closeResultSet(resultSet);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
         return tempClientHandoverHeaderMap;
     }
@@ -263,12 +273,13 @@ public class HttpCustomerInfoCollection
     {
         final Map<String, List<ClientHandoverParams>> tempClientHandoverparamsMap = new HashMap<>();
         ResultSet                                     resultSet                   = null;
-
-        try (
-                Connection con = DBDataSourceFactory.getConnection(mInmemoryInput.getJNDIInfo());
-                PreparedStatement pstmt = con.prepareStatement(PARAMS_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);)
+    	Connection con =null;
+    	PreparedStatement pstmt = null;
+    	
+        try 
         {
-            pstmt.setFetchSize(1000);
+        	  con = DBDataSourceFactory.getConnectionFromThin(mInmemoryInput.getJNDIInfo());
+              pstmt = con.prepareStatement(PARAMS_QUERY, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             resultSet = pstmt.executeQuery();
 
             while (resultSet.next())
@@ -302,6 +313,9 @@ public class HttpCustomerInfoCollection
         finally
         {
             CommonUtility.closeResultSet(resultSet);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+     
         }
         return tempClientHandoverparamsMap;
     }

@@ -128,7 +128,7 @@ public class DataRefresher
                 + " is_processed = 0 order by created_ts desc";
 
         try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+                final Connection con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
                 final PreparedStatement pstmt = con.prepareStatement(SQL);
                 final ResultSet rs = pstmt.executeQuery();)
         {
@@ -180,7 +180,7 @@ public class DataRefresher
         final String SQL = "update data_event_log set is_processed = 1 where seq_no = ?";
 
         try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+                final Connection con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
                 final PreparedStatement pstmt = con.prepareStatement(SQL);)
         {
 
@@ -231,7 +231,7 @@ public class DataRefresher
         final String SQL = "select * from data_refresher";
 
         try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+                Connection con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
                 PreparedStatement pstmt = con.prepareStatement(SQL);
                 ResultSet rs = pstmt.executeQuery();)
         {

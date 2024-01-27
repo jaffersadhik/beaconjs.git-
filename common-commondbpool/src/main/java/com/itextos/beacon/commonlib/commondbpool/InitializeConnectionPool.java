@@ -99,7 +99,7 @@ final class InitializeConnectionPool
 
         addJndiInfo(JndiInfo.SYSTEM_DB);
 
-        populateOtherConfigInfo();
+        populateOtherConfigInfo(props);
 
         isStarted = true;
     }
@@ -187,18 +187,23 @@ final class InitializeConnectionPool
             log.info("Common datasource configuration is done");
     }
 
-    private void populateOtherConfigInfo()
+    private void populateOtherConfigInfo(Properties props)
     {
         final String sql = "select * from " + SYSTEM_SCHEMA + ".jndi_info";
 
         if (log.isInfoEnabled())
             log.info("Creating data source for the Schema '" + JndiInfo.SYSTEM_DB + "'");
 
-        try (
-                Connection con = getConnection(JndiInfo.SYSTEM_DB);
-                PreparedStatement pstmt = con.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery();)
+        Connection con =null;
+        PreparedStatement pstmt =null;
+        ResultSet rs =null;
+        
+        try 
         {
+        	 //con = getConnection(JndiInfo.SYSTEM_DB);
+        		con=MysqlThinConnection.getConnection(props);
+        	   pstmt=   con.prepareStatement(sql);
+        	   rs= pstmt.executeQuery();
             if (log.isInfoEnabled())
                 log.info("Query to select records '" + sql + "'");
 
@@ -261,6 +266,12 @@ final class InitializeConnectionPool
         catch (final Exception e)
         {
             log.error("Unable to fetch the connection configuration from the database.", e);
+        }finally {
+        	
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+    
         }
     }
 

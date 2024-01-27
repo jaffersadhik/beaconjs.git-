@@ -42,12 +42,23 @@ public class DatabaseOperation
     {
         final Map<String, ScheduleInfo> returnValue = new HashMap<>();
 
-        try (
-                Connection con = getConnection();
-                final PreparedStatement pstmt = con.prepareStatement(aInitialLoad ? INITIAL_SELECT_QUERY : SELECT_QUERY);
-                final ResultSet rs = pstmt.executeQuery();)
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try 
         {
+        	  con = getConnection();
+              pstmt = con.prepareStatement(aInitialLoad ? INITIAL_SELECT_QUERY : SELECT_QUERY);
+              rs = pstmt.executeQuery();
             getScheduleInfo(returnValue, rs);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }finally
+        {
+            CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
         return returnValue;
     }
@@ -192,7 +203,7 @@ public class DatabaseOperation
             throws Exception
     {
         // TODO Has to be make is as property driven
-        return DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+        return DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
     }
 
     private static void getScheduleInfo(

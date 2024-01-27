@@ -78,7 +78,7 @@ public class LoadOnnetTableInfo
 
         try
         {
-            lSQLConn   = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CARRIER_HANDOVER.getKey()));
+            lSQLConn   = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.CARRIER_HANDOVER.getKey()));
             lStatement = lSQLConn.createStatement();
             // select * from operator_onnet_table_mapping
             lResultSet = lStatement.executeQuery("select * from carrier_onnet_table_map");

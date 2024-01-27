@@ -96,12 +96,16 @@ public class InmemoryLoaderCollection
     {
         final Map<InmemoryId, InmemoryInput> tempMemoryInputCollection = new EnumMap<>(InmemoryId.class);
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                PreparedStatement pstmt = con.prepareStatement(JNDI_INDI_SQL, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-                ResultSet resultSet = pstmt.executeQuery();)
+        ResultSet                 resultSet             = null;
+      	Connection con =null;
+     	PreparedStatement pstmt = null;
+    
+        try 
         {
 
+        	 con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+             pstmt = con.prepareStatement(JNDI_INDI_SQL, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+             resultSet = pstmt.executeQuery();
             while (resultSet.next())
             {
                 final InmemoryInput inmemoryInput = new InmemoryInput(resultSet.getString(COL_INDEX_INMEMORY_ID), resultSet.getString(COL_INDEX_DESCRIPTION), resultSet.getInt(COL_INDEX_JNDI_INFO_ID),
@@ -131,6 +135,13 @@ public class InmemoryLoaderCollection
         catch (final Exception e)
         {
             throw e;
+        }
+        finally
+        {
+            CommonUtility.closeResultSet(resultSet);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
     }
 

@@ -113,7 +113,7 @@ public class CarrierErrorInfoInmemReaper
 
         try
         {
-            lCon = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
+            lCon = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
             lCon.setAutoCommit(false);
 
             lPStmt           = lCon.prepareStatement(SQL_OPERATOR_ERROR_CODE_INSERT);

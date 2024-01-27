@@ -73,19 +73,24 @@ public class AccountLoader
         {
             final Map<String, List<String>> serviceDetails = getServiceInfo();
 
-            try (
-                    Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
-                    PreparedStatement pstmt = con.prepareStatement(SQL_SEPECIFIC_CUSTOMERS);)
+           	Connection con =null;
+        	PreparedStatement pstmt = null;
+     
+            try 
             {
+                 con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
+                 pstmt = con.prepareStatement(SQL_SEPECIFIC_CUSTOMERS);
                 final Map<String, Map<String, String>> dbAccDataMap = new HashMap<>();
 
                 for (final String s : aList)
                 {
                     pstmt.setString(1, s);
 
-                    try (
-                            final ResultSet resultSet = pstmt.executeQuery();)
+                	ResultSet resultSet=null;
+
+                    try 
                     {
+                    	resultSet = pstmt.executeQuery();
 
                         if (resultSet.next())
                         {
@@ -95,6 +100,12 @@ public class AccountLoader
                         }
                         else
                             log.warn("No data found for the query '" + SQL_SEPECIFIC_CUSTOMERS + "' for the key value '" + s + "'");
+                    }catch(Exception e) {
+                    	
+                    }finally {
+                    	
+                        CommonUtility.closeResultSet(resultSet);
+
                     }
                 }
 
@@ -106,6 +117,11 @@ public class AccountLoader
                 final String s = "Exception while update the account data into Redis";
                 log.error(s, e);
                 throw new ItextosException(s, e);
+            }finally {
+            	
+                CommonUtility.closeStatement(pstmt);
+                CommonUtility.closeConnection(con);
+         
             }
         }
     }
@@ -115,11 +131,15 @@ public class AccountLoader
     {
         final Map<String, List<String>> returnValue = new HashMap<>();
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
-                PreparedStatement pstmt = con.prepareStatement(SQL_USER_SERVICE_MAP);
-                ResultSet userServiceMap = pstmt.executeQuery();)
+      	Connection con =null;
+    	PreparedStatement pstmt = null;
+    	ResultSet userServiceMap=null;
+   
+        try 
         {
+        	 con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
+             pstmt = con.prepareStatement(SQL_USER_SERVICE_MAP);
+             userServiceMap = pstmt.executeQuery();
 
             while (userServiceMap.next())
             {
@@ -133,6 +153,11 @@ public class AccountLoader
             final String s = "Exception while getting the User Service Map Info";
             log.error(s, e);
             throw new ItextosException(s, e);
+        }finally {
+            CommonUtility.closeResultSet(userServiceMap);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+     
         }
 
         return returnValue;
@@ -163,15 +188,18 @@ public class AccountLoader
 
         boolean                         isSuccess      = true;
         ResultSet                       resultSet      = null;
+      	Connection con =null;
+    	PreparedStatement pstmt = null;
+ 
         int                             recordsCount   = 0;
 
         final Map<String, List<String>> serviceDetails = getServiceInfo();
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
-                PreparedStatement pstmt = con.prepareStatement(SQL_SELECT_ALL_CUSTOMERS, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);)
+        try 
         {
-            pstmt.setFetchSize(FETCH_BATCH_SIZE);
+             con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfo(JndiIdProperties.getInstance().getJndiProperty(DatabaseSchema.ACCOUNTS.getKey())));
+             pstmt = con.prepareStatement(SQL_SELECT_ALL_CUSTOMERS, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
 
             resultSet = pstmt.executeQuery();
             final Map<String, Map<String, String>> dbAccDataMap = new HashMap<>();
@@ -206,6 +234,9 @@ public class AccountLoader
         finally
         {
             CommonUtility.closeResultSet(resultSet);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+    
         }
 
         if (log.isInfoEnabled())

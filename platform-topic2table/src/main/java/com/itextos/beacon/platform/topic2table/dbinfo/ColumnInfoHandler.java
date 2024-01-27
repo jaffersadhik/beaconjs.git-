@@ -126,10 +126,12 @@ public class ColumnInfoHandler
         final Map<Integer, ColumnInfo> allColumns    = new ConcurrentHashMap<>();
         ResultSet                      rsColumnNames = null;
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                final PreparedStatement pstmt = con.prepareStatement(T2TUtility.ALL_COLUMNS_QUERY);)
+        Connection con = null;
+         PreparedStatement pstmt = null;
+        try
         {
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+              pstmt = con.prepareStatement(T2TUtility.ALL_COLUMNS_QUERY);
             pstmt.setString(1, aTableName);
             pstmt.setString(2, aSchemaName);
             rsColumnNames = pstmt.executeQuery();
@@ -148,6 +150,9 @@ public class ColumnInfoHandler
         finally
         {
             CommonUtility.closeResultSet(rsColumnNames);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
         return allColumns;
     }

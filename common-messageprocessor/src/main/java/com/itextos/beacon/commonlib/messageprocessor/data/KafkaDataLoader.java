@@ -137,7 +137,7 @@ public class KafkaDataLoader
             log.debug("Loading initial Kafka Details");
 
         try (
-                final Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB))
+                final Connection con = DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB))
         {
             loadPlatformClusterInfo(con);
             loadKafkaClusterInfo(con);

@@ -142,13 +142,18 @@ public class InterfaceParameterLoader
             log.debug("SQL to load the Client Parameter Keys : '" + SQL_CLIENT_PARAM + "'");
         }
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(CONFIGURATION_ID);
-                PreparedStatement pstmt1 = con.prepareStatement(SQL_DEFAULT_PARAM);
-                ResultSet rsDefault = pstmt1.executeQuery();
-                PreparedStatement pstmt2 = con.prepareStatement(SQL_CLIENT_PARAM);
-                ResultSet rsClient = pstmt2.executeQuery();)
+        Connection con = null;
+        PreparedStatement pstmt1 = null;
+        ResultSet rsDefault = null;
+        PreparedStatement pstmt2 = null;
+        ResultSet rsClient = null;
+        try 
         {
+        	   con = DBDataSourceFactory.getConnectionFromThin(CONFIGURATION_ID);
+               pstmt1 = con.prepareStatement(SQL_DEFAULT_PARAM);
+               rsDefault = pstmt1.executeQuery();
+               pstmt2 = con.prepareStatement(SQL_CLIENT_PARAM);
+               rsClient = pstmt2.executeQuery();
             final EnumMap<InterfaceType, EnumMap<InterfaceParameter, String>>              tempDefaultParamNames = getDefaultParams(rsDefault);
             final Map<String, EnumMap<InterfaceType, EnumMap<InterfaceParameter, String>>> tempClientParamNames  = getClientParams(rsClient);
 
@@ -160,6 +165,15 @@ public class InterfaceParameterLoader
 
             if (log.isDebugEnabled())
                 log.debug("Completed loading the Default and Client Parameters.");
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }finally {
+        	
+        	CommonUtility.closeResultSet(rsDefault);
+        	CommonUtility.closeStatement(pstmt1);
+        	 CommonUtility.closeResultSet(rsClient);
+             CommonUtility.closeStatement(pstmt2);
+             CommonUtility.closeConnection(con);
         }
     }
 

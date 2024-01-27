@@ -166,6 +166,8 @@ public class AccountInfo
         // TODO Need to replace with the required fields.
         final String              sql            = "select * from accounts_view where cli_id=?";
         ResultSet                 rs             = null;
+     	Connection con =null;
+    	PreparedStatement pstmt = null;
         Map<String, List<String>> serviceDetails = null;
 
         try
@@ -177,10 +179,10 @@ public class AccountInfo
             // TODO: handle exception
         }
 
-        try (
-                Connection con = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
-                final PreparedStatement pstmt = con.prepareStatement(sql);)
+        try 
         {
+        	  con = DBDataSourceFactory.getConnectionFromThin(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
+              pstmt = con.prepareStatement(sql);
             pstmt.setLong(1, Long.parseLong(aClientId));
             rs = pstmt.executeQuery();
 
@@ -211,6 +213,9 @@ public class AccountInfo
         finally
         {
             CommonUtility.closeResultSet(rs);
+            CommonUtility.closeStatement(pstmt);
+            CommonUtility.closeConnection(con);
+   
         }
         return null;
     }
