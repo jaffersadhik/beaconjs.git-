@@ -31,7 +31,7 @@ public class MysqlThinConnection {
 
 		}
 	}
-	public static Connection getConnection(Properties prop) {
+	public static Connection getConnection(Properties prop) throws Exception {
 		Connection con=null;
 		try{
 			
@@ -43,7 +43,7 @@ public class MysqlThinConnection {
 		
 		}catch(Exception e){
 			
-			return null;
+			throw e;
 
 		}
 	}
