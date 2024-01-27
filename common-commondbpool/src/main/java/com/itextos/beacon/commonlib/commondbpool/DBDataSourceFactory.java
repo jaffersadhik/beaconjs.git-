@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class DBDataSourceFactory
@@ -45,10 +46,17 @@ public class DBDataSourceFactory
             throws Exception
     {
         waitForJndiLoad();
+        if (aDBConID == null)
+            throw new ItextosException("JndiInfo cannot be null.");
+
     	DBDataSource dbDataSource=DataSourceCollection.getInstance().getDataSourceHolderInfo(aDBConID);
+        if (dbDataSource == null)
+            throw new ItextosException("Configuration is not initialised. ConnectionID : " + aDBConID);
+
+    
     	DataSourceConfig dataSourceConfig= dbDataSource.getDataSourceConfig();
     	return MysqlThinConnection.getConnection(dataSourceConfig);
-
+    	
     }
 
     public static Map<ConnectionCount, Integer> getDataSourceStatistics(
