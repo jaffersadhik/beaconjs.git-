@@ -200,7 +200,9 @@ final class InitializeConnectionPool
         
         try 
         {
-        	 //con = getConnection(JndiInfo.SYSTEM_DB);
+        	
+        	log.info(" props : "+props);
+        	// con = getConnection(JndiInfo.SYSTEM_DB);
         		con=MysqlThinConnection.getConnection(props);
         	   pstmt=   con.prepareStatement(sql);
         	   rs= pstmt.executeQuery();
