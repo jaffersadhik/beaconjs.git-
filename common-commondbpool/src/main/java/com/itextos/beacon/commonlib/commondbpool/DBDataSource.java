@@ -8,7 +8,7 @@ import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class DBDataSource
+class DBDataSource
         extends
         AbstractDataSource
 {

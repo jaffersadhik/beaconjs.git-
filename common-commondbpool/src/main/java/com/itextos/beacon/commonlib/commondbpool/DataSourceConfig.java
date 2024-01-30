@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 
-public class DataSourceConfig
+class DataSourceConfig
         extends
         DataSourceConstants
 {
@@ -98,7 +98,7 @@ public class DataSourceConfig
         }
     }
 
-    public Properties getConfigAsProperties()
+    Properties getConfigAsProperties()
     {
 
         if (props == null)

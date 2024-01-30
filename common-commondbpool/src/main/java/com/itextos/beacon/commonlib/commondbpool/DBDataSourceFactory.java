@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 public class DBDataSourceFactory
@@ -18,7 +17,27 @@ public class DBDataSourceFactory
     {
         InitializeConnectionPool.getInstance();
     }
-    
+
+    public static Connection getConnection(
+            JndiInfo aDBConID)
+            throws Exception
+    {
+        waitForJndiLoad();
+        final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
+        con.setAutoCommit(true);
+        return con;
+    }
+
+    public static Connection getConnectionFromThin(
+            JndiInfo aDBConID)
+            throws Exception
+    {
+        waitForJndiLoad();
+        final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
+        con.setAutoCommit(true);
+        return con;
+    }
+
     
     public static Connection getConnectionFromPool(
             JndiInfo aDBConID)
@@ -30,36 +49,7 @@ public class DBDataSourceFactory
         return con;
     }
 
-    public static Connection getConnection(
-            JndiInfo aDBConID)
-            throws Exception
-    {
-    	 waitForJndiLoad();
-         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
-         con.setAutoCommit(true);
-         return con;
-
-    }
-
-    public static Connection getConnectionFromThin(
-            JndiInfo aDBConID)
-            throws Exception
-    {
-    	
-    	/*
-        waitForJndiLoad();
-        if (aDBConID == null)
-            throw new ItextosException("JndiInfo cannot be null.");
-
-   
-    	return MysqlThinConnection.getConnection(aDBConID);
-    	*/
-    	 waitForJndiLoad();
-         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
-         con.setAutoCommit(true);
-         return con;
-    }
-
+    
     public static Map<ConnectionCount, Integer> getDataSourceStatistics(
             JndiInfo aConnectionID)
     {

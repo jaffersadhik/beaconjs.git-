@@ -1,4 +1,5 @@
 package com.itextos.beacon.commonlib.commondbpool;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
