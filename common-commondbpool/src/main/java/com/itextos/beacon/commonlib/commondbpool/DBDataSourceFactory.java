@@ -45,13 +45,19 @@ public class DBDataSourceFactory
             JndiInfo aDBConID)
             throws Exception
     {
+    	
+    	/*
         waitForJndiLoad();
         if (aDBConID == null)
             throw new ItextosException("JndiInfo cannot be null.");
 
    
     	return MysqlThinConnection.getConnection(aDBConID);
-    	
+    	*/
+    	 waitForJndiLoad();
+         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
+         con.setAutoCommit(true);
+         return con;
     }
 
     public static Map<ConnectionCount, Integer> getDataSourceStatistics(

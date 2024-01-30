@@ -1,5 +1,4 @@
 package com.itextos.beacon.commonlib.commondbpool;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +16,6 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 final class InitializeConnectionPool
@@ -99,10 +97,8 @@ final class InitializeConnectionPool
         createCommonPool(props);
 
         addJndiInfo(JndiInfo.SYSTEM_DB);
-        addJndiInfo(JndiInfo.CONFIGURARION_DB);
-        
 
-        populateOtherConfigInfo(props);
+        populateOtherConfigInfo();
 
         isStarted = true;
     }
@@ -184,40 +180,24 @@ final class InitializeConnectionPool
             Properties properties)
     {
         final DataSourceConfig config = new DataSourceConfig(JndiInfo.SYSTEM_DB, properties);
-        
         DataSourceCollection.getInstance().createDataSource(config.getDbConID(), config);
-
-        final DataSourceConfig config2 = new DataSourceConfig(JndiInfo.CONFIGURARION_DB, properties);
-        
-        DataSourceCollection.getInstance().createDataSource(config2.getDbConID(), config);
 
         if (log.isInfoEnabled())
             log.info("Common datasource configuration is done");
     }
 
-    private void populateOtherConfigInfo(Properties props)
+    private void populateOtherConfigInfo()
     {
         final String sql = "select * from " + SYSTEM_SCHEMA + ".jndi_info";
 
         if (log.isInfoEnabled())
             log.info("Creating data source for the Schema '" + JndiInfo.SYSTEM_DB + "'");
 
-        Connection con =null;
-        PreparedStatement pstmt =null;
-        ResultSet rs =null;
-        
-        try 
+        try (
+                Connection con = getConnection(JndiInfo.SYSTEM_DB);
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery();)
         {
-        	
-        	log.info(" props : "+props);
-			//props.setProperty("password", Encryptor.getDecryptedDbPassword(props.getProperty("password")));
-
-        	log.info(" props : "+props);
-
-        	 con = getConnection(JndiInfo.SYSTEM_DB);
-       // 		con=MysqlThinConnection.getConnection(props);
-        	   pstmt=   con.prepareStatement(sql);
-        	   rs= pstmt.executeQuery();
             if (log.isInfoEnabled())
                 log.info("Query to select records '" + sql + "'");
 
@@ -280,12 +260,6 @@ final class InitializeConnectionPool
         catch (final Exception e)
         {
             log.error("Unable to fetch the connection configuration from the database.", e);
-        }finally {
-        	
-            CommonUtility.closeResultSet(rs);
-            CommonUtility.closeStatement(pstmt);
-            CommonUtility.closeConnection(con);
-    
         }
     }
 
@@ -293,8 +267,7 @@ final class InitializeConnectionPool
             JndiInfo aDBConID)
             throws Exception
     {
-        final Connection con = DBDataSourceFactory.getConnection(aDBConID);
-
+        final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
         con.setAutoCommit(true);
         return con;
     }
