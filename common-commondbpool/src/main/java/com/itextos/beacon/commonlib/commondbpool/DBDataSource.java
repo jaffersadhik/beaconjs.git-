@@ -31,6 +31,8 @@ class DBDataSource
         try
         {
             mBasicDataSource = BasicDataSourceFactory.createDataSource(dataSourceConfig.getConfigAsProperties());
+            mBasicDataSource.setMaxConnLifetimeMillis(60000);
+            mBasicDataSource.setMinEvictableIdleTimeMillis(3000);
             return true;
         }
         catch (final Exception e)
