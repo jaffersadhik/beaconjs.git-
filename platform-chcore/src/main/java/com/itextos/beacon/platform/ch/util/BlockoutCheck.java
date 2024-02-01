@@ -25,7 +25,7 @@ public class BlockoutCheck
         if (isBlockoutMessage())
         {
        
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: sendBlockoutQueueMessage() start Message Id : ");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: sendBlockoutQueueMessage() start Message Id : ");
 
             mMessageRequest.setFromScheduleBlockout("RC_SCHDBLOCK");
             mMessageRequest.setScheduleBlockoutMessage(Constants.BLOCKOUT_MSG);
@@ -73,14 +73,14 @@ public class BlockoutCheck
         if (lBlockOutPurge)
         {
       
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() Rejected Promo msg purge due to trai : ");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: isBlockoutMessage() Rejected Promo msg purge due to trai : ");
 
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.TRAI_BLOCKOUT_FAILED.getStatusCode());
             CHProducer.sendToNextLevel(mMessageRequest);
             return true;
         }
 
-    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() sending to Trai Blockout Queue : ");
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: isBlockoutMessage() sending to Trai Blockout Queue : ");
 
         CHProducer.sendToBlockout(mMessageRequest);
         return true;
@@ -98,7 +98,7 @@ public class BlockoutCheck
         if ((lDomesticSmsBlockout == 2) || (lIntlSmsBlockout == 2))
         {
       
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Rejected Due to sms_blockout value is 2 ");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: Rejected Due to sms_blockout value is 2 ");
 
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.SMS_BLOCKOUT_FAILED.getStatusCode());
             mMessageRequest.setPlatfromRejected(true);
@@ -107,7 +107,7 @@ public class BlockoutCheck
             return true;
         }
 
-        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Sending to Custom Blockout Queue : ");
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: Sending to Custom Blockout Queue : ");
 
         CHProducer.sendToBlockout(mMessageRequest);
         return true;
@@ -124,7 +124,7 @@ public class BlockoutCheck
             if (lSpecificDrop)
             {
       
-                mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Message getting dropped due to specific blockout drop Message Id : ");
+            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: Message getting dropped due to specific blockout drop Message Id : ");
 
                 mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.SPECIFIC_BLOCKOUT_FAILED.getStatusCode());
                 mMessageRequest.setPlatfromRejected(true);
@@ -137,14 +137,14 @@ public class BlockoutCheck
     private boolean doSpecificBlockout()
     {
       
-        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Sending to specific Blockout Queue : ");
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: Sending to specific Blockout Queue : ");
 
         return true;
     }
 
     private boolean isBlockoutMessage()
     {
-        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: isBlockoutMessage() start Message Id : ");
+    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: isBlockoutMessage() start Message Id : ");
 
         return BlockoutChecker.blockoutCheck(mMessageRequest);
     }

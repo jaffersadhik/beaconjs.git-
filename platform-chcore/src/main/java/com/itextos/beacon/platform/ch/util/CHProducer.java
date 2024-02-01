@@ -47,7 +47,7 @@ public class CHProducer
         catch (final Exception e)
         {
             
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to Schedule/Blockout topic .."+ErrorMessage.getStackTraceAsString(e));
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"  Exception occer while sending to Schedule/Blockout topic .."+ErrorMessage.getStackTraceAsString(e));
 
             sendToErrorLog(aMessageRequest, e);
         }
@@ -63,7 +63,7 @@ public class CHProducer
         }
         catch (final ItextosException e)
         {
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to Retry Carrier Handover topic .."+ErrorMessage.getStackTraceAsString(e));
+        	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"  Exception occer while sending to Retry Carrier Handover topic .."+ErrorMessage.getStackTraceAsString(e));
 
             sendToErrorLog(aMessageRequest, e);
         }
@@ -108,7 +108,7 @@ public class CHProducer
         catch (final Exception e)
         {
             log.error("Exception occer while sending to Platform Rejection topic ..", e);
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  Exception occer while sending to  Platform Rejection topic .."+ErrorMessage.getStackTraceAsString(e));
+        	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"  Exception occer while sending to  Platform Rejection topic .."+ErrorMessage.getStackTraceAsString(e));
 
             sendToErrorLog(aMessageRequest, e);
         }

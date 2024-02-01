@@ -452,12 +452,12 @@ public class CarrierHandoverProcess
         final String additionalInfoString = CHUtil.getCallBackParams(aSubmissionObject);
 
 
-      	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: additionalInfoString===>" + additionalInfoString );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: additionalInfoString===>" + additionalInfoString );
 
         final String encodedAdditionalInfo = URLEncoder.encode(additionalInfoString, Constants.ENCODER_FORMAT);
         lDlrUrl = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo);
        
-      	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Kannel dn URL--->" + lDlrUrl );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Kannel dn URL--->" + lDlrUrl );
 
         aSubmissionObject.setCallBackUrl(lDlrUrl);
     }
@@ -576,7 +576,7 @@ public class CarrierHandoverProcess
             MessageRequest aMessageRequest,
             SubmissionObject aSubmissionObject)
     {
-         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sending to retry queue due to kannel down/storesize/latency route:" + aMessageRequest.getRouteId());
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Sending to retry queue due to kannel down/storesize/latency route:" + aMessageRequest.getRouteId());
 
 
         try
@@ -587,7 +587,7 @@ public class CarrierHandoverProcess
         catch (final Exception e)
         {
             
-            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Exception while removing payload .. :: "+ErrorMessage.getStackTraceAsString(e));
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Exception while removing payload .. :: "+ErrorMessage.getStackTraceAsString(e));
 
         }
 

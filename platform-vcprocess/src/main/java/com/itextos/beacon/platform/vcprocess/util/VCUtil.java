@@ -45,21 +45,21 @@ public class VCUtil
         final int    lDuplicateChkInterval = aMessageRequest.getDuplicateCheckInterval();
 
       
-    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Duplicate Checking for Client : " + lClientId );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Duplicate Checking for Client : " + lClientId );
 
         if (aMessageRequest.getDupCheckForUI() == 1)
         {
             final String lCampId = CommonUtility.nullCheck(aMessageRequest.getCampaignId(), true);
 
       
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Duplicate Checking for Client : '" + lClientId + "' :: Campiagn Id : '" + lCampId + "'" );
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Duplicate Checking for Client : '" + lClientId + "' :: Campiagn Id : '" + lCampId + "'" );
 
             final String lMobileNumber = aMessageRequest.getMobileNumber();
             return DuplicateCheck.isDuplicatCampiagn(lClientId, lMobileNumber, lCampId);
         }
 
   
-    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"Duplicate Check for other applications .." );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"Duplicate Check for other applications .." );
 
         if (DUPLICATE_BASED_ON_CUST_MID == lDuplicateType)
         {
@@ -90,7 +90,7 @@ public class VCUtil
         final boolean isTimeBoundEnable = aMessageRequest.getTimeboundCheck();
 
   
-         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Time boundCheck Enable :" + isTimeBoundEnable );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Time boundCheck Enable :" + isTimeBoundEnable );
 
 
         if (isTimeBoundEnable)
@@ -98,7 +98,7 @@ public class VCUtil
             final int lTimeBoundInterval = aMessageRequest.getTimeboundInterval();
             final int lTimeBoundMaxCount = aMessageRequest.getTimeboundMaxReqCount();
 
-          	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Timebound interval : '" + lTimeBoundInterval + "', TimeBound Max Count:'" + lTimeBoundMaxCount + "'");
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Timebound interval : '" + lTimeBoundInterval + "', TimeBound Max Count:'" + lTimeBoundMaxCount + "'");
 
             return TimeBoundMessageChecker.increaseMsgCounter(lClientId, CommonUtility.getLong(lMobileNumber), lTimeBoundInterval, lTimeBoundMaxCount);
         }
@@ -115,7 +115,7 @@ public class VCUtil
         final String lTemplateGroupId   = CommonUtility.nullCheck(aMessageRequest.getDltTemplateGroupId(), true);
         final String lHeader            = MessageUtil.getHeaderId(aMessageRequest);
 
-     	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: cust_dlt_entityId:'" + lCustDltEntityId + "', cust_dlt_templateId:'" + lCustDltTemplateId + "', TemplateGroupId :'" + lTemplateGroupId + "', header:'" + lHeader + "'" );
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: cust_dlt_entityId:'" + lCustDltEntityId + "', cust_dlt_templateId:'" + lCustDltTemplateId + "', TemplateGroupId :'" + lTemplateGroupId + "', header:'" + lHeader + "'" );
 
         final DomesticUserHeaderInfo lDomesticUserHeaderInfo = (DomesticUserHeaderInfo) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.DOMESTIC_USER_HEADERS);
         final String                 lHeaderBasedEntity      = CommonUtility.nullCheck(lDomesticUserHeaderInfo.getEntityId(lTemplateGroupId, lHeader.toLowerCase()));
@@ -141,7 +141,7 @@ public class VCUtil
 
         if (CommonUtility.nullCheck(lHeaderBasedEntity, true).equals(""))
         {
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: No entity id found in dlt_template_group_header_entity_map against Template Group Id:'" + lTemplateGroupId + "', Header:'" + lHeader + "'" );
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: No entity id found in dlt_template_group_header_entity_map against Template Group Id:'" + lTemplateGroupId + "', Header:'" + lHeader + "'" );
 
             
             return PlatformStatusCode.INVALID_DLT_ENTITY_ID.getStatusCode();
@@ -155,7 +155,7 @@ public class VCUtil
 
         if (!isFetchTemplateId)
         {
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"  :: No template id found in DLT_Templates table against entityid:'" + lHeaderBasedEntity + "', header:'" + lHeader + "', dlt_templte_group_id:'" + lTemplateGroupId + "'" );
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"  :: No template id found in DLT_Templates table against entityid:'" + lHeaderBasedEntity + "', header:'" + lHeader + "', dlt_templte_group_id:'" + lTemplateGroupId + "'" );
 
              return PlatformStatusCode.REJECTED_IN_DLT_TEMPLATE_CHECK.getStatusCode();
         }
@@ -175,7 +175,7 @@ public class VCUtil
 
             final String lLongMessage      = CommonUtility.nullCheck(aMessageRequest.getLongMessage(), true);
 
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: DltTemplateGrpId:'" + lDltTemplateGrpId + "',  Header:'" + lHeader + "', Long Message:'" + lLongMessage + "'" );
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: DltTemplateGrpId:'" + lDltTemplateGrpId + "',  Header:'" + lHeader + "', Long Message:'" + lLongMessage + "'" );
 
             TemplateResult lTemplateResult = null;
 
@@ -191,7 +191,7 @@ public class VCUtil
 
             if (lTemplateResult != null)
             {
-               	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+"lTemplateRresult==" + lTemplateResult );
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"lTemplateRresult==" + lTemplateResult );
 
                 final Result lResult = lTemplateResult.getResult();
 
@@ -217,7 +217,7 @@ public class VCUtil
         {
             aMessageRequest.setAdditionalErrorInfo(exp.getMessage());
 
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ::  problem finding the templates due to..."+ ErrorMessage.getStackTraceAsString(exp));
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" ::  problem finding the templates due to..."+ ErrorMessage.getStackTraceAsString(exp));
 
             log.error("", exp);
         }
@@ -288,7 +288,7 @@ public class VCUtil
         final boolean isCappingEnable = CommonUtility.isEnabled(aMessageRequest.getValue(MiddlewareConstant.MW_CAPPING_CHK_ENABLED));
 
      
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Capping Enable :" + isCappingEnable);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Capping Enable :" + isCappingEnable);
 
          
 
@@ -298,7 +298,7 @@ public class VCUtil
             int        lTotalMsgParts      = aMessageRequest.getMessageTotalParts();
             lTotalMsgParts = (lTotalMsgParts == 0) ? 1 : lTotalMsgParts;
 
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Capping Max Request Allow Count : '" + lCappingMaxReqCount + "', Message Part Count :'" + lTotalMsgParts + "'");
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Capping Max Request Allow Count : '" + lCappingMaxReqCount + "', Message Part Count :'" + lTotalMsgParts + "'");
 
             return CappingMessageChecker.doCappingCheck(lClientId, lCappingMaxReqCount, lTotalMsgParts);
         }
@@ -313,7 +313,7 @@ public class VCUtil
 
         if (!doCappingChk(aMessageRequest))
         {
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" Message Rejected Capping Check Failed");
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" Message Rejected Capping Check Failed");
 
               aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.REJECT_CAPPING_CHECK.getStatusCode());
             VCProducer.sendToPlatformRejection(aSourceComponent, aMessageRequest);

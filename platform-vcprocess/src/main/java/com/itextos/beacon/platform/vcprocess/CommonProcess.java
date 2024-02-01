@@ -28,7 +28,7 @@ public abstract class CommonProcess
 
         if (((mMessageRequest.getVlShortner() == 0) && (mMessageRequest.getUrlSmartlinkEnable() == 0)) && VCUtil.doDuplicateChk(mMessageRequest))
         {
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message Rejected Duplicate Check Failed ..  ");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Message Rejected Duplicate Check Failed ..  ");
 
              mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.DUPLICATE_CHECK_FAILED.getStatusCode());
             VCProducer.sendToPlatformRejection(mSourceComponent, mMessageRequest);
@@ -43,7 +43,7 @@ public abstract class CommonProcess
         if (!VCUtil.doTimeboundChk(mMessageRequest))
         {
         	
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message Rejected Time Bound Check Failed  ..  ");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Message Rejected Time Bound Check Failed  ..  ");
 
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.REJECT_TIMEBOUND_CHECK.getStatusCode());
             VCProducer.sendToPlatformRejection(mSourceComponent, mMessageRequest);

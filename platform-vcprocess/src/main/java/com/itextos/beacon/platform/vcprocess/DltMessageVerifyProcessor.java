@@ -33,7 +33,7 @@ public class DltMessageVerifyProcessor
 
         try
         {
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message Received :  " );
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Message Received :  " );
 
             if (!doDuplicateCheck())
                 return;
@@ -47,7 +47,7 @@ public class DltMessageVerifyProcessor
         {
             log.error("Exception occer while processing the message in Verify Consumer ....", e);
 
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Exception occer while processing the message in Verify Consumer :  " +ErrorMessage.getStackTraceAsString(e));
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Exception occer while processing the message in Verify Consumer :  " +ErrorMessage.getStackTraceAsString(e));
 
             VCProducer.sendToErrorLog(mSourceComponent, mMessageRequest, e);
         }
@@ -57,7 +57,7 @@ public class DltMessageVerifyProcessor
             MessageRequest aMessageRequest)
             throws Exception
     {
-        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Message Received :  " );
+    	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Message Received :  " );
 
      
         dltMsgProcess();
@@ -82,7 +82,7 @@ public class DltMessageVerifyProcessor
         final boolean isCreditCheckEnabled = CommonUtility.isEnabled(mMessageRequest.getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
 
-        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Credit Check Enabled : " + isCreditCheckEnabled);
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Credit Check Enabled : " + isCreditCheckEnabled);
 
         final BillType lBillType = BillType.getBillType(Integer.toString(mMessageRequest.getBillType()));
 
@@ -90,14 +90,14 @@ public class DltMessageVerifyProcessor
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.WC, mMessageRequest);
 
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message sendToPrepaidComponent: Successfully : ");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Message sendToPrepaidComponent: Successfully : ");
 
         }
         else
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.RC, mMessageRequest);
 
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message  sendToRouterComponent: Successfully : ");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Message  sendToRouterComponent: Successfully : ");
 
            
         }

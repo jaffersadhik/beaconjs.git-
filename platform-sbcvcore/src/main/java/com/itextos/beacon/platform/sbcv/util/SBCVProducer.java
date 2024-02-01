@@ -39,7 +39,7 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Platform Reject topic.", e);
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Platform Reject topic. :  "+ErrorMessage.getStackTraceAsString(e) );
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Platform Reject topic. :  "+ErrorMessage.getStackTraceAsString(e) );
 
             sendToErrorLog(aMessageRequest, e);
         }
@@ -81,7 +81,7 @@ public class SBCVProducer
         catch (final Exception e)
         {
         	
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Verify Consumer topic :  "+ErrorMessage.getStackTraceAsString(e) );
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Verify Consumer topic :  "+ErrorMessage.getStackTraceAsString(e) );
 
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -104,7 +104,7 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Schedule topic.", e);
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Schedule topic :  "+ErrorMessage.getStackTraceAsString(e) );
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Schedule topic :  "+ErrorMessage.getStackTraceAsString(e) );
 
             sendToErrorLog(aMessageRequest, e);
         }
@@ -126,7 +126,7 @@ public class SBCVProducer
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Blockout topic.", e);
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to Blockout topic :  "+ErrorMessage.getStackTraceAsString(e) );
+            aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Blockout topic :  "+ErrorMessage.getStackTraceAsString(e) );
 
             sendToErrorLog(aMessageRequest, e);
         }
@@ -143,7 +143,7 @@ public class SBCVProducer
         }
         catch (final Exception e)
         {
-        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Exception while sending the message to error log topic :  "+ErrorMessage.getStackTraceAsString(e) );
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to error log topic :  "+ErrorMessage.getStackTraceAsString(e) );
 
             log.error("Exception while sending request to error log. " + aMessageRequest, e);
         }

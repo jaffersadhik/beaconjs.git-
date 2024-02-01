@@ -46,10 +46,10 @@ public class IntlMsgVerifyProcessor
         final String  lPlatformBaseCurrency     = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.BASE_CURRENCY);
         final String  lPlatformIntlBaseCurrency = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.INTL_BASE_CURRENCY);
 
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Country : " + lCountry );
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl From Currency : " + lPlatformIntlBaseCurrency);
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Billing Currency : " + mMessageRequest.getBillingCurrency());
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Reffrence Currency : " + lPlatformBaseCurrency);
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Country : " + lCountry );
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Intl From Currency : " + lPlatformIntlBaseCurrency);
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Billing Currency : " + mMessageRequest.getBillingCurrency());
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Reffrence Currency : " + lPlatformBaseCurrency);
 
 
         final CalculateIntlBillingPrice lBillingPrice = new CalculateIntlBillingPrice(lClientId, lCountry, mMessageRequest.getBillingCurrency(), lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
@@ -63,9 +63,9 @@ public class IntlMsgVerifyProcessor
             lCalculateBillingPrice = lBillingPrice.calculate();
 
 
-            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Billing SMS Rate : " + lCalculateBillingPrice.getBillingSmsRate() );
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Intl Billing SMS Rate : " + lCalculateBillingPrice.getBillingSmsRate() );
 
-            	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Billing Additional Rate : " + lCalculateBillingPrice.getBillingAdditionalFixedRate() );
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Intl Billing Additional Rate : " + lCalculateBillingPrice.getBillingAdditionalFixedRate() );
 
 
             mMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
@@ -131,20 +131,20 @@ public class IntlMsgVerifyProcessor
         final boolean isCreditCheckEnabled = CommonUtility.isEnabled(mMessageRequest.getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
    
-    	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Credit Check Enabled : " + isCreditCheckEnabled );
+        mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Credit Check Enabled : " + isCreditCheckEnabled );
 
         if ((mMessageRequest.getBillType() == 1) || isCreditCheckEnabled)
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.WC, mMessageRequest);
 
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+"Message Send to Wallet Topic: Successfully");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Message Send to Wallet Topic: Successfully");
 
          }
         else
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.RC, mMessageRequest);
 
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Message  sendtoIntlRouteQueue: Successfully : " );
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Message  sendtoIntlRouteQueue: Successfully : " );
 
          }
     }
@@ -157,7 +157,7 @@ public class IntlMsgVerifyProcessor
         if (lErrorCode != null)
         {
          	
-        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" : Intl Rejected Status Code : " + lErrorCode);
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Intl Rejected Status Code : " + lErrorCode);
 
             mMessageRequest.setSubOriginalStatusCode(lErrorCode.getStatusCode());
           //  VCProducer.sendToNextComponent(mSourceComponent, Component.PRC, mMessageRequest);

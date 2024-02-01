@@ -44,7 +44,7 @@ public class RProcessor
 
         if (lError == null)
         {
-           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: To Validate Govt Route...");
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: To Validate Govt Route...");
 
             lError = doGovtRouteIdentifying(lFailListRouteId, isSpecialSeries);
         }
@@ -91,7 +91,7 @@ public class RProcessor
                     final RFinder lRFinder        = new RFinder(mMessageRequest);
                     final boolean lMaskGovtHeader = lRFinder.maskGovtHeader();
 
-                   	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: mapping found in govt_header_masking****** mid:"+ lMaskGovtHeader );
+                    mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: mapping found in govt_header_masking****** mid:"+ lMaskGovtHeader );
 
                  
                 
@@ -134,7 +134,7 @@ public class RProcessor
         if (aFailListRouteId.isEmpty())
         {
        
-           	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getBaseMessageId()+" :: Going to execute normal routing logics" );
+        	mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" :: Going to execute normal routing logics" );
 
             final RFinder lRFinder = new RFinder(mMessageRequest);
             lRFinder.findAndSetRoute();
@@ -154,7 +154,7 @@ public class RProcessor
         if (!isValidHeader)
         {
             
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ::"+lHeader + " Header blocked for route " + lRouteId );
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" ::"+lHeader + " Header blocked for route " + lRouteId );
 
             // checking in
             // header_fixed_routes/header_alternate_routes/header_priority_open_routes
@@ -196,7 +196,7 @@ public class RProcessor
 
 
 
-       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: validateRoutes() - Route Id : " + lRouteId);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: validateRoutes() - Route Id : " + lRouteId);
 
         if (RCUtil.isExpiredRoute(lRouteId))
             return PlatformStatusCode.INTL_ROUTE_EXPIRED;
@@ -214,7 +214,7 @@ public class RProcessor
         RCProducer.sendToPlatformRejection(aMessageRequest);
 
 
-           	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sent To Biller ");
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Sent To Biller ");
 
        
     }
@@ -224,12 +224,12 @@ public class RProcessor
     {
         final String lRouteId = CommonUtility.nullCheck(aMessageRequest.getRouteId(), true);
 
-       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: sendToQueue() - Route Id : " + lRouteId);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: sendToQueue() - Route Id : " + lRouteId);
 
         final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(lRouteId);
 
   
-       	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: sendToQueue() - Route Configuration : " + lRouteConfigInfo);
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: sendToQueue() - Route Configuration : " + lRouteConfigInfo);
 
         final String lRouteType = lRouteConfigInfo.getRouteType();
 
@@ -248,7 +248,7 @@ public class RProcessor
         RCProducer.sendToCarrierHandover(aMessageRequest);
     
              
-            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" :: Sent to Carrier Handover " + lRouteId + " Success. ");
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Sent to Carrier Handover " + lRouteId + " Success. ");
 
        
     }
