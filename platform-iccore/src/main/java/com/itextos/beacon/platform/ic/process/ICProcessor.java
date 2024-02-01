@@ -160,8 +160,8 @@ public class ICProcessor
         }
 
         if (ICUtility.isVLFeatureEnabled(aMessageRequest))
-        {aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()
-        		aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Request sending to R3C..");
+        {
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Request sending to R3C..");
 
             	
             ICProducer.sendToUrlShortner(aMessageRequest);

@@ -59,7 +59,7 @@ public class ICProducer
         }
         catch (final Exception e)
         {
-        	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to URL Shortner topic. : "+ErrorMessage.getStackTraceAsString(e));
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to URL Shortner topic. : "+ErrorMessage.getStackTraceAsString(e));
 
             log.error("Exception while sending the message to URL Shortner topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -75,13 +75,13 @@ public class ICProducer
 
             if (ClusterType.OTP == aMessageRequest.getClusterType())
             {
-            	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"Bypassing the Schedule/Blockout funcationality for OTP request.., Hence request sending to VC");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+"Bypassing the Schedule/Blockout funcationality for OTP request.., Hence request sending to VC");
 
                 sendToVerifyConsumerTopic(aMessageRequest);
             }
             else
             {
-            	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Request sending to SBCV..");
+            	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Request sending to SBCV..");
              //   MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
                 
                 aMessageRequest.setFromComponent(Component.IC.getKey());
@@ -91,7 +91,7 @@ public class ICProducer
         }
         catch (final Exception e)
         {
-        	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to SBCV Process topic. : "+ErrorMessage.getStackTraceAsString(e));
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to SBCV Process topic. : "+ErrorMessage.getStackTraceAsString(e));
 
             log.error("Exception while sending the message to SBCV Process topic.", e);
             sendToErrorLog(aMessageRequest, e);
@@ -125,7 +125,7 @@ public class ICProducer
         }
         catch (final Exception e)
         {
-        	aMessagaMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Verify Consumer topic : "+ErrorMessage.getStackTraceAsString(e));
+        	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Exception while sending the message to Verify Consumer topic : "+ErrorMessage.getStackTraceAsString(e));
 
             log.error("Exception while sending the message to Verify Consumer topic.", e);
             sendToErrorLog(aMessageRequest, e);
