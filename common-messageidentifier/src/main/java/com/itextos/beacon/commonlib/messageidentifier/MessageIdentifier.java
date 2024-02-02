@@ -177,8 +177,7 @@ public class MessageIdentifier
             System.exit(-99);
         }
      //   mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
-     //   return mAppInstanceId + getUniqueDate() + getNextIndex() + FIXED_LAST_DIGITS;
-        return mAppInstanceId + System.currentTimeMillis() + getNextIndex() + FIXED_LAST_DIGITS;
+        return mAppInstanceId + getUniqueDate() + getNextIndex() + FIXED_LAST_DIGITS;
     }
 
     public synchronized String getUniqueSequence()
