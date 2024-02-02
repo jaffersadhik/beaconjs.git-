@@ -23,8 +23,16 @@ class DBDataSource
     {
         super(aConId, aDataSourceConfig);
     }
+    
+    
 
-    @Override
+    public BasicDataSource getmBasicDataSource() {
+		return mBasicDataSource;
+	}
+
+
+
+	@Override
     boolean createDataSource()
     {
 

@@ -6,8 +6,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import java.lang.reflect.Field;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 
@@ -133,6 +136,47 @@ class DataSourceCollection
                         log.debug("DataSource closed for the Connection ID: " + temp.toString());
                 }
                 else
+                    if (log.isDebugEnabled())
+                        log.debug("DataSource not created for the Connection ID: " + temp.toString() + ". No need to close it.");
+            }
+            catch (final Exception e)
+            {
+                log.error("IGNORE: Exception while closing the DataSource: '" + temp.toString() + "'", e);
+            }
+        }
+    }
+
+    void evicAllConnectionPool()
+    {
+
+        for (final Entry<JndiInfo, DBDataSource> entry : dataSourceHolder.entrySet())
+        {
+            final JndiInfo temp = entry.getKey();
+
+            if (log.isInfoEnabled())
+                log.info("Closing the DataSource for the Connection ID: " + temp.toString());
+
+            try
+            {
+                final DBDataSource tempDataSource = entry.getValue();
+
+                if (tempDataSource.isDataSourceCreated())
+                {
+                  
+                	try {
+                        // Validate and close idle connections
+
+                		 Field field = BasicDataSource.class.getDeclaredField("connectionPool");
+                         field.setAccessible(true);
+                         GenericObjectPool<Connection> connectionPool = (GenericObjectPool<Connection>) field.get(tempDataSource.getmBasicDataSource());
+
+                   		connectionPool.evict(); // Evict idle connections
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                	
                     if (log.isDebugEnabled())
                         log.debug("DataSource not created for the Connection ID: " + temp.toString() + ". No need to close it.");
             }
