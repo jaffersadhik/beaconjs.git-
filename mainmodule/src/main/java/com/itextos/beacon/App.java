@@ -394,6 +394,14 @@ public class App {
 			IS_START_PROMETHEUS=true;
 			return true;
 			
+		}else if(module.equals("ifp")){
+			
+			com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("sbcv")){
 			
 			com.itextos.beacon.platform.sbcv.StartApplication.main(args);
