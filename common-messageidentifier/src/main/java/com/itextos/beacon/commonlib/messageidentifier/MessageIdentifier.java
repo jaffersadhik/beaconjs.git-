@@ -177,7 +177,7 @@ public class MessageIdentifier
             System.exit(-99);
         }
      //   mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
-        return mAppInstanceId + getUniqueDate() + getNextIndex() + FIXED_LAST_DIGITS;
+        return mAppInstanceId + getUniqueDateWithMillis() + getNextIndex() + FIXED_LAST_DIGITS;
     }
 
     public synchronized String getUniqueSequence()
@@ -227,6 +227,19 @@ public class MessageIdentifier
         return DECIMAL_FORMATTER_2.format(ym) + DECIMAL_FORMATTER_3.format(dhh) + DATE_FORMATER.format(cal.getTime());
     }
 
+    private static String getUniqueDateWithMillis()
+    {
+        final Calendar cal = Calendar.getInstance();
+        cal.setLenient(false);
+
+        // Used to format the date with minutes and seconds.
+        final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("mmssSSS");
+        // Add 1 as Calendar.MONTH will return 0 to 11.
+        final int              ym            = ((cal.get(Calendar.YEAR) % NO_OF_YEARS) * MONTHS_IN_A_YEAR) + (cal.get(Calendar.MONTH) + 1);
+        final int              dhh           = ((cal.get(Calendar.DATE) - 1) * HOURS_IN_A_DAY) + cal.get(Calendar.HOUR_OF_DAY);
+        return DECIMAL_FORMATTER_2.format(ym) + DECIMAL_FORMATTER_3.format(dhh) + DATE_FORMATER.format(cal.getTime());
+    }
+    
     private synchronized String getNextIndex()
     {
 
