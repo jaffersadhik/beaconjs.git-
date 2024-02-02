@@ -57,7 +57,11 @@
 			<artifactId>platform-blockoutprocess</artifactId>
 			<version>1.0</version>
 	</dependency>
-	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-duplicatecheckremoval</artifactId>
+			<version>1.0</version>
+	</dependency>
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-mccmncload</artifactId>

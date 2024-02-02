@@ -402,6 +402,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("dcr")){
+			
+			com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("sbcv")){
 			
 			com.itextos.beacon.platform.sbcv.StartApplication.main(args);
