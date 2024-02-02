@@ -394,6 +394,14 @@ public class App {
 			IS_START_PROMETHEUS=true;
 			return true;
 			
+		}else if(module.equals("smppinterface")){
+			
+			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("ifp")){
 			
 			com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
