@@ -18,7 +18,12 @@ public class StartApplication
 
         try
         {
-            final String lCluster = System.getProperty("cluster");
+             String lCluster = System.getProperty("cluster");
+            
+            if(lCluster==null) {
+            	
+            	lCluster=System.getenv("cluster");
+            }
 
             if (log.isDebugEnabled())
                 log.debug("Cluster Type : " + lCluster);
