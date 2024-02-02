@@ -19,14 +19,13 @@ public class MessageIdentifier
     private static final Log           log                 = LogFactory.getLog(MessageIdentifier.class);
 
     private static final String        FIXED_LAST_DIGITS   = "00";
-    private static final int           MAX_INDEX           = 99999;
+    private static final int           MAX_S2_INDEX           = 99;
+    private static final int           MAX_S3_INDEX           = 999;
 
     private static final int           MONTHS_IN_A_YEAR    = 12;
     private static final int           HOURS_IN_A_DAY      = 24;
     private static final int           NO_OF_YEARS         = 8;
 
-    // Used to format the running Sequence number
-    private static final DecimalFormat DECIMAL_FORMATTER   = new DecimalFormat("00000");
 
     // Used to format the combined year & month
     private static final DecimalFormat DECIMAL_FORMATTER_2 = new DecimalFormat("00");
@@ -49,7 +48,9 @@ public class MessageIdentifier
 
     private String                   mLocalIP               = null;
     private boolean                  mIsAppInstanceIDSet    = false;
-    private int                      mCurrentIndex          = 0;
+    private int                      ms2Index          = 10;
+    private int                      ms3Index          = 100;
+
     private InterfaceType            mInterfaceType;
     private String                   mAppInstanceId         = null;
     private RedisAppInstnaceIDPool   mAppInstanceRedis      = null;
@@ -141,6 +142,7 @@ public class MessageIdentifier
     public synchronized String getNextId()
     {
 
+    	/*
         if (!mIsAppInstanceIDSet)
         {
             final String message = "WARNING ::: " + "APP INSTANCE ID is not. " //
@@ -155,6 +157,8 @@ public class MessageIdentifier
         }
         mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
         return mAppInstanceId + mIdDateFormat.format(mDate) + getNextIndex() + FIXED_LAST_DIGITS;
+    	*/
+    	return getNextSmallId();
     }
 
     public synchronized String getNextSmallId()
@@ -172,7 +176,7 @@ public class MessageIdentifier
             System.err.println(new Date() + " ::: " + message);
             System.exit(-99);
         }
-        mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
+     //   mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
         return mAppInstanceId + getUniqueDate() + getNextIndex() + FIXED_LAST_DIGITS;
     }
 
@@ -226,18 +230,41 @@ public class MessageIdentifier
     private synchronized String getNextIndex()
     {
 
-        if (mCurrentIndex >= MAX_INDEX)
-        {
-            mCurrentIndex = 1;
-
-            if (log.isDebugEnabled())
-                log.debug("Resetting the running sequence number.");
-        }
-        else
-            ++mCurrentIndex;
-        return DECIMAL_FORMATTER.format(mCurrentIndex);
+       
+        return getS2()+""+getS3();
     }
 
+    private synchronized int getS2() {
+    	
+    	 if (ms2Index >= MAX_S2_INDEX)
+         {
+    		 ms2Index = 10;
+
+   
+         }
+         else {
+             ++ms2Index;
+         }
+         return ms2Index;
+
+    	
+    }
+    
+    private synchronized int getS3() {
+    	
+   	 if (ms3Index >= MAX_S3_INDEX)
+        {
+   		 ms3Index = 100;
+
+  
+        }
+        else {
+            ++ms3Index;
+        }
+        return ms3Index;
+
+   	
+   }
     /**
      * This method should be called in all the interface instances to reset the
      * instance id.
