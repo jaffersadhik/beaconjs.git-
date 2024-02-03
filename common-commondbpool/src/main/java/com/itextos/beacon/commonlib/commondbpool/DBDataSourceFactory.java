@@ -27,7 +27,7 @@ public class DBDataSourceFactory
         con.setAutoCommit(true);
         return con;
     }
-
+    
     public static Connection getConnectionFromThin(
             JndiInfo aDBConID)
             throws Exception
@@ -49,7 +49,6 @@ public class DBDataSourceFactory
         return con;
     }
 
-    
     public static Map<ConnectionCount, Integer> getDataSourceStatistics(
             JndiInfo aConnectionID)
     {

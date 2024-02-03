@@ -118,10 +118,7 @@ class DataSourceConfig
             props.put("numTestsPerEvictionRun", Integer.toString(numTestsPerEvictionRun));
             props.put("maxTotal", Integer.toString(maxTotal));
             props.put("maxWait", Integer.toString(maxWait));
-            props.put("maxWaitMillis", Integer.toString(maxWaitMillis));            
-            props.put("maxConnLifetimeMillis ", Integer.toString(120000));
-
-            
+            props.put("maxWaitMillis", Integer.toString(maxWaitMillis));
 
             // ***************************************
             // Due to communication link error and hung issue the below codes

@@ -23,24 +23,14 @@ class DBDataSource
     {
         super(aConId, aDataSourceConfig);
     }
-    
-    
 
-    public BasicDataSource getmBasicDataSource() {
-		return mBasicDataSource;
-	}
-
-
-
-	@Override
+    @Override
     boolean createDataSource()
     {
 
         try
         {
             mBasicDataSource = BasicDataSourceFactory.createDataSource(dataSourceConfig.getConfigAsProperties());
-            mBasicDataSource.setMaxConnLifetimeMillis(60000);
-            mBasicDataSource.setMinEvictableIdleTimeMillis(3000);
             return true;
         }
         catch (final Exception e)

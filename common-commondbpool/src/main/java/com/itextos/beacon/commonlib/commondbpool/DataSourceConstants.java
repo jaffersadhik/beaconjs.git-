@@ -15,7 +15,7 @@ class DataSourceConstants
     static final int     DEFAULT_MAX_WAIT_IN_MILLIS                = 10000;
     static final int     DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS = -1;
     static final int     DEFAULT_NUM_TESTS_PER_EVICTION_RUN        = 3;
-    static final int     DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS    = 180000;
+    static final int     DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS    = 1800000;
     static final int     DEFAULT_REMOVE_ABANDONED_TIMEOUT          = 60;
     static final String  DEFAULT_VALIDATION_QUERY                  = "select 1";
     static final boolean DEFAULT_TEST_ON_BORROW                    = false;
