@@ -45,12 +45,12 @@
 		<kafka-clients-version>2.8.0</kafka-clients-version>
 
 		<!-- Build related -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<!--	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus_url>http://10.0.1.21:8081</nexus_url>
 		<nexus_repository>${nexus_url}/repository</nexus_repository>
 		<itextos_lib>${nexus_repository}/iTexTos_lib/</itextos_lib>
 		<itextos_release>${nexus_repository}/iTexTos_release/</itextos_release>
-
+-->
 		<!-- Compiler Related -->
 	<!-- 	<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version> -->
 		<maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version> 
