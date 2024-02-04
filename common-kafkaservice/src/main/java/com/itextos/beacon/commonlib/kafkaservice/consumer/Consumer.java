@@ -119,14 +119,17 @@ public class Consumer
                 }
                 else
                 {
+                
+                	
+                	 if(log.isDebugEnabled()) {
+                         log.debug(mLogTopicName + " Assigned patition Count" +mConsumer.assignment().size());
+                 	}
                 	mConsumer.assignment().
                 	forEach((p)->{
                 	
                 	 String t1=	p.topic()+""+p.partition();
                 	 
-                	 if(log.isDebugEnabled()) {
-                        log.debug(mLogTopicName + " no Records patition " + t1);
-                	}
+                	
 
                 	});
                     checkAndCommit(0);
