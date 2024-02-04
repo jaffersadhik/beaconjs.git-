@@ -86,6 +86,8 @@ public class Consumer
             isCompletelyStopped = false;
 
             long starttime=System.currentTimeMillis();
+           final long stime=System.currentTimeMillis();
+            
             while (!mClosed)
             {
             	
@@ -97,6 +99,7 @@ public class Consumer
                 }
                 final long                              startTime = System.currentTimeMillis();
                 final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
+                
                 final int                               pollCount = records.count();
                 final long                              endTime   = System.currentTimeMillis();
 
@@ -116,6 +119,16 @@ public class Consumer
                 }
                 else
                 {
+                	mConsumer.assignment().
+                	forEach((p)->{
+                	
+                	 String t1=	p.topic()+""+p.partition();
+                	 
+                	 if(log.isDebugEnabled()) {
+                        log.debug(mLogTopicName + " no Records patition " + t1);
+                	}
+
+                	});
                     checkAndCommit(0);
 
                     // Goto Sleep after the commit.
