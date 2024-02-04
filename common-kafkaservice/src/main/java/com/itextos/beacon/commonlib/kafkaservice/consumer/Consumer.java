@@ -91,18 +91,20 @@ public class Consumer
             while (!mClosed)
             {
             	
-                if (log.isDebugEnabled()) {
-                	if((System.currentTimeMillis()-starttime)>4000) {
-                		starttime=System.currentTimeMillis();
-                    log.debug("Started consuming messages from '" + mTopicName + "'");
-                	}
-                }
+            
                 final long                              startTime = System.currentTimeMillis();
                 final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
                 
                 final int                               pollCount = records.count();
                 final long                              endTime   = System.currentTimeMillis();
 
+                if (log.isDebugEnabled()) {
+                	if((System.currentTimeMillis()-starttime)>4000) {
+                		starttime=System.currentTimeMillis();
+                    log.debug("Started consuming messages from '" + mTopicName + "' pollCount : "+pollCount);
+                	}
+                }
+                
                 if (pollCount != 0)
                 {
                     if (log.isDebugEnabled())
