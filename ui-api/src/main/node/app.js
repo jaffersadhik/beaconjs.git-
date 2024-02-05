@@ -31,7 +31,7 @@ const fastify = Fastify({
         prettyPrint: false,
         // prettyPrint: {colorize: true, translateTime: 'SYS:standard'},
         level: 'debug',
-        file: './log/cm.log',
+        file: '/logs/cm.log',
     },
     genReqId(req) {
         const reqid = fastify.nanoid();

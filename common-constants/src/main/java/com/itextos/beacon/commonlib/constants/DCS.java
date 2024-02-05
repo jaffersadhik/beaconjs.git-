@@ -7,13 +7,18 @@ public enum DCS
         implements
         ItextosEnum
 {
+	 PLAIN("0"),
+	    FLASH_UNICODE1("24"),
+	    FLASH_UNICODE2("18"),
+	    FLASH_PM("16"),
+	    FLASH_PM2("-16"),
+	    UNICODE("8"),
+	    PEM("12"),
+	    BM_2("-11"),
+	    BM_3("11"),
 
     FLASH("240"),
-    FLASH_PM("16"),
-    FLASH_UNICODE1("24"),
-    FLASH_UNICODE2("18"),
-    UNICODE("8"),
-    PLAIN("0"),
+   
     SPECIAL_PORT_PM("4"),
     PDU_MSG("247");
 

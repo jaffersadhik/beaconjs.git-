@@ -38,6 +38,7 @@ public class FCUtility
 
             case FLASH:
             case FLASH_PM:
+            case FLASH_PM2:	
                 lFeaturecd = getFlashPlainFeatureCode(aPlainMessageLengh, aUdhInclude, aUdh, aMessage);
                 break;
 
@@ -361,6 +362,7 @@ public class FCUtility
         {
             case FLASH:
             case FLASH_PM:
+            case FLASH_PM2:	
                 return MessageClass.FLASH_PLAIN_MESSAGE;
 
             case FLASH_UNICODE1:
