@@ -51,6 +51,15 @@ public final class DateTimeUtility
         {
             if (log.isWarnEnabled())
                 log.warn("Exception while parsing the date string '" + aDateString + "' with the format '" + aInputDateFormat + "'", e);
+       
+            try {
+            	
+            	returnValue=new Date(Long.parseLong(aDateString));
+            	
+            }catch(Exception e1) {
+            	
+            	
+            }
         }
 
         return returnValue;
