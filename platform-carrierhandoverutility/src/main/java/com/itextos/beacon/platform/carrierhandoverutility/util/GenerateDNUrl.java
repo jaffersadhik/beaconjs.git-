@@ -60,7 +60,8 @@ public class GenerateDNUrl
             if (maxRandomSeed == 0)
                 maxRandomSeed = 10;
 
-            lSts = lSTimeLnng + (lRandomGen.nextInt(maxRandomSeed) * 1000);
+         //   lSts = lSTimeLnng + (lRandomGen.nextInt(maxRandomSeed) * 1000);
+            lSts = lSTimeLnng + lRandomGen.nextInt(1500);
             if (log.isDebugEnabled())
                 log.debug("Adjusted sts:" + lSts + " for stime:" + lSTimeLnng);
         }
