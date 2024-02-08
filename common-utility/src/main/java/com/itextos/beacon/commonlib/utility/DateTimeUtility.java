@@ -56,7 +56,7 @@ public final class DateTimeUtility
             	
             	returnValue=new Date(Long.parseLong(aDateString));
             	
-            }catch(Exception e1) {
+            }catch(final Exception e1) {
             	
             	
             }
