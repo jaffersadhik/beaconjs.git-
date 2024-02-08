@@ -45,6 +45,9 @@ public class BillerProcessor
     	
     	 try
          {
+    	     if (log.isDebugEnabled())
+    	            log.debug("Biller Received Object .. " + aBaseMessage);
+
              final SubmissionProcess lSubProcessor = new SubmissionProcess((SubmissionObject) aBaseMessage);
              lSubProcessor.process();
          }

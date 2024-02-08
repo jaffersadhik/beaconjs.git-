@@ -258,6 +258,7 @@
  --> 	<module>platform-mccmncload</module>
 
  	<module>ui-api</module>
+ 	<module>demo</module>
   </modules>
   
 

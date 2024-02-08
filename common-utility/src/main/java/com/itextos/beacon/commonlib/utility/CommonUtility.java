@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 
@@ -130,7 +131,12 @@ public final class CommonUtility
         }
         catch (final Exception e)
         {
-            // ignore
+        	try {
+        		returnValue=DateTimeUtility.getDateFromString(aLongValue, DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS).getTime();
+        
+        	}catch(Exception e1) {
+        		
+        	}
         }
         return returnValue;
     }
