@@ -1,5 +1,7 @@
 package com.itextos.beacon.platform.smppdlr.util;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -42,6 +44,12 @@ public class SmppDlrRedisOperation
             {
                 final DeliverSmInfo lDeliverSmInfo = getDeliveryInfo(lDeliveryObject);
 
+             /*   String dn=lDeliverSmInfo.getShortMessage();
+                dn=URLEncoder.encode(dn,"UTF-8");
+                dn=dn.replaceAll("%0A", "");
+
+                lDeliverSmInfo.setShortMessage(URLDecoder.decode(dn,"UTF-8"));
+               */
                 jsonArray.add(lDeliverSmInfo.getJson());
             }
             log.debug(jsonArray.toString());

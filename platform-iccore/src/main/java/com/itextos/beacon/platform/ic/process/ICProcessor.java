@@ -71,6 +71,7 @@ public class ICProcessor
     	
     	try
         {
+    		emptyTheNullCharacter(lMessageRequest);
             setClientHeader(lMessageRequest);
             setClietDltParams(lMessageRequest);
 
@@ -105,6 +106,27 @@ public class ICProcessor
 
     }
   
+
+	private static void emptyTheNullCharacter(MessageRequest lMessageRequest) {
+
+		String msg=lMessageRequest.getLongMessage();
+		msg=msg.replaceAll("\0", "");		
+		lMessageRequest.setLongMessage(msg);
+		
+	
+		if(lMessageRequest.getMessageParts()!=null&&lMessageRequest.getMessageParts().size()>0) {
+		
+			lMessageRequest.getMessageParts().forEach((partmsg)->{
+				
+				String m=partmsg.getMessage();
+				
+				m=m.replaceAll("\0", "");	
+				
+				partmsg.setMessage(m);
+
+			});
+		}
+	}
 
 	private static void setClietDltParams(
             MessageRequest aMessageRequest)
