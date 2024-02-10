@@ -402,6 +402,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("dbgwspring")){
+			
+			com.itextos.beacon.dbgw.main.JwtRefreshTokenSpringBootApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("ifp")){
 			
 			com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
