@@ -39,7 +39,14 @@ public class Test {
        //day(null);
 		
 		System.out.println(URLEncoder.encode(" DN:'id:2170216805068145032000 sub:001 dlvrd:001 submit date:240208000506 done date:240208000841 stat:UNDELIV err:699 Text:OLELEARN \r\n'","UTF-8"));
-       
+     
+		String st="\0";
+		System.out.println(URLEncoder.encode(st,"UTF-8"));
+
+		st=st.replaceAll("\0", "The");
+		System.out.println(URLEncoder.encode(st,"UTF-8"));
+		System.out.println(st);
+
 	}
 
 	

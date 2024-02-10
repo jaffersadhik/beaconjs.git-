@@ -181,7 +181,8 @@ public class DlrSmppGenerator
             sb.append(" done date:").append(lFormatedDtime);
             sb.append(" stat:").append(lDlrStatus);
             sb.append(" err:").append(aDeliveryObject.getDnClientStatusCode());
-            sb.append(" Text:").append(lReplaceMessage);
+           // sb.append(" Text:").append(lReplaceMessage);
+            sb.append(" Text:").append(" ");
         }
         catch (final Exception e)
         {
