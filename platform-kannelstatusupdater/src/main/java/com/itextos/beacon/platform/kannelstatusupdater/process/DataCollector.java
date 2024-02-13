@@ -28,15 +28,14 @@ public class DataCollector
     {
         final Map<String, KannelInfo> lAllRouteConfigs = ICHUtil.getAllRouteConfig();
 
-        if (log.isDebugEnabled())
             log.debug("Kannel info to be validated " + lAllRouteConfigs);
 
         final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(lAllRouteConfigs);
 
-        if (log.isDebugEnabled())
-            log.debug("resultMap=" + resultMap);
 
         final Map<String, KannelStatusInfo> outputMap = getResults(resultMap);
+
+            log.debug("resultMap=" + resultMap);
 
         RedisProcess.populateDataIntoRedis(lAllRouteConfigs, outputMap);
     }

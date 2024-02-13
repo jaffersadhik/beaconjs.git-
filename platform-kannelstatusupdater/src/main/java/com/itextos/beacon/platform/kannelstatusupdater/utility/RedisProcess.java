@@ -49,8 +49,7 @@ public class RedisProcess
 
                 final String           kannelIpPort = CommonUtility.combine(':', lKannelInfo.getKannelIp(), lKannelInfo.getKannelPort(), "StatusPort", lKannelInfo.getStatusPort());
 
-                if (log.isInfoEnabled())
-                    log.info("KannelIpPort : '" + kannelIpPort + "' Status : '" + status + "'");
+                    log.debug("KannelIpPort : '" + kannelIpPort + "' Status : '" + status + "'");
 
                 boolean kannelAvailability = false;
                 long    storeSize          = 0;

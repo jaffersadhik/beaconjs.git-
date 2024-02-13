@@ -155,7 +155,7 @@ public class Encryptor
         	}*/
 
         	
-        	final String lDecryptedDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
+        	final String lDecryptedDbPassword = getDecryptedDbPassword("YSrU1+RIM5hwN+ycQQdy4XhlOGhoU3RrYmtELgjZwSBQBXSHJ8AUHk/I");
             System.out.println(lDecryptedDbPassword);
             final String s = getSmppDecryptedPassword("O6sDdq6P039GHmA5nu4iT3pMcjl5aEFiRFq9bNtoyT0vISytTdngS5LB");
             System.out.println("smpp : '" + s + "'\t");

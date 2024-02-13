@@ -68,8 +68,18 @@ public abstract class InmemoryProcessor
     		
     	}else {
     		
-    		getDataFromEJBServer();
-    	}
+    		
+        	String dbgw=System.getenv("dbgw");
+
+    		if(dbgw!=null&&dbgw.equals("ejb")) {
+    			
+    			getDataFromEJBServer();
+
+    		}else {
+    			
+    			getDataFromDB();
+
+    		}    	}
         
     }
 
