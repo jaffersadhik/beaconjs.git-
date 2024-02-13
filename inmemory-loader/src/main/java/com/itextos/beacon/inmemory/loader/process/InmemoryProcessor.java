@@ -51,10 +51,26 @@ public abstract class InmemoryProcessor
         }
     }
 
+    
+    @Override
+    public void getDataFromEJBServer() {
+    	
+    }
+    
     @Override
     public void refreshInmemoryData()
     {
-        getDataFromDB();
+    	String module=System.getenv("module");
+    	
+    	if(module.equals("dbgwejb")) {
+    		
+    		getDataFromDB();
+    		
+    	}else {
+    		
+    		getDataFromEJBServer();
+    	}
+        
     }
 
     protected abstract void processResultSet(

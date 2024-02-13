@@ -36,7 +36,17 @@ public abstract class AbstractAutoRefreshInMemoryProcessor
     @Override
     public boolean processNow()
     {
-        getDataFromDB();
+    	String module=System.getenv("module");
+    	
+    	if(module.equals("dbgwejb")) {
+    		
+    		 getDataFromDB();
+    		 
+    	}else {
+    		
+    		getDataFromEJBServer();
+    	}
+       
         return false;
     }
 

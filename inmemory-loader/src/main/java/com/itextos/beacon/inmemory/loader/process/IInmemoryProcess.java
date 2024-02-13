@@ -7,4 +7,6 @@ public interface IInmemoryProcess
 
     void refreshInmemoryData();
 
+	void getDataFromEJBServer();
+
 }
