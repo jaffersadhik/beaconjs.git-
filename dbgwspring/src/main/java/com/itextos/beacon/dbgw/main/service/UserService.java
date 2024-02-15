@@ -1,6 +1,8 @@
 package com.itextos.beacon.dbgw.main.service;
 
 import java.util.Arrays;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class UserService {
 	public User saveUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role userRole = roleRepository.findByRole("ROLE_USER");
-		user.setRoles(Arrays.asList(userRole));
+		user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 		
         return user = userRepository.save(user);
 	}
@@ -35,7 +37,7 @@ public class UserService {
 	public User saveAdmin(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role adminRole = roleRepository.findByRole("ROLE_ADMIN");
-		user.setRoles(Arrays.asList(adminRole));
+		user.setRoles(new HashSet<>(Arrays.asList(adminRole)));
 		
         return user = userRepository.save(user);
 	}
