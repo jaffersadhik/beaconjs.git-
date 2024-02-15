@@ -1,7 +1,14 @@
 package com.itextos.beacon.dbgw.main.payload;
 
-import java.util.List;
+import java.util.Set;
 
+import com.itextos.beacon.dbgw.main.menu.Menu;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class JwtResponse {
 
 	private String type;
@@ -10,9 +17,10 @@ public class JwtResponse {
 	private Long userid;
 	private String fullname;
 	private String username;
-	private List<String> roles;
+	private Set<String> roles;
+	private Set<Menu> menus;
 
-	public JwtResponse(String type, String token, String refreshToken, Long userid, String fullname, String username, List<String> roles) {
+	public JwtResponse(String type, String token, String refreshToken, Long userid, String fullname, String username, Set<String> roles,Set<Menu> menus) {
 		this.type = type;
 		this.token = token;
 		this.refreshToken = refreshToken;
@@ -20,62 +28,6 @@ public class JwtResponse {
 		this.fullname = fullname;
 		this.username = username;
 		this.roles = roles;
+		this.menus = menus;
 	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getRefreshToken() {
-		return refreshToken;
-	}
-
-	public void setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
-
-	public Long getUserid() {
-		return userid;
-	}
-
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-
 }

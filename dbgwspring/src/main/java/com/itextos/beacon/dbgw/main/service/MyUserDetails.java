@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.itextos.beacon.dbgw.main.menu.Menu;
 import com.itextos.beacon.dbgw.main.model.Role;
 import com.itextos.beacon.dbgw.main.model.User;
 
+import lombok.Getter;
+
+@Getter
 public class MyUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -20,16 +26,18 @@ public class MyUserDetails implements UserDetails {
 	private String fullname;
 	private String username;
 	private Collection<? extends GrantedAuthority> authorities;
-
+	private Set<Menu> menu;
+	
 	@JsonIgnore
 	private String password;
 
-	public MyUserDetails(Long id, String fullname, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+	public MyUserDetails(Long id, String fullname, String username, String password, Collection<? extends GrantedAuthority> authorities,Set<Menu> menu) {
 		this.id = id;
 		this.fullname = fullname;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.menu = menu;
 	}
 
 	public static MyUserDetails build(User user) {
@@ -39,16 +47,9 @@ public class MyUserDetails implements UserDetails {
 			roles.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 
-		return new MyUserDetails(user.getId(), user.getFullname(), user.getUsername(), user.getPassword(), roles);
+		return new MyUserDetails(user.getId(), user.getFullname(), user.getUsername(), user.getPassword(), roles,user.getMenus());
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

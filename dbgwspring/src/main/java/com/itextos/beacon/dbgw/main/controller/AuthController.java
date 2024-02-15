@@ -1,9 +1,10 @@
 package com.itextos.beacon.dbgw.main.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,9 +51,9 @@ public class AuthController {
 		MyUserDetails myUserDetails = (MyUserDetails) auth.getPrincipal();
 		final String jwt = jwtUtils.generateToken(myUserDetails);
 		RefreshToken refreshToken = refreshTokenService.createRefreshToken(myUserDetails.getId());
-		List<String> roles = myUserDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
+		Set<String> roles = myUserDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toSet());
 		
-		return ResponseEntity.ok(new JwtResponse("Bearer", jwt, refreshToken.getRefreshToken(), myUserDetails.getId(), myUserDetails.getFullname(),myUserDetails.getUsername() , roles));
+		return ResponseEntity.ok(new JwtResponse("Bearer", jwt, refreshToken.getRefreshToken(), myUserDetails.getId(), myUserDetails.getFullname(),myUserDetails.getUsername() , roles,myUserDetails.getMenu()));
 	}
 	
 	@PostMapping("/registerUser")
