@@ -1,15 +1,20 @@
 package com.itextos.beacon.dbgw.main.menu;
 
-import javax.persistence.*;
+import java.util.Set;
 
-import com.itextos.beacon.dbgw.main.model.Role;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table(name = "menus")
@@ -28,8 +33,8 @@ public class Menu {
     private String url;
     private String icon;
 
-    @OneToMany(mappedBy = "parentMenu", cascade = CascadeType.ALL)
-    private List<Submenu> submenus;
+    @OneToMany(mappedBy = "parentMenu", fetch = FetchType.EAGER)
+    private Set<Submenu> submenus;
 
     // Getters and setters
     // Constructor
