@@ -404,7 +404,7 @@ public class App {
 			
 		}else if(module.equals("dbgwspring")){
 			
-			com.itextos.beacon.dbgw.main.JwtRefreshTokenSpringBootApplication.main(args);
+			com.itextos.beacon.dbgw.main.DBGWSpringAPI.main(args);
 
 			IS_START_PROMETHEUS=true;
 

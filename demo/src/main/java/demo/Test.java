@@ -1,11 +1,9 @@
 package demo;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.UUID;
 
 public class Test {
 
@@ -35,8 +33,8 @@ public class Test {
        
        System.out.println(sdf.parse(cs).getTime()-sdf.parse(recv_time).getTime()); ;
 
-       */
-       //day(null);
+       
+       day(null);
 		
 		System.out.println(URLEncoder.encode(" DN:'id:2170216805068145032000 sub:001 dlvrd:001 submit date:240208000506 done date:240208000841 stat:UNDELIV err:699 Text:OLELEARN \r\n'","UTF-8"));
      
@@ -46,7 +44,9 @@ public class Test {
 		st=st.replaceAll("\0", "The");
 		System.out.println(URLEncoder.encode(st,"UTF-8"));
 		System.out.println(st);
-
+*/
+	    UUID uuid = UUID.randomUUID();
+        System.out.println("Random UUID: " + uuid.toString());
 	}
 
 	

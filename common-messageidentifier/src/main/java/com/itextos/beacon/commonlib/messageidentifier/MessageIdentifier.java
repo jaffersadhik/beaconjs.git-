@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,6 +30,10 @@ public class MessageIdentifier
 
     // Used to format the combined year & month
     private static final DecimalFormat DECIMAL_FORMATTER_2 = new DecimalFormat("00");
+
+    private static final Random RANDOM = new Random();
+    
+    private static final DecimalFormat DECIMAL_FORMATTER_8 = new DecimalFormat("00000000");
 
     // Used to format the combined date & hour
     private static final DecimalFormat DECIMAL_FORMATTER_3 = new DecimalFormat("000");
@@ -177,7 +182,9 @@ public class MessageIdentifier
             System.exit(-99);
         }
      //   mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
-        return mAppInstanceId + getUniqueDateWithMillis() + getNextIndex() + FIXED_LAST_DIGITS;
+ //       return mAppInstanceId + getUniqueDateWithMillis() + getNextIndex() + FIXED_LAST_DIGITS;
+        return mAppInstanceId + getUniqueDateWithNanoSecond() + getNextIndex() +(RANDOM.nextInt(80) + 10)+ FIXED_LAST_DIGITS;
+        
     }
 
     public synchronized String getUniqueSequence()
@@ -238,6 +245,24 @@ public class MessageIdentifier
         final int              ym            = ((cal.get(Calendar.YEAR) % NO_OF_YEARS) * MONTHS_IN_A_YEAR) + (cal.get(Calendar.MONTH) + 1);
         final int              dhh           = ((cal.get(Calendar.DATE) - 1) * HOURS_IN_A_DAY) + cal.get(Calendar.HOUR_OF_DAY);
         return DECIMAL_FORMATTER_2.format(ym) + DECIMAL_FORMATTER_3.format(dhh) + DATE_FORMATER.format(cal.getTime());
+    }
+    
+    
+    private static String getUniqueDateWithNanoSecond()
+    {
+        final Calendar cal = Calendar.getInstance();
+        cal.setLenient(false);
+
+        // Used to format the date with minutes and seconds.
+        final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("SSSSSS");
+        int dayoftheyear=cal.get(Calendar.DAY_OF_YEAR)+1;
+        int hour=cal.get(Calendar.HOUR_OF_DAY)+1;
+        int minute=cal.get(Calendar.MINUTE)+1;
+        int second=cal.get(Calendar.SECOND)+1;
+   
+        int day=dayoftheyear*hour*minute*second;
+        
+        return DECIMAL_FORMATTER_8.format(day) + DATE_FORMATER.format(cal.getTime());
     }
     
     private synchronized String getNextIndex()

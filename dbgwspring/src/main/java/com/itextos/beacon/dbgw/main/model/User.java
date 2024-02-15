@@ -1,6 +1,7 @@
 package com.itextos.beacon.dbgw.main.model;
 
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +13,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
+
+import com.itextos.beacon.dbgw.main.menu.Menu;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
 @Component
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
 	@Id
@@ -36,57 +49,13 @@ public class User {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
+	
+	
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_menu", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
+	private List<Menu> menus;
 
-	public User() {
 
-	}
 
-	public User(long id, String fullname, String username, String password, List<Role> roles) {
-		this.id = id;
-		this.fullname = fullname;
-		this.username = username;
-		this.password = password;
-		this.roles = roles;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
+	
 }
