@@ -2,14 +2,20 @@ package com.itextos.beacon.dbgw.main.menu;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.itextos.beacon.dbgw.main.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +41,11 @@ public class Menu {
 
     @OneToMany(mappedBy = "parentMenu", fetch = FetchType.EAGER)
     private Set<Submenu> submenus;
+    
+    
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_menu", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
+	private Set<User> users;
 
     // Getters and setters
     // Constructor

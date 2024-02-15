@@ -20,7 +20,7 @@ public class JwtResponse {
 	private Set<String> roles;
 	private Set<Menu> menus;
 
-	public JwtResponse(String type, String token, String refreshToken, Long userid, String fullname, String username, Set<String> roles,Set<Menu> menus) {
+	public JwtResponse(String type, String token, String refreshToken, Long userid, String fullname, String username, Set<String> roles) {
 		this.type = type;
 		this.token = token;
 		this.refreshToken = refreshToken;
@@ -28,6 +28,5 @@ public class JwtResponse {
 		this.fullname = fullname;
 		this.username = username;
 		this.roles = roles;
-		this.menus = menus;
 	}
 }

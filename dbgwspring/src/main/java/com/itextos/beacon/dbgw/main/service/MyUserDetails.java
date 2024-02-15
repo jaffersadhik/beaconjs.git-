@@ -26,18 +26,16 @@ public class MyUserDetails implements UserDetails {
 	private String fullname;
 	private String username;
 	private Collection<? extends GrantedAuthority> authorities;
-	private Set<Menu> menu;
 	
 	@JsonIgnore
 	private String password;
 
-	public MyUserDetails(Long id, String fullname, String username, String password, Collection<? extends GrantedAuthority> authorities,Set<Menu> menu) {
+	public MyUserDetails(Long id, String fullname, String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.fullname = fullname;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
-		this.menu = menu;
 	}
 
 	public static MyUserDetails build(User user) {
@@ -47,7 +45,7 @@ public class MyUserDetails implements UserDetails {
 			roles.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 
-		return new MyUserDetails(user.getId(), user.getFullname(), user.getUsername(), user.getPassword(), roles,user.getMenus());
+		return new MyUserDetails(user.getId(), user.getFullname(), user.getUsername(), user.getPassword(), roles);
 	}
 
 

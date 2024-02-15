@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UIMenuItemService {
+public class MenuService {
     @Autowired
     private MenuRepository uiMenuItemRepository;
 
-    public List<Menu> getAllUIMenus() {
-        return uiMenuItemRepository.findAll();
+    public List<Menu> getAllMenus(Long userId) {
+        return uiMenuItemRepository.findByUser_Id(userId);
     }
 }
 

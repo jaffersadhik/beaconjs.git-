@@ -53,7 +53,7 @@ public class AuthController {
 		RefreshToken refreshToken = refreshTokenService.createRefreshToken(myUserDetails.getId());
 		Set<String> roles = myUserDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toSet());
 		
-		return ResponseEntity.ok(new JwtResponse("Bearer", jwt, refreshToken.getRefreshToken(), myUserDetails.getId(), myUserDetails.getFullname(),myUserDetails.getUsername() , roles,myUserDetails.getMenu()));
+		return ResponseEntity.ok(new JwtResponse("Bearer", jwt, refreshToken.getRefreshToken(), myUserDetails.getId(), myUserDetails.getFullname(),myUserDetails.getUsername() , roles));
 	}
 	
 	@PostMapping("/registerUser")
