@@ -12,7 +12,7 @@
 	<version>1.0</version>
 	<name>JWT-refresh-token-spring-boot</name>
 	<description>Ready to use implementation of JWT refresh token using Spring Boot</description>
-	
+	<!--
 	<dependencies>
 		
 		
@@ -48,12 +48,12 @@
  <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.27</version> <!-- Specify the version here -->
+        <version>8.0.27</version>  
     </dependency>
 		<dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
-    <version>1.18.20</version> <!-- Make sure to use the latest version -->
+    <version>1.18.20</version> 
     <scope>provided</scope>
 </dependency>
 		<dependency>
@@ -87,5 +87,5 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	</dependencies> -->
 </project>

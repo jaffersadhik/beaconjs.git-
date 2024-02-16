@@ -124,9 +124,11 @@ public class IntlRUtils
             aMessageRequest.setRouteLogicId(aDerivedRoute.getLogicId());
             aMessageRequest.setRouteId(aDerivedRoute.getRouteId());
 
+            /*
             if (!CommonUtility.nullCheck(aDerivedRoute.getDefaultHeader(), true).isEmpty())
                 aMessageRequest.setIntlClientHeader(aDerivedRoute.getDefaultHeader());
 
+			*/
             if (log.isDebugEnabled())
                 log.debug("Updating the Route : '" + aDerivedRoute.getRouteId() + "', Logic ID : '" + aDerivedRoute.getLogicId() + "' Default Header : '" + aDerivedRoute.getDefaultHeader()
                         + "' for the MID : '" + aMessageRequest.getBaseMessageId() + "'");

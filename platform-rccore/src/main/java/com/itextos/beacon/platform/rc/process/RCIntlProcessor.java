@@ -232,8 +232,10 @@ public class RCIntlProcessor
                 if (!isAbsoluteRoute)
                     return PlatformStatusCode.INVALID_ROUTE_ID;
             }
-            else
-                return PlatformStatusCode.INVALID_HEADER;
+            else {
+                //  return PlatformStatusCode.INVALID_HEADER;
+	
+            }
         }
         return null;
     }
