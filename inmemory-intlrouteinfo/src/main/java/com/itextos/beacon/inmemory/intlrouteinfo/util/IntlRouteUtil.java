@@ -30,6 +30,8 @@ public class IntlRouteUtil
 
         IntlRouteConfigInfo lIntlRouteConfig = getMccMncRouteInfo(aMessageRequest);
         
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" mccmnc route : "+lIntlRouteConfig); 
+
         if (lIntlRouteConfig == null) {
         	lIntlRouteConfig = getRouteIntlInfo(lMnumber);
         }
@@ -56,10 +58,12 @@ public class IntlRouteUtil
 		
         final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
 
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" IntlRouteConfigInfo lMccMnceRoutes : "+lMccMnceRoutes); 
+
         if(lMccMnceRoutes!=null) {
         	
-        	log.debug(" IntlRouteConfigInfo lMccMnceRoutes : "+lMccMnceRoutes);
         	
+
         	IntlRouteConfigInfo lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
         	
         	if(lIntlRouteConfigInfo==null) {
