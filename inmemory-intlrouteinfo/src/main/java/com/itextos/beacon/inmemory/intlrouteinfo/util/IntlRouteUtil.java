@@ -41,16 +41,6 @@ public class IntlRouteUtil
             return PlatformStatusCode.INTL_INVALID_MOBILE_LENGTH;
         }
 
-        aMessageRequest.setCountry(lIntlRouteConfig.getCountry());
-        
-        
-        IntlRouteConfigInfo lIntlRouteConfigTemp=getMccMncRouteInfo(aMessageRequest);
-        
-        
-        if(lIntlRouteConfigTemp!=null) {
-        	
-        	lIntlRouteConfig= lIntlRouteConfigTemp;
-        }
         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" mccmnc route : "+lIntlRouteConfig); 
 
      
@@ -64,37 +54,7 @@ public class IntlRouteUtil
         return null;
     }
 
-    private static IntlRouteConfigInfo getMccMncRouteInfo(MessageRequest aMessageRequest) {
-		
-        final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
-
-        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" IntlRouteConfigInfo lMccMnceRoutes : "+lMccMnceRoutes); 
-
-        if(lMccMnceRoutes!=null) {
-        	
-        	
-
-        	IntlRouteConfigInfo lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
-        	
-        	if(lIntlRouteConfigInfo==null) {
-        		
-        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(),  CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
-            	
-        	}
-        	
-        	
-        	if(lIntlRouteConfigInfo==null) {
-        		
-        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(CommonUtility.nullCheck(null, true), aMessageRequest.getCountry(), CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
-            	
-        	}
-        	
-        	
-        	return lIntlRouteConfigInfo;
-        }
-        return null;
-       }
-
+  
 	private static IntlRouteConfigInfo getRouteIntlInfo(
             String aMNumber)
     {

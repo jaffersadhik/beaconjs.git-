@@ -12,6 +12,9 @@ import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.pattern.PatternCache;
 import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.inmemory.intlrouteinfo.cache.IntlRouteConfigInfo;
+import com.itextos.beacon.inmemory.intlrouteinfo.cache.MccMncRoutes;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.routeinfo.cache.ClientKeywordHeaderInfo;
@@ -201,8 +204,26 @@ public class IntlRUtils
 
         try
         {
-            boolean isRouteFound = setRouteUsingCountryKeywordTemplate(aMessageRequest);
+        	
+            
+            
+            IntlRouteConfigInfo lIntlRouteConfigTemp=getMccMncRouteInfo(aMessageRequest);
+            
+            boolean isRouteFound=false;
+            if(lIntlRouteConfigTemp!=null) {
+            	
+            	isRouteFound=true;
+            	
+            	aMessageRequest.setRouteId(lIntlRouteConfigTemp.getRouteId());
+            }
+         
 
+            if (!isRouteFound)
+            {
+
+            	isRouteFound = setRouteUsingCountryKeywordTemplate(aMessageRequest);
+
+            }
             if (log.isDebugEnabled())
                 log.debug("Route found based on intl_country_header_template: '" + isRouteFound + "'");
 
@@ -234,6 +255,40 @@ public class IntlRUtils
             log.error("Exception while getting the route.", e);
         }
     }
+    
+    
+    
+  private static IntlRouteConfigInfo getMccMncRouteInfo(MessageRequest aMessageRequest) {
+		
+        final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
+
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" IntlRouteConfigInfo lMccMnceRoutes : "+lMccMnceRoutes); 
+
+        if(lMccMnceRoutes!=null) {
+        	
+        	
+
+        	IntlRouteConfigInfo lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
+        	
+        	if(lIntlRouteConfigInfo==null) {
+        		
+        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(),  CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
+            	
+        	}
+        	
+        	
+        	if(lIntlRouteConfigInfo==null) {
+        		
+        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(CommonUtility.nullCheck(null, true), aMessageRequest.getCountry(), CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
+            	
+        	}
+        	
+        	
+        	return lIntlRouteConfigInfo;
+        }
+        return null;
+       }
+
 
     public static boolean setRouteUsingCountryKeywordTemplate(
             MessageRequest aMessageRequest)
