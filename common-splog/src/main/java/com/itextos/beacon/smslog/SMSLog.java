@@ -17,13 +17,29 @@ public class SMSLog {
 
         String logFileNamePattern = "/logs/smslog.%g.log";
 
+        Level loglevel=Level.INFO;
+        
+        String loglevelFromEnr=System.getenv("loglevel");
+        
+        if(loglevelFromEnr!=null) {
+        
+        	if(loglevelFromEnr.equals("all")) {
+        		
+        		loglevel=Level.ALL;
+        		
+        	}else if(loglevelFromEnr.equals("off")) {
+        		
+        		loglevel=Level.OFF;
+        	}
+        }
+        
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
 			fileHandler = new FileHandler(logFileNamePattern, 1000000, 10, true);
 			
 			   // Set the logging level for the handler
-	        fileHandler.setLevel(Level.INFO);
+	        fileHandler.setLevel(loglevel);
 
 	        // Set a formatter for the handler (optional)
 	        fileHandler.setFormatter(new SimpleFormatter());
@@ -31,7 +47,7 @@ public class SMSLog {
 	        // Add the handler to the logger
 	        logger.addHandler(fileHandler);
 	        
-	        logger.setLevel(Level.INFO);
+	        logger.setLevel(loglevel);
 
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
