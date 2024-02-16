@@ -55,8 +55,11 @@ public class IntlRouteUtil
 		
         final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
 
+        if(lMccMnceRoutes!=null) {
 		return lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
-	}
+        }
+        return null;
+       }
 
 	private static IntlRouteConfigInfo getRouteIntlInfo(
             String aMNumber)
