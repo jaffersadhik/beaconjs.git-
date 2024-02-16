@@ -7,6 +7,9 @@ public class CalculateIntlBillingPrice
 
     private final String  mClientId;
     private final String  mCountry;
+    private final String  mMcc;
+    private final String  mMnc;
+
     private final String  mFromCurrency;
     private final String  mBillingCurrency;
     private final String  mRefCurrency;
@@ -15,6 +18,8 @@ public class CalculateIntlBillingPrice
     public CalculateIntlBillingPrice(
             String aClientId,
             String aCountry,
+            String aMcc,
+            String aMnc,
             String aFromCurrency,
             String aBillingCurrency,
             String aRefCurrency,
@@ -27,11 +32,13 @@ public class CalculateIntlBillingPrice
         mBillingCurrency = aBillingCurrency;
         mRefCurrency     = aRefCurrency;
         mConvertDatewise = aConvertDatewise;
+        mMcc=aMcc;
+        mMnc=aMnc;
     }
 
     public CalculateBillingPrice calculate()
     {
-        final IntlSmsRates          lIntlPrice             = CurrencyUtil.getIntlPrice(mClientId, mCountry);
+        final IntlSmsRates          lIntlPrice             = CurrencyUtil.getIntlPrice(mClientId, mCountry,mMcc,mMnc);
         final CalculateBillingPrice lCalculateBillingPrice = new CalculateBillingPrice(mClientId, lIntlPrice.getBaseSmsRate(), lIntlPrice.getBaseAddlFixedRate(), mFromCurrency, mBillingCurrency,
                 mRefCurrency, mConvertDatewise);
         CurrencyUtil.getBillingPrice(lCalculateBillingPrice);

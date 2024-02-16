@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.intlrouteinfo.cache.IntlRouteConfigInfo;
 import com.itextos.beacon.inmemory.intlrouteinfo.cache.IntlRouteConfiguration;
+import com.itextos.beacon.inmemory.intlrouteinfo.cache.MccMncRoutes;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 
@@ -26,7 +27,11 @@ public class IntlRouteUtil
     {
         final String              lMnumber         = aMessageRequest.getMobileNumber();
 
-        final IntlRouteConfigInfo lIntlRouteConfig = getRouteIntlInfo(lMnumber);
+        IntlRouteConfigInfo lIntlRouteConfig = getMccMncRouteInfo(aMessageRequest);
+        
+        if (lIntlRouteConfig == null) {
+        	lIntlRouteConfig = getRouteIntlInfo(lMnumber);
+        }
 
         if (log.isDebugEnabled())
             log.debug("ccinfo : '" + lIntlRouteConfig + "'");
@@ -46,7 +51,14 @@ public class IntlRouteUtil
         return null;
     }
 
-    private static IntlRouteConfigInfo getRouteIntlInfo(
+    private static IntlRouteConfigInfo getMccMncRouteInfo(MessageRequest aMessageRequest) {
+		
+        final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
+
+		return lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
+	}
+
+	private static IntlRouteConfigInfo getRouteIntlInfo(
             String aMNumber)
     {
 

@@ -234,12 +234,16 @@ public class WalletUtil
     {
         final String                    lClientId                 = aMessageRequest.getClientId();
         final String                    lCountry                  = CommonUtility.nullCheck(aMessageRequest.getCountry(), true).toUpperCase();
+        final String                    lMcc                  = CommonUtility.nullCheck(aMessageRequest.getMcc(), true);
+        final String                    lMnc                  = CommonUtility.nullCheck(aMessageRequest.getMnc(), true);
+
         final boolean                   lConvertDatewise          = aMessageRequest.getBillingCurrencyConversionType() == 2 ? true : false;
         final String                    lPlatformBaseCurrency     = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.BASE_CURRENCY);
         final String                    lPlatformIntlBaseCurrency = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.INTL_BASE_CURRENCY);
 
-        final CalculateIntlBillingPrice lBillingPrice             = new CalculateIntlBillingPrice(lClientId, lCountry, lPlatformIntlBaseCurrency, aMessageRequest.getBillingCurrency(),
-                lPlatformBaseCurrency, lConvertDatewise);
+        final CalculateIntlBillingPrice lBillingPrice = new CalculateIntlBillingPrice(lClientId, lCountry,lMcc,lMnc, aMessageRequest.getBillingCurrency(), lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
+                lConvertDatewise);
+ 
         CalculateBillingPrice           lCalculateBillingPrice;
 
         try

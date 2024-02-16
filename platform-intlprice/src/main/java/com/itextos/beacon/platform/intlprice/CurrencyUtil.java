@@ -14,6 +14,7 @@ import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.inmemory.msgutil.cache.ClientIntlCredits;
 import com.itextos.beacon.inmemory.msgutil.cache.IntlCredits;
 import com.itextos.beacon.inmemory.msgutil.cache.IntlSmsRates;
+import com.itextos.beacon.inmemory.msgutil.cache.MccMncRates;
 import com.itextos.beacon.platform.decimalutility.PlatformDecimalUtil;
 
 public class CurrencyUtil
@@ -73,10 +74,18 @@ public class CurrencyUtil
 
     static IntlSmsRates getIntlPrice(
             String aClientId,
-            String aCountry)
+            String aCountry,
+            String mcc,
+            String mnc)
     {
         final ItextosClient lItextosClient = new ItextosClient(aClientId);
-        IntlSmsRates        lIntlSmsRates  = getClientSmsRates(lItextosClient, aCountry);
+        
+        IntlSmsRates        lIntlSmsRates  = getMccMncSmsRates(lItextosClient, aCountry,mcc,mnc);
+        
+        if(lIntlSmsRates == null) {
+        	
+        	lIntlSmsRates  = getClientSmsRates(lItextosClient, aCountry);
+        }
 
         if (lIntlSmsRates == null)
         {
@@ -133,6 +142,49 @@ public class CurrencyUtil
             lValueOfCustomFeature = lCustomFeatures.getValueOfCustomFeature(aItextosClient.getSuperAdmin(), CustomFeatures.USE_DEFAULT_INTL_PRICE.getKey());
 
         return lValueOfCustomFeature;
+    }
+
+    private static IntlSmsRates getMccMncSmsRates(
+            ItextosClient aItextosClient,
+            String aCountry,String mcc,String mnc)
+    {
+        final MccMncRates lMccMncRates = (MccMncRates) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_RATES);
+
+        IntlSmsRates            lCustomerCredits   = lMccMncRates.getCustomerCredits(aItextosClient.getClientId(), aCountry,mcc,mnc);
+
+   
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getAdmin(), aCountry, mcc,mnc);
+
+      
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getSuperAdmin(), aCountry, mcc,mnc);
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getClientId(), aCountry,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getAdmin(), aCountry,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getSuperAdmin(), aCountry,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getClientId(), REST_OF_THE_WORLD,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getAdmin(), REST_OF_THE_WORLD,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits(aItextosClient.getSuperAdmin(), REST_OF_THE_WORLD,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits("", aCountry,"","");
+
+        if (lCustomerCredits == null)
+            lCustomerCredits = lMccMncRates.getCustomerCredits("", REST_OF_THE_WORLD,"","");
+
+        return lCustomerCredits;
     }
 
     private static IntlSmsRates getClientSmsRates(

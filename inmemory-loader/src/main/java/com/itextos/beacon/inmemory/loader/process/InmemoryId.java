@@ -42,6 +42,8 @@ public enum InmemoryId
     MCC_MNC("mcc_mnc"),
     ACCOUNT_MSG_PREFIX_SUFFIX("account_msg_prefix_suffix"),
     CLIENT_INTL_RATES("client_intl_rates"),
+    MCC_MNC_RATES("mcc_mnc_rates"),
+    MCC_MNC_ROUTES("mcc_mnc_routes"),
     INTL_COUNTRY_RATES("intl_country_rates"),
     SPECIFIC_BLOCKOUT("specific_blockout"),
     RANDOM_HEADER("random_header"),

@@ -42,6 +42,9 @@ public class IntlMsgVerifyProcessor
 
         final String  lClientId                 = mMessageRequest.getClientId();
         final String  lCountry                  = CommonUtility.nullCheck(mMessageRequest.getCountry(), true).toUpperCase();
+        final String  lMcc                  = CommonUtility.nullCheck(mMessageRequest.getMcc(), true);
+        final String  lMnc                  = CommonUtility.nullCheck(mMessageRequest.getMnc(), true);
+
         final boolean lConvertDatewise          = mMessageRequest.getBillingCurrencyConversionType() == 2 ? true : false;
         final String  lPlatformBaseCurrency     = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.BASE_CURRENCY);
         final String  lPlatformIntlBaseCurrency = PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.INTL_BASE_CURRENCY);
@@ -52,7 +55,7 @@ public class IntlMsgVerifyProcessor
         mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Reffrence Currency : " + lPlatformBaseCurrency);
 
 
-        final CalculateIntlBillingPrice lBillingPrice = new CalculateIntlBillingPrice(lClientId, lCountry, mMessageRequest.getBillingCurrency(), lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
+        final CalculateIntlBillingPrice lBillingPrice = new CalculateIntlBillingPrice(lClientId, lCountry,lMcc,lMnc, mMessageRequest.getBillingCurrency(), lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
                 lConvertDatewise);
         CalculateBillingPrice           lCalculateBillingPrice;
 
