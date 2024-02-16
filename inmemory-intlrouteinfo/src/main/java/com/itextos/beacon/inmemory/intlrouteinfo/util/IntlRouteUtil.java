@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.intlrouteinfo.cache.IntlRouteConfigInfo;
 import com.itextos.beacon.inmemory.intlrouteinfo.cache.IntlRouteConfiguration;
 import com.itextos.beacon.inmemory.intlrouteinfo.cache.MccMncRoutes;
@@ -33,8 +34,8 @@ public class IntlRouteUtil
         	lIntlRouteConfig = getRouteIntlInfo(lMnumber);
         }
 
-        if (log.isDebugEnabled())
-            log.debug("ccinfo : '" + lIntlRouteConfig + "'");
+         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ccinfo : "+lIntlRouteConfig); 
+
 
         if (lIntlRouteConfig == null)
             return PlatformStatusCode.INTL_COUNTRY_CODE_RANGE_NOT_AVAILABLE;
@@ -56,6 +57,9 @@ public class IntlRouteUtil
         final MccMncRoutes lMccMnceRoutes = (MccMncRoutes) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_ROUTES);
 
         if(lMccMnceRoutes!=null) {
+        	
+        	log.debug(" IntlRouteConfigInfo lMccMnceRoutes : "+lMccMnceRoutes);
+        	
         	IntlRouteConfigInfo lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), aMessageRequest.getMcc(), aMessageRequest.getMnc());
         	
         	if(lIntlRouteConfigInfo==null) {
