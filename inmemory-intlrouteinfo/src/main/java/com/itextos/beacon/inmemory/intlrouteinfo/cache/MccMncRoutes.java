@@ -67,4 +67,10 @@ public class MccMncRoutes
             mMccMncRoutes = lMccMncRoutes;
     }
 
+    
+    @Override
+    public String toString() {
+    	
+    	return mMccMncRoutes.toString();
+    }
 }

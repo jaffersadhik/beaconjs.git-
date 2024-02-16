@@ -28,20 +28,11 @@ public class IntlRouteUtil
     {
         final String              lMnumber         = aMessageRequest.getMobileNumber();
 
-        IntlRouteConfigInfo lIntlRouteConfig = getMccMncRouteInfo(aMessageRequest);
+        IntlRouteConfigInfo lIntlRouteConfig = getRouteIntlInfo(lMnumber);
         
-        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" mccmnc route : "+lIntlRouteConfig); 
-
-        if (lIntlRouteConfig == null) {
-        	lIntlRouteConfig = getRouteIntlInfo(lMnumber);
-        }
-
-         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" ccinfo : "+lIntlRouteConfig); 
-
-
         if (lIntlRouteConfig == null)
             return PlatformStatusCode.INTL_COUNTRY_CODE_RANGE_NOT_AVAILABLE;
-
+        
         if (!isValidMobileLengh(lMnumber, lIntlRouteConfig))
         {
             // Setting country here to send to billing tables.
@@ -49,6 +40,25 @@ public class IntlRouteUtil
                 aMessageRequest.setCountry(lIntlRouteConfig.getCountry());
             return PlatformStatusCode.INTL_INVALID_MOBILE_LENGTH;
         }
+
+        aMessageRequest.setCountry(lIntlRouteConfig.getCountry());
+        
+        
+        IntlRouteConfigInfo lIntlRouteConfigTemp=getMccMncRouteInfo(aMessageRequest);
+        
+        
+        if(lIntlRouteConfigTemp!=null) {
+        	
+        	lIntlRouteConfig= lIntlRouteConfigTemp;
+        }
+        aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" mccmnc route : "+lIntlRouteConfig); 
+
+     
+
+
+
+      
+       
 
         setCarrierInfo(aMessageRequest, lIntlRouteConfig);
         return null;
@@ -68,14 +78,14 @@ public class IntlRouteUtil
         	
         	if(lIntlRouteConfigInfo==null) {
         		
-        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(), null, null);
+        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(aMessageRequest.getClientId(), aMessageRequest.getCountry(),  CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
             	
         	}
         	
         	
         	if(lIntlRouteConfigInfo==null) {
         		
-        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(null, aMessageRequest.getCountry(), null, null);
+        		lIntlRouteConfigInfo= lMccMnceRoutes.getMccMncRoute(CommonUtility.nullCheck(null, true), aMessageRequest.getCountry(), CommonUtility.nullCheck(null, true), CommonUtility.nullCheck(null, true));
             	
         	}
         	
