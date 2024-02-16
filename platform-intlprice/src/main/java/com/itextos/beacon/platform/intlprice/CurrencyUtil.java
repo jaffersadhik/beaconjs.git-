@@ -150,6 +150,8 @@ public class CurrencyUtil
     {
         final MccMncRates lMccMncRates = (MccMncRates) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.MCC_MNC_RATES);
 
+        if(lMccMncRates!=null) {
+        	
         IntlSmsRates            lCustomerCredits   = lMccMncRates.getCustomerCredits(aItextosClient.getClientId(), aCountry,mcc,mnc);
 
    
@@ -185,6 +187,10 @@ public class CurrencyUtil
             lCustomerCredits = lMccMncRates.getCustomerCredits("", REST_OF_THE_WORLD,"","");
 
         return lCustomerCredits;
+        
+        }
+        
+        return null;
     }
 
     private static IntlSmsRates getClientSmsRates(
