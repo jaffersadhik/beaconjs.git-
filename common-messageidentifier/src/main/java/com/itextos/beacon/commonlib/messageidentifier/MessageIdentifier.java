@@ -183,7 +183,7 @@ public class MessageIdentifier
         }
      //   mDate.setTime(DateTimeUtility.getCurrentTimeInMillis());
  //       return mAppInstanceId + getUniqueDateWithMillis() + getNextIndex() + FIXED_LAST_DIGITS;
-        return mAppInstanceId + getUniqueDateWithNanoSecond() + getNextIndex() +(RANDOM.nextInt(80) + 10)+ FIXED_LAST_DIGITS;
+        return mAppInstanceId + getUniqueDateWithMillis() + getNextIndex() +(RANDOM.nextInt(80) + 10)+ FIXED_LAST_DIGITS;
         
     }
 
