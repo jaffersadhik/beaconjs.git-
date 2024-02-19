@@ -1,6 +1,6 @@
 package com.itextos.beacon.dbgw.main.menu;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ public class MenuController {
     private MenuService uiMenuItemService;
 
     @PostMapping
-    public List<Menu> getAllUIMenus(@RequestParam("userid") Long userid) {
+    public Set<Menu> getAllUIMenus(@RequestParam("userid") Long userid) {
         return uiMenuItemService.getAllMenus(userid);
     }
 }

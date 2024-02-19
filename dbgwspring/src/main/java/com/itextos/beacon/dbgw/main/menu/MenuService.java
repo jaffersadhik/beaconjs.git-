@@ -1,16 +1,20 @@
 package com.itextos.beacon.dbgw.main.menu;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import com.itextos.beacon.dbgw.main.config.MySingletonObject;
 
 @Service
 public class MenuService {
-    @Autowired
-    private MenuRepository uiMenuItemRepository;
+   
+	@Autowired 
+	private MySingletonObject mySingletonObject;
 
-    public List<Menu> getAllMenus(Long userId) {
-        return uiMenuItemRepository.findByUser_Id(userId);
+    public Set<Menu> getAllMenus(Long userId) {
+        return mySingletonObject.getUsersWithUserid().get(userId).getMenus();
     }
 }
 
