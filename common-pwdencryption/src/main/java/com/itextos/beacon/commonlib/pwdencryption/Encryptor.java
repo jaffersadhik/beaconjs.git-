@@ -153,20 +153,15 @@ public class Encryptor
               System.out.println(lDecryptedDbPassword);
     
         	}*/
-
         	
-        	final String lDecryptedDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
-            System.out.println(lDecryptedDbPassword);
-            final String s = getSmppDecryptedPassword("O6sDdq6P039GHmA5nu4iT3pMcjl5aEFiRFq9bNtoyT0vISytTdngS5LB");
-            System.out.println("smpp : '" + s + "'\t");
-            
-            
-           String s2= getGuiDecryptedPassword("$2a$10$nlCb67l1JggY/QzqdZq8quVfXatLjndhES/qvXY9IfsTzPXXkrRpi");
+        	
 
-                   System.out.println("'" + s2 + "'\t");
+        	final String lApiPassword = getApiDecryptedPassword("0Zy+Eu0zriO1e6kUNegUSkpmYTRUUWVpa27WIo/Q3LTVxmXUiTS0QXkb");
 
-            final String d = getApiDecryptedPassword("rUyujabtn7LkbCSYuQDhVnpTbTJHVm5fcF/P4IbhPzZ87zo4HeI2vurr");
-            System.out.println("'" + d + "'\t");
+            System.out.println(lApiPassword);
+
+       
+           
             
         }
         catch (final Exception e)

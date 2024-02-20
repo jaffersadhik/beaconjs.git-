@@ -90,14 +90,14 @@ public class DltMessageVerifyProcessor
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.WC, mMessageRequest);
 
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Message sendToPrepaidComponent: Successfully : ");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" mSourceComponent "+mSourceComponent +" DEST " +Component.WC+"  Message sendToPrepaidComponent: Successfully : ");
 
         }
         else
         {
             VCProducer.sendToNextComponent(mSourceComponent, Component.RC, mMessageRequest);
 
-            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+"Message  sendToRouterComponent: Successfully : ");
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" mSourceComponent "+mSourceComponent +" DEST " +Component.RC+" Message  sendToRouterComponent: Successfully : ");
 
            
         }
