@@ -549,19 +549,20 @@ public final class CommonUtility
         if ((aTotalparts <= 1) || (aTotalparts > 100))
             throw new ItextosException("Invalid total parts specified. Total Parts : '" + aTotalparts + "'");
 
-        final int len = aBaseMessageId.length();
+ //       final int len = aBaseMessageId.length();
 
-        if (len == aMessageIdLength)
-        {
+   //     if (len == aMessageIdLength)
+       
             final DecimalFormat df       = new DecimalFormat("00");
-            final String        base     = aBaseMessageId.substring(0, aMessageIdLength - 2);
+            final String        base     = aBaseMessageId.substring(0,  aBaseMessageId.length() - 2);
             final List<String>  toReturn = new ArrayList<>();
 
-            for (int index = 0; index < aTotalparts; index++)
+            for (int index = 0; index < aTotalparts; index++) {
                 toReturn.add(base + df.format(index));
+            }
             return toReturn;
-        }
-        throw new ItextosException("Invalid Message Id length. Message Id : '" + aBaseMessageId + "'. Length : '" + len + "'");
+        
+    //    throw new ItextosException("Invalid Message Id length. Message Id : '" + aBaseMessageId + "'. Length : '" + aBaseMessageId.length() + "'");
     }
 
     public static String getFormattedDouble(
