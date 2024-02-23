@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.itextos.beacon.dbgw.main.config.MySingletonObject;
 import com.itextos.beacon.dbgw.main.model.Role;
 import com.itextos.beacon.dbgw.main.model.User;
 import com.itextos.beacon.dbgw.main.repository.RoleRepository;
@@ -15,11 +14,8 @@ import com.itextos.beacon.dbgw.main.repository.UserRepository;
 
 @Service
 public class UserService {
-	
-	@Autowired 
-	private MySingletonObject mySingletonObject;
-	
-	
+
+
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -28,8 +24,9 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 
 	public User findUserByUsername(String username) {
+	
 		
-		return mySingletonObject.getUsersWithUsername().get(username.toLowerCase());
+		return userRepository.findByUsernameIgnoreCase(username);
 	}
 
 	public User saveUser(User user) {
@@ -37,7 +34,10 @@ public class UserService {
 		Role userRole = roleRepository.findByRole("ROLE_USER");
 		user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 		
-        return user = userRepository.save(user);
+         user = userRepository.save(user);
+        
+
+        return user;
 	}
 	
 	public User saveAdmin(User user) {

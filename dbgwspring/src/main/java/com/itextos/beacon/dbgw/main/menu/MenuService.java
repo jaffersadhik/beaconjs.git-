@@ -14,7 +14,8 @@ public class MenuService {
 	private MySingletonObject mySingletonObject;
 
     public Set<Menu> getAllMenus(Long userId) {
-        return mySingletonObject.getUsersWithUserid().get(userId).getMenus();
+       // return mySingletonObject.getUsersWithUserid().get(userId).getMenus();
+    	return null;
     }
 }
 

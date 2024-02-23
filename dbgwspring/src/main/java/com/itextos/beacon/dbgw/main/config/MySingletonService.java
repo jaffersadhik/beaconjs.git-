@@ -3,6 +3,7 @@ package com.itextos.beacon.dbgw.main.config;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +21,32 @@ public class MySingletonService {
         this.mySingletonObject = mySingletonObject;
     }
 
-    public void setUsersInMemory(Map<Long,User> usermap) {
+    public void setUsersInMemory(List<User> userlist) {
     	
-    	mySingletonObject.setUsersWithUserid(usermap);
+    	mySingletonObject.setUsersWithUserid(getUsersWithUserId(userlist));
     
-    	mySingletonObject.setUsersWithUsername(getUsersWithUsername(usermap));
+    	mySingletonObject.setUsersWithUsername(getUsersWithUsername(userlist));
     }
 
-	private Map<String, User> getUsersWithUsername(Map<Long, User> usermap) {
+	private Map<String, User> getUsersWithUsername(List<User> userlist) {
 		
 		Map<String, User> result=new HashMap<String,User>(); 
 		
-		usermap.forEach((k,v)->{
+		userlist.forEach((u)->{
 			
-			result.put(v.getUsername().toLowerCase(), v);
+			result.put(u.getUsername().toLowerCase(), u);
+		});
+		
+		return result;
+	}
+	
+	private Map<Long, User> getUsersWithUserId(List<User> userlist) {
+		
+		Map<Long, User> result=new HashMap<Long,User>(); 
+		
+		userlist.forEach((u)->{
+			
+			result.put(u.getId(), u);
 		});
 		
 		return result;
