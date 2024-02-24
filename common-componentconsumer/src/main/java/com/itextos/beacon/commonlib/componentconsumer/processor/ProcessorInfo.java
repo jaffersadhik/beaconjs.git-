@@ -76,8 +76,8 @@ public class ProcessorInfo
     {
         mComponent = aComponent;
 
-        readLockFile();
-        createLockFile();
+    //    readLockFile();
+    //    createLockFile();
 
         mStartupRuntimeArguments = new StartupRuntimeArguments();
 
