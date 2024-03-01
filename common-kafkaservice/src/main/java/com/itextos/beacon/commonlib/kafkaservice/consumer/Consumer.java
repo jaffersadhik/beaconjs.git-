@@ -152,6 +152,10 @@ public class Consumer
         }
         catch (final WakeupException we)
         {
+        	
+        	
+            log.error(mLogTopicName + "Exception while consumeing messages.", we);
+
             // Ignore exception if closing
             if (!mClosed)
                 throw we;
