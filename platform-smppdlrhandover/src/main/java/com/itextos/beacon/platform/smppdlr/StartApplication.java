@@ -28,8 +28,11 @@ public class StartApplication
         	final String cluster1=System.getProperty("cluster");
             
             if(cluster1==null) {
-            
-            	System.setProperty("cluster", System.getenv("cluster"));
+
+            	String cl=System.getenv("cluster");
+            	if(cl!=null) {
+            	System.setProperty("cluster", cl);
+            	}
             }
 
             final String modvalue=System.getProperty("modvalue");
