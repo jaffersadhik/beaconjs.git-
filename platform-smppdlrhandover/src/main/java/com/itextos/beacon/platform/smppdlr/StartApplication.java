@@ -30,6 +30,7 @@ public class StartApplication
             if(cluster1==null) {
 
             	String cl=System.getenv("cluster");
+            	
             	if(cl!=null) {
             	System.setProperty("cluster", cl);
             	}

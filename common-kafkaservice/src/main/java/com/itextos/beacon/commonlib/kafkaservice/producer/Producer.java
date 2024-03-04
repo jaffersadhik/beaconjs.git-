@@ -16,7 +16,10 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
+import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.splog.SPLog;
@@ -112,6 +115,23 @@ public class Producer
 
         try
         {
+        	
+        	String msgid="notfind";
+        	
+        	if(aMessage instanceof DeliveryObject) {
+        		
+        		msgid =((DeliveryObject)aMessage).getMessageId();
+        		
+        	}else if(aMessage instanceof SubmissionObject ) {
+        		
+        		msgid =((SubmissionObject)aMessage).getFileId();
+
+        	}else if(aMessage instanceof MessageRequest ) {
+        		
+        		msgid =((MessageRequest)aMessage).getFileId();
+
+        	}
+        	
             addToInMemory(aMessage);
             final ProducerRecord<String, IMessage> kafkaRecord                   = getProducerRecord(aMessage);
             final ProducerCallbackForInterface     lProducerCallbackForInterface = new ProducerCallbackForInterface(this, mTopicName, aMessage, aFallBackHolder);
@@ -126,7 +146,7 @@ public class Producer
             PrometheusMetrics.kafkaProducerIncrement(mTopicName, 1);
 
             if (log.isDebugEnabled())
-                log.debug(mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+                log.debug(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
             sent = true;
         }
         catch (final KafkaException exp)
@@ -158,6 +178,23 @@ public class Producer
 
         try
         {
+        	
+        	String msgid="notfind";
+        	
+        	if(aMessage instanceof DeliveryObject) {
+        		
+        		msgid =((DeliveryObject)aMessage).getMessageId();
+        		
+        	}else if(aMessage instanceof SubmissionObject ) {
+        		
+        		msgid =((SubmissionObject)aMessage).getFileId();
+
+        	}else if(aMessage instanceof MessageRequest ) {
+        		
+        		msgid =((MessageRequest)aMessage).getFileId();
+
+        	}
+        	
             addToInMemory(aMessage);
             final ProducerRecord<String, IMessage> kafkaRecord = getProducerRecord(aMessage);
             mProducer.send(kafkaRecord, new ProducerCallback(this, mTopicName, aMessage));
@@ -170,7 +207,7 @@ public class Producer
             PrometheusMetrics.kafkaProducerIncrement(mTopicName, 1);
 
             if (log.isDebugEnabled())
-                log.debug(mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+                log.debug(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
             sent = true;
         }
         catch (final KafkaException exp)
