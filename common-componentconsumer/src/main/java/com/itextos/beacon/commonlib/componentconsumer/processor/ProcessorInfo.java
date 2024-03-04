@@ -40,6 +40,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.ConsumerTopicList;
 import com.itextos.beacon.splog.SPLog;
 
 public class ProcessorInfo
@@ -364,6 +365,9 @@ public class ProcessorInfo
     private Map<String, Map<String, ConsumerInMemCollection>> createConsumersBeforeStartingThread(
             Map<String, List<String>> aTopicsToConsume)
     {
+    	
+    	ConsumerTopicList.log("aTopicsToConsume : "+aTopicsToConsume);
+    	
         final Map<String, Map<String, ConsumerInMemCollection>> clusterInMemCollection = new HashMap<>();
 
         for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
