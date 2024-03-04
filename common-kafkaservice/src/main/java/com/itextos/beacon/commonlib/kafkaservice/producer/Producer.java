@@ -183,7 +183,7 @@ public class Producer
         	
         	if(aMessage instanceof DeliveryObject) {
         		
-        		msgid =((DeliveryObject)aMessage).getMessageId();
+        		msgid =((DeliveryObject)aMessage).getMessageId()+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
         		
         	}else if(aMessage instanceof SubmissionObject ) {
         		
