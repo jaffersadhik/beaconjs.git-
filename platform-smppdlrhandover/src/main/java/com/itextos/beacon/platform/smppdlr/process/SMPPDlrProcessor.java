@@ -52,11 +52,11 @@ public class SMPPDlrProcessor
 	
 		if(msgtype!=null&&msgtype.equals("0")) {
 			
-			PromoConsumerLog.log(msgid+ " "+ mTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+			PromoConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
 
 		}else {
 			
-			TransConsumerLog.log(msgid+ " "+ mTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+			TransConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
 		}
         try
         {
