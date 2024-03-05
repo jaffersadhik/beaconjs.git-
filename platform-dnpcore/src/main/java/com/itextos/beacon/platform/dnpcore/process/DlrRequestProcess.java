@@ -77,6 +77,7 @@ public class DlrRequestProcess
 
         //        if (lNoPayloadForPromoMsg && (lNewDeliveryObj.getMessageType() != MessageType.PROMOTIONAL)) {
 
+        /*
         if (lNoPayloadForPromoMsg) {
         		
         		if (log.isDebugEnabled())
@@ -90,6 +91,10 @@ public class DlrRequestProcess
                 log.debug(aDeliveryObject.getMessageId() + " : nextComponentMap not to set T2DB_DELIVERIES : lNoPayloadForPromoMsg "+lNoPayloadForPromoMsg+" : MessageType :  "+lNewDeliveryObj.getMessageType() );
              
         }
+
+*/
+        
+    	nextComponentMap.put(Component.T2DB_DELIVERIES, lNewDeliveryObj);
 
         final DlrTypeInfo lDlrTypeInfo = DNPUtil.getDnTypeInfo(lNewDeliveryObj.getClientId());
 
