@@ -45,6 +45,8 @@ import com.itextos.beacon.smpp.objects.bind.UnbindInfo;
 import com.itextos.beacon.smpp.redisoperations.DeliverySmRedisOps;
 import com.itextos.beacon.smpp.utils.SmppKafkaProducer;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.DnRollbackLog;
+import com.itextos.beacon.smslog.DnSendLog;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -461,12 +463,17 @@ abstract class ItextosSmppSessionHelper
 
                 DnPostLogGen.identifySuffix(lDeliveryObject);
 
+                DnSendLog.log(" sent to postlog table "+ lDeliveryObject.getMessageId());
+                
                 SmppKafkaProducer.sendToPostLog(lDeliveryObject);
             }
             else
             {
                 final List<DeliverSmInfo> list = new ArrayList<>();
                 list.add(aDnInfo);
+                
+                DnRollbackLog.log("rollack ro redis dn : "+aDnInfo.getMsgId());
+                
                 DeliverySmRedisOps.lpushDeliverSm(aDnInfo.getClientId(), new Gson().toJson(list));
             }
         }
