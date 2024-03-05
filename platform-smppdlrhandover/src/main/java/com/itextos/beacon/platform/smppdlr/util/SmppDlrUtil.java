@@ -15,6 +15,9 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
+import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueue;
+import com.itextos.beacon.smslog.PromoConsumerLog;
+import com.itextos.beacon.smslog.TransConsumerLog;
 
 public class SmppDlrUtil
 {
@@ -98,6 +101,36 @@ public class SmppDlrUtil
                     {
                         e.printStackTrace();
                     }
+                }else {
+                	
+                	lDeliveryObjectsList.forEach((obj)->{
+                		
+                		
+                	 	String msgid="notfind";
+                    	
+                    	String msgtype="notfind";
+                    
+                    	msgtype=((DeliveryObject)obj).getMessageType().getKey();
+
+                		msgid =((DeliveryObject)obj).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)obj).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)obj).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)obj).getMessagePriority();
+                	
+                	
+                        try
+                        {
+                            
+                        	if(msgtype!=null&&msgtype.equals("0")) {
+                    			
+                    			PromoConsumerLog.log(msgid+ " Inmemory  Consumed successfully sent to redis");
+
+                    		}else {
+                    			
+                    			TransConsumerLog.log(msgid+ " Inmemory  Consumed successfully sent to redis");
+                    		}
+                        }
+                        catch (final Exception e)
+                        {
+                        }
+                	});
                 }
             }
             else

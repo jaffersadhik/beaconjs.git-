@@ -50,17 +50,19 @@ public class SMPPDlrProcessor
 
 		msgid =((DeliveryObject)lDeliveryObject).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)lDeliveryObject).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)lDeliveryObject).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)lDeliveryObject).getMessagePriority();
 	
-		if(msgtype!=null&&msgtype.equals("0")) {
-			
-			PromoConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
-
-		}else {
-			
-			TransConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
-		}
+	
         try
         {
             InmemoryQueue.getInstance().addRecord(lDeliveryObject);
+            
+        	if(msgtype!=null&&msgtype.equals("0")) {
+    			
+    			PromoConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
+
+    		}else {
+    			
+    			TransConsumerLog.log(msgid+ " "+ mTopicName + " Consumed successfully in Non-Trans mode (Async)");
+    		}
         }
         catch (final Exception e)
         {

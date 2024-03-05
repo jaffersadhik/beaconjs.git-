@@ -172,6 +172,23 @@ public class ProcessorInfo
 
         printTopicList(topicsToConsume);
 
+        String module=System.getenv("module");
+    	
+    	
+    	if(module.equals("smppdlrhandover")) {
+    		
+    	List<String> tempTpopics=topicsToConsume.get("bulk");
+
+    	if(tempTpopics!=null) {
+    	tempTpopics.add("smpp-dlr-handover");
+    	
+    	tempTpopics.add("smpp-dlr-handover-intl");
+    	
+    	topicsToConsume.put("bulk", tempTpopics);
+    	}
+    	
+    	}
+    	
         final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(topicsToConsume);
 
         createConsumerThreads(topicsToConsume, kafkaComponentInfo, lConsumerInmemCollection);
@@ -369,22 +386,6 @@ public class ProcessorInfo
     	
     	
     	
-    	String module=System.getenv("module");
-    	
-    	
-    	if(module.equals("smppdlrhandover")) {
-    		
-    	List<String> tempTpopics=aTopicsToConsume.get("bulk");
-
-    	if(tempTpopics!=null) {
-    	tempTpopics.add("smpp-dlr-handover");
-    	
-    	tempTpopics.add("smpp-dlr-handover-intl");
-    	
-    	aTopicsToConsume.put("bulk", tempTpopics);
-    	}
-    	
-    	}
     	ConsumerTopicList.log("aTopicsToConsume : "+aTopicsToConsume);
 
         final Map<String, Map<String, ConsumerInMemCollection>> clusterInMemCollection = new HashMap<>();
