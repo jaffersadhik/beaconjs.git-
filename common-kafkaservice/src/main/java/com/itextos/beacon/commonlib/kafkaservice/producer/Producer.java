@@ -22,6 +22,8 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.PromosenderLog;
+import com.itextos.beacon.smslog.TranssenderLog;
 import com.itextos.beacon.splog.SPLog;
 
 public class Producer
@@ -181,10 +183,20 @@ public class Producer
         	
         	String msgid="notfind";
         	
+        	String msgtype="notfind";
         	if(aMessage instanceof DeliveryObject) {
         		
-        		msgid =((DeliveryObject)aMessage).getMessageId()+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
-        		
+        		msgtype=((DeliveryObject)aMessage).getMessageType().getKey();
+
+        		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
+        		if(msgtype!=null&&msgtype.equals("0")) {
+        			
+        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+
+        		}else {
+        			
+        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
         		msgid =((SubmissionObject)aMessage).getFileId();
