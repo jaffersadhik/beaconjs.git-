@@ -15,7 +15,7 @@ public class DnRollbackLog {
     static {
     	
 
-        String logFileNamePattern = "/logs/dnsent.%g.log";
+        String logFileNamePattern = "/logs/dnrollback.%g.log";
 
         Level loglevel=Level.INFO;
         

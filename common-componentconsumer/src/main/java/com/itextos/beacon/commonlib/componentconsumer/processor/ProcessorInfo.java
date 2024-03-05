@@ -187,6 +187,18 @@ public class ProcessorInfo
     	topicsToConsume.put("bulk", tempTpopics);
     	}
     	
+    	}else if(module.equals("dnpostlogt2tb")) {
+    		
+    		
+    		List<String> tempTpopics=topicsToConsume.get("bulk");
+
+        	if(tempTpopics!=null) {
+        	tempTpopics.add("t2db-smpp-post-log");
+        	
+        	tempTpopics.add("t2db-smpp-post-log-intl");
+        	
+        	topicsToConsume.put("bulk", tempTpopics);
+        	}
     	}
     	
         final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(topicsToConsume);
