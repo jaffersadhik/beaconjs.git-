@@ -12,6 +12,8 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueue;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrProducer;
+import com.itextos.beacon.smslog.PromoConsumerLog;
+import com.itextos.beacon.smslog.TransConsumerLog;
 
 public class SMPPDlrProcessor
         extends
@@ -40,6 +42,22 @@ public class SMPPDlrProcessor
         if (log.isDebugEnabled())
             log.debug(lDeliveryObject.getMessageId()+ " : SMPP Dlr the request : " + lDeliveryObject);
 
+     	String msgid="notfind";
+    	
+    	String msgtype="notfind";
+    
+    	msgtype=((DeliveryObject)lDeliveryObject).getMessageType().getKey();
+
+		msgid =((DeliveryObject)lDeliveryObject).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)lDeliveryObject).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)lDeliveryObject).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)lDeliveryObject).getMessagePriority();
+	
+		if(msgtype!=null&&msgtype.equals("0")) {
+			
+			PromoConsumerLog.log(msgid+ " "+ mTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+
+		}else {
+			
+			TransConsumerLog.log(msgid+ " "+ mTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+		}
         try
         {
             InmemoryQueue.getInstance().addRecord(lDeliveryObject);
