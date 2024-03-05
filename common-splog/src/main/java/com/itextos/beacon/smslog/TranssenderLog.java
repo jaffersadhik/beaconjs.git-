@@ -15,7 +15,7 @@ public class TranssenderLog {
     static {
     	
 
-        String logFileNamePattern = "/logs/promosender.%g.log";
+        String logFileNamePattern = "/logs/transsender.%g.log";
 
         Level loglevel=Level.INFO;
         
