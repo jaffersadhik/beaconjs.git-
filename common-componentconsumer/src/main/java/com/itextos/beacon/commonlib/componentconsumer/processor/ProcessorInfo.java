@@ -365,9 +365,28 @@ public class ProcessorInfo
     private Map<String, Map<String, ConsumerInMemCollection>> createConsumersBeforeStartingThread(
             Map<String, List<String>> aTopicsToConsume)
     {
+    
     	
+    	
+    	
+    	String module=System.getenv("module");
+    	
+    	
+    	if(module.equals("smppdlrhandover")) {
+    		
+    	List<String> tempTpopics=aTopicsToConsume.get("bulk");
+
+    	if(tempTpopics!=null) {
+    	tempTpopics.add("smpp-dlr-handover");
+    	
+    	tempTpopics.add("smpp-dlr-handover-intl");
+    	
+    	aTopicsToConsume.put("bulk", tempTpopics);
+    	}
+    	
+    	}
     	ConsumerTopicList.log("aTopicsToConsume : "+aTopicsToConsume);
-    	
+
         final Map<String, Map<String, ConsumerInMemCollection>> clusterInMemCollection = new HashMap<>();
 
         for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
