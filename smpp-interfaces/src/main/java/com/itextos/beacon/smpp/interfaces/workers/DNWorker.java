@@ -16,6 +16,7 @@ import com.itextos.beacon.smpp.interfaces.util.Communicator;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.DnTimeStampLog;
 
 public class DNWorker
 {
@@ -82,7 +83,7 @@ public class DNWorker
                     sb.append(aDeliverySmInfo.getMsgId()+" timeZone : "+timeZone).append("\n");
                     sb.append(aDeliverySmInfo.getMsgId()+" dnMsg : "+dnMsg).append("\n");
 
-                    
+                    DnTimeStampLog.log(sb.toString());
                 }
                 catch (final Exception ignore)
                 {}
