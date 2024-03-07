@@ -75,8 +75,14 @@ public class DNWorker
                 {
                     final String timeZone = CommonUtility.nullCheck(lSmppUserInfo.getAccountTimeZone());
 
+                    StringBuffer sb=new StringBuffer();
                     if (!"".equals(timeZone))
-                        dnMsg = WorkerUtil.convertTimeFromIstToIntlTimeZone(dnMsg, timeZone);
+                        dnMsg = WorkerUtil.convertTimeFromIstToIntlTimeZone(dnMsg, timeZone,aDeliverySmInfo.getMsgId(),sb);
+                
+                    sb.append(aDeliverySmInfo.getMsgId()+" timeZone : "+timeZone).append("\n");
+                    sb.append(aDeliverySmInfo.getMsgId()+" dnMsg : "+dnMsg).append("\n");
+
+                    
                 }
                 catch (final Exception ignore)
                 {}

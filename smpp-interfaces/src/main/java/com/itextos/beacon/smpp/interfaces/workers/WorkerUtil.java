@@ -353,9 +353,13 @@ public class WorkerUtil
 
     static String convertTimeFromIstToIntlTimeZone(
             String dnMsg,
-            String aTimeOffSet)
+            String aTimeOffSet,
+            String msgid,
+            StringBuffer sb)
     {
         String time = null;
+
+        sb.append(msgid+" aTimeOffSet : "+aTimeOffSet).append("\n");
 
         try
         {
@@ -364,12 +368,20 @@ public class WorkerUtil
             {
                 time = getKeyValueFromShortMsg(dnMsg, timeLable);
 
+                sb.append(msgid+" timeLable : "+time).append("\n");
+
                 if (time != null)
                 {
-                    final String timeInTz = convertTime(time, aTimeOffSet);
+                    final String timeInTz = convertTime(time, aTimeOffSet,msgid,sb);
+
+                    sb.append(msgid+" timeInTz : "+timeInTz).append("\n");
 
                     if (timeInTz != null)
                         dnMsg = dnMsg.replace(timeLable + ":" + time, timeLable + ":" + timeInTz);
+               
+                
+                    sb.append(msgid+" dnMsg : "+dnMsg).append("\n");
+
                 }
             }
         }
@@ -383,7 +395,9 @@ public class WorkerUtil
 
     private static String convertTime(
             String time,
-            String aTimeOffSet)
+            String aTimeOffSet,
+            String msgid,
+            StringBuffer sb)
     {
         for (final String timeFormat : EXPECTED_TIME_FORMATS)
             try
@@ -392,7 +406,7 @@ public class WorkerUtil
                 if (DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM.getKey().equals(timeFormat))
                     lTimeForMat = DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM;
 
-                return changeTimeToGivenOffset(aTimeOffSet, time, lTimeForMat);
+                return changeTimeToGivenOffset(aTimeOffSet, time, lTimeForMat,msgid,sb);
             }
             catch (final Exception ignore)
             {}
@@ -403,12 +417,17 @@ public class WorkerUtil
     public static String changeTimeToGivenOffset(
             String aTimeZone,
             String aTime,
-            DateTimeFormat aTimeFormat)
+            DateTimeFormat aTimeFormat,
+            String msgid,
+            StringBuffer sb)
     {
         final Date lDate = TimeZoneUtility.getDateBasedOnTimeZone(aTime, aTimeFormat, aTimeZone);
 
+        sb.append(msgid+" aTime "+aTime+" aTimeFormat "+aTimeFormat+" aTimeZone : "+aTimeZone+" After converting to IST lDate "+lDate).append("\n");
+
         if (log.isDebugEnabled())
             log.debug("After converting to IST : '" + lDate + "'");
+
 
         return DateTimeUtility.getFormattedDateTime(lDate, aTimeFormat);
     }
