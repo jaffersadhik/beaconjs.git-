@@ -45,6 +45,7 @@ import com.itextos.beacon.smpp.objects.bind.UnbindInfo;
 import com.itextos.beacon.smpp.redisoperations.DeliverySmRedisOps;
 import com.itextos.beacon.smpp.utils.SmppKafkaProducer;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.DnMissedLog;
 import com.itextos.beacon.smslog.DnRollbackLog;
 import com.itextos.beacon.smslog.DnSendLog;
 
@@ -347,15 +348,22 @@ abstract class ItextosSmppSessionHelper
             PduResponse aPduResponse)
     {
         mLastUsedTime = new Date();
-
+        
+        StringBuffer sb=new StringBuffer();
+        
         if (log.isDebugEnabled())
             log.debug("handle UnexpectedPduResponseReceived possible unhandled response " + aPduResponse);
 
         final DeliverSmResp deliverSmResp   = (DeliverSmResp) aPduResponse;
         final int           lSequenceNumber = deliverSmResp.getSequenceNumber();
 
+        sb.append("Missing DN Error").append("\n");
+        
+
         if (log.isInfoEnabled())
             log.info("deliver_sm_resp: commandStatus for new [" + deliverSmResp.getCommandStatus() + "=" + deliverSmResp.getResultMessage() + "][Sequence Number -]" + lSequenceNumber);
+
+        sb.append("deliver_sm_resp: commandStatus for new [").append(deliverSmResp.getCommandStatus() + "=" + deliverSmResp.getResultMessage() + "][Sequence Number -]" + lSequenceNumber).append("\n");
 
         final DeliverSmInfo dnInfo = mDeliverySmInfoMap.remove(lSequenceNumber);
 
@@ -368,8 +376,16 @@ abstract class ItextosSmppSessionHelper
         {
             if (log.isDebugEnabled())
                 log.debug("Sequence and DnInfo Map " + mDeliverySmInfoMap);
+            
+            sb.append("Sequence and DnInfo Map"+ mDeliverySmInfoMap).append("\n");
+
             log.error("fireUnexpectedPduResponseReceived - Missing Seq Number in map -" + lSequenceNumber);
+       
+            sb.append("fireUnexpectedPduResponseReceived - Missing Seq Number in map -" + lSequenceNumber).append("\n");
+
         }
+        
+        DnMissedLog.log(sb.toString());
     }
 
     void handleUnknownThrowable(
