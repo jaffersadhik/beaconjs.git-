@@ -399,12 +399,13 @@ public class WorkerUtil
             String msgid,
             StringBuffer sb)
     {
-        for (final String timeFormat : EXPECTED_TIME_FORMATS)
             try
             {
                 DateTimeFormat lTimeForMat = DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS;
-                if (DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM.getKey().equals(timeFormat))
+                if (time.length()!=DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS.toString().length())
                     lTimeForMat = DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM;
+
+                sb.append(msgid+"Choosen Time And Format aTime "+time+" aTimeFormat "+lTimeForMat).append("\n");
 
                 return changeTimeToGivenOffset(aTimeOffSet, time, lTimeForMat,msgid,sb);
             }
