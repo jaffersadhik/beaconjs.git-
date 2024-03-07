@@ -402,7 +402,10 @@ public class WorkerUtil
             try
             {
                 DateTimeFormat lTimeForMat = DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS;
-                if (time.length()!=DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS.toString().length())
+                
+                sb.append(msgid+"  aTime length "+time.length()+" aTimeFormat length"+DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS.getKey().length()).append("\n");
+
+                if (time.length()!=DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS.getKey().length())
                     lTimeForMat = DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM;
 
                 sb.append(msgid+"Choosen Time And Format aTime "+time+" aTimeFormat "+lTimeForMat).append("\n");
@@ -493,4 +496,10 @@ public class WorkerUtil
         request.setShortMessage(mMessage.getBytes());
     }
 
+    public static void main(String args[]) {
+    	
+    int l=	DateTimeFormat.NO_SEPARATOR_YY_MM_DD_HH_MM_SS.getKey().length();
+    
+    System.out.println(l);
+    }
 }
