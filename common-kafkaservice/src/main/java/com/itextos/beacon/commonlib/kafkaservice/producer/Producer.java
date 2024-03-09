@@ -119,6 +119,8 @@ public class Producer
 
         try
         {
+            String threadName = Thread.currentThread().getName();
+
         	StringBuffer msgidparts=new StringBuffer();
 
         	String msgid="notfind";
@@ -132,11 +134,11 @@ public class Producer
         		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(new Date()+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(new Date()+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
@@ -162,11 +164,11 @@ public class Producer
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(new Date()+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(new Date()+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
         	
@@ -219,6 +221,8 @@ public class Producer
 
         try
         {
+            String threadName = Thread.currentThread().getName();
+
         	
         	StringBuffer msgidparts=new StringBuffer();
         	String msgid="notfind";
@@ -231,11 +235,11 @@ public class Producer
         		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(new Date()+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(new Date()+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
@@ -261,11 +265,11 @@ public class Producer
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(new Date()+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(new Date()+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
         	
