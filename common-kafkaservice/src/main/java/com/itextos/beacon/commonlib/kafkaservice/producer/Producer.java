@@ -205,6 +205,17 @@ public class Producer
         		
         		msgid =((MessageRequest)aMessage).getFileId();
 
+        		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
+       
+        		if(msgtype!=null&&msgtype.equals("0")) {
+        			
+        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+
+        		}else {
+        			
+        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		}
+       
         	}
         	
             addToInMemory(aMessage);

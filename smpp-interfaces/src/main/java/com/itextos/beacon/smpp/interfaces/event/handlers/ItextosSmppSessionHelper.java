@@ -229,7 +229,7 @@ abstract class ItextosSmppSessionHelper
             if (mSessionDetail.getBindType() == SmppBindType.RECEIVER)
             {
                 aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
-                
+                aSubmitSmResponse.setMessageId("1");
                 SmppInvalidBindReceiverLog.log(userName+ " :  "+bindType+" SmppBindType.RECEIVER : "+ SmppBindType.RECEIVER + " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage() );
                 return;
             }
@@ -250,6 +250,7 @@ abstract class ItextosSmppSessionHelper
         {
             log.error("Exception while handling SubmitSm Request for user '" + userName + "'", e);
             aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
+            aSubmitSmResponse.setMessageId("2");
             SmppSMErrorLog.log(userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()+ " error : "+ErrorMessage.getStackTraceAsString(e));
         }
         finally
