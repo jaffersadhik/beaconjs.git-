@@ -7,8 +7,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.smslog.ErrorLog;
 
 public class ProducerCallbackForInterface
         implements
@@ -43,6 +45,7 @@ public class ProducerCallbackForInterface
         if ((aException != null) || (aMetadata == null) || !aMetadata.hasOffset())
         {
             log.error("Exception while sending to kafka. Doing the backup process. IMessage :'" + mMessage + "'", aException);
+        	ErrorLog.log( "Exception while sending to kafka. Doing the backup process. IMessage :'" + mMessage + "' "+ ErrorMessage.getStackTraceAsString(aException));
 
             try
             {
@@ -50,12 +53,18 @@ public class ProducerCallbackForInterface
                 if (mFallBackHolder != null) {
                 	
                 	log.debug("ProducerCallbackInterface got error put the message to fallbackHolder");
-                	 mFallBackHolder.put(mMessage);
+                	ErrorLog.log( "ProducerCallbackInterface got error put the message to fallbackHolder");
+
+                	mFallBackHolder.put(mMessage);
                 }
                 else
                 {
                     log.error("Exception while adding the message to InMemqueue while the Kafka is not available. " + "But the fallback inmemory queue is null. "
                             + "This data will be available in the Redis. " + "Please check in Redis.");
+                
+                	ErrorLog.log( "Exception while adding the message to InMemqueue while the Kafka is not available. " + "But the fallback inmemory queue is null. "
+                            + "This data will be available in the Redis. " + "Please check in Redis.");
+
                     KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
                 }
             }
