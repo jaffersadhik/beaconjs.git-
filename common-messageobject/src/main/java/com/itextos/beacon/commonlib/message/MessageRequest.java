@@ -1,5 +1,7 @@
 package com.itextos.beacon.commonlib.message;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -446,7 +448,12 @@ public class MessageRequest
 
     public String getLongMessage()
     {
-        return getValue(MiddlewareConstant.MW_LONG_MSG);
+    	String encodemessage=getValue(MiddlewareConstant.MW_LONG_MSG);
+    	if(encodemessage!=null) {
+    		
+    		return URLDecoder.decode(encodemessage);
+    	}
+        return encodemessage ;
     }
 
     public String getMaskedHeader()
@@ -1605,7 +1612,8 @@ public class MessageRequest
     public void setLongMessage(
             String aLongMessage)
     {
-        putValue(MiddlewareConstant.MW_LONG_MSG, aLongMessage);
+    	String encodemsg=URLEncoder.encode(aLongMessage);
+        putValue(MiddlewareConstant.MW_LONG_MSG, encodemsg);
     }
 
     public void setMaskedHeader(
