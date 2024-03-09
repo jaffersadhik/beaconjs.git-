@@ -21,6 +21,7 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.ProducertoRedisLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -178,6 +179,8 @@ public class KafkaUtility
             String aTopicName,
             List<IMessage> aMessage)
     {
+        String threadName = Thread.currentThread().getName();
+
 
         try (
                 Jedis jedis = getKafkaRedis();
@@ -189,6 +192,8 @@ public class KafkaUtility
             pipe.sync();
 
             log.fatal("Component Name:" + aComponent + ", Topic ='" + aTopicName + "' Successfully added producer messages in redis count -" + aMessage.size());
+        
+            ProducertoRedisLog.log(threadName+" : Component Name:" + aComponent + ", Topic ='" + aTopicName + "' Successfully added producer messages in redis count -" + aMessage.size());
         }
         catch (final Exception e)
         {

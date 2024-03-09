@@ -24,6 +24,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ProducerFlushLog;
 import com.itextos.beacon.smslog.PromosenderLog;
 import com.itextos.beacon.smslog.TranssenderLog;
 import com.itextos.beacon.splog.SPLog;
@@ -331,14 +332,24 @@ public class Producer
     public synchronized void flush(
             String aEvent)
     {
-        if (aEvent != null)
-            log.fatal(aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
-        else
+    	
+        String threadName = Thread.currentThread().getName();
+
+        if (aEvent != null) {
+            log.fatal(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+       
+            ProducerFlushLog.log(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+        } else {
             if (log.isDebugEnabled())
                 log.debug("Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+        
+            ProducerFlushLog.log(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+
+        }
         mProducer.flush();
         mBatchCounter = 0;
         lastFlushed   = System.currentTimeMillis();
+        
     }
 
     void flushBaesdOnTime()
@@ -489,5 +500,8 @@ class FlushMonitor
     {
         mCanContinue = false;
     }
+    
+    
+    
 
 }

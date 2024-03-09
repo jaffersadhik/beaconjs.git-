@@ -21,6 +21,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.errors.WakeupException;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
@@ -31,6 +32,7 @@ import com.itextos.beacon.commonlib.kafkaservice.producer.Producer;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ErrorLog;
 
 public class Consumer
         implements
@@ -155,6 +157,8 @@ public class Consumer
         	
         	
             log.error(mLogTopicName + "Exception while consumeing messages.", we);
+            
+            ErrorLog.log(mLogTopicName + "Exception while consumeing messages. \t "+ErrorMessage.getStackTraceAsString(we));
 
             // Ignore exception if closing
             if (!mClosed)
@@ -163,6 +167,9 @@ public class Consumer
         catch (final Exception ex)
         {
             log.error(mLogTopicName + "Exception while consumeing messages.", ex);
+            
+            ErrorLog.log(mLogTopicName + "Exception while consumeing messages \t "+ErrorMessage.getStackTraceAsString(ex));
+
         }
         finally
         {
@@ -183,6 +190,9 @@ public class Consumer
             catch (final Exception exc)
             {
                 //
+            	
+                ErrorLog.log(mLogTopicName + "Exception while consumeing messages \t "+ErrorMessage.getStackTraceAsString(exc));
+
             }
 
             log.fatal("#### Completely Stopped the consumer ************ ");
