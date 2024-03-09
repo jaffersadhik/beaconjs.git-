@@ -28,6 +28,7 @@ import com.cloudhopper.smpp.pdu.SubmitSmResp;
 import com.cloudhopper.smpp.pdu.Unbind;
 import com.cloudhopper.smpp.pdu.UnbindResp;
 import com.google.gson.Gson;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
@@ -48,6 +49,9 @@ import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 import com.itextos.beacon.smslog.DnMissedLog;
 import com.itextos.beacon.smslog.DnRollbackLog;
 import com.itextos.beacon.smslog.DnSendLog;
+import com.itextos.beacon.smslog.SmppEntryLog;
+import com.itextos.beacon.smslog.SmppInvalidBindReceiverLog;
+import com.itextos.beacon.smslog.SmppSMErrorLog;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -225,6 +229,8 @@ abstract class ItextosSmppSessionHelper
             if (mSessionDetail.getBindType() == SmppBindType.RECEIVER)
             {
                 aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
+                
+                SmppInvalidBindReceiverLog.log(userName+ " :  "+bindType+" SmppBindType.RECEIVER : "+ SmppBindType.RECEIVER + " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage() );
                 return;
             }
 
@@ -236,11 +242,15 @@ abstract class ItextosSmppSessionHelper
                 log.debug("Submit SM Response : " + aSubmitSmResponse);
                 log.debug("Submit SM Response Reult Message: " + aSubmitSmResponse.getResultMessage());
             }
+            
+            SmppEntryLog.log(userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
+
         }
         catch (final Exception e)
         {
             log.error("Exception while handling SubmitSm Request for user '" + userName + "'", e);
             aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
+            SmppSMErrorLog.log(userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()+ " error : "+ErrorMessage.getStackTraceAsString(e));
         }
         finally
         {
