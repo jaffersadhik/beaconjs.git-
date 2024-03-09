@@ -17,10 +17,13 @@ import org.apache.kafka.common.TopicPartition;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.ConsumerRedisLog;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.ProducertoRedisLog;
 
 import redis.clients.jedis.Jedis;
@@ -161,16 +164,23 @@ public class KafkaUtility
             String aTopicName,
             IMessage aMessage)
     {
+        String threadName = Thread.currentThread().getName();
+
 
         try (
                 Jedis jedis = getKafkaRedis())
         {
             final String listKey = CommonUtility.combine(REDIS_SEPARATOR, REDIS_PRODUCER_KEY, aComponent.getKey(), aTopicName);
             jedis.lpush(listKey, aMessage.getJsonString());
+            
+            ProducertoRedisLog.log(threadName+" : Component Name:" + aComponent + ", Topic ='" + aTopicName + "' Successfully added producer messages in redis count -" + aMessage);
+
         }
         catch (final Exception e)
         {
             log.error("Ecxception while pushing message to Redis for the Producer Topic Name '" + aTopicName + "' Message '" + aMessage + "'", e);
+       
+            ErrorLog.log("Ecxception while pushing message to Redis for the Producer Topic Name '" + aTopicName + "' Message '" + aMessage + "'"+ErrorMessage.getStackTraceAsString(e));
         }
     }
 
@@ -198,6 +208,7 @@ public class KafkaUtility
         catch (final Exception e)
         {
             log.error("Ecxception while pushing message to Redis for the Producer Topic Name '" + aTopicName + "' Message '" + aMessage + "'", e);
+            ErrorLog.log("Ecxception while pushing message to Redis for the Producer Topic Name '" + aTopicName + "' Message '" + aMessage + "' "+ErrorMessage.getStackTraceAsString(e));
         }
     }
 
@@ -217,10 +228,14 @@ public class KafkaUtility
             pipe.sync();
 
             log.fatal("Component Name:" + aComponent + ", Topic ='" + aTopicName + "' Successfully added consumer messages in redis count -" + aMessage.size());
+
+            ConsumerRedisLog.log("Component Name:" + aComponent + ", Topic ='" + aTopicName + "' Successfully added consumer messages in redis count -" + aMessage.size());
         }
         catch (final Exception e)
         {
             log.error("Ecxception while pushing message to Redis for the Consumer Topic Name '" + aTopicName + "' Message '" + aMessage + "'", e);
+      
+            ErrorLog.log("Ecxception while pushing message to Redis for the Consumer Topic Name '" + aTopicName + "' Message '" + aMessage + "' "+ ErrorMessage.getStackTraceAsString(e));
         }
     }
 
@@ -267,12 +282,19 @@ public class KafkaUtility
 
                     if (log.isDebugEnabled())
                         log.debug("Messages count for the key '" + aKeys + "' Topicname '" + topicName + "' Messages Count '" + msgList.size() + "'");
+                
+                    ConsumerRedisLog.log("Messages count for the key '" + aKeys + "' Topicname '" + topicName + "' Messages Count '" + msgList.size() + "'");
                 }
+                
+                
             }
         }
         catch (final Exception e)
         {
             log.error("Ecxception while getting message from Redis for the Key '" + aKeys + "''", e);
+       
+            ErrorLog.log("Ecxception while getting message from Redis for the Key '" + aKeys + "'' "+ErrorMessage.getStackTraceAsString(e) );
+        
         }
         return returnValue;
     }

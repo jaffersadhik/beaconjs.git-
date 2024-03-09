@@ -32,6 +32,7 @@ import com.itextos.beacon.commonlib.kafkaservice.producer.Producer;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ConsumerLog;
 import com.itextos.beacon.smslog.ErrorLog;
 
 public class Consumer
@@ -80,6 +81,8 @@ public class Consumer
 
     private void process()
     {
+        String threadName = Thread.currentThread().getName();
+
         if (log.isDebugEnabled())
             log.debug("Started consuming messages from '" + mTopicName + "'");
 
@@ -112,6 +115,7 @@ public class Consumer
                     if (log.isDebugEnabled())
                         log.debug(mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
 
+                    ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
                     mAreRecordsInProcess = false;
 
                     PrometheusMetrics.kafkaConsumerIncrement(mTopicName, pollCount);

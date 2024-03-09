@@ -5,8 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.smslog.ErrorLog;
 
 public class ProducerCallback
         implements
@@ -38,13 +40,17 @@ public class ProducerCallback
         if ((aException != null) || (aMetadata == null) || !aMetadata.hasOffset())
         {
             log.error("Exception while sending to kafka. Doing the backup process. IMessage :'" + mMessage + "'", aException);
+        	ErrorLog.log( "Exception while sending to kafka. Doing the backup process. IMessage :'" + mMessage + "' "+ ErrorMessage.getStackTraceAsString(aException));
 
+            
             try
             {
                 doFallbackForKafka();
             }
             catch (final Exception e)
             {
+            	
+            	ErrorLog.log("Exception while sending back to the same queue"+ ErrorMessage.getStackTraceAsString(e));
                 log.error("Exception while sending back to the same queue", e);
             }
         }
