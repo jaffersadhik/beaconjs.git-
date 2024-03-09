@@ -18,6 +18,7 @@ import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
@@ -198,6 +199,7 @@ public class Producer
         try
         {
         	
+        	StringBuffer msgidparts=new StringBuffer();
         	String msgid="notfind";
         	
         	String msgtype="notfind";
@@ -220,8 +222,18 @@ public class Producer
 
         	}else if(aMessage instanceof MessageRequest ) {
         		
-        		msgid =((MessageRequest)aMessage).getFileId();
+        		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
+        		
+        		if(parts !=null) {
+        		parts.forEach((p)->{
+        			
+        			msgidparts.append(": "+p.getMessageId());
+        			
+        		});
+        		}
 
+        		msgid=msgidparts.toString();
+        		
         		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
        
         		if(msgtype!=null&&msgtype.equals("0")) {
