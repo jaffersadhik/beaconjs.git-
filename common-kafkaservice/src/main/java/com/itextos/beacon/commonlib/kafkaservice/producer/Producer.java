@@ -118,6 +118,8 @@ public class Producer
 
         try
         {
+        	StringBuffer msgidparts=new StringBuffer();
+
         	String msgid="notfind";
         	
         	String msgtype="notfind";
@@ -135,8 +137,17 @@ public class Producer
         		
 
         		
-        		msgid =((MessageRequest)aMessage).getFileId();
+  		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
+        		
+        		if(parts !=null) {
+        		parts.forEach((p)->{
+        			
+        			msgidparts.append(": "+p.getMessageId());
+        			
+        		});
+        		}
 
+        		msgid=msgidparts.toString();
         		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
        
         		if(msgtype!=null&&msgtype.equals("0")) {
