@@ -117,8 +117,9 @@ public class Producer
 
         try
         {
-        	
         	String msgid="notfind";
+        	
+        	String msgtype="notfind";
         	
         	if(aMessage instanceof DeliveryObject) {
         		
@@ -130,7 +131,23 @@ public class Producer
 
         	}else if(aMessage instanceof MessageRequest ) {
         		
+        		
+
+        		
         		msgid =((MessageRequest)aMessage).getFileId();
+
+        		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
+       
+        		if(msgtype!=null&&msgtype.equals("0")) {
+        			
+        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+
+        		}else {
+        			
+        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		}
+       
+        	
 
         	}
         	
