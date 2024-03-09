@@ -36,7 +36,7 @@ public class PromosenderLog {
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
-			fileHandler = new FileHandler(logFileNamePattern, 1000000, 10, true);
+			fileHandler = new FileHandler(logFileNamePattern, 0, 10, true);
 			
 			   // Set the logging level for the handler
 	        fileHandler.setLevel(loglevel);
