@@ -140,11 +140,11 @@ public class Producer
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+" "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
         	
@@ -208,11 +208,11 @@ public class Producer
         		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
@@ -226,11 +226,11 @@ public class Producer
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
         	}
