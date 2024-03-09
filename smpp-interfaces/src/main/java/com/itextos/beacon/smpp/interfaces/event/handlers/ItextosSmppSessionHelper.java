@@ -227,7 +227,6 @@ abstract class ItextosSmppSessionHelper
             bindType = mSessionDetail.getBindName();
             userName = mSessionDetail.getSystemId();
 
-            EntryLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
 
             lTimer   = PrometheusMetrics
                     .smppSubmitSmStartTimer(new SmppPrometheusInfo(SmppProperties.getInstance().getInstanceCluster(), mSessionDetail.getInstanceId(), userName, mSessionDetail.getHost(), bindType));
@@ -235,10 +234,10 @@ abstract class ItextosSmppSessionHelper
             if (mSessionDetail.getBindType() == SmppBindType.RECEIVER)
             {
                 aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
-                aSubmitSmResponse.setMessageId("1");
                 SmppInvalidBindReceiverLog.log(userName+ " :  "+bindType+" SmppBindType.RECEIVER : "+ SmppBindType.RECEIVER + " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage() );
                 return;
             }
+
 
             Communicator.sendSubmitSmReqLog(mSessionDetail, aSubmitSmRequest);
             ValidateRequest.validateSubmitSm(aSubmitSmRequest, aSubmitSmResponse, mSessionDetail);
@@ -248,15 +247,16 @@ abstract class ItextosSmppSessionHelper
                 log.debug("Submit SM Response : " + aSubmitSmResponse);
                 log.debug("Submit SM Response Reult Message: " + aSubmitSmResponse.getResultMessage());
             }
-            
+          
+            EntryLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
+
 
         }
         catch (final Exception e)
         {
             log.error("Exception while handling SubmitSm Request for user '" + userName + "'", e);
             aSubmitSmResponse.setCommandStatus(SmppConstants.STATUS_SYSERR);
-            aSubmitSmResponse.setMessageId("2");
-            SmppSMErrorLog.log(userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()+ " error : "+ErrorMessage.getStackTraceAsString(e));
+            EntryLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()+" error : "+ErrorMessage.getStackTraceAsString(e));
         }
         finally
         {
@@ -265,7 +265,6 @@ abstract class ItextosSmppSessionHelper
             Communicator.sendSubmitSmResLog(mSessionDetail, aSubmitSmResponse);
         }
         
-        ExitLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
 
     }
 
