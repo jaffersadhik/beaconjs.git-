@@ -126,8 +126,17 @@ public class Producer
         	
         	if(aMessage instanceof DeliveryObject) {
         		
-        		msgid =((DeliveryObject)aMessage).getMessageId();
-        		
+        		msgtype=((DeliveryObject)aMessage).getMessageType().getKey();
+
+        		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
+        		if(msgtype!=null&&msgtype.equals("0")) {
+        			
+        			PromosenderLog.log(((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+
+        		}else {
+        			
+        			TranssenderLog.log(((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
         		msgid =((SubmissionObject)aMessage).getFileId();
@@ -152,11 +161,11 @@ public class Producer
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+" "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
         	
@@ -221,11 +230,11 @@ public class Producer
         		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
         	}else if(aMessage instanceof SubmissionObject ) {
         		
@@ -233,7 +242,10 @@ public class Producer
 
         	}else if(aMessage instanceof MessageRequest ) {
         		
-        		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
+        		
+
+        		
+  		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
         		
         		if(parts !=null) {
         		parts.forEach((p)->{
@@ -244,18 +256,19 @@ public class Producer
         		}
 
         		msgid=msgidparts.toString();
-        		
         		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
        
         		if(msgtype!=null&&msgtype.equals("0")) {
         			
-        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			PromosenderLog.log(((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
 
         		}else {
         			
-        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+ " "+msgid+ " "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        			TranssenderLog.log(((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
         		}
        
+        	
+
         	}
         	
             addToInMemory(aMessage);

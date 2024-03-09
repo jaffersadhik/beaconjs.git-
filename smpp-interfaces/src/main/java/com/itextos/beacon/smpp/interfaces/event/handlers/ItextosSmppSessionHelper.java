@@ -30,6 +30,7 @@ import com.cloudhopper.smpp.pdu.UnbindResp;
 import com.google.gson.Gson;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -49,7 +50,8 @@ import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 import com.itextos.beacon.smslog.DnMissedLog;
 import com.itextos.beacon.smslog.DnRollbackLog;
 import com.itextos.beacon.smslog.DnSendLog;
-import com.itextos.beacon.smslog.SmppEntryLog;
+import com.itextos.beacon.smslog.EntryLog;
+import com.itextos.beacon.smslog.ExitLog;
 import com.itextos.beacon.smslog.SmppInvalidBindReceiverLog;
 import com.itextos.beacon.smslog.SmppSMErrorLog;
 
@@ -212,6 +214,8 @@ abstract class ItextosSmppSessionHelper
             SubmitSm aSubmitSmRequest,
             SubmitSmResp aSubmitSmResponse)
     {
+    	
+
         int    seqNum   = -1;
         String bindType = BIND_TYPE_UNKNOWN;
         String userName = USER_UNKNOWN;
@@ -222,6 +226,8 @@ abstract class ItextosSmppSessionHelper
             seqNum   = aSubmitSmRequest.getSequenceNumber();
             bindType = mSessionDetail.getBindName();
             userName = mSessionDetail.getSystemId();
+
+            EntryLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
 
             lTimer   = PrometheusMetrics
                     .smppSubmitSmStartTimer(new SmppPrometheusInfo(SmppProperties.getInstance().getInstanceCluster(), mSessionDetail.getInstanceId(), userName, mSessionDetail.getHost(), bindType));
@@ -243,7 +249,6 @@ abstract class ItextosSmppSessionHelper
                 log.debug("Submit SM Response Reult Message: " + aSubmitSmResponse.getResultMessage());
             }
             
-            SmppEntryLog.log(userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
 
         }
         catch (final Exception e)
@@ -259,6 +264,9 @@ abstract class ItextosSmppSessionHelper
                     new SmppPrometheusInfo(SmppProperties.getInstance().getInstanceCluster(), mSessionDetail.getInstanceId(), userName, mSessionDetail.getHost(), bindType), lTimer);
             Communicator.sendSubmitSmResLog(mSessionDetail, aSubmitSmResponse);
         }
+        
+        ExitLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
+
     }
 
     private void handleUnbind(

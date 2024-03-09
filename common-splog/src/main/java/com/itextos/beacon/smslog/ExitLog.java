@@ -7,15 +7,15 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 
-public class SmppEntryLog {
+public class ExitLog {
 
 
-    private static final  Logger logger = Logger.getLogger(SmppEntryLog.class.getName());
+    private static final  Logger logger = Logger.getLogger(ExitLog.class.getName());
     
     static {
     	
 
-        String logFileNamePattern = "/logs/smppentry.%g.log";
+        String logFileNamePattern = "/logs/exit.%g.log";
 
         Level loglevel=Level.INFO;
         

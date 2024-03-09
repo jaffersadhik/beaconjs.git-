@@ -1,5 +1,7 @@
 package com.itextos.beacon.platform.ic.process;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -15,6 +17,7 @@ import com.itextos.beacon.commonlib.constants.SubServices;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -22,6 +25,8 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.ic.util.HeaderValidaton;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
+import com.itextos.beacon.smslog.EntryLog;
+import com.itextos.beacon.smslog.ExitLog;
 import com.itextos.beacon.smslog.SMSLog;
 
 public class ICProcessor
@@ -49,6 +54,23 @@ public class ICProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
+    	StringBuffer msgidparts=new StringBuffer();
+
+    	List<MessagePart> parts=((MessageRequest)lMessageRequest).getMessageParts();
+		
+		if(parts !=null) {
+		parts.forEach((p)->{
+			
+			msgidparts.append(": "+p.getMessageId());
+			
+		});
+		}
+
+		String msgid=msgidparts.toString();
+
+		
+        EntryLog.log(" ic : "+((MessageRequest)lMessageRequest).getUser()+" fileid :  "+ ((MessageRequest)lMessageRequest).getFileId() +" : msgid[ "+msgid+" ] ");
+
         	lMessageRequest.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
         	
         	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
@@ -64,6 +86,10 @@ public class ICProcessor
       	   lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+lMessageRequest.getBaseMessageId()+"######################");
 
            SMSLog.log(lMessageRequest.getLogBuffer().toString());
+           
+           ExitLog.log(" ic : "+((MessageRequest)lMessageRequest).getUser()+" fileid :  "+ ((MessageRequest)lMessageRequest).getFileId() +" : msgid[ "+msgid+" ] ");
+
+           
     }
 
 
