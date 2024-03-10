@@ -11,9 +11,9 @@ import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
-import com.itextos.beacon.http.generichttpapi.processor.reader.QSRequestReader;
-import com.itextos.beacon.http.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
+import com.itextos.beacon.interfaces.generichttpapi.processor.reader.QSRequestReader;
+import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.smslog.QSReceiverLog;
 
 import jakarta.servlet.ServletException;

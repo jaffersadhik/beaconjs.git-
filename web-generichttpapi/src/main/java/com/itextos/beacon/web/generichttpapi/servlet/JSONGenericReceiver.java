@@ -10,9 +10,9 @@ import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
-import com.itextos.beacon.http.generichttpapi.processor.reader.JSONRequestReader;
-import com.itextos.beacon.http.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
+import com.itextos.beacon.interfaces.generichttpapi.processor.reader.JSONRequestReader;
+import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

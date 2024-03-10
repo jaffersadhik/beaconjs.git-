@@ -12,9 +12,9 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
-import com.itextos.beacon.http.generichttpapi.processor.request.JSONRequestProcessor;
-import com.itextos.beacon.http.generichttpapi.processor.request.XMLRequestProcessor;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
+import com.itextos.beacon.interfaces.generichttpapi.processor.request.JSONRequestProcessor;
+import com.itextos.beacon.interfaces.generichttpapi.processor.request.XMLRequestProcessor;
 
 public class AsyncRequestProcessor
         extends

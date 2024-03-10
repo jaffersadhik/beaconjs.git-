@@ -15,8 +15,8 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
-import com.itextos.beacon.http.migration.processor.reader.MJsonRequestReader;
-import com.itextos.beacon.http.migration.processor.reader.MRequestReader;
+import com.itextos.beacon.interfaces.migration.processor.reader.MJsonRequestReader;
+import com.itextos.beacon.interfaces.migration.processor.reader.MRequestReader;
 
 public class MQSRequestReceiver
         extends
