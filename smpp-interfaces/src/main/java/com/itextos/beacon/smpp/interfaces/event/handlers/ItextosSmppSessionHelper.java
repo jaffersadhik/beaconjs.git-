@@ -54,6 +54,7 @@ import com.itextos.beacon.smslog.EntryLog;
 import com.itextos.beacon.smslog.ExitLog;
 import com.itextos.beacon.smslog.SmppInvalidBindReceiverLog;
 import com.itextos.beacon.smslog.SmppSMErrorLog;
+import com.itextos.beacon.smslog.SubmitsmLog;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -221,13 +222,17 @@ abstract class ItextosSmppSessionHelper
         String userName = USER_UNKNOWN;
         Timer  lTimer   = null;
 
+        StringBuffer sb=new StringBuffer();
+        sb.append("\n#######################################################################\n");
+
         try
         {
             seqNum   = aSubmitSmRequest.getSequenceNumber();
             bindType = mSessionDetail.getBindName();
             userName = mSessionDetail.getSystemId();
+            sb.append(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()).append("\n");
 
-
+            
             lTimer   = PrometheusMetrics
                     .smppSubmitSmStartTimer(new SmppPrometheusInfo(SmppProperties.getInstance().getInstanceCluster(), mSessionDetail.getInstanceId(), userName, mSessionDetail.getHost(), bindType));
 
@@ -240,7 +245,7 @@ abstract class ItextosSmppSessionHelper
 
 
             Communicator.sendSubmitSmReqLog(mSessionDetail, aSubmitSmRequest);
-            ValidateRequest.validateSubmitSm(aSubmitSmRequest, aSubmitSmResponse, mSessionDetail);
+            ValidateRequest.validateSubmitSm(aSubmitSmRequest, aSubmitSmResponse, mSessionDetail,sb);
 
             if (log.isDebugEnabled())
             {
@@ -265,7 +270,9 @@ abstract class ItextosSmppSessionHelper
             Communicator.sendSubmitSmResLog(mSessionDetail, aSubmitSmResponse);
         }
         
+        sb.append("\n#######################################################################\n");
 
+        SubmitsmLog.log(sb.toString());
     }
 
     private void handleUnbind(

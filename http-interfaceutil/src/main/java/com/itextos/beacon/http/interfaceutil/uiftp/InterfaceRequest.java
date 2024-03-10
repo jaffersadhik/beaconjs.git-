@@ -34,7 +34,7 @@ public class InterfaceRequest
 
     public static void sendToKafka(
             EnumMap<InterfaceConstant, String> aRequest,
-            String aAccJson)
+            String aAccJson,StringBuffer sb)
             throws Exception
     {
         InterfaceStatusCode lInterfaceStatusCode = InterfaceStatusCode.SUCCESS;
@@ -172,7 +172,7 @@ public class InterfaceRequest
             lMessagePart.setMessageActualReceivedTime(lReceivedTime);
             lMessageRequest.addMessagePart(lMessagePart);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
         }
         catch (final Exception e)
         {

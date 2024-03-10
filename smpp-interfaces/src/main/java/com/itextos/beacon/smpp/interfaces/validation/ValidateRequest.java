@@ -2,7 +2,6 @@ package com.itextos.beacon.smpp.interfaces.validation;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -340,7 +339,8 @@ public class ValidateRequest
     public static void validateSubmitSm(
             SubmitSm aSubmitSmRequest,
             SubmitSmResp aSubmitSmResponse,
-            SessionDetail aSessionDetail)
+            SessionDetail aSessionDetail,
+            StringBuffer sb)
     {
         final SubmitSmRequest    lSmRequest          = new SubmitSmRequest(aSubmitSmRequest, aSubmitSmResponse, aSessionDetail);
 
@@ -422,7 +422,7 @@ public class ValidateRequest
         }
         finally
         {
-            sendToPlatform(lSmppMessageRequest, aSubmitSmResponse, aSessionDetail);
+            sendToPlatform(lSmppMessageRequest, aSubmitSmResponse, aSessionDetail,sb);
         }
     }
 
@@ -448,7 +448,8 @@ public class ValidateRequest
     private static void sendToPlatform(
             SmppMessageRequest aSubmitSmRequest,
             SubmitSmResp aSubmitSmResp,
-            SessionDetail aSessionDetail)
+            SessionDetail aSessionDetail,
+            StringBuffer sb)
     {
         final String lMessageId = MessageIdentifier.getInstance().getNextId();
         aSubmitSmResp.setMessageId(lMessageId);
@@ -456,7 +457,7 @@ public class ValidateRequest
         aSubmitSmRequest.setAckid(lMessageId);
         aSubmitSmRequest.setSmppInstance(aSessionDetail.getInstanceId());
         // Push Message
-        mwHandover(aSubmitSmRequest, aSessionDetail, aSubmitSmResp);
+        mwHandover(aSubmitSmRequest, aSessionDetail, aSubmitSmResp,sb);
     }
 
     private static void throttleMessage(
@@ -626,7 +627,8 @@ public class ValidateRequest
     private static void mwHandover(
             SmppMessageRequest aSmppMessageRequest,
             SessionDetail aSessionDetail,
-            SubmitSmResp aSubmitResponse)
+            SubmitSmResp aSubmitResponse,
+            StringBuffer sb)
     {
         boolean            isValidDCS          = true;
 
@@ -648,20 +650,21 @@ public class ValidateRequest
         {
             if (log.isDebugEnabled())
                 log.debug("Processing multipart request ...........");
-            concatTemplateProcess(aSmppMessageRequest, aSessionDetail, aSubmitResponse);
+            concatTemplateProcess(aSmppMessageRequest, aSessionDetail, aSubmitResponse,sb);
         }
         else
         {
             if (log.isDebugEnabled())
                 log.debug("Processing singlepart request ...........");
-            send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, aPlatformStatusCode);
+            send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, aPlatformStatusCode,sb);
         }
     }
 
     private static void concatTemplateProcess(
             SmppMessageRequest aSmppMessageRequest,
             SessionDetail aSessionDetail,
-            SubmitSmResp aSubmitResponse)
+            SubmitSmResp aSubmitResponse,
+            StringBuffer sb2)
     {
 
         try
@@ -686,7 +689,7 @@ public class ValidateRequest
 
                     final PlatformStatusCode lPlatformStatusCode = PlatformStatusCode.EXCEED_MAX_SPLIT_PARTS;
                     // accept set error codeas Max Split exceed and send to platform
-                    send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, lPlatformStatusCode);
+                    send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, lPlatformStatusCode,sb2);
                 }
                 else
                 {
@@ -708,20 +711,22 @@ public class ValidateRequest
 
                     aSmppMessageRequest.setInterfaceErrorCode(InterfaceStatusCode.SMPP_PARTNO_EXCEED_TOTAL_PART_COUNT.getStatusCode());
                     aSubmitResponse.setCommandStatus(SmppErrorCodes.STATUS_INVDMSGPART);
-                    send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, null);
+                    send2Platform(aSmppMessageRequest, aSubmitResponse, aSessionDetail, null,sb2);
                 }
                 else
                 {
                     if (log.isDebugEnabled())
                         log.debug("Request sending to concat process.............");
-
+                    sb2.append("Request sending to concat process.............");
+                    StringBuffer sb=new StringBuffer();
+                    sb.append("\n#################################################\n");
                     final long lStartTime = System.currentTimeMillis();
 
                     try
                     {
                         final ClusterType lClusterType = aSessionDetail.getPlatformCluster();
                         aSmppMessageRequest.setInterfaceErrorCode("");
-                        ConcatenateReceiver.addSmppMessage(lClusterType, aSmppMessageRequest, true);
+                        ConcatenateReceiver.addSmppMessage(lClusterType, aSmppMessageRequest, true,sb);
                     }
                     catch (final Exception exp)
                     {
@@ -732,6 +737,12 @@ public class ValidateRequest
 
                     if (log.isDebugEnabled())
                         log.debug("Concatinate Message Started at '" + lStartTime + "' Processed Time : " + (System.currentTimeMillis() - lStartTime));
+               
+                    sb.append("Concatinate Message Started at '" + lStartTime + "' Processed Time : " + (System.currentTimeMillis() - lStartTime)).append("\n");
+
+                    sb.append("\n#################################################\n");
+
+                
                 }
             }
         }
@@ -746,7 +757,8 @@ public class ValidateRequest
             SmppMessageRequest aSmppMessageRequest,
             SubmitSmResp aSubmitResponse,
             SessionDetail aSessionDetail,
-            PlatformStatusCode aPlatformStatusCode)
+            PlatformStatusCode aPlatformStatusCode,
+            StringBuffer sb)
     {
 
         try
@@ -756,7 +768,7 @@ public class ValidateRequest
             if (log.isDebugEnabled())
                 log.debug("Message Request Object sending to Kafka : " + lMessageRequest);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
 
             if (aSubmitResponse.getCommandStatus() == 0)
                 aSubmitResponse.setCommandStatus(SmppConstants.STATUS_OK);
