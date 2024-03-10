@@ -448,7 +448,7 @@ public class KafkaInformation
             	if(hostip==null) {
             		hostip="";
             	}
-                final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer", Integer.toString(consumerClientIndex), ip,hostip);
+                final String clientId = CommonUtility.combine(Thread.currentThread().getName(), aComponent.getKey(), "consumer",topicName, Integer.toString(consumerClientIndex), ip,hostip);
 
                 if (log.isDebugEnabled())
                     log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
