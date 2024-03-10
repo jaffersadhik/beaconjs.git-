@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
@@ -76,18 +77,20 @@ public class InterfaceUtil
     }
 
     public static void sendToKafka(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest,StringBuffer sb)
     {
         if (log.isDebugEnabled())
             log.debug(" The MessageRequest object Handover to Kafka........" + aMessageRequest + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'");
-
+        sb.append(" The MessageRequest object Handover to Kafka........" + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'" ).append("\n");
         final boolean isKafkaAvailable = CommonUtility.isEnabled(getConfigParamsValueAsString(ConfigParamConstants.IS_KAFKA_AVAILABLE));
 
+        sb.append(" isKafkaAvailable : "+isKafkaAvailable).append("\n");
         if (!isKafkaAvailable)
         {
             if (log.isDebugEnabled())
                 log.debug("Unable to push kafka, Hence sending to Mysql ..");
 
+            sb.append("Unable to push kafka, Hence sending to Mysql ..").append("\n");
             sendToFallback(aMessageRequest);
         }
         else
@@ -102,11 +105,15 @@ public class InterfaceUtil
             catch (final Exception e)
             {
                 log.error("Message sending to kafka is failed, Hence sending to Fallback table..", e);
+                sb.append("Message sending to kafka is failed, Hence sending to Fallback table.. "+ ErrorMessage.getStackTraceAsString(e)).append("\n");
+
                 sendToFallback(aMessageRequest);
             }
 
             if (log.isDebugEnabled())
                 log.debug("Kafka handover status -" + status);
+            
+            sb.append("Kafka handover status -" + status).append("\n");
         }
     }
 

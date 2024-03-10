@@ -41,15 +41,18 @@ public class MJsonRequestReader
     private final String     mRequestType;
     private final String     mSource;
 
+    StringBuffer sb=null;
     public MJsonRequestReader(
             HttpServletRequest aRequest,
             HttpServletResponse aResponse,
             String aSource,
-            String aRequestType)
+            String aRequestType,
+            StringBuffer sb)
     {
         super(aSource, aRequest, aResponse);
         mSource      = aSource;
         mRequestType = aRequestType;
+        this.sb=sb;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class MJsonRequestReader
             final String lReqJson = lJsonObj.toJSONString();
             if (log.isDebugEnabled())
                 log.debug("After parsing JSON String is  - " + lReqJson);
-            final IRequestProcessor requestProcessor = new JSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), mRequestType, MessageSource.GENERIC_JSON);
+            final IRequestProcessor requestProcessor = new JSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), mRequestType, MessageSource.GENERIC_JSON,sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 
@@ -272,7 +275,7 @@ public class MJsonRequestReader
 
             if (log.isDebugEnabled())
                 log.debug("After parsing JSON String is  - " + lReqJson);
-            final IRequestProcessor requestProcessor = new JSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), mRequestType, MessageSource.GENERIC_QS);
+            final IRequestProcessor requestProcessor = new JSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), mRequestType, MessageSource.GENERIC_QS,sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 

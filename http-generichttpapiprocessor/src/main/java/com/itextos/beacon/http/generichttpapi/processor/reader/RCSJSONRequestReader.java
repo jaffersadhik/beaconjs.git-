@@ -39,13 +39,16 @@ public class RCSJSONRequestReader
     private final String     mRequestType;
     private final String     mSource;
 
+    StringBuffer sb;
     public RCSJSONRequestReader(
             HttpServletRequest aRequest,
             HttpServletResponse aResponse,
             String aSource,
-            String aRequestType)
+            String aRequestType,
+            StringBuffer sb)
     {
         super("json", aRequest, aResponse);
+        this.sb=sb;
         mSource      = aSource;
         mRequestType = aRequestType;
     }
@@ -90,7 +93,7 @@ public class RCSJSONRequestReader
             String aJSonString)
     {
         final IRequestProcessor      requestProcessor = new JSONRequestProcessor(aJSonString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.GENERIC_JSON,
-                MessageSource.GENERIC_JSON);
+                MessageSource.GENERIC_JSON,sb);
 
         final InterfaceRequestStatus status           = new InterfaceRequestStatus(InterfaceStatusCode.INVALID_JSON, "");
         requestProcessor.setRequestStatus(status);

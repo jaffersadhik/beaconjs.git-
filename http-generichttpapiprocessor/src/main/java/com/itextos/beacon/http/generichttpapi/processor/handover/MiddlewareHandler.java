@@ -60,7 +60,8 @@ public class MiddlewareHandler
     public void middleWareHandover(
             boolean isAsync,
             IResponseProcessor responseHandler,
-            String aReqType)
+            String aReqType,
+            StringBuffer sb)
             throws Exception
     {
         if (log.isDebugEnabled())
@@ -101,7 +102,7 @@ public class MiddlewareHandler
             log.debug("Object Before sending to Kafka - " + lMessageRequest.toString());
         }
 
-        InterfaceUtil.sendToKafka(lMessageRequest);
+        InterfaceUtil.sendToKafka(lMessageRequest,sb);
     }
 
     private static void logAndUpdateCounter(

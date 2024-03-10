@@ -41,11 +41,13 @@ public class JSONCustomReceiver
         if (log.isDebugEnabled())
             log.debug("Custom JSON  request received in doGet");
 
+        StringBuffer sb=new StringBuffer();
+        
         final long start = System.currentTimeMillis();
 
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-        final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, "custom");
+        final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, "custom",sb);
         reader.processGetRequest();
 
         final long end = System.currentTimeMillis();
@@ -70,12 +72,14 @@ public class JSONCustomReceiver
 
         try
         {
+            StringBuffer sb=new StringBuffer();
+
             if (log.isDebugEnabled())
                 log.debug("Custom JSON request received in doPost");
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-            final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, "customm");
+            final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, "customm",sb);
 
             reader.processPostRequest();
         }

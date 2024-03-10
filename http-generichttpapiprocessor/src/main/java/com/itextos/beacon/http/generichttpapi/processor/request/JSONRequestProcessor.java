@@ -36,15 +36,19 @@ public class JSONRequestProcessor
     private static final Log log           = LogFactory.getLog(JSONRequestProcessor.class);
     private JSONArray        mMessageArray = null;
 
+    StringBuffer sb=null;
+ 
     public JSONRequestProcessor(
             String aRequestString,
             String aCustomerIP,
             long aRequestedTime,
             String aReqType,
-            String aResponseType)
+            String aResponseType,
+            StringBuffer sb)
     {
         super(aRequestString, aCustomerIP, aRequestedTime, aReqType, aResponseType);
 
+        this.sb=sb;
         if (MessageSource.GENERIC_QS.equals(aResponseType))
             mResponseProcessor = new GenerateQueryStringResponse(aCustomerIP);
         else
@@ -201,7 +205,7 @@ public class JSONRequestProcessor
                         log.debug("Destination array is empty:  '" + lMultipleDests.size() + "' status '" + InterfaceStatusCode.DESTINATION_EMPTY + "'");
                     lMessage = handleNoDest(lJsonMessage);
                     lMessage.setRouteType(RouteType.DOMESTIC);
-                    send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false);
+                    send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb);
                 }
                 else
                     if (lMultipleDests.size() == 1)
@@ -235,7 +239,7 @@ public class JSONRequestProcessor
                 lMessage.setRequestStatus(lRequestStatus);
                 lMessage.setRouteType(RouteType.DOMESTIC);
 
-                send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false);
+                send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb);
             }
         }
         catch (final Exception e)
@@ -297,7 +301,7 @@ public class JSONRequestProcessor
                     log.debug("Single message  " + lMessage + " send to kafka ");
         }
 
-        send2Mw(lMessage, lClientStatus, false);
+        send2Mw(lMessage, lClientStatus, false,sb);
 
         final InterfaceRequestStatus lRequestStatus = new InterfaceRequestStatus(lClientStatus, null);
 
@@ -412,7 +416,7 @@ public class JSONRequestProcessor
         aMessage.setRouteType(RouteType.DOMESTIC);
         aMessage.setMobileNumber(APIConstants.DEFAULT_DEST);
 
-        send2Mw(aMessage, aMiddlewareStaus, aIsAsync);
+        send2Mw(aMessage, aMiddlewareStaus, aIsAsync,sb);
     }
 
     private void handleMultipleMobileNumber(
@@ -484,7 +488,7 @@ public class JSONRequestProcessor
             Utility.setMessageId(aMessage);
 
             final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, destStatus);
-            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType);
+            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
         }
     }
 
@@ -641,12 +645,13 @@ public class JSONRequestProcessor
     private void send2Mw(
             InterfaceMessage aMessage,
             InterfaceStatusCode aMiddlewareStaus,
-            boolean aIsAsync)
+            boolean aIsAsync,
+            StringBuffer sb)
             throws Exception
     {
         Utility.setMessageId(aMessage);
         final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, InterfaceStatusCode.SUCCESS);
-        middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType);
+        middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
     }
 
 }

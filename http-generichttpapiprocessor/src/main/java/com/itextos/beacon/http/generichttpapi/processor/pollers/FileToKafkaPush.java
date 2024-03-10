@@ -75,11 +75,13 @@ public class FileToKafkaPush
             throws ItextosException
     {
         IRequestProcessor reqHandler;
+        
+        StringBuffer sb=new StringBuffer();
 
         if (MessageSource.GENERIC_XML.equalsIgnoreCase(aQueueObject.getReqType()))
-            reqHandler = new XMLRequestProcessor(aQueueObject.getRequestMag(), aQueueObject.getCustIp(), aQueueObject.getRequestedTime());
+            reqHandler = new XMLRequestProcessor(aQueueObject.getRequestMag(), aQueueObject.getCustIp(), aQueueObject.getRequestedTime(),sb);
         else
-            reqHandler = new JSONRequestProcessor(aQueueObject.getRequestMag(), aQueueObject.getCustIp(), aQueueObject.getRequestedTime(), aQueueObject.getReqType(), aQueueObject.getReqType());
+            reqHandler = new JSONRequestProcessor(aQueueObject.getRequestMag(), aQueueObject.getCustIp(), aQueueObject.getRequestedTime(), aQueueObject.getReqType(), aQueueObject.getReqType(),sb);
 
         reqHandler.parseBasicInfo("");
 

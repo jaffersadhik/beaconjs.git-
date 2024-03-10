@@ -70,6 +70,7 @@ public class CompletedMessagePoller
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
             final List<String> lCompletedMessageRefNumbers = RedisOperation.getCompletedMessageRefNumbers(mClusterType, mRedisPoolIndex, MAX_MESSAGES_PER_ITERATION);
 
             if (log.isDebugEnabled())
@@ -121,7 +122,7 @@ public class CompletedMessagePoller
                 try
                 {
                     if (!toSend.isEmpty())
-                        buildAndSendToKafka(toSend);
+                        buildAndSendToKafka(toSend,sb);
                 }
                 catch (final Exception e)
                 {
@@ -156,7 +157,8 @@ public class CompletedMessagePoller
     }
 
     private void buildAndSendToKafka(
-            List<SmppMessageRequest> aToSend)
+            List<SmppMessageRequest> aToSend,
+            StringBuffer sb)
             throws Exception
     {
         final String lClientId = aToSend.get(0).getClientId();
@@ -218,7 +220,7 @@ public class CompletedMessagePoller
             if (log.isDebugEnabled())
                 log.debug("MessageRequest object before sending to Kafka ..:" + lMessageRequest);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
         }
         else
         {
@@ -234,7 +236,7 @@ public class CompletedMessagePoller
                 if (log.isDebugEnabled())
                     log.debug("MessageRequest object before sending to Kafka ..:" + lMessageRequest);
 
-                InterfaceUtil.sendToKafka(lMessageRequest);
+                InterfaceUtil.sendToKafka(lMessageRequest,sb);
             }
         }
     }

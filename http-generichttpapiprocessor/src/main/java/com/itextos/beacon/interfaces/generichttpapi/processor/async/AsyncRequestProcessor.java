@@ -23,15 +23,20 @@ public class AsyncRequestProcessor
 
     private static final Log log = LogFactory.getLog(AsyncRequestProcessor.class);
 
+    StringBuffer sb=null;
+    
     public AsyncRequestProcessor(
             String aThreadName,
             Component aComponent,
             ClusterType aPlatformCluster,
             String aTopicName,
             ConsumerInMemCollection aConsumerInMemCollection,
-            int aSleepInMillis)
+            int aSleepInMillis,
+            StringBuffer sb)
     {
         super(aThreadName, Component.INTERFACES, aComponent, aPlatformCluster, aTopicName, aConsumerInMemCollection, aSleepInMillis);
+    	this.sb=sb;
+
     }
 
     @Override
@@ -48,7 +53,7 @@ public class AsyncRequestProcessor
             doJsonParsing(aRequestObject);
     }
 
-    private static void doJsonParsing(
+    private  void doJsonParsing(
             AsyncRequestObject aRequestObject)
             throws ParseException
     {
@@ -56,7 +61,7 @@ public class AsyncRequestProcessor
         try
         {
             final JSONRequestProcessor lJsonRrequestProcessor = new JSONRequestProcessor(aRequestObject.getMessageContent(), aRequestObject.getCustomerIp(), aRequestObject.getRequestedTime(),
-                    aRequestObject.getMessageSource(), aRequestObject.getMessageSource());
+                    aRequestObject.getMessageSource(), aRequestObject.getMessageSource(),sb);
             final JSONObject           lParsedJson            = Utility.parseJSON(aRequestObject.getMessageContent());
             lJsonRrequestProcessor.processFromQueue(lParsedJson, aRequestObject.getMessageId(), aRequestObject.getCustomerId());
         }
@@ -67,13 +72,13 @@ public class AsyncRequestProcessor
         }
     }
 
-    private static void doXmlParsing(
+    private void doXmlParsing(
             AsyncRequestObject aRequestObject)
     {
 
         try
         {
-            final XMLRequestProcessor lXmlRequestProcessor = new XMLRequestProcessor(aRequestObject.getMessageContent(), aRequestObject.getCustomerIp(), aRequestObject.getRequestedTime());
+            final XMLRequestProcessor lXmlRequestProcessor = new XMLRequestProcessor(aRequestObject.getMessageContent(), aRequestObject.getCustomerIp(), aRequestObject.getRequestedTime(),sb);
             lXmlRequestProcessor.continueFromQueue(aRequestObject.getMessageContent(), aRequestObject.getMessageId(), aRequestObject.getCustomerId());
         }
         catch (final Exception e)

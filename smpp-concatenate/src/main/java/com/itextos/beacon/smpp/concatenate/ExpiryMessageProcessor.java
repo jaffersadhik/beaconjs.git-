@@ -62,6 +62,8 @@ class ExpiryMessageProcessor
 
     private void processExpiredMessages()
     {
+    	
+    	StringBuffer sb=new StringBuffer();
         final int count = mExpiryRefNumberQueue.size() > 1000 ? 1000 : mExpiryRefNumberQueue.size();
         if (log.isDebugEnabled())
             log.debug("Expiry Ref number count :" + count);
@@ -102,7 +104,7 @@ class ExpiryMessageProcessor
                 deleteProcessedMessaes(toDelete);
 
             if (!lMsgToSend.isEmpty())
-                buildAndSendToKafkaExpiredTopic(lMsgToSend);
+                buildAndSendToKafkaExpiredTopic(lMsgToSend,sb);
         }
         catch (final Exception e)
         {
@@ -119,7 +121,8 @@ class ExpiryMessageProcessor
     }
 
     private void buildAndSendToKafkaExpiredTopic(
-            List<List<SmppMessageRequest>> aMessageToSend)
+            List<List<SmppMessageRequest>> aMessageToSend,
+            StringBuffer sb)
             throws Exception
     {
 
@@ -155,7 +158,7 @@ class ExpiryMessageProcessor
             if (log.isDebugEnabled())
                 log.debug("MessageRequest object before sending to Kafka ..:" + lMessageRequest);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
         }
     }
 

@@ -63,6 +63,7 @@ public class OrphanExpiryMessageProcessor
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
             if (log.isDebugEnabled())
                 log.debug(mTimedProcessor.getName() + ", Orphan Expiry Poller running for cluster '" + mClusterType + ", RedisIndex:'" + mRedisPoolIndex + "'");
 
@@ -106,7 +107,7 @@ public class OrphanExpiryMessageProcessor
                             deleteProcessedMessaes(toDelete);
 
                         if (!toExpiredSend.isEmpty())
-                            buildAndSendToKafkaExpiredTopic(toExpiredSend);
+                            buildAndSendToKafkaExpiredTopic(toExpiredSend,sb);
                     }
                     catch (final Exception e)
                     {
@@ -133,7 +134,8 @@ public class OrphanExpiryMessageProcessor
     }
 
     private void buildAndSendToKafkaExpiredTopic(
-            List<SmppMessageRequest> aMessageToSend)
+            List<SmppMessageRequest> aMessageToSend,
+            StringBuffer sb)
             throws Exception
     {
 
@@ -166,7 +168,7 @@ public class OrphanExpiryMessageProcessor
             if (log.isDebugEnabled())
                 log.debug("MessageRequest object before sending to Kafka ..:" + lMessageRequest);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
         }
     }
 

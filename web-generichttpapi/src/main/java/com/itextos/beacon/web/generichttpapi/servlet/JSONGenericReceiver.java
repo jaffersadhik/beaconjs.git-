@@ -2,10 +2,6 @@ package com.itextos.beacon.web.generichttpapi.servlet;
 
 import java.io.IOException;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +13,10 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.generichttpapi.processor.reader.JSONRequestReader;
 import com.itextos.beacon.http.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class JSONGenericReceiver
         extends
@@ -40,10 +40,11 @@ public class JSONGenericReceiver
         if (log.isDebugEnabled())
             log.debug("Generic JSON  request received in doGet");
 
+        StringBuffer sb=new StringBuffer();
         final long start = System.currentTimeMillis();
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-        final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, null);
+        final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, null,sb);
         reader.processGetRequest();
 
         final long end    = System.currentTimeMillis();
@@ -64,12 +65,14 @@ public class JSONGenericReceiver
 
         try
         {
+            StringBuffer sb=new StringBuffer();
+
             if (log.isDebugEnabled())
                 log.debug("Generic JSON request received in doPost");
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-            final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, null);
+            final RequestReader reader = new JSONRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, null,sb);
 
             reader.processPostRequest();
         }

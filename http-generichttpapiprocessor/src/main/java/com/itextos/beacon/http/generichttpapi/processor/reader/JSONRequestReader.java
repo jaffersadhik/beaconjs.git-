@@ -1,8 +1,5 @@
 package com.itextos.beacon.http.generichttpapi.processor.reader;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
@@ -27,6 +24,8 @@ import com.itextos.beacon.http.interfaceparameters.InterfaceParameterLoader;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 
 import io.prometheus.client.Histogram.Timer;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class JSONRequestReader
         extends
@@ -38,13 +37,17 @@ public class JSONRequestReader
     private final String     mRequestType;
     private final String     mSource;
 
+    StringBuffer sb=null;
+    
     public JSONRequestReader(
             HttpServletRequest aRequest,
             HttpServletResponse aResponse,
             String aSource,
-            String aRequestType)
+            String aRequestType,
+            StringBuffer sb)
     {
         super("json", aRequest, aResponse);
+        this.sb=sb;
         mSource      = aSource;
         mRequestType = aRequestType;
     }
@@ -67,7 +70,7 @@ public class JSONRequestReader
             final String            lReqJson         = lJsonObj.toJSONString();
 
             final IRequestProcessor requestProcessor = new JSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.GENERIC_JSON,
-                    MessageSource.GENERIC_JSON);
+                    MessageSource.GENERIC_JSON,sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 
@@ -89,7 +92,7 @@ public class JSONRequestReader
             String aJSonString)
     {
         final IRequestProcessor      requestProcessor = new JSONRequestProcessor(aJSonString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.GENERIC_JSON,
-                MessageSource.GENERIC_JSON);
+                MessageSource.GENERIC_JSON,sb);
 
         final InterfaceRequestStatus status           = new InterfaceRequestStatus(InterfaceStatusCode.INVALID_JSON, "");
         requestProcessor.setRequestStatus(status);

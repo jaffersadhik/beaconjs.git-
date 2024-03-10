@@ -29,11 +29,16 @@ public class XMLRequestReader
 
     private static final Log log = LogFactory.getLog(XMLRequestReader.class);
 
+    StringBuffer sb;
+    
     public XMLRequestReader(
             HttpServletRequest aRequest,
-            HttpServletResponse aResponse)
+            HttpServletResponse aResponse,
+            StringBuffer sb)
     {
         super("xml", aRequest, aResponse);
+        
+        this.sb=sb;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class XMLRequestReader
             overAllProcess = PrometheusMetrics.apiStartTimer(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_XML, APIConstants.CLUSTER_INSTANCE, mHttpRequest.getRemoteAddr(), OVERALL);
 
             XMLValidation.getInstance().isXMLValid(aXmlString);
-            final IRequestProcessor requestProcessor = new XMLRequestProcessor(aXmlString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis());
+            final IRequestProcessor requestProcessor = new XMLRequestProcessor(aXmlString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(),sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
             final InterfaceRequestStatus reqStatus = requestProcessor.validateBasicInfo();
@@ -210,7 +215,7 @@ public class XMLRequestReader
             String aXmlString,
             Exception aException)
     {
-        final IRequestProcessor      requestProcessor = new XMLRequestProcessor(aXmlString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis());
+        final IRequestProcessor      requestProcessor = new XMLRequestProcessor(aXmlString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(),sb);
         final InterfaceRequestStatus status           = new InterfaceRequestStatus(InterfaceStatusCode.INVALID_XML, aException.getMessage());
         requestProcessor.setRequestStatus(status);
         sendResponse(requestProcessor);

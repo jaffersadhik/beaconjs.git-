@@ -67,8 +67,8 @@ class DbOperationInMemory
                 // {
                 if (log.isDebugEnabled())
                     log.debug("Redis is available .. pushing to concat-redis...");
-
-                ConcatenateReceiver.addSmppMessage(aCluster, lSmppMessageRequest, false);
+                StringBuffer sb=new StringBuffer();
+                ConcatenateReceiver.addSmppMessage(aCluster, lSmppMessageRequest, false,sb);
                 toDelete.add(entry.getKey());
                 // }
             }

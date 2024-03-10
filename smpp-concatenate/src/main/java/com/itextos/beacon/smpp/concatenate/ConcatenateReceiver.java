@@ -24,7 +24,8 @@ public class ConcatenateReceiver
     public static void addSmppMessage(
             ClusterType aClusterType,
             SmppMessageRequest aSmppMessageRequest,
-            boolean aInsertIntoDb)
+            boolean aInsertIntoDb,
+            StringBuffer sb)
             throws Exception
     {
         final String refNumberString     = aSmppMessageRequest.getUdhReferenceNumber();
@@ -47,7 +48,7 @@ public class ConcatenateReceiver
         switch (messagesCount)
         {
             case DUPLICATE_UDH_FOR_SAME_MOBILE:
-                send2Platform(aSmppMessageRequest, PlatformStatusCode.SMPP_SAME_UDH);
+                send2Platform(aSmppMessageRequest, PlatformStatusCode.SMPP_SAME_UDH,sb);
                 break;
 
             case REDIS_INSERT_FAIL:
@@ -106,7 +107,8 @@ public class ConcatenateReceiver
 
     private static void send2Platform(
             SmppMessageRequest aSmppMessageRequest,
-            PlatformStatusCode aPlatformStatusCode)
+            PlatformStatusCode aPlatformStatusCode,
+            StringBuffer sb)
     {
 
         try
@@ -126,7 +128,7 @@ public class ConcatenateReceiver
             if (log.isDebugEnabled())
                 log.debug("Failed Message Request Object sending to Kafka : " + lMessageRequest);
 
-            InterfaceUtil.sendToKafka(lMessageRequest);
+            InterfaceUtil.sendToKafka(lMessageRequest,sb);
 
             if (log.isDebugEnabled())
                 log.debug("Successfully send to kafka ........");

@@ -37,10 +37,11 @@ public class QSCustomReceiver
         if (log.isDebugEnabled())
             log.debug("QS request received in doGet");
 
+        StringBuffer sb=new StringBuffer();
         final long start = System.currentTimeMillis();
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_QS, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-        final RequestReader reader = new QSRequestReader(aRequest, aResponse, getServletName(), "custom");
+        final RequestReader reader = new QSRequestReader(aRequest, aResponse, getServletName(), "custom",sb);
         reader.processGetRequest();
 
         final long end = System.currentTimeMillis();

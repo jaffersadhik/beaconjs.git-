@@ -36,15 +36,22 @@ public class QSRequestReader
     private final String     servletName;
     private final String     mRequestType;
 
+    StringBuffer sb;
+    
     public QSRequestReader(
             HttpServletRequest aRequest,
             HttpServletResponse aResponse,
             String aServletName,
-            String aRequestType)
+            String aRequestType,
+            StringBuffer sb)
     {
         super("queryString", aRequest, aResponse);
         servletName  = aServletName;
         mRequestType = aRequestType;
+        this.sb=sb;
+        sb.append(" servletName : "+servletName ).append("\n");
+
+        sb.append(" aRequestType : "+aRequestType ).append("\n");
     }
 
     @Override
@@ -59,6 +66,7 @@ public class QSRequestReader
             if (mRequestType == null)
             {
                 buildJson(jsonObject, null, mRequestType);
+                sb.append("buildJson Json").append("\n");
                 doProcess(jsonObject);
             }
             else
@@ -67,6 +75,7 @@ public class QSRequestReader
                     log.debug("Custimize QueryString Request processing..");
 
                 buildBadsicInfo(jsonObject);
+                sb.append("buildBadsicInfo Json").append("\n");
                 doProcess(jsonObject);
             }
         }
@@ -82,7 +91,7 @@ public class QSRequestReader
     {
         if (log.isDebugEnabled())
             log.debug(" source_ip:  '" + mHttpRequest.getRemoteAddr() + "' request received time: '" + System.currentTimeMillis() + " '");
-
+        sb.append(" source_ip:  '" + mHttpRequest.getRemoteAddr() + "' request received time: '" + System.currentTimeMillis() + " '").append("\n");
         String lUserName      = NO_USER;
         Timer  overAllProcess = null;
         Timer  jsonProcess    = null;
@@ -97,12 +106,14 @@ public class QSRequestReader
                 jsonString = buildBadsicInfo(aJsonObj);
 
             final IRequestProcessor requestProcessor = new JSONRequestProcessor(jsonString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.GENERIC_QS,
-                    MessageSource.GENERIC_QS);
+                    MessageSource.GENERIC_QS,sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 
             final InterfaceRequestStatus reqStatus = requestProcessor.validateBasicInfo();
 
+            sb.append("reqStatus : "+reqStatus).append("\n");
+            
             if (reqStatus.getStatusCode() == InterfaceStatusCode.SUCCESS)
             {
                 lUserName   = getUserName(requestProcessor);
@@ -116,7 +127,9 @@ public class QSRequestReader
 
                 if (log.isDebugEnabled())
                     log.debug(" messageCount:  '" + messagesCount + "'");
-
+                
+                sb.append(" messageCount:  '" + messagesCount + "'").append("\n");
+                
                 if (messagesCount == 0)
                 {
                     if (log.isDebugEnabled())
@@ -150,7 +163,7 @@ public class QSRequestReader
             String aJsonString)
     {
         final IRequestProcessor      requestProcessor = new JSONRequestProcessor(aJsonString, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.GENERIC_QS,
-                MessageSource.GENERIC_QS);
+                MessageSource.GENERIC_QS,sb);
         final InterfaceRequestStatus status           = new InterfaceRequestStatus(InterfaceStatusCode.INVALID_REQUEST, "");
         requestProcessor.setRequestStatus(status);
         sendResponse(requestProcessor);

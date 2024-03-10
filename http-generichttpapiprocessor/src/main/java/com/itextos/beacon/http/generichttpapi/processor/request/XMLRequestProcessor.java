@@ -45,14 +45,17 @@ public class XMLRequestProcessor
     private static final Log log          = LogFactory.getLog(XMLRequestProcessor.class);
     private List<Messages>   mMessageList = null;
 
+    StringBuffer sb=null;
     public XMLRequestProcessor(
             String aRequestString,
             String aCustomerIP,
-            long aRequestedTime)
+            long aRequestedTime,
+            StringBuffer sb)
     {
         super(aRequestString, aCustomerIP, aRequestedTime, MessageSource.GENERIC_XML, MessageSource.GENERIC_XML);
         mResponseProcessor = new GenerateXMLResponse(aCustomerIP);
         mResponseProcessor.setServletContext("XMLReceiver");
+        this.sb=sb;
     }
 
     @Override
@@ -276,7 +279,7 @@ public class XMLRequestProcessor
         Utility.setMessageId(lMessage);
 
         final MiddlewareHandler middlewareHandler = new MiddlewareHandler(lMessage, mBasicInfo, lMessageValidationStatus, lDestValidationStatus);
-        middlewareHandler.middleWareHandover(false, mResponseProcessor, mReqType);
+        middlewareHandler.middleWareHandover(false, mResponseProcessor, mReqType,sb);
 
         return lMessageValidationStatus;
     }
@@ -403,7 +406,7 @@ public class XMLRequestProcessor
             Utility.setMessageId(aMessage);
 
             final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStatus, destStatus);
-            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType);
+            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
         }
     }
 

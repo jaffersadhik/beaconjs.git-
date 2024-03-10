@@ -37,12 +37,14 @@ public class MQSRequestReceiver
             throws ServletException,
             IOException
     {
+    	StringBuffer sb=new StringBuffer();
+
         if (log.isDebugEnabled())
             log.debug("QS request received in doGet");
 
         final long lProcessStart = System.currentTimeMillis();
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.MIGRATION_API, MessageSource.GENERIC_QS, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
-        final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_QS, MessageSource.GENERIC_QS);
+        final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_QS, MessageSource.GENERIC_QS,sb);
         lMRequestReader.processGetRequest();
 
         final long lProcessEnd   = System.currentTimeMillis();

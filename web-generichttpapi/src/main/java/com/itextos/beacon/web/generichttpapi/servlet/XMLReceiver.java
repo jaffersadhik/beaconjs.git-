@@ -40,10 +40,12 @@ public class XMLReceiver
         if (log.isDebugEnabled())
             log.debug("XML request received in doGet");
 
+        StringBuffer sb=new StringBuffer();
+
         final long lProcessStart = System.currentTimeMillis();
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_XML, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-        final RequestReader reader = new XMLRequestReader(aRequest, aResponse);
+        final RequestReader reader = new XMLRequestReader(aRequest, aResponse,sb);
         reader.processGetRequest();
 
         final long lProcessEnd = System.currentTimeMillis();
@@ -64,11 +66,12 @@ public class XMLReceiver
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
             if (log.isDebugEnabled())
                 log.debug("XML request received in doPost");
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_XML, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-            final RequestReader reader = new XMLRequestReader(aRequest, aResponse);
+            final RequestReader reader = new XMLRequestReader(aRequest, aResponse,sb);
             reader.processPostRequest();
         }
         catch (final Exception e)

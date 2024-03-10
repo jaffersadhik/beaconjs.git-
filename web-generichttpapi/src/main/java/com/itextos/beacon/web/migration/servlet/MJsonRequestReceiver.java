@@ -45,8 +45,9 @@ public class MJsonRequestReceiver
                 log.debug("Generic JSON  request received in doGet");
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
+        	StringBuffer sb=new StringBuffer();
 
-            final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, MessageSource.GENERIC_JSON);
+            final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, MessageSource.GENERIC_JSON,sb);
             lMRequestReader.processPostRequest();
         }
         catch (final Exception e)
@@ -74,12 +75,14 @@ public class MJsonRequestReceiver
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
+
             if (log.isDebugEnabled())
                 log.debug("M JSON request received in doPost");
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
-            final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, MessageSource.GENERIC_JSON);
+            final MRequestReader lMRequestReader = new MJsonRequestReader(aRequest, aResponse, MessageSource.GENERIC_JSON, MessageSource.GENERIC_JSON,sb);
             lMRequestReader.processPostRequest();
         }
         catch (final Exception e)
