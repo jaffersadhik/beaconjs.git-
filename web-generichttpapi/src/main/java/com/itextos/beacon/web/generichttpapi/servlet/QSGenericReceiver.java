@@ -43,6 +43,8 @@ public class QSGenericReceiver
             log.debug("QS request received in doGet");
 
         StringBuffer sb=new StringBuffer();
+        
+        sb.append("\n##########################################\n");
         sb.append("QS request received in doGet").append("\n");
         
         final long lProcessStart = System.currentTimeMillis();
@@ -58,6 +60,8 @@ public class QSGenericReceiver
                     + "' milliseconds");
         sb.append("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + lProcessTaken
                 + "' milliseconds").append("\n");
+
+        sb.append("\n##########################################\n");
 
         QSReceiverLog.log(sb.toString());
     }
