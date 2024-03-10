@@ -15,6 +15,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.request.JSONRequestProcessor;
 import com.itextos.beacon.interfaces.generichttpapi.processor.request.XMLRequestProcessor;
+import com.itextos.beacon.smslog.AsynRPLog;
 
 public class AsyncRequestProcessor
         extends
@@ -23,7 +24,6 @@ public class AsyncRequestProcessor
 
     private static final Log log = LogFactory.getLog(AsyncRequestProcessor.class);
 
-    StringBuffer sb=null;
     
     public AsyncRequestProcessor(
             String aThreadName,
@@ -31,11 +31,10 @@ public class AsyncRequestProcessor
             ClusterType aPlatformCluster,
             String aTopicName,
             ConsumerInMemCollection aConsumerInMemCollection,
-            int aSleepInMillis,
-            StringBuffer sb)
+            int aSleepInMillis
+            )
     {
         super(aThreadName, Component.INTERFACES, aComponent, aPlatformCluster, aTopicName, aConsumerInMemCollection, aSleepInMillis);
-    	this.sb=sb;
 
     }
 
@@ -60,10 +59,16 @@ public class AsyncRequestProcessor
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
+        	sb.append("\n###########################################################\n");
+        	sb.append("\n################# JSON #########################\n");
+
             final JSONRequestProcessor lJsonRrequestProcessor = new JSONRequestProcessor(aRequestObject.getMessageContent(), aRequestObject.getCustomerIp(), aRequestObject.getRequestedTime(),
                     aRequestObject.getMessageSource(), aRequestObject.getMessageSource(),sb);
             final JSONObject           lParsedJson            = Utility.parseJSON(aRequestObject.getMessageContent());
             lJsonRrequestProcessor.processFromQueue(lParsedJson, aRequestObject.getMessageId(), aRequestObject.getCustomerId());
+        	sb.append("\n###########################################################\n");
+        	AsynRPLog.log(sb.toString());
         }
         catch (final ParseException e)
         {
@@ -78,8 +83,15 @@ public class AsyncRequestProcessor
 
         try
         {
+        	StringBuffer sb=new StringBuffer();
+        	sb.append("\n###########################################################\n");
+        	sb.append("\n################# XML #########################\n");
+
             final XMLRequestProcessor lXmlRequestProcessor = new XMLRequestProcessor(aRequestObject.getMessageContent(), aRequestObject.getCustomerIp(), aRequestObject.getRequestedTime(),sb);
             lXmlRequestProcessor.continueFromQueue(aRequestObject.getMessageContent(), aRequestObject.getMessageId(), aRequestObject.getCustomerId());
+         	sb.append("\n###########################################################\n");
+        	AsynRPLog.log(sb.toString());
+ 
         }
         catch (final Exception e)
         {
