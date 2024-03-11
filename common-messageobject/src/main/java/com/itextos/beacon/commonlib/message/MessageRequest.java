@@ -449,10 +449,13 @@ public class MessageRequest
     public String getLongMessage()
     {
     	String encodemessage=getValue(MiddlewareConstant.MW_LONG_MSG);
+    	
+    	/*
     	if(encodemessage!=null) {
     		
     		return URLDecoder.decode(encodemessage);
     	}
+    	*/
         return encodemessage ;
     }
 
@@ -1613,7 +1616,11 @@ public class MessageRequest
             String aLongMessage)
     {
     	String encodemsg=URLEncoder.encode(aLongMessage);
-        putValue(MiddlewareConstant.MW_LONG_MSG, encodemsg);
+    	
+        //putValue(MiddlewareConstant.MW_LONG_MSG, encodemsg);
+    	
+    	putValue(MiddlewareConstant.MW_LONG_MSG, aLongMessage);
+        
     }
 
     public void setMaskedHeader(
