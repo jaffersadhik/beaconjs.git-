@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ErrorLog;
 
 public class RedisConfigLoader
 {
@@ -108,6 +109,7 @@ public class RedisConfigLoader
         if (redisTypeConfigMap == null)
         {
             log.error("Redis configuration is not available for the cluster '" + aClusterType + "'");
+            ErrorLog.log("Redis configuration is not available for the cluster '" + aClusterType + "'");
             return null;
         }
 
@@ -116,6 +118,8 @@ public class RedisConfigLoader
         if (redisConfig == null)
         {
             log.error("Redis configuration is not available for the Redis Type '" + aRedisType + "'");
+            ErrorLog.log("Redis configuration is not available for the Redis Type '" + aRedisType + "'");
+
             return null;
         }
         return redisConfig;

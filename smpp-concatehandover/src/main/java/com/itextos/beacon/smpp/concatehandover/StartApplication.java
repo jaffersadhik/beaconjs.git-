@@ -1,4 +1,4 @@
-package com.itextos.beacon.smpp.interfaces;
+package com.itextos.beacon.smpp.concatehandover;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.cloudhopper.smpp.type.SmppChannelException;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
@@ -17,27 +16,13 @@ import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.concatenate.CompletedMessageChecker;
 import com.itextos.beacon.smpp.concatenate.CompletedMessagePoller;
-import com.itextos.beacon.smpp.concatenate.DbInmemoryCollectionFactory;
 import com.itextos.beacon.smpp.concatenate.ExpiryMessageCollectionFactory;
 import com.itextos.beacon.smpp.concatenate.OrphanExpiryMessageProcessor;
-import com.itextos.beacon.smpp.dboperations.DbBindOperation;
-import com.itextos.beacon.smpp.interfaces.admin.ItextosAdminServer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoInvalidInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoValidInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.UnbindInfoDbInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.monitor.Monitor;
-import com.itextos.beacon.smpp.interfaces.shutdown.SmppShutdownhook;
-import com.itextos.beacon.smpp.interfaces.timertasks.DisabledAccountCheckTask;
-import com.itextos.beacon.smpp.interfaces.timertasks.IdleSessionRemoverTask;
-import com.itextos.beacon.smpp.interfaces.timertasks.SessionCountUpdateTask;
 import com.itextos.beacon.smpp.objects.SmppObjectType;
 import com.itextos.beacon.smpp.objects.inmem.InfoCollection;
-import com.itextos.beacon.smpp.redisoperations.RedisBindOperation;
-import com.itextos.beacon.smpp.redisoperations.SessionInfoRedisUpdate;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.SmppApplicationParams;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
@@ -46,7 +31,6 @@ public class StartApplication
 {
 
     private static final Log   log         = LogFactory.getLog(StartApplication.class);
-    private ItextosAdminServer adminServer = null;
 
     public void start()
     {
@@ -59,27 +43,17 @@ public class StartApplication
 
             System.out.println("Entering after initialize()");
 
-            startServersAndInmemory();
-
-            System.out.println("Entering after startServersAndInmemory()");
-
-            updateRedisRelatedEntries();
+        
 
             System.out.println("Entering after updateRedisRelatedEntries()");
 
-   //         startConcatenateAndExpiryProcessors();
+            startConcatenateAndExpiryProcessors();
 
             System.out.println("Entering after startConcatenateAndExpiryProcessors()");
 
             addShutdownhook();
 
-            System.out.println("Entering after addShutdownhook()");
-
-            FallbackQReaper.getInstance();
-            
-            System.out.println("going to start Monitroing thread");
-    //        new Monitor().start();
-            System.out.println("Monitroing thread Started");
+       
 
         }
         catch (final Exception exp)
@@ -100,36 +74,12 @@ public class StartApplication
         final MessageIdentifier lMsgIdentifier = MessageIdentifier.getInstance();
         lMsgIdentifier.init(InterfaceType.SMPP);
 
-        clearOldBindRecords(lInstanceId);
 
         loadAccountInfo();
     }
 
-    private void startServersAndInmemory()
-            throws SmppChannelException
-    {
-        startSmppServer();
-        startInMemDrainers();
-        startTimerBasedTasks();
-        // startAdminServer();
-    }
 
-    private static void startSmppServer()
-            throws SmppChannelException
-    {
-        if (log.isDebugEnabled())
-            log.debug("Starting the Smpp Server Instance ....");
-
-        ItextosSmppServer.getInstance().start();
-    }
-
-    private static void updateRedisRelatedEntries()
-    {
-        final String lInstanceId = SmppProperties.getInstance().getInstanceId();
-
-        updateRedisSessions(lInstanceId);
-        RedisBindOperation.removeAllBindInfo(lInstanceId);
-    }
+   
 
     private static void loadAccountInfo()
     {
@@ -140,22 +90,7 @@ public class StartApplication
         log.fatal("Completed Loading the accounts...");
     }
 
-    private static void clearOldBindRecords(
-            String aInstanceId)
-    {
-        if (log.isDebugEnabled())
-            log.debug("Clearing the Bind records for the instance - '" + aInstanceId + "'");
-
-        try
-        {
-            DbBindOperation.clearSmppBindInfo(aInstanceId);
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception occer while executing  the clearing smpp_bind_info query..", e);
-        }
-    }
-
+   
     private static void startConcatenateAndExpiryProcessors()
     {
         final boolean isConcatMessageProcessEnable = SmppProperties.getInstance().isConcatMessageProcessEnable();
@@ -174,60 +109,10 @@ public class StartApplication
 
     private void addShutdownhook()
     {
-        if (log.isDebugEnabled())
-            log.debug("Adding Shutdown hook to the application.");
-
-        final String lInstanceId = SmppProperties.getInstance().getInstanceId();
-        Runtime.getRuntime().addShutdownHook(new SmppShutdownhook(this, lInstanceId));
     }
 
-    private static void updateRedisSessions(
-            String aInstanceId)
-    {
-        SessionInfoRedisUpdate.removeAllBindInfo(aInstanceId, false);
-        SessionInfoRedisUpdate.removeAllBindInfo(aInstanceId, true);
-    }
+   
 
-    private void startAdminServer()
-    {
-        if (log.isDebugEnabled())
-            log.debug("Starting Admin Server ");
-
-        adminServer = new ItextosAdminServer();
-        final Thread adminServerThread = new Thread(adminServer, "SmppAdminServer");
-        adminServerThread.start();
-
-        if (log.isInfoEnabled())
-            log.info("Admin Server started successfully..");
-    }
-
-    private static void startTimerBasedTasks()
-    {
-        if (log.isDebugEnabled())
-            log.debug("Starting Time Based Processors");
-
-        new IdleSessionRemoverTask();
-        new DisabledAccountCheckTask();
-        new SessionCountUpdateTask();
-
-        if (log.isInfoEnabled())
-            log.info("Time based processors started");
-    }
-
-    private static void startInMemDrainers()
-    {
-        if (log.isDebugEnabled())
-            log.debug("Starting inmemory drainner");
-
-        BindInfoValidInmemDrainer.getInstance();
-        BindInfoInvalidInmemDrainer.getInstance();
-
-        UnbindInfoDbInmemDrainer.getInstance();
-        DbInmemoryCollectionFactory.getInstance();
-
-        if (log.isInfoEnabled())
-            log.info("Inmemory drainners started");
-    }
 
     private static void startCompletedMessageProcessor()
     {
@@ -271,38 +156,8 @@ public class StartApplication
         }
     }
 
-    public void shutdown()
-    {
-        log.fatal(SmppProperties.getInstance().getInstanceId() + " SMPP Server Instance shutting down....");
-
-        ItextosSmppServer.getInstance().shutdownInitiated();
-        ItextosSmppServer.getInstance().getSmppServer().destroy();
-
-        processUnbindInfo();
-
-        ItextosSmppServer.getInstance().stop();
-
-        // TODO: Already called server stop in above statement. Not require to call
-        // again.
-        // stopOtherThreads();
-
-        // printRunningThreadsInfo();
-
-        while (!ItextosSmppServer.getInstance().isServerStopped())
-        {
-            log.error("shutdown() - Waiting for the Server to Stop.....");
-            CommonUtility.sleepForAWhile();
-        }
-
-        log.fatal("Shutdown completed.");
-    }
-
-    private void stopOtherThreads()
-    {
-        // TODO Need to add all the threads started by us.
-        if (adminServer != null)
-            adminServer.stop();
-    }
+  
+  
 
     private static void printRunningThreadsInfo()
     {

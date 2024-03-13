@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.config.RedisConfig;
 import com.itextos.beacon.commonlib.redisconnectionprovider.config.RedisConfigLoader;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ErrorLog;
 
 import redis.clients.jedis.Jedis;
 
@@ -99,6 +100,7 @@ public class RedisConnectionProvider
         if (lRedisCongfiguration == null)
         {
             log.error("There is no Redis connection pool configuration available for the Cluster type '" + aClusterType + "' and Component '" + aComponent + "'");
+            ErrorLog.log("There is no Redis connection pool configuration available for the Cluster type '" + aClusterType + "' and Component '" + aComponent + "'");
             return null;
         }
         final RedisConnectionPool lRedisConnectionPool = new RedisConnectionPool(aClusterType, aComponent, lRedisCongfiguration);

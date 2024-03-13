@@ -218,6 +218,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("smpp")) {
+			
+			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}
 		return false;
 	}
@@ -397,6 +405,14 @@ public class App {
 		}else if(module.equals("smppinterface")){
 			
 			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
+		}else if(module.equals("smppconcatehandover")){
+			
+			com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
 
