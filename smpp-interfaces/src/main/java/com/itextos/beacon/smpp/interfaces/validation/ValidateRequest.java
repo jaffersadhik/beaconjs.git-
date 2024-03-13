@@ -720,6 +720,8 @@ public class ValidateRequest
                     sb2.append("Request sending to concat process.............");
                     StringBuffer sb=new StringBuffer();
                     sb.append("\n#################################################\n");
+                    sb.append("\nconcate receiver : "+aSmppMessageRequest.getAckid()+"\n");
+
                     final long lStartTime = System.currentTimeMillis();
 
                     try

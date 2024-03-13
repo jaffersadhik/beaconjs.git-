@@ -254,6 +254,7 @@ abstract class ItextosSmppSessionHelper
             }
           
             EntryLog.log(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage());
+            sb.append(" smpp : "+userName+ " :  "+bindType+ " : " +aSubmitSmResponse.getMessageId()+ " : "+ aSubmitSmResponse.getResultMessage()).append("\n");
 
 
         }
