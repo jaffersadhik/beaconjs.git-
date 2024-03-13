@@ -40,11 +40,14 @@ public class ConcatenateReceiver
         final String counterIncrementKey = CommonUtility.combine(RedisOperation.REDIS_CONCAT_CHAR, clientId, mobileNumber, refNumberString);
         final String messageKey          = CommonUtility.combine(RedisOperation.REDIS_CONCAT_CHAR, counterIncrementKey, Integer.toString(partNumber));
 
+        sb.append("aClusterType : "+aClusterType+" : refNumber :  "+ refNumber+" : counterIncrementKey :"+counterIncrementKey+" : messageKey :"+ messageKey+" : totalParts :"+ totalParts+" : receivedTime :"+ receivedTime).append("\n");
+
         final int    messagesCount       = RedisOperation.pushMessageToRedis(aClusterType, refNumber, counterIncrementKey, messageKey, messageJson, totalParts, receivedTime);
 
         if (log.isDebugEnabled())
             log.debug("Concat message redis process state : " + messagesCount);
 
+        sb.append("Concat message redis process state : " + messagesCount).append("\n");
         switch (messagesCount)
         {
             case DUPLICATE_UDH_FOR_SAME_MOBILE:
