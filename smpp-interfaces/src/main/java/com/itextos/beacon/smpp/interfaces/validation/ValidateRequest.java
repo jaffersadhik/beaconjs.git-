@@ -45,6 +45,7 @@ import com.itextos.beacon.smpp.utils.ItextosSmppConstants;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 import com.itextos.beacon.smpp.utils.SmppErrorCodes;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.ConcateReceiverLog;
 
 public class ValidateRequest
 {
@@ -744,6 +745,7 @@ public class ValidateRequest
 
                     sb.append("\n#################################################\n");
 
+                    ConcateReceiverLog.log(sb.toString());
                 
                 }
             }
