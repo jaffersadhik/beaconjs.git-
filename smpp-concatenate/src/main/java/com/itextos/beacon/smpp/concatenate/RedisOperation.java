@@ -13,8 +13,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ErrorLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -94,6 +96,7 @@ class RedisOperation
         catch (final Exception e)
         {
             log.error("problem pushing to redis..", e);
+            ErrorLog.log("concate problem pushing to redis.."+ErrorMessage.getStackTraceAsString(e));
             increment = -1;
         }
 
