@@ -29,6 +29,7 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaReques
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
+import com.itextos.beacon.smslog.KILog;
 import com.itextos.beacon.splog.SPLog;
 
 public class KafkaInformation
@@ -158,6 +159,9 @@ public class KafkaInformation
 
         if (lComponentClusterKey != null)
         {
+        	
+        	KILog.log("mKafkaProducerCollection : "+ mKafkaProducerCollection.toString());
+        	
             final Map<String, Map<Integer, Producer>> lTopicProducerMap  = mKafkaProducerCollection.computeIfAbsent(lComponentClusterKey, k -> new ConcurrentHashMap());
             final Map<Integer, Producer>              lThreadProducerMap = lTopicProducerMap.computeIfAbsent(aTopicName, k -> new ConcurrentHashMap<>());
 
