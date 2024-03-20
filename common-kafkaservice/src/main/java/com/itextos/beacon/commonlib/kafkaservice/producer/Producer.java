@@ -357,8 +357,11 @@ public class Producer
         if (log.isDebugEnabled())
             log.debug("Total Counts " + totalCount + " Last Batch count " + mBatchCounter);
 
-        if ((mBatchCounter>0) && ((System.currentTimeMillis() - lastFlushed) > KafkaCustomProperties.getInstance().getProducerMaxFlushTimeInterval()))
-            flush();
+        if ((totalCount>0) && ((System.currentTimeMillis() - lastFlushed) > KafkaCustomProperties.getInstance().getProducerMaxFlushTimeInterval())) {
+        	
+        	flush();
+        }
+            
     }
 
     private ProducerRecord<String, IMessage> getProducerRecord(
