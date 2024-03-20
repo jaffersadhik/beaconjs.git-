@@ -106,7 +106,11 @@ public class DeliveryObject
     {
         return getValue(MiddlewareConstant.MW_MNC);
     }
-
+    
+    public String getSegment()
+    {
+        return getValue(MiddlewareConstant.MW_SEGMENT);
+    }
     public String getCarrierAcknowledgeId()
     {
         return getValue(MiddlewareConstant.MW_CARRIER_ACKNOWLEDGE_ID);
@@ -763,6 +767,12 @@ public class DeliveryObject
         putValue(MiddlewareConstant.MW_MNC, aMnc);
     }
 
+    public void setSegment(
+            String aSegment)
+    {
+        putValue(MiddlewareConstant.MW_SEGMENT, aSegment);
+    }
+    
     public void setCarrierAcknowledgeId(
             String aCarrierAcknowledgeId)
     {

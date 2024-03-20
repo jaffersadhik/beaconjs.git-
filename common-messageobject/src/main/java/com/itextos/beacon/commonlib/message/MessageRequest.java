@@ -139,6 +139,11 @@ public class MessageRequest
         return getValue(MiddlewareConstant.MW_CARRIER);
     }
     
+    public String getSegment()
+    {
+        return getValue(MiddlewareConstant.MW_SEGMENT);
+    }
+    
     public String getMnc()
     {
         return getValue(MiddlewareConstant.MW_MNC);
@@ -878,6 +883,7 @@ public class MessageRequest
         subObj.putValue(MiddlewareConstant.MW_CREDIT_CHECK, getValue(MiddlewareConstant.MW_CREDIT_CHECK));
         subObj.putValue(MiddlewareConstant.MW_MCC, getValue(MiddlewareConstant.MW_MCC));
         subObj.putValue(MiddlewareConstant.MW_MNC, getValue(MiddlewareConstant.MW_MNC));
+        subObj.putValue(MiddlewareConstant.MW_SEGMENT, getValue(MiddlewareConstant.MW_SEGMENT));
 
         return subObj;
     }
@@ -1196,7 +1202,11 @@ public class MessageRequest
     {
         putValue(MiddlewareConstant.MW_MNC, aMnc);
     }
-    
+    public void setSegment(
+            String aSegment)
+    {
+        putValue(MiddlewareConstant.MW_SEGMENT, aSegment);
+    }
     public void setCarrierDateTimeFormat(
             String aCarrierDateTimeFormat)
     {

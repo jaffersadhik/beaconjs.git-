@@ -36,6 +36,8 @@ public class ICProcessor
 
     private static final Log log = LogFactory.getLog(ICProcessor.class);
 
+    public static String SEGMENT="";
+    
     public ICProcessor(
             String aThreadName,
             Component aComponent,
@@ -54,6 +56,8 @@ public class ICProcessor
     {
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
+        lMessageRequest.setSegment(SEGMENT);
+        
     	StringBuffer msgidparts=new StringBuffer();
 
     	List<MessagePart> parts=((MessageRequest)lMessageRequest).getMessageParts();

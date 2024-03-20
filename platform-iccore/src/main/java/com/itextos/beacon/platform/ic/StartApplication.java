@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.platform.ic.process.ICProcessor;
 
 public class StartApplication
 {
@@ -23,6 +24,8 @@ public class StartApplication
         {
         	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
 
+        	ICProcessor.SEGMENT=System.getenv("segment");
+        	
             final ProcessorInfo lProcessor = new ProcessorInfo(Component.IC);
             lProcessor.process();
         }
