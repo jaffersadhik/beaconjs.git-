@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dch.util.DCHUtil;
+import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class DummyCarrierHandoverProcess
@@ -70,9 +71,14 @@ public class DummyCarrierHandoverProcess
 
         try
         {
-            MessageProcessor.writeMessage(Component.DCH, Component.DLRINTLP, aDeliveryObject);
+        //    MessageProcessor.writeMessage(Component.DCH, Component.DLRINTLP, aDeliveryObject);
+        	
+            aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
+            aDeliveryObject.setFromComponent(Component.DCH.getKey());
+       
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while sending to Dlr Internal Processor topic ..", e);
             sendToErrorLog(aDeliveryObject, e);

@@ -42,22 +42,26 @@ public class DlrInternalProcessor
 
         final DeliveryObject lDeliveryObject = (DeliveryObject) aBaseMessage;
 
-        try
-        {
-            lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
-
-            final Map<Component, DeliveryObject> processInternalDNQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
-
-            DNPProducer.sendToNextComponents(processInternalDNQ);
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception occer while processing the  Internal Processor Dlr : ", e);
-
-            DNPProducer.sendToErrorLog(lDeliveryObject, e);
-        }
+        forDLRInternal(lDeliveryObject);
     }
 
+    public static void forDLRInternal(final DeliveryObject lDeliveryObject) {
+    	
+    	 try
+         {
+             lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+
+             final Map<Component, DeliveryObject> processInternalDNQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
+
+             DNPProducer.sendToNextComponents(processInternalDNQ);
+         }
+         catch (final Exception e)
+         {
+             log.error("Exception occer while processing the  Internal Processor Dlr : ", e);
+
+             DNPProducer.sendToErrorLog(lDeliveryObject, e);
+         }
+    }
     @Override
     public void doCleanup()
     {
