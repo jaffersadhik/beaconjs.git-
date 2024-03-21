@@ -69,9 +69,10 @@ public class SpecialStartApplication
             if (log.isDebugEnabled())
                 log.debug("Starting the application " + Component.DLRINTLP);
 
+            /*
             final ProcessorInfo lDlrInternalProcessor = new ProcessorInfo(Component.DLRINTLP, false);
             lDlrInternalProcessor.process();
-
+	*/
             
             NoPayloadRetryQReaper.getInstance();
             NoPayloadRetryUpdateQReaper.getInstance();

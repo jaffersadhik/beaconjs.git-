@@ -18,14 +18,13 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
-import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
+import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 
 public class PushToDlrProcessor
 {
@@ -154,9 +153,13 @@ public class PushToDlrProcessor
 
         try
         {
-            MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
+            aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
+            aDeliveryObject.setFromComponent(Component.DLR_GEN.getKey());
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+
+        //    MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while handover to Dlr Internal Topic ..", e);
         }

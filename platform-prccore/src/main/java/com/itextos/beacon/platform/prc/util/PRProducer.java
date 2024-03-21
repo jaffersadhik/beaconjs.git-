@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
 
@@ -45,9 +46,13 @@ public class PRProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
+            aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
+            aDeliveryObject.setFromComponent(Component.PRC.getKey());
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+
+          //  MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
         }
-        catch (final ItextosException e)
+        catch (final Exception e)
         {
             log.error("Exception occer while Dlr internal processor ..", e);
             sendToErrorLog(aDeliveryObject, e);
