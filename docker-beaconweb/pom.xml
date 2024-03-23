@@ -108,13 +108,26 @@
 			<type>war</type>
 		</dependency>
 	
-			  	<dependency>
+		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-r3r</artifactId>
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>
 		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-pwdencryptionapplication</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		
+				  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>dlrquery-dlrqueryweb</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
 	
   </dependencies>
   <artifactId>docker-beaconweb</artifactId>
@@ -147,6 +160,18 @@
                             <groupId>beacon</groupId>
                             <artifactId>platform-r3r</artifactId>
                             <contextRoot>/</contextRoot>
+                        </webModule>
+                        
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>dlrquery-dlrqueryweb</artifactId>
+                            <contextRoot>/dlrquery</contextRoot>
+                        </webModule>
+                        
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>common-pwdencryptionapplication</artifactId>
+                            <contextRoot>/password</contextRoot>
                         </webModule>
                      
                     </modules>

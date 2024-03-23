@@ -246,7 +246,6 @@
   	<module>docker-beacon</module>
   	<module>http-japi</module>
   	<module>commonwardependency</module>
-  	<module>docker-beaconweb</module>
   	<module>common-splog</module>
   	
   <!--
@@ -264,6 +263,11 @@
  <!--	<module>reactjsadmin</module> -->
  <module>smpp-concatehandover</module>
  <module>monitortopics</module>
+ <module>dlrquery-dlrqueryprocess</module>
+ <module>dlrquery-dlrqueryweb</module>
+   	<module>docker-beaconweb</module>
+
+
   </modules>
   
 

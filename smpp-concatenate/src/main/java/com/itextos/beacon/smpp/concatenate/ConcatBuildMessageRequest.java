@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
-import com.itextos.beacon.inmemory.data.account.UserInfo;
+import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.AccountDetails;

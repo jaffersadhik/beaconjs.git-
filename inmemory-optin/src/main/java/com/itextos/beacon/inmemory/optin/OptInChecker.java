@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.RedisKeys;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.data.redis.RedisHandler;
+import com.itextos.beacon.inmemdata.redis.RedisHandler;
 
 public class OptInChecker
 {

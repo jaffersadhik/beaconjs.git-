@@ -7,11 +7,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
+import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
+import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.inmemdata.account.dao.AccountInfo;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
-import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
-import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

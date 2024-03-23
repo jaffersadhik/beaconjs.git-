@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.data.redis;
+package com.itextos.beacon.inmemdata.redis;
 
 import java.util.List;
 import java.util.Map;

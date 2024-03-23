@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.data.account;
+package com.itextos.beacon.inmemdata.account;
 
 import com.itextos.beacon.commonlib.constants.AccountStatus;
 

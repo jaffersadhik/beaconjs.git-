@@ -1,4 +1,4 @@
-package com.itextos.beacon.inmemory.data.account;
+package com.itextos.beacon.inmemdata.account;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.RedisKeys;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemdata.account.dao.AccountInfo;
-import com.itextos.beacon.inmemory.data.redis.RedisHandler;
+import com.itextos.beacon.inmemdata.redis.RedisHandler;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 

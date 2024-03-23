@@ -19,7 +19,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.inmemory.data.account.UserInfo;
+import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.inmemory.loader.process.AbstractAutoRefreshInMemoryProcessor;
 import com.itextos.beacon.inmemory.loader.process.InmemoryInput;
 

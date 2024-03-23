@@ -44,10 +44,10 @@ import com.itextos.beacon.http.generichttpapi.common.data.response.ObjectFactory
 import com.itextos.beacon.http.generichttpapi.common.data.response.ResponseObject;
 import com.itextos.beacon.http.generichttpapi.common.data.response.Root;
 import com.itextos.beacon.http.generichttpapi.common.data.response.Root.Status;
+import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
+import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
-import com.itextos.beacon.inmemory.data.account.ClientAccountDetails;
-import com.itextos.beacon.inmemory.data.account.UserInfo;
 import com.itextos.beacon.inmemory.encryptinfo.EncryptInfo;
 import com.itextos.beacon.inmemory.encryptinfo.EncryptInfoCollection;
 import com.itextos.beacon.inmemory.inmemdata.country.CountryInfo;

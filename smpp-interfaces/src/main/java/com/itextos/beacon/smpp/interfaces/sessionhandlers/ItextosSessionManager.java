@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import com.cloudhopper.smpp.SmppBindType;
 import com.cloudhopper.smpp.SmppServerSession;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.inmemory.data.account.UserInfo;
+import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.objects.SessionRoundRobin;
 import com.itextos.beacon.smpp.interfaces.util.counters.BindUnbindCounter;
