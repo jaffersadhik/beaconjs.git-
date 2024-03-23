@@ -156,11 +156,7 @@
                             <contextRoot>/dnr</contextRoot>
                         </webModule> 
                      
-                        <webModule>
-                            <groupId>beacon</groupId>
-                            <artifactId>platform-r3r</artifactId>
-                            <contextRoot>/</contextRoot>
-                        </webModule>
+      
                         
                         <webModule>
                             <groupId>beacon</groupId>
@@ -174,6 +170,11 @@
                             <contextRoot>/password</contextRoot>
                         </webModule>
                      
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-r3r</artifactId>
+                            <contextRoot>/</contextRoot>
+                        </webModule>
                     </modules>
                 </configuration>
             </plugin>
