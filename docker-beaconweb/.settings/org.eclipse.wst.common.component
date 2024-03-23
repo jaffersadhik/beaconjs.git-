@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
+            
+    
     <wb-module deploy-name="docker-beaconweb-1.0">
-                
+                        
+        
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                
+                        
+        
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
         <dependent-module archiveName="web-generichttpapi-1.0.war" deploy-path="/" handle="module:/resource/web-generichttpapi/web-generichttpapi">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="platform-dnr-1.0.war" deploy-path="/" handle="module:/resource/platform-dnr/platform-dnr">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-r3r-1.0.war" deploy-path="/" handle="module:/resource/platform-r3r/platform-r3r">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
@@ -701,7 +707,9 @@
         <dependent-module archiveName="http-interfacefallback-1.0.jar" deploy-path="/lib" handle="module:/resource/http-interfacefallback/http-interfacefallback">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-            
-    </wb-module>
+                    
     
+    </wb-module>
+        
+
 </project-modules>
