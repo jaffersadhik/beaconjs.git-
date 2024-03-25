@@ -67,9 +67,14 @@ public final class InitServlet
                 System.exit(-1);
             }
 
-            FallbackQReaper.getInstance();
+            
+            String module=System.getenv("module");
+            if(module!=null&&module.equals("japi")) {
+            	
+            	FallbackQReaper.getInstance();
 
-            startConsumers();
+            	startConsumers();
+            }
         }
         catch (final Exception e)
         {
