@@ -93,6 +93,12 @@
 
 		</dependency>	
 		
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>dlrquery-dlrqueryprocess</artifactId>
+			<version>1.0</version>
+
+		</dependency>	
 		
 	  	<dependency>
 			<groupId>beacon</groupId>
