@@ -14,6 +14,9 @@
         <dependent-module archiveName="platform-dnr-1.0.war" deploy-path="/" handle="module:/resource/platform-dnr/platform-dnr">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="common-datarefresherweb-1.0.war" deploy-path="/" handle="module:/resource/common-datarefresherweb/common-datarefresherweb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="dlrquery-dlrqueryweb-1.0.war" deploy-path="/" handle="module:/resource/dlrquery-dlrqueryweb/dlrquery-dlrqueryweb">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -698,7 +701,10 @@
         <dependent-module archiveName="http-interfacefallback-1.0.jar" deploy-path="/lib" handle="module:/resource/http-interfacefallback/http-interfacefallback">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-data/inmemory-data">
+        <dependent-module archiveName="common-datarefresher-1.0.jar" deploy-path="/lib" handle="module:/resource/common-datarefresher/common-datarefresher">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-accountsync-1.0.jar" deploy-path="/lib" handle="module:/resource/common-accountsync/common-accountsync">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
@@ -707,7 +713,7 @@
         <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="common-accountsync-1.0.jar" deploy-path="/lib" handle="module:/resource/common-accountsync/common-accountsync">
+        <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-data/inmemory-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commondbpool/common-commondbpool">

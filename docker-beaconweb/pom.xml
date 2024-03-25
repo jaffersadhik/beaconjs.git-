@@ -92,6 +92,12 @@
 			<version>1.0</version>
 
 		</dependency>	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-datarefresher</artifactId>
+			<version>1.0</version>
+
+		</dependency>	
 		
 				<dependency>
 			<groupId>beacon</groupId>
@@ -120,6 +126,14 @@
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>
+
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-datarefresherweb</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+
 		
 		<dependency>
 			<groupId>beacon</groupId>
@@ -162,7 +176,12 @@
                             <contextRoot>/dnr</contextRoot>
                         </webModule> 
                      
-      
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>common-datarefresherweb</artifactId>
+                            <contextRoot>/datarefresher</contextRoot>
+                        </webModule>
+       
                         
                         <webModule>
                             <groupId>beacon</groupId>
