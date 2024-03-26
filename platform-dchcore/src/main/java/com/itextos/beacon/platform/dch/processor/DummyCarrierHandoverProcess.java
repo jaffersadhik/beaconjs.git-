@@ -44,11 +44,11 @@ public class DummyCarrierHandoverProcess
         if (log.isDebugEnabled())
             log.debug("Dummy Carrier Handover receiver  : " + lSubmissionObject.getJsonString());
 
-        DummyCarrierHandoverProcess.forDCH(lSubmissionObject);
+        DummyCarrierHandoverProcess.forDCH(lSubmissionObject,new StringBuffer());
     }
 
     
-    public static void forDCH(SubmissionObject lSubmissionObject) {
+    public static void forDCH(SubmissionObject lSubmissionObject,StringBuffer sb) {
     	
     	 try
          {
@@ -58,7 +58,7 @@ public class DummyCarrierHandoverProcess
              if (log.isDebugEnabled())
                  log.debug("Before handover to Dlr Internal process : " + lSubmissionObject.getJsonString());
 
-             sendToDlrReceiver(lDeliveryObject);
+             sendToDlrReceiver(lDeliveryObject,sb);
          }
          catch (final Exception e)
          {
@@ -66,7 +66,7 @@ public class DummyCarrierHandoverProcess
          }
     }
     public static void sendToDlrReceiver(
-            DeliveryObject aDeliveryObject)
+            DeliveryObject aDeliveryObject,StringBuffer sb)
     {
 
         try
@@ -76,7 +76,7 @@ public class DummyCarrierHandoverProcess
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DCH.getKey());
        
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,sb);
         }
         catch (final Exception e)
         {

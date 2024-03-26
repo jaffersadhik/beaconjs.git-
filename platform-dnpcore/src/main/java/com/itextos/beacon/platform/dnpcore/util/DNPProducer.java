@@ -6,10 +6,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
@@ -23,7 +25,7 @@ public class DNPProducer
     {}
 
     public static void sendToNextComponents(
-            Map<Component, DeliveryObject> aNextProcess)
+            Map<Component, DeliveryObject> aNextProcess,StringBuffer sb)
     {
         aNextProcess.entrySet().stream().forEach(e -> {
 
@@ -47,16 +49,23 @@ public class DNPProducer
                             if (log.isDebugEnabled())
                                 log.debug("Sending to Http Client Handover specific topic...");
 
+                        	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
+
                             MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue(), true);
                         }
-                        else
+                        else {
+                        	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
+
                             MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue());
-                    }
+                        }                    }
                     else
                         log.warn("DlrHandover not configure for client : " + e.getValue().getClientId());
                 }
-                else
+                else {
+                	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
+
                     MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue());
+                }
             }
             catch (final ItextosException e1)
             {

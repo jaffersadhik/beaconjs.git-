@@ -276,7 +276,7 @@ public class CarrierHandoverProcess
 
                            if (lRetryAttempt == 0)
                            {
-                               CHProducer.sendToSubBilling(lSubmissionObject);
+                               CHProducer.sendToSubBilling(lSubmissionObject,lMessageRequest.getLogBuffer());
                                
                             	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: Sent to submission biller topic.. success"  );
 
@@ -393,13 +393,13 @@ public class CarrierHandoverProcess
       	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" Sending to dummy route q:" + lSubmissionObject.getMessageId() + " retry attempt:" + lMessageRequest.getRetryAttempt() );
 
    
-           CHProducer.sendToDummyRoute(lSubmissionObject);
+           CHProducer.sendToDummyRoute(lSubmissionObject,lMessageRequest.getLogBuffer());
        
 
         if (lMessageRequest.getRetryAttempt() == 0)
         {
             lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.SUCCESS.getStatusCode());
-            CHProducer.sendToSubBilling(lSubmissionObject);
+            CHProducer.sendToSubBilling(lSubmissionObject,lMessageRequest.getLogBuffer());
         }
 
         PrometheusMetrics.componentMethodEndTimer(Component.CH, dummyHandover);

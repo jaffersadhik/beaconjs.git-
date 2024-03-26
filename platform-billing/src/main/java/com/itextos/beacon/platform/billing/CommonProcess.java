@@ -59,7 +59,7 @@ public abstract class CommonProcess
     }
 
     protected void sendToOtherTopic(
-            NextTopic aNextTopic)
+            NextTopic aNextTopic,StringBuffer sb)
     {
         if (log.isDebugEnabled())
             log.debug("Send to next topic '" + aNextTopic + "'");
@@ -68,15 +68,15 @@ public abstract class CommonProcess
         switch (aNextTopic)
         {
             case FULL_MESSAGE_INSERT:
-                BillingProducer.sendToFullMessageTopic(aBaseMessage);
+                BillingProducer.sendToFullMessageTopic(aBaseMessage,sb);
                 break;
 
             case DLR_QUERY:
-                BillingProducer.sendToDlrQueryTopic(aBaseMessage);
+                BillingProducer.sendToDlrQueryTopic(aBaseMessage,sb);
                 break;
 
             case SUB_BILLING:
-                BillingProducer.sendToBillingTopic(aBaseMessage);
+                BillingProducer.sendToBillingTopic(aBaseMessage,sb);
                 break;
 
             default:

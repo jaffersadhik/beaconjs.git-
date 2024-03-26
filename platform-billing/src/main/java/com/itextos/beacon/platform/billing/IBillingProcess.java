@@ -6,7 +6,7 @@ public interface IBillingProcess
 {
 
     // Common
-    void process()
+    void process(StringBuffer sb)
             throws ItextosException;
 
     // Submission

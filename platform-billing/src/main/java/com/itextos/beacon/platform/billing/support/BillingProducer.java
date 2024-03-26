@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class BillingProducer
@@ -18,11 +19,13 @@ public class BillingProducer
     {}
 
     public static void sendToBillingTopic(
-            BaseMessage aBaseMessage)
+            BaseMessage aBaseMessage,StringBuffer sb)
     {
 
         try
         {
+          	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Sending to q:" + Component.T2DB_SUBMISSION.getKey() );
+
             MessageProcessor.writeMessage(Component.SUBBC, Component.T2DB_SUBMISSION, aBaseMessage);
         }
         catch (final ItextosException e)
@@ -33,11 +36,13 @@ public class BillingProducer
     }
 
     public static void sendToDlrQueryTopic(
-            BaseMessage aBaseMessage)
+            BaseMessage aBaseMessage,StringBuffer sb)
     {
 
         try
         {
+          	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Sending to q:" + Component.DLRQMT.getKey() );
+
             MessageProcessor.writeMessage(Component.SUBBC, Component.DLRQMT, aBaseMessage);
         }
         catch (final ItextosException e)
@@ -48,11 +53,13 @@ public class BillingProducer
     }
 
     public static void sendToWalletRefundTopic(
-            BaseMessage aBaseMessage)
+            BaseMessage aBaseMessage,StringBuffer sb)
     {
 
         try
         {
+          	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Sending to q:" + Component.WALLET_REFUND.getKey() );
+
             MessageProcessor.writeMessage(Component.SUBBC, Component.WALLET_REFUND, aBaseMessage);
         }
         catch (final ItextosException e)
@@ -63,11 +70,13 @@ public class BillingProducer
     }
 
     public static void sendToFullMessageTopic(
-            BaseMessage aBaseMessage)
+            BaseMessage aBaseMessage,StringBuffer sb)
     {
 
         try
         {
+          	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Sending to q:" + Component.T2DB_FULL_MESSAGE.getKey() );
+
             MessageProcessor.writeMessage(Component.SUBBC, Component.T2DB_FULL_MESSAGE, aBaseMessage);
         }
         catch (final ItextosException e)
@@ -84,6 +93,7 @@ public class BillingProducer
 
         try
         {
+        	
             PlatformUtil.sendToErrorLog(Component.SUBBC, aBaseMessage, aErrorMsg);
         }
         catch (final Exception e)

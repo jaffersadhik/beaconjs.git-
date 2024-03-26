@@ -38,10 +38,10 @@ public class BillerProcessor
         if (log.isDebugEnabled())
             log.debug("Biller Received Object .. " + aBaseMessage);
 
-        BillerProcessor.forSUBPC(aBaseMessage);
+        BillerProcessor.forSUBPC(aBaseMessage,new StringBuffer());
     }
 
-    public static void forSUBPC(BaseMessage aBaseMessage) {
+    public static void forSUBPC(BaseMessage aBaseMessage,StringBuffer sb) {
     	
     	 try
          {
@@ -49,7 +49,7 @@ public class BillerProcessor
     	            log.debug("Biller Received Object .. " + aBaseMessage);
 
              final SubmissionProcess lSubProcessor = new SubmissionProcess((SubmissionObject) aBaseMessage);
-             lSubProcessor.process();
+             lSubProcessor.process(sb);
          }
          catch (final ItextosException e)
          {

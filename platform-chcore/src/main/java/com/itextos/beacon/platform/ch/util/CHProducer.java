@@ -115,7 +115,7 @@ public class CHProducer
     }
 
     public static void sendToDummyRoute(
-            SubmissionObject aSubmissionObject)
+            SubmissionObject aSubmissionObject,StringBuffer sb)
     {
 
         try
@@ -123,7 +123,7 @@ public class CHProducer
             //MessageProcessor.writeMessage(Component.CH, Component.DCH, aSubmissionObject);
             aSubmissionObject.setFromComponent(Component.CH.getKey());
             aSubmissionObject.setNextComponent(Component.DCH.getKey());
-            DummyCarrierHandoverProcess.forDCH(aSubmissionObject);
+            DummyCarrierHandoverProcess.forDCH(aSubmissionObject,sb);
         }
         catch (final Exception e)
         {
@@ -180,7 +180,7 @@ public class CHProducer
     }
 
     public static void sendToSubBilling(
-            BaseMessage aBaseMessage)
+            BaseMessage aBaseMessage,StringBuffer sb)
     {
 
         try
@@ -190,7 +190,7 @@ public class CHProducer
             
             aBaseMessage.setFromComponent(Component.CH.getKey());
             aBaseMessage.setNextComponent(Component.SUBBC.getKey());
-            BillerProcessor.forSUBPC(aBaseMessage);
+            BillerProcessor.forSUBPC(aBaseMessage,sb);
 
         }
         catch (final Exception e)

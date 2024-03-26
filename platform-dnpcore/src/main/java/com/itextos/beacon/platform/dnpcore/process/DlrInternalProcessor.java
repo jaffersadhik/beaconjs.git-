@@ -42,10 +42,10 @@ public class DlrInternalProcessor
 
         final DeliveryObject lDeliveryObject = (DeliveryObject) aBaseMessage;
 
-        forDLRInternal(lDeliveryObject);
+        forDLRInternal(lDeliveryObject,new StringBuffer());
     }
 
-    public static void forDLRInternal(final DeliveryObject lDeliveryObject) {
+    public static void forDLRInternal(final DeliveryObject lDeliveryObject,StringBuffer sb) {
     	
     	 try
          {
@@ -53,7 +53,7 @@ public class DlrInternalProcessor
 
              final Map<Component, DeliveryObject> processInternalDNQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
 
-             DNPProducer.sendToNextComponents(processInternalDNQ);
+             DNPProducer.sendToNextComponents(processInternalDNQ,sb);
          }
          catch (final Exception e)
          {

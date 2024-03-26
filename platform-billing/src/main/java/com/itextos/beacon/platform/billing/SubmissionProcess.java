@@ -53,7 +53,7 @@ public class SubmissionProcess
 
     // Common
     @Override
-    public void process()
+    public void process(StringBuffer sb)
             throws ItextosException
     {
         mSubmissionObject = (SubmissionObject) mBaseMessage;
@@ -70,7 +70,7 @@ public class SubmissionProcess
 
         encryptMessageAndMobile();
 
-        sendToFullMessageTopic();
+        sendToFullMessageTopic(sb);
 
         updateAlpha();
 
@@ -96,9 +96,9 @@ public class SubmissionProcess
 
         updateTotalPartCount();
 
-        sendToDlrQueryTopic();
+        sendToDlrQueryTopic(sb);
 
-        sendToBillingTopic();
+        sendToBillingTopic(sb);
     }
 
     private void cappingCheck()
@@ -148,10 +148,10 @@ public class SubmissionProcess
         }
     }
 
-    private void sendToBillingTopic()
+    private void sendToBillingTopic(StringBuffer sb)
     {
         PrometheusMetrics.platformIncrement(Component.T2DB_SUBMISSION, mSubmissionObject.getClusterType(), "SUB_BILLING");
-        sendToOtherTopic(NextTopic.SUB_BILLING);
+        sendToOtherTopic(NextTopic.SUB_BILLING,sb);
     }
 
     // Submission
@@ -268,12 +268,12 @@ public class SubmissionProcess
         mSubmissionObject.setRefExchangeRate(0.0d);
     }
 
-    private void sendToFullMessageTopic()
+    private void sendToFullMessageTopic(StringBuffer sb)
     {
         // Need to send to Full Message only if the message is multipart.
         final int retryAttempt = mSubmissionObject.getRetryAttempt();
         if (isFirstPart && (retryAttempt <= 0))
-            sendToOtherTopic(NextTopic.FULL_MESSAGE_INSERT);
+            sendToOtherTopic(NextTopic.FULL_MESSAGE_INSERT,sb);
     }
 
     private void encryptMessageAndMobile()
@@ -466,13 +466,13 @@ public class SubmissionProcess
         }
     }
 
-    private void sendToDlrQueryTopic()
+    private void sendToDlrQueryTopic(StringBuffer sb)
     {
         final ClientDlrConfig lClientDlrConfig = ClientDlrConfigUtil.getDlrHandoverConfig(mSubmissionObject.getValue(MiddlewareConstant.MW_CLIENT_ID), "sms", mSubmissionObject.getInterfaceType(),
                 mSubmissionObject.isDlrRequestFromClient());
 
         if ((lClientDlrConfig != null) && lClientDlrConfig.isDlrQueryEnabled())
-            sendToOtherTopic(NextTopic.DLR_QUERY);
+            sendToOtherTopic(NextTopic.DLR_QUERY,sb);
     }
 
 }
