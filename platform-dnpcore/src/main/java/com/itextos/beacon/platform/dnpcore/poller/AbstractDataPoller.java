@@ -66,7 +66,7 @@ public abstract class AbstractDataPoller
             final List<String>                toDelete       = new ArrayList<>(lRecords.keySet());
             final List<DeliveryObject>        toProcess      = new ArrayList<>(lRecords.values());
 
-            final List<String>                failedMessages = sendToNextQueue(toProcess);
+            final List<String>                failedMessages = sendToNextQueue(toProcess,new StringBuffer());
 
             if (!failedMessages.isEmpty())
                 toDelete.removeAll(failedMessages);
@@ -80,7 +80,7 @@ public abstract class AbstractDataPoller
     }
 
     private static List<String> sendToNextQueue(
-            List<DeliveryObject> aToProcess)
+            List<DeliveryObject> aToProcess,StringBuffer sb)
     {
         final List<String> lSNoList          = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public abstract class AbstractDataPoller
                         if (log.isDebugEnabled())
                             log.debug("Sending to " + lProcessDnReceiverQ.keySet() + " BaseMessage:" + lDelvObj.getJsonString());
 
-                        DNPProducer.sendToNextComponents(lProcessDnReceiverQ);
+                        DNPProducer.sendToNextComponents(lProcessDnReceiverQ,new StringBuffer());
                     }
                 }
                 else
@@ -149,7 +149,7 @@ public abstract class AbstractDataPoller
                         }
                     }
 
-                    DNPProducer.sendToNextComponents(processDNQueues);
+                    DNPProducer.sendToNextComponents(processDNQueues,sb);
                 }
             }
             catch (final Exception e)

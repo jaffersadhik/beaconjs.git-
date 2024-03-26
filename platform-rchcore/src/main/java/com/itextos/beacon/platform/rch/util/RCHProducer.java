@@ -93,7 +93,7 @@ public class RCHProducer
     }
 
     public static void sendToDummyRoute(
-            SubmissionObject aSubmissionObject)
+            SubmissionObject aSubmissionObject,StringBuffer sb)
     {
 
         try
@@ -101,7 +101,7 @@ public class RCHProducer
          //   MessageProcessor.writeMessage(Component.RCH, Component.DCH, aSubmissionObject);
             aSubmissionObject.setFromComponent(Component.RCH.getKey());
             aSubmissionObject.setNextComponent(Component.DCH.getKey());
-            DummyCarrierHandoverProcess.forDCH(aSubmissionObject);
+            DummyCarrierHandoverProcess.forDCH(aSubmissionObject,sb);
   
         }
         catch (final Exception e)
@@ -158,7 +158,7 @@ public class RCHProducer
     }
 
     public static void sendToSubBilling(
-            SubmissionObject aSubmissionObject)
+            SubmissionObject aSubmissionObject,StringBuffer sb)
     {
 
         try
@@ -167,7 +167,7 @@ public class RCHProducer
             
             aSubmissionObject.setFromComponent(Component.RCH.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
-            BillerProcessor.forSUBPC(aSubmissionObject);
+            BillerProcessor.forSUBPC(aSubmissionObject,sb);
  
         }
         catch (final Exception e1)

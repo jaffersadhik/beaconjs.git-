@@ -59,7 +59,7 @@ public class SingleDnProcessor
             {
                 if (log.isDebugEnabled())
                     log.debug(" process() - Sending to " + processSingleDNQ.keySet() + " json:" + lDeliveryObject.toString());
-                DNPProducer.sendToNextComponents(processSingleDNQ);
+                DNPProducer.sendToNextComponents(processSingleDNQ,lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
             }
             if (log.isDebugEnabled())
                 log.debug(" process() no data to be processed json:" + lDeliveryObject.toString());

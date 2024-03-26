@@ -48,6 +48,7 @@ public class RetryCarrierHandover
     public void doProcess()
     {
 
+    	StringBuffer sb=new StringBuffer();
         try
         {
             final boolean isHexMsg = mMessageRequest.isHexMessage();
@@ -179,13 +180,13 @@ public class RetryCarrierHandover
                         {
                             if (log.isInfoEnabled())
                                 log.info("sending to dummy route....");
-                            RCHProducer.sendToDummyRoute(lSubmissionObject);
+                            RCHProducer.sendToDummyRoute(lSubmissionObject,sb);
                         }
 
                         if (mMessageRequest.getRetryAttempt() == 0)
                         {
                             lSubmissionObject.setSubOriginalStatusCode(PlatformStatusCode.SUCCESS.getStatusCode());
-                            RCHProducer.sendToSubBilling(lSubmissionObject);
+                            RCHProducer.sendToSubBilling(lSubmissionObject,sb);
                         }
                         continue;
                     }
@@ -240,7 +241,7 @@ public class RetryCarrierHandover
 
                         if (lRetryAttempt == 0)
                         {
-                            RCHProducer.sendToSubBilling(lSubmissionObject);
+                            RCHProducer.sendToSubBilling(lSubmissionObject,sb);
 
                             if (log.isDebugEnabled())
                                 log.debug("sendToSubBilling success");

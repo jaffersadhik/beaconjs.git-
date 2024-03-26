@@ -132,7 +132,7 @@ public class PRCUtil
         
                 aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: Request sending Biller Topic : ");
 
-                PRProducer.sendToBillerTopic(aSubmissionObject);
+                PRProducer.sendToBillerTopic(aSubmissionObject,aSubmissionObject.getLogBuffer());
 
          
                 aSubmissionObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append((aSubmissionObject).getBaseMessageId()+" :: sending to biller topic succesful..for mid=");
@@ -207,7 +207,7 @@ public class PRCUtil
 
             setStatusDesc(lDeliveryObject);
 
-            PRProducer.sendToDLRTopic(lDeliveryObject);
+            PRProducer.sendToDLRTopic(lDeliveryObject,aSubmissionObject.getLogBuffer());
         }
         catch (final Exception exp)
         {

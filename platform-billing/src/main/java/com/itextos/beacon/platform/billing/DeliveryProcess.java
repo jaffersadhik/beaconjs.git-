@@ -39,7 +39,7 @@ public class DeliveryProcess
     }
 
     @Override
-    public void process()
+    public void process(StringBuffer sb)
     {
         mDeliveryObject = (DeliveryObject) mBaseMessage;
 

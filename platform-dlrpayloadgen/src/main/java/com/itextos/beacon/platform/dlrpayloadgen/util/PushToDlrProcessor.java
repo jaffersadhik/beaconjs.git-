@@ -155,7 +155,7 @@ public class PushToDlrProcessor
         {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLR_GEN.getKey());
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,new StringBuffer());
 
         //    MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
         }

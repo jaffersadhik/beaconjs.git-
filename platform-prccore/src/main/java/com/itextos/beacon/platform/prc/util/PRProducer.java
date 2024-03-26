@@ -22,7 +22,7 @@ public class PRProducer
     {}
 
     public static void sendToBillerTopic(
-            SubmissionObject aSubmissionObject)
+            SubmissionObject aSubmissionObject,StringBuffer sb)
     {
 
         try
@@ -31,7 +31,7 @@ public class PRProducer
             
             aSubmissionObject.setFromComponent(Component.PRC.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
-            BillerProcessor.forSUBPC(aSubmissionObject);
+            BillerProcessor.forSUBPC(aSubmissionObject,sb);
         }
         catch (final Exception e)
         {
@@ -41,14 +41,14 @@ public class PRProducer
     }
 
     public static void sendToDLRTopic(
-            DeliveryObject aDeliveryObject)
+            DeliveryObject aDeliveryObject,StringBuffer sb)
     {
 
         try
         {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.PRC.getKey());
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,sb);
 
           //  MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
         }

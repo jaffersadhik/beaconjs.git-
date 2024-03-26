@@ -50,7 +50,7 @@ public class DlrAgingProcessor
                 if (log.isDebugEnabled())
                     log.debug(" process() - Sending to " + processAgeingDNQ.keySet() + " json:" + lDeliveryObject.toString());
 
-                DNPProducer.sendToNextComponents(processAgeingDNQ);
+                DNPProducer.sendToNextComponents(processAgeingDNQ, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
             }
         }
         catch (final Exception e)

@@ -43,7 +43,7 @@ public class SetNextComponent
         {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLRR.getKey());
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject);
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,new StringBuffer());
 
          //   MessageProcessor.writeMessage(Component.DLRR, Component.DLRINTLP, aDeliveryObject);
         }

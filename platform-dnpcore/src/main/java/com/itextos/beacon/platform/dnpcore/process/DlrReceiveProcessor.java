@@ -92,7 +92,7 @@ public class DlrReceiveProcessor
                         log.debug(lDeliveryObject.getMessageId()+" :  Sending to " + lProcessDnReceiverQ.keySet() + " Message Obj :" + lDeliveryObject);
 
                     // return processDnReceiverQ;
-                    DNPProducer.sendToNextComponents(lProcessDnReceiverQ);
+                    DNPProducer.sendToNextComponents(lProcessDnReceiverQ, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
                 }
             }
             else
@@ -112,7 +112,7 @@ public class DlrReceiveProcessor
                 if (log.isDebugEnabled())
                     log.debug(" Sending to " + processDNQueues.keySet() + " Message Obj:" + lDeliveryObject);
 
-                DNPProducer.sendToNextComponents(processDNQueues);
+                DNPProducer.sendToNextComponents(processDNQueues, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
             }
         }
         catch (final Exception e)
