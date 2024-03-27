@@ -1,22 +1,24 @@
 package com.itextos.beacon.platform.dnr.process;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
-import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.platform.dnpcore.process.DlrReceiveProcessor;
 import com.itextos.beacon.platform.dnrfallback.DlrFallbackProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.DNLog;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 public class DlrProcess
 {
@@ -58,8 +60,16 @@ public class DlrProcess
             
             if (log.isDebugEnabled())
                 log.debug("Delivery Object :" + deliveryObject.getJsonString());
-
-            // PrometheusMetrics.platformIncrement(Component.DNR,
+            
+            deliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+        	
+            deliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+deliveryObject.getBaseMessageId()+"######################");
+          
+           long starttime=System.currentTimeMillis();
+           
+           		
+      	   
+               // PrometheusMetrics.platformIncrement(Component.DNR,
             // deliveryObject.getClusterType(), "");
 
             ReceivedCounter.getInstance().add();
@@ -68,6 +78,16 @@ public class DlrProcess
 
             if (log.isDebugEnabled())
                 log.debug("processRequest() - Successfully Send to DN processor ..");
+   
+            deliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(deliveryObject.getBaseMessageId()+" Time Taken For process :"+(System.currentTimeMillis()-starttime)+" Milli Second"); 
+          	
+         	
+       	   
+            deliveryObject.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("##########"+deliveryObject.getBaseMessageId()+"######################");
+
+            DNLog.log(deliveryObject.getLogBuffer().toString());
+
+
         }
         catch (final Exception e)
         {
@@ -94,9 +114,13 @@ public class DlrProcess
 
             try
             {
-                MessageProcessor.writeMessage(Component.DNR, Component.DNP, aDeliveryObject);
+           //     MessageProcessor.writeMessage(Component.DNR, Component.DNP, aDeliveryObject);
+                
+            	aDeliveryObject.setFromComponent(Component.DNR.getKey());
+            	aDeliveryObject.setNextComponent(Component.DNP.getKey());
+                DlrReceiveProcessor.forDLR(aDeliveryObject);
             }
-            catch (final ItextosException e)
+            catch (final Exception e)
             {
                 log.error("Message sending to kafka is failed, Hence sending to Dlr Receive Fallback table..", e);
                 sendToFallback(aDeliveryObject);

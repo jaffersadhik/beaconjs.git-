@@ -47,79 +47,88 @@ public class DlrReceiveProcessor
         {
             DeliveryObject lDeliveryObject = (DeliveryObject) aBaseMessage;
 
-            lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
-
-            if (log.isDebugEnabled())
-                log.debug(lDeliveryObject.getMessageId()+ " : Message received form Carrier : " + lDeliveryObject);
-
-            // Request Received from Carrier
-
-            final String requestFromVoice = null;// aNunMessage.getValue(MiddlewareConstant.MW_IS_VOICE_DLR);
-
-            String       lPayloadStatus   = CommonUtility.nullCheck(lDeliveryObject.getDnPayloadStatus(), true);
-
-            if (requestFromVoice == null)
-            {
-
-                if (lPayloadStatus.isEmpty())
-                {
-                    final String lCarrierFullDn = CommonUtility.nullCheck(lDeliveryObject.getCarrierFullDn(), true);
-
-                    if (!lCarrierFullDn.isEmpty())
-                        lDeliveryObject = DNPUtil.processDR(lDeliveryObject);
-
-                    if (log.isDebugEnabled())
-                        log.debug(lDeliveryObject.getMessageId()+ " : DN Message Obj - " + lDeliveryObject);
-
-                    lDeliveryObject = PayloadProcessor.retrivePayload(lDeliveryObject);
-                }
-
-                if (log.isDebugEnabled())
-                    log.debug(lDeliveryObject.getMessageId()+ " : Payload Object - " + lDeliveryObject.getJsonString());
-
-                lPayloadStatus = CommonUtility.nullCheck(lDeliveryObject.getDnPayloadStatus(), true);
-            }
-
-            if (lDeliveryObject.isPlatfromRejected() || "1".equals(lPayloadStatus) || "1".equals(requestFromVoice))
-            {
-                DNPUtil.setPlatformErrorCodeBasedOnCarrierErrorCode(lDeliveryObject);
-
-                final Map<Component, DeliveryObject> lProcessDnReceiverQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
-
-                if ((lProcessDnReceiverQ != null) && !lProcessDnReceiverQ.isEmpty())
-                {
-                    if (log.isDebugEnabled())
-                        log.debug(lDeliveryObject.getMessageId()+" :  Sending to " + lProcessDnReceiverQ.keySet() + " Message Obj :" + lDeliveryObject);
-
-                    // return processDnReceiverQ;
-                    DNPProducer.sendToNextComponents(lProcessDnReceiverQ, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
-                }
-            }
-            else
-            {
-                final HashMap<Component, DeliveryObject> processDNQueues = new HashMap<>();
-
-                // -1, 0
-                if ("-1".equals(lPayloadStatus))
-                {
-                    DNPUtil.setPlatformErrorCodeBasedOnCarrierErrorCode(lDeliveryObject);
-                    processDNQueues.put(Component.T2DB_NO_PAYLOAD_DN, lDeliveryObject);
-                }
-                else
-                    if ("0".equals(lPayloadStatus))
-                        NoPayloadRetryQ.getInstance().addMessage(lDeliveryObject);
-
-                if (log.isDebugEnabled())
-                    log.debug(" Sending to " + processDNQueues.keySet() + " Message Obj:" + lDeliveryObject);
-
-                DNPProducer.sendToNextComponents(processDNQueues, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
-            }
+            forDLR(lDeliveryObject);
         }
+        
         catch (final Exception e)
         {
             log.error("Exception occer while processing the Carrier DN/ Internal Rejection Dlr : ", e);
             DNPProducer.sendToErrorLog(aBaseMessage, e);
         }
+    }
+    
+    
+    public static void forDLR(DeliveryObject lDeliveryObject) throws Exception {
+    	
+    	
+        lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
+
+        if (log.isDebugEnabled())
+            log.debug(lDeliveryObject.getMessageId()+ " : Message received form Carrier : " + lDeliveryObject);
+
+        // Request Received from Carrier
+
+        final String requestFromVoice = null;// aNunMessage.getValue(MiddlewareConstant.MW_IS_VOICE_DLR);
+
+        String       lPayloadStatus   = CommonUtility.nullCheck(lDeliveryObject.getDnPayloadStatus(), true);
+
+        if (requestFromVoice == null)
+        {
+
+            if (lPayloadStatus.isEmpty())
+            {
+                final String lCarrierFullDn = CommonUtility.nullCheck(lDeliveryObject.getCarrierFullDn(), true);
+
+                if (!lCarrierFullDn.isEmpty())
+                    lDeliveryObject = DNPUtil.processDR(lDeliveryObject);
+
+                if (log.isDebugEnabled())
+                    log.debug(lDeliveryObject.getMessageId()+ " : DN Message Obj - " + lDeliveryObject);
+
+                lDeliveryObject = PayloadProcessor.retrivePayload(lDeliveryObject);
+            }
+
+            if (log.isDebugEnabled())
+                log.debug(lDeliveryObject.getMessageId()+ " : Payload Object - " + lDeliveryObject.getJsonString());
+
+            lPayloadStatus = CommonUtility.nullCheck(lDeliveryObject.getDnPayloadStatus(), true);
+        }
+
+        if (lDeliveryObject.isPlatfromRejected() || "1".equals(lPayloadStatus) || "1".equals(requestFromVoice))
+        {
+            DNPUtil.setPlatformErrorCodeBasedOnCarrierErrorCode(lDeliveryObject);
+
+            final Map<Component, DeliveryObject> lProcessDnReceiverQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
+
+            if ((lProcessDnReceiverQ != null) && !lProcessDnReceiverQ.isEmpty())
+            {
+                if (log.isDebugEnabled())
+                    log.debug(lDeliveryObject.getMessageId()+" :  Sending to " + lProcessDnReceiverQ.keySet() + " Message Obj :" + lDeliveryObject);
+
+                // return processDnReceiverQ;
+                DNPProducer.sendToNextComponents(lProcessDnReceiverQ, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
+            }
+        }
+        else
+        {
+            final HashMap<Component, DeliveryObject> processDNQueues = new HashMap<>();
+
+            // -1, 0
+            if ("-1".equals(lPayloadStatus))
+            {
+                DNPUtil.setPlatformErrorCodeBasedOnCarrierErrorCode(lDeliveryObject);
+                processDNQueues.put(Component.T2DB_NO_PAYLOAD_DN, lDeliveryObject);
+            }
+            else
+                if ("0".equals(lPayloadStatus))
+                    NoPayloadRetryQ.getInstance().addMessage(lDeliveryObject);
+
+            if (log.isDebugEnabled())
+                log.debug(" Sending to " + processDNQueues.keySet() + " Message Obj:" + lDeliveryObject);
+
+            DNPProducer.sendToNextComponents(processDNQueues, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
+        }
+
     }
 
     @Override

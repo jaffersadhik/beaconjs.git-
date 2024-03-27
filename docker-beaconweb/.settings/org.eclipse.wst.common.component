@@ -713,10 +713,22 @@
         <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="dlrquery-dlrqueryprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/dlrquery-dlrqueryprocess/dlrquery-dlrqueryprocess">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-data/inmemory-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="inmemory-dlrquery-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-dlrquery/inmemory-dlrquery">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-clientdlrpreferences-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-clientdlrpreferences/inmemory-clientdlrpreferences">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commondbpool/common-commondbpool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-stringprocessor-1.0.jar" deploy-path="/lib" handle="module:/resource/common-stringprocessor/common-stringprocessor">
             <dependency-type>uses</dependency-type>
         </dependent-module>
                     
