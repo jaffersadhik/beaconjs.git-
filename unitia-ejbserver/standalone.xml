@@ -70,6 +70,19 @@
         </access-control>
     </management>
     <profile>
+    
+    
+       <subsystem xmlns="urn:jboss:domain:security-realms:20.0">
+    <security-realms>
+      <security-realm name="DatabaseRealm">
+   			 <authentication>
+     		   <local default-user="$local"/>
+      		  <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
+    		</authentication>
+	</security-realm>
+        <!-- Other security realms may be defined here -->
+    </security-realms>
+</subsystem>
         <subsystem xmlns="urn:jboss:domain:logging:8.0">
             <console-handler name="CONSOLE">
                 <level name="INFO"/>
@@ -116,17 +129,7 @@
         </subsystem>
         
         
-        <subsystem xmlns="urn:jboss:domain:security-realms:1.0">
-    <security-realms>
-      <security-realm name="DatabaseRealm">
-    <authentication>
-        <local default-user="$local"/>
-        <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
-    </authentication>
-</security-realm>
-        <!-- Other security realms may be defined here -->
-    </security-realms>
-</subsystem>
+
 
 
         <subsystem xmlns="urn:jboss:domain:batch-jberet:3.0">
