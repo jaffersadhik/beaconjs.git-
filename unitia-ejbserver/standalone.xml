@@ -224,6 +224,7 @@
             <statistics enabled="${wildfly.ejb3.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
             <log-system-exceptions value="true"/>
         </subsystem>
+<!-- 
         <subsystem xmlns="urn:wildfly:elytron:18.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
             <providers>
                 <aggregate-providers name="combined-providers">
@@ -236,7 +237,7 @@
             <audit-logging>
                 <file-audit-log name="local-audit" path="audit.log" relative-to="jboss.server.log.dir" format="JSON"/>
             </audit-logging>
-              <!-- 
+            
             <security-domains>
                 <security-domain name="ApplicationDomain" default-realm="ApplicationRealm" permission-mapper="default-permission-mapper">
                     <realm name="ApplicationRealm" role-decoder="groups-to-roles"/>
@@ -260,7 +261,7 @@
                 </properties-realm>
             </security-realms>
             
-             -->
+             
             <mappers>
                 <simple-permission-mapper name="default-permission-mapper" mapping-mode="first">
                     <permission-mapping>
@@ -288,7 +289,6 @@
                     <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
                 </permission-set>
             </permission-sets>
-            <!-- 
             <http>
                 <http-authentication-factory name="application-http-authentication" security-domain="ApplicationDomain" http-server-mechanism-factory="global">
                     <mechanism-configuration>
@@ -339,7 +339,6 @@
                 <provider-sasl-server-factory name="global"/>
             </sasl>
             
-              -->
             <tls>
                 <key-stores>
                     <key-store name="applicationKS">
@@ -361,6 +360,7 @@
                 <jacc-policy/>
             </policy>
         </subsystem>
+        
         <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0"/>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
         <subsystem xmlns="urn:jboss:domain:infinispan:14.0">
@@ -408,6 +408,8 @@
                 </local-cache>
             </cache-container>
         </subsystem>
+        
+        -->
         <subsystem xmlns="urn:jboss:domain:io:3.0">
             <worker name="default"/>
         </subsystem>
