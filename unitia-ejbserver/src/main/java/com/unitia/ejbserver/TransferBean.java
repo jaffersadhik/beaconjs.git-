@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class TransferBean implements Serializable,Cloneable {
 	
-    private static final long serialVersionUID = -7253423594039060631L;
+    public static final long serialVersionUID = -7253423594039060631L;
 
-    private String messageGson;
+    public String messageGson;
     
     public String getMessageGson() {
     	
