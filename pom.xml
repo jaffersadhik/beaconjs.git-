@@ -268,6 +268,10 @@
    	<module>docker-beaconweb</module>
 
 
+   	<module>unitia-redis</module>
+   	<module>unitia-util</module>
+   	<module>unitia-ejbserver</module>
+   	<module>unitia-ejbclient</module>
   </modules>
   
 

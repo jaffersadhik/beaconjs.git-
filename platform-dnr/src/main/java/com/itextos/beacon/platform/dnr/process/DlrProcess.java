@@ -8,6 +8,7 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
+import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
@@ -114,11 +115,13 @@ public class DlrProcess
 
             try
             {
-           //     MessageProcessor.writeMessage(Component.DNR, Component.DNP, aDeliveryObject);
+                MessageProcessor.writeMessage(Component.DNR, Component.DNP, aDeliveryObject);
                 
+            	/*
             	aDeliveryObject.setFromComponent(Component.DNR.getKey());
             	aDeliveryObject.setNextComponent(Component.DNP.getKey());
                 DlrReceiveProcessor.forDLR(aDeliveryObject);
+ 				*/
             }
             catch (final Exception e)
             {

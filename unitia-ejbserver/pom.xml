@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>beacon</groupId>
+    <artifactId>beacon</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>unitia-ejbserver</artifactId>
+  <packaging>ejb</packaging> <!-- Packaging type set to EJB -->
+
+   <dependencies>
+	<dependency>
+    <groupId>javax</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>8.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+	<dependency>
+    <groupId>beacon</groupId>
+    <artifactId>thirdpartyjar</artifactId>
+    <version>1.0</version>
+	</dependency>
+
+	<dependency>
+    <groupId>beacon</groupId>
+    <artifactId>common-messageobject</artifactId>
+    <version>1.0</version>
+	</dependency>
+  </dependencies>
+  
+  
+    <build>
+        <plugins>
+            <!-- Maven EJB Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <!-- Configuration for EJB plugin -->
+                    <ejbVersion>3.2</ejbVersion> <!-- EJB version -->
+                    <generateClient>false</generateClient> <!-- Do not generate client -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
