@@ -1,7 +1,5 @@
 package com.unitia.ejbclient;
 
-import java.util.Hashtable;
-import java.util.Properties;
 import java.util.Properties;
 
 import javax.ejb.EJB;
@@ -9,6 +7,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.unitia.ejbserver.MessageTransfer;
 import com.unitia.ejbserver.TransferBean;
 
@@ -42,39 +42,42 @@ public class UnitiaHandover {
 		
 	}
 	
-	private static Properties getInitialContextProperties() {
+	private  Properties getInitialContextProperties() {
         Properties props = new Properties();
         props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-        props.put(Context.PROVIDER_URL, "http-remoting://192.168.1.95:9190"); // Change to your server URL
+        props.put(Context.PROVIDER_URL, "http-remoting://"+ipport); // Change to your server URL
         props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
         props.put("jboss.naming.client.ejb.context", true);
         return props;
     }
 	
-	 private static Context getInitialContext() throws NamingException {
+	 private  Context getInitialContext() throws NamingException {
 	        // Set up properties for the initial context
 	        Properties props = getInitialContextProperties();
 	    
 	        return new InitialContext(props);
 	    }
-	public boolean send(String messageGson) {
+	public boolean sendtoIC(String messageGson) {
 	
+		try {
 		TransferBean bean=new TransferBean();
 		
 		bean.setMessageGson(messageGson);
 		
 		String response=messageTransfer.send(bean);
 		
-		System.out.println(response);
+		if(response.equals("ok")) {
+			
+			return true;
+		}else {
+			
+			return false;
+		}
 		
-		return true;
+		}catch(Exception e) {
+			
+			ErrorLog.log("sendtoIC : "+ErrorMessage.getStackTraceAsString(e));
+		}
+		return false;
 	}
-	
-	
-	public static void main(String args[]) {
-	
-		UnitiaHandover uh=new UnitiaHandover("192.168.1.95:9190");
-		
-		uh.send("test");
 	}
-}

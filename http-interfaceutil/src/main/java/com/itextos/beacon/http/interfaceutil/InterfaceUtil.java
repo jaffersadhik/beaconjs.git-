@@ -20,6 +20,7 @@ import com.itextos.beacon.inmemory.inmemdata.country.CountryInfo;
 import com.itextos.beacon.inmemory.inmemdata.country.CountryInfoCollection;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.unitia.ejbclient.UnitiaHandoverSingleTon;
 
 public class InterfaceUtil
 {
@@ -27,6 +28,8 @@ public class InterfaceUtil
     private static final Log    log                = LogFactory.getLog(InterfaceUtil.class);
 
     private static final String INTL_SERVICE_ALLOW = "sms~international";
+    
+    private static final String handovergw=System.getenv("handovergw");
 
     private InterfaceUtil()
     {}
@@ -79,45 +82,58 @@ public class InterfaceUtil
     public static void sendToKafka(
             MessageRequest aMessageRequest,StringBuffer sb)
     {
-        if (log.isDebugEnabled())
-            log.debug(" The MessageRequest object Handover to Kafka........" + aMessageRequest + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'");
-        sb.append(" The MessageRequest object Handover to Kafka........" + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'" ).append("\n");
-        final boolean isKafkaAvailable = CommonUtility.isEnabled(getConfigParamsValueAsString(ConfigParamConstants.IS_KAFKA_AVAILABLE));
-
-        sb.append(" isKafkaAvailable : "+isKafkaAvailable).append("\n");
-        if (!isKafkaAvailable)
-        {
-            if (log.isDebugEnabled())
-                log.debug("Unable to push kafka, Hence sending to Mysql ..");
-
-            sb.append("Unable to push kafka, Hence sending to Mysql ..").append("\n");
-            sendToFallback(aMessageRequest);
-        }
-        else
-        {
-            boolean status = false;
-
-            try
-            {
-                MessageProcessor.writeMessage(Component.INTERFACES, Component.IC, FallbackQ.getInstance().getBlockingQueue(), aMessageRequest);
-                status = true;
-            }
-            catch (final Exception e)
-            {
-                log.error("Message sending to kafka is failed, Hence sending to Fallback table..", e);
-                sb.append("Message sending to kafka is failed, Hence sending to Fallback table.. "+ ErrorMessage.getStackTraceAsString(e)).append("\n");
-
-                sendToFallback(aMessageRequest);
-            }
-
-            if (log.isDebugEnabled())
-                log.debug("Kafka handover status -" + status);
-            
-            sb.append("Kafka handover status -" + status).append("\n");
-        }
+    	
+    	if(handovergw!=null&&handovergw.equals("unitia")) {
+    		
+    		UnitiaHandoverSingleTon.getInstance().getUnitiaHandover().sendtoIC(aMessageRequest.getJsonString());
+    	}else {
+    		sendKafkaOriginal(aMessageRequest,sb);
+    	}
     }
 
-    private static void sendToFallback(
+    private static void sendKafkaOriginal(MessageRequest aMessageRequest, StringBuffer sb) {
+		
+    	   if (log.isDebugEnabled())
+               log.debug(" The MessageRequest object Handover to Kafka........" + aMessageRequest + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'");
+           sb.append(" The MessageRequest object Handover to Kafka........" + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'" ).append("\n");
+           final boolean isKafkaAvailable = CommonUtility.isEnabled(getConfigParamsValueAsString(ConfigParamConstants.IS_KAFKA_AVAILABLE));
+
+           sb.append(" isKafkaAvailable : "+isKafkaAvailable).append("\n");
+           if (!isKafkaAvailable)
+           {
+               if (log.isDebugEnabled())
+                   log.debug("Unable to push kafka, Hence sending to Mysql ..");
+
+               sb.append("Unable to push kafka, Hence sending to Mysql ..").append("\n");
+               sendToFallback(aMessageRequest);
+           }
+           else
+           {
+               boolean status = false;
+
+               try
+               {
+                   MessageProcessor.writeMessage(Component.INTERFACES, Component.IC, FallbackQ.getInstance().getBlockingQueue(), aMessageRequest);
+                   status = true;
+               }
+               catch (final Exception e)
+               {
+                   log.error("Message sending to kafka is failed, Hence sending to Fallback table..", e);
+                   sb.append("Message sending to kafka is failed, Hence sending to Fallback table.. "+ ErrorMessage.getStackTraceAsString(e)).append("\n");
+
+                   sendToFallback(aMessageRequest);
+               }
+
+               if (log.isDebugEnabled())
+                   log.debug("Kafka handover status -" + status);
+               
+               sb.append("Kafka handover status -" + status).append("\n");
+           }
+
+		
+	}
+
+	private static void sendToFallback(
             MessageRequest aMessageRequest)
     {
 

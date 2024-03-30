@@ -3,6 +3,7 @@ package com.unitia.util.misc;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -145,6 +146,23 @@ public class Prop {
 		return result;
 	}
 
+	
+	public List<String> getEJBServerList() {
+
+		String fileName = "/unitia/ejbserverlist.prop";
+
+		Properties result = new FileReader().getProperties(fileName);
+
+		
+		List<String> resultlist=new ArrayList<String>();
+		result.entrySet().forEach((key)->{
+			
+			resultlist.add(key.getValue().toString());
+		});
+
+		return resultlist;
+	}
+	
 	public Properties getBillingDBProp() {
 
 		String fileName = "billingdb.prop";

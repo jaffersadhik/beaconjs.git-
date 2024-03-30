@@ -17,6 +17,11 @@
 			<artifactId>common-componentconsumer</artifactId>
 			<version>1.0</version>
 		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>unitia-ejbclient</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>inmemory-data</artifactId>
