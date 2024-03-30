@@ -69,20 +69,19 @@
             </role-mapping>
         </access-control>
     </management>
-    <profile>
-    
-    
-       <subsystem xmlns="urn:jboss:domain:security-realms:20.0">
-    <security-realms>
-      <security-realm name="DatabaseRealm">
-   			 <authentication>
+    <profile>    
+     	<subsystem xmlns="urn:jboss:domain:security-realms:20.0">
+            <security-realms>
+                <security-realm name="MyCustomRealm">
+                    <!-- Configuration for MyCustomRealm -->
+                     <authentication>
      		   <local default-user="$local"/>
       		  <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
     		</authentication>
-	</security-realm>
-        <!-- Other security realms may be defined here -->
-    </security-realms>
-</subsystem>
+                </security-realm>
+                <!-- Other security realms may be defined here -->
+            </security-realms>
+        </subsystem>
         <subsystem xmlns="urn:jboss:domain:logging:8.0">
             <console-handler name="CONSOLE">
                 <level name="INFO"/>
@@ -127,12 +126,7 @@
                 <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
             </formatter>
         </subsystem>
-        
-        
-
-
-
-        <subsystem xmlns="urn:jboss:domain:batch-jberet:3.0">
+	    <subsystem xmlns="urn:jboss:domain:batch-jberet:3.0">
             <default-job-repository name="in-memory"/>
             <default-thread-pool name="batch"/>
             <security-domain name="ApplicationDomain"/>
