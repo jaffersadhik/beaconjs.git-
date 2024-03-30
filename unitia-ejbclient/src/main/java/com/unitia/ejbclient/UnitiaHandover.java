@@ -14,7 +14,7 @@ import com.unitia.ejbserver.TransferBean;
 
 public class UnitiaHandover {
 
-	@EJB
+	@EJB(name="MessageTransfer")
 	public MessageTransfer messageTransfer;
 	
 	public String ipport;
@@ -32,7 +32,7 @@ public class UnitiaHandover {
 			Context context =getInitialContext();
 			
 
-			messageTransfer = (MessageTransfer) context.lookup("java:global/unitia-ejbserver-1.0/MessageTransfer!com.unitia.ejbserver.MessageTransfer");
+			messageTransfer = (MessageTransfer) context.lookup("java:jboss/exported/global/MessageTransfer");
 	
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
