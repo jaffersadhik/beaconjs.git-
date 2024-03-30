@@ -32,8 +32,8 @@ public class UnitiaHandover {
 			Context context =getInitialContext();
 			
 
-	//		messageTransfer = (MessageTransfer) context.lookup("java:global/unitia-ejbserver-1.0.jar/MessageTransfer!com.unitia.ejbserver.MessageTransfer");
-			context.close();
+			messageTransfer = (MessageTransfer) context.lookup("java:global/unitia-ejbserver-1.0.jar/MessageTransfer!com.unitia.ejbserver.MessageTransfer");
+	
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,6 +77,8 @@ public class UnitiaHandover {
 		}catch(Exception e) {
 			
 			ErrorLog.log("sendtoIC : "+ErrorMessage.getStackTraceAsString(e));
+			
+			init();
 		}
 		return false;
 	}
