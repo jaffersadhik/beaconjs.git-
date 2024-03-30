@@ -32,7 +32,7 @@ public class UnitiaHandover {
 			Context context =getInitialContext();
 			
 
-			messageTransfer = (MessageTransfer) context.lookup("java:global/unitia-ejbserver-1.0.jar/MessageTransfer!com.unitia.ejbserver.MessageTransfer");
+			messageTransfer = (MessageTransfer) context.lookup("java:global/unitia-ejbserver-1.0/MessageTransfer!com.unitia.ejbserver.MessageTransfer");
 	
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
