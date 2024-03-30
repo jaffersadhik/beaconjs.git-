@@ -115,18 +115,6 @@
             </formatter>
         </subsystem>
         
-        
-        <subsystem xmlns="urn:jboss:domain:security-realms:1.0">
-    <security-realms>
-      <security-realm name="DatabaseRealm">
-    <authentication>
-        <local default-user="$local"/>
-        <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
-    </authentication>
-</security-realm>
-        <!-- Other security realms may be defined here -->
-    </security-realms>
-</subsystem>
         <subsystem xmlns="urn:jboss:domain:batch-jberet:3.0">
             <default-job-repository name="in-memory"/>
             <default-thread-pool name="batch"/>
