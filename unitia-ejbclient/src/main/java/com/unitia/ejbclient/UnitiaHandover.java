@@ -49,7 +49,7 @@ public class UnitiaHandover {
         props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
         props.put("jboss.naming.client.ejb.context", true);
         props.put(Context.SECURITY_PRINCIPAL, "john");
-        props.put(Context.SECURITY_CREDENTIALS, "secret123");
+        props.put(Context.SECURITY_CREDENTIALS, "fcf730b6d95236ecd3c9fc2d92d7b6b2bb061514961aec041d6c7a7192f592e4");
         return props;
     }
 	
