@@ -446,8 +446,12 @@
         <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
         <subsystem xmlns="urn:jboss:domain:remoting:6.0">
             <endpoint worker="default"/>
-            <http-connector name="http-remoting-connector" connector-ref="default" sasl-authentication-factory="application-sasl-authentication"/>
-        </subsystem>
+       <!--      
+       <http-connector name="http-remoting-connector" connector-ref="default" sasl-authentication-factory="application-sasl-authentication"/>
+        -->
+               <http-connector name="http-remoting-connector" connector-ref="default" />
+        
+         </subsystem>
         <subsystem xmlns="urn:jboss:domain:request-controller:1.0"/>
         <subsystem xmlns="urn:jboss:domain:resource-adapters:7.1"/>
         <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
