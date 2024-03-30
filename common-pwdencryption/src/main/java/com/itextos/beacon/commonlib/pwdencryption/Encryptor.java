@@ -156,7 +156,7 @@ public class Encryptor
         	
         	
 
-        	final String lApiPassword = getApiDecryptedPassword("0Zy+Eu0zriO1e6kUNegUSkpmYTRUUWVpa27WIo/Q3LTVxmXUiTS0QXkb");
+        	final String lApiPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
 
             System.out.println(lApiPassword);
 

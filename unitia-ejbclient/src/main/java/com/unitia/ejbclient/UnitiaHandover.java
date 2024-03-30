@@ -48,6 +48,8 @@ public class UnitiaHandover {
         props.put(Context.PROVIDER_URL, "http-remoting://"+ipport); // Change to your server URL
         props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
         props.put("jboss.naming.client.ejb.context", true);
+        props.put(Context.SECURITY_PRINCIPAL, "john");
+        props.put(Context.SECURITY_CREDENTIALS, "secret123");
         return props;
     }
 	
