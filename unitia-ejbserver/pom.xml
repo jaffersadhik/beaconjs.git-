@@ -48,9 +48,13 @@
                     <!-- Configuration for EJB plugin -->
                     <ejbVersion>3.2</ejbVersion> <!-- EJB version -->
                     <generateClient>false</generateClient> <!-- Do not generate client -->
-                     <manifestEntries>
-                        <Dependencies> com.unitia.ejbserver</Dependencies> <!-- Replace com.example.ejb with your module name -->
-                    </manifestEntries>
+                      <archive>
+                  
+                        <manifestEntries>
+                            <Dependencies>com.unitia.server</Dependencies> <!-- Replace com.example.ejb with your module name -->
+                        </manifestEntries>
+                   
+                </archive>
                 </configuration>
             </plugin>
         </plugins>
