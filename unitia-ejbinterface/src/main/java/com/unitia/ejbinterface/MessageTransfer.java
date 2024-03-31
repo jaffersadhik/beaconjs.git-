@@ -1,4 +1,4 @@
-package com.unitia.ejbserver;
+package com.unitia.ejbinterface;
 
 import javax.ejb.Remote;
 

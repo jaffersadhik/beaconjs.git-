@@ -9,8 +9,8 @@ import javax.naming.NamingException;
 
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.smslog.ErrorLog;
-import com.unitia.ejbserver.MessageTransfer;
-import com.unitia.ejbserver.TransferBean;
+import com.unitia.ejbinterface.MessageTransfer;
+import com.unitia.ejbinterface.TransferBean;
 
 public class UnitiaHandover {
 
@@ -32,7 +32,7 @@ public class UnitiaHandover {
 			Context context =getInitialContext();
 			
 
-			messageTransfer = (MessageTransfer) context.lookup("java:jboss/exported/global/MessageTransfer");
+			messageTransfer = (MessageTransfer) context.lookup("java:global/MessageTransfer");
 	
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

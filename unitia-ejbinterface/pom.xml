@@ -5,41 +5,27 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>unitia-ejbclient</artifactId>
-  <dependencies>
-	  
-	  <dependency>
+  <artifactId>unitia-ejbinterface</artifactId>
+  
+   <dependencies>
+	<dependency>
     <groupId>javax</groupId>
     <artifactId>javaee-api</artifactId>
     <version>8.0.1</version>
     <scope>provided</scope>
 </dependency>
 
-<dependency>
-    <groupId>org.jboss</groupId>
-    <artifactId>jboss-ejb-client</artifactId>
-    <version>4.0.23.Final</version> <!-- Adjust version as per your server -->
-</dependency>
-
-
 	<dependency>
     <groupId>beacon</groupId>
-    <artifactId>unitia-ejbinterface</artifactId>
+    <artifactId>thirdpartyjar</artifactId>
     <version>1.0</version>
 	</dependency>
-	
-	
-	<dependency>
-    <groupId>beacon</groupId>
-    <artifactId>common-splog</artifactId>
-    <version>1.0</version>
-	</dependency>
-	
 
 	<dependency>
     <groupId>beacon</groupId>
-    <artifactId>unitia-util</artifactId>
+    <artifactId>common-messageobject</artifactId>
     <version>1.0</version>
 	</dependency>
   </dependencies>
+  
 </project>

@@ -272,6 +272,7 @@
    	<module>unitia-util</module>
    	<module>unitia-ejbserver</module>
    	<module>unitia-ejbclient</module>
+   	<module>unitia-ejbinterface</module>
   </modules>
   
 

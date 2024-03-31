@@ -701,6 +701,9 @@
         <dependent-module archiveName="http-interfaceutil-1.0.jar" deploy-path="/lib" handle="module:/resource/http-interfaceutil/http-interfaceutil">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="unitia-ejbclient-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-ejbclient/unitia-ejbclient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="jboss-ejb-client-4.0.23.Final.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/jboss/jboss-ejb-client/4.0.23.Final/jboss-ejb-client-4.0.23.Final.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -743,7 +746,7 @@
         <dependent-module archiveName="wildfly-naming-client-1.0.4.Final.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/wildfly/wildfly-naming-client/1.0.4.Final/wildfly-naming-client-1.0.4.Final.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="unitia-ejbserver-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-ejbserver/unitia-ejbserver">
+        <dependent-module archiveName="unitia-util-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-util/unitia-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="commons-dbcp-1.2.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-dbcp/commons-dbcp/1.2.2/commons-dbcp-1.2.2.jar">
