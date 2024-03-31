@@ -51,7 +51,7 @@
                       <archive>
                   
                         <manifestEntries>
-                            <Dependencies>com.unitia.server</Dependencies> <!-- Replace com.example.ejb with your module name -->
+                            <Dependencies>com.unitia.ejbserver</Dependencies> <!-- Replace com.example.ejb with your module name -->
                         </manifestEntries>
                    
                 </archive>
