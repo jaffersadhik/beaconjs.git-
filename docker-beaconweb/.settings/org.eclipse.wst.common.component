@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                
+                    
+    
     
     
     <wb-module deploy-name="docker-beaconweb-1.0">
-                                
+                                        
+        
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                
+                                        
+        
         
         
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
@@ -746,6 +749,9 @@
         <dependent-module archiveName="wildfly-naming-client-1.0.4.Final.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/wildfly/wildfly-naming-client/1.0.4.Final/wildfly-naming-client-1.0.4.Final.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="unitia-ejbinterface-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-ejbinterface/unitia-ejbinterface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="unitia-util-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-util/unitia-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -788,11 +794,13 @@
         <dependent-module archiveName="common-stringprocessor-1.0.jar" deploy-path="/lib" handle="module:/resource/common-stringprocessor/common-stringprocessor">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                            
+                                    
+    
     
     
     </wb-module>
-            
+                
+
 
 
 </project-modules>

@@ -4,6 +4,7 @@
     <groupId>beacon</groupId>
     <artifactId>beacon</artifactId>
     <version>1.0</version>
+    
   </parent>
   <artifactId>unitia-ejbserver</artifactId>
   <packaging>ejb</packaging> <!-- Packaging type set to EJB -->
@@ -38,6 +39,15 @@
   
   
     <build>
+		    <sourceDirectory>ejbModule</sourceDirectory>
+ <resources>
+      <resource>
+        <directory>ejbModule</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
         <plugins>
             <!-- Maven EJB Plugin -->
             <plugin>
@@ -48,47 +58,29 @@
                     <!-- Configuration for EJB plugin -->
                     <ejbVersion>3.2</ejbVersion> <!-- EJB version -->
                     <generateClient>false</generateClient> <!-- Do not generate client -->
-                      <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
-                        </manifest>
-                    </archive>
-                     <archive>
-                        <manifestEntries>
-                            <!-- Add your custom entries here -->
-                            <Dependencies>com.unitia.ejbserver</Dependencies>
-                        </manifestEntries>
-                        </archive>
+                    
                 </configuration>
             </plugin>
             
+               <!-- Dependency plugin to copy external JARs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             
-             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>3.2.0</version> <!-- Use the latest version -->
-            <executions>
-                <execution>
-                    <id>copy-resources</id>
-                    <phase>initialize</phase> <!-- Run during the initialize phase -->
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>./target</outputDirectory>
-                        <resources>
-                            <resource>
-                                <directory>../thirdpartyjar/target</directory>
-                                <includes>
-                                    <include>thirdpartyjar-1.0.jar</include>
-                                </includes>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        </plugins>
+             </plugins>
     </build>
 </project>

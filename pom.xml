@@ -248,15 +248,14 @@
   	<module>commonwardependency</module>
   	<module>common-splog</module>
   	
-  <!--
+  
   	<module>ui-customer</module>
   	<module>ui-nginx</module>
   		
   	<module>ui-api</module>
   	
- --> 	<module>platform-mccmncload</module>
+  	<module>platform-mccmncload</module>
 
- 	<module>ui-api</module>
  	<module>demo</module>
  	<module>springboot</module>
  	<module>dbgwspring</module>
