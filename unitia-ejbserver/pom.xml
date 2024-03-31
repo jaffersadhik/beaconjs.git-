@@ -54,6 +54,12 @@
                             <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
                         </manifest>
                     </archive>
+                     <archive>
+                        <manifestEntries>
+                            <!-- Add your custom entries here -->
+                            <Dependencies>com.unitia.ejbserver</Dependencies>
+                        </manifestEntries>
+                        </archive>
                 </configuration>
             </plugin>
         </plugins>
