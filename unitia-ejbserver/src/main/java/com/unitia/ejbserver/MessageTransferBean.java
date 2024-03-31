@@ -5,7 +5,7 @@ import javax.ejb.Stateless;
 import com.unitia.ejbinterface.MessageTransfer;
 import com.unitia.ejbinterface.TransferBean;
 
-@Stateless(name="MessageTransfer",mappedName="java:global/MessageTransfer")
+@Stateless(mappedName="java:global/MessageTransfer")
 public class MessageTransferBean implements MessageTransfer {
 
 
