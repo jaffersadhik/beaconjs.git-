@@ -28,6 +28,9 @@
                                 <resource>
                                     <directory>../ui-customer/dist/</directory>
                                 </resource>
+                                 <resource>
+                                    <directory>../ui-mui/dist/</directory>
+                                </resource>
                             </resources>
                         </configuration>
                     </execution>

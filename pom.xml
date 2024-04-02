@@ -248,7 +248,8 @@
   	<module>commonwardependency</module>
   	<module>common-splog</module>
   	
-  
+
+   	<module>ui-mui</module>
   	<module>ui-customer</module>
   	<module>ui-nginx</module>
   		
