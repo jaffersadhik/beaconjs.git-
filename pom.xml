@@ -273,6 +273,20 @@
    	<module>unitia-ejbserver</module>
    	<module>unitia-ejbclient</module>
    	<module>unitia-ejbinterface</module>
+   	<module>fb-initialstage</module>
+   	<module>fb-splitstage</module>
+   	<module>fb-fileparser</module>
+   	<module>fb-utils</module>
+   	<module>fb-inmemoryrefresh</module>
+   	<module>fb-handoverstage</module>
+   	<module>fb-fileupload</module>
+   	<module>fb-scheduleprocessor</module>
+   	<module>fb-campaignfinisher</module>
+   	<module>fb-groupsprocessor</module>
+   	<module>fb-excludeprocessor</module>
+   	<module>fb-dltfileprocessor</module>
+   	<module>fb-downloadhandler</module>
+   	<module>fb-cronjobs</module>
   </modules>
   
 

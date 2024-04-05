@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="fb-splitstage-1.0">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="common-utility-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-utility/common-utility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commonpropertyloader-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-commonpropertyloader/common-commonpropertyloader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-data/inmemory-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-loader-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inmemory-loader/inmemory-loader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-commondbpool/common-commondbpool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-constants/common-constants">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="thirdpartyjar-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/thirdpartyjar/thirdpartyjar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-splog-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-splog/common-splog">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-accountsync-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-accountsync/common-accountsync">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="fb-splitstage"/>
+        <property name="java-output-path" value="/fb-splitstage/target/classes"/>
+    </wb-module>
+</project-modules>
