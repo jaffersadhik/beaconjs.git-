@@ -40,49 +40,56 @@ public class InitializeExcludeConsumer extends GenericServlet implements Servlet
 	
 	public void init() throws ServletException {
 		super.init();
-		try {
-			prop = ExcludeProcessorPropertiesTon.getInstance()
-					.getPropertiesConfiguration();
-			String instanceId = prop
-					.getString(com.winnovature.utils.utils.Constants.MONITORING_INSTANCE_ID);
-			Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
-					.getInstance().getConfigurationFromconfigParams();
+		
+		String module=System.getenv("excludeprocessor");
+		if(module!=null&&module.equals("1")) {
+	
 
-			Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon
-					.getInstance().getConfigurationFromconfigParams();
+			try {
+				prop = ExcludeProcessorPropertiesTon.getInstance()
+						.getPropertiesConfiguration();
+				String instanceId = prop
+						.getString(com.winnovature.utils.utils.Constants.MONITORING_INSTANCE_ID);
+				Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
+						.getInstance().getConfigurationFromconfigParams();
 
-			String queueNameAndSize = configMap
-					.get(Constants.HIGH_MEDIUM_LOW_QUEUES_NOOF_CONSUMERS_COUNTS);
-			String[] queueNameAndSizeArray = queueNameAndSize.split(":");
-			List<String> queueNameAndSizeList = Arrays
-					.asList(queueNameAndSizeArray);
+				Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon
+						.getInstance().getConfigurationFromconfigParams();
 
-			for (RedisServerDetailsBean bean : configurationFromconfigParams
-					.values()) {
+				String queueNameAndSize = configMap
+						.get(Constants.HIGH_MEDIUM_LOW_QUEUES_NOOF_CONSUMERS_COUNTS);
+				String[] queueNameAndSizeArray = queueNameAndSize.split(":");
+				List<String> queueNameAndSizeList = Arrays
+						.asList(queueNameAndSizeArray);
 
-				for (String queueNameAndConsumer : queueNameAndSizeList) {
-					String noofconsumer = queueNameAndConsumer.split("~")[1];
-					String queueName = queueNameAndConsumer.split("~")[0];
-					queueName = queueName + com.winnovature.utils.utils.Constants.EXCLUDE;
+				for (RedisServerDetailsBean bean : configurationFromconfigParams
+						.values()) {
 
-					for (int i = 0; i < Integer.parseInt(noofconsumer); i++) {
-						consumer = new ExcludeConsumer(queueName, bean, instanceId);
-						consumer.setName("Thread" + i + "-" + queueName);
-						consumer.start();
-						log.info(className
-								+ "[init] >>>>>> STARTING ExcludeConsumer  "
-								+ i + " QUEUE NAME " + queueName + " bean:"
-								+ bean.getIpAddress() + " instanceId:"
-								+ instanceId);
+					for (String queueNameAndConsumer : queueNameAndSizeList) {
+						String noofconsumer = queueNameAndConsumer.split("~")[1];
+						String queueName = queueNameAndConsumer.split("~")[0];
+						queueName = queueName + com.winnovature.utils.utils.Constants.EXCLUDE;
 
-						log.info(className + "[init] >>>>>>>> Starting "
-								+ queueName + " Consumer... Done");
-					} // end of for loop
+						for (int i = 0; i < Integer.parseInt(noofconsumer); i++) {
+							consumer = new ExcludeConsumer(queueName, bean, instanceId);
+							consumer.setName("Thread" + i + "-" + queueName);
+							consumer.start();
+							log.info(className
+									+ "[init] >>>>>> STARTING ExcludeConsumer  "
+									+ i + " QUEUE NAME " + queueName + " bean:"
+									+ bean.getIpAddress() + " instanceId:"
+									+ instanceId);
+
+							log.info(className + "[init] >>>>>>>> Starting "
+									+ queueName + " Consumer... Done");
+						} // end of for loop
+					}
+
 				}
-
+			} catch (Exception e) {
+				log.error(className + "[init]  Exception:", e);
 			}
-		} catch (Exception e) {
-			log.error(className + "[init]  Exception:", e);
+
 		}
 	}
 

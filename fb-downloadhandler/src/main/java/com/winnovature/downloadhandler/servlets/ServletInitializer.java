@@ -32,36 +32,43 @@ public class ServletInitializer extends GenericServlet implements Servlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		try {
-			if (log.isDebugEnabled()) {
-				log.debug(className + " InitializePollers Servlet started...");
+		
+		
+		String module=System.getenv("downloadhandler");
+		if(module!=null&&module.equals("1")) {
+		
+
+			try {
+				if (log.isDebugEnabled()) {
+					log.debug(className + " InitializePollers Servlet started...");
+				}
+				propertiesConfiguration = DownloadHandlerPropertiesTon.getInstance().getPropertiesConfiguration();
+
+				String isPollerRequired = propertiesConfiguration.getString("download_req.poller.required");
+
+				if (StringUtils.isNotBlank(isPollerRequired)) {
+					isPollerDownloadReqRequired = isPollerRequired.trim().equalsIgnoreCase("yes");
+				}
+
+				if (isPollerDownloadReqRequired) {
+					pollerDownladReq = new PollerDownloadReq();
+					pollerDownladReq.setName("PollerDownladReq");
+					pollerDownladReq.start();
+				}
+
+				int consumersCount = propertiesConfiguration.getInt("csv.excel.convertion.consumers.count", 5);
+				for (int i = 0; i < consumersCount; i++) {
+					csvToExcelConvertor = new CsvToExcelConvertionRequestConsumer();
+					csvToExcelConvertor.setName("CsvToExcelConvertionRequestConsumer" + (i + 1));
+					csvToExcelConvertor.start();
+				}
+
+			} catch (Exception e) {
+				log.error(className + " Exception:", e);
+				log.error(className + " RESTART FP-DownloadHandler MODULE ");
 			}
-			propertiesConfiguration = DownloadHandlerPropertiesTon.getInstance().getPropertiesConfiguration();
 
-			String isPollerRequired = propertiesConfiguration.getString("download_req.poller.required");
-
-			if (StringUtils.isNotBlank(isPollerRequired)) {
-				isPollerDownloadReqRequired = isPollerRequired.trim().equalsIgnoreCase("yes");
-			}
-
-			if (isPollerDownloadReqRequired) {
-				pollerDownladReq = new PollerDownloadReq();
-				pollerDownladReq.setName("PollerDownladReq");
-				pollerDownladReq.start();
-			}
-
-			int consumersCount = propertiesConfiguration.getInt("csv.excel.convertion.consumers.count", 5);
-			for (int i = 0; i < consumersCount; i++) {
-				csvToExcelConvertor = new CsvToExcelConvertionRequestConsumer();
-				csvToExcelConvertor.setName("CsvToExcelConvertionRequestConsumer" + (i + 1));
-				csvToExcelConvertor.start();
-			}
-
-		} catch (Exception e) {
-			log.error(className + " Exception:", e);
-			log.error(className + " RESTART FP-DownloadHandler MODULE ");
 		}
-
 	}
 
 	@Override

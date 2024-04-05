@@ -46,108 +46,115 @@ public class InitializePoller extends GenericServlet implements Servlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		try {
-			if (log.isDebugEnabled()) {
-				log.debug(className + " InitializePoller Servlet started...");
-			}
-			groupsProperties = GroupsProcessorPropertiesTon.getInstance().getPropertiesConfiguration();
-			String instanceId = groupsProperties.getString(Constants.MONITORING_INSTANCE_ID);
-			String groupsPollerRequired = groupsProperties.getString(Constants.GroupsPollerRequired);
-			boolean runGroupsPoller = false;
-			if (StringUtils.isNotBlank(groupsPollerRequired)) {
-				runGroupsPoller = groupsPollerRequired.trim().equalsIgnoreCase("yes");
-			}
-			// picks request from group_master/group_files tables
-			if (runGroupsPoller) {
-				groupsMasterPoller = new GroupsMasterPoller("GroupsMasterPoller");
-				groupsMasterPoller.setName("GroupsMasterPoller");
-				groupsMasterPoller.start();
+		
+		String module=System.getenv("groupsprocessor");
+		if(module!=null&&module.equals("1")) {
+
+
+			try {
 				if (log.isDebugEnabled()) {
-					log.debug(className + " GroupsMasterPoller started.");
+					log.debug(className + " InitializePoller Servlet started...");
 				}
-			}
-
-			// parse/chops user files to one/more txt files
-			int groupFileConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CONSUMERS_PER_REDIS);
-			List<RedisServerDetailsBean> normalRedisServerDetails = RedisConnectionTon.getInstance()
-					.getConfigurationFromconfigParams();
-
-			Iterator<RedisServerDetailsBean> iterator = normalRedisServerDetails.iterator();
-
-			while (iterator.hasNext()) {
-				RedisServerDetailsBean bean = iterator.next();
-				for (int i = 0; i < groupFileConsumersPerRedisServer; i++) {
-					groupsQConsumer = new GroupsQConsumer(bean, instanceId);
-					groupsQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsQConsumer");
-					groupsQConsumer.start();
-					if (log.isDebugEnabled())
-						log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsQConsumer" + (i + 1) + " ThreadName:"
-								+ groupsQConsumer.getName() + " bean:" + bean.getIpAddress());
+				groupsProperties = GroupsProcessorPropertiesTon.getInstance().getPropertiesConfiguration();
+				String instanceId = groupsProperties.getString(Constants.MONITORING_INSTANCE_ID);
+				String groupsPollerRequired = groupsProperties.getString(Constants.GroupsPollerRequired);
+				boolean runGroupsPoller = false;
+				if (StringUtils.isNotBlank(groupsPollerRequired)) {
+					runGroupsPoller = groupsPollerRequired.trim().equalsIgnoreCase("yes");
 				}
-			} // end of REDIS servers iteration
-
-			// reads the parsed/choped files and push to redis
-			int groupSplitFileConsumersPerRedisServer = groupsProperties
-					.getInt(Constants.SPLIT_FILE_CONSUMERS_PER_REDIS);
-			String batchSize = groupsProperties.getString(Constants.REDIS_PUSH_BATCH_SIZE);
-			iterator = normalRedisServerDetails.iterator();
-			while (iterator.hasNext()) {
-				RedisServerDetailsBean bean = iterator.next();
-				for (int i = 0; i < groupSplitFileConsumersPerRedisServer; i++) {
-					groupsFileSplitQConsumer = new GroupsFileSplitQConsumer(bean, instanceId, batchSize);
-					groupsFileSplitQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsFileSplitQConsumer");
-					groupsFileSplitQConsumer.start();
-					if (log.isDebugEnabled())
-						log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsFileSplitQConsumer" + (i + 1)
-								+ " ThreadName:" + groupsFileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+				// picks request from group_master/group_files tables
+				if (runGroupsPoller) {
+					groupsMasterPoller = new GroupsMasterPoller("GroupsMasterPoller");
+					groupsMasterPoller.setName("GroupsMasterPoller");
+					groupsMasterPoller.start();
+					if (log.isDebugEnabled()) {
+						log.debug(className + " GroupsMasterPoller started.");
+					}
 				}
-			} // end of REDIS servers iteration
-			
-			// updates group_master, groups_files to be completed
-			if (runGroupsPoller) {
-				pollerGroupFilesCompleted = new PollerGroupFilesCompleted();
-				pollerGroupFilesCompleted.setName("PollerGroupFilesCompleted");
-				pollerGroupFilesCompleted.start();
-				if (log.isDebugEnabled()) {
-					log.debug(className + " PollerGroupFilesCompleted started.");
+
+				// parse/chops user files to one/more txt files
+				int groupFileConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CONSUMERS_PER_REDIS);
+				List<RedisServerDetailsBean> normalRedisServerDetails = RedisConnectionTon.getInstance()
+						.getConfigurationFromconfigParams();
+
+				Iterator<RedisServerDetailsBean> iterator = normalRedisServerDetails.iterator();
+
+				while (iterator.hasNext()) {
+					RedisServerDetailsBean bean = iterator.next();
+					for (int i = 0; i < groupFileConsumersPerRedisServer; i++) {
+						groupsQConsumer = new GroupsQConsumer(bean, instanceId);
+						groupsQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsQConsumer");
+						groupsQConsumer.start();
+						if (log.isDebugEnabled())
+							log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsQConsumer" + (i + 1) + " ThreadName:"
+									+ groupsQConsumer.getName() + " bean:" + bean.getIpAddress());
+					}
+				} // end of REDIS servers iteration
+
+				// reads the parsed/choped files and push to redis
+				int groupSplitFileConsumersPerRedisServer = groupsProperties
+						.getInt(Constants.SPLIT_FILE_CONSUMERS_PER_REDIS);
+				String batchSize = groupsProperties.getString(Constants.REDIS_PUSH_BATCH_SIZE);
+				iterator = normalRedisServerDetails.iterator();
+				while (iterator.hasNext()) {
+					RedisServerDetailsBean bean = iterator.next();
+					for (int i = 0; i < groupSplitFileConsumersPerRedisServer; i++) {
+						groupsFileSplitQConsumer = new GroupsFileSplitQConsumer(bean, instanceId, batchSize);
+						groupsFileSplitQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsFileSplitQConsumer");
+						groupsFileSplitQConsumer.start();
+						if (log.isDebugEnabled())
+							log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsFileSplitQConsumer" + (i + 1)
+									+ " ThreadName:" + groupsFileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+					}
+				} // end of REDIS servers iteration
+				
+				// updates group_master, groups_files to be completed
+				if (runGroupsPoller) {
+					pollerGroupFilesCompleted = new PollerGroupFilesCompleted();
+					pollerGroupFilesCompleted.setName("PollerGroupFilesCompleted");
+					pollerGroupFilesCompleted.start();
+					if (log.isDebugEnabled()) {
+						log.debug(className + " PollerGroupFilesCompleted started.");
+					}
+					
+					pollerGroupMasterCompleted = new PollerGroupMasterCompleted();
+					pollerGroupMasterCompleted.setName("PollerGroupMasterCompleted");
+					pollerGroupMasterCompleted.start();
+					if (log.isDebugEnabled()) {
+						log.debug(className + " PollerGroupMasterCompleted started.");
+					}
+					
+					pollerCampaignMasterCompleted = new PollerCampaignMasterCompleted();
+					pollerCampaignMasterCompleted.setName("PollerCampaignMasterCompleted");
+					pollerCampaignMasterCompleted.start();
+					if (log.isDebugEnabled()) {
+						log.debug(className + " PollerCampaignMasterCompleted started.");
+					}
 				}
 				
-				pollerGroupMasterCompleted = new PollerGroupMasterCompleted();
-				pollerGroupMasterCompleted.setName("PollerGroupMasterCompleted");
-				pollerGroupMasterCompleted.start();
-				if (log.isDebugEnabled()) {
-					log.debug(className + " PollerGroupMasterCompleted started.");
-				}
-				
-				pollerCampaignMasterCompleted = new PollerCampaignMasterCompleted();
-				pollerCampaignMasterCompleted.setName("PollerCampaignMasterCompleted");
-				pollerCampaignMasterCompleted.start();
-				if (log.isDebugEnabled()) {
-					log.debug(className + " PollerCampaignMasterCompleted started.");
-				}
+				// get request from GroupsCampaignQ and create a text file with group numbers
+				int groupsCampaignQConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CAMPAIGN_Q_CONSUMERS_PER_REDIS);
+				List<RedisServerDetailsBean> redisServerDetails = com.winnovature.utils.singletons.RedisConnectionTon.getInstance()
+						.getConfigurationFromconfigParams();
+				Iterator<RedisServerDetailsBean> iterator2 = redisServerDetails.iterator();
+				while (iterator2.hasNext()) {
+					RedisServerDetailsBean bean = iterator2.next();
+					for (int i = 0; i < groupsCampaignQConsumersPerRedisServer; i++) {
+						groupsCampaignQConsumer = new GroupsCampaignQConsumer(bean, instanceId);
+						groupsCampaignQConsumer.setName("Thread" + (i+1) + "-" + "GroupsCampaignQConsumer");
+						groupsCampaignQConsumer.start();
+						if (log.isDebugEnabled())
+							log.debug("[SplitStageServlet.init()] >>>>>> STARTING GroupsCampaignQConsumer[GroupsCampaignQ]  " + (i+1)
+									+ " ThreadName:" + groupsCampaignQConsumer.getName() + " bean:" + bean.getIpAddress());
+					}
+
+				} // end of REDIS servers iteration
+
+			} catch (Exception e) {
+				log.error(className + " Exception:", e);
+				log.error(className + " RESTART FP-GroupsProcessor MODULE ");
 			}
-			
-			// get request from GroupsCampaignQ and create a text file with group numbers
-			int groupsCampaignQConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CAMPAIGN_Q_CONSUMERS_PER_REDIS);
-			List<RedisServerDetailsBean> redisServerDetails = com.winnovature.utils.singletons.RedisConnectionTon.getInstance()
-					.getConfigurationFromconfigParams();
-			Iterator<RedisServerDetailsBean> iterator2 = redisServerDetails.iterator();
-			while (iterator2.hasNext()) {
-				RedisServerDetailsBean bean = iterator2.next();
-				for (int i = 0; i < groupsCampaignQConsumersPerRedisServer; i++) {
-					groupsCampaignQConsumer = new GroupsCampaignQConsumer(bean, instanceId);
-					groupsCampaignQConsumer.setName("Thread" + (i+1) + "-" + "GroupsCampaignQConsumer");
-					groupsCampaignQConsumer.start();
-					if (log.isDebugEnabled())
-						log.debug("[SplitStageServlet.init()] >>>>>> STARTING GroupsCampaignQConsumer[GroupsCampaignQ]  " + (i+1)
-								+ " ThreadName:" + groupsCampaignQConsumer.getName() + " bean:" + bean.getIpAddress());
-				}
 
-			} // end of REDIS servers iteration
-
-		} catch (Exception e) {
-			log.error(className + " Exception:", e);
-			log.error(className + " RESTART FP-GroupsProcessor MODULE ");
 		}
 	}
 

@@ -45,51 +45,58 @@ public class SplitStageServlet extends GenericServlet implements Servlet {
 
 		super.init();
 
-		try {
+		String module=System.getenv("splitstage");
+		if(module!=null&&module.equals("1")) {
+	
 
-			prop = SplitStagePropertiesTon.getInstance().getPropertiesConfiguration();
+			try {
 
-			String instanceId = prop.getString(Constants.MONITORING_INSTANCE_ID);
+				prop = SplitStagePropertiesTon.getInstance().getPropertiesConfiguration();
 
-			Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon.getInstance()
-					.getConfigurationFromconfigParams();
+				String instanceId = prop.getString(Constants.MONITORING_INSTANCE_ID);
 
-			int splitConsumersPerRedisServer = Integer.parseInt(configMap.get(Constants.SPLIT_CONSUMERS_PER_REDIS));
+				Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon.getInstance()
+						.getConfigurationFromconfigParams();
 
-			if (log.isDebugEnabled()) {
-				log.debug(className + methodName + " splitConsumersPerRedisServer = " + splitConsumersPerRedisServer);
-			}
+				int splitConsumersPerRedisServer = Integer.parseInt(configMap.get(Constants.SPLIT_CONSUMERS_PER_REDIS));
 
-			List<RedisServerDetailsBean> redisServerDetails = RedisConnectionTon.getInstance()
-					.getConfigurationFromconfigParams();
-
-			Iterator<RedisServerDetailsBean> iterator = redisServerDetails.iterator();
-
-			while (iterator.hasNext()) {
-
-				RedisServerDetailsBean bean = iterator.next();
-
-				for (int i = 0; i < splitConsumersPerRedisServer; i++) {
-					fileSplitQConsumer = new FileSplitQConsumer(bean, instanceId);
-					fileSplitQConsumer.setName("Thread" + (i+1) + "-" + "SplitQConsumer");
-					fileSplitQConsumer.start();
-					if (log.isDebugEnabled())
-						log.debug("[SplitStageServlet.init()] >>>>>> STARTING FileSplitQConsumer[SplitQConsumer]  " + (i+1)
-								+ " ThreadName:" + fileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+				if (log.isDebugEnabled()) {
+					log.debug(className + methodName + " splitConsumersPerRedisServer = " + splitConsumersPerRedisServer);
 				}
 
-			} // end of REDIS servers iteration
+				List<RedisServerDetailsBean> redisServerDetails = RedisConnectionTon.getInstance()
+						.getConfigurationFromconfigParams();
 
-		} catch (Exception e) {
-			log.error(className + methodName + " >>>> Exception: ", e);
-			log.error(className + methodName + " >>>> Please restart SplitStage module. ");
-		} catch (Throwable t) {
-			log.error(className + methodName + " >>>> Throwable: ", t);
-			log.error(className + methodName + " >>>> Please restart SplitStage module. ");
-		}
+				Iterator<RedisServerDetailsBean> iterator = redisServerDetails.iterator();
 
-		if (log.isDebugEnabled()) {
-			log.debug(className + methodName + " end..");
+				while (iterator.hasNext()) {
+
+					RedisServerDetailsBean bean = iterator.next();
+
+					for (int i = 0; i < splitConsumersPerRedisServer; i++) {
+						fileSplitQConsumer = new FileSplitQConsumer(bean, instanceId);
+						fileSplitQConsumer.setName("Thread" + (i+1) + "-" + "SplitQConsumer");
+						fileSplitQConsumer.start();
+						if (log.isDebugEnabled())
+							log.debug("[SplitStageServlet.init()] >>>>>> STARTING FileSplitQConsumer[SplitQConsumer]  " + (i+1)
+									+ " ThreadName:" + fileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+					}
+
+				} // end of REDIS servers iteration
+
+			} catch (Exception e) {
+				log.error(className + methodName + " >>>> Exception: ", e);
+				log.error(className + methodName + " >>>> Please restart SplitStage module. ");
+			} catch (Throwable t) {
+				log.error(className + methodName + " >>>> Throwable: ", t);
+				log.error(className + methodName + " >>>> Please restart SplitStage module. ");
+			}
+
+			if (log.isDebugEnabled()) {
+				log.debug(className + methodName + " end..");
+			}
+
 		}
+		
 	}
 }

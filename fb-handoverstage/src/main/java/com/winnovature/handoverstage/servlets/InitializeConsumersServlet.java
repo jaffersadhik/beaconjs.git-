@@ -42,48 +42,55 @@ public class InitializeConsumersServlet extends GenericServlet implements Servle
 	
 	public void init() throws ServletException {
 		super.init();
-		try {
-			lMsgIdentifier.init(InterfaceType.GUI);
-			FallbackQReaper.getInstance();
-			
-			prop = HandoverStagePropertiesTon.getInstance()
-					.getPropertiesConfiguration();
-			String instanceId = prop
-					.getString(com.winnovature.utils.utils.Constants.MONITORING_INSTANCE_ID);
-			Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
-					.getInstance().getConfigurationFromconfigParams();
+		
+		String module=System.getenv("handoverstage");
+		if(module!=null&&module.equals("1")) {
+	
 
-			Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon
-					.getInstance().getConfigurationFromconfigParams();
+			try {
+				lMsgIdentifier.init(InterfaceType.GUI);
+				FallbackQReaper.getInstance();
+				
+				prop = HandoverStagePropertiesTon.getInstance()
+						.getPropertiesConfiguration();
+				String instanceId = prop
+						.getString(com.winnovature.utils.utils.Constants.MONITORING_INSTANCE_ID);
+				Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
+						.getInstance().getConfigurationFromconfigParams();
 
-			String queueNameAndSize = configMap
-					.get(Constants.HIGH_MEDIUM_LOW_QUEUES_NOOF_CONSUMERS_COUNTS);
-			String[] queueNameAndSizeArray = queueNameAndSize.split(":");
-			List<String> queueNameAndSizeList = Arrays
-					.asList(queueNameAndSizeArray);
+				Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon
+						.getInstance().getConfigurationFromconfigParams();
 
-			for (RedisServerDetailsBean bean : configurationFromconfigParams
-					.values()) {
+				String queueNameAndSize = configMap
+						.get(Constants.HIGH_MEDIUM_LOW_QUEUES_NOOF_CONSUMERS_COUNTS);
+				String[] queueNameAndSizeArray = queueNameAndSize.split(":");
+				List<String> queueNameAndSizeList = Arrays
+						.asList(queueNameAndSizeArray);
 
-				for (String queueNameAndConsumer : queueNameAndSizeList) {
-					String noofconsumer = queueNameAndConsumer.split("~")[1];
-					String queueName = queueNameAndConsumer.split("~")[0];
+				for (RedisServerDetailsBean bean : configurationFromconfigParams
+						.values()) {
 
-					for (int i = 0; i < Integer.parseInt(noofconsumer); i++) {
+					for (String queueNameAndConsumer : queueNameAndSizeList) {
+						String noofconsumer = queueNameAndConsumer.split("~")[1];
+						String queueName = queueNameAndConsumer.split("~")[0];
 
-						consumer = new SplitFileConsumer(queueName, bean, instanceId);
-						consumer.setName("Thread" + i + "-" + queueName);
-						consumer.start();
-						if (log.isDebugEnabled())
-							log.debug(className + "[init] >>>>>> STARTING Handover Consumer  " + i + " QUEUE NAME "
-									+ queueName + " bean:" + bean.getIpAddress() + " instanceId:" + instanceId);
+						for (int i = 0; i < Integer.parseInt(noofconsumer); i++) {
 
-					} // end of for loop
+							consumer = new SplitFileConsumer(queueName, bean, instanceId);
+							consumer.setName("Thread" + i + "-" + queueName);
+							consumer.start();
+							if (log.isDebugEnabled())
+								log.debug(className + "[init] >>>>>> STARTING Handover Consumer  " + i + " QUEUE NAME "
+										+ queueName + " bean:" + bean.getIpAddress() + " instanceId:" + instanceId);
+
+						} // end of for loop
+					}
+
 				}
-
+			} catch (Exception e) {
+				log.error(className + "[init]  Exception:", e);
 			}
-		} catch (Exception e) {
-			log.error(className + "[init]  Exception:", e);
+
 		}
 	}
 

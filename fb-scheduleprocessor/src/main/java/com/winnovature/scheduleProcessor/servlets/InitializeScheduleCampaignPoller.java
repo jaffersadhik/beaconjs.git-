@@ -24,23 +24,31 @@ public class InitializeScheduleCampaignPoller extends GenericServlet implements 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		try {
+		
+		String module=System.getenv("scheduleprocessor");
+		if(module!=null&&module.equals("1")) {
 			
-			// thread to fetch records from campaign_master & campaign_files tables and HO to fileSplitQ/groupQ
-			if (log.isDebugEnabled())
-				log.debug(className + " CampaignMasterPoller[CSAPoller] starting...");
 
-			CSAPoller = new ScheduleCampaignPoller("CSAPoller");
-			CSAPoller.setName("CSAPoller");
-			CSAPoller.start();
+			try {
+				
+				// thread to fetch records from campaign_master & campaign_files tables and HO to fileSplitQ/groupQ
+				if (log.isDebugEnabled())
+					log.debug(className + " CampaignMasterPoller[CSAPoller] starting...");
 
-			if (log.isDebugEnabled())
-				log.debug(className + " CampaignMasterPoller[CSAPoller] started.");
+				CSAPoller = new ScheduleCampaignPoller("CSAPoller");
+				CSAPoller.setName("CSAPoller");
+				CSAPoller.start();
 
-		} catch (Exception e) {
-			log.error(className + " Exception:", e);
-			log.error(className + " RESTART THIS MODULE ");
+				if (log.isDebugEnabled())
+					log.debug(className + " CampaignMasterPoller[CSAPoller] started.");
+
+			} catch (Exception e) {
+				log.error(className + " Exception:", e);
+				log.error(className + " RESTART THIS MODULE ");
+			}
+
 		}
+		
 	}
 
 	@Override

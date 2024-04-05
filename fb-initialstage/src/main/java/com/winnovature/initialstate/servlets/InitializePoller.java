@@ -26,30 +26,39 @@ public class InitializePoller extends GenericServlet implements Servlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		try {
+		
+		
+		String module=System.getenv("initialstage");
+		if(module!=null&&module.equals("1")) {
+		
 
-			// thread to fetch records from campaign_master & campaign_files tables and HO to fileSplitQ/groupQ
-			if (log.isDebugEnabled())
-				log.debug(className + " CampaignMasterPoller/CampaignGroupsPoller starting...");
+			try {
 
-			campaignMasterPoller = new CampaignMasterPoller("CampaignMasterPoller");
-			campaignMasterPoller.setName("CampaignMasterPoller");
-			campaignMasterPoller.start();
+				// thread to fetch records from campaign_master & campaign_files tables and HO to fileSplitQ/groupQ
+				if (log.isDebugEnabled())
+					log.debug(className + " CampaignMasterPoller/CampaignGroupsPoller starting...");
 
-			if (log.isDebugEnabled())
-				log.debug(className + " CampaignMasterPoller started.");
-			
-			campaignGroupsPoller = new CampaignGroupsPoller("CampaignGroupsPoller");
-			campaignGroupsPoller.setName("CampaignGroupsPoller");
-			campaignGroupsPoller.start();
+				campaignMasterPoller = new CampaignMasterPoller("CampaignMasterPoller");
+				campaignMasterPoller.setName("CampaignMasterPoller");
+				campaignMasterPoller.start();
 
-			if (log.isDebugEnabled())
-				log.debug(className + " CampaignGroupsPoller started.");
+				if (log.isDebugEnabled())
+					log.debug(className + " CampaignMasterPoller started.");
+				
+				campaignGroupsPoller = new CampaignGroupsPoller("CampaignGroupsPoller");
+				campaignGroupsPoller.setName("CampaignGroupsPoller");
+				campaignGroupsPoller.start();
 
-		} catch (Exception e) {
-			log.error(className + " Exception:", e);
-			log.error(className + " RESTART FP-InitialStage MODULE ");
+				if (log.isDebugEnabled())
+					log.debug(className + " CampaignGroupsPoller started.");
+
+			} catch (Exception e) {
+				log.error(className + " Exception:", e);
+				log.error(className + " RESTART FP-InitialStage MODULE ");
+			}
+
 		}
+		
 	}
 
 	@Override
