@@ -8,7 +8,7 @@
   
 	<properties>
 		<maven.compiler.fork>true</maven.compiler.fork>
-		<argLine>-Xmx512m</argLine>
+		<argLine>-Xmx2g</argLine>
 		  <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
