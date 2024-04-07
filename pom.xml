@@ -7,6 +7,11 @@
   <packaging>pom</packaging>
   
 	<properties>
+		<maven.compiler.fork>true</maven.compiler.fork>
+		<argLine>-Xmx512m</argLine>
+		  <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+
 		<commons-logging-version>1.2</commons-logging-version>
 		<commons-configuration-version>1.10</commons-configuration-version>
 		<log4j-2-version>2.17.0</log4j-2-version>
