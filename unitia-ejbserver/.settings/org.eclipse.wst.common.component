@@ -3,7 +3,7 @@
     <wb-module deploy-name="unitia-ejbserver">
         <wb-resource deploy-path="/" source-path="/ejbModule/java"/>
         <wb-resource deploy-path="/" source-path="/ejbModule/resources"/>
-        <wb-resource deploy-path="/" source-path="/ejbModule"/>
+        <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
                 
         <property name="java-output-path" value="/unitia-ejbserver/target/classes"/>
             
