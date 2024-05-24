@@ -19,6 +19,7 @@ import com.itextos.beacon.http.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceRequestStatus;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
+import com.itextos.beacon.smslog.IPBlockListLog;
 
 public class BasicValidation
 {
@@ -91,8 +92,11 @@ public class BasicValidation
                     if (log.isDebugEnabled())
                         log.debug("Is IP validation Enabled?  '" + isValidIP + "'");
 
-                    if (!isValidIP)
-                        lRequestStatus = new InterfaceRequestStatus(InterfaceStatusCode.IP_RESTRICTED, null);
+                    if (!isValidIP) {
+                        lRequestStatus = new InterfaceRequestStatus(InterfaceStatusCode.IP_RESTRICTED, "This is Your IP :  "+aBasicInfo.getCustIp());
+                
+                        IPBlockListLog.log(" lClientId : "+ lClientId+" aBasicInfo.getCustIp() : "+aBasicInfo.getCustIp());
+                    }
                 }
                 else
                     log.error("Access Violation for user " + lJsonUserDetails.get(MiddlewareConstant.MW_USER) + " Clusster '" + lCluster + "'");

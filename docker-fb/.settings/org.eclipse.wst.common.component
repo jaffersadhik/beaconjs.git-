@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="docker-fb-1.0">
+                
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+                
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
         <dependent-module archiveName="fb-campaignfinisher-1.0.war" deploy-path="/" handle="module:/resource/fb-campaignfinisher/fb-campaignfinisher">
             <dependency-type>uses</dependency-type>
@@ -626,7 +629,7 @@
         <dependent-module archiveName="common-prometheusmetricsutil-1.0.jar" deploy-path="/lib" handle="module:/resource/common-prometheusmetricsutil/common-prometheusmetricsutil">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="unitia-ejbclient-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-ejbclient/unitia-ejbclient">
+        <dependent-module archiveName="unitia-ejbclient-1.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/beacon/unitia-ejbclient/1.0/unitia-ejbclient-1.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jboss-ejb-client-4.0.23.Final.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/jboss/jboss-ejb-client/4.0.23.Final/jboss-ejb-client-4.0.23.Final.jar">
@@ -674,10 +677,10 @@
         <dependent-module archiveName="wildfly-naming-client-1.0.4.Final.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/wildfly/wildfly-naming-client/1.0.4.Final/wildfly-naming-client-1.0.4.Final.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="unitia-ejbinterface-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-ejbinterface/unitia-ejbinterface">
+        <dependent-module archiveName="unitia-ejbinterface-1.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/beacon/unitia-ejbinterface/1.0/unitia-ejbinterface-1.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="unitia-util-1.0.jar" deploy-path="/lib" handle="module:/resource/unitia-util/unitia-util">
+        <dependent-module archiveName="unitia-util-1.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/beacon/unitia-util/1.0/unitia-util-1.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="commons-pool2-2.8.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-pool2/2.8.1/commons-pool2-2.8.1.jar">
@@ -740,5 +743,7 @@
         <dependent-module archiveName="curvesapi-1.06.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.06/curvesapi-1.06.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+            
     </wb-module>
+    
 </project-modules>
