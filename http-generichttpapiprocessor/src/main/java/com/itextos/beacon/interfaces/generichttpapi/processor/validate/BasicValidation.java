@@ -93,9 +93,9 @@ public class BasicValidation
                         log.debug("Is IP validation Enabled?  '" + isValidIP + "'");
 
                     if (!isValidIP) {
-                        lRequestStatus = new InterfaceRequestStatus(InterfaceStatusCode.IP_RESTRICTED, "This is Your IP :  "+aBasicInfo.getCustIp());
+                        lRequestStatus = new InterfaceRequestStatus(InterfaceStatusCode.IP_RESTRICTED, "This is Your IP :  "+aBasicInfo.getCustIp()+" IP configured in Database : "+lIPList);
                 
-                        IPBlockListLog.log(" lClientId : "+ lClientId+" aBasicInfo.getCustIp() : "+aBasicInfo.getCustIp());
+                        IPBlockListLog.log(" lClientId : "+ lClientId+" aBasicInfo.getCustIp() : "+aBasicInfo.getCustIp()+" IP configured in Database : "+lIPList);
                     }
                 }
                 else
