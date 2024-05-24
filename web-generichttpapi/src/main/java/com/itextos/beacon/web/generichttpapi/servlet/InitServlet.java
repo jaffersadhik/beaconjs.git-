@@ -23,7 +23,6 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 import com.itextos.beacon.interfaces.generichttpapi.processor.pollers.FilePoller;
-import com.unitia.ejbclient.UnitiaHandoverSingleTon;
 
 public final class InitServlet
         extends
@@ -49,7 +48,6 @@ public final class InitServlet
 
         try
         {
-        	UnitiaHandoverSingleTon.getInstance();
         	
             final MessageIdentifier lMsgIdentifier = MessageIdentifier.getInstance();
             lMsgIdentifier.init(InterfaceType.HTTP_JAPI);
