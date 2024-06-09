@@ -85,6 +85,8 @@ public class Consumer
 
         if (log.isDebugEnabled())
             log.debug("Started consuming messages from '" + mTopicName + "'");
+        
+        
 
         try
         {
@@ -129,6 +131,7 @@ public class Consumer
                 {
                 
                 	
+                	
                 	 if(log.isDebugEnabled()) {
                          log.debug(mLogTopicName + " Assigned patition Count" +mConsumer.assignment().size());
                  	}
@@ -140,6 +143,9 @@ public class Consumer
                 	
 
                 	});
+                	
+                    ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
+
                     checkAndCommit(0);
 
                     // Goto Sleep after the commit.
@@ -202,6 +208,8 @@ public class Consumer
             log.fatal("#### Completely Stopped the consumer ************ ");
 
             isCompletelyStopped = true;
+            
+            ConsumerLog.log(threadName+" isCompletelyStopped : "+isCompletelyStopped);
         }
     }
 
@@ -307,6 +315,8 @@ public class Consumer
 
     private void printInMemoryMessageDetails()
     {
+        ConsumerLog.log(Thread.currentThread().getName()+" : Topic Name "+mLogTopicName  + ", Consumer InMem Collection Size >>>>>>>> " + mConsumerInMemCollection.getInMemSize());
+
         log.fatal("Topic Name : " + mTopicName + ", Consumer InMem Collection Size >>>>>>>> " + mConsumerInMemCollection.getInMemSize());
     }
 
