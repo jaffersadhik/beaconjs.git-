@@ -308,13 +308,13 @@
   	<module>commonwardependency</module>
   	<module>common-splog</module>
   	
-
+<!--
    	<module>ui-mui</module>
   	<module>ui-customer</module>
   	<module>ui-nginx</module>
   		
   	<module>ui-api</module>
-  	
+  	-->
   	<module>platform-mccmncload</module>
 
  	<module>demo</module>
@@ -328,7 +328,7 @@
    	<module>docker-beaconweb</module>
 
 
- 
+ <!--
    	<module>fb-initialstage</module>
    	<module>fb-splitstage</module>
    	<module>fb-fileparser</module>
@@ -346,6 +346,7 @@
    	<module>docker-fb</module>
    	<module>node-cm</module>
    	<module>node-cm-jobs</module>
+   	-->
   </modules>
   
 
