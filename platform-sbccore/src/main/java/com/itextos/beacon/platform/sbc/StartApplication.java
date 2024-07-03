@@ -5,9 +5,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.platform.sbc.data.InmemBlockoutQReaper;
 import com.itextos.beacon.platform.sbc.data.InmemoryBlockoutReaper;
 import com.itextos.beacon.platform.sbc.data.InmemoryScheduleReaper;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -20,6 +22,8 @@ public class StartApplication
     {
         if (log.isDebugEnabled())
             log.debug("Starting the application " + THIS_COMPONENT);
+        
+        DebugLog.log("Starting the application " + THIS_COMPONENT);
 
         try
         {
@@ -31,6 +35,12 @@ public class StartApplication
         catch (final Exception e)
         {
             log.error("Exception while starting component '" + THIS_COMPONENT + "'", e);
+            
+            DebugLog.log("Exception while starting component '" + THIS_COMPONENT + "'");
+            
+            
+            DebugLog.log(ErrorMessage.getStackTraceAsString(e));
+            
             System.exit(-1);
         }
     }
