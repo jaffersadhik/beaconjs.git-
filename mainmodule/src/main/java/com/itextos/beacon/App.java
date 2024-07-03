@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class App {
 
@@ -19,6 +20,8 @@ public class App {
 		String module=System.getenv("module");
 		
 		System.out.println("module : "+module);
+		
+		DebugLog.log("module : "+module);
 
 		if(!isMW(module,args)) {
 			

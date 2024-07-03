@@ -317,9 +317,7 @@
   	-->
   	<module>platform-mccmncload</module>
 
- 	<module>demo</module>
- 	<module>springboot</module>
- 	<module>dbgwspring</module>
+ 
  <!--	<module>reactjsadmin</module> -->
  <module>smpp-concatehandover</module>
  <module>monitortopics</module>

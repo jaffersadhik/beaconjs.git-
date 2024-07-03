@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.lang.reflect.Constructor;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,10 +36,10 @@ import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
-import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.smslog.ConsumerTopicList;
+import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.splog.SPLog;
 
 public class ProcessorInfo
@@ -85,6 +84,8 @@ public class ProcessorInfo
         if (log.isDebugEnabled())
             log.debug("Invoking for Component '" + mComponent + "' with Startup Arguments " + mStartupRuntimeArguments);
 
+    	DebugLog.log("Invoking for Component '" + mComponent + "' with Startup Arguments " + mStartupRuntimeArguments);
+    	
         ShutdownHandler.getInstance().addHook(aComponent.toString(), this);
 
     //    startPrometheusServer(aStartJettyServer);
@@ -121,6 +122,8 @@ public class ProcessorInfo
             if (log.isDebugEnabled())
                 log.debug("Processing for the cluster Type '" + cluster + "'");
 
+            DebugLog.log("Processing for the cluster Type '" + cluster + "'");
+            
             if (cluster != null)
             {
                 final KafkaClusterComponentMap lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, cluster);
@@ -135,7 +138,8 @@ public class ProcessorInfo
 
             if (clusterNotSpecified && types.contains(cluster))
             {
-                log.fatal("Skipping '" + cluster + "' cluster as it has separate instance setup.");
+            	DebugLog.log("Skipping '" + cluster + "' cluster as it has separate instance setup.");
+            	log.fatal("Skipping '" + cluster + "' cluster as it has separate instance setup.");
                 continue;
             }
 
@@ -145,14 +149,21 @@ public class ProcessorInfo
 
             for (final InterfaceGroup intfGroup : lInterfaceGroupList)
             {
-                if (log.isDebugEnabled())
+                if (log.isDebugEnabled()) {
+                	
                     log.debug("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
 
+                }
+                
+                	DebugLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
+                	
                 for (final MessagePriority msgPriority : lMessagePriorityList)
                 {
-                    if (log.isDebugEnabled())
+                    if (log.isDebugEnabled()) {
                         log.debug("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
-
+                    }
+                    
+                    DebugLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
                     final List<String> priorityBasedTopics = getPriorityBasedTopics(cluster, intfGroup, mStartupRuntimeArguments.getMessageType(), msgPriority);
 
                     if ((priorityBasedTopics != null) && !priorityBasedTopics.isEmpty())
