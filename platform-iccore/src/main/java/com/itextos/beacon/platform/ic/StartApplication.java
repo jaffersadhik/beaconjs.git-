@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.platform.ic.process.ICProcessor;
 import com.itextos.beacon.smslog.DebugLog;
 
@@ -35,6 +36,8 @@ public class StartApplication
         catch (final Exception e)
         {
             log.error("Exception while starting the Interface Consumer.", e);
+            DebugLog.log("Exception while starting the Interface Consumer.");
+            DebugLog.log(ErrorMessage.getStackTraceAsString(e));
             System.exit(-1);
         }
         
