@@ -183,6 +183,7 @@ public class WorkerUtil
             if (log.isDebugEnabled())
                 log.debug("DN String :" + dnMsg);
 
+            /*
             try
             {
                 convertMessageFromMessage(aDcs, dnMsg.getBytes(), request, lCharSet);
@@ -191,6 +192,9 @@ public class WorkerUtil
             {
                 request.setShortMessage(dnMsg.getBytes());
             }
+            */
+            request.setShortMessage(dnMsg.getBytes());
+
         }
         else
         {
