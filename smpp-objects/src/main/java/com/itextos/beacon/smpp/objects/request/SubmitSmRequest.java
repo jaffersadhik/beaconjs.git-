@@ -155,9 +155,9 @@ public class SubmitSmRequest
                 }
                 else
                 {
-                    // Single Part Plain
-                    if (log.isInfoEnabled())
-                        log.info("Hex message content--->" + HexUtil.toHexString(mSubmitSm.getShortMessage()));
+                  
+                   
+                    sb.append("\n").append("Hex message content--->" + HexUtil.toHexString(mSubmitSm.getShortMessage())).append("\n");
                     convertMessageFromObject();
 
                     log.info(mSystemId + " Message : " + mMessage);
