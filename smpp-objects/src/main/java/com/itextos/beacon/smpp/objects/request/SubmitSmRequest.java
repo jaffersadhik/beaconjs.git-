@@ -70,11 +70,13 @@ public class SubmitSmRequest
     private String           mInterfaceStatusCode = null;
     private String           mClientMid           = null;
 
+    private StringBuffer sb =null;
     public SubmitSmRequest(
             SubmitSm aSubmitSm,
             SubmitSmResp aSubmitSmResp,
-            SessionDetail aSessionDetail)
+            SessionDetail aSessionDetail, StringBuffer sb)
     {
+    	this.sb=sb;
         mSubmitSm      = aSubmitSm;
         mSessionDetail = aSessionDetail;
         mSystemId      = mSessionDetail.getSystemId();
@@ -468,6 +470,8 @@ public class SubmitSmRequest
 
         if (log.isInfoEnabled())
             log.info("current charset=" + charset);
+        
+        sb.append("current charset=" + charset);
 
         Charset           toUserCharSet = CharsetUtil.CHARSET_ISO_8859_1;
 

@@ -343,7 +343,7 @@ public class ValidateRequest
             SessionDetail aSessionDetail,
             StringBuffer sb)
     {
-        final SubmitSmRequest    lSmRequest          = new SubmitSmRequest(aSubmitSmRequest, aSubmitSmResponse, aSessionDetail);
+        final SubmitSmRequest    lSmRequest          = new SubmitSmRequest(aSubmitSmRequest, aSubmitSmResponse, aSessionDetail,sb);
 
         final SmppMessageRequest lSmppMessageRequest = lSmRequest.getMessageRequest();
 

@@ -224,7 +224,7 @@ abstract class ItextosSmppSessionHelper
 
         StringBuffer sb=new StringBuffer();
         sb.append("\n#######################################################################\n");
-
+        
         try
         {
             seqNum   = aSubmitSmRequest.getSequenceNumber();
