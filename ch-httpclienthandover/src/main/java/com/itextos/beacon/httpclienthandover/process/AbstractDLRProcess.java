@@ -31,6 +31,7 @@ import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.smslog.DNHttpPostLog;
 
 public abstract class AbstractDLRProcess
         implements
@@ -111,6 +112,8 @@ public abstract class AbstractDLRProcess
 
         final URLResult                        httpResult   = hitUrl(requestType, aUrl, aTemplate, headerMap);
 
+        DNHttpPostLog.log(httpResult.toString());
+        
         return httpResult;
     }
 
