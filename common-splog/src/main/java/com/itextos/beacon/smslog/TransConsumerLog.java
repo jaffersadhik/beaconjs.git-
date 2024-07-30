@@ -14,6 +14,8 @@ public class TransConsumerLog {
     
     static {
     	
+    	 int limit = 1024 * 1024*5; // 1 MB file size limit
+         int count = 2; // N
 
         String logFileNamePattern = "/logs/transconsumer.%g.log";
 
@@ -36,7 +38,7 @@ public class TransConsumerLog {
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
-			fileHandler = new FileHandler(logFileNamePattern, 1000000, 10, true);
+			fileHandler = new FileHandler(logFileNamePattern, limit, count, true);
 			
 			   // Set the logging level for the handler
 	        fileHandler.setLevel(loglevel);

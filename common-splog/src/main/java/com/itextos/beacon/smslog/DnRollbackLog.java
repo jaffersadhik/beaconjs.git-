@@ -15,6 +15,9 @@ public class DnRollbackLog {
     static {
     	
 
+    	 int limit = 1024 * 1024*5; // 1 MB file size limit
+         int count = 2; // N
+         
         String logFileNamePattern = "/logs/dnrollback.%g.log";
 
         Level loglevel=Level.INFO;
@@ -36,8 +39,8 @@ public class DnRollbackLog {
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
-			fileHandler = new FileHandler(logFileNamePattern, 1000000, 10, true);
-			
+
+			fileHandler = new FileHandler(logFileNamePattern, limit, count, true);
 			   // Set the logging level for the handler
 	        fileHandler.setLevel(loglevel);
 
