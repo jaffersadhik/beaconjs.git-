@@ -141,7 +141,6 @@ public class MessageProcessor
             throws ItextosException
     {
     	
-    	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t : "+aIMessage.toString());
 
         if (aIMessage != null)
         {
@@ -149,6 +148,7 @@ public class MessageProcessor
             if (aIMessage instanceof BaseMessage)
             {
                 final boolean canContinue = checkForRetryAndRemoveMessage(aFromComponent, aNextComponent, aIMessage);
+
 
                 if(aIMessage instanceof MessageRequest) {
                 if (log.isDebugEnabled())
@@ -178,6 +178,8 @@ public class MessageProcessor
 
             if (producer != null)
             {
+            	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t : "+aIMessage.toString());
+
                 aIMessage.setNextComponent(aNextComponent.getKey());
                 aIMessage.setFromComponent(aFromComponent.getKey());
                 if (aFallbackQueue != null)
