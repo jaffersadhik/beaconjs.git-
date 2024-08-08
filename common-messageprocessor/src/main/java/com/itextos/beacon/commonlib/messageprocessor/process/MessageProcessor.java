@@ -33,6 +33,7 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ConsumerKafkaReques
 import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.KafkaSender;
 
 public class MessageProcessor
 {
@@ -139,6 +140,8 @@ public class MessageProcessor
             IMessage aIMessage)
             throws ItextosException
     {
+    	
+    	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t  : \n "+aIMessage.toString());
 
         if (aIMessage != null)
         {
