@@ -499,6 +499,7 @@ public abstract class BaseMessage
     	
         final Map<MiddlewareConstant, Boolean> returnValue = new EnumMap<>(MiddlewareConstant.class);
 
+        removeByConstant(MiddlewareConstant.MW_LOG_BUFFER);
     	/*
 
         try
