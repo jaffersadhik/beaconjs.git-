@@ -220,10 +220,23 @@ public class ClientHandoverUtils
             if (aEncodeRequired)
                 recordValue = URLEncoder.encode(recordValue, DEFAULT_ENCODING);
 
-            if (!"".equals(CommonUtility.nullCheck(recordValue, true)))
-                stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), recordValue);
-            else
-                stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), "");
+            if(checkString.equals("{7}")) {
+            	
+            	 if (!"".equals(CommonUtility.nullCheck(recordValue, true)))
+                     stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), recordValue.toLowerCase());
+                 else
+                     stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), "");
+         
+            	 
+            }else {
+    
+            	 if (!"".equals(CommonUtility.nullCheck(recordValue, true)))
+                     stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), recordValue);
+                 else
+                     stringToReplace.replace(checkStringindex, checkStringindex + checkString.length(), "");
+         
+            	 
+            }
         }
         return stringToReplace;
     }
