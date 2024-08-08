@@ -496,7 +496,10 @@ public abstract class BaseMessage
     public Map<MiddlewareConstant, Boolean> removeByConstant(
             List<MiddlewareConstant> aMcs)
     {
+    	
         final Map<MiddlewareConstant, Boolean> returnValue = new EnumMap<>(MiddlewareConstant.class);
+
+    	/*
 
         try
         {
@@ -510,7 +513,9 @@ public abstract class BaseMessage
         {
             log.error("Exception while removing data from message " + toString() + " Keys to remove " + aMcs, e);
         }
+        */
         return returnValue;
+
     }
 
     boolean removeByName(
