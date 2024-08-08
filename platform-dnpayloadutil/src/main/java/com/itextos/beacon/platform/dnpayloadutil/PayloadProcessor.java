@@ -363,6 +363,8 @@ public class PayloadProcessor
                 return aDeliveryObject;
             }
 
+            payLoadReceiverLog.log(lJsonPayload);
+            
             final Map<String, String> payload = getAsHashMap(aDeliveryObject,lJsonPayload);
 
             if (log.isDebugEnabled())
