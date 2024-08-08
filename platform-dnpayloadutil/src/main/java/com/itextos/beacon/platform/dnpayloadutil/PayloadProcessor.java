@@ -34,6 +34,7 @@ import com.itextos.beacon.commonlib.utility.RoundRobin;
 import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.platform.dnpayloadutil.common.PayloadUtil;
 import com.itextos.beacon.platform.dnpayloadutil.dao.PayloadInsertInDB;
+import com.itextos.beacon.smslog.payLoadReceiverLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -208,6 +209,7 @@ public class PayloadProcessor
             final int    lRetryAttempt        = aSubmissionObject.getRetryAttempt();
             // final String lPayload = getDLRPayload(aSubmissionObject);
             final String lPayload             = getJsonFromMessage(aSubmissionObject);
+            payLoadReceiverLog.log(lPayload);
             final Date   lSTime               = aSubmissionObject.getMessageReceivedTime();
             final Date   dateStime            = lSTime;
 
