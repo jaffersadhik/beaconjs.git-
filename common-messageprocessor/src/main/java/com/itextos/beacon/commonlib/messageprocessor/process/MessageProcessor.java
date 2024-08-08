@@ -144,6 +144,8 @@ public class MessageProcessor
 
         if (aIMessage != null)
         {
+        	
+        	((BaseMessage)aIMessage).removeByConstant(null);
 
             if (aIMessage instanceof BaseMessage)
             {

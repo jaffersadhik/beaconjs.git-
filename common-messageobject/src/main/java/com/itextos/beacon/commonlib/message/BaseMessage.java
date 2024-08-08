@@ -32,6 +32,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.RemoveLogBuffer;
 
 public abstract class BaseMessage
         extends
@@ -535,6 +536,9 @@ public abstract class BaseMessage
         else
             returnValue = messageAttributes.remove(aMiddlewareConstant.getKey()) != null;
 
+        RemoveLogBuffer.log(" LOG BUFFER Remove : "+returnValue);
+        
+        
         return returnValue;
     }
 
