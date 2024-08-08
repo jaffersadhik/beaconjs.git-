@@ -121,6 +121,7 @@ public class PayloadProcessor
         final String                  lClientId           = aSubmissionObject.getClientId();
         final HashMap<String, String> lPayloadMap         = new HashMap<>();
         final PropertiesConfiguration mPayloadprops       = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.DN_PAYLOAD_PARAMS_PROPERTIES, false);
+        mPayloadprops.addProperty("param6", "dummy");
         final Iterator<String>        lIterator           = mPayloadprops.getKeys();
         final boolean                 isPayloadCanFullMsg = CommonUtility.isEnabled(PayloadUtil.getCutomFeatureValue(lClientId, CustomFeatures.PAYLOAD_LOGMSG_YN));
 
