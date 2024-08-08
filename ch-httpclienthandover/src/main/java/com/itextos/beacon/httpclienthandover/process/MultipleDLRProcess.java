@@ -19,6 +19,7 @@ import com.itextos.beacon.httpclienthandover.data.ClientHandoverMaster;
 import com.itextos.beacon.httpclienthandover.data.URLResult;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
+import com.itextos.beacon.smslog.payLoadReceiverLog;
 
 public class MultipleDLRProcess
         extends
@@ -93,6 +94,8 @@ public class MultipleDLRProcess
             for (final BaseMessage message : aMessageList)
             {
             	StringBuffer sb=new StringBuffer();
+            	
+            	payLoadReceiverLog.log(message.getJsonString());
             	
                 message.putValue(MiddlewareConstant.MW_CLIENT_HANDOVER_IS_BATCH, "1");
 

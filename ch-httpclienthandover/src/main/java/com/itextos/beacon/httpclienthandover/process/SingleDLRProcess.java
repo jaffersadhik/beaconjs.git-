@@ -17,6 +17,7 @@ import com.itextos.beacon.httpclienthandover.data.ClientHandoverMaster;
 import com.itextos.beacon.httpclienthandover.data.URLResult;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
+import com.itextos.beacon.smslog.payLoadReceiverLog;
 
 public class SingleDLRProcess
         extends
@@ -35,6 +36,8 @@ public class SingleDLRProcess
 
         for (final BaseMessage message : aMessageList)
         {
+        	payLoadReceiverLog.log(message.getJsonString());
+
             final ClientHandoverData clientHandoverData = ClientHandoverUtils.getClientHandoverData(message.getValue(MiddlewareConstant.MW_CLIENT_ID));
 
             if (clientHandoverData == null)
