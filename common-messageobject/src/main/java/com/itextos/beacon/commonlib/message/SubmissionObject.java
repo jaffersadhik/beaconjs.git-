@@ -105,6 +105,11 @@ public class SubmissionObject
         return getValue(MiddlewareConstant.MW_MCC);
     }
     
+    public String getParam6()
+    {
+        return getValue(MiddlewareConstant.MW_PARAM_6);
+    }
+    
     public String getMnc()
     {
         return getValue(MiddlewareConstant.MW_MNC);
@@ -206,6 +211,7 @@ public class SubmissionObject
         lDeliveryObject.setCarrier(getCarrier());
         lDeliveryObject.setMcc(getMcc());
         lDeliveryObject.setMnc(getMnc());
+        lDeliveryObject.setParam6(getParam6());
         lDeliveryObject.setCircle(getCircle());
         lDeliveryObject.setClientMessageId(getClientMessageId());
         lDeliveryObject.setMessageTotalParts(getMessageTotalParts());
@@ -265,7 +271,7 @@ public class SubmissionObject
         lDeliveryObject.setUser(getUser());
         lDeliveryObject.setInvoiceBasedOn(getInvoiceBasedOn());
         lDeliveryObject.setSmppInstance(getSmppInstance());
-
+        
         lDeliveryObject.putValue(MiddlewareConstant.MW_CREDIT_CHECK, getValue(MiddlewareConstant.MW_CREDIT_CHECK));
 
         return lDeliveryObject;

@@ -182,6 +182,12 @@ public class DeliveryObject
     {
         return getValue(MiddlewareConstant.MW_CLIENT_MESSAGE_ID);
     }
+    
+    
+    public String getParam6()
+    {
+        return getValue(MiddlewareConstant.MW_PARAM_6);
+    }
 
     public DeliveryObject getClonedDeliveryObject()
     {
@@ -373,6 +379,7 @@ public class DeliveryObject
         lMessageRequest.setMnc(getMnc());
         lMessageRequest.setCircle(getCircle());
         lMessageRequest.setClientMessageId(getClientMessageId());
+        lMessageRequest.setParam6(getParam6());
         lMessageRequest.setMessageTotalParts(getMessageTotalParts());
         lMessageRequest.setScheduleDateTime(getScheduleDateTime());
         lMessageRequest.setBillType(getBillType());
@@ -767,6 +774,12 @@ public class DeliveryObject
         putValue(MiddlewareConstant.MW_MNC, aMnc);
     }
 
+    public void setParam6(
+            String param6)
+    {
+        putValue(MiddlewareConstant.MW_PARAM_6, param6);
+    }
+    
     public void setSegment(
             String aSegment)
     {

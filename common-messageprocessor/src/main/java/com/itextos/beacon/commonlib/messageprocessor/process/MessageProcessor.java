@@ -141,7 +141,7 @@ public class MessageProcessor
             throws ItextosException
     {
     	
-    	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t  : \n "+aIMessage.toString());
+    	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t : "+aIMessage.toString());
 
         if (aIMessage != null)
         {
