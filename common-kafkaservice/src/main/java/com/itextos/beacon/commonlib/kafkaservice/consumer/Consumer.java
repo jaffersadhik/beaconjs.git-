@@ -34,6 +34,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.smslog.ConsumerLog;
 import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.smslog.KafkaReceiver;
 
 public class Consumer
         implements
@@ -238,6 +239,8 @@ public class Consumer
 
             final IMessage message = messageFromKafka.value();
 
+            KafkaReceiver.log(message.getJsonString());
+            
             mConsumerInMemCollection.addMessage(message);
 
             if (mClosed)
