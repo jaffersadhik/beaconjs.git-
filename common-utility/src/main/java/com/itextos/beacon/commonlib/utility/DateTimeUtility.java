@@ -169,9 +169,16 @@ public final class DateTimeUtility
 
         try
         {
-            final SimpleDateFormat sdf = new SimpleDateFormat(aOutputDateFormat);
-            sdf.setLenient(false);
-            returnValue = sdf.format(aDate);
+        	if(aOutputDateFormat.equalsIgnoreCase("e")) {
+         
+        		returnValue=""+(aDate.getTime()/1000);
+        		
+        	}else {
+        		
+        		   final SimpleDateFormat sdf = new SimpleDateFormat(aOutputDateFormat);
+                   sdf.setLenient(false);
+                   returnValue = sdf.format(aDate);
+        	}
         }
         catch (final Exception e)
         {

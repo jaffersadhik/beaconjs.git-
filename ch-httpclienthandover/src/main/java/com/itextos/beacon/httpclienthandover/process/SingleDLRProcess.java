@@ -22,6 +22,9 @@ public class SingleDLRProcess
         extends
         AbstractDLRProcess
 {
+	
+	private static final String className="com.itextos.beacon.httpclienthandover.process.MultipleDLRProcess";
+
 
     private static final Log log = LogFactory.getLog(SingleDLRProcess.class);
 
@@ -38,6 +41,7 @@ public class SingleDLRProcess
             {
                 final UUID       uniqueId   = UUID.randomUUID();
 
+                
                 final HttpResult failResult = ClientHandoverUtils.getCustomResult("No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID), -999);
                 ClientHandoverUtils.setResultInMessage(message, failResult);
 
@@ -58,7 +62,11 @@ public class SingleDLRProcess
 
             for (final ClientHandoverMaster customerEndPoint : customerEndPointInfos)
             {
-                final String    processedTemplate    = processTemplate(customerEndPoint, message);
+            	StringBuffer sb=new StringBuffer();
+
+                final String    processedTemplate    = processTemplate(customerEndPoint, message,sb);
+
+                sb.append("processedTemplate : ").append(processedTemplate).append("\t").append(className).append("\n");
 
                 long            httpProcessStartTime = System.currentTimeMillis();
                 final URLResult httpResult           = processHTTPRequest(processedTemplate, customerEndPoint, customerEndPoint.getPrimaryUrl());

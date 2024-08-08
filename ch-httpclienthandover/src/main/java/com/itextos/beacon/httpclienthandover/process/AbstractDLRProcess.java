@@ -42,12 +42,14 @@ public abstract class AbstractDLRProcess
 
     public static String processTemplate(
             ClientHandoverMaster aCustomerEndPoint,
-            BaseMessage aMessage)
+            BaseMessage aMessage,StringBuffer sb)
     {
         final List<ClientHandoverParams> aClientHandoverParams = aCustomerEndPoint.getClientHandoverParams();
         final boolean                    isEncodingRequired    = ClientHandoverUtils.checkIfEncodingRequired(aCustomerEndPoint);
         final StringBuilder              template              = ClientHandoverUtils.getTemPlateBuilder(aCustomerEndPoint);
 
+        sb.append("template : ").append(template).append("\t").append("\n");
+        
         for (final ClientHandoverParams handoverParams : aClientHandoverParams)
         {
             final String defaultValue = handoverParams.getDefaultValue();

@@ -24,6 +24,8 @@ public class MultipleDLRProcess
         extends
         AbstractDLRProcess
 {
+	
+	private static final String className="com.itextos.beacon.httpclienthandover.process.MultipleDLRProcess";
 
     private static final Log log = LogFactory.getLog(MultipleDLRProcess.class);
 
@@ -90,11 +92,16 @@ public class MultipleDLRProcess
 
             for (final BaseMessage message : aMessageList)
             {
+            	StringBuffer sb=new StringBuffer();
+            	
                 message.putValue(MiddlewareConstant.MW_CLIENT_HANDOVER_IS_BATCH, "1");
 
                 doWeNeedToCheckLatency(message);
 
-                final String processedTemplate = processTemplate(customerEndPoint, message);
+                final String processedTemplate = processTemplate(customerEndPoint, message,sb);
+                
+                sb.append("processedTemplate : ").append(processedTemplate).append("\t").append(className).append("\n");
+               
                 sJoiner.add(processedTemplate);
 
                 processedMessage.add(message);
