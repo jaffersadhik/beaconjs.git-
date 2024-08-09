@@ -70,11 +70,18 @@ public class PropertyLoader
             final PropertiesPath aPropertiesKey,
             final boolean aStopIfNotAvailable)
     {
-        final PropertiesConfiguration obj = mPropertiesConfigMap.get(aPropertiesKey);
+    	
+    	if(PropertiesPath.DN_PAYLOAD_PARAMS_PROPERTIES==aPropertiesKey) {
+    		
+    	}else {
+    	
+    		final PropertiesConfiguration obj = mPropertiesConfigMap.get(aPropertiesKey);
 
-        if (obj == null)
-            return loadPropertiesConfiguration(aPropertiesKey, aStopIfNotAvailable);
-        return obj;
+            if (obj == null)
+                return loadPropertiesConfiguration(aPropertiesKey, aStopIfNotAvailable);
+            return obj;
+
+    	}
     }
 
     public Properties getProperties(
@@ -128,7 +135,22 @@ public class PropertyLoader
 
         try
         {
-            final String                  propertiesPath    = mCommonConfiguration.getString(aPropertiesKey.getKey());
+        	 String                  propertiesPath="";
+            if(PropertiesPath.DN_PAYLOAD_PARAMS_PROPERTIES==aPropertiesKey) {
+            	
+            	propertiesPath ="/payload-params.properties";
+            	
+            }else if(PropertiesPath.MESSAGE_KEY_REMOVE_PROPERTIES==aPropertiesKey) {
+            	
+            	propertiesPath ="/messageremove.properties";
+
+            }else {
+            	
+            	propertiesPath   = mCommonConfiguration.getString(aPropertiesKey.getKey());
+
+            }
+            
+            
             final PropertiesConfiguration propConfiguration = new PropertiesConfiguration(propertiesPath);
             propConfiguration.setReloadingStrategy(new FileChangedReloadingStrategy());
             mPropertiesConfigMap.put(aPropertiesKey, propConfiguration);
@@ -137,6 +159,7 @@ public class PropertyLoader
                 log.debug("Loading PropertiesConfiguration for key : '" + aPropertiesKey + "' from '" + propertiesPath + "' is completed.");
 
             return propConfiguration;
+          
         }
         catch (final Throwable e)
         {
