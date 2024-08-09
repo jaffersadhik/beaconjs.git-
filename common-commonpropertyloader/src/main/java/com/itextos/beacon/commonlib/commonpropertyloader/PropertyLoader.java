@@ -71,17 +71,13 @@ public class PropertyLoader
             final boolean aStopIfNotAvailable)
     {
     	
-    	if(PropertiesPath.DN_PAYLOAD_PARAMS_PROPERTIES==aPropertiesKey) {
-    		
-    	}else {
+    
     	
     		final PropertiesConfiguration obj = mPropertiesConfigMap.get(aPropertiesKey);
 
             if (obj == null)
                 return loadPropertiesConfiguration(aPropertiesKey, aStopIfNotAvailable);
             return obj;
-
-    	}
     }
 
     public Properties getProperties(
