@@ -239,7 +239,7 @@ public class Consumer
 
             final IMessage message = messageFromKafka.value();
 
-            KafkaReceiver.log(message.getJsonString());
+            KafkaReceiver.getInstance(message.getFromComponent()).log(message.getJsonString());
             
             mConsumerInMemCollection.addMessage(message);
 
