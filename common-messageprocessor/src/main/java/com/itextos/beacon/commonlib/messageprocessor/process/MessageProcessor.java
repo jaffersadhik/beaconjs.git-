@@ -180,7 +180,7 @@ public class MessageProcessor
 
             if (producer != null)
             {
-            	KafkaSender.log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t : "+aIMessage.toString());
+            	KafkaSender.getInstance(aNextComponent.toString()).log("aFromComponent : "+aFromComponent.toString()+" \t aNextComponent : "+aNextComponent.toString()+"\t : "+aIMessage.toString());
 
                 aIMessage.setNextComponent(aNextComponent.getKey());
                 aIMessage.setFromComponent(aFromComponent.getKey());

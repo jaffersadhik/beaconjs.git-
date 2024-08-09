@@ -10,14 +10,31 @@ import java.util.logging.SimpleFormatter;
 public class KafkaSender {
 
 
-    private static final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
-    
-    static {
+	private static KafkaSender obj=null;
+	
+	public static KafkaSender getInstance(String nextcomponent) {
+	
+		if(obj==null) {
+			
+			obj=new KafkaSender(nextcomponent);
+		}
+		
+		return obj;
+	}
+	
+	
+	private KafkaSender() {
+		
+	}
+	
+	private KafkaSender(String nextcomponent) {
+		
+
     	
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 2; // N
 
-        String logFileNamePattern = "/logs/kafkasender.%g.log";
+        String logFileNamePattern = "/logs/kafkasender_"+nextcomponent+".%g.log";
 
         Level loglevel=Level.INFO;
         
@@ -62,9 +79,13 @@ public class KafkaSender {
      
 
         // Set the logging level for the logger
-    }
+    
+	}
+    private static final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
+    
+    static {}
 
-    public static void log(String string) {
+    public void log(String string) {
 
     	logger.info(string);
     	
