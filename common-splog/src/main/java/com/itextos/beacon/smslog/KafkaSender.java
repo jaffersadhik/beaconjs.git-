@@ -10,7 +10,11 @@ import java.util.logging.SimpleFormatter;
 public class KafkaSender {
 
 
+    private  final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
+
 	private static KafkaSender obj=null;
+	
+	
 	
 	public static KafkaSender getInstance(String nextcomponent) {
 	
@@ -81,9 +85,6 @@ public class KafkaSender {
         // Set the logging level for the logger
     
 	}
-    private static final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
-    
-    static {}
 
     public void log(String string) {
 
