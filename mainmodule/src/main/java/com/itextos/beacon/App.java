@@ -289,7 +289,7 @@ public class App {
 	private static boolean isAllBiller(String module, String[] args) {
 		
 		if(module.equals("biller")) {
-			
+			//
 			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
