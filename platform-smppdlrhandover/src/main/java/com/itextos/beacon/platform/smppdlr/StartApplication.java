@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.platform.smppdlr.fbp.SmppDlrFallbackPollerHolder;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueueReaper;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrRedis;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -22,6 +23,8 @@ public class StartApplication
     {
         if (log.isDebugEnabled())
             log.debug("Starting the application " + THIS_COMPONENT);
+        
+        DebugLog.log("Starting the application " + THIS_COMPONENT);
 
         try
         {
@@ -56,6 +59,10 @@ public class StartApplication
           
             	lClusters=System.getenv("cluster");
             }
+            
+            
+            DebugLog.log("lClusters " + lClusters);
+
             
             String[] lClusterList = null;
             

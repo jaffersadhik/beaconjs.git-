@@ -64,7 +64,8 @@ public class App {
 	}
 	
 	 private static boolean isAllDNPost(String module, String[] args) {
-		 if(module.equals("dnpost")) {
+		 if(module.trim().equals("dnpost")) {
+			 DebugLog.log("Start the module : dnpost ");
 			 com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
 			 com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 			IS_START_PROMETHEUS=true;
