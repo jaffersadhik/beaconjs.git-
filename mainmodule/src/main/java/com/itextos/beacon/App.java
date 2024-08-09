@@ -42,6 +42,9 @@ public class App {
 								
 								if(!isAllBiller(module, args)) {
 									
+									if(!isAllDNPost(module, args)) {
+										
+									}
 								}
 
 							}
@@ -60,7 +63,19 @@ public class App {
 		}
 	}
 	
-	 private static boolean isMWALL(String module, String[] args) {
+	 private static boolean isAllDNPost(String module, String[] args) {
+		 if(module.equals("dnpost")) {
+			 com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			 com.itextos.beacon.httpclienthandover.StartApplication.main(args);
+			IS_START_PROMETHEUS=true;
+			return true;
+				
+			}
+			
+			return false;
+	}
+
+	private static boolean isMWALL(String module, String[] args) {
 
 			if(module.equals("mw")) {
 
