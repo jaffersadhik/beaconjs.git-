@@ -1,6 +1,8 @@
 package com.itextos.beacon.smslog;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,16 +14,22 @@ public class KafkaSender {
 
     private  final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
 
-	private static KafkaSender obj=null;
+	private static Map<String,KafkaSender> objmap=new HashMap<String,KafkaSender>();
 	
 	
 	
 	public static KafkaSender getInstance(String nextcomponent) {
 	
+		
+		KafkaSender obj=objmap.get(nextcomponent);
+		
 		if(obj==null) {
 			
 			obj=new KafkaSender(nextcomponent);
+			
+			objmap.put(nextcomponent, obj);
 		}
+		
 		
 		return obj;
 	}
