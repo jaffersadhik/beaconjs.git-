@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.platform.sbpcore.process.ScheduleBlockoutPollarHolder;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -16,6 +17,7 @@ public class StartApplication
         if (log.isDebugEnabled())
             log.debug("Starting the Schedule Blockout Pollar application ");
 
+        DebugLog.log("Starting the Schedule Blockout Pollar application ");
         try
         {
             ScheduleBlockoutPollarHolder.getInstance();

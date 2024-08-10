@@ -67,6 +67,7 @@ public class App {
 	}
 	
 	 private static boolean isAllSingleTon(String module, String[] args) {
+		 
 		 if(module.trim().equals("singleton")) {
 			 DebugLog.log("Start the module : singleton ");
 			

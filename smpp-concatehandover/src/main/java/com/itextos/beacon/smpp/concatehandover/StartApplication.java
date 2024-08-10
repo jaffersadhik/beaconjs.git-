@@ -26,6 +26,7 @@ import com.itextos.beacon.smpp.objects.inmem.InfoCollection;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.SmppApplicationParams;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -240,6 +241,7 @@ public class StartApplication
     public static void main(
             String[] args)
     {
+    	DebugLog.log("Concate Handover Start");
     	
     	System.out.println("System going to Start");
         new StartApplication().start();

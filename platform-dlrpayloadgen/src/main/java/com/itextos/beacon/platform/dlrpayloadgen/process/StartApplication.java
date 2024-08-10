@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -16,6 +17,8 @@ public class StartApplication
         if (log.isDebugEnabled())
             log.debug("Starting the application DLR Payload Generator");
 
+        DebugLog.log("Starting the application DLR Payload Generator");
+        
         try
         {
              String lCluster = System.getProperty("cluster");

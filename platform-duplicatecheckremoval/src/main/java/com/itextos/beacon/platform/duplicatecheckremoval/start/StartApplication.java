@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.platform.duplicatecheckremoval.ExpiryRemovalTask;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class StartApplication
 {
@@ -18,6 +19,8 @@ public class StartApplication
     {
         if (log.isDebugEnabled())
             log.debug("Starting the DuplicateCheck Expiry Processor... ");
+
+		 DebugLog.log("Starting the DuplicateCheck Expiry Processor... ");
 
         try
         {
