@@ -44,6 +44,9 @@ public class App {
 									
 									if(!isAllDNPost(module, args)) {
 										
+										if(!isAllSingleTon(module, args)) {
+											
+										}
 									}
 								}
 
@@ -63,7 +66,41 @@ public class App {
 		}
 	}
 	
-	 private static boolean isAllDNPost(String module, String[] args) {
+	 private static boolean isAllSingleTon(String module, String[] args) {
+		 if(module.trim().equals("singleton")) {
+			 DebugLog.log("Start the module : singleton ");
+			
+
+				com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication.main(args);
+
+
+				com.itextos.beacon.platform.dlrpayloadgen.process.StartApplication.main(args);
+
+
+				com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
+
+
+				com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);
+
+
+				com.itextos.beacon.platform.rch.StartApplication.main(args);
+
+
+				com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
+
+
+
+				com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+			return true;
+				
+			}
+			
+			return false;
+	}
+
+	private static boolean isAllDNPost(String module, String[] args) {
 		 if(module.trim().equals("dnpost")) {
 			 DebugLog.log("Start the module : dnpost ");
 			 com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
