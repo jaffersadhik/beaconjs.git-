@@ -18,6 +18,7 @@ import com.itextos.beacon.platform.dnpcore.process.DlrReceiveProcessor;
 import com.itextos.beacon.platform.dnrfallback.DlrFallbackProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.smslog.DNLog;
+import com.itextos.beacon.smslog.UserLog;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -88,6 +89,7 @@ public class DlrProcess
 
             DNLog.log(deliveryObject.getLogBuffer().toString());
 
+            UserLog.getInstance(deliveryObject.getUser()).log(deliveryObject.getLogBuffer().toString());
 
         }
         catch (final Exception e)
