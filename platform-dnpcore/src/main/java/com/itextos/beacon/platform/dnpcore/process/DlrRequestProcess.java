@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
@@ -37,30 +38,7 @@ public class DlrRequestProcess
         final DeliveryObject lNewDeliveryObj = aDeliveryObject.getClonedDeliveryObject();
         final String         lMid            = lNewDeliveryObj.getMessageId();
 
-        /*
-         * String lDndDeliveryStatus =
-         * PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.DELV_DND_STATUS);
-         * String lDndDeliveryRouteId =
-         * PlatformUtil.getAppConfigValueAsString(ConfigParamConstants.DELV_DND_ROUTE_ID
-         * );
-         * lDndDeliveryStatus = lDndDeliveryStatus == null ? "" : lDndDeliveryStatus;
-         * lDndDeliveryRouteId = lDndDeliveryRouteId == null ? "" : lDndDeliveryRouteId;
-         * final String lStatusId =
-         * lNewNunMessage.getValue(MiddlewareConstant.MW_DN_ORI_STATUS_CODE);
-         * if ((lNewNunMessage.getValue(MiddlewareConstant.MW_PLATFROM_REJECTED) ==
-         * null) || ((lNewNunMessage.getValue(MiddlewareConstant.MW_PLATFROM_REJECTED)
-         * != null)
-         * && lDndDeliveryStatus.equals(lStatusId) &&
-         * lDndDeliveryRouteId.equals(lNewNunMessage.getValue(MiddlewareConstant.
-         * MW_ROUTE_ID))))
-         * {
-         * if (log.isDebugEnabled())
-         * log.debug(" Adjustments begin mid:" + lMid + " status_id:" + lStatusId);
-         * processDeliveryAdjustments(lNewNunMessage);
-         * if (log.isDebugEnabled())
-         * log.debug(" Adjustments end mid:" + lMid);
-         * }
-         */
+      
         if (log.isDebugEnabled())
             log.debug(aDeliveryObject.getMessageId() + " : Before DlrDataUpdater the Message Object : " + lNewDeliveryObj.getJsonString());
 
@@ -118,15 +96,16 @@ public class DlrRequestProcess
         if ((aDeliveryObject.getDlrFromInternal() != null) && aDeliveryObject.getDlrFromInternal().equals("dummyroute_dlr_came_from_MW"))
             isProcessClientHandover = true;
 
+        
+    	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :isProcessClientHandover :: " + isProcessClientHandover);
+
         if (isProcessClientHandover || aDeliveryObject.isPlatfromRejected())
         {
-            if (log.isDebugEnabled())
-                log.debug(aDeliveryObject.getMessageId() +" : Client Handover allows only Carrier Success / Platform Rejections.. ");
-
+          
             final boolean isRejectedRequest = aDeliveryObject.isPlatfromRejected() || aDeliveryObject.isInterfaceRejected();
 
-            if (log.isDebugEnabled())
-                log.debug(aDeliveryObject.getMessageId() + " : Is Rejected Dlr ? '" + isRejectedRequest + "', If TRUE then bypass the Single DN..");
+            	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId() + " : Is Rejected Dlr ? '" + isRejectedRequest + "', If TRUE then bypass the Single DN..");
+
 
             if ((lDlrTypeInfo != null) && DlrConstants.SINGLE_DN_ENABLE.equals(lDlrTypeInfo.getDnType()) && (lTotalMsgParts > 1) && !isRejectedRequest)
                 nextComponentMap.put(Component.SDNP, lNewDeliveryObj);

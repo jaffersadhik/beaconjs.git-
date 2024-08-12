@@ -63,9 +63,7 @@ public class DlrReceiveProcessor
     	
         lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
 
-        if (log.isDebugEnabled())
-            log.debug(lDeliveryObject.getMessageId()+ " : Message received form Carrier : " + lDeliveryObject);
-
+ 
         // Request Received from Carrier
 
         final String requestFromVoice = null;// aNunMessage.getValue(MiddlewareConstant.MW_IS_VOICE_DLR);
@@ -82,15 +80,11 @@ public class DlrReceiveProcessor
                 if (!lCarrierFullDn.isEmpty())
                     lDeliveryObject = DNPUtil.processDR(lDeliveryObject);
 
-                if (log.isDebugEnabled())
-                    log.debug(lDeliveryObject.getMessageId()+ " : DN Message Obj - " + lDeliveryObject);
-
+       
                 lDeliveryObject = PayloadProcessor.retrivePayload(lDeliveryObject);
             }
 
-            if (log.isDebugEnabled())
-                log.debug(lDeliveryObject.getMessageId()+ " : Payload Object - " + lDeliveryObject.getJsonString());
-
+   
             lPayloadStatus = CommonUtility.nullCheck(lDeliveryObject.getDnPayloadStatus(), true);
         }
 
@@ -102,8 +96,9 @@ public class DlrReceiveProcessor
 
             if ((lProcessDnReceiverQ != null) && !lProcessDnReceiverQ.isEmpty())
             {
-                if (log.isDebugEnabled())
-                    log.debug(lDeliveryObject.getMessageId()+" :  Sending to " + lProcessDnReceiverQ.keySet() + " Message Obj :" + lDeliveryObject);
+                   
+                lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(lDeliveryObject.getMessageId()+" :  Sending to " + lProcessDnReceiverQ.keySet() + " Message Obj :" + lDeliveryObject);
+
 
                 // return processDnReceiverQ;
                 DNPProducer.sendToNextComponents(lProcessDnReceiverQ, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));

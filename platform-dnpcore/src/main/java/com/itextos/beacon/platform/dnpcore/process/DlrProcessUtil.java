@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
@@ -30,23 +31,23 @@ public class DlrProcessUtil
             DeliveryObject aDeliveryObject)
             throws Exception
     {
-        if (log.isDebugEnabled())
-            log.debug(aDeliveryObject.getMessageId()+ " : Processing DN Receiver Request : " + aDeliveryObject);
-
+   
         final Map<Component, DeliveryObject> lNextComponentMap = new HashMap<>();
 
         final List<Component>                lProcessDnRetryLs = DlrRetryProcess.processRetry(aDeliveryObject);
-        if (log.isDebugEnabled())
-            log.debug(aDeliveryObject.getMessageId()+  " : Begin processDnRetryLs:" + lProcessDnRetryLs + " Message Id:" + aDeliveryObject.getMessageId() + " status_id:" + aDeliveryObject.getDnOrigianlstatusCode());
+     
+        aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+  " : Begin processDnRetryLs:" + lProcessDnRetryLs + " Message Id:" + aDeliveryObject.getMessageId() + " status_id:" + aDeliveryObject.getDnOrigianlstatusCode());
 
         for (final Component lComponentName : lProcessDnRetryLs)
             if (lComponentName == Component.T2DB_DELIVERIES)
                 DlrRequestProcess.processDNQueueReq(aDeliveryObject, lNextComponentMap);
             else
                 lNextComponentMap.put(lComponentName, aDeliveryObject);
-        if (log.isDebugEnabled())
-            log.debug(" End processDnRetryLs:" + lProcessDnRetryLs + " Message Id:" + aDeliveryObject.getMessageId() + " lNextComponentMap keyset:"
-                    + (lNextComponentMap != null ? lNextComponentMap.keySet() : lNextComponentMap));
+     
+        
+        aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" End processDnRetryLs:" + lProcessDnRetryLs + " Message Id:" + aDeliveryObject.getMessageId() + " lNextComponentMap keyset:"
+                + (lNextComponentMap != null ? lNextComponentMap.keySet() : lNextComponentMap));
+
         return lNextComponentMap;
     }
 
