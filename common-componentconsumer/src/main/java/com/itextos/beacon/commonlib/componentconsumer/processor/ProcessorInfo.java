@@ -186,7 +186,7 @@ public class ProcessorInfo
         String module=System.getenv("module");
     	
     	
-    	if(module.equals("smppdlrhandover")) {
+    	if(module.equals("smppdlrhandover")||module.equals("dnpost")) {
     		
     	List<String> tempTpopics=topicsToConsume.get("bulk");
 
@@ -198,7 +198,7 @@ public class ProcessorInfo
     	topicsToConsume.put("bulk", tempTpopics);
     	}
     	
-    	}else if(module.equals("dnpostlogt2tb")) {
+    	}else if(module.equals("dnpostlogt2tb")||module.equals("biller")) {
     		
     		
     		List<String> tempTpopics=topicsToConsume.get("bulk");
