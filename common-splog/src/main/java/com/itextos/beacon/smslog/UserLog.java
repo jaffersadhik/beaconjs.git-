@@ -39,14 +39,14 @@ public class UserLog {
 		
 	}
 	
-	private UserLog(String nextcomponent) {
+	private UserLog(String username) {
 		
 
     	
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/logs/userlog_"+nextcomponent+".%g.log";
+        String logFileNamePattern = "/logs/userlog_"+username+".%g.log";
 
         Level loglevel=Level.INFO;
         
