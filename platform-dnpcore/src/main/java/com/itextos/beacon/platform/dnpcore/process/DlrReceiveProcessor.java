@@ -19,6 +19,7 @@ import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryQ;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
+import com.itextos.beacon.smslog.DNLog;
 
 public class DlrReceiveProcessor
         extends
@@ -123,6 +124,10 @@ public class DlrReceiveProcessor
 
             DNPProducer.sendToNextComponents(processDNQueues, lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
         }
+        
+        
+        DNLog.log(lDeliveryObject.getLogBuffer().toString());
+
 
     }
 
