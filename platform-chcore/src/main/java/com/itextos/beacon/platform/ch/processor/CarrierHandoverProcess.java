@@ -394,21 +394,32 @@ public class CarrierHandoverProcess
  					
  					StringTokenizer st=new StringTokenizer(url.getQuery(),"&");
  		    	
+ 					String metadata="";
  					while(st.hasMoreTokens()) {
  						
  						String param=st.nextToken();
  						
- 						StringTokenizer st1=new StringTokenizer(param,"=");
- 						
- 						
- 						reqmap.put(st1.nextToken().toLowerCase(), st1.nextToken());
+ 						if(!param.startsWith("meta-data")) {
+ 							
+ 							StringTokenizer st1=new StringTokenizer(param,"=");
+ 	 						
+ 	 						
+ 	 						reqmap.put(st1.nextToken().toLowerCase(), st1.nextToken());
 
+ 						}else {
+ 							
+ 							metadata=param;
+ 						}
+ 						
+ 						
  					}
  					
  					reqmap.forEach((k,v)->{
  						
  						sb.append(k).append("=").append(v).append("&");
  					});
+ 					
+ 					sb.append(metadata);
  		    	
  					return sb.toString();
 
