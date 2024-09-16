@@ -1,9 +1,14 @@
 package com.itextos.beacon.platform.ch.processor;
 
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -224,7 +229,7 @@ public class CarrierHandoverProcess
                        if ((lSubmissionObject.getMtMessageRetryIdentifier() == null) || !lRouteId.equals(lActualRouteId))
                            setCallBackUrl(lMessageRequest, lSubmissionObject);
 
-                       final String lKannelUrl = getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable);
+                       final String lKannelUrl = makelowercase(getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable));
 
                     
 
@@ -375,7 +380,51 @@ public class CarrierHandoverProcess
 
 
     }
-    private static void sendDummyRoute(final SubmissionObject lSubmissionObject,final RouteKannelInfo lKannelRouteInfo,final MessageRequest lMessageRequest,ClusterType mPlatformCluster) {
+ 
+       private static String makelowercase(String kannelUrl) {
+			
+ 		   // 	="http://192.168.1.80:34003/cgi-bin/sendsms?user=Net4&password=Netin&smsc=VNSTBA-1&smsc-id=VNSTBA-1&cliid=4000003600000002&sdate=2024-09-16&to=916206851089&from=APOHOS&text=Dear+User%2C+%0A%0AUse+OTP+656491+to+verify+and+submit+your+details+securely+with+Apollo+Hospitals.&priority=1&validity=1440&coding=0&dlr-url=http%3A%2F%2Fdnreceiver%3A8480%2Fdnr%2Fdlrreceiver%3Fdr%3D%25a%26smscid%3D%25i%26statuscd%3D%25d%26add_info%3D%257B%2522car_ts_format%2522%253A%2522yyMMddHHmmss%2522%252C%2522msg_create_ts%2522%253A%25221726475693183%2522%252C%2522pl_rds_id%2522%253A%25222%2522%252C%2522intl_msg%2522%253A%25220%2522%252C%2522intf_type%2522%253A%2522http_japi%2522%252C%2522pl_exp%2522%253A%252224091621%2522%252C%2522rty_atmpt%2522%253A%25220%2522%252C%2522sms_priority%2522%253A%25225%2522%252C%2522recv_ts%2522%253A%25222024-09-16%2B14%253A06%253A13.693%2522%252C%2522platform_cluster%2522%253A%2522otp%2522%252C%2522intf_grp_type%2522%253A%2522api%2522%252C%2522msg_type%2522%253A%25221%2522%252C%2522rute_id%2522%253A%2522VNSTBA%2522%252C%2522c_id%2522%253A%25224000003600000002%2522%252C%2522m_id%2522%253A%2522292093740613693302107700%2522%257D%26systemid%3D%25o&dlr-mask=3&accpriority=5&rp=0&meta-data=%3Fsmpp%3Fentityid=1001315801901941875%26templateid=1107172596401737054%26telemarketerid=1702166693997804050";
+ 		    	String response=null;
+ 		    	try {
+ 					URL url=new URL(kannelUrl);
+ 					StringBuffer sb=new StringBuffer();
+ 					sb.append(url.getProtocol()).append("://").append(url.getHost()).append(":").append(url.getPort()).append(url.getPath().toLowerCase()).append("?");
+
+ 					Map<String,String> reqmap=new HashMap<String,String>();
+ 					
+ 					StringTokenizer st=new StringTokenizer(url.getQuery(),"&");
+ 		    	
+ 					while(st.hasMoreTokens()) {
+ 						
+ 						String param=st.nextToken();
+ 						
+ 						StringTokenizer st1=new StringTokenizer(param,"=");
+ 						
+ 						
+ 						reqmap.put(st1.nextToken().toLowerCase(), st1.nextToken());
+
+ 					}
+ 					
+ 					reqmap.forEach((k,v)->{
+ 						
+ 						sb.append(k).append("=").append(v).append("&");
+ 					});
+ 		    	
+ 					return sb.toString();
+
+ 		    	} catch (MalformedURLException e) {
+ 					
+ 					
+ 					return kannelUrl;
+
+ 				}
+ 		    	
+ 			}
+ 		   
+
+	
+
+	private static void sendDummyRoute(final SubmissionObject lSubmissionObject,final RouteKannelInfo lKannelRouteInfo,final MessageRequest lMessageRequest,ClusterType mPlatformCluster) {
 		
 
         lSubmissionObject.setCarrierFullDn(lKannelRouteInfo.getCarrierFullDn());
