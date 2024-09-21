@@ -143,6 +143,8 @@ public class PropertyLoader
             }else {
             	
             	propertiesPath   = mCommonConfiguration.getString(aPropertiesKey.getKey());
+            	
+            	propertiesPath=propertiesPath.substring(propertiesPath.lastIndexOf('/'));
 
             }
             
