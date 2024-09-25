@@ -25,12 +25,15 @@ public class KafkaClusterInfo
 
     public String getKafkaProducerProperties()
     {
-        return mKafkaProducerProperties;
+        //return mKafkaProducerProperties;
+        return "/kafka-producer.properties";
     }
 
     public String getKafkaConsumerProperties()
     {
-        return mKafkaConsumerProperties;
+    //    return mKafkaConsumerProperties;
+        return "/kafka-consumer.properties";
+
     }
 
     @Override
