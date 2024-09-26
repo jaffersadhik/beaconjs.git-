@@ -257,6 +257,7 @@ public class ICProcessor
 
         if (!aMessageRequest.isIsIntl())
         {
+        	/*
         	if (!aMessageRequest.isIldo())
             {
             isSuccess       = new HeaderValidaton(aMessageRequest).validate();
@@ -278,12 +279,14 @@ public class ICProcessor
             	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" SKIP HeaderValidaton(aMessageRequest).validate() for isIldo():");
 
             }
+            */
         }else {
         	
                	
         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" SKIP HeaderValidaton(aMessageRequest).validate() for isIsIntl() :");
 
         }
+        
         return true;
     }
 

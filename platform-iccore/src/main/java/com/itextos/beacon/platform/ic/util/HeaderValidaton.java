@@ -54,6 +54,7 @@ public class HeaderValidaton
             return true;
         }*/
 
+        /*
         if (!isGovtHeader)
         {
             final boolean isValidHeaderForDelivery = isUserHeaderAvailable();
@@ -98,7 +99,7 @@ public class HeaderValidaton
                 }
             }
         }
-
+	*/
         return true;
     }
 
