@@ -1,5 +1,5 @@
 version: "3.1"
 services:
   beacon:
-    image: dk-reg.mas:5000/beacon:25sep2024_1 
+    image: dk-reg.mas:5000/beacon:26sep2024
     build: .
