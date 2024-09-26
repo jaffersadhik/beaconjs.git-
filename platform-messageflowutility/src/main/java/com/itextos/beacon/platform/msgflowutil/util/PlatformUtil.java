@@ -19,6 +19,7 @@ import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.pattern.PatternCache;
 import com.itextos.beacon.commonlib.pattern.PatternCheckCategory;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
@@ -54,8 +55,8 @@ public abstract class PlatformUtil
     {
         final String lHeader = MessageUtil.getHeaderId(aMessageRequest);
 
-        if (log.isDebugEnabled())
-            log.debug("Pattern check for Header : " + lHeader + " PromoHeaderRegex : " + mPromoHeaderRegex + " :: TransHeaderRegex : " + mTransHeaderRegex);
+         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" Pattern check for Header : " + lHeader + " PromoHeaderRegex : " + mPromoHeaderRegex + " :: TransHeaderRegex : " + mTransHeaderRegex);
+
 
         if (aMessageRequest.getMessageType() == MessageType.PROMOTIONAL)
             return PatternCache.getInstance().isPatternMatch(PatternCheckCategory.HEADER_CHECK, mPromoHeaderRegex, lHeader);

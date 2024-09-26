@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.governmentheaders.GovtHeaderBlockCheck;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
@@ -37,14 +38,13 @@ public class HeaderValidaton
         {
             final boolean isHeaderPatternFailed = PlatformUtil.isHeaderPatternFailed(mMessageRequest);
 
-            if (log.isDebugEnabled()) {
-                log.debug(mMessageRequest.getBaseMessageId()+" : Transactional/Promotioanl Header pattern check status : " + isHeaderPatternFailed);
-            }
+     
+            
+            mMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(mMessageRequest.getFileId()+" : Transactional/Promotioanl Header pattern check status : " + isHeaderPatternFailed);
+
             if (!isHeaderPatternFailed)
             {
-                if (log.isDebugEnabled())
-                    log.debug("Final Transactional/Promotioanl Header pattern check status : " + isHeaderPatternFailed);
-
+            
                 mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.HEADER_PATTERN_CHECK_FAILED.getStatusCode());
                 mMessageRequest.setPlatfromRejected(true);
                 return false;
