@@ -22,6 +22,7 @@ import com.itextos.beacon.platform.walletbase.data.WalletResult;
 import com.itextos.beacon.platform.walletbase.util.WalletUtil;
 import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
 import com.itextos.beacon.platform.wc.util.WCProducer;
+import com.itextos.beacon.smslog.ErrorLog;
 
 public class WalletProcessor
         extends
@@ -106,7 +107,9 @@ public class WalletProcessor
                 	
                 	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+"  ::: Error : " +ErrorMessage.getStackTraceAsString(ite));
 
-                    log.error(ite.getMessage());
+                 //   log.error(ite.getMessage());
+                    
+                    ErrorLog.log(ErrorMessage.getStackTraceAsString(ite));
                     hasWallectDeductStatus = false;
                     lStatus                = true;
                 }
