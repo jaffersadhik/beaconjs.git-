@@ -30,10 +30,12 @@ public class HeaderValidaton
         boolean isGovtHeader = false;
         isGovtHeader = isGovernmentHeader();
 
+        
         /**
          * Bye pass the other Header validation for DLT Template & Entity in customer
          * request.
          */
+        /*
         if (!isGovtHeader && mMessageRequest.isBypassDltCheck())
         {
             final boolean isHeaderPatternFailed = PlatformUtil.isHeaderPatternFailed(mMessageRequest);
@@ -50,7 +52,7 @@ public class HeaderValidaton
                 return false;
             }
             return true;
-        }
+        }*/
 
         if (!isGovtHeader)
         {
