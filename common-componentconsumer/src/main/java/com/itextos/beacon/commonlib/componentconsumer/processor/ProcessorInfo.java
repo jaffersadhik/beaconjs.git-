@@ -447,8 +447,14 @@ public class ProcessorInfo
             {
                 log.debug("Platform Cluster : '" + entry.getKey() + "'");
 
-                for (final String s : entry.getValue())
-                    log.debug("Topic Name :              '" + s + "'");
+            	StartupFlowLog.log("Platform Cluster : '" + entry.getKey() + "'");
+
+                for (final String s : entry.getValue()) {
+ 
+                	log.debug("Topic Name :              '" + s + "'");
+                	
+                	StartupFlowLog.log("Topic Name :              '" + s + "'");
+            }
             }
     }
 
