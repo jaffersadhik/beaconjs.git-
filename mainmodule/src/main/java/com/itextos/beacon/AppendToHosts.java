@@ -21,6 +21,8 @@ public class AppendToHosts {
                 bw.write(line);
                 bw.newLine(); // Write a newline after each entry
             }
+        }catch(Exception e) {
+        	
         }
     }
 }
