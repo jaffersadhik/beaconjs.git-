@@ -548,6 +548,7 @@ public class ProcessorInfo
 
             ComponentProcessorLog.log("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                     + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");
+            
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                         + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");
