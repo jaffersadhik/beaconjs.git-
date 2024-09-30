@@ -443,6 +443,9 @@ public class ProcessorInfo
                 
             }
         }
+        
+    	StartupFlowLog.log("clusterInMemCollection : "+clusterInMemCollection);
+
         return clusterInMemCollection;
     }
 
