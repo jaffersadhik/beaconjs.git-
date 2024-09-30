@@ -419,7 +419,7 @@ public class ProcessorInfo
     	
     	
     	
-    	ConsumerTopicList.log("aTopicsToConsume : "+aTopicsToConsume);
+    	StartupFlowLog.log("aTopicsToConsume : "+aTopicsToConsume);
 
         final Map<String, Map<String, ConsumerInMemCollection>> clusterInMemCollection = new HashMap<>();
 
