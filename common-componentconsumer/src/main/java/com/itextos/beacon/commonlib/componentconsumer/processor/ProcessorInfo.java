@@ -436,8 +436,13 @@ public class ProcessorInfo
             final ClusterType                          platformCluster      = ClusterType.getCluster(clusterName);
             final Map<String, ConsumerInMemCollection> topicInMemCollection = clusterInMemCollection.computeIfAbsent(clusterName, k -> new HashMap<>());
 
+        	StartupFlowLog.log("clusterName : "+clusterName);
+        	StartupFlowLog.log("platformCluster : "+platformCluster);
+
             for (final String topicName : entry.getValue())
             {
+            	StartupFlowLog.log("clusterName : "+clusterName+"platformCluster : "+platformCluster+" topicName : "+topicName);
+
                 final ConsumerInMemCollection temp = KafkaInformation.getInstance().createConsumer(mComponent, platformCluster, topicName);
                 topicInMemCollection.put(topicName, temp);
                 

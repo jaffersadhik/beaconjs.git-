@@ -29,7 +29,9 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaReques
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
+import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.splog.SPLog;
 
 public class KafkaInformation
@@ -340,7 +342,10 @@ public class KafkaInformation
             String aTopicName)
     {
         final String platformCluster = KafkaDataLoaderUtility.getNameOrDefault(aClusterType);
+        StartupFlowLog.log("platformCluster :  "+ platformCluster);
         final String key             = CommonUtility.combine(aComponent.getKey(), platformCluster, aTopicName);
+        StartupFlowLog.log("key :  "+ key);
+
         return mKafkaInMemoryConsumerCollection.computeIfAbsent(key, k -> createNewConsumers(aComponent, aClusterType, aTopicName));
     }
 
@@ -353,10 +358,14 @@ public class KafkaInformation
         if (log.isDebugEnabled())
             log.debug("Creating Kafka Consumers for " + logKey);
 
+        StartupFlowLog.log("Creating Kafka Consumers for " + logKey);
+        
         final KafkaClusterComponentMap lKafkaClusterComponentMap = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(aComponent, aClusterType);
 
         if (log.isDebugEnabled())
             log.debug("Kafka Cluster Component map : " + lKafkaClusterComponentMap);
+
+        StartupFlowLog.log("Kafka Cluster Component map : " + lKafkaClusterComponentMap);
 
         if (lKafkaClusterComponentMap != null)
         {
@@ -365,15 +374,22 @@ public class KafkaInformation
             if (log.isDebugEnabled())
                 log.debug("Consumer Kafka Cluster name : '" + lKafkaConsumerClusterName + "'");
 
+            StartupFlowLog.log("Consumer Kafka Cluster name : '" + lKafkaConsumerClusterName + "'");
+
             final KafkaClusterInfo lKafkaClusterInfo = KafkaDataLoader.getInstance().getKafkaClusterInfo(lKafkaConsumerClusterName);
 
             if (log.isDebugEnabled())
                 log.debug("Kafka Cluster found : '" + lKafkaClusterInfo + "'");
 
+            StartupFlowLog.log("Kafka Cluster found : '" + lKafkaClusterInfo + "'");
+
             if (lKafkaClusterInfo != null)
             {
                 if (log.isDebugEnabled())
                     log.debug("Topic Name to use :'" + aTopicName + "'");
+                
+                StartupFlowLog.log("Topic Name to use :'" + aTopicName + "'");
+
 
                 if (aTopicName != null)
                     return createConsumerClients(aComponent, aClusterType, aTopicName, lKafkaClusterInfo);
@@ -383,6 +399,9 @@ public class KafkaInformation
             log.error("Kafka Cluser information not available for '" + lKafkaConsumerClusterName + "'");
         }
         log.error("Component Platform Cluster map is not available for component '" + aComponent + "'");
+        StartupFlowLog.log("Component Platform Cluster map is not available for component '" + aComponent + "'");
+        ErrorLog.log("Component Platform Cluster map is not available for component '" + aComponent + "'");
+
         log.fatal("Unable to create a Kafka Producer for " + logKey);
         return null;
     }
@@ -399,19 +418,25 @@ public class KafkaInformation
 
         if (log.isDebugEnabled())
             log.debug("Final Topic name to use : '" + topicName + "'");
+        
+        StartupFlowLog.log("Final Topic name to use : '" + topicName + "'");
 
         final String                      key                                = CommonUtility.combine(aComponent.getKey(), KafkaDataLoaderUtility.getNameOrDefault(aClusterType));
         final Map<String, List<Consumer>> consumerMap                        = mKafkaConsumerCollection.computeIfAbsent(key, k -> new ConcurrentHashMap<>());
         final List<Consumer>              consumersList                      = consumerMap.computeIfAbsent(topicName, k -> new ArrayList<>());
         final List<Consumer>              componentConsumersList             = mKafkaConsumerCollectionAtClusterComponentLevel.computeIfAbsent(key, k -> new ArrayList<>());
         final String                      lKafkaServerConsumerPropertiesPath = aKafkaClusterInfo.getKafkaConsumerProperties();
-        final String                      lKafkaServerProducerPropertiesPath = aKafkaClusterInfo.getKafkaConsumerProperties();
+        final String                      lKafkaServerProducerPropertiesPath = aKafkaClusterInfo.getKafkaProducerProperties();
 
         if (log.isDebugEnabled())
         {
             log.debug("Kafka Cluster Producer Properties found : '" + lKafkaServerProducerPropertiesPath + "'");
             log.debug("Kafka Cluster Consumer Properties found : '" + lKafkaServerConsumerPropertiesPath + "'");
         }
+        
+        StartupFlowLog.log("Kafka Cluster Producer Properties found : '" + lKafkaServerProducerPropertiesPath + "'");
+        StartupFlowLog.log("Kafka Cluster Consumer Properties found : '" + lKafkaServerConsumerPropertiesPath + "'");
+
         final Properties              consumerProps           = PropertyLoader.getInstance().getPropertiesByFileName(lKafkaServerConsumerPropertiesPath);
         final String                  ip                      = CommonUtility.getApplicationServerIp();
 
@@ -456,6 +481,8 @@ public class KafkaInformation
 
                 if (log.isDebugEnabled())
                     log.debug("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
+                
+                StartupFlowLog.log("Topic Name : " + topicName + " Consumer Group Name " + lKafkaCLusterInformation.getKafkaConsumerGroupName());
 
                 consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, topicName);
                 consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaCLusterInformation.getKafkaConsumerGroupName());
@@ -473,7 +500,7 @@ public class KafkaInformation
                 final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                 consumerThread.start();
 
-                SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                 
                 if (log.isDebugEnabled())
                     log.debug("Started consumer " + clientId);
@@ -522,7 +549,7 @@ public class KafkaInformation
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 
-                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
                         log.debug("Started consumer " + clientId);
@@ -556,7 +583,7 @@ public class KafkaInformation
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 
-                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
                         log.debug("Started consumer " + clientId);
@@ -590,7 +617,7 @@ public class KafkaInformation
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 
-                    SPLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
+                    StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
                         log.debug("Started consumer " + clientId);
