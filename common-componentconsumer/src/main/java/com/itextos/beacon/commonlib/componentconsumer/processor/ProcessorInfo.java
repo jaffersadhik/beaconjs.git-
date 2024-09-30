@@ -38,6 +38,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterCompone
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.ComponentProcessorLog;
 import com.itextos.beacon.smslog.ConsumerTopicList;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.splog.SPLog;
@@ -545,6 +546,8 @@ public class ProcessorInfo
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();
 
+            ComponentProcessorLog.log("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
+                    + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                         + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");
