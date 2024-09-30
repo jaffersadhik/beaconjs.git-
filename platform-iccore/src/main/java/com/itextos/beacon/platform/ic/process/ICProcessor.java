@@ -22,12 +22,12 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
-import com.itextos.beacon.platform.ic.util.HeaderValidaton;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
 import com.itextos.beacon.smslog.EntryLog;
 import com.itextos.beacon.smslog.ExitLog;
 import com.itextos.beacon.smslog.SMSLog;
+import com.itextos.beacon.smslog.StartupFlowLog;
 
 public class ICProcessor
         extends
@@ -46,7 +46,11 @@ public class ICProcessor
             ConsumerInMemCollection aConsumerInMemCollection,
             int aSleepInMillis)
     {
+    	
         super(aThreadName, aComponent, aPlatformCluster, aTopicName, aConsumerInMemCollection, aSleepInMillis);
+ 
+    	StartupFlowLog.log("ICProcessor contsructer Entered");
+
     }
 
     @Override
@@ -57,6 +61,7 @@ public class ICProcessor
         final MessageRequest lMessageRequest = (MessageRequest) aBaseMessage;
 
         lMessageRequest.setSegment(SEGMENT);
+        
         
     	StringBuffer msgidparts=new StringBuffer();
 

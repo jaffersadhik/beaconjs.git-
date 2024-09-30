@@ -22,6 +22,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.StartupFlowLog;
 
 public abstract class AbstractCommonComponentProcessor
         implements
@@ -58,6 +59,9 @@ public abstract class AbstractCommonComponentProcessor
         mTopicName              = aTopicName;
         mSleepInMillis          = aSleepInMillis;
         consumerInMemCollection = aConsumerInMemCollection;
+        
+    	StartupFlowLog.log("AbstractCommonComponentProcessor contsructer Entered");
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
+import com.itextos.beacon.smslog.StartupFlowLog;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -30,6 +31,9 @@ public abstract class AbstractKafkaComponentProcessor
             int aSleepInMillis)
     {
         super(aThreadName, aComponent, aPlatformCluster, aTopicName, aConsumerInMemCollection, aSleepInMillis);
+   
+    	StartupFlowLog.log("AbstractKafkaComponentProcessor contsructer Entered");
+
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.itextos.beacon.commonlib.componentconsumer.processor.extend.Utility;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
@@ -41,6 +42,8 @@ import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.smslog.ComponentProcessorLog;
 import com.itextos.beacon.smslog.ConsumerTopicList;
 import com.itextos.beacon.smslog.DebugLog;
+import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.splog.SPLog;
 
 public class ProcessorInfo
@@ -81,9 +84,13 @@ public class ProcessorInfo
     //    createLockFile();
 
         mStartupRuntimeArguments = new StartupRuntimeArguments();
+        
 
         if (log.isDebugEnabled())
             log.debug("Invoking for Component '" + mComponent + "' with Startup Arguments " + mStartupRuntimeArguments);
+        
+        StartupFlowLog.log("Invoking for Component '" + mComponent + "' with Startup Arguments " + mStartupRuntimeArguments);
+        
 
     	DebugLog.log("Invoking for Component '" + mComponent + "' with Startup Arguments " + mStartupRuntimeArguments);
     	
@@ -122,8 +129,9 @@ public class ProcessorInfo
         {
             if (log.isDebugEnabled())
                 log.debug("Processing for the cluster Type '" + cluster + "'");
-
-            DebugLog.log("Processing for the cluster Type '" + cluster + "'");
+            
+            StartupFlowLog.log("Processing for the cluster Type '" + cluster + "'");
+            
             
             if (cluster != null)
             {
@@ -139,7 +147,7 @@ public class ProcessorInfo
 
             if (clusterNotSpecified && types.contains(cluster))
             {
-            	DebugLog.log("Skipping '" + cluster + "' cluster as it has separate instance setup.");
+            	StartupFlowLog.log("Skipping '" + cluster + "' cluster as it has separate instance setup.");
             	log.fatal("Skipping '" + cluster + "' cluster as it has separate instance setup.");
                 continue;
             }
@@ -156,7 +164,7 @@ public class ProcessorInfo
 
                 }
                 
-                	DebugLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
+                StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
                 	
                 for (final MessagePriority msgPriority : lMessagePriorityList)
                 {
@@ -164,7 +172,7 @@ public class ProcessorInfo
                         log.debug("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
                     }
                     
-                    DebugLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
+                    StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
                     final List<String> priorityBasedTopics = getPriorityBasedTopics(cluster, intfGroup, mStartupRuntimeArguments.getMessageType(), msgPriority);
 
                     if ((priorityBasedTopics != null) && !priorityBasedTopics.isEmpty())
@@ -291,7 +299,8 @@ public class ProcessorInfo
             if (log.isInfoEnabled())
                 log.info("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster+ " topics : "+topics+" topicInMemCollection : "+topicInMemCollection);
     
-            
+            StartupFlowLog.log("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster+ " topics : "+topics+" topicInMemCollection : "+topicInMemCollection);
+       
             for (final String topicName : topics)
             {
 
@@ -533,7 +542,7 @@ public class ProcessorInfo
          if (log.isDebugEnabled())
             log.debug("Creating a thread with name '" + threadName + "' for the class '" + aClassName + "'");
 
-         SPLog.log("createConsumerThreads : aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
+         StartupFlowLog.log("createConsumerThreads : aClusterName : "+aClusterName+" aPlatformCluster :  "+aPlatformCluster+" aTopicName : "+aTopicName+" aClassName : "+aClassName );
          
          
         try
@@ -546,7 +555,7 @@ public class ProcessorInfo
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();
 
-            ComponentProcessorLog.log("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
+            StartupFlowLog.log("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                     + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");
             
             if (log.isInfoEnabled())
@@ -557,6 +566,9 @@ public class ProcessorInfo
         {
             log.error("Exception while creating " + aThreadIndex + " thread for the component '" + mComponent + "' for Cluster '" + aClusterName + "' Topic name '" + aTopicName + "' Class Name '"
                     + aClassName + "' ThreadIndex '" + aThreadIndex + "'", e);
+            
+            ErrorLog.log("Exception while creating " + aThreadIndex + " thread for the component '" + mComponent + "' for Cluster '" + aClusterName + "' Topic name '" + aTopicName + "' Class Name '"
+                    + aClassName + "' ThreadIndex '" + aThreadIndex + "'"+ErrorMessage.getStackTraceAsString(e));
         }
     }
 
