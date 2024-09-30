@@ -281,10 +281,17 @@ public class ProcessorInfo
 
         int totalThreadsCount = 0;
 
+        StartupFlowLog.log("aTopicsToConsume : '" + aTopicsToConsume );
+
         for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
         {
             final String      clusterName     = entry.getKey();
+            
+            StartupFlowLog.log("clusterName : '" + clusterName );
+
             final ClusterType platformCluster = ClusterType.getCluster(clusterName);
+
+            StartupFlowLog.log("platformCluster : '" + platformCluster );
 
   
             final KafkaClusterComponentMap             lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, platformCluster);
