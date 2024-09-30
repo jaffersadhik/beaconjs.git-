@@ -16,7 +16,7 @@ public class App {
     
 	public static void main(String[] args) throws IOException {
 		
-		
+		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
 		
 		System.out.println("module : "+module);
