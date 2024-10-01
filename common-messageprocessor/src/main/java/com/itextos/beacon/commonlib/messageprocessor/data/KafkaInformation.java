@@ -497,9 +497,14 @@ public class KafkaInformation
 
                 mTotalConsumersCount++;
 
+                Thread virtualThread = Thread.ofVirtual().start(consumer);
+
+                virtualThread.setName( topicName + "-" + consumerClientIndex);
+                /*
                 final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                 consumerThread.start();
-
+				*/
+                
                 StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                 
                 if (log.isDebugEnabled())
@@ -546,9 +551,15 @@ public class KafkaInformation
 
                     mTotalConsumersCount++;
 
+                    /*
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 
+	*/
+                    Thread virtualThread = Thread.ofVirtual().start(consumer);
+
+                    virtualThread.setName( topicName + "-" + consumerClientIndex);
+                    
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
@@ -580,9 +591,14 @@ public class KafkaInformation
 
                     mTotalConsumersCount++;
 
+                    /*
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 
+	*/
+                    Thread virtualThread = Thread.ofVirtual().start(consumer);
+
+                    virtualThread.setName( topicName + "-" + consumerClientIndex);
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
@@ -613,10 +629,15 @@ public class KafkaInformation
                     componentConsumersList.add(consumer);
 
                     mTotalConsumersCount++;
+                    
+                    /*
 
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
+*/
+                    Thread virtualThread = Thread.ofVirtual().start(consumer);
 
+                    virtualThread.setName(  topicName + "-" + consumerClientIndex);
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())

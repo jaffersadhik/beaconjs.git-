@@ -151,7 +151,13 @@ public class RedisStatusMonitorHolder
                             if (aInitalRun)
                                 redisMonitor.run();
                             else
+                            	
+                            	/*
                                 new Thread(redisMonitor).start();
+                                */
+                            	
+                            	 Thread.ofVirtual().start(redisMonitor);
+
                             redisMonitorMap.put(index, redisMonitor);
                         }
                 }

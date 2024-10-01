@@ -87,6 +87,7 @@ public class TestMain
     {
         final int    testIterations = 12;
 
+        /*
         final Thread t1             = new Thread(new DlrQueryInsert(testIterations), "T1");
         t1.start();
         final Thread t2 = new Thread(new DlrQueryInsert(testIterations), "T2");
@@ -95,6 +96,20 @@ public class TestMain
         t3.start();
         final Thread t4 = new Thread(new DlrQueryInsert(testIterations), "T4");
         t4.start();
+        */
+        
+        Thread virtualThread1 = Thread.ofVirtual().start(new DlrQueryInsert(testIterations));
+
+        virtualThread1.setName( "T1");
+        Thread virtualThread2 = Thread.ofVirtual().start(new DlrQueryInsert(testIterations));
+
+        virtualThread2.setName( "T2");
+        Thread virtualThread3 = Thread.ofVirtual().start(new DlrQueryInsert(testIterations));
+
+        virtualThread3.setName( "T3");
+        Thread virtualThread4 = Thread.ofVirtual().start(new DlrQueryInsert(testIterations));
+
+        virtualThread4.setName( "T4");
     }
 
     private static void singelDnDelete()

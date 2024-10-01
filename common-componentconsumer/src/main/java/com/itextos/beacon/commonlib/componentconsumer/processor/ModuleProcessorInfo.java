@@ -386,9 +386,15 @@ public class ModuleProcessorInfo
             final IComponentProcessor currentComponentProcessor = (IComponentProcessor) constructor.newInstance(threadName, mComponent, aPlatformCluster, aTopicName, aInMemCollection, aSleepInMillis);
             allProcessors.add(currentComponentProcessor);
 
+            /*
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();
 
+*/
+            Thread virtualThread = Thread.ofVirtual().start(currentComponentProcessor);
+
+            virtualThread.setName( threadName);
+            
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                         + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");

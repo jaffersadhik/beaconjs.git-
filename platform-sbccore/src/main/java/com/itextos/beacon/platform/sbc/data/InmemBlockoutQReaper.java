@@ -17,7 +17,12 @@ public class InmemBlockoutQReaper
 
     private InmemBlockoutQReaper()
     {
+    	/*
         new Thread(this).start();
+        */
+    	 Thread virtualThread = Thread.ofVirtual().start(this);
+
+         virtualThread.setName( "InmemBlockoutQReaper");
     }
 
     private static class SingletonHolder

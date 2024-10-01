@@ -54,9 +54,13 @@ public class PrintDesends
             secondLevelList.add(psl);
 
             final String name = "Thread-" + all[firstCharIndex] + all[index2];
+            /*
             final Thread t    = new Thread(psl, name);
             t.start();
+*/
+            Thread virtualThread = Thread.ofVirtual().start(psl);
 
+            virtualThread.setName( name);
             System.out.println(sdf.format(new Date()) + " : Second Level Thread started " + name);
         }
 

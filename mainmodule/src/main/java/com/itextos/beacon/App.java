@@ -238,11 +238,7 @@ public class App {
 		
 	}
 
-	private static boolean isHTTP(String module, String[] args) {
-
-		return com.itextos.beacon.jetty.server.MultiWarDeployment.deploy(module);
-
-	}
+	
 
 	private static void startPrometheusServer(
 	            boolean aStartJettyServer)

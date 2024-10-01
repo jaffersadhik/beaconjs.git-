@@ -46,8 +46,14 @@ public class FileNameSplitter
         {
             final FileCopy fileCopy = new FileCopy(source, destination, entry);
             list.add(fileCopy);
+            
+            /*
             final Thread t = new Thread(fileCopy);
             t.start();
+            */
+            Thread virtualThread = Thread.ofVirtual().start(fileCopy);
+
+            virtualThread.setName( "fileCopy");
         }
 
         while (true)

@@ -56,8 +56,14 @@ public class StartApplication
                     isConsumerCreated = isConsumerCreated || lConsumer.isConsumerCreated();
 
                     final String threadName = topicName + "-consumer-" + i;
+                    /*
                     final Thread thread     = new Thread(lConsumer, threadName);
                     thread.start();
+                    */
+                    Thread virtualThread = Thread.ofVirtual().start(lConsumer);
+
+                    virtualThread.setName( threadName);
+                    
                     log.debug("Process Thread " + threadName + " started");
                 }
                 catch (final Exception e)
@@ -77,8 +83,14 @@ public class StartApplication
         {
             final FullMessageTableInserter lFullMessageTableInserter = new FullMessageTableInserter(3000);
             final String                   threadName                = "FullMsgInserter-" + i;
+           /*
             final Thread                   thread                    = new Thread(lFullMessageTableInserter, threadName);
             thread.start();
+            */
+            Thread virtualThread = Thread.ofVirtual().start(lFullMessageTableInserter);
+
+            virtualThread.setName( threadName);
+            
             log.debug("Process Thread " + threadName + " started");
         }
     }

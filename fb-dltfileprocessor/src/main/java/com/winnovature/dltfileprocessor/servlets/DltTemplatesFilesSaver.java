@@ -160,8 +160,13 @@ public class DltTemplatesFilesSaver extends HttpServlet {
 					// Create the FutureTask with Callable
 					taskList.add(index, new FutureTask<Map<String, Object>>(callable));
 					// As it implements Runnable, create Thread with FutureTask
+					
+					/*
 					Thread t = new Thread(taskList.get(index));
 					t.start();
+					*/
+					 Thread virtualThread = Thread.ofVirtual().start(taskList.get(index));
+
 					index++;
 				}
 				

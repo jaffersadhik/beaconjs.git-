@@ -26,8 +26,14 @@ public class ItextosAdminServer
         try
         {
             mServerSocket = new ServerSocket(SmppProperties.getInstance().getAdminPort());
+            /*
             final Thread adminServerThread = new Thread(this, "AdminServerr");
             adminServerThread.start();
+            */
+            Thread virtualThread = Thread.ofVirtual().start(this);
+
+            virtualThread.setName( "AdminServerr");
+            
             log.info(" SMPP Interface Admin Server started on port " + mServerSocket.getLocalPort());
         }
         catch (final Exception e)
@@ -59,8 +65,13 @@ public class ItextosAdminServer
     {
         final ItextosServerSocketHandler lServerSocketHandler = new ItextosServerSocketHandler(aClientSocket);
         mClientSockets.add(lServerSocketHandler);
+        /*
         final Thread t = new Thread(lServerSocketHandler, "ClientSocketThread");
         t.start();
+        */
+        Thread virtualThread = Thread.ofVirtual().start(lServerSocketHandler);
+
+        virtualThread.setName( "ClientSocketThread");
     }
 
     public void stop()

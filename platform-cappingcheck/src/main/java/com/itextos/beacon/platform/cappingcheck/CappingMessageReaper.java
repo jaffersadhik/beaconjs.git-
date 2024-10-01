@@ -147,8 +147,13 @@ public class CappingMessageReaper
             if ((lKeys != null) && !lKeys.isEmpty())
             {
                 final RemoveRedisEntries lRemoveEntries = new RemoveRedisEntries(aRedisId, lKeys, lCompareTime);
+             /*
                 final Thread             t1             = new Thread(lRemoveEntries, "RemoveEntries-" + lPattern);
                 t1.start();
+                */
+                Thread virtualThread = Thread.ofVirtual().start(lRemoveEntries);
+
+                virtualThread.setName( "RemoveEntries-" + lPattern);
             }
         }
         catch (final Exception e)
@@ -190,8 +195,14 @@ public class CappingMessageReaper
                     {
                         lTotRecords = lTotRecords + lKeys.size();
                         final RemoveRedisEntries lRemoveEntries = new RemoveRedisEntries(aRedisIndex, lKeys, lFromTime.getTimeInMillis());
+                     /*
                         final Thread             t              = new Thread(lRemoveEntries, "MissedRemovedEntries-" + lPattern);
                         t.start();
+                        */
+                        
+                        Thread virtualThread = Thread.ofVirtual().start(lRemoveEntries);
+
+                        virtualThread.setName( "MissedRemovedEntries-" + lPattern);
                     }
                 }
                 catch (final Exception e)

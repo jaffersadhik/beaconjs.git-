@@ -134,9 +134,13 @@ public class MessageIdentifier
     private void startUpdaterThread()
     {
         mInstanceStatusUpdater = new MessageIdentifierUpdater(mAppInstanceRedis);
+      /*
         final Thread updaterThread = new Thread(mInstanceStatusUpdater, "MessageIdentifier-" + mInterfaceType + "-" + mAppInstanceRedis.getCurrentAppInstanceID());
         updaterThread.start();
+	*/
+        Thread virtualThread = Thread.ofVirtual().start(mInstanceStatusUpdater);
 
+        virtualThread.setName( "MessageIdentifier-" + mInterfaceType + "-" + mAppInstanceRedis.getCurrentAppInstanceID());
         if (log.isDebugEnabled())
             log.debug("Message Identifier Status updater thread started for the interface type :'" + mInterfaceType + "' and Instance ID : '" + mAppInstanceRedis.getCurrentAppInstanceID() + "'");
     }

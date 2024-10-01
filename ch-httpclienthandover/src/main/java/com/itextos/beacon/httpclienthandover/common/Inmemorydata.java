@@ -106,9 +106,16 @@ public class Inmemorydata
                 log.debug("Starting the client handover thread for client id '" + aClientId + "' thread count '" + (index + 1) + "'");
 
             final ProcessStarter processStarter = new ProcessStarter(aClientId);
+           
+            /*
             final Thread         thread         = new Thread(processStarter, "Process Starter - " + aClientId + "-" + index);
             thread.start();
 
+			*/
+            Thread virtualThread = Thread.ofVirtual().start(processStarter);
+
+            virtualThread.setName( "Process Starter - " + aClientId + "-" + index);
+            
             processStartersList.add(processStarter);
         }
 

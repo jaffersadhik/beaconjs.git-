@@ -26,6 +26,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.smslog.ProducerFlushLog;
 import com.itextos.beacon.smslog.PromosenderLog;
+import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TranssenderLog;
 import com.itextos.beacon.splog.SPLog;
 
@@ -62,10 +63,15 @@ public class Producer
         mProducerInMemCollection = aProducerInMemCollection;
         createProducer();
 
+        /*
         final Thread t = new Thread(new FlushMonitor(this), "FM-" + mTopicName + "-" + Thread.currentThread().getId());
         t.start();
+        */
+        Thread virtualThread = Thread.ofVirtual().start(new FlushMonitor(this));
+
+        virtualThread.setName( "FM-" + mTopicName + "-" + Thread.currentThread().getId());
         
-        SPLog.log("Producer : "+t.getName());
+        StartupFlowLog.log("Producer : "+virtualThread.getName());
     }
 
     private void createProducer()

@@ -138,6 +138,7 @@ public class RemoveSession
             if (log.isDebugEnabled())
                 log.debug("Insert the record using a separate thread to avoid the interruptted exception");
 
+            /*
             new Thread((Runnable) () -> {
                 final List<ISmppInfo> bindLogList = new ArrayList<>();
                 bindLogList.add(unBindinfoLog);
@@ -151,6 +152,21 @@ public class RemoveSession
                     log.error("Exception while inserting Unbind Request...", e1);
                 }
             }, "Thread Db Insert").start();
+            */
+           Thread t= Thread.startVirtualThread((Runnable) () -> {
+                final List<ISmppInfo> bindLogList = new ArrayList<>();
+                bindLogList.add(unBindinfoLog);
+
+                try
+                {
+                    DbBindOperation.insertUnBindInfo(bindLogList);
+                }
+                catch (final Exception e1)
+                {
+                    log.error("Exception while inserting Unbind Request...", e1);
+                }
+            });
+           t.setName("Thread Db Insert");
         }
     }
 

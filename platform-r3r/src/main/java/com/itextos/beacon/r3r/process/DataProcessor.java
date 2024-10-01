@@ -32,16 +32,27 @@ public class DataProcessor
 
     private void initDBProcessor()
     {
+    	/*
         final Thread dbThread = new Thread(dbProcessorThread, "DB Process Thread");
         dbThread.start();
+        */
+    	 Thread virtualThread = Thread.ofVirtual().start(dbProcessorThread);
+
+         virtualThread.setName( "DB Process Thread");
         if (log.isDebugEnabled())
             log.debug("DB Processor Thread Started ");
     }
 
     private void initRequestDataProcessor()
     {
+    	/*
         final Thread urlThread = new Thread(urlRequestDetailsProcessor, "URL Request Processor");
         urlThread.start();
+		*/
+    	 Thread virtualThread = Thread.ofVirtual().start(urlRequestDetailsProcessor);
+
+         virtualThread.setName( "URL Request Processor");
+         
         if (log.isDebugEnabled())
             log.debug("URL Request Details Processor Started ");
     }

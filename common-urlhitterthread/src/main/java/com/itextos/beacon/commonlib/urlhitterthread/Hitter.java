@@ -28,14 +28,26 @@ public class Hitter
         {
             final HitterThread ht = new HitterThread(index);
             threads.put(index, ht);
+            
+            /*
             final Thread t = new Thread(ht, "Thread-" + index);
+            */
+            Thread t = Thread.ofVirtual().unstarted(ht);
+
+            t.setName(  "Thread-" + index);
             threadList.add(t);
         }
 
         final CountPrinter cp  = new CountPrinter(threads);
+        /*
         final Thread       tcp = new Thread(cp);
         tcp.start();
 
+		*/
+        Thread virtualThread = Thread.ofVirtual().start(cp);
+
+        virtualThread.setName( "CountPrinter");
+        
         for (final Thread t : threadList)
         {
             log.debug("Starting : '" + t.getName() + "'");

@@ -112,11 +112,17 @@ class WalletKafkaProcessor
                 final List<WalletInput> toInsert = new ArrayList<>(inMemSize);
                 mWalletInputInMemory.drainTo(toInsert, inMemSize);
 
+                /*
                 final Thread t = new Thread(() -> {
                     insertIntoDb(toInsert);
                 }, "WalletInputToDb-" + (index + 1));
 
                 t.start();
+                */
+                Thread t=  Thread.startVirtualThread(() -> {
+                    insertIntoDb(toInsert);
+                });
+                t.setName( "WalletInputToDb-" + (index + 1));
             }
 
             inProcess = false;

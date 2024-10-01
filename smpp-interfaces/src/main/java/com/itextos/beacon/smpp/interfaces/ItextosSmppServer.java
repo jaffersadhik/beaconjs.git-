@@ -153,9 +153,14 @@ public class ItextosSmppServer
             public Thread newThread(
                     Runnable r)
             {
+            	/*
                 final Thread t = new Thread(r);
                 t.setName("SmppServerSessionWindowMonitorPool-" + sequence.getAndIncrement());
-                return t;
+                */
+            	 Thread t = Thread.ofVirtual().unstarted(r);
+
+                 t.setName( "SmppServerSessionWindowMonitorPool-" + sequence.getAndIncrement());
+            	return t;
             }
 
         };

@@ -202,8 +202,13 @@ public class InformationHolder
     {
         final String     fileNameAlone = InformationHolder.getInstance().getNextFileName();
         final FileWriter writer        = new FileWriter(aReturnValue, fileNameAlone);
+        /*
         final Thread     t             = new Thread(writer, "File Writer - " + fileNameAlone);
         t.start();
+        */
+        Thread virtualThread = Thread.ofVirtual().start(writer);
+
+        virtualThread.setName( "File Writer - " + fileNameAlone);
     }
 
     public synchronized String getNextFileName()

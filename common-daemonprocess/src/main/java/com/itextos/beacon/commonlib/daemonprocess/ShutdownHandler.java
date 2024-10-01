@@ -42,7 +42,9 @@ public class ShutdownHandler
         if (log.isDebugEnabled())
             log.debug("Adding shutdown hook for the object '" + aProcessName + "'");
 
-        final Thread shutdownThread = new Thread(() -> {
+        
+       
+        final Thread shutdownThread =  Thread.startVirtualThread(() -> {
 
             try
             {

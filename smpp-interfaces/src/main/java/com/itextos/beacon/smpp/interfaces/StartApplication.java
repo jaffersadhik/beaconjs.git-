@@ -194,9 +194,13 @@ public class StartApplication
             log.debug("Starting Admin Server ");
 
         adminServer = new ItextosAdminServer();
+        /*
         final Thread adminServerThread = new Thread(adminServer, "SmppAdminServer");
         adminServerThread.start();
+	*/
+        Thread virtualThread = Thread.ofVirtual().start(adminServer);
 
+        virtualThread.setName("SmppAdminServer");
         if (log.isInfoEnabled())
             log.info("Admin Server started successfully..");
     }

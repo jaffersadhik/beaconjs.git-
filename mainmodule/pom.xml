@@ -98,11 +98,7 @@
 			<artifactId>platform-mccmncload</artifactId>
 			<version>1.0</version>
 	</dependency>
-	<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>1.0</version>
-	</dependency>
+
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-blockoutwalletconsumer</artifactId>
@@ -568,10 +564,6 @@
 	</dependency><dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-timezoneutility</artifactId>
-			<version>1.0</version>
-	</dependency><dependency>
-			<groupId>beacon</groupId>
-			<artifactId>common-unittest</artifactId>
 			<version>1.0</version>
 	</dependency><dependency>
 			<groupId>beacon</groupId>

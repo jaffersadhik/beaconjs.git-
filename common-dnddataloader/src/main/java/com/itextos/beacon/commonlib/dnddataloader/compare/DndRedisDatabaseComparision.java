@@ -94,8 +94,13 @@ public class DndRedisDatabaseComparision
 
             log.fatal("Starting the thread ..." + withRange);
 
+            Thread virtualThread = Thread.ofVirtual().start(withRange);
+
+            virtualThread.setName( threadName);
+            /*
             final Thread t = new Thread(withRange, threadName);
             t.start();
+            */
         }
     }
 
