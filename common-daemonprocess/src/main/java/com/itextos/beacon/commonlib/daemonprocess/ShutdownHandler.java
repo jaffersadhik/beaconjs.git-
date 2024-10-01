@@ -44,7 +44,7 @@ public class ShutdownHandler
 
         
        
-        final Thread shutdownThread =  Thread.startVirtualThread(() -> {
+        final Thread shutdownThread =  new Thread(() -> {
 
             try
             {
