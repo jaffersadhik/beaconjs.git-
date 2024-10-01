@@ -5,8 +5,7 @@ EXPOSE 20000/tcp
 RUN mkdir -p /logs
 
 RUN apt-get update && \
-    apt-get install -y iputils-ping telnet && \
-    apt-get install -y vim && \
+    apt-get install -y iputils-ping telnet vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
