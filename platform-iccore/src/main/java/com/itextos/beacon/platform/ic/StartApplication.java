@@ -26,8 +26,21 @@ public class StartApplication
         {
         	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
 
-        	ICProcessor.SEGMENT=System.getenv("segment");
+        	ICProcessor.SEGMENT=System.getenv("NODE_HOSTNAME");
         	
+        	if(ICProcessor.SEGMENT==null) {
+        		
+            	ICProcessor.SEGMENT=System.getenv("segment");
+
+        	}
+        	
+        	if(ICProcessor.SEGMENT!=null) {
+        		
+        		if(ICProcessor.SEGMENT.trim().length()>25) {
+        			
+        			ICProcessor.SEGMENT=ICProcessor.SEGMENT.substring(0, 25);
+        		}
+        	}
         	DebugLog.log("segment : "+ICProcessor.SEGMENT);
         	
             final ProcessorInfo lProcessor = new ProcessorInfo(Component.IC);
