@@ -1,4 +1,4 @@
-FROM openjdk:21-jdk-slim
+FROM dk-reg.mas:5000/openjdk:21-jdk-slim
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
