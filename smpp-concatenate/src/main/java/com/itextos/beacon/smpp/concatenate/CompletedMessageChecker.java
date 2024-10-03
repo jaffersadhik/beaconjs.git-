@@ -42,7 +42,10 @@ public class CompletedMessageChecker
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
         mTimedProcessor = new TimedProcessor("CompletedMessageChecker:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+    
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

@@ -39,7 +39,9 @@ abstract class AbstractEsInmemoryCollection
     {
         mEsTypeInsert   = aEsType;
         mTimedProcessor = new TimedProcessor("ESInMemCollection-" + aEsType, this, TimerIntervalConstant.ELASTIC_SEARCH_INMEMORY_PUSH);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

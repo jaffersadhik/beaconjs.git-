@@ -26,7 +26,8 @@ public class RedisShortCodeChecker
     public RedisShortCodeChecker()
     {
         mTimedProcessor = new TimedProcessor("RedisShortCodeChecker", this, TimerIntervalConstant.SHORT_CODE_COUNT_CHECER);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         if (log.isDebugEnabled())
             log.debug("Starting the TimedProcess for the Redis Short Code Checker.");

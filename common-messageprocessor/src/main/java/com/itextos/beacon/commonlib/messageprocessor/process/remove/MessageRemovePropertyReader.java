@@ -58,7 +58,9 @@ public class MessageRemovePropertyReader
             mPropConf = new PropertiesConfiguration();
         }
         mTimedProcessor = new TimedProcessor("MessageRemovePropertyReader", this, TimerIntervalConstant.MESSAGE_REMOVE_PROPERTY_UPDATER);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

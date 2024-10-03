@@ -98,7 +98,9 @@ class PrometheusController
         isFirstLoad     = false;
 
         mTimedProcessor = new TimedProcessor("PrometheusControl", this, TimerIntervalConstant.PROMETHEUS_CONTROL_REFRESH);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

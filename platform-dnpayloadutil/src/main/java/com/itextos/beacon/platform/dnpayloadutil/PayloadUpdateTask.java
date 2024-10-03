@@ -30,7 +30,9 @@ public class PayloadUpdateTask
         start();
 
         mTimedProcessor = new TimedProcessor("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public static PayloadUpdateTask getInstance()

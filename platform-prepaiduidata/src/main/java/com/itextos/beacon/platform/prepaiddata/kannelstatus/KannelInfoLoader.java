@@ -69,7 +69,8 @@ public class KannelInfoLoader
             log.debug("Starting the Kannel Info Loader : '");
 
         mTimedProcessor = new TimedProcessor("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         if (log.isDebugEnabled())
             log.debug("Kannel Info Loader started '");

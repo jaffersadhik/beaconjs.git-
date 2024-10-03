@@ -37,7 +37,8 @@ public class CappingMessageReaper
         this.mRedisIndex = aRedisIndex;
 
         mTimedProcessor  = new TimedProcessor("CappingMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         checkForPreviousHour(mRedisIndex);
     }

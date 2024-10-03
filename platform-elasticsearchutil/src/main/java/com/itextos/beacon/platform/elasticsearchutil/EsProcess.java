@@ -47,7 +47,9 @@ public class EsProcess
     private EsProcess()
     {
         mTimedProcessor = new TimedProcessor("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public static boolean insertSingleDn(

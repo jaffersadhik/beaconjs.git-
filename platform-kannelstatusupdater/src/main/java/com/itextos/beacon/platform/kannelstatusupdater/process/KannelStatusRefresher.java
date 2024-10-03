@@ -34,7 +34,8 @@ public class KannelStatusRefresher
     {
         final int timeInterval = 10;
         mTimedProcessor = new TimedProcessor("KannelStatusRefresher", this, TimerIntervalConstant.KANNEL_STATUS_REFRESH);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         if (log.isInfoEnabled())
             log.info("Kannel Status Refresher started with " + timeInterval + " time interval.");

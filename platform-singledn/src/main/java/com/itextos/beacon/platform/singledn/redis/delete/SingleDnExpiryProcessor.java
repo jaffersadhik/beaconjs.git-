@@ -40,7 +40,8 @@ public class SingleDnExpiryProcessor
     public SingleDnExpiryProcessor()
     {
         mTimedProcessor = new TimedProcessor("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         log.info("SingleDnExpiry Processor started ........");
     }

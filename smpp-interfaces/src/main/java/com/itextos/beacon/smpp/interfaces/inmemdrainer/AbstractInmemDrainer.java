@@ -33,7 +33,9 @@ abstract class AbstractInmemDrainer
         mSmppObjectType = aSmppObjectType;
         mBatchSize      = aBatchSize;
         mTimedProcessor = new TimedProcessor(aSmppObjectType + "-InMemDrainer", this, aIntervalConstant);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

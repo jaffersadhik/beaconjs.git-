@@ -23,7 +23,9 @@ public class PayloadDeleteTask
         start();
 
         mTimedProcessor = new TimedProcessor("PayloadDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public static PayloadDeleteTask getInstance()

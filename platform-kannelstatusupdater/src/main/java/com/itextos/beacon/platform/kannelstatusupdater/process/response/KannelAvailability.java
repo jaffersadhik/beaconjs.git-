@@ -43,7 +43,9 @@ public class KannelAvailability
     private KannelAvailability()
     {
         mTimedProcessor = new TimedProcessor("KannelAvailability", this, TimerIntervalConstant.KANNEL_AVALIABILITY_REFRESH);
-        mTimedProcessor.start();
+     //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     /** Request from - 0-CarrierHandover, 1-RetryCarrierHandover */

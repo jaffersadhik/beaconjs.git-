@@ -42,7 +42,9 @@ abstract class AbstractRedisProcess
         mRedisIndex     = aRedisIndex;
 
         mTimedProcessor = new TimedProcessor("PromoRedisDataCleaner-" + mRedisIndex, this, TimerIntervalConstant.PROMO_KANNEL_REDIS_CLEANER_INTERVAL);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

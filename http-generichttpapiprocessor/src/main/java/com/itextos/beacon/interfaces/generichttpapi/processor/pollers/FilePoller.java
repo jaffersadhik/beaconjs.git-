@@ -29,7 +29,8 @@ public class FilePoller
         if (log.isDebugEnabled())
             log.debug(" APIConstants.POLLER_SLEEP_TIME_IN_MILLIS : " + APIConstants.POLLER_SLEEP_TIME_IN_MILLIS);
         mTimedProcessor = new TimedProcessor(threadName, this, TimerIntervalConstant.INTERFACE_FILE_POLLER_LOOKUP_INTERVAL);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         if (log.isDebugEnabled())
             log.debug("Started File Poller with name " + threadName);

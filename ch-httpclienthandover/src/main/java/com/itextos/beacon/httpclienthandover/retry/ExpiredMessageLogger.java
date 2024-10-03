@@ -34,7 +34,9 @@ public class ExpiredMessageLogger
         isCustomerSpecific = aIsCustSpecific;
         clientId           = aCustID;
         timeProcessor      = new TimedProcessor("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
-        timeProcessor.start();
+    //    timeProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(timeProcessor);
+
     }
 
     @Override

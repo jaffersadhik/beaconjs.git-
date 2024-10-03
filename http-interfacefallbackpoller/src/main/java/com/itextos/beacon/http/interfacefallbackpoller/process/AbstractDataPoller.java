@@ -32,7 +32,9 @@ public abstract class AbstractDataPoller
         super();
 
         mTimedProcessor = new TimedProcessor("FallbackTableReader", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

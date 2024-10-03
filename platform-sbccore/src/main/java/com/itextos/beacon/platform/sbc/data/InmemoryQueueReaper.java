@@ -33,7 +33,9 @@ public abstract class InmemoryQueueReaper
         mInmemoryQueue  = aInMemoryQueue;
         mTableName      = aTableName;
         mTimedProcessor = new TimedProcessor("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

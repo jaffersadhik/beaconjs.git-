@@ -40,7 +40,8 @@ public class SingleDnDataDelete
     public SingleDnDataDelete()
     {
         mTimedProcessor = new TimedProcessor("SingleDnDataDelete", this, TimerIntervalConstant.SINGLE_DN_DELETE_PROCESS);
-        mTimedProcessor.start();
+        //mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         log.info("SingleDnDataDelete Processor started ........");
     }

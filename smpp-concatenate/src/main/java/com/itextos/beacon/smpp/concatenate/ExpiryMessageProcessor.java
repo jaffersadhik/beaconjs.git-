@@ -44,7 +44,9 @@ class ExpiryMessageProcessor
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
         mTimedProcessor = new TimedProcessor("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

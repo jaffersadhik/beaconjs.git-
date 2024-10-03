@@ -53,7 +53,9 @@ public class KafkaCustomProperties
     {
         mPropConf       = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.KAFKA_CUSTOM_PROPERTIES, true);
         mTimedProcessor = new TimedProcessor("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public int getProducerMaxFlushCount()

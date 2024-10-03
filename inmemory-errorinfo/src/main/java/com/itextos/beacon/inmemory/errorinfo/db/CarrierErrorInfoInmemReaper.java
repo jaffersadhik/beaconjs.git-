@@ -49,7 +49,9 @@ public class CarrierErrorInfoInmemReaper
     private CarrierErrorInfoInmemReaper()
     {
         mTimedProcessor = new TimedProcessor("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public void addErrorInfo(

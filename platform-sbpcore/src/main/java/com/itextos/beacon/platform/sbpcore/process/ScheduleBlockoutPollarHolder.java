@@ -44,7 +44,9 @@ public class ScheduleBlockoutPollarHolder
     {
         startPollars();
         mTimedProcessor = new TimedProcessor("TimerThread-SchedulePollerStarter", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     private void startPollars()

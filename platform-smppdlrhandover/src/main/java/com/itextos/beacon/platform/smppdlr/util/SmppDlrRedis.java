@@ -36,7 +36,11 @@ public class SmppDlrRedis
         super();
         mRedisPoolIndex = aRedisPoolIndex;
         mTimedProcessor = new TimedProcessor("SmppRedisOperation:" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
-        mTimedProcessor.start();
+        
+        //mTimedProcessor.start();
+        
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
         if (log.isDebugEnabled())
             log.debug("SmppDlrRedisPoller started successfully ........." + aRedisPoolIndex);
     }

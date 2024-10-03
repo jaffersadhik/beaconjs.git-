@@ -47,7 +47,9 @@ class WalletKafkaProcessor
         try
         {
             mTimedProcessor = new TimedProcessor("WalletHistoryProducer", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
-            mTimedProcessor.start();
+         //   mTimedProcessor.start();
+            Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
         }
         catch (final Exception e)
         {

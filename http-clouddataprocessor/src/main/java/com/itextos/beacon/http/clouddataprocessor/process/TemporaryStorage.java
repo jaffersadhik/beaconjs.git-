@@ -33,7 +33,9 @@ public class TemporaryStorage
     {
         queue  = new LinkedBlockingQueue<>();
         reaper = new TimedProcessor("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
-        reaper.start();
+   //     reaper.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(reaper);
+
     }
 
     public static TemporaryStorage getInstance()

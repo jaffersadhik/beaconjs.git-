@@ -40,7 +40,9 @@ public class OrphanExpiryMessageProcessor
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
         mTimedProcessor = new TimedProcessor("OrphanExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_ORPHAN_MESSAGE_EXPIRY_INTERVAL);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

@@ -41,7 +41,9 @@ public abstract class AbstractDataPoller
         super();
         mClusterType    = aClusterType;
         mTimedProcessor = new TimedProcessor("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

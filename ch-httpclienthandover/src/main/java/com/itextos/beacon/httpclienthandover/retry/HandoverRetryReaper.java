@@ -32,7 +32,9 @@ public class HandoverRetryReaper
         isClientSpecific = aIsCustSpecific;
         mClientId        = aCustID;
         timedProcessor   = new TimedProcessor("Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
-        timedProcessor.start();
+    //    timedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(timedProcessor);
+
     }
 
     @Override

@@ -48,7 +48,9 @@ public abstract class AbstractDataPoller
         mAppInstanceId  = aAppInstanceId;
         mTableName      = aTableName;
         mTimedProcessor = new TimedProcessor("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
-        mTimedProcessor.start();
+   //     mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

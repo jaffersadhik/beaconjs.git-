@@ -29,7 +29,9 @@ public class KannelStatsRedisUpdater
     private KannelStatsRedisUpdater()
     {
         mTimedProcessor = new TimedProcessor("KannelStatsUpdateReaper", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

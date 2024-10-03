@@ -28,7 +28,9 @@ public class AbstractAgingDlrGen
     {
         super();
         mTimedProcessor = new TimedProcessor("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
-        mTimedProcessor.start();
+       // mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

@@ -31,7 +31,9 @@ public class PayloadRedisDeleteTask
         start();
 
         mTimedProcessor = new TimedProcessor("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public static PayloadRedisDeleteTask getInstance()

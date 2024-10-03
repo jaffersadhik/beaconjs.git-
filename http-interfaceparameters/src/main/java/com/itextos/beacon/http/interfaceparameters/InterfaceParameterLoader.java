@@ -68,7 +68,8 @@ public class InterfaceParameterLoader
             throw new ItextosRuntimeException(s, e);
         }
         mTimedProcessor = new TimedProcessor("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         if (log.isDebugEnabled())
             log.debug("Timer Thread for loading the Interface Parameters started with sleep time of 30 seconds.");

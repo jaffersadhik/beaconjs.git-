@@ -62,7 +62,9 @@ public class RedisPusher
     private RedisPusher()
     {
         mTimedProcessor = new TimedProcessor("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
-        mTimedProcessor.start();
+     //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
         mCanContinue = true;
     }
 

@@ -46,7 +46,9 @@ public class RedisStatusMonitorHolder
     private RedisStatusMonitorHolder()
     {
         mTimedProcessor = new TimedProcessor("RedisStatisticsCollector", this, TimerIntervalConstant.REDIS_STATISTICS_READER);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     public Map<Component, Map<Integer, RedisMonitor>> getRedisMonitorStats(

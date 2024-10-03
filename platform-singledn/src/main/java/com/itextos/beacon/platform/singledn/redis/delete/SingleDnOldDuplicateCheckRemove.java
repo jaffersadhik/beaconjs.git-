@@ -40,7 +40,8 @@ public class SingleDnOldDuplicateCheckRemove
     public SingleDnOldDuplicateCheckRemove()
     {
         mTimedProcessor = new TimedProcessor("SingleDnOldDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         log.info("SingleDnDuplicateCheckRemove Processor started ........");
     }

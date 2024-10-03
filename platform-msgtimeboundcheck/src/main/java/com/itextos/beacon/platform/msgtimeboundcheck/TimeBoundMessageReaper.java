@@ -37,7 +37,8 @@ public class TimeBoundMessageReaper
         this.mRedisIndex = aRedisIndex;
 
         mTimedProcessor  = new TimedProcessor("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
-        mTimedProcessor.start();
+     //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         checkForPreviousDate(mRedisIndex);
     }

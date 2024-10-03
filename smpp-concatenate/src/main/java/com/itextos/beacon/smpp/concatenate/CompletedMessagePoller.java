@@ -46,7 +46,9 @@ public class CompletedMessagePoller
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
         mTimedProcessor = new TimedProcessor("CompletedMessagePoller:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
-        mTimedProcessor.start();
+    //    mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
         if (log.isDebugEnabled())
             log.debug("CompletedMessagePoller started successfully ........." + mClusterType + "~" + aRedisPoolIndex);
     }

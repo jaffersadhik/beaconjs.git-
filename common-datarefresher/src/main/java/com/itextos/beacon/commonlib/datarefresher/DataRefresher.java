@@ -58,7 +58,9 @@ public class DataRefresher
     private DataRefresher()
     {
         mTimedProcessor = new TimedProcessor("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-        mTimedProcessor.start();
+     //   mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

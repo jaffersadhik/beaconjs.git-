@@ -6,11 +6,14 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.platform.smppdlr.fbp.SmppDlrFallbackPollerHolder;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueueReaper;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrRedis;
 import com.itextos.beacon.smslog.DebugLog;
+import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.smslog.StartupFlowLog;
 
 public class StartApplication
 {
@@ -96,11 +99,17 @@ public class StartApplication
             }
 
             SmppDlrFallbackPollerHolder.getInstance();
+            
+            StartupFlowLog.log(" SmppDlrFallbackPollerHolder.getInstance() finished");
+
         }
         catch (final Exception e)
         {
             log.error("Exception while starting component '" + THIS_COMPONENT + "'", e);
+            StartupFlowLog.log("Exception while starting component '" + THIS_COMPONENT + "'"+ ErrorMessage.getStackTraceAsString(e));
+            ErrorLog.log("Exception while starting component '" + THIS_COMPONENT + "'"+ ErrorMessage.getStackTraceAsString(e));
             System.exit(-1);
+            
         }
     }
 

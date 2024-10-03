@@ -56,7 +56,9 @@ public class DltTemplatesDataLoader
     private DltTemplatesDataLoader()
     {
         mTimedProcessor = new TimedProcessor("DltTemplatesDataLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

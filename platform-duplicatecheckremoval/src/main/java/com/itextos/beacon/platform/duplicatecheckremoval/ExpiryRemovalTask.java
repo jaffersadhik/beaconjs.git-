@@ -33,7 +33,9 @@ public class ExpiryRemovalTask
         this.mRedisIndex = aRedisIndex;
 
         mTimedProcessor  = new TimedProcessor("DuplicateCheckRemovel-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.DUPLICATE_CHECK_EXPIRY_TASK_INTERVAL);
-        mTimedProcessor.start();
+   //     mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
     }
 
     @Override

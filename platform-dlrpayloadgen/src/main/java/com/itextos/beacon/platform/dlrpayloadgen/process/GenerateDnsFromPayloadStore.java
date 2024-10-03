@@ -54,7 +54,8 @@ public class GenerateDnsFromPayloadStore
         super();
 
         mTimedProcessor = new TimedProcessor("GenerateDnsFromPayloadStore-" + aPayloadId, this, TimerIntervalConstant.DLR_PAYLOAD_GEN_REFRESH);
-        mTimedProcessor.start();
+      //  mTimedProcessor.start();
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
         this.mPayloadId = aPayloadId;
         this.mCluster   = aCluster;

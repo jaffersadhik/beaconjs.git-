@@ -54,7 +54,9 @@ public class LoadOnnetTableInfo
         try
         {
             mTimedProcessor = new TimedProcessor("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
-            mTimedProcessor.start();
+          //  mTimedProcessor.start();
+            Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+
         }
         catch (final Exception e)
         {
