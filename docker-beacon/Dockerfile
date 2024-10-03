@@ -5,7 +5,7 @@ EXPOSE 20000/tcp
 RUN mkdir -p /logs
 
 RUN apt-get update && \
-    apt-get install -y iputils-ping telnet vim curl  && \
+    apt-get install -y iputils-ping telnet vim curl procps  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -47,6 +47,7 @@ COPY prometheus.control.properties /prometheus.control.properties
 
 COPY mcc-mnc-list.json /mcc-mnc-list.json
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
-ENTRYPOINT ["java","-Xss512k","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
+ENTRYPOINT ["java","-Xss5m","-Xmx512m","-Xms512m",
+"-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
 VOLUME ["/instance"]
 VOLUME ["/logs"]
