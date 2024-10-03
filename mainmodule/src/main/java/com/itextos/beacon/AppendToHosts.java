@@ -10,7 +10,7 @@ public class AppendToHosts {
 
     
     public static void appendCustomHostsToSystemHosts() throws IOException {
-    	 String customHostsFilePath = "/etc/custom_hosts"; // Path to your custom hosts file
+    	 String customHostsFilePath = "/custom_hosts_production.properties"; // Path to your custom hosts file
          String hostsFilePath = "/etc/hosts"; // Path to the system hosts file
 
     	try (BufferedReader br = new BufferedReader(new FileReader(customHostsFilePath));
