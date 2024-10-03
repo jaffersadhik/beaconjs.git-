@@ -11,6 +11,7 @@ RUN apt-get update && \
 
 COPY log4j2-common.xml /log4j2-common.xml
 
+COPY smpp-interface.properties /smpp-interface.properties
 COPY encrypt.properties /encrypt.properties
 COPY elasticsearch.properties /elasticsearch.properties
 COPY dnd.properties /dnd.properties
