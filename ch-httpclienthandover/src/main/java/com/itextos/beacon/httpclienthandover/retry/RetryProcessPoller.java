@@ -18,9 +18,13 @@ public class RetryProcessPoller
     {
         final String           currentTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.NO_SEPARATOR_YYYY_MM_DD_HH_MM_SS);
         final RedisRetryReaper reaper      = new RedisRetryReaper(currentTime, aIsCustSpecific, aCustID);
+       /*
         final Thread           th          = new Thread(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
         th.start();
+	*/
+        Thread virtualThread = Thread.ofVirtual().start(reaper);
 
+        virtualThread.setName( "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
         processInProcessMessage(aIsCustSpecific, aCustID);
         processPastMessages(currentTime, aIsCustSpecific, aCustID);
     }

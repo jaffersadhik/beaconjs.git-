@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.smslog.DebugLog;
+import com.itextos.beacon.smslog.TimeTakenLog;
 
 public class App {
 
@@ -15,6 +16,8 @@ public class App {
     private static boolean IS_START_PROMETHEUS=false;
     
 	public static void main(String[] args) throws IOException {
+		
+		long start=System.currentTimeMillis();
 		
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
@@ -64,6 +67,10 @@ public class App {
 			startPrometheusServer(true);
 
 		}
+		
+		long end=System.currentTimeMillis();
+		
+		TimeTakenLog.log("Time Taken for Start : "+(end-start)/1000+" seconds");
 	}
 	
 	 private static boolean isAllSingleTon(String module, String[] args) {
