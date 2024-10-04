@@ -85,7 +85,7 @@ public class ConcateSMPPScheduledTimedProcessor {
 
     // Stop the scheduler
     public void stopReaper() {
-    	
+    	/*
     	try {
         mStoppedExternally = true;
         scheduler.shutdown();
@@ -95,5 +95,6 @@ public class ConcateSMPPScheduledTimedProcessor {
     	}catch(Exception e) {
     		
     	}
+    	*/
     }
 }
