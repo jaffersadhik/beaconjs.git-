@@ -103,7 +103,7 @@ public abstract class AbstractCommonComponentProcessor
                 else
                     if (mStopped)
                     {
-                    	TopicExitLog.getInstance(mTopicName).getInstance("Topicname : "+ mTopicName +" : "+ new Date()+ "Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'")
+                    	TopicExitLog.getInstance(mTopicName).getInstance("Topicname : "+ mTopicName +" : "+ new Date()+ "Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'");
                        
                     	log.fatal("Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'");
                         break;
