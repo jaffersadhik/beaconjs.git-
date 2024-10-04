@@ -396,7 +396,7 @@ public class ModuleProcessorInfo
 
             virtualThread.setName( threadName);
   */
-            CoreExecutorPoolSingleton.getInstance().submitTask(currentComponentProcessor, threadName);
+            CoreExecutorPoolSingleton.getInstance().addTask(currentComponentProcessor, threadName);
           
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName

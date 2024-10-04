@@ -1,16 +1,24 @@
 package com.itextos.beacon.commonlib.utility;
 
-import java.util.concurrent.ExecutorService;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class CoreExecutorPoolSingleton {
-    private static final int CORE_POOL_SIZE = 5; // Maximum core size of the thread pool
-    private static CoreExecutorPoolSingleton instance;
-    private final ExecutorService threadPool;
 
+	private static CoreExecutorPoolSingleton instance;
+    private final ScheduledExecutorService scheduler;
+    private final List<Runnable> tasks;
+    private int currentTaskIndex = 0;
+
+    private ThreadPool threadpool=new ThreadPool(5); 
     // Private constructor for Singleton
     private CoreExecutorPoolSingleton() {
-        threadPool = Executors.newFixedThreadPool(CORE_POOL_SIZE);
+        scheduler = Executors.newScheduledThreadPool(1);
+        tasks = new ArrayList<>();
+        startTaskRotation() ;
     }
 
     // Public method to get the singleton instance
@@ -21,26 +29,41 @@ public class CoreExecutorPoolSingleton {
         return instance;
     }
 
-    // Method to submit tasks to the thread pool
-    public void submitTask(Runnable task, String taskName) {
-        threadPool.submit(() -> {
-            Thread currentThread = Thread.currentThread();
-            String originalThreadName = currentThread.getName();
-            try {
-                // Set custom thread name for this task
-                currentThread.setName(taskName);
-                task.run();
-            } finally {
-                // Restore the original thread name after execution
-                currentThread.setName(originalThreadName);
+    // Method to add tasks to the list of tasks
+    public void addTask(Runnable task,String threadName) {
+        synchronized (tasks) {
+            tasks.add(task);
+        }
+    }
+
+    // Method to start executing tasks in a round-robin manner
+    private void startTaskRotation() {
+        scheduler.scheduleAtFixedRate(() -> {
+        	 if(threadpool.getQueueSize()<100) {
+            Runnable taskToRun;
+
+            synchronized (tasks) {
+                if (tasks.isEmpty()) {
+                    return; // No tasks to run
+                }
+
+                // Get the current task to run in a round-robin manner
+                taskToRun = tasks.get(currentTaskIndex);
+                currentTaskIndex = (currentTaskIndex + 1) % tasks.size();
             }
-        });
+
+           
+            	
+            threadpool.submitTask(taskToRun);
+            
+            }
+            
+        }, 0, 10L, TimeUnit.MILLISECONDS);
     }
 
     // Method to shut down the thread pool
     public void shutdown() {
-        threadPool.shutdown();
+        scheduler.shutdown();
     }
 
 }
-

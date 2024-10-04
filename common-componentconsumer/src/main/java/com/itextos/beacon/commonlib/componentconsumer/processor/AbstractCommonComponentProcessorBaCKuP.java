@@ -27,12 +27,12 @@ import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TopicExitLog;
 import com.itextos.beacon.smslog.TopicLog;
 
-public abstract class AbstractCommonComponentProcessor
+public abstract class AbstractCommonComponentProcessorBaCKuP
         implements
         IComponentProcessor
 {
 
-    private static final Log              log                    = LogFactory.getLog(AbstractCommonComponentProcessor.class);
+    private static final Log              log                    = LogFactory.getLog(AbstractCommonComponentProcessorBaCKuP.class);
     private static final long             MAX_TIME               = 5 * 1000L;
 
     protected final String                mThreadName;
@@ -48,7 +48,7 @@ public abstract class AbstractCommonComponentProcessor
 
     private final ConsumerInMemCollection consumerInMemCollection;
 
-    protected AbstractCommonComponentProcessor(
+    protected AbstractCommonComponentProcessorBaCKuP(
             String aThreadName,
             Component aComponent,
             ClusterType aPlatformCluster,
@@ -71,10 +71,6 @@ public abstract class AbstractCommonComponentProcessor
     public void run()
     {
         int messageProcessedAfterStopped = 0;
-        
-        int loopcount=0;
-        
-        long start=System.currentTimeMillis();
 
         while (true)
         {
@@ -83,7 +79,6 @@ public abstract class AbstractCommonComponentProcessor
 
             try
             {
-            	loopcount++;
                 TopicLog.getInstance(mTopicName).log("mTopicName : "+mTopicName +" : "+new Date());
 
                 loadOldDataFromRedis();
@@ -120,13 +115,6 @@ public abstract class AbstractCommonComponentProcessor
                 sendBackToTopic(lReadMessage);
             }
 
-            if(isNoRecordAvailable||loopcount>10||(System.currentTimeMillis()-start)>500) {
-            	
-            	 if (isNoRecordAvailable)
-                     CommonUtility.sleepForAWhile(1);
-            	
-            	break;
-            }
             try
             {
                 if (isNoRecordAvailable)

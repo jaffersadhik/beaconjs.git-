@@ -99,7 +99,7 @@ public class DndRedisDatabaseComparision
 
             virtualThread.setName( threadName);
         */
-            CoreExecutorPoolSingleton.getInstance().submitTask(withRange, threadName);
+            CoreExecutorPoolSingleton.getInstance().addTask(withRange, threadName);
             /*
             final Thread t = new Thread(withRange, threadName);
             t.start();

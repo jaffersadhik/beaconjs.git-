@@ -580,7 +580,7 @@ public class ProcessorInfo
             virtualThread.setName( threadName);
   */
             TopicLog.getInstance(aTopicName+"_initiated").log(aTopicName+" : "+new Date());
-            CoreExecutorPoolSingleton.getInstance().submitTask(currentComponentProcessor, threadName);
+            CoreExecutorPoolSingleton.getInstance().addTask(currentComponentProcessor, threadName);
             /*
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();

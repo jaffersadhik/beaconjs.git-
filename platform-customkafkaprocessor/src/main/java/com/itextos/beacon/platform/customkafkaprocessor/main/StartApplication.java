@@ -67,7 +67,7 @@ public class StartApplication
 
                     virtualThread.setName( threadName);
                     */
-                    CoreExecutorPoolSingleton.getInstance().submitTask(lConsumer, threadName);
+                    CoreExecutorPoolSingleton.getInstance().addTask(lConsumer, threadName);
                     
                     log.debug("Process Thread " + threadName + " started");
                 }
@@ -98,7 +98,7 @@ public class StartApplication
 
             virtualThread.setName( threadName);
             */
-            CoreExecutorPoolSingleton.getInstance().submitTask(lFullMessageTableInserter, threadName);
+            CoreExecutorPoolSingleton.getInstance().addTask(lFullMessageTableInserter, threadName);
             log.debug("Process Thread " + threadName + " started");
         }
     }
