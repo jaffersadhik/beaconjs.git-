@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 
 public class CompletedMessageChecker
@@ -31,7 +31,7 @@ public class CompletedMessageChecker
 
     private final ClusterType    mClusterType;
     private final int            mRedisPoolIndex;
-    private final TimedProcessor mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              mCanContinue            = true;
 
     public CompletedMessageChecker(
@@ -41,11 +41,14 @@ public class CompletedMessageChecker
         super();
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
-        mTimedProcessor = new TimedProcessor("CompletedMessageChecker:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("CompletedMessageChecker:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
      //   mTimedProcessor.start();
     
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("CompletedMessageChecker:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
     }
 
     @Override

@@ -5,11 +5,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.http.interfacefallback.dao.FallBackDaoRCS;
 
 public class FallbackQReaperRCS
@@ -33,14 +31,16 @@ public class FallbackQReaperRCS
     }
 
     private boolean              canContinue = true;
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
 
     private FallbackQReaperRCS()
     {
-        mTimedProcessor = new TimedProcessor("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		 */
+		 
     }
 
     private static boolean process()

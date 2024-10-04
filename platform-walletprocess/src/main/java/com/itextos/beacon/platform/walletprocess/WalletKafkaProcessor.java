@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.database.DbInserter;
 import com.itextos.beacon.platform.walletbase.util.WalletHistoryKafkaProperties;
@@ -38,7 +38,7 @@ class WalletKafkaProcessor
 
     private final BlockingQueue<WalletInput> mWalletInputInMemory = new LinkedBlockingQueue<>(10000);
     private boolean                          mCanContinue         = true;
-    private TimedProcessor                   mTimedProcessor      = null;
+    //private ScheduledTimedProcessorForSpleepOfEachExecution                   mTimedProcessor      = null;
     private boolean                          inProcess            = false;
 
     private WalletKafkaProcessor()
@@ -46,10 +46,12 @@ class WalletKafkaProcessor
 
         try
         {
-            mTimedProcessor = new TimedProcessor("WalletHistoryProducer", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
+        	/*
+            mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("WalletHistoryProducer", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
          //   mTimedProcessor.start();
             Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+			*/
+        	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("WalletHistoryProducer", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
         }
         catch (final Exception e)
         {

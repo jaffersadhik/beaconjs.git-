@@ -20,7 +20,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 
 public class LoadOnnetTableInfo
@@ -33,7 +33,7 @@ public class LoadOnnetTableInfo
     private boolean              mCanContinue        = true;
 
     Map<String, String>          mOnneTableRouteInfo = new HashMap<>();
-    private final TimedProcessor mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
 
     private static class SingletonHolder
     {
@@ -53,10 +53,12 @@ public class LoadOnnetTableInfo
 
         try
         {
-            mTimedProcessor = new TimedProcessor("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
+        	/*
+            mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
           //  mTimedProcessor.start();
             Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+			*/
+        	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
         }
         catch (final Exception e)
         {
@@ -202,8 +204,13 @@ public class LoadOnnetTableInfo
     {
         mCanContinue = false;
 
+        /*
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
+       */
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+        
     }
 
 }

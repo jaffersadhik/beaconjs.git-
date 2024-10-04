@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.dnrfallback.dao.DlrFallBackDao;
 
 public class DlrFallbackQReaper
@@ -33,14 +33,17 @@ public class DlrFallbackQReaper
     }
 
     private boolean              canContinue = true;
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
 
     private DlrFallbackQReaper()
     {
-        mTimedProcessor = new TimedProcessor("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
     }
 
     private static boolean process()

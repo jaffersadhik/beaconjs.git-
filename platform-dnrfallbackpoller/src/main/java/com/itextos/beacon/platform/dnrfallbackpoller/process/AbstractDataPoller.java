@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.dnrfallback.dao.DlrFallBackDao;
 
 public abstract class AbstractDataPoller
@@ -25,7 +25,7 @@ public abstract class AbstractDataPoller
 
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
 
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              canContinue = true;
     private final ClusterType    mClusterType;
 
@@ -34,10 +34,13 @@ public abstract class AbstractDataPoller
     {
         super();
         mClusterType    = aClusterType;
-        mTimedProcessor = new TimedProcessor("DlrFallbackTableReader-" + mClusterType, this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("DlrFallbackTableReader-" + mClusterType, this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("DlrFallbackTableReader-" + mClusterType, this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
     }
 
     @Override

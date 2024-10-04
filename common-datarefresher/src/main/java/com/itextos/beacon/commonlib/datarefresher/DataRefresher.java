@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.datarefresher.dataobjects.DataRefresherMaste
 import com.itextos.beacon.commonlib.datarefresher.dataobjects.IDataRefresher;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class DataRefresher
         implements
@@ -50,17 +50,21 @@ public class DataRefresher
         return SingletonHolder.INSTANCE;
     }
 
-    private final TimedProcessor                 mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution                 mTimedProcessor;
     private Map<String, DataRefresherMasterData> mDataRefresherCollection = new HashMap<>();
     private boolean                              mCanContinue             = true;
     private int                                  iterateIndex             = 0;
 
     private DataRefresher()
     {
-        mTimedProcessor = new TimedProcessor("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+    	
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    	
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
     }
 
     @Override

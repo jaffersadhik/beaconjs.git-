@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class PayloadRedisDeleteTask
         implements
@@ -23,17 +23,18 @@ public class PayloadRedisDeleteTask
     public static final String                          PAYLOAD_OPERATION_SUCCESS = "1";
 
     private final LinkedBlockingQueue<SubmissionObject> mPayloadRedisDeleteQ      = new LinkedBlockingQueue<>(1000);
-    private TimedProcessor                              mTimedProcessor           = null;
+    //private ScheduledTimedProcessorForSpleepOfEachExecution                              mTimedProcessor           = null;
     private boolean                                     mCanContinue              = true;
 
     private PayloadRedisDeleteTask()
     {
         start();
-
-        mTimedProcessor = new TimedProcessor("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
+/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
     }
 
     public static PayloadRedisDeleteTask getInstance()

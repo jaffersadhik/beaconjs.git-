@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.http.generichttpapi.common.data.QueueObject;
 import com.itextos.beacon.http.generichttpapi.common.utils.FileGenUtil;
 
@@ -19,7 +19,7 @@ public class AsyncFallbackQReaper
 {
 
     private static final Log     log         = LogFactory.getLog(AsyncFallbackQReaper.class);
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              canContinue = true;
 
     private static class SingletonHolder
@@ -37,10 +37,16 @@ public class AsyncFallbackQReaper
 
     private AsyncFallbackQReaper()
     {
-        mTimedProcessor = new TimedProcessor("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
+		*/
+    	
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	
     }
 
     private static boolean process()

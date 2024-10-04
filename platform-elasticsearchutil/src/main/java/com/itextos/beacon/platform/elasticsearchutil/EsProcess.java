@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.elasticsearchutil.data.R3Info;
 import com.itextos.beacon.platform.elasticsearchutil.types.DlrQueryMulti;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsSortOrder;
@@ -40,13 +40,13 @@ public class EsProcess
         return SingletonHolder.INSTANCE;
     }
 
-    private final TimedProcessor          mTimedProcessor;
+    private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
     private boolean                       canContinue             = true;
     private final Map<Long, EsConnection> mThreadBasedRestClients = new ConcurrentHashMap<>();
 
     private EsProcess()
     {
-        mTimedProcessor = new TimedProcessor("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 

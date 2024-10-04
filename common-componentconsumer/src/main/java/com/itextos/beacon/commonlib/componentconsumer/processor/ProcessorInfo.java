@@ -38,6 +38,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArgument
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.smslog.ComponentProcessorLog;
 import com.itextos.beacon.smslog.ConsumerTopicList;
@@ -572,10 +573,12 @@ public class ProcessorInfo
             final Constructor<?>      constructor               = cls.getDeclaredConstructor(Utility.getDeclaredConstrutorArgumentTypes());
             final IComponentProcessor currentComponentProcessor = (IComponentProcessor) constructor.newInstance(threadName, mComponent, aPlatformCluster, aTopicName, aInMemCollection, aSleepInMillis);
             allProcessors.add(currentComponentProcessor);
-
+/*
             Thread virtualThread = Thread.ofVirtual().start(currentComponentProcessor);
 
             virtualThread.setName( threadName);
+  */
+            CoreExecutorPoolSingleton.getInstance().submitTask(currentComponentProcessor, threadName);
             /*
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();

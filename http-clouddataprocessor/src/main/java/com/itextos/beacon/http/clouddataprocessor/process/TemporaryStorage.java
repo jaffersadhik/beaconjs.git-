@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class TemporaryStorage
         implements
@@ -20,7 +20,7 @@ public class TemporaryStorage
     private final static Log      log       = LogFactory.getLog(TemporaryStorage.class);
     int                           batchSize = 100;
     private BlockingQueue<String> queue     = null;
-    private TimedProcessor        reaper    = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution        reaper    = null;
 
     static class SINGLETON_HOLDER
     {
@@ -32,10 +32,13 @@ public class TemporaryStorage
     private TemporaryStorage()
     {
         queue  = new LinkedBlockingQueue<>();
-        reaper = new TimedProcessor("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
+        /*
+        reaper = new ScheduledTimedProcessorForSpleepOfEachExecution("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
    //     reaper.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(reaper);
-
+		*/
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
     }
 
     public static TemporaryStorage getInstance()

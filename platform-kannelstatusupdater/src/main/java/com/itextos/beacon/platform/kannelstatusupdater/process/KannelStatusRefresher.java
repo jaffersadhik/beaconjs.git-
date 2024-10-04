@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class KannelStatusRefresher
         implements
@@ -27,16 +27,19 @@ public class KannelStatusRefresher
         return SingletonHolder.INSTANCE;
     }
 
-    private TimedProcessor mTimedProcessor = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor = null;
     private boolean        canContinue     = true;
 
     private KannelStatusRefresher()
     {
+    	
         final int timeInterval = 10;
-        mTimedProcessor = new TimedProcessor("KannelStatusRefresher", this, TimerIntervalConstant.KANNEL_STATUS_REFRESH);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KannelStatusRefresher", this, TimerIntervalConstant.KANNEL_STATUS_REFRESH);
        // mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("KannelStatusRefresher", this, TimerIntervalConstant.KANNEL_STATUS_REFRESH);
         if (log.isInfoEnabled())
             log.info("Kannel Status Refresher started with " + timeInterval + " time interval.");
     }

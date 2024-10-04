@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
+import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.platform.customkafkaprocessor.CustomKafkaConsumer;
 import com.itextos.beacon.platform.customkafkaprocessor.process.FullMessageTableInserter;
 import com.itextos.beacon.platform.customkafkaprocessor.util.CustomKafkaProperties;
@@ -60,9 +61,13 @@ public class StartApplication
                     final Thread thread     = new Thread(lConsumer, threadName);
                     thread.start();
                     */
+                    
+                    /*
                     Thread virtualThread = Thread.ofVirtual().start(lConsumer);
 
                     virtualThread.setName( threadName);
+                    */
+                    CoreExecutorPoolSingleton.getInstance().submitTask(lConsumer, threadName);
                     
                     log.debug("Process Thread " + threadName + " started");
                 }
@@ -87,10 +92,13 @@ public class StartApplication
             final Thread                   thread                    = new Thread(lFullMessageTableInserter, threadName);
             thread.start();
             */
+            
+            /*
             Thread virtualThread = Thread.ofVirtual().start(lFullMessageTableInserter);
 
             virtualThread.setName( threadName);
-            
+            */
+            CoreExecutorPoolSingleton.getInstance().submitTask(lFullMessageTableInserter, threadName);
             log.debug("Process Thread " + threadName + " started");
         }
     }

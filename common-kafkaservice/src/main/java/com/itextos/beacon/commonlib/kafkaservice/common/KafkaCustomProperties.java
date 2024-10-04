@@ -7,7 +7,7 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class KafkaCustomProperties
         implements
@@ -37,7 +37,7 @@ public class KafkaCustomProperties
     }
 
     private boolean                       canContinue                = true;
-    private final TimedProcessor          mTimedProcessor;
+//    private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
     private int                           mMaxFlushSize              = 1000;
     private int                           mMaxFlushInterval          = 1000;
     private int                           mConsumerMaxInmemorySize   = 3000;
@@ -52,10 +52,12 @@ public class KafkaCustomProperties
     private KafkaCustomProperties()
     {
         mPropConf       = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.KAFKA_CUSTOM_PROPERTIES, true);
-        mTimedProcessor = new TimedProcessor("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
+     /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
     }
 
     public int getProducerMaxFlushCount()

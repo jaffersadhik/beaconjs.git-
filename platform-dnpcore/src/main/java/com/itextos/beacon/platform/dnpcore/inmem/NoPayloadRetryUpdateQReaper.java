@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
 public class NoPayloadRetryUpdateQReaper
@@ -33,14 +33,17 @@ public class NoPayloadRetryUpdateQReaper
     }
 
     private boolean              canContinue = true;
-    private final TimedProcessor mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
 
     private NoPayloadRetryUpdateQReaper()
     {
-        mTimedProcessor = new TimedProcessor("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    	
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
     }
 
     private static boolean process()

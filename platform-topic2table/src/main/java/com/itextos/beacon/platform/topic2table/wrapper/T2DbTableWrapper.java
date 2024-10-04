@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
@@ -36,7 +36,7 @@ public class T2DbTableWrapper
     private final Component                  mComponent;
     private final Table2DBInserterId         mTableInsertId;
     private final BlockingQueue<BaseMessage> messagesInmemQueue     = new LinkedBlockingQueue<>(MAX_QUEUE_SIZE);
-    private final TimedProcessor             timedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution             timedProcessor;
 
     private boolean                          canContinue            = true;
     private int                              mSleepTimeSecs         = DEFAULT_SLEEP_TIME_SEC;
@@ -52,9 +52,12 @@ public class T2DbTableWrapper
         mTableInsertId = aTableInsertId;
 
         loadBasicInfo();
-
-        timedProcessor = new TimedProcessor(mComponent.getKey(), this, mSleepTimeSecs);
+/*
+        timedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution(mComponent.getKey(), this, mSleepTimeSecs);
         timedProcessor.start();
+  */
+    
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start(mComponent.getKey(), this, mSleepTimeSecs);
     }
 
     private void loadBasicInfo()

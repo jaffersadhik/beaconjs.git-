@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 import redis.clients.jedis.Jedis;
 
@@ -28,18 +28,19 @@ public class TimeBoundMessageReaper
 
     private int              mIterateCounter = 0;
     private int              mRedisIndex     = 0;
-    private TimedProcessor   mTimedProcessor = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor = null;
     private boolean          mCanPrrocess    = true;
 
     public TimeBoundMessageReaper(
             int aRedisIndex)
     {
         this.mRedisIndex = aRedisIndex;
-
-        mTimedProcessor  = new TimedProcessor("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
+/*
+        mTimedProcessor  = new ScheduledTimedProcessorForSpleepOfEachExecution("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
      //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
         checkForPreviousDate(mRedisIndex);
     }
 

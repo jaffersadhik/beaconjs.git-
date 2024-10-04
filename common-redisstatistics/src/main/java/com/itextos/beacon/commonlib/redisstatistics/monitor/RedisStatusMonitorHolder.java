@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisstatistics.monitor.stats.RedisMonitor;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 import redis.clients.jedis.Jedis;
 
@@ -38,17 +38,20 @@ public class RedisStatusMonitorHolder
         return SingletonHolder.INSTANCE;
     }
 
-    private final TimedProcessor                                         mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution                                         mTimedProcessor;
     private boolean                                                      mCanContinue            = true;
     private Map<ClusterType, Map<Component, Map<Integer, RedisMonitor>>> mRedisMonitorStatistics = null;
     private boolean                                                      initalRun               = true;
 
     private RedisStatusMonitorHolder()
     {
-        mTimedProcessor = new TimedProcessor("RedisStatisticsCollector", this, TimerIntervalConstant.REDIS_STATISTICS_READER);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("RedisStatisticsCollector", this, TimerIntervalConstant.REDIS_STATISTICS_READER);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
+*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("RedisStatisticsCollector", this, TimerIntervalConstant.REDIS_STATISTICS_READER);
     }
 
     public Map<Component, Map<Integer, RedisMonitor>> getRedisMonitorStats(

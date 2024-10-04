@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
@@ -33,7 +33,7 @@ class ExpiryMessageProcessor
     private final ClusterType           mClusterType;
     private final int                   mRedisPoolIndex;
     private final BlockingQueue<String> mExpiryRefNumberQueue = new LinkedBlockingQueue<>(500);
-    private final TimedProcessor        mTimedProcessor;
+ ///   private final ScheduledTimedProcessorForSpleepOfEachExecution        mTimedProcessor;
     private boolean                     mCanContinue          = true;
 
     public ExpiryMessageProcessor(
@@ -43,10 +43,13 @@ class ExpiryMessageProcessor
         super();
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
-        mTimedProcessor = new TimedProcessor("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
     }
 
     @Override

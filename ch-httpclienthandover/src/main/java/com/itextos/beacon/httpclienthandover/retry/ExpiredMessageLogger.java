@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.httpclienthandover.utils.LogStatusEnum;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
 
@@ -24,7 +24,7 @@ public class ExpiredMessageLogger
     //
     private final String         clientId;
     private final boolean        isCustomerSpecific;
-    private final TimedProcessor timeProcessor;
+//    private final ScheduledTimedProcessorForSpleepOfEachExecution timeProcessor;
     private boolean              canContinue = true;
 
     public ExpiredMessageLogger(
@@ -33,10 +33,13 @@ public class ExpiredMessageLogger
     {
         isCustomerSpecific = aIsCustSpecific;
         clientId           = aCustID;
-        timeProcessor      = new TimedProcessor("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
+        
+       /* 
+        timeProcessor      = new ScheduledTimedProcessorForSpleepOfEachExecution("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
     //    timeProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(timeProcessor);
-
+     //   Thread virtualThreadInstance = Thread.ofVirtual().start(timeProcessor);
+	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
     }
 
     @Override

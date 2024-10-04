@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
@@ -35,7 +35,7 @@ public class CompletedMessagePoller
 
     private final ClusterType    mClusterType;
     private final int            mRedisPoolIndex;
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              mCanContinue               = true;
 
     public CompletedMessagePoller(
@@ -45,10 +45,12 @@ public class CompletedMessagePoller
         super();
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
-        mTimedProcessor = new TimedProcessor("CompletedMessagePoller:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("CompletedMessagePoller:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("CompletedMessagePoller:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
         if (log.isDebugEnabled())
             log.debug("CompletedMessagePoller started successfully ........." + mClusterType + "~" + aRedisPoolIndex);
     }

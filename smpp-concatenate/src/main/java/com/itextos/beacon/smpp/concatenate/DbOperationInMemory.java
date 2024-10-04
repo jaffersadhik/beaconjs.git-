@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 
 class DbOperationInMemory
@@ -25,17 +25,19 @@ class DbOperationInMemory
 
     private final ClusterType                       mClusterType;
     private final BlockingQueue<SmppMessageRequest> mSmppMessageRequestQueue = new LinkedBlockingQueue<>(5000);
-    private final TimedProcessor                    mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution                    mTimedProcessor;
     private boolean                                 mCanContinue             = true;
 
     DbOperationInMemory(
             ClusterType aClusterType)
     {
         mClusterType    = aClusterType;
-        mTimedProcessor = new TimedProcessor("SmppConcateDbInserter-" + aClusterType, this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SmppConcateDbInserter-" + aClusterType, this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
    //     mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SmppConcateDbInserter-" + aClusterType, this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
     }
 
     void addMessage(

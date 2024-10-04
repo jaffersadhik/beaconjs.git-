@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 public class InterfaceParameterLoader
         implements
@@ -47,7 +47,7 @@ public class InterfaceParameterLoader
         return SingletonHolder.INSTANCE;
     }
 
-    private final TimedProcessor                                                     mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution                                                     mTimedProcessor;
     private boolean                                                                  mCanContinue       = true;
     private EnumMap<InterfaceType, EnumMap<InterfaceParameter, String>>              mDefaultParamNames = new EnumMap<>(InterfaceType.class);
     private Map<String, EnumMap<InterfaceType, EnumMap<InterfaceParameter, String>>> mClientParamNames  = new HashMap<>();
@@ -67,10 +67,12 @@ public class InterfaceParameterLoader
             log.error(s, e);
             throw new ItextosRuntimeException(s, e);
         }
-        mTimedProcessor = new TimedProcessor("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
         if (log.isDebugEnabled())
             log.debug("Timer Thread for loading the Interface Parameters started with sleep time of 30 seconds.");
     }

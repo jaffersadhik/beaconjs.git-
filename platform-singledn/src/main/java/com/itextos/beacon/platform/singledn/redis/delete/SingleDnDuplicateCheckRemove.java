@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.singledn.process.RedisOperation;
 import com.itextos.beacon.platform.singledn.process.SingleDNUtil;
@@ -21,7 +21,7 @@ public class SingleDnDuplicateCheckRemove
 
     private static final Log log             = LogFactory.getLog(SingleDnDuplicateCheckRemove.class);
 
-    private TimedProcessor   mTimedProcessor = null;
+ //   private ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor = null;
     private boolean          mCanPrrocess    = true;
 
     private static class SingletonHolder
@@ -39,10 +39,12 @@ public class SingleDnDuplicateCheckRemove
 
     public SingleDnDuplicateCheckRemove()
     {
-        mTimedProcessor = new TimedProcessor("SingleDnDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SingleDnDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+	*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SingleDnDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
         log.info("SingleDnDuplicateCheckRemove Processor started ........");
     }
 

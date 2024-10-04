@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
 
 public class ScheduleBlockoutPollarHolder
@@ -38,15 +38,17 @@ public class ScheduleBlockoutPollarHolder
     private static final String                                 BLOCOUT     = "blockout";
     private final Map<String, Map<Integer, AbstractDataPoller>> mPollers    = new HashMap<>();
     private boolean                                             canContinue = true;
-    private final TimedProcessor                                mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution                                mTimedProcessor;
 
     private ScheduleBlockoutPollarHolder()
     {
         startPollars();
-        mTimedProcessor = new TimedProcessor("TimerThread-SchedulePollerStarter", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-SchedulePollerStarter", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-SchedulePollerStarter", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
     }
 
     private void startPollars()

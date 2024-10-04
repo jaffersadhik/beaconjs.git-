@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.errorinfo.data.CarrierErrorInfo;
 
 public class CarrierErrorInfoInmemReaper
@@ -44,14 +44,16 @@ public class CarrierErrorInfoInmemReaper
     private final BlockingQueue<CarrierErrorInfo> toInsert    = new LinkedBlockingQueue<>();
 
     private boolean                               canContinue = true;
-    private final TimedProcessor                  mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution                  mTimedProcessor;
 
     private CarrierErrorInfoInmemReaper()
     {
-        mTimedProcessor = new TimedProcessor("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
        // mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
     }
 
     public void addErrorInfo(
@@ -102,8 +104,12 @@ public class CarrierErrorInfoInmemReaper
     {
         canContinue = false;
 
+        /*
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
+         */
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+
     }
 
     private static void insertInToDb(

@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -31,12 +31,15 @@ public class PayloadDataReader
     private static final int    REDIS_KEYS_LEN  = "dnpayload-expire:".length();
 
     private boolean             canContinue     = true;
-    private TimedProcessor      mTimedProcessor = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution      mTimedProcessor = null;
 
     public PayloadDataReader()
     {
-        mTimedProcessor = new TimedProcessor("PayloadDataReader", this, REFRESH_MINUTES);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PayloadDataReader", this, REFRESH_MINUTES);
         mTimedProcessor.start();
+    	*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PayloadDataReader", this, REFRESH_MINUTES);
     }
 
     @Override

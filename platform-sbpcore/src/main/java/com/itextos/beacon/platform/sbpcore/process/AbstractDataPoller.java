@@ -20,7 +20,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
@@ -35,7 +35,7 @@ public abstract class AbstractDataPoller
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
     private final int            mAppInstanceId;
     private final String         mTableName;
-    private final TimedProcessor mTimedProcessor;
+    private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              canContinue = true;
 
     private static String        SBC_FROM_RC = "RC_SCHDBLOCK";
@@ -47,7 +47,7 @@ public abstract class AbstractDataPoller
         super();
         mAppInstanceId  = aAppInstanceId;
         mTableName      = aTableName;
-        mTimedProcessor = new TimedProcessor("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
    //     mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 

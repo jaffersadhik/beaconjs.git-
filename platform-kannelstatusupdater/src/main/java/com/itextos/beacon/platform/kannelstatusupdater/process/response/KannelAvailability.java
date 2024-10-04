@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.KannelRedisConstants;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.Utility;
 
@@ -35,17 +35,18 @@ public class KannelAvailability
         return SingletonHolder.INSTANCE;
     }
 
-    private TimedProcessor                   mTimedProcessor = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution                   mTimedProcessor = null;
     private boolean                          canContinue     = true;
 
     private Map<String, Map<String, String>> kannelRedisData = new HashMap<>();
 
     private KannelAvailability()
     {
-        mTimedProcessor = new TimedProcessor("KannelAvailability", this, TimerIntervalConstant.KANNEL_AVALIABILITY_REFRESH);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KannelAvailability", this, TimerIntervalConstant.KANNEL_AVALIABILITY_REFRESH);
      //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
     }
 
     /** Request from - 0-CarrierHandover, 1-RetryCarrierHandover */
@@ -122,8 +123,11 @@ public class KannelAvailability
     {
         canContinue = false;
 
+        /*
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
+    	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
     }
 
 }

@@ -27,7 +27,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.dlrpayloadgen.util.DlrPayloadGenUtil;
 import com.itextos.beacon.platform.dlrpayloadgen.util.PushToDlrProcessor;
 
@@ -42,7 +42,7 @@ public class GenerateDnsFromPayloadStore
 
     private final String         mPayloadId;
     private final ClusterType    mCluster;
-    private final TimedProcessor mTimedProcessor;
+ //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              canContinue = true;
 
     private static Log           log         = LogFactory.getLog(GenerateDnsFromPayloadStore.class);
@@ -53,10 +53,12 @@ public class GenerateDnsFromPayloadStore
     {
         super();
 
-        mTimedProcessor = new TimedProcessor("GenerateDnsFromPayloadStore-" + aPayloadId, this, TimerIntervalConstant.DLR_PAYLOAD_GEN_REFRESH);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("GenerateDnsFromPayloadStore-" + aPayloadId, this, TimerIntervalConstant.DLR_PAYLOAD_GEN_REFRESH);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("GenerateDnsFromPayloadStore-" + aPayloadId, this, TimerIntervalConstant.DLR_PAYLOAD_GEN_REFRESH);
         this.mPayloadId = aPayloadId;
         this.mCluster   = aCluster;
     }

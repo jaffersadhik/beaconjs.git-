@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 class PrometheusController
         implements
@@ -62,7 +62,7 @@ class PrometheusController
 
     private final PropertiesConfiguration mPropConf;
     private boolean                       mCanContinue   = true;
-    private final TimedProcessor          mTimedProcessor;
+   // private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
 
     private Set<PrometheusMetricProvider> mPrometheusEnabled;
 
@@ -96,11 +96,12 @@ class PrometheusController
         loadProperties();
 
         isFirstLoad     = false;
-
-        mTimedProcessor = new TimedProcessor("PrometheusControl", this, TimerIntervalConstant.PROMETHEUS_CONTROL_REFRESH);
+/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PrometheusControl", this, TimerIntervalConstant.PROMETHEUS_CONTROL_REFRESH);
        // mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PrometheusControl", this, TimerIntervalConstant.PROMETHEUS_CONTROL_REFRESH);
     }
 
     @Override

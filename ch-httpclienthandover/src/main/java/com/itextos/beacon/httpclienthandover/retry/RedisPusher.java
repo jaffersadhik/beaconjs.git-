@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 
@@ -47,7 +47,7 @@ public class RedisPusher
         return SingletonHolder.INSTANCE;
     }
 
-    private final TimedProcessor             mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution             mTimedProcessor;
     private boolean                          mCanContinue               = true;
     private static final Log                 log                        = LogFactory.getLog(RedisPusher.class);
 
@@ -61,10 +61,13 @@ public class RedisPusher
 
     private RedisPusher()
     {
-        mTimedProcessor = new TimedProcessor("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
+    	
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
      //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
         mCanContinue = true;
     }
 
@@ -225,8 +228,12 @@ public class RedisPusher
             log.debug("Inmemory process Redis Pusher stopped externaly.");
         mCanContinue = false;
 
+        /*
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
+    	*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+
     }
 
 }

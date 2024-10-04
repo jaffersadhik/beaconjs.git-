@@ -39,6 +39,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterCompone
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 
 public class ModuleProcessorInfo
@@ -391,10 +392,12 @@ public class ModuleProcessorInfo
             processThread.start();
 
 */
-            Thread virtualThread = Thread.ofVirtual().start(currentComponentProcessor);
+/*            Thread virtualThread = Thread.ofVirtual().start(currentComponentProcessor);
 
             virtualThread.setName( threadName);
-            
+  */
+            CoreExecutorPoolSingleton.getInstance().submitTask(currentComponentProcessor, threadName);
+          
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName
                         + "' Thread index '" + aThreadIndex + "' with sleep time millis '" + aSleepInMillis + "'");

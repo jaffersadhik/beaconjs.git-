@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.httpclienthandover.common.DLRProcessor;
 import com.itextos.beacon.httpclienthandover.common.IHandoverProcessor;
 
@@ -20,7 +20,7 @@ public class HandoverRetryReaper
 
     private static final Log     log         = LogFactory.getLog(HandoverRetryReaper.class);
 
-    private final TimedProcessor timedProcessor;
+//    private final ScheduledTimedProcessorForSpleepOfEachExecution timedProcessor;
     private boolean              canContinue = true;
     private final boolean        isClientSpecific;
     private final String         mClientId;
@@ -31,10 +31,13 @@ public class HandoverRetryReaper
     {
         isClientSpecific = aIsCustSpecific;
         mClientId        = aCustID;
-        timedProcessor   = new TimedProcessor("Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
+        /*
+        timedProcessor   = new ScheduledTimedProcessorForSpleepOfEachExecution("Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
     //    timedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(timedProcessor);
-
+		*/
+        
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
     }
 
     @Override

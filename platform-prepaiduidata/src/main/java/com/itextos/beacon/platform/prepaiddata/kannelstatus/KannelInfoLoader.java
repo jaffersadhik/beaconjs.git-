@@ -24,7 +24,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -57,7 +57,7 @@ public class KannelInfoLoader
         return SingletonHolder.INSTANCE;
     }
 
-    private TimedProcessor                   mTimedProcessor = null;
+  //  private ScheduledTimedProcessorForSpleepOfEachExecution                   mTimedProcessor = null;
     private boolean                          mCanContinue    = true;
 
     private Map<String, List<String>>        mRouteInfo      = new HashMap<>();
@@ -68,10 +68,13 @@ public class KannelInfoLoader
         if (log.isDebugEnabled())
             log.debug("Starting the Kannel Info Loader : '");
 
-        mTimedProcessor = new TimedProcessor("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+        /*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+        
         if (log.isDebugEnabled())
             log.debug("Kannel Info Loader started '");
     }
@@ -204,8 +207,11 @@ public class KannelInfoLoader
 
     private void stopReaper()
     {
+    	/*
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
+    	*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
     }
 
     public Set<String> getAllOperators()

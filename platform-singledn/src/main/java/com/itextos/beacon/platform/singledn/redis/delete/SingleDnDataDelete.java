@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.singledn.process.RedisOperation;
 import com.itextos.beacon.platform.singledn.process.SingleDNUtil;
@@ -21,7 +21,7 @@ public class SingleDnDataDelete
 
     private static final Log log             = LogFactory.getLog(SingleDnDataDelete.class);
 
-    private TimedProcessor   mTimedProcessor = null;
+ //   private ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor = null;
     private boolean          mCanPrrocess    = true;
 
     private static class SingletonHolder
@@ -39,10 +39,12 @@ public class SingleDnDataDelete
 
     public SingleDnDataDelete()
     {
-        mTimedProcessor = new TimedProcessor("SingleDnDataDelete", this, TimerIntervalConstant.SINGLE_DN_DELETE_PROCESS);
+    	/*
+        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SingleDnDataDelete", this, TimerIntervalConstant.SINGLE_DN_DELETE_PROCESS);
         //mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SingleDnDataDelete", this, TimerIntervalConstant.SINGLE_DN_DELETE_PROCESS);
         log.info("SingleDnDataDelete Processor started ........");
     }
 
