@@ -35,7 +35,7 @@ public abstract class AbstractDataPoller
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
     private final int            mAppInstanceId;
     private final String         mTableName;
-    private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+//    private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
     private boolean              canContinue = true;
 
     private static String        SBC_FROM_RC = "RC_SCHDBLOCK";
@@ -47,10 +47,12 @@ public abstract class AbstractDataPoller
         super();
         mAppInstanceId  = aAppInstanceId;
         mTableName      = aTableName;
+        /*
         mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
    //     mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+		*/
+        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
     }
 
     @Override
