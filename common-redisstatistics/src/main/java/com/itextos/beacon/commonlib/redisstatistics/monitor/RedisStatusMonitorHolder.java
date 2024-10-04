@@ -174,7 +174,9 @@ public class RedisStatusMonitorHolder
     public void stopMe()
     {
         mCanContinue = false;
+        /*
         mTimedProcessor.start();
+        */
     }
 
 }
