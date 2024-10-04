@@ -45,6 +45,7 @@ import com.itextos.beacon.smslog.ConsumerTopicList;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
+import com.itextos.beacon.smslog.TopicLog;
 import com.itextos.beacon.splog.SPLog;
 
 public class ProcessorInfo
@@ -578,6 +579,7 @@ public class ProcessorInfo
 
             virtualThread.setName( threadName);
   */
+            TopicLog.getInstance(aTopicName+"_initiated").log(aTopicName+" : "+new Date());
             CoreExecutorPoolSingleton.getInstance().submitTask(currentComponentProcessor, threadName);
             /*
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
