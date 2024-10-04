@@ -141,7 +141,7 @@ public abstract class AbstractCommonComponentProcessor
         processPendingMessages();
 
         mCompleted = true;
-    	TopicExitLog.getInstance(mTopicName).getInstance("Topicname : "+ mTopicName +" : "+ new Date());
+    	TopicExitLog.getInstance(mTopicName+"_exit").log("Topicname : "+ mTopicName +" : "+ new Date());
 
     }
 
