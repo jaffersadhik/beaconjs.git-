@@ -154,8 +154,11 @@ public class TemporaryStorage
     @Override
     public void stopMe()
     {
+    	/*
         if (reaper != null)
             reaper.stopReaper();
+            */
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
     }
 
 }

@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.timer.SMPPDLRScheduledTimedProcessor;
 import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
 
@@ -32,7 +32,7 @@ public abstract class AbstractDataPoller
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SmppDlrFallbackTableReader", this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
+        SMPPDLRScheduledTimedProcessor.getInstance().start("SmppDlrFallbackTableReader", this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.timer.SMPPDLRScheduledTimedProcessor;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
 
 public class InmemoryQueueReaper
@@ -32,7 +32,7 @@ public class InmemoryQueueReaper
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
+        SMPPDLRScheduledTimedProcessor.getInstance().start("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
     }
 
     @Override

@@ -49,7 +49,7 @@ class ExpiryMessageProcessor
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
         
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
+        ConcateSMPPScheduledTimedProcessor.getInstance().start("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
     }
 
     @Override
