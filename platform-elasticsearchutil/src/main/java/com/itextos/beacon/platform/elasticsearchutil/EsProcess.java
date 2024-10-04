@@ -46,10 +46,12 @@ public class EsProcess
 
     private EsProcess()
     {
+    	/*
         mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
+	*/
+    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
     }
 
     public static boolean insertSingleDn(
