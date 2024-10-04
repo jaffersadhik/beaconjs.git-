@@ -2,6 +2,7 @@ package com.itextos.beacon.commonlib.componentconsumer.processor;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.smslog.StartupFlowLog;
+import com.itextos.beacon.smslog.TopicExitLog;
+import com.itextos.beacon.smslog.TopicLog;
 
 public abstract class AbstractCommonComponentProcessor
         implements
@@ -76,7 +79,10 @@ public abstract class AbstractCommonComponentProcessor
 
             try
             {
+                TopicLog.getInstance(mTopicName).log("mTopicName : "+mTopicName +" : "+new Date());
+
                 loadOldDataFromRedis();
+                
 
                 lReadMessage        = consumerInMemCollection.getMessage();
                 isNoRecordAvailable = (lReadMessage == null);
@@ -97,7 +103,9 @@ public abstract class AbstractCommonComponentProcessor
                 else
                     if (mStopped)
                     {
-                        log.fatal("Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'");
+                    	TopicExitLog.getInstance(mTopicName).getInstance("Topicname : "+ mTopicName +" : "+ new Date()+ "Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'")
+                       
+                    	log.fatal("Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'");
                         break;
                     }
             }
@@ -121,6 +129,8 @@ public abstract class AbstractCommonComponentProcessor
         processPendingMessages();
 
         mCompleted = true;
+    	TopicExitLog.getInstance(mTopicName).getInstance("Topicname : "+ mTopicName +" : "+ new Date());
+
     }
 
     private void loadOldDataFromRedis()
