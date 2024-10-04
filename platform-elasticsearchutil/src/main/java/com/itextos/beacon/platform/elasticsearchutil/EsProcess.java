@@ -40,7 +40,7 @@ public class EsProcess
         return SingletonHolder.INSTANCE;
     }
 
-    private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
+  //  private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
     private boolean                       canContinue             = true;
     private final Map<Long, EsConnection> mThreadBasedRestClients = new ConcurrentHashMap<>();
 
