@@ -1,6 +1,7 @@
 package com.itextos.beacon.platform.topic2table.wrapper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,8 +13,8 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.utility.Table2DBExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
@@ -21,10 +22,11 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 import com.itextos.beacon.platform.topic2table.inserter.DynamicTableInserter;
 import com.itextos.beacon.platform.topic2table.inserter.ITableInserter;
 import com.itextos.beacon.platform.topic2table.inserter.StaticTableInserter;
+import com.itextos.beacon.smslog.Table2DBLog;
 
 public class T2DbTableWrapper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log                 log                    = LogFactory.getLog(T2DbTableWrapper.class);
@@ -57,7 +59,10 @@ public class T2DbTableWrapper
         timedProcessor.start();
   */
     
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start(mComponent.getKey(), this, mSleepTimeSecs);
+    //    ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start(mComponent.getKey(), this, mSleepTimeSecs);
+    
+        Table2DBExecutorPoolSingleton.getInstance().addTask(this, mComponent.getKey());
+        
     }
 
     private void loadBasicInfo()
@@ -92,6 +97,30 @@ public class T2DbTableWrapper
             process(true);
     }
 
+    public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	
+    	while(true) {
+    		
+    		Table2DBLog.getInstance(mTableInsertId.toString()).log(mTableInsertId.toString() + " : Date : "+new Date());
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
     private void process(
             boolean aOnSize)
     {
