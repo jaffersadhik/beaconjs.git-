@@ -2,6 +2,7 @@ package com.itextos.beacon.smslog;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -14,13 +15,12 @@ public class TopicLog {
 
     private  final  Logger logger = Logger.getLogger(TopicLog.class.getName());
 
-	private static Map<String,TopicLog> objmap=new HashMap<String,TopicLog>();
-	
+	private static LinkedHashMap<String,TopicLog> objmap=new LinkedHashMap<String,TopicLog>();
 	
 	
 	public static TopicLog getInstance(String topicname) {
 	
-		synchronized (topicname) {
+	
 			
 			TopicLog obj=objmap.get(topicname);
 			
@@ -33,7 +33,7 @@ public class TopicLog {
 			
 			return obj;
 
-		}
+		
 		
 		
 		
