@@ -20,18 +20,23 @@ public class TopicLog {
 	
 	public static TopicLog getInstance(String topicname) {
 	
-		
-		TopicLog obj=objmap.get(topicname);
-		
-		if(obj==null) {
+		synchronized (topicname) {
 			
-			obj=new TopicLog(topicname);
+			TopicLog obj=objmap.get(topicname);
 			
-			objmap.put(topicname, obj);
+			if(obj==null) {
+				
+				obj=new TopicLog(topicname);
+				
+				objmap.put(topicname, obj);
+			}
+			
+			return obj;
+
 		}
 		
 		
-		return obj;
+		
 	}
 	
 	
