@@ -21,7 +21,7 @@ import com.itextos.beacon.inmemory.errorinfo.data.CarrierErrorInfo;
 
 public class CarrierErrorInfoInmemReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static class SingletonHolder
@@ -71,6 +71,30 @@ public class CarrierErrorInfoInmemReaper
         }
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+  
     @Override
     public boolean canContinue()
     {

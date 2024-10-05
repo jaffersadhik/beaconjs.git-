@@ -21,7 +21,7 @@ import redis.clients.jedis.Jedis;
 
 public class CappingMessageReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log log             = LogFactory.getLog(CappingMessageReaper.class);
@@ -52,6 +52,30 @@ public class CappingMessageReaper
         return mCanPrrocess;
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+  
     @Override
     public boolean processNow()
     {

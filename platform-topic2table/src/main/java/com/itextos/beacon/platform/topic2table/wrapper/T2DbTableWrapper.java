@@ -100,16 +100,16 @@ public class T2DbTableWrapper
     public void run() {
     	
     	long startTime=System.currentTimeMillis();
-    	
+    	int loopcount=0;
     	while(true) {
-    		
+    		loopcount++;
     		Table2DBLog.getInstance(mTableInsertId.toString()).log(mTableInsertId.toString() + " : Date : "+new Date());
     
     		boolean status=processNow();
     		
     		if(status) {
     			
-    			if((System.currentTimeMillis()-startTime)>500) {
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
     				
     				break;
     			}

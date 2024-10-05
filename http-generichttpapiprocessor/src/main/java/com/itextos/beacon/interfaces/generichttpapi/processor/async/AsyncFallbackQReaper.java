@@ -15,7 +15,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.FileGenUtil;
 
 public class AsyncFallbackQReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log     log         = LogFactory.getLog(AsyncFallbackQReaper.class);
@@ -28,6 +28,30 @@ public class AsyncFallbackQReaper
         @SuppressWarnings("synthetic-access")
         static final AsyncFallbackQReaper INSTANCE = new AsyncFallbackQReaper();
 
+    }
+    
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
     }
 
     public static AsyncFallbackQReaper getInstance()

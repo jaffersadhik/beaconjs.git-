@@ -8,13 +8,14 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
 public class NoPayloadRetryUpdateQReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log log = LogFactory.getLog(NoPayloadRetryUpdateQReaper.class);
@@ -43,7 +44,9 @@ public class NoPayloadRetryUpdateQReaper
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
     	
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    //	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    
+    	CoreExecutorPoolSingleton.getInstance().addTask(this, "NoPayloadRetryUpdateQReaper");
     }
 
     private static boolean process()
@@ -79,6 +82,30 @@ public class NoPayloadRetryUpdateQReaper
         return hasRecord;
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+  
     private static boolean updateData(
             List<IMessage> aRecords)
     {

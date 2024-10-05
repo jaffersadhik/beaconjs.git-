@@ -1,5 +1,6 @@
 package com.itextos.beacon.httpclienthandover.retry;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,14 +10,16 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
+import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
 import com.itextos.beacon.httpclienthandover.utils.LogStatusEnum;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
+import com.itextos.beacon.smslog.Table2DBLog;
 
 public class ExpiredMessageLogger
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     public static final Log      log         = LogFactory.getLog(ExpiredMessageLogger.class);
@@ -39,7 +42,9 @@ public class ExpiredMessageLogger
     //    timeProcessor.start();
      //   Thread virtualThreadInstance = Thread.ofVirtual().start(timeProcessor);
 	*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
+  //      ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
+    
+        CoreExecutorPoolSingleton.getInstance().addTask(this, aCustID); 
     }
 
     @Override
@@ -48,6 +53,30 @@ public class ExpiredMessageLogger
         return canContinue;
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+    
     @Override
     public boolean processNow()
     {

@@ -14,7 +14,7 @@ import com.itextos.beacon.http.interfacefallback.dao.FallBackDao;
 
 public class FallbackQReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log log = LogFactory.getLog(FallbackQReaper.class);
@@ -79,6 +79,30 @@ public class FallbackQReaper
         return hasRecord;
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+  
     private static boolean insertData(
             List<IMessage> aRecords)
     {

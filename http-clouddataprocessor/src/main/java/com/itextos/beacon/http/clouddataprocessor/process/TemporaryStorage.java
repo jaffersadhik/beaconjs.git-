@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSple
 
 public class TemporaryStorage
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private final static Log      log       = LogFactory.getLog(TemporaryStorage.class);
@@ -46,6 +46,30 @@ public class TemporaryStorage
         return SINGLETON_HOLDER.INSTANCE;
     }
 
+  public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
+    }
+  
     public void add(
             String aData)
     {
