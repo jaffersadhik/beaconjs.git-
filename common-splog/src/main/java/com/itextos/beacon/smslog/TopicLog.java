@@ -20,7 +20,7 @@ public class TopicLog {
 	
 	public static TopicLog getInstance(String topicname) {
 	
-	
+		synchronized (objmap) {
 			
 			TopicLog obj=objmap.get(topicname);
 			
@@ -32,6 +32,9 @@ public class TopicLog {
 			}
 			
 			return obj;
+		}
+			
+			
 
 		
 		
