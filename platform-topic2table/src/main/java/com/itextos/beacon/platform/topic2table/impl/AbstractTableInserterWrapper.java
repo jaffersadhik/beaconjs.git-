@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.platform.topic2table.wrapper.T2DbTableWrapper;
+import com.itextos.beacon.platform.topic2table.wrapper.TableQueue;
 
 public abstract class AbstractTableInserterWrapper
         extends
@@ -20,6 +21,8 @@ public abstract class AbstractTableInserterWrapper
     private static final Log       log = LogFactory.getLog(AbstractTableInserterWrapper.class);
 
     private final T2DbTableWrapper mT2DbTableWrapper;
+    private final TableQueue tablequeue;
+
 
     protected AbstractTableInserterWrapper(
             String aThreadName,
@@ -31,6 +34,8 @@ public abstract class AbstractTableInserterWrapper
             Table2DBInserterId aTableInserterId)
     {
         super(aThreadName, aComponent, aPlatformCluster, aTopicName, aConsumerInMemCollection, aSleepInMillis);
+        tablequeue=TableQueue.getInstance(aComponent, aTableInserterId);
+        
         mT2DbTableWrapper = new T2DbTableWrapper(aComponent, aTableInserterId);
     }
 
@@ -50,7 +55,8 @@ public abstract class AbstractTableInserterWrapper
 
         try
         {
-            mT2DbTableWrapper.addMessage(aBaseMessage);
+        	tablequeue.addMessage(aBaseMessage);
+         //  mT2DbTableWrapper.addMessage(aBaseMessage);
         }
         catch (final Exception e)
         {
