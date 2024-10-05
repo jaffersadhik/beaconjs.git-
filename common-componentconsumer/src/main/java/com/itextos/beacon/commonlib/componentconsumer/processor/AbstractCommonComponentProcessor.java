@@ -24,7 +24,6 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.smslog.StartupFlowLog;
-import com.itextos.beacon.smslog.TopicExitLog;
 import com.itextos.beacon.smslog.TopicLog;
 
 public abstract class AbstractCommonComponentProcessor
