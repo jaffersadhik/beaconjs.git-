@@ -43,10 +43,10 @@ public class Table2DBLog {
 		
 
     	
-        int limit = 1024 * 1024*1; // 1 MB file size limit
+        int limit = 1024 * 5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/logs/table2db_"+username+".%g.log";
+        String logFileNamePattern = "/logs/table2db/table2db_"+username+".%g.log";
 
         Level loglevel=Level.INFO;
         

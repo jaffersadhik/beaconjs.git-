@@ -15,10 +15,30 @@ public class App {
 
     private static boolean IS_START_PROMETHEUS=false;
     
+    public static void foldercreaton(String folderPath) {
+        
+
+        // Create a File object representing the directory
+        File folder = new File(folderPath);
+
+        // Check if the directory exists
+        if (!folder.exists()) {
+            // Attempt to create the directory
+            if (folder.mkdirs()) {
+                System.out.println("Directory created successfully: " + folderPath);
+            } else {
+                System.out.println("Failed to create directory: " + folderPath);
+            }
+        } else {
+            System.out.println("Directory already exists: " + folderPath);
+        }
+    }
 	public static void main(String[] args) throws IOException {
 		
 		long start=System.currentTimeMillis();
-		
+		foldercreaton("/logs/topic");
+		foldercreaton("/logs/table2db");
+
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
 		
