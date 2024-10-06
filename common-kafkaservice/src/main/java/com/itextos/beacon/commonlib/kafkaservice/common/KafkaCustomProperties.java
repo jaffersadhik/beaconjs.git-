@@ -7,7 +7,7 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class KafkaCustomProperties
         implements
@@ -57,7 +57,7 @@ public class KafkaCustomProperties
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 	*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
+        ScheduledTimedProcessor.getInstance().start("KafkaCustomPropertiesReload", this, TimerIntervalConstant.KAFKA_CUSTOM_PROPERTIES_RELOAD);
     }
 
     public int getProducerMaxFlushCount()

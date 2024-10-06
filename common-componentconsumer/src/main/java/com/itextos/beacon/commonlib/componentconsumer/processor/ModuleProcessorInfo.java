@@ -27,7 +27,6 @@ import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
-import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDBConstants;
@@ -37,10 +36,9 @@ import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
-import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.tp.TopicExecutorPoolSingleton;
 
 public class ModuleProcessorInfo
         implements
@@ -396,7 +394,7 @@ public class ModuleProcessorInfo
 
             virtualThread.setName( threadName);
   */
-            CoreExecutorPoolSingleton.getInstance().addTask(currentComponentProcessor, threadName);
+            TopicExecutorPoolSingleton.getInstance().addTask(currentComponentProcessor, threadName);
           
             if (log.isInfoEnabled())
                 log.info("Thread '" + threadName + "'started for Component '" + mComponent + "' Cluster '" + aClusterName + "' Actual Cluster '" + aPlatformCluster + "' Topic name '" + aTopicName

@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.singledn.process.RedisOperation;
 import com.itextos.beacon.platform.singledn.process.SingleDNUtil;
@@ -44,7 +44,7 @@ public class SingleDnExpiryProcessor
     //    mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
+    	ScheduledTimedProcessor.getInstance().start("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
     	
         log.info("SingleDnExpiry Processor started ........");
     }

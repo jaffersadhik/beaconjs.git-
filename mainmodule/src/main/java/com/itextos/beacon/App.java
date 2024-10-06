@@ -39,6 +39,7 @@ public class App {
 		long start=System.currentTimeMillis();
 		foldercreaton("/logs/topic");
 		foldercreaton("/logs/table2db");
+		foldercreaton("/logs/consumer");
 
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");

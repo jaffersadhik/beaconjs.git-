@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class TemporaryStorage
         implements
@@ -38,7 +38,7 @@ public class TemporaryStorage
         Thread virtualThreadInstance = Thread.ofVirtual().start(reaper);
 		*/
         
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
+        ScheduledTimedProcessor.getInstance().start("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
     }
 
     public static TemporaryStorage getInstance()
@@ -182,7 +182,7 @@ public class TemporaryStorage
         if (reaper != null)
             reaper.stopReaper();
             */
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+    	ScheduledTimedProcessor.getInstance().stopReaper();
     }
 
 }

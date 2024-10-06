@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class PayloadRedisDeleteTask
         implements
@@ -34,7 +34,7 @@ public class PayloadRedisDeleteTask
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
+        ScheduledTimedProcessor.getInstance().start("PayloadRedisDeleteTask", this, TimerIntervalConstant.PAYLOAD_DELETE_TASK_RELOAD);
     }
 
     public static PayloadRedisDeleteTask getInstance()

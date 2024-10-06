@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public abstract class AbstractAutoRefreshInMemoryProcessor
         extends
@@ -27,7 +27,7 @@ public abstract class AbstractAutoRefreshInMemoryProcessor
         mTimedProcessor.start();
         */
         
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-" + mInmemoryInput.getInmemoryId(), this, mInmemoryInput.getSleepSec());
+        ScheduledTimedProcessor.getInstance().start("TimerThread-" + mInmemoryInput.getInmemoryId(), this, mInmemoryInput.getSleepSec());
         mCanContinue = mInmemoryInput.isAutoRefreshRequired();
     }
 
@@ -76,7 +76,7 @@ public abstract class AbstractAutoRefreshInMemoryProcessor
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
 		*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+        ScheduledTimedProcessor.getInstance().stopReaper();
 
     }
 

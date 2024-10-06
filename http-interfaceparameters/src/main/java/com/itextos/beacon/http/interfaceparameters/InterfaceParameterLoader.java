@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class InterfaceParameterLoader
         implements
@@ -72,7 +72,7 @@ public class InterfaceParameterLoader
      //   mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 	*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
+        ScheduledTimedProcessor.getInstance().start("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);
         if (log.isDebugEnabled())
             log.debug("Timer Thread for loading the Interface Parameters started with sleep time of 30 seconds.");
     }

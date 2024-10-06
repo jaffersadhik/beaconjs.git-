@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.KannelRedisConstants;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.Utility;
 
@@ -127,7 +127,7 @@ public class KannelAvailability
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
     	*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+        ScheduledTimedProcessor.getInstance().stopReaper();
     }
 
 }

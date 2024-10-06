@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.utility.timer;
+package com.itextos.beacon.commonlib.utility.tp;
 
 
 import java.util.concurrent.Executors;
@@ -9,6 +9,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
+import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimerProcesorIntervalProvider;
 
 public class SMPPDLRScheduledTimedProcessor {
     private static final Log log = LogFactory.getLog(SMPPDLRScheduledTimedProcessor.class);
@@ -25,7 +27,7 @@ public class SMPPDLRScheduledTimedProcessor {
     // Private constructor for Singleton
     private SMPPDLRScheduledTimedProcessor() {
         // Create a ScheduledExecutorService with a pool size of 4 (can be adjusted as needed)
-        scheduler = Executors.newScheduledThreadPool(5);
+        scheduler = Executors.newScheduledThreadPool(2);
         mThreadName = null; // Default value; can be set when the task is scheduled
         mTimedProcess = null; // Placeholder to be set per task
     }

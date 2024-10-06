@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
 
@@ -36,7 +36,7 @@ public class ExpiryRemovalTask
    //     mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("DuplicateCheckRemovel-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.DUPLICATE_CHECK_EXPIRY_TASK_INTERVAL);
+        ScheduledTimedProcessor.getInstance().start("DuplicateCheckRemovel-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.DUPLICATE_CHECK_EXPIRY_TASK_INTERVAL);
     }
 
     @Override

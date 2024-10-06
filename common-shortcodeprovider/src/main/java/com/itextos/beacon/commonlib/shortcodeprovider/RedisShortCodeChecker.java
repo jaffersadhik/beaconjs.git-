@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.shortcodeprovider.operation.FileInfo;
 import com.itextos.beacon.commonlib.shortcodeprovider.operation.RedisOperation;
 import com.itextos.beacon.commonlib.shortcodeprovider.operation.ShortCodeProperties;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class RedisShortCodeChecker
         implements
@@ -31,7 +31,7 @@ public class RedisShortCodeChecker
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
 */
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("RedisShortCodeChecker", this, TimerIntervalConstant.SHORT_CODE_COUNT_CHECER);
+    	ScheduledTimedProcessor.getInstance().start("RedisShortCodeChecker", this, TimerIntervalConstant.SHORT_CODE_COUNT_CHECER);
     	
         if (log.isDebugEnabled())
             log.debug("Starting the TimedProcess for the Redis Short Code Checker.");

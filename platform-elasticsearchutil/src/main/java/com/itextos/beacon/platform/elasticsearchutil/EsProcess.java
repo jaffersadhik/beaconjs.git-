@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.elasticsearchutil.data.R3Info;
 import com.itextos.beacon.platform.elasticsearchutil.types.DlrQueryMulti;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsSortOrder;
@@ -51,7 +51,7 @@ public class EsProcess
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 	*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
+    	ScheduledTimedProcessor.getInstance().start("ESConnectionReaper", this, TimerIntervalConstant.ELASTIC_SEARCH_CONNECTION_REAPER);
     }
 
     public static boolean insertSingleDn(

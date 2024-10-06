@@ -29,6 +29,7 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaReques
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
+import com.itextos.beacon.commonlib.utility.tp.KafkaConsumerExecutorPoolSingleton;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
 import com.itextos.beacon.smslog.StartupFlowLog;
@@ -497,9 +498,12 @@ public class KafkaInformation
 
                 mTotalConsumersCount++;
 
+                /*
                 Thread virtualThread = Thread.ofVirtual().start(consumer);
 
                 virtualThread.setName( topicName + "-" + consumerClientIndex);
+                */
+                KafkaConsumerExecutorPoolSingleton.getInstance().addTask(consumer, topicName);
                 /*
                 final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                 consumerThread.start();

@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryUpdateQ;
@@ -46,7 +46,7 @@ public abstract class AbstractDataPoller
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
      
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
+        ScheduledTimedProcessor.getInstance().start("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
     }
 
     @Override

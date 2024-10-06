@@ -22,7 +22,7 @@ import com.itextos.beacon.commonlib.datarefresher.dataobjects.DataRefresherMaste
 import com.itextos.beacon.commonlib.datarefresher.dataobjects.IDataRefresher;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class DataRefresher
         implements
@@ -64,7 +64,7 @@ public class DataRefresher
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
     	
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+    	ScheduledTimedProcessor.getInstance().start("DataRefresherMasterData", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
     }
 
     @Override

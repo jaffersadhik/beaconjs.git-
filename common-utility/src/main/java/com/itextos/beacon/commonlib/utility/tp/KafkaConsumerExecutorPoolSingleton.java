@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.utility;
+package com.itextos.beacon.commonlib.utility.tp;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,25 +6,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Table2DBExecutorPoolSingleton {
+public class KafkaConsumerExecutorPoolSingleton {
 
-	private static Table2DBExecutorPoolSingleton instance;
+	private static KafkaConsumerExecutorPoolSingleton instance;
     private final ScheduledExecutorService scheduler;
     private final List<Runnable> tasks;
     private int currentTaskIndex = 0;
 
-    private ThreadPool threadpool=new ThreadPool(5); 
+    private ThreadPool threadpool=new ThreadPool(2); 
     // Private constructor for Singleton
-    private Table2DBExecutorPoolSingleton() {
+    private KafkaConsumerExecutorPoolSingleton() {
         scheduler = Executors.newScheduledThreadPool(1);
         tasks = new ArrayList<>();
         startTaskRotation() ;
     }
 
     // Public method to get the singleton instance
-    public static synchronized Table2DBExecutorPoolSingleton getInstance() {
+    public static synchronized KafkaConsumerExecutorPoolSingleton getInstance() {
         if (instance == null) {
-            instance = new Table2DBExecutorPoolSingleton();
+            instance = new KafkaConsumerExecutorPoolSingleton();
         }
         return instance;
     }

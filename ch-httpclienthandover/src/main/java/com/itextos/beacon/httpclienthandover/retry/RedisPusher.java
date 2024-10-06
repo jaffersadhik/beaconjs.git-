@@ -19,9 +19,9 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 

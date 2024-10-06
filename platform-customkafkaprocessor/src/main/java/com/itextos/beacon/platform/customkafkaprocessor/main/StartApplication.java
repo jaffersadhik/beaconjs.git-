@@ -1,15 +1,13 @@
 package com.itextos.beacon.platform.customkafkaprocessor.main;
 
-import java.sql.Connection;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
-import com.itextos.beacon.commonlib.utility.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.KafkaConsumerExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.Table2DBExecutorPoolSingleton;
 import com.itextos.beacon.platform.customkafkaprocessor.CustomKafkaConsumer;
 import com.itextos.beacon.platform.customkafkaprocessor.process.FullMessageTableInserter;
 import com.itextos.beacon.platform.customkafkaprocessor.util.CustomKafkaProperties;
@@ -67,7 +65,7 @@ public class StartApplication
 
                     virtualThread.setName( threadName);
                     */
-                    CoreExecutorPoolSingleton.getInstance().addTask(lConsumer, threadName);
+                    KafkaConsumerExecutorPoolSingleton.getInstance().addTask(lConsumer, threadName);
                     
                     log.debug("Process Thread " + threadName + " started");
                 }
@@ -98,7 +96,7 @@ public class StartApplication
 
             virtualThread.setName( threadName);
             */
-            CoreExecutorPoolSingleton.getInstance().addTask(lFullMessageTableInserter, threadName);
+            Table2DBExecutorPoolSingleton.getInstance().addTask(lFullMessageTableInserter, threadName);
             log.debug("Process Thread " + threadName + " started");
         }
     }

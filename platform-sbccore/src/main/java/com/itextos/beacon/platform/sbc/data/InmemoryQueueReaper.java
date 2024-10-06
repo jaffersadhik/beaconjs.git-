@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.sbc.dao.DBHandler;
 
 public abstract class InmemoryQueueReaper
@@ -37,7 +37,7 @@ public abstract class InmemoryQueueReaper
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 	*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
+        ScheduledTimedProcessor.getInstance().start("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
         
     }
 

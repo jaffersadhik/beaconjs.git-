@@ -24,7 +24,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -73,7 +73,7 @@ public class KannelInfoLoader
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+        ScheduledTimedProcessor.getInstance().start("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
         
         if (log.isDebugEnabled())
             log.debug("Kannel Info Loader started '");
@@ -211,7 +211,7 @@ public class KannelInfoLoader
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
     	*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+    	ScheduledTimedProcessor.getInstance().stopReaper();
     }
 
     public Set<String> getAllOperators()

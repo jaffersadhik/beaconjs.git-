@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public abstract class AbstractJobLogging
         implements
@@ -23,7 +23,7 @@ public abstract class AbstractJobLogging
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
 	*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("ScheduleJobLogging", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+    	ScheduledTimedProcessor.getInstance().start("ScheduleJobLogging", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
     }
 
     @Override

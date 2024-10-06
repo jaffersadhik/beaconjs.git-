@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class AbstractAgingDlrGen
         implements
@@ -32,7 +32,7 @@ public class AbstractAgingDlrGen
        // mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+        ScheduledTimedProcessor.getInstance().start("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
     }
 
     @Override

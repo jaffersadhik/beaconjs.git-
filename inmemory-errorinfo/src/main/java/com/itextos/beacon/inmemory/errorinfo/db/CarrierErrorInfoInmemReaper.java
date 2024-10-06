@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.inmemory.errorinfo.data.CarrierErrorInfo;
 
 public class CarrierErrorInfoInmemReaper
@@ -53,7 +53,7 @@ public class CarrierErrorInfoInmemReaper
        // mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
+    	ScheduledTimedProcessor.getInstance().start("TimerThread-CarrierErrorInfoInmemReaper", this, TimerIntervalConstant.CARRIER_ERROR_INFO_REFRESH);
     }
 
     public void addErrorInfo(
@@ -132,7 +132,7 @@ public class CarrierErrorInfoInmemReaper
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
          */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
+        ScheduledTimedProcessor.getInstance().stopReaper();
 
     }
 

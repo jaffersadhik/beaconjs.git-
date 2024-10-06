@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.SMPPDLRScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.SMPPDLRScheduledTimedProcessor;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
 
 public class InmemoryQueueReaper

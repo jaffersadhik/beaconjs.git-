@@ -24,11 +24,11 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.tp.KafkaProducerExecutorPoolSingleton;
 import com.itextos.beacon.smslog.ProducerFlushLog;
 import com.itextos.beacon.smslog.PromosenderLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TranssenderLog;
-import com.itextos.beacon.splog.SPLog;
 
 public class Producer
 {
@@ -67,11 +67,17 @@ public class Producer
         final Thread t = new Thread(new FlushMonitor(this), "FM-" + mTopicName + "-" + Thread.currentThread().getId());
         t.start();
         */
+        
+        /*
         Thread virtualThread = Thread.ofVirtual().start(new FlushMonitor(this));
 
         virtualThread.setName( "FM-" + mTopicName + "-" + Thread.currentThread().getId());
         
-        StartupFlowLog.log("Producer : "+virtualThread.getName());
+       StartupFlowLog.log("Producer : "+virtualThread.getName());
+        */
+        
+        KafkaProducerExecutorPoolSingleton.getInstance().addTask(new FlushMonitor(this), aTopicName);
+  
     }
 
     private void createProducer()
@@ -496,12 +502,22 @@ class FlushMonitor
     public void run()
     {
 
+    	int loopcount=0;
+    	
+    	long startTime=System.currentTimeMillis();
         while (mCanContinue)
         {
+        	loopcount++;
+        	
             if (log.isDebugEnabled())
                 log.debug("Calling the Producer.doFlushCheck() method");
             mProducer.flushBaesdOnTime();
-            CommonUtility.sleepForAWhile(5L * KafkaCustomProperties.getInstance().getProducerMaxFlushTimeInterval());
+        //    CommonUtility.sleepForAWhile(5L * KafkaCustomProperties.getInstance().getProducerMaxFlushTimeInterval());
+        
+            if(loopcount>10||(System.currentTimeMillis()-startTime)>500) {
+            	
+            	break;
+            }
         }
     }
 

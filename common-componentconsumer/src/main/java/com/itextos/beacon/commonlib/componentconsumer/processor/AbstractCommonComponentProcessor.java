@@ -120,26 +120,32 @@ public abstract class AbstractCommonComponentProcessor
 
             if(isNoRecordAvailable||loopcount>10||(System.currentTimeMillis()-start)>500) {
             	
-            	 if (isNoRecordAvailable)
+            /*	 if (isNoRecordAvailable)
                      CommonUtility.sleepForAWhile(1);
-            	
+            */
             	break;
             }
+            
+            /*
             try
             {
                 if (isNoRecordAvailable)
                     CommonUtility.sleepForAWhile(mSleepInMillis);
             }
+           
             catch (final Exception e)
             {
                 // ignore
             }
+             */
         }
 
+        if(mStopped) {
         processPendingMessages();
 
         mCompleted = true;
 
+        }
     }
 
     private void loadOldDataFromRedis()

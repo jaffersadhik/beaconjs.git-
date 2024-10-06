@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.http.generichttpapi.common.data.QueueObject;
 import com.itextos.beacon.http.generichttpapi.common.utils.FileGenUtil;
 
@@ -69,7 +69,7 @@ public class AsyncFallbackQReaper
 
 		*/
     	
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	ScheduledTimedProcessor.getInstance().start("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
     	
     }
 

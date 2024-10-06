@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.dnpayloadutil.dao.PayloadInsertInDB;
 
 public class PayloadUpdateTask
@@ -33,7 +33,7 @@ public class PayloadUpdateTask
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
+        ScheduledTimedProcessor.getInstance().start("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
     }
 
     public static PayloadUpdateTask getInstance()

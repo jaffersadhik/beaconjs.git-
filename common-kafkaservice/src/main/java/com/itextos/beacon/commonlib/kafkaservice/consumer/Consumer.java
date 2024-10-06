@@ -33,6 +33,7 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.smslog.ConsumerLog;
+import com.itextos.beacon.smslog.ConsumerTPLog;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KafkaReceiver;
 
@@ -95,13 +96,18 @@ public class Consumer
 
             long starttime=System.currentTimeMillis();
            final long stime=System.currentTimeMillis();
+           
+           int loopcount=0;
             
             while (!mClosed)
             {
-            	
+            	ConsumerTPLog.getInstance(mTopicName).log(mTopicName+" : "+new Date());
+            	loopcount++;
             
                 final long                              startTime = System.currentTimeMillis();
-                final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
+          //      final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
+                final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ZERO);
+                    
                 
                 final int                               pollCount = records.count();
                 final long                              endTime   = System.currentTimeMillis();
@@ -145,15 +151,24 @@ public class Consumer
 
                 	});
                 	
-                    ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
+             //      ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
 
                     checkAndCommit(0);
+                    
+                    break;
 
                     // Goto Sleep after the commit.
-                    CommonUtility.sleepForAWhile(100);
+                //    CommonUtility.sleepForAWhile(100);
+                }
+                
+                if(loopcount>10||(System.currentTimeMillis()-startTime)>500) {
+                	
+                	break;
                 }
             }
 
+            
+            if(mClosed) {
             printInMemoryMessageDetails();
 
             waitForAllMessagesToProcess();
@@ -162,6 +177,7 @@ public class Consumer
             flushProducers("ConsumerStopConsuming");
             updateRedisAndCommitConsumer(true, "OnExit");
             resendInMemMessages();
+            }
         }
         catch (final WakeupException we)
         {
@@ -184,6 +200,7 @@ public class Consumer
         }
         finally
         {
+        	if(mClosed) {
             waitForAllMessagesToProcess();
 
             flushProducers("ConsumerFinally");
@@ -211,6 +228,7 @@ public class Consumer
             isCompletelyStopped = true;
             
             ConsumerLog.log(threadName+" isCompletelyStopped : "+isCompletelyStopped);
+        	}
         }
     }
 

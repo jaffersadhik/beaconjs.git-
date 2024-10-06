@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.commonlib.utility.timer.ConcateSMPPScheduledTimedProcessor;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.tp.ConcateSMPPScheduledTimedProcessor;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 
 public class CompletedMessageChecker

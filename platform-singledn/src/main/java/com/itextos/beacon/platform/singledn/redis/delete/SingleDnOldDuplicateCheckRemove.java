@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.singledn.process.RedisOperation;
 import com.itextos.beacon.platform.singledn.process.SingleDNUtil;
@@ -45,7 +45,7 @@ public class SingleDnOldDuplicateCheckRemove
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 
 		*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("SingleDnOldDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
+    	ScheduledTimedProcessor.getInstance().start("SingleDnOldDuplicateCheckRemove", this, TimerIntervalConstant.SINGLE_DN_DUPCHECK_PROCESS);
     	
         log.info("SingleDnDuplicateCheckRemove Processor started ........");
     }

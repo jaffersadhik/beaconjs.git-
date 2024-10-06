@@ -18,7 +18,7 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class PartitionInfoCollection
         implements
@@ -58,7 +58,7 @@ public class PartitionInfoCollection
         mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PartitionInfoCollection", this, TimerIntervalConstant.KAFKA_PARTITION_INFO_INSERT);
         mTimedProcessor.start();
         */
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PartitionInfoCollection", this, TimerIntervalConstant.KAFKA_PARTITION_INFO_INSERT);
+    	ScheduledTimedProcessor.getInstance().start("PartitionInfoCollection", this, TimerIntervalConstant.KAFKA_PARTITION_INFO_INSERT);
     }
 
     public void addKafkaPartition(

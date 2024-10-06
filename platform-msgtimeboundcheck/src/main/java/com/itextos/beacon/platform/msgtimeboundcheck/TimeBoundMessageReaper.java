@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
 
@@ -40,7 +40,7 @@ public class TimeBoundMessageReaper
      //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 */
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
+        ScheduledTimedProcessor.getInstance().start("TimeBoundMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
         checkForPreviousDate(mRedisIndex);
     }
 

@@ -20,7 +20,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
@@ -52,7 +52,7 @@ public abstract class AbstractDataPoller
    //     mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
 		*/
-        ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+        ScheduledTimedProcessor.getInstance().start("TimerThread-ScheduleBlockoutPoller-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
     }
 
     @Override

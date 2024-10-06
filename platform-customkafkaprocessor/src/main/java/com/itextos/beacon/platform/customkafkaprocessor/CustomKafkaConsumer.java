@@ -103,10 +103,12 @@ public class CustomKafkaConsumer
         try
         {
             log.fatal(mTopicName + "-" + mThreadIndex + " Starting " + (!mClosed));
-
+            final long                              startTime = System.currentTimeMillis();
+            int loopcount=0;
             while (!mClosed)
             {
-                final long                              startTime = System.currentTimeMillis();
+            	loopcount++;
+            	
                 final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(CustomKafkaProperties.getInstance().getConsumerPollInterval()));
                 final int                               pollCount = records.count();
                 final long                              endTime   = System.currentTimeMillis();
@@ -124,14 +126,21 @@ public class CustomKafkaConsumer
                     checkAndCommit(0);
 
                     // Goto Sleep after the commit.
-                    CommonUtility.sleepForAWhile(100);
+                //    CommonUtility.sleepForAWhile(100);
+                }
+                
+                if(loopcount>10||(endTime-startTime)>100) {
+                	
+                	break;
                 }
             }
 
+            if(mClosed) {
             waitForAllMessagesToProcess();
 
             // Call the commit method and send the unprocessed messages to Redis.
             updateRedisAndCommitConsumer();
+            }
         }
         catch (final WakeupException we)
         {

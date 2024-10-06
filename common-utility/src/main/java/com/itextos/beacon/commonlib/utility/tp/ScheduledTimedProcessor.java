@@ -1,4 +1,4 @@
-package com.itextos.beacon.commonlib.utility.timer;
+package com.itextos.beacon.commonlib.utility.tp;
 
 
 import java.util.concurrent.Executors;
@@ -9,12 +9,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
+import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimerProcesorIntervalProvider;
 
-public class ScheduledTimedProcessorForSpleepOfEachExecution {
-    private static final Log log = LogFactory.getLog(ScheduledTimedProcessorForSpleepOfEachExecution.class);
+public class ScheduledTimedProcessor {
+    private static final Log log = LogFactory.getLog(ScheduledTimedProcessor.class);
     private static final long DEFAULT_SLEEP_TIME_MILLIS = 1000;
 
-    private static ScheduledTimedProcessorForSpleepOfEachExecution instance;
+    private static ScheduledTimedProcessor instance;
     private final ScheduledExecutorService scheduler;
 
     private final String mThreadName;
@@ -23,17 +25,17 @@ public class ScheduledTimedProcessorForSpleepOfEachExecution {
     private boolean mStoppedExternally = false;
 
     // Private constructor for Singleton
-    private ScheduledTimedProcessorForSpleepOfEachExecution() {
+    private ScheduledTimedProcessor() {
         // Create a ScheduledExecutorService with a pool size of 4 (can be adjusted as needed)
-        scheduler = Executors.newScheduledThreadPool(5);
+        scheduler = Executors.newScheduledThreadPool(2);
         mThreadName = null; // Default value; can be set when the task is scheduled
         mTimedProcess = null; // Placeholder to be set per task
     }
 
     // Public method to get the Singleton instance
-    public static synchronized ScheduledTimedProcessorForSpleepOfEachExecution getInstance() {
+    public static synchronized ScheduledTimedProcessor getInstance() {
         if (instance == null) {
-            instance = new ScheduledTimedProcessorForSpleepOfEachExecution();
+            instance = new ScheduledTimedProcessor();
         }
         return instance;
     }

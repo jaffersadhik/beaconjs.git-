@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.timer.ScheduledTimedProcessorForSpleepOfEachExecution;
+import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -39,7 +39,7 @@ public class PayloadDataReader
         mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PayloadDataReader", this, REFRESH_MINUTES);
         mTimedProcessor.start();
     	*/
-    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("PayloadDataReader", this, REFRESH_MINUTES);
+    	ScheduledTimedProcessor.getInstance().start("PayloadDataReader", this, REFRESH_MINUTES);
     }
 
     @Override
