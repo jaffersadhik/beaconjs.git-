@@ -46,7 +46,7 @@ public class KafkaSender {
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/logs/kafkasender_"+nextcomponent+".%g.log";
+        String logFileNamePattern = "/logs/kafkasender/kafkasender_"+nextcomponent+".%g.log";
 
         Level loglevel=Level.INFO;
         

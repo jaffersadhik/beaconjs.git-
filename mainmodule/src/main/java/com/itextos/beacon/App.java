@@ -41,7 +41,9 @@ public class App {
 		foldercreaton("/logs/table2db");
 		foldercreaton("/logs/consumer");
 		foldercreaton("/logs/producer");
+		foldercreaton("/logs/kafkasender");
 
+		
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
 		
@@ -114,11 +116,9 @@ public class App {
 				com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);
 
 
-				com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
 
 
-
-				com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
+				
 
 			IS_START_PROMETHEUS=true;
 			return true;
