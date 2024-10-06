@@ -114,9 +114,6 @@ public class App {
 				com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);
 
 
-				com.itextos.beacon.platform.rch.StartApplication.main(args);
-
-
 				com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
 
 
@@ -473,6 +470,9 @@ public class App {
 		if(module.equals("ic")){
 			
 			com.itextos.beacon.platform.ic.StartApplication.main(args);
+			
+			com.itextos.beacon.platform.rch.StartApplication.main(args);
+
 			
 			IS_START_PROMETHEUS=true;
 			return true;
