@@ -142,7 +142,7 @@ public class Consumer
                 {
                 
                 	
-                	
+                	/*
                 	 if(log.isDebugEnabled()) {
                          log.debug(mLogTopicName + " Assigned patition Count" +mConsumer.assignment().size());
                  	}
@@ -154,7 +154,7 @@ public class Consumer
                 	
 
                 	});
-                	
+                	*/
              //      ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
 
                     checkAndCommit(0);

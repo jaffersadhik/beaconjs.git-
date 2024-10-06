@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverConstatnts;
 
 public class RetryProcessPoller
@@ -22,9 +23,15 @@ public class RetryProcessPoller
         final Thread           th          = new Thread(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
         th.start();
 	*/
+        
+        /*
         Thread virtualThread = Thread.ofVirtual().start(reaper);
 
         virtualThread.setName( "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
+   	*/
+        
+        CoreExecutorPoolSingleton.getInstance().addTask(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
+     
         processInProcessMessage(aIsCustSpecific, aCustID);
         processPastMessages(currentTime, aIsCustSpecific, aCustID);
     }
