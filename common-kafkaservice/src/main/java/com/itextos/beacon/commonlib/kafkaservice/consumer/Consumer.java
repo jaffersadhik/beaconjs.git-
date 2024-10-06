@@ -81,7 +81,7 @@ public class Consumer
             log.debug("Consumers created successfully for topic '" + aTopicName + "'");
     }
 
-    private void process()
+    private synchronized void process()
     {
         String threadName = Thread.currentThread().getName();
 
