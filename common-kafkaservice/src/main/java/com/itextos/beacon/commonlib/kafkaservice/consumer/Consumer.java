@@ -102,6 +102,10 @@ public class Consumer
             while (!mClosed)
             {
             	ConsumerTPLog.getInstance(mTopicName).log(mTopicName+" : "+new Date());
+            	
+            	if(mConsumerInMemCollection.getInMemSize()>500) {
+            		break;
+            	}
             	loopcount++;
             
                 final long                              startTime = System.currentTimeMillis();
@@ -161,7 +165,7 @@ public class Consumer
                 //    CommonUtility.sleepForAWhile(100);
                 }
                 
-                if(loopcount>10||(System.currentTimeMillis()-startTime)>500) {
+                if(loopcount>10||(System.currentTimeMillis()-starttime)>500) {
                 	
                 	break;
                 }
