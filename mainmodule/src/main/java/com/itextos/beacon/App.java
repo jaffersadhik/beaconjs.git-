@@ -40,6 +40,7 @@ public class App {
 		foldercreaton("/logs/topic");
 		foldercreaton("/logs/table2db");
 		foldercreaton("/logs/consumer");
+		foldercreaton("/logs/producer");
 
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");

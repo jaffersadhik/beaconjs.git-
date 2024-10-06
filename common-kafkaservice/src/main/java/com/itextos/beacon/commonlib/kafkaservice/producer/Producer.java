@@ -29,6 +29,7 @@ import com.itextos.beacon.smslog.ProducerFlushLog;
 import com.itextos.beacon.smslog.PromosenderLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TranssenderLog;
+import com.itextos.beacon.smslog.ProducerTPLog;
 
 public class Producer
 {
@@ -80,6 +81,13 @@ public class Producer
   
     }
 
+    
+    public String getTopicName() {
+    	
+    	return mTopicName;
+    }
+    
+    
     private void createProducer()
             throws ItextosException
     {
@@ -507,6 +515,8 @@ class FlushMonitor
     	long startTime=System.currentTimeMillis();
         while (mCanContinue)
         {
+        	ProducerTPLog.getInstance(mProducer.getTopicName()).log(mProducer.getTopicName()+ " : "+new Date());
+        	
         	loopcount++;
         	
             if (log.isDebugEnabled())
