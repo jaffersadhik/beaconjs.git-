@@ -9,12 +9,12 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.platform.dnrfallback.dao.DlrFallBackDao;
 
 public class DlrFallbackQReaper
         implements
-        ITimedProcess
+        ITimedProcess,Runnable
 {
 
     private static final Log log = LogFactory.getLog(DlrFallbackQReaper.class);
@@ -33,17 +33,19 @@ public class DlrFallbackQReaper
     }
 
     private boolean              canContinue = true;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     private DlrFallbackQReaper()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	
+        mTimedProcessor = new TimedProcessor("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
+		
     
-    	ScheduledTimedProcessor.getInstance().start("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    //	ScheduledTimedProcessor.getInstance().start("DlrFallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    
+    //	CoreExecutorPoolSingleton.getInstance().addTask(this, "DlrFallbackTableInserter");
     }
 
     private static boolean process()
@@ -116,6 +118,31 @@ public class DlrFallbackQReaper
     public void stopMe()
     {
         canContinue = false;
+    }
+    
+    
+    public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
     }
 
 }

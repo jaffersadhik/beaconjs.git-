@@ -9,7 +9,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.sbc.dao.DBHandler;
 
 public abstract class InmemoryQueueReaper
@@ -21,7 +22,7 @@ public abstract class InmemoryQueueReaper
     private static final int     MAX_RECORDS_PER_ITERATION = 1000;
     private final InmemoryQueue  mInmemoryQueue;
     private final String         mTableName;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue               = true;
 
     private long starttime=System.currentTimeMillis();
@@ -32,13 +33,10 @@ public abstract class InmemoryQueueReaper
     {
         mInmemoryQueue  = aInMemoryQueue;
         mTableName      = aTableName;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-	*/
-        ScheduledTimedProcessor.getInstance().start("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
+  
+        mTimedProcessor = new TimedProcessor("TimerThread-InmemoryReaper-" + aTableName, this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_INSERTER);
         
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "TimerThread-InmemoryReaper-" + aTableName);
     }
 
     @Override

@@ -71,10 +71,7 @@ public abstract class AbstractCommonComponentProcessor
     {
         int messageProcessedAfterStopped = 0;
         
-        int loopcount=0;
-        
-        long start=System.currentTimeMillis();
-
+    
         while (true)
         {
             boolean  isNoRecordAvailable = true;
@@ -82,7 +79,6 @@ public abstract class AbstractCommonComponentProcessor
 
             try
             {
-            	loopcount++;
                 TopicLog.getInstance(mTopicName).log("mTopicName : "+mTopicName +" : "+new Date());
 
                 loadOldDataFromRedis();
@@ -118,15 +114,9 @@ public abstract class AbstractCommonComponentProcessor
                 sendBackToTopic(lReadMessage);
             }
 
-            if(isNoRecordAvailable||loopcount>10||(System.currentTimeMillis()-start)>500) {
-            	
-            /*	 if (isNoRecordAvailable)
-                     CommonUtility.sleepForAWhile(1);
-            */
-            	break;
-            }
+           
             
-            /*
+        
             try
             {
                 if (isNoRecordAvailable)
@@ -137,15 +127,14 @@ public abstract class AbstractCommonComponentProcessor
             {
                 // ignore
             }
-             */
+             
         }
 
-        if(mStopped) {
         processPendingMessages();
 
         mCompleted = true;
 
-        }
+      
     }
 
     private void loadOldDataFromRedis()

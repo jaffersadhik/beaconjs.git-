@@ -7,7 +7,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.smpputil.ISmppInfo;
 import com.itextos.beacon.smpp.objects.SmppObjectType;
 import com.itextos.beacon.smpp.objects.inmem.InfoCollection;
@@ -21,7 +22,7 @@ abstract class AbstractInmemDrainer
     private static final Log       log         = LogFactory.getLog(AbstractInmemDrainer.class);
 
     protected final SmppObjectType mSmppObjectType;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor;
+    private final TimedProcessor   mTimedProcessor;
     private final int              mBatchSize;
     private boolean                canContinue = true;
 
@@ -32,12 +33,10 @@ abstract class AbstractInmemDrainer
     {
         mSmppObjectType = aSmppObjectType;
         mBatchSize      = aBatchSize;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution(aSmppObjectType + "-InMemDrainer", this, aIntervalConstant);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        ScheduledTimedProcessor.getInstance().start(aSmppObjectType + "-InMemDrainer", this, aIntervalConstant);
+        
+        mTimedProcessor = new TimedProcessor(aSmppObjectType + "-InMemDrainer", this, aIntervalConstant);
+    
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, aSmppObjectType + "-InMemDrainer");
     }
 
     @Override

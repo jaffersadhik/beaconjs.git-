@@ -9,17 +9,18 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.http.generichttpapi.common.data.QueueObject;
 import com.itextos.beacon.http.generichttpapi.common.utils.FileGenUtil;
 
 public class AsyncFallbackQReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log     log         = LogFactory.getLog(AsyncFallbackQReaper.class);
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue = true;
 
     private static class SingletonHolder
@@ -30,29 +31,7 @@ public class AsyncFallbackQReaper
 
     }
     
-  public void run() {
-    	
-    	long startTime=System.currentTimeMillis();
-    	int loopcount=0;
-    	while(true) {
-    		loopcount++;
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
-    				
-    				break;
-    			}
-    			
-    		}else {
-    			
-    			break;
-    			
-    		}
-    	}
-    }
+  
 
     public static AsyncFallbackQReaper getInstance()
     {
@@ -62,15 +41,10 @@ public class AsyncFallbackQReaper
     private AsyncFallbackQReaper()
     {
     	
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
-		*/
     	
-    	ScheduledTimedProcessor.getInstance().start("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
-    	
+        mTimedProcessor = new TimedProcessor("AsyncFallbackInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+     
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "AsyncFallbackInserter");
     }
 
     private static boolean process()

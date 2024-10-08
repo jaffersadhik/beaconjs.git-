@@ -10,7 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dnpayloadutil.dao.PayloadInsertInDB;
 
 public class PayloadUpdateTask
@@ -21,20 +22,18 @@ public class PayloadUpdateTask
     private static final Log                      log            = LogFactory.getLog(PayloadUpdateTask.class);
 
     private final LinkedBlockingQueue<PayloadKey> mUpdatePayload = new LinkedBlockingQueue<>();
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution                  mTimedProcessor;
+    private final TimedProcessor                  mTimedProcessor;
     private boolean                               mCanContinue   = true;
 
     private PayloadUpdateTask()
     {
         PayloadDeleteTask.getInstance();
         start();
-/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-*/
-        ScheduledTimedProcessor.getInstance().start("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
-    }
+
+        mTimedProcessor = new TimedProcessor("PayloadUpdateTask", this, TimerIntervalConstant.PAYLOAD_UPDATE_TASK_RELOAD);
+   
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "PayloadUpdateTask");
+     }
 
     public static PayloadUpdateTask getInstance()
     {

@@ -16,7 +16,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryUpdateQ;
@@ -31,7 +32,7 @@ public abstract class AbstractDataPoller
 
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
 
-   // private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue = true;
     private final ClusterType    mClusterType;
 
@@ -40,13 +41,10 @@ public abstract class AbstractDataPoller
     {
         super();
         mClusterType    = aClusterType;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-     
-        ScheduledTimedProcessor.getInstance().start("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
+      
+        mTimedProcessor = new TimedProcessor("NoPayloadRetryTableReader-" + mClusterType, this, TimerIntervalConstant.NO_PAYLOAD_RETRY_TABLE_READER);
+        
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "NoPayloadRetryTableReader-" + mClusterType);
     }
 
     @Override

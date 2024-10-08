@@ -15,20 +15,21 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 import redis.clients.jedis.Jedis;
 
 public class CappingMessageReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log log             = LogFactory.getLog(CappingMessageReaper.class);
 
     private int              mIterateCounter = 0;
     private int              mRedisIndex     = 0;
-  //  private ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor = null;
+    private TimedProcessor   mTimedProcessor = null;
     private boolean          mCanPrrocess    = true;
 
     public CappingMessageReaper(
@@ -36,13 +37,10 @@ public class CappingMessageReaper
     {
         this.mRedisIndex = aRedisIndex;
 
-        /*
-        mTimedProcessor  = new ScheduledTimedProcessorForSpleepOfEachExecution("CappingMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
-       // mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
-	*/
-        ScheduledTimedProcessor.getInstance().start("CappingMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
+        
+        mTimedProcessor  = new TimedProcessor("CappingMessageReaper-RedisIndex:" + mRedisIndex, this, TimerIntervalConstant.TIMEBOUND_MESSAGE_REAPER);
+        
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor,"CappingMessageReaper-RedisIndex:");
         checkForPreviousHour(mRedisIndex);
     }
 
@@ -52,29 +50,6 @@ public class CappingMessageReaper
         return mCanPrrocess;
     }
 
-  public void run() {
-    	
-    	long startTime=System.currentTimeMillis();
-    	int loopcount=0;
-    	while(true) {
-    		loopcount++;
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
-    				
-    				break;
-    			}
-    			
-    		}else {
-    			
-    			break;
-    			
-    		}
-    	}
-    }
   
     @Override
     public boolean processNow()
@@ -179,9 +154,11 @@ public class CappingMessageReaper
                 final Thread             t1             = new Thread(lRemoveEntries, "RemoveEntries-" + lPattern);
                 t1.start();
                 */
+                
                 Thread virtualThread = Thread.ofVirtual().start(lRemoveEntries);
 
                 virtualThread.setName( "RemoveEntries-" + lPattern);
+               
             }
         }
         catch (final Exception e)

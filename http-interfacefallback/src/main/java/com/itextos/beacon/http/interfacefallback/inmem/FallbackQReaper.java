@@ -9,12 +9,12 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.http.interfacefallback.dao.FallBackDao;
 
 public class FallbackQReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log log = LogFactory.getLog(FallbackQReaper.class);
@@ -33,17 +33,19 @@ public class FallbackQReaper
     }
 
     private boolean              canContinue = true;
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     private FallbackQReaper()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+    	
+        mTimedProcessor = new TimedProcessor("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
       //  mTimedProcessor.start();
         Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
+		
     
-    	ScheduledTimedProcessor.getInstance().start("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+ //   	ScheduledTimedProcessor.getInstance().start("FallbackTableInserter", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+   
+  //  	CoreExecutorPoolSingleton.getInstance().addTask(this, "FallbackTableInserter");
     }
 
     private static boolean process()
@@ -79,29 +81,6 @@ public class FallbackQReaper
         return hasRecord;
     }
 
-  public void run() {
-    	
-    	long startTime=System.currentTimeMillis();
-    	int loopcount=0;
-    	while(true) {
-    		loopcount++;
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
-    				
-    				break;
-    			}
-    			
-    		}else {
-    			
-    			break;
-    			
-    		}
-    	}
-    }
   
     private static boolean insertData(
             List<IMessage> aRecords)

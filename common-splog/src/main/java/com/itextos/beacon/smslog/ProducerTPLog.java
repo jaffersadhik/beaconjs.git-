@@ -18,7 +18,7 @@ public class ProducerTPLog {
 	private static LinkedHashMap<String,ProducerTPLog> objmap=new LinkedHashMap<String,ProducerTPLog>();
 	
 	
-	public static ProducerTPLog getInstance(String topicname) {
+	public static synchronized ProducerTPLog getInstance(String topicname) {
 	
 		synchronized (objmap) {
 			

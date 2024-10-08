@@ -44,25 +44,18 @@ public class ProcessStarter
     public void run()
     {
 
-    	int loopcount=0;
         while (!stopMe)
         {
-        	loopcount++;
         	
             final List<BaseMessage> deliveryObjects = Inmemorydata.getInstance().getMessages(clientId, batchSize);
 
             if (!deliveryObjects.isEmpty()) {
                 process(deliveryObjects);
-            }
-            else {
-            	break;
-             //   CommonUtility.sleepForAWhile(100);
+            }else {
+           	 CommonUtility.sleepForAWhile(100);
+
             }
             
-            if(loopcount>10) {
-            	
-            	break;
-            }
         }
     }
 

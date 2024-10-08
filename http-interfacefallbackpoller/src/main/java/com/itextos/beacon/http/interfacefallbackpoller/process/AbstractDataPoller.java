@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.http.interfacefallback.dao.FallBackDao;
 
 public abstract class AbstractDataPoller
@@ -24,20 +24,23 @@ public abstract class AbstractDataPoller
 
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
 
-//    private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue = true;
 
     protected AbstractDataPoller()
     {
         super();
 
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("FallbackTableReader", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
-       // mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
         
-        ScheduledTimedProcessor.getInstance().start("FallbackTableReader", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
+        mTimedProcessor = new TimedProcessor("FallbackTableReader", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
+       // mTimedProcessor.start();
+        
+        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
+		
+        
+      //  ScheduledTimedProcessor.getInstance().start("FallbackTableReader", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
+    
+     //   CoreExecutorPoolSingleton.getInstance().addTask(this, "FallbackTableReader");
     }
 
     @Override
@@ -59,7 +62,7 @@ public abstract class AbstractDataPoller
         return false;
     }
 
-    private static void doProcess()
+    private static boolean doProcess()
     {
 
         try
@@ -68,17 +71,25 @@ public abstract class AbstractDataPoller
             final List<String>                toDelete       = new ArrayList<>(lRecords.keySet());
             final List<MessageRequest>        toProcess      = new ArrayList<>(lRecords.values());
 
+            if(!toProcess.isEmpty()) {
+            	
             final List<String>                failedMessages = sendToNextQueue(toProcess);
 
             if (!failedMessages.isEmpty())
                 toDelete.removeAll(failedMessages);
 
             FallBackDao.deleteRecords(toDelete);
+            
+            return true;
+            }
+            
         }
         catch (final Exception e)
         {
             log.error("Exception while sending the message to " + Component.IC, e);
         }
+        return false;
+
     }
 
     private static List<String> sendToNextQueue(
@@ -96,6 +107,30 @@ public abstract class AbstractDataPoller
                 log.error("Exception while writing to the kafka. Loosing the message.", e);
             }
         return errorInWritingToKafka;
+    }
+
+    public void run() {
+    	
+    	long startTime=System.currentTimeMillis();
+    	int loopcount=0;
+    	while(true) {
+    		loopcount++;
+    
+    		boolean status=processNow();
+    		
+    		if(status) {
+    			
+    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
+    				
+    				break;
+    			}
+    			
+    		}else {
+    			
+    			break;
+    			
+    		}
+    	}
     }
 
     @Override

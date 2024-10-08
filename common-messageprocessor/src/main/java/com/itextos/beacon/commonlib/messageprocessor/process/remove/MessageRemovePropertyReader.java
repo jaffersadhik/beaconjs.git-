@@ -17,7 +17,8 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 public class MessageRemovePropertyReader
         implements
@@ -42,7 +43,7 @@ public class MessageRemovePropertyReader
 
     private PropertiesConfiguration                  mPropConf      = null;
     private boolean                                  mCanContinue   = true;
-   // private final ScheduledTimedProcessorForSpleepOfEachExecution                     mTimedProcessor;
+    private final TimedProcessor                     mTimedProcessor;
     private Map<Component, List<MiddlewareConstant>> componentMcMap = new EnumMap<>(Component.class);
 
     private MessageRemovePropertyReader()
@@ -57,12 +58,10 @@ public class MessageRemovePropertyReader
             log.error(PropertiesPath.MESSAGE_KEY_REMOVE_PROPERTIES.getKey() + " may not be available. No keys will be removed.", e);
             mPropConf = new PropertiesConfiguration();
         }
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("MessageRemovePropertyReader", this, TimerIntervalConstant.MESSAGE_REMOVE_PROPERTY_UPDATER);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        ScheduledTimedProcessor.getInstance().start("MessageRemovePropertyReader", this, TimerIntervalConstant.MESSAGE_REMOVE_PROPERTY_UPDATER);
+       
+        mTimedProcessor = new TimedProcessor("MessageRemovePropertyReader", this, TimerIntervalConstant.MESSAGE_REMOVE_PROPERTY_UPDATER);
+ 
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "MessageRemovePropertyReader");
     }
 
     @Override

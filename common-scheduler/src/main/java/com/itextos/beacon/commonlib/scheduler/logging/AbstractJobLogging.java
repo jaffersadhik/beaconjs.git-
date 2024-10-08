@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 public abstract class AbstractJobLogging
         implements
@@ -13,17 +14,14 @@ public abstract class AbstractJobLogging
 {
 
     private boolean              mCanContinue = true;
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     public AbstractJobLogging()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ScheduleJobLogging", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-
-	*/
-    	ScheduledTimedProcessor.getInstance().start("ScheduleJobLogging", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+    	
+        mTimedProcessor = new TimedProcessor("ScheduleJobLogging", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+   
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "ScheduleJobLogging");
     }
 
     @Override

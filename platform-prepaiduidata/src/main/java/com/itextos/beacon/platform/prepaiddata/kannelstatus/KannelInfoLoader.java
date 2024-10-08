@@ -24,6 +24,8 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
@@ -57,7 +59,7 @@ public class KannelInfoLoader
         return SingletonHolder.INSTANCE;
     }
 
-  //  private ScheduledTimedProcessorForSpleepOfEachExecution                   mTimedProcessor = null;
+    private TimedProcessor                   mTimedProcessor = null;
     private boolean                          mCanContinue    = true;
 
     private Map<String, List<String>>        mRouteInfo      = new HashMap<>();
@@ -68,12 +70,9 @@ public class KannelInfoLoader
         if (log.isDebugEnabled())
             log.debug("Starting the Kannel Info Loader : '");
 
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-*/
-        ScheduledTimedProcessor.getInstance().start("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+        mTimedProcessor = new TimedProcessor("KannelInfoLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+          
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "KannelInfoLoader");
         
         if (log.isDebugEnabled())
             log.debug("Kannel Info Loader started '");

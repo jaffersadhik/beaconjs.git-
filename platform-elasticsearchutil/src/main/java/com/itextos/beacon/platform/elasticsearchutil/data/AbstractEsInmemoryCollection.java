@@ -16,7 +16,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.elasticsearchutil.types.EsOperation;
 import com.itextos.beacon.platform.elasticsearchutil.utility.EsBulkProcessor;
 import com.itextos.beacon.platform.elasticsearchutil.utility.EsUtility;
@@ -29,7 +30,7 @@ abstract class AbstractEsInmemoryCollection
 
     private static final Log              log                 = LogFactory.getLog(AbstractEsInmemoryCollection.class);
     private final EsOperation             mEsTypeInsert;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution          mTimedProcessor;
+    private final TimedProcessor          mTimedProcessor;
     private boolean                       mCanContinue        = true;
 
     private final BlockingQueue<IMessage> mInmemoryCollection = new LinkedBlockingQueue<>(5000);
@@ -38,12 +39,10 @@ abstract class AbstractEsInmemoryCollection
             EsOperation aEsType)
     {
         mEsTypeInsert   = aEsType;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ESInMemCollection-" + aEsType, this, TimerIntervalConstant.ELASTIC_SEARCH_INMEMORY_PUSH);
-       // mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        ScheduledTimedProcessor.getInstance().start("ESInMemCollection-" + aEsType, this, TimerIntervalConstant.ELASTIC_SEARCH_INMEMORY_PUSH);
+       
+        mTimedProcessor = new TimedProcessor("ESInMemCollection-" + aEsType, this, TimerIntervalConstant.ELASTIC_SEARCH_INMEMORY_PUSH);
+      
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "ESInMemCollection-" + aEsType);
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverConstatnts;
 
 public class RetryProcessPoller
@@ -19,18 +19,11 @@ public class RetryProcessPoller
     {
         final String           currentTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.NO_SEPARATOR_YYYY_MM_DD_HH_MM_SS);
         final RedisRetryReaper reaper      = new RedisRetryReaper(currentTime, aIsCustSpecific, aCustID);
-       /*
-        final Thread           th          = new Thread(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
-        th.start();
-	*/
+      
         
-        /*
-        Thread virtualThread = Thread.ofVirtual().start(reaper);
-
-        virtualThread.setName( "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
-   	*/
+     
         
-        CoreExecutorPoolSingleton.getInstance().addTask(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
+        ExecutorCore.getInstance().addTask(reaper, "Retry-Process-Poller - " + (aIsCustSpecific ? aCustID : "Default"));
      
         processInProcessMessage(aIsCustSpecific, aCustID);
         processPastMessages(currentTime, aIsCustSpecific, aCustID);

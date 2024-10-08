@@ -81,7 +81,7 @@ public class Consumer
             log.debug("Consumers created successfully for topic '" + aTopicName + "'");
     }
 
-    private synchronized void process()
+    private  void process()
     {
         String threadName = Thread.currentThread().getName();
 
@@ -96,21 +96,19 @@ public class Consumer
 
             long starttime=System.currentTimeMillis();
            final long stime=System.currentTimeMillis();
-           
-           int loopcount=0;
             
             while (!mClosed)
             {
             	ConsumerTPLog.getInstance(mTopicName).log(mTopicName+" : "+new Date());
             	
             	if(mConsumerInMemCollection.getInMemSize()>500) {
-            		break;
+                    CommonUtility.sleepForAWhile(25);
+
+            		continue;
             	}
-            	loopcount++;
             
                 final long                              startTime = System.currentTimeMillis();
-          //      final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
-                final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ZERO);
+                final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
                     
                 
                 final int                               pollCount = records.count();
@@ -141,38 +139,14 @@ public class Consumer
                 else
                 {
                 
-                	
-                	/*
-                	 if(log.isDebugEnabled()) {
-                         log.debug(mLogTopicName + " Assigned patition Count" +mConsumer.assignment().size());
-                 	}
-                	mConsumer.assignment().
-                	forEach((p)->{
-                	
-                	 String t1=	p.topic()+""+p.partition();
-                	 
-                	
-
-                	});
-                	*/
-             //      ConsumerLog.log(threadName+" : "+mLogTopicName + " Time taken " + (endTime - startTime) + " records " + pollCount);
-
-                    checkAndCommit(0);
+                	 checkAndCommit(0);
                     
-                    break;
-
-                    // Goto Sleep after the commit.
-                //    CommonUtility.sleepForAWhile(100);
+                	 CommonUtility.sleepForAWhile(100);
                 }
                 
-                if(loopcount>10||(System.currentTimeMillis()-starttime)>500) {
-                	
-                	break;
-                }
             }
 
             
-            if(mClosed) {
             printInMemoryMessageDetails();
 
             waitForAllMessagesToProcess();
@@ -181,7 +155,6 @@ public class Consumer
             flushProducers("ConsumerStopConsuming");
             updateRedisAndCommitConsumer(true, "OnExit");
             resendInMemMessages();
-            }
         }
         catch (final WakeupException we)
         {
@@ -204,7 +177,6 @@ public class Consumer
         }
         finally
         {
-        	if(mClosed) {
             waitForAllMessagesToProcess();
 
             flushProducers("ConsumerFinally");
@@ -232,7 +204,6 @@ public class Consumer
             isCompletelyStopped = true;
             
             ConsumerLog.log(threadName+" isCompletelyStopped : "+isCompletelyStopped);
-        	}
         }
     }
 

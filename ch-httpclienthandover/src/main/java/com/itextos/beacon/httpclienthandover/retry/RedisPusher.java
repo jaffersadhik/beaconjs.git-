@@ -16,12 +16,13 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
+import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 
@@ -61,36 +62,24 @@ public class RedisPusher
     private RedisPusher()
     {
     	
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
-     //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-//    	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
-    	CoreExecutorPoolSingleton.getInstance().addTask(this, "TimerThread-Redis-Pusher");
+    	ExecutorCore.getInstance().addTask(this, "TimerThread-Redis-Pusher");
     	mCanContinue = true;
     }
     
     
   public void run() {
     	
-    	long startTime=System.currentTimeMillis();
-    	int loopcount=0;
-    	while(true) {
-    		loopcount++;
+     	while(true) {
     
     		boolean status=processNow();
     		
     		if(status) {
     			
-    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
-    				
-    				break;
-    			}
+    			continue;
     			
     		}else {
     			
-    			break;
+              	 CommonUtility.sleepForAWhile( TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL.getDurationInSecs());
     			
     		}
     	}
@@ -253,12 +242,7 @@ public class RedisPusher
             log.debug("Inmemory process Redis Pusher stopped externaly.");
         mCanContinue = false;
 
-        /*
-        if (mTimedProcessor != null)
-            mTimedProcessor.stopReaper();
-    	*/
-   	//     ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().stopReaper();
-
+     
     }
 
 }

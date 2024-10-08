@@ -6,12 +6,12 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
-public class TimedProcessorBackUp
+public class TimedProcessor
         extends
         Thread
 {
 
-    private static final Log    log                       = LogFactory.getLog(TimedProcessorBackUp.class);
+    private static final Log    log                       = LogFactory.getLog(TimedProcessor.class);
 
     private static final long   DEFAULT_SLEEP_TIME_MILLIS = 1000;
 
@@ -20,7 +20,7 @@ public class TimedProcessorBackUp
     private long                mSleepTimeInMilliSeconds  = 1000;
     private boolean             mStoppedExternally        = false;
 
-    public TimedProcessorBackUp(
+    public TimedProcessor(
             String aThreadName,
             ITimedProcess aTimedProcess,
             TimerIntervalConstant aTimerIntervalConstant)
@@ -35,7 +35,7 @@ public class TimedProcessorBackUp
     }
 
     @Deprecated
-    public TimedProcessorBackUp(
+    public TimedProcessor(
             String aThreadName,
             ITimedProcess aTimedProcess,
             int aTimerIntervalInSecs)

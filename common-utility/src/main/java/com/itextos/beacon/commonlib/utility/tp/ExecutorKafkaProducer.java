@@ -1,11 +1,13 @@
 package com.itextos.beacon.commonlib.utility.tp;
 
-public class TopicExecutorPoolSingleton {
+public class ExecutorKafkaProducer {
 
+	
 
-    public static TopicExecutorPoolSingleton getInstance() {
-    
-        return  new TopicExecutorPoolSingleton();
+    // Public method to get the singleton instance
+    public static  ExecutorKafkaProducer getInstance() {
+      
+        return new ExecutorKafkaProducer();
     }
 
     // Method to add tasks to the list of tasks
@@ -14,5 +16,5 @@ public class TopicExecutorPoolSingleton {
     	Thread.ofVirtual().start(task);
     }
 
-    
+
 }

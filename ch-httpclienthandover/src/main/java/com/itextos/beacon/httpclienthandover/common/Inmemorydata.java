@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.retry.ExpiredMessageLogger;
 import com.itextos.beacon.httpclienthandover.retry.HandoverRetryReaper;
@@ -108,17 +108,7 @@ public class Inmemorydata
 
             final ProcessStarter processStarter = new ProcessStarter(aClientId);
            
-            /*
-            final Thread         thread         = new Thread(processStarter, "Process Starter - " + aClientId + "-" + index);
-            thread.start();
-
-			*/
-            /*
-            Thread virtualThread = Thread.ofVirtual().start(processStarter);
-
-            virtualThread.setName( "Process Starter - " + aClientId + "-" + index);
-            */
-            CoreExecutorPoolSingleton.getInstance().addTask(processStarter, "Process Starter - " + aClientId + "-" + index);
+            ExecutorCore.getInstance().addTask(processStarter, "Process Starter - " + aClientId + "-" + index);
             processStartersList.add(processStarter);
         }
 

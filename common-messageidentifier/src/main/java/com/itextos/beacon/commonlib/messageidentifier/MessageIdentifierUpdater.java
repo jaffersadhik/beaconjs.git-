@@ -32,6 +32,7 @@ class MessageIdentifierUpdater
             if (log.isDebugEnabled())
                 log.debug("Going to sleep for the " + mUpdateSleepTimeinMillis + " seconds.");
 
+      
             try
             {
                 Thread.sleep(mUpdateSleepTimeinMillis);
@@ -40,6 +41,7 @@ class MessageIdentifierUpdater
             {
                 // ignore
             }
+          
         }
     }
 

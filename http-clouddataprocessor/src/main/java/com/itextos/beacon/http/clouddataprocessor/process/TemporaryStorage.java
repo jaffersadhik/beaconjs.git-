@@ -10,6 +10,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 
 public class TemporaryStorage
@@ -20,7 +22,7 @@ public class TemporaryStorage
     private final static Log      log       = LogFactory.getLog(TemporaryStorage.class);
     int                           batchSize = 100;
     private BlockingQueue<String> queue     = null;
-  //  private ScheduledTimedProcessorForSpleepOfEachExecution        reaper    = null;
+    private TimedProcessor        reaper    = null;
 
     static class SINGLETON_HOLDER
     {
@@ -32,13 +34,11 @@ public class TemporaryStorage
     private TemporaryStorage()
     {
         queue  = new LinkedBlockingQueue<>();
-        /*
-        reaper = new ScheduledTimedProcessorForSpleepOfEachExecution("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
-   //     reaper.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(reaper);
-		*/
+      
+        reaper = new TimedProcessor("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
+  
+        ExecutorSheduler.getInstance().addTask(reaper, "Temporary storage");
         
-        ScheduledTimedProcessor.getInstance().start("Temporary storage", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
     }
 
     public static TemporaryStorage getInstance()
@@ -182,7 +182,6 @@ public class TemporaryStorage
         if (reaper != null)
             reaper.stopReaper();
             */
-    	ScheduledTimedProcessor.getInstance().stopReaper();
     }
 
 }

@@ -9,7 +9,7 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
 import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
@@ -38,15 +38,8 @@ public class NoPayloadRetryUpdateQReaper
 
     private NoPayloadRetryUpdateQReaper()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
-     //   mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-    	
-    //	ScheduledTimedProcessorForSpleepOfEachExecution.getInstance().start("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
-    
-    	CoreExecutorPoolSingleton.getInstance().addTask(this, "NoPayloadRetryUpdateQReaper");
+     
+    	ExecutorCore.getInstance().addTask(this, "NoPayloadRetryUpdateQReaper");
     }
 
     private static boolean process()
@@ -84,23 +77,16 @@ public class NoPayloadRetryUpdateQReaper
 
   public void run() {
     	
-    	long startTime=System.currentTimeMillis();
-    	int loopcount=0;
-    	while(true) {
-    		loopcount++;
+     	while(true) {
     
     		boolean status=processNow();
     		
     		if(status) {
     			
-    			if((System.currentTimeMillis()-startTime)>500||loopcount>10) {
-    				
-    				break;
-    			}
-    			
+    			continue;
     		}else {
     			
-    			break;
+                CommonUtility.sleepForAWhile();
     			
     		}
     	}

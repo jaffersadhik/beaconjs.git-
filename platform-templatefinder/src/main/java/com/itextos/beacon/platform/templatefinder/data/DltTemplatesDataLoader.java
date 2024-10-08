@@ -23,7 +23,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.templatefinder.TemplateScrubber;
 import com.itextos.beacon.platform.templatefinder.utility.DltTemplateProperties;
 
@@ -50,17 +51,14 @@ public class DltTemplatesDataLoader
 
     private boolean               mCanContinue        = true;
     private boolean               isFirstLoadComplete = false;
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution  mTimedProcessor;
+    private final TimedProcessor  mTimedProcessor;
     private final ExecutorService pool                = Executors.newFixedThreadPool(DltTemplateProperties.getInstance().getDataloaderThreadPoolSize());
 
     private DltTemplatesDataLoader()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("DltTemplatesDataLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-    	ScheduledTimedProcessor.getInstance().start("DltTemplatesDataLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+    	
+        mTimedProcessor = new TimedProcessor("DltTemplatesDataLoader", this, TimerIntervalConstant.DATA_REFRESHER_RELOAD_INTERVAL);
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "DltTemplatesDataLoader");
     }
 
     @Override

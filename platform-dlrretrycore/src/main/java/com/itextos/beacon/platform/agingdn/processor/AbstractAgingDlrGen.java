@@ -9,7 +9,8 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 public class AbstractAgingDlrGen
         implements
@@ -18,7 +19,7 @@ public class AbstractAgingDlrGen
 
     private static final Log     log          = LogFactory.getLog(AbstractAgingDlrGen.class);
 
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue  = true;
     private final int            divisorVal   = 0;
     private final int            remainderVal = 0;
@@ -27,12 +28,10 @@ public class AbstractAgingDlrGen
     protected AbstractAgingDlrGen()
     {
         super();
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
-       // mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        ScheduledTimedProcessor.getInstance().start("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+       
+        mTimedProcessor = new TimedProcessor("TimerThread-AgingDlrGenrator", this, TimerIntervalConstant.SCHEDULE_MESSAGE_TABLE_READER);
+     
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "TimerThread-AgingDlrGenrator");
     }
 
     @Override

@@ -20,7 +20,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 
 public class LoadOnnetTableInfo
@@ -33,7 +34,7 @@ public class LoadOnnetTableInfo
     private boolean              mCanContinue        = true;
 
     Map<String, String>          mOnneTableRouteInfo = new HashMap<>();
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     private static class SingletonHolder
     {
@@ -53,13 +54,11 @@ public class LoadOnnetTableInfo
 
         try
         {
-        	/*
-            mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
-          //  mTimedProcessor.start();
-            Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-			*/
-        	ScheduledTimedProcessor.getInstance().start("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
-        }
+        	
+            mTimedProcessor = new TimedProcessor("TimerThread-LoadOnnetTableInfo", this, TimerIntervalConstant.ONNET_TABLE_INFO_REFRESH);
+        
+            ExecutorSheduler.getInstance().addTask(mTimedProcessor, "LoadOnnetTableInfo");
+            }
         catch (final Exception e)
         {
             final String s = "Exception while loading Onnet table information from DB";
@@ -204,12 +203,11 @@ public class LoadOnnetTableInfo
     {
         mCanContinue = false;
 
-        /*
+       
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
-       */
+     
         
-        ScheduledTimedProcessor.getInstance().stopReaper();
         
     }
 

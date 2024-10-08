@@ -9,7 +9,8 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.inmemory.customfeatures.pojo.DlrTypeInfo;
 import com.itextos.beacon.platform.singledn.process.RedisOperation;
 import com.itextos.beacon.platform.singledn.process.SingleDNUtil;
@@ -21,7 +22,7 @@ public class SingleDnExpiryProcessor
 
     private static final Log log             = LogFactory.getLog(SingleDnExpiryProcessor.class);
 
- //   private ScheduledTimedProcessorForSpleepOfEachExecution   mTimedProcessor = null;
+    private TimedProcessor   mTimedProcessor = null;
     private boolean          mCanPrrocess    = true;
 
     private static class SingletonHolder
@@ -39,13 +40,10 @@ public class SingleDnExpiryProcessor
 
     public SingleDnExpiryProcessor()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-    	ScheduledTimedProcessor.getInstance().start("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
-    	
+        mTimedProcessor = new TimedProcessor("SingleDnExpiryProcessor ", this, TimerIntervalConstant.SINGLE_DN_EXPIRY_PROCESS);
+        
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "SingleDnExpiryProcessor ");
+        
         log.info("SingleDnExpiry Processor started ........");
     }
 

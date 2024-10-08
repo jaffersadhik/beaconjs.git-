@@ -29,7 +29,7 @@ import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaReques
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
-import com.itextos.beacon.commonlib.utility.tp.KafkaConsumerExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaConsumer;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
 import com.itextos.beacon.smslog.StartupFlowLog;
@@ -503,7 +503,7 @@ public class KafkaInformation
 
                 virtualThread.setName( topicName + "-" + consumerClientIndex);
                 */
-                KafkaConsumerExecutorPoolSingleton.getInstance().addTask(consumer, topicName);
+                ExecutorKafkaConsumer.getInstance().addTask(consumer, topicName);
                 /*
                 final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                 consumerThread.start();
@@ -560,9 +560,13 @@ public class KafkaInformation
                     consumerThread.start();
 
 	*/
+                    /*
                     Thread virtualThread = Thread.ofVirtual().start(consumer);
 
                     virtualThread.setName( topicName + "-" + consumerClientIndex);
+                    
+                    */
+                    ExecutorKafkaConsumer.getInstance().addTask(consumer, topicName + "-" + consumerClientIndex);
                     
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
@@ -600,9 +604,14 @@ public class KafkaInformation
                     consumerThread.start();
 
 	*/
+                    /*
                     Thread virtualThread = Thread.ofVirtual().start(consumer);
 
                     virtualThread.setName( topicName + "-" + consumerClientIndex);
+                    */
+                    
+                    ExecutorKafkaConsumer.getInstance().addTask(consumer,  topicName + "-" + consumerClientIndex);
+                    
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())
@@ -639,9 +648,13 @@ public class KafkaInformation
                     final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
                     consumerThread.start();
 */
+                    /*
                     Thread virtualThread = Thread.ofVirtual().start(consumer);
 
                     virtualThread.setName(  topicName + "-" + consumerClientIndex);
+                    */
+                    ExecutorKafkaConsumer.getInstance().addTask(consumer,  topicName + "-" + consumerClientIndex);
+        
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                     
                     if (log.isDebugEnabled())

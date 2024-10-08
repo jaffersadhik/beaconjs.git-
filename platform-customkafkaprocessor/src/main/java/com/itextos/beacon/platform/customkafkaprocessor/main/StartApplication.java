@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.utility.tp.KafkaConsumerExecutorPoolSingleton;
-import com.itextos.beacon.commonlib.utility.tp.Table2DBExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaConsumer;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorTable2DB;
 import com.itextos.beacon.platform.customkafkaprocessor.CustomKafkaConsumer;
 import com.itextos.beacon.platform.customkafkaprocessor.process.FullMessageTableInserter;
 import com.itextos.beacon.platform.customkafkaprocessor.util.CustomKafkaProperties;
@@ -65,7 +65,7 @@ public class StartApplication
 
                     virtualThread.setName( threadName);
                     */
-                    KafkaConsumerExecutorPoolSingleton.getInstance().addTask(lConsumer, threadName);
+                    ExecutorKafkaConsumer.getInstance().addTask(lConsumer, threadName);
                     
                     log.debug("Process Thread " + threadName + " started");
                 }
@@ -96,7 +96,7 @@ public class StartApplication
 
             virtualThread.setName( threadName);
             */
-            Table2DBExecutorPoolSingleton.getInstance().addTask(lFullMessageTableInserter, threadName);
+            ExecutorTable2DB.getInstance().addTask(lFullMessageTableInserter, threadName);
             log.debug("Process Thread " + threadName + " started");
         }
     }

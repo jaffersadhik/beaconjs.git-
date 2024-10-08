@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.dnddataloader.common.CountHolder;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
-import com.itextos.beacon.commonlib.utility.tp.CoreExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
 
 public class DndRedisDatabaseComparision
 {
@@ -94,16 +94,9 @@ public class DndRedisDatabaseComparision
             final Db2RedisWithRange withRange = aAllThreads.get(threadName);
 
             log.fatal("Starting the thread ..." + withRange);
-/*
-            Thread virtualThread = Thread.ofVirtual().start(withRange);
 
-            virtualThread.setName( threadName);
-        */
-            CoreExecutorPoolSingleton.getInstance().addTask(withRange, threadName);
-            /*
-            final Thread t = new Thread(withRange, threadName);
-            t.start();
-            */
+            ExecutorCore.getInstance().addTask(withRange, threadName);
+          
         }
     }
 

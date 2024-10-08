@@ -2,7 +2,8 @@ package com.itextos.beacon.platform.kannelstatusupdater.process.response;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.Utility;
 
 public class KannelStatsRedisUpdater
@@ -11,7 +12,7 @@ public class KannelStatsRedisUpdater
 {
 
     private boolean        canContinue     = true;
-  //  private ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor = null;
+    private TimedProcessor mTimedProcessor = null;
 
     private static class SingletonHolder
     {
@@ -28,12 +29,9 @@ public class KannelStatsRedisUpdater
 
     private KannelStatsRedisUpdater()
     {
-    	/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("KannelStatsUpdateReaper", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
-     //   mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-    	ScheduledTimedProcessor.getInstance().start("KannelStatsUpdateReaper", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
+    	
+        mTimedProcessor = new TimedProcessor("KannelStatsUpdateReaper", this, TimerIntervalConstant.KANNEL_RESPONSE_REFRESH);
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "KannelStatsUpdateReaper");
     }
 
     @Override
