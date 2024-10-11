@@ -1,26 +1,24 @@
 package com.itextos.beacon.httpclienthandover.retry;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.jetty.util.thread.ScheduledExecutorScheduler;
 
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.httpclienthandover.utils.LogStatusEnum;
 import com.itextos.beacon.httpclienthandover.utils.TopicSenderUtility;
-import com.itextos.beacon.smslog.Table2DBLog;
 
 public class ExpiredMessageLogger
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     public static final Log      log         = LogFactory.getLog(ExpiredMessageLogger.class);
@@ -28,7 +26,7 @@ public class ExpiredMessageLogger
     //
     private final String         clientId;
     private final boolean        isCustomerSpecific;
-//    private final ScheduledTimedProcessorForSpleepOfEachExecution timeProcessor;
+    private final TimedProcessor timeProcessor;
     private boolean              canContinue = true;
 
     public ExpiredMessageLogger(
@@ -37,8 +35,8 @@ public class ExpiredMessageLogger
     {
         isCustomerSpecific = aIsCustSpecific;
         clientId           = aCustID;
-        
-       ExecutorCore.getInstance().addTask(this, aCustID); 
+        timeProcessor      = new TimedProcessor("Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL);
+        ExecutorSheduler.getInstance().addTask(timeProcessor, "Expired Message Logger - " + (aIsCustSpecific ? aCustID : "Default"));
     }
 
     @Override
@@ -47,26 +45,6 @@ public class ExpiredMessageLogger
         return canContinue;
     }
 
-  public void run() {
-    	
-    	while(true) {
-    	
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			continue;
-    			
-    		}else {
-    			
-                CommonUtility.sleepForAWhile( TimerIntervalConstant.DLR_HTTP_HANDOVER_EXPIRED_MESSAGE_LOG_INTERVAL.getDurationInSecs());
-
-                continue;
-    		}
-    	}
-    }
-    
     @Override
     public boolean processNow()
     {

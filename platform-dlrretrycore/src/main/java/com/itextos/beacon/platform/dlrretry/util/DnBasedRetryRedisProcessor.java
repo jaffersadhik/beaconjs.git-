@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 import com.itextos.beacon.platform.dlrretry.process.DnBasedRedisPoller;
 
 import redis.clients.jedis.Jedis;
@@ -50,7 +51,8 @@ public class DnBasedRetryRedisProcessor
             final String             thredName = "DnRetryPollar-" + index;
             final DnBasedRedisPoller drp       = new DnBasedRedisPoller(index, thredName);
             final Thread             th        = new Thread(drp, thredName);
-            th.start();
+
+            ExecutorSheduler2.getInstance().addTask(th, thredName);
         }
     }
 

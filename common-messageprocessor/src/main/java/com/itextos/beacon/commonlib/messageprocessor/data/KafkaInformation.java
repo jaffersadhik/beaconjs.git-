@@ -498,16 +498,8 @@ public class KafkaInformation
 
                 mTotalConsumersCount++;
 
-                /*
-                Thread virtualThread = Thread.ofVirtual().start(consumer);
-
-                virtualThread.setName( topicName + "-" + consumerClientIndex);
-                */
                 ExecutorKafkaConsumer.getInstance().addTask(consumer, topicName);
-                /*
-                final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
-                consumerThread.start();
-				*/
+             
                 
                 StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
                 
@@ -555,17 +547,6 @@ public class KafkaInformation
 
                     mTotalConsumersCount++;
 
-                    /*
-                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
-                    consumerThread.start();
-
-	*/
-                    /*
-                    Thread virtualThread = Thread.ofVirtual().start(consumer);
-
-                    virtualThread.setName( topicName + "-" + consumerClientIndex);
-                    
-                    */
                     ExecutorKafkaConsumer.getInstance().addTask(consumer, topicName + "-" + consumerClientIndex);
                     
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);
@@ -599,16 +580,7 @@ public class KafkaInformation
 
                     mTotalConsumersCount++;
 
-                    /*
-                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
-                    consumerThread.start();
-
-	*/
-                    /*
-                    Thread virtualThread = Thread.ofVirtual().start(consumer);
-
-                    virtualThread.setName( topicName + "-" + consumerClientIndex);
-                    */
+                   
                     
                     ExecutorKafkaConsumer.getInstance().addTask(consumer,  topicName + "-" + consumerClientIndex);
                     
@@ -643,16 +615,7 @@ public class KafkaInformation
 
                     mTotalConsumersCount++;
                     
-                    /*
-
-                    final Thread consumerThread = new Thread(consumer, topicName + "-" + consumerClientIndex);
-                    consumerThread.start();
-*/
-                    /*
-                    Thread virtualThread = Thread.ofVirtual().start(consumer);
-
-                    virtualThread.setName(  topicName + "-" + consumerClientIndex);
-                    */
+                   
                     ExecutorKafkaConsumer.getInstance().addTask(consumer,  topicName + "-" + consumerClientIndex);
         
                     StartupFlowLog.log("createConsumerClients : "+clientId+"  topicName : "+topicName);

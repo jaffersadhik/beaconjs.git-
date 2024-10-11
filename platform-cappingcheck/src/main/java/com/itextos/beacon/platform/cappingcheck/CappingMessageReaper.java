@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 
 import redis.clients.jedis.Jedis;
 
@@ -150,14 +151,11 @@ public class CappingMessageReaper
             if ((lKeys != null) && !lKeys.isEmpty())
             {
                 final RemoveRedisEntries lRemoveEntries = new RemoveRedisEntries(aRedisId, lKeys, lCompareTime);
-             /*
-                final Thread             t1             = new Thread(lRemoveEntries, "RemoveEntries-" + lPattern);
-                t1.start();
-                */
+           
                 
-                Thread virtualThread = Thread.ofVirtual().start(lRemoveEntries);
-
-                virtualThread.setName( "RemoveEntries-" + lPattern);
+                ExecutorSheduler2.getInstance().addTask(lRemoveEntries,  "RemoveEntries-" + lPattern);
+                
+      
                
             }
         }
@@ -200,15 +198,10 @@ public class CappingMessageReaper
                     {
                         lTotRecords = lTotRecords + lKeys.size();
                         final RemoveRedisEntries lRemoveEntries = new RemoveRedisEntries(aRedisIndex, lKeys, lFromTime.getTimeInMillis());
-                     /*
-                        final Thread             t              = new Thread(lRemoveEntries, "MissedRemovedEntries-" + lPattern);
-                        t.start();
-                        */
+              
                         
-                        Thread virtualThread = Thread.ofVirtual().start(lRemoveEntries);
-
-                        virtualThread.setName( "MissedRemovedEntries-" + lPattern);
-                    }
+                        ExecutorSheduler2.getInstance().addTask(lRemoveEntries,  "MissedRemovedEntries-" + lPattern);
+                                  }
                 }
                 catch (final Exception e)
                 {

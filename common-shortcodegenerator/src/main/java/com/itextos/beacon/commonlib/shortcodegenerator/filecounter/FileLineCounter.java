@@ -50,6 +50,8 @@ public class FileLineCounter
             Thread virtualThread = Thread.ofVirtual().start(flc);
 
             virtualThread.setName( "FileLengthCheck-" + index);
+            
+            
         }
     }
 

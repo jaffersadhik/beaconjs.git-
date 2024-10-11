@@ -3,6 +3,8 @@ package com.itextos.beacon.r3r.process;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
+
 public class DataProcessor
 {
 
@@ -32,26 +34,19 @@ public class DataProcessor
 
     private void initDBProcessor()
     {
-    	/*
-        final Thread dbThread = new Thread(dbProcessorThread, "DB Process Thread");
-        dbThread.start();
-        */
-    	 Thread virtualThread = Thread.ofVirtual().start(dbProcessorThread);
+    	
+    	
+    	ExecutorSheduler2.getInstance().addTask(dbProcessorThread, "DB Process Thread");
 
-         virtualThread.setName( "DB Process Thread");
-        if (log.isDebugEnabled())
+    	if (log.isDebugEnabled())
             log.debug("DB Processor Thread Started ");
     }
 
     private void initRequestDataProcessor()
     {
-    	/*
-        final Thread urlThread = new Thread(urlRequestDetailsProcessor, "URL Request Processor");
-        urlThread.start();
-		*/
-    	 Thread virtualThread = Thread.ofVirtual().start(urlRequestDetailsProcessor);
-
-         virtualThread.setName( "URL Request Processor");
+    
+    	
+    	ExecutorSheduler2.getInstance().addTask(urlRequestDetailsProcessor, "URL Request Processor");
          
         if (log.isDebugEnabled())
             log.debug("URL Request Details Processor Started ");

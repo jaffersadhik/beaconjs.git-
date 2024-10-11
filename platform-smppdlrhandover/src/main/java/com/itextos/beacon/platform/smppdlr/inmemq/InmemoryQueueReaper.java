@@ -9,6 +9,8 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.commonlib.utility.tp.SMPPDLRScheduledTimedProcessor;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
 
@@ -19,7 +21,7 @@ public class InmemoryQueueReaper
 
     private static final Log     log         = LogFactory.getLog(InmemoryQueueReaper.class);
 
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private final ClusterType    mCluster;
     private boolean              canContinue = true;
 
@@ -27,12 +29,10 @@ public class InmemoryQueueReaper
             ClusterType aCluster)
     {
         mCluster        = aCluster;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        SMPPDLRScheduledTimedProcessor.getInstance().start("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
+        
+        mTimedProcessor = new TimedProcessor("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
+
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "TimerThread-InmemoryReaper-smppdlr");
     }
 
     @Override

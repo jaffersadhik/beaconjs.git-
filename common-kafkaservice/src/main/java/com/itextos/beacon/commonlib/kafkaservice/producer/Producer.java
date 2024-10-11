@@ -64,18 +64,7 @@ public class Producer
         mProducerInMemCollection = aProducerInMemCollection;
         createProducer();
 
-        /*
-        final Thread t = new Thread(new FlushMonitor(this), "FM-" + mTopicName + "-" + Thread.currentThread().getId());
-        t.start();
-        */
-        
-        /*
-        Thread virtualThread = Thread.ofVirtual().start(new FlushMonitor(this));
-
-        virtualThread.setName( "FM-" + mTopicName + "-" + Thread.currentThread().getId());
-        
-       StartupFlowLog.log("Producer : "+virtualThread.getName());
-        */
+      
         
         ExecutorKafkaProducer.getInstance().addTask(new FlushMonitor(this), aTopicName);
   
