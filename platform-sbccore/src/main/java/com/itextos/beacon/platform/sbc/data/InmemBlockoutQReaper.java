@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 import com.itextos.beacon.platform.sbc.dao.DBHandler;
 
 public class InmemBlockoutQReaper
@@ -17,12 +18,8 @@ public class InmemBlockoutQReaper
 
     private InmemBlockoutQReaper()
     {
-    	/*
-        new Thread(this).start();
-        */
-    	 Thread virtualThread = Thread.ofVirtual().start(this);
-
-         virtualThread.setName( "InmemBlockoutQReaper");
+    	         
+         ExecutorSheduler2.getInstance().addTask(this,  "InmemBlockoutQReaper");
     }
 
     private static class SingletonHolder

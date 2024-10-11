@@ -87,16 +87,7 @@ public class TestMain
     {
         final int    testIterations = 12;
 
-        /*
-        final Thread t1             = new Thread(new DlrQueryInsert(testIterations), "T1");
-        t1.start();
-        final Thread t2 = new Thread(new DlrQueryInsert(testIterations), "T2");
-        t2.start();
-        final Thread t3 = new Thread(new DlrQueryInsert(testIterations), "T3");
-        t3.start();
-        final Thread t4 = new Thread(new DlrQueryInsert(testIterations), "T4");
-        t4.start();
-        */
+      
         
         Thread virtualThread1 = Thread.ofVirtual().start(new DlrQueryInsert(testIterations));
 

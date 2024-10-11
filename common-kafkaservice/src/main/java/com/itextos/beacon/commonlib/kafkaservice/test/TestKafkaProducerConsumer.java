@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 public class TestKafkaProducerConsumer
 {
@@ -65,7 +66,8 @@ public class TestKafkaProducerConsumer
             TestKafkaConsumer aConsumer)
     {
         final Thread t = new Thread(aConsumer);
-        t.start();
+        
+        ExecutorSheduler.getInstance().addTask(t,"TestConsumer : ");
     }
 
     private static Thread produceMessage(

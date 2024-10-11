@@ -12,7 +12,8 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 
 import redis.clients.jedis.Jedis;
 
@@ -32,7 +33,7 @@ abstract class AbstractRedisProcess
     protected ClusterType            mClusterType;
     protected int                    mRedisIndex;
     private boolean                  mCanContinue              = true;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution     mTimedProcessor;
+    private final TimedProcessor     mTimedProcessor;
 
     AbstractRedisProcess(
             ClusterType aClusterType,
@@ -41,11 +42,10 @@ abstract class AbstractRedisProcess
         mClusterType    = aClusterType;
         mRedisIndex     = aRedisIndex;
 
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("PromoRedisDataCleaner-" + mRedisIndex, this, TimerIntervalConstant.PROMO_KANNEL_REDIS_CLEANER_INTERVAL);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
+       
+        mTimedProcessor = new TimedProcessor("PromoRedisDataCleaner-" + mRedisIndex, this, TimerIntervalConstant.PROMO_KANNEL_REDIS_CLEANER_INTERVAL);
+  
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "PromoRedisDataCleaner-" + mRedisIndex);
         
     }
 

@@ -12,6 +12,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.commonlib.utility.tp.SMPPDLRScheduledTimedProcessor;
 
 import redis.clients.jedis.Jedis;
@@ -27,7 +29,7 @@ public class SmppDlrRedis
     private static Map<String, List<Map<String, String>>> mLiveSessionInfo = new HashMap<>();
 
     private final int                                     mRedisPoolIndex;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution                          mTimedProcessor;
+    private final TimedProcessor                          mTimedProcessor;
     private boolean                                       mCanContinue     = true;
 
     public SmppDlrRedis(
@@ -35,15 +37,11 @@ public class SmppDlrRedis
     {
         super();
         mRedisPoolIndex = aRedisPoolIndex;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SmppRedisOperation:" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
+      
+        mTimedProcessor = new TimedProcessor("SmppRedisOperation:" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
         
-        //mTimedProcessor.start();
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "SmppRedisOperation:" + mRedisPoolIndex);
         
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        
-        SMPPDLRScheduledTimedProcessor.getInstance().start("SmppRedisOperation:" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_CHECKER_INTERVAL);
         if (log.isDebugEnabled())
             log.debug("SmppDlrRedisPoller started successfully ........." + aRedisPoolIndex);
     }

@@ -16,11 +16,12 @@ import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dnrfallback.dao.DlrFallBackDao;
 
 public abstract class AbstractDataPoller
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
@@ -36,14 +37,9 @@ public abstract class AbstractDataPoller
         mClusterType    = aClusterType;
        
         mTimedProcessor = new TimedProcessor("DlrFallbackTableReader-" + mClusterType, this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		
-        
-       // ScheduledTimedProcessor.getInstance().start("DlrFallbackTableReader-" + mClusterType, this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_READER);
-      
-    //    CoreExecutorPoolSingleton.getInstance().addTask(this, "DlrFallbackTableReader-" + mClusterType);
-    }
+
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "DlrFallbackTableReader-" + mClusterType);
+     }
 
     @Override
     public boolean canContinue()

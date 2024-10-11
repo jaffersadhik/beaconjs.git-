@@ -8,6 +8,8 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
+
 public class TestClass
 {
 
@@ -24,7 +26,8 @@ public class TestClass
         for (int index = 0; index < noOfThreads; index++)
         {
             final Thread t = new Thread(new Hitter(url, "T-" + dc.format((index + 1)), noOfHitsPerThread, isResponseRequired));
-            t.start();
+            
+            ExecutorSheduler2.getInstance().addTask(t,   "T-" );
         }
     }
 

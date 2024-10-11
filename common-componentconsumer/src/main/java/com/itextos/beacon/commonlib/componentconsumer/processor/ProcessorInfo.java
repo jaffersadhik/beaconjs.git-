@@ -39,7 +39,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterCompone
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.commonlib.utility.tp.TopicExecutorPoolSingleton;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorTopic;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
@@ -577,7 +577,7 @@ public class ProcessorInfo
             virtualThread.setName( threadName);
   */
             TopicLog.getInstance(aTopicName+"_initiated").log(aTopicName+" : "+new Date());
-            TopicExecutorPoolSingleton.getInstance().addTask(currentComponentProcessor, threadName);
+            ExecutorTopic.getInstance().addTask(currentComponentProcessor, threadName);
             /*
             final Thread processThread = new Thread(currentComponentProcessor, threadName);
             processThread.start();

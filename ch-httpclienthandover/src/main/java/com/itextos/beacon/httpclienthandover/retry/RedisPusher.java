@@ -22,7 +22,8 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.httpclienthandover.data.ClientHandoverData;
 import com.itextos.beacon.httpclienthandover.utils.ClientHandoverUtils;
 
@@ -31,7 +32,7 @@ import redis.clients.jedis.Pipeline;
 
 public class RedisPusher
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 
 {
 
@@ -47,7 +48,7 @@ public class RedisPusher
         return SingletonHolder.INSTANCE;
     }
 
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution             mTimedProcessor;
+    private final TimedProcessor             mTimedProcessor;
     private boolean                          mCanContinue               = true;
     private static final Log                 log                        = LogFactory.getLog(RedisPusher.class);
 
@@ -61,28 +62,9 @@ public class RedisPusher
 
     private RedisPusher()
     {
-    	
-    	ExecutorCore.getInstance().addTask(this, "TimerThread-Redis-Pusher");
-    	mCanContinue = true;
-    }
-    
-    
-  public void run() {
-    	
-     	while(true) {
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			continue;
-    			
-    		}else {
-    			
-              	 CommonUtility.sleepForAWhile( TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL.getDurationInSecs());
-    			
-    		}
-    	}
+        mTimedProcessor = new TimedProcessor("TimerThread-Redis-Pusher", this, TimerIntervalConstant.DLR_HTTP_HANDOVER_REDIS_PUSH_INTERVAL);
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor,"TimerThread-Redis-Pusher" );
+        mCanContinue = true;
     }
 
     public void add(
@@ -242,7 +224,8 @@ public class RedisPusher
             log.debug("Inmemory process Redis Pusher stopped externaly.");
         mCanContinue = false;
 
-     
+        if (mTimedProcessor != null)
+            mTimedProcessor.stopReaper();
     }
 
 }

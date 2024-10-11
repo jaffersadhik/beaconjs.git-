@@ -8,21 +8,20 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
-import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.httpclienthandover.common.DLRProcessor;
 import com.itextos.beacon.httpclienthandover.common.IHandoverProcessor;
 
 public class HandoverRetryReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log     log         = LogFactory.getLog(HandoverRetryReaper.class);
 
-//    private final ScheduledTimedProcessorForSpleepOfEachExecution timedProcessor;
+    private final TimedProcessor timedProcessor;
     private boolean              canContinue = true;
     private final boolean        isClientSpecific;
     private final String         mClientId;
@@ -33,8 +32,8 @@ public class HandoverRetryReaper
     {
         isClientSpecific = aIsCustSpecific;
         mClientId        = aCustID;
-          
-        ExecutorCore.getInstance().addTask(this, aCustID);
+        timedProcessor   = new TimedProcessor("Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"), this, TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER);
+        ExecutorSheduler.getInstance().addTask(timedProcessor, "Client Handover Retry Reaper - " + (aIsCustSpecific ? aCustID : "Default"));
     }
 
     @Override
@@ -43,26 +42,6 @@ public class HandoverRetryReaper
         return canContinue;
     }
 
-  public void run() {
-    	
-      	while(true) {
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			continue;
-    			
-    		}else {
-    			
-           	 CommonUtility.sleepForAWhile( TimerIntervalConstant.DLR_HTTP_HANDOVER_HANDOVER_RETRY_REAPER.getDurationInSecs());
-
-    			continue;
-    			
-    		}
-    	}
-    }
-  
     @Override
     public boolean processNow()
     {

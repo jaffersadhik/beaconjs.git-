@@ -1,11 +1,11 @@
 package com.itextos.beacon.commonlib.utility.tp;
 
-public class TopicExecutorPoolSingleton {
+public class ExecutorTopic {
 
 
-    public static TopicExecutorPoolSingleton getInstance() {
+    public static ExecutorTopic getInstance() {
     
-        return  new TopicExecutorPoolSingleton();
+        return  new ExecutorTopic();
     }
 
     // Method to add tasks to the list of tasks

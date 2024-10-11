@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaProducer;
 
 public class TestKafkaProducerConsumer
 {
@@ -83,8 +84,9 @@ public class TestKafkaProducerConsumer
     private static void startConsumMessages(
             TestKafkaConsumer aConsumer)
     {
-        final Thread t = new Thread(aConsumer);
-        t.start();
+      
+    	ExecutorKafkaProducer.getInstance().addTask(aConsumer,"startConsumMessages");
+    	
     }
 
     private static Thread produceMessage(
@@ -145,7 +147,8 @@ public class TestKafkaProducerConsumer
             final long endTime = System.currentTimeMillis();
             System.out.println("Thread " + aIndex + " Time taken " + (endTime - startTime) + " counts " + count + " Total Size " + totalLength);
         });
-        t.start();
+       
+        ExecutorKafkaProducer.getInstance().addTask(t, "sstartMessagings");
         // t.join();
         // aProducer.closeProducer();
         return t;

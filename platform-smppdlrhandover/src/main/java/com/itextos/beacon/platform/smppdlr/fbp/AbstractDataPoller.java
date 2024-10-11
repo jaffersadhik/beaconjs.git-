@@ -10,7 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.SMPPDLRScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
 import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
 
@@ -21,18 +22,16 @@ public abstract class AbstractDataPoller
 
     private static final Log     log         = LogFactory.getLog(AbstractDataPoller.class);
 
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              canContinue = true;
 
     protected AbstractDataPoller()
     {
         super();
-/*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("SmppDlrFallbackTableReader", this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-*/
-        SMPPDLRScheduledTimedProcessor.getInstance().start("SmppDlrFallbackTableReader", this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
+
+        mTimedProcessor = new TimedProcessor("SmppDlrFallbackTableReader", this, TimerIntervalConstant.SMPP_DLR_FALLBACK_TABLE_READER);
+  
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "SmppDlrFallbackTableReader");
     }
 
     @Override

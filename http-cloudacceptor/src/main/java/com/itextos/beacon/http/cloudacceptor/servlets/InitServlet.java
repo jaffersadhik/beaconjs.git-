@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 import com.itextos.beacon.http.cloudacceptor.common.RedisPusher;
 import com.itextos.beacon.http.clouddatautil.common.CloudDataConfig;
 import com.itextos.beacon.http.clouddatautil.common.CloudDataConfigInfo;
@@ -64,8 +65,9 @@ public final class InitServlet
             for (int index = 0; index < maxRedisCount; index++)
             {
                 final RedisPusher rp = new RedisPusher(index + 1, key);
-                final Thread      t  = new Thread(rp, "RedisPusher:" + key + ("-" + (index + 1)));
-                t.start();
+            
+                
+                ExecutorSheduler2.getInstance().addTask(rp,  "RedisPusher:" + key + ("-" + (index + 1)));
             }
         }
     }
