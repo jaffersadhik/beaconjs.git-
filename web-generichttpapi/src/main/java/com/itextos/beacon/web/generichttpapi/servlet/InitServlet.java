@@ -70,7 +70,7 @@ public final class InitServlet
 
             
             String module=System.getenv("module");
-            if(module!=null&&module.equals("japi")) {
+            if(module!=null&&(module.equals("japi")||module.equals("all"))) {
             	
             	FallbackQReaper.getInstance();
 

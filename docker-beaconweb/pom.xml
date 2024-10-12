@@ -120,12 +120,7 @@
 			<type>war</type>
 		</dependency>
 	
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-r3r</artifactId>
-			<version>1.0</version>
-			<type>war</type>
-		</dependency>
+
 
 		<dependency>
 			<groupId>beacon</groupId>
@@ -148,7 +143,29 @@
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>
-	
+
+				  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-prepaiduIweb</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+
+				  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-messagetoolweb</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+				
+		
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-r3r</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		
   </dependencies>
   <artifactId>docker-beaconweb</artifactId>
       <packaging>ear</packaging>
@@ -194,7 +211,19 @@
                             <artifactId>common-pwdencryptionapplication</artifactId>
                             <contextRoot>/password</contextRoot>
                         </webModule>
-                     
+                        
+                                               <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-prepaiduIweb</artifactId>
+                            <contextRoot>/prepaiddata</contextRoot>
+                        </webModule>
+ 
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>platform-messagetoolweb</artifactId>
+                            <contextRoot>/msgtool</contextRoot>
+                        </webModule>
+                        
                         <webModule>
                             <groupId>beacon</groupId>
                             <artifactId>platform-r3r</artifactId>
