@@ -5,12 +5,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
 public class NoPayloadRetryQReaper
@@ -57,7 +55,7 @@ public class NoPayloadRetryQReaper
     private NoPayloadRetryQReaper()
     {
      	
-    	ExecutorCore.getInstance().addTask(this, "NoPayloadRetryQReaper");
+    	ExecutorSheduler2.getInstance().addTask(this, "NoPayloadRetryQReaper");
     }
 
     private static boolean process()

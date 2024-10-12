@@ -206,11 +206,10 @@ public class KannelInfoLoader
 
     private void stopReaper()
     {
-    	/*
+    	
         if (mTimedProcessor != null)
             mTimedProcessor.stopReaper();
-    	*/
-    	ScheduledTimedProcessor.getInstance().stopReaper();
+    	
     }
 
     public Set<String> getAllOperators()

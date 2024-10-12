@@ -18,7 +18,8 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ConcateSMPPScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
@@ -33,7 +34,7 @@ class ExpiryMessageProcessor
     private final ClusterType           mClusterType;
     private final int                   mRedisPoolIndex;
     private final BlockingQueue<String> mExpiryRefNumberQueue = new LinkedBlockingQueue<>(500);
- ///   private final ScheduledTimedProcessorForSpleepOfEachExecution        mTimedProcessor;
+    private final TimedProcessor        mTimedProcessor;
     private boolean                     mCanContinue          = true;
 
     public ExpiryMessageProcessor(
@@ -43,13 +44,10 @@ class ExpiryMessageProcessor
         super();
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
-    //    mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
         
-        ConcateSMPPScheduledTimedProcessor.getInstance().start("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
+        mTimedProcessor = new TimedProcessor("ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_MESSAGE_EXPIRY_INTERVAL);
+   
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "ExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex);
     }
 
     @Override

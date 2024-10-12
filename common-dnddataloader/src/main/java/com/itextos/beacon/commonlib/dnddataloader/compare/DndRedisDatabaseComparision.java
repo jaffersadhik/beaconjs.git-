@@ -95,7 +95,7 @@ public class DndRedisDatabaseComparision
 
             log.fatal("Starting the thread ..." + withRange);
 
-            ExecutorCore.getInstance().addTask(withRange, threadName);
+            ExecutorSheduler2.getInstance().addTask(withRange, threadName);
           
         }
     }

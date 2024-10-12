@@ -15,7 +15,9 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ConcateSMPPScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
@@ -29,7 +31,7 @@ public class OrphanExpiryMessageProcessor
 
     private final ClusterType    mClusterType;
     private final int            mRedisPoolIndex;
- //   private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
     private boolean              mCanContinue = true;
 
     public OrphanExpiryMessageProcessor(
@@ -39,12 +41,10 @@ public class OrphanExpiryMessageProcessor
         super();
         mClusterType    = aClusterType;
         mRedisPoolIndex = aRedisPoolIndex;
-        /*
-        mTimedProcessor = new ScheduledTimedProcessorForSpleepOfEachExecution("OrphanExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_ORPHAN_MESSAGE_EXPIRY_INTERVAL);
-      //  mTimedProcessor.start();
-        Thread virtualThreadInstance = Thread.ofVirtual().start(mTimedProcessor);
-		*/
-        ConcateSMPPScheduledTimedProcessor.getInstance().start("OrphanExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_ORPHAN_MESSAGE_EXPIRY_INTERVAL);
+        
+        mTimedProcessor = new TimedProcessor("OrphanExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex, this, TimerIntervalConstant.SMPP_CONCAT_ORPHAN_MESSAGE_EXPIRY_INTERVAL);
+    
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "OrphanExpiryMessageProcessor:" + mClusterType + "~" + mRedisPoolIndex);
     }
 
     @Override
