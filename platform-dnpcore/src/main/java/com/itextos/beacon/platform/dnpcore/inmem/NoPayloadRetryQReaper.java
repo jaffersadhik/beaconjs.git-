@@ -5,15 +5,17 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
 public class NoPayloadRetryQReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log log = LogFactory.getLog(NoPayloadRetryQReaper.class);
@@ -31,31 +33,15 @@ public class NoPayloadRetryQReaper
         return SingletonHolder.INSTANCE;
     }
 
-  public void run() {
-    	
-    
-    	while(true) {
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			continue;
-    		}else {
-    			
-                CommonUtility.sleepForAWhile();
-    			
-    		}
-    	}
-    }
-  
     private boolean              canContinue = true;
-   // private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     private NoPayloadRetryQReaper()
     {
-     	
-    	ExecutorSheduler2.getInstance().addTask(this, "NoPayloadRetryQReaper");
+        mTimedProcessor = new TimedProcessor("NoPayloadRetryQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+        
+
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "NoPayloadRetryQReaper");
     }
 
     private static boolean process()

@@ -33,7 +33,6 @@ import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaConsumer;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
 import com.itextos.beacon.smslog.StartupFlowLog;
-import com.itextos.beacon.splog.SPLog;
 
 public class KafkaInformation
 {

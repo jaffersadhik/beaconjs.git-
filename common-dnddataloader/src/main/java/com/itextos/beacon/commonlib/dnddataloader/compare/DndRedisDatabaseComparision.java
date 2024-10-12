@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.dnddataloader.common.CountHolder;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
 
 public class DndRedisDatabaseComparision
 {

@@ -9,13 +9,13 @@ import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
-import com.itextos.beacon.commonlib.utility.tp.ExecutorCore;
-import com.itextos.beacon.commonlib.utility.tp.ScheduledTimedProcessor;
+import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
+import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dnpcore.dao.NoPayloadRetryDao;
 
 public class NoPayloadRetryUpdateQReaper
         implements
-        ITimedProcess,Runnable
+        ITimedProcess
 {
 
     private static final Log log = LogFactory.getLog(NoPayloadRetryUpdateQReaper.class);
@@ -34,12 +34,12 @@ public class NoPayloadRetryUpdateQReaper
     }
 
     private boolean              canContinue = true;
-  //  private final ScheduledTimedProcessorForSpleepOfEachExecution mTimedProcessor;
+    private final TimedProcessor mTimedProcessor;
 
     private NoPayloadRetryUpdateQReaper()
     {
-     
-    	ExecutorCore.getInstance().addTask(this, "NoPayloadRetryUpdateQReaper");
+        mTimedProcessor = new TimedProcessor("NoPayloadRetryUpdateQReaper", this, TimerIntervalConstant.INTERFACE_FALLBACK_TABLE_INSERTER);
+        ExecutorSheduler.getInstance().addTask(mTimedProcessor, "NoPayloadRetryQReaper");
     }
 
     private static boolean process()
@@ -75,23 +75,6 @@ public class NoPayloadRetryUpdateQReaper
         return hasRecord;
     }
 
-  public void run() {
-    	
-     	while(true) {
-    
-    		boolean status=processNow();
-    		
-    		if(status) {
-    			
-    			continue;
-    		}else {
-    			
-                CommonUtility.sleepForAWhile();
-    			
-    		}
-    	}
-    }
-  
     private static boolean updateData(
             List<IMessage> aRecords)
     {

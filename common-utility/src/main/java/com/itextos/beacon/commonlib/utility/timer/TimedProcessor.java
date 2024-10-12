@@ -1,10 +1,13 @@
 package com.itextos.beacon.commonlib.utility.timer;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ExecutorLog1;
 
 public class TimedProcessor
         extends
@@ -61,7 +64,9 @@ public class TimedProcessor
             // if (log.isDebugEnabled())
             // log.debug(mTimedProcess.getClass() + " Invoking processNow");
 
-            synchronized (mTimedProcess)
+        	ExecutorLog1.getInstance("t_"+mThreadName).log("t_"+mThreadName+" : "+new Date());
+
+        	synchronized (mTimedProcess)
             {
                 continueNextExecutuionWithoutSleep = mTimedProcess.processNow();
             }

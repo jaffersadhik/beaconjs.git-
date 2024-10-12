@@ -34,15 +34,24 @@ public class App {
             System.out.println("Directory already exists: " + folderPath);
         }
     }
-	public static void main(String[] args) throws IOException {
-		
-		long start=System.currentTimeMillis();
-		foldercreaton("/logs/topic");
+    
+    public static void createfolder() {
+    	
+    	foldercreaton("/logs/topic");
 		foldercreaton("/logs/table2db");
 		foldercreaton("/logs/consumer");
 		foldercreaton("/logs/producer");
 		foldercreaton("/logs/kafkasender");
+		foldercreaton("/logs/executorlog1");
+		foldercreaton("/logs/executorlog2");
+    }
+	public static void main(String[] args) throws IOException {
+		
+		long start=System.currentTimeMillis();
+	
+		createfolder();
 
+		
 		
 		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
