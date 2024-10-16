@@ -3,7 +3,9 @@ ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
 
-RUN mkdir -p /logs
+USER root  # Switch to root user to create the directory
+RUN mkdir -p /logs && chown -R jboss:jboss /logs  # Ensure correct permissions for the directory
+USER jboss  # Switch back to non-root user
 
 COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
