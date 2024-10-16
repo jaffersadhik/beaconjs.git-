@@ -11,7 +11,6 @@ COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
 COPY log4j2-common.xml /log4j2-common.xml
 
-COPY custom_hosts_production.properties /custom_hosts_production.properties
 COPY smpp-interface.properties /smpp-interface.properties
 COPY encrypt.properties /encrypt.properties
 COPY elasticsearch.properties /elasticsearch.properties
