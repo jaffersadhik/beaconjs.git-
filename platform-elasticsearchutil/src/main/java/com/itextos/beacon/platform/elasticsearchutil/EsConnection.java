@@ -2,6 +2,7 @@ package com.itextos.beacon.platform.elasticsearchutil;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +11,7 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 
+import com.itextos.beacon.commonlib.constants.T;
 import com.itextos.beacon.platform.elasticsearchutil.utility.ElasticsearchProperties;
 
 class EsConnection
@@ -87,7 +89,11 @@ class EsConnection
 
         for (final String tempHost : hosts)
         {
-            final HttpHost host1 = new HttpHost(tempHost, ElasticsearchProperties.getInstance().getPort(), ElasticsearchProperties.getInstance().getScheme());
+        	StringTokenizer st=new StringTokenizer(tempHost,":");
+        	
+        	String ip=st.nextToken();
+        	int port=Integer.parseInt(st.nextToken());
+            final HttpHost host1 = new HttpHost(ip,port, ElasticsearchProperties.getInstance().getScheme());
             hostArray[index] = host1;
             index++;
         }
