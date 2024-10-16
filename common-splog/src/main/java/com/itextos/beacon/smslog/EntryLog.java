@@ -18,7 +18,7 @@ public class EntryLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
          
-        String logFileNamePattern = "/logs/entry.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/entry.%g.log";
 
         Level loglevel=Level.INFO;
         

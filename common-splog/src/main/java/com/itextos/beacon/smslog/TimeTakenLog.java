@@ -17,7 +17,7 @@ public class TimeTakenLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/timetaken.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/timetaken.%g.log";
 
         Level loglevel=Level.INFO;
         

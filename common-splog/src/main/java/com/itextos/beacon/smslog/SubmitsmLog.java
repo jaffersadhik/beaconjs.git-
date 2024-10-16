@@ -17,7 +17,7 @@ public class SubmitsmLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/submitsm.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/submitsm.%g.log";
 
         Level loglevel=Level.INFO;
         

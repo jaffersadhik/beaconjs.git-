@@ -17,7 +17,7 @@ public class ExitLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/exit.%g.log";
+        String logFileNamePattern = "//opt/jboss/wildfly/logs/exit.%g.log";
 
         Level loglevel=Level.INFO;
         

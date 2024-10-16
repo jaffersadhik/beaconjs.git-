@@ -37,7 +37,7 @@ public class Table2DBLog {
         int limit = 1024 * 5; // 1 MB file size limit
         int count = 1; // Number of log files
 
-        String logFileNamePattern = "/logs/topic/topiclog_" + topicname + ".%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/topic/topiclog_" + topicname + ".%g.log";
         Level loglevel = Level.INFO;
 
         String loglevelFromEnv = System.getenv("loglevel");

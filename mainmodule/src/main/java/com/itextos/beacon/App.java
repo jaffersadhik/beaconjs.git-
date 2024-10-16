@@ -37,13 +37,13 @@ public class App {
     
     public static void createfolder() {
     	
-    	foldercreaton("/logs/topic");
-		foldercreaton("/logs/table2db");
-		foldercreaton("/logs/consumer");
-		foldercreaton("/logs/producer");
-		foldercreaton("/logs/kafkasender");
-		foldercreaton("/logs/executorlog1");
-		foldercreaton("/logs/executorlog2");
+    	foldercreaton("/opt/jboss/wildfly/logs/topic");
+		foldercreaton("/opt/jboss/wildfly/logs/table2db");
+		foldercreaton("/opt/jboss/wildfly/logs/consumer");
+		foldercreaton("/opt/jboss/wildfly/logs/producer");
+		foldercreaton("/opt/jboss/wildfly/logs/kafkasender");
+		foldercreaton("/opt/jboss/wildfly/logs/executorlog1");
+		foldercreaton("/opt/jboss/wildfly/logs/executorlog2");
 
 		try {
 			AppendToHosts.appendCustomHostsToSystemHosts();

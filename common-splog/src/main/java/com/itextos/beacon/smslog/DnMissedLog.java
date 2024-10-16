@@ -17,7 +17,7 @@ public class DnMissedLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/dnmissed.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/dnmissed.%g.log";
 
         Level loglevel=Level.INFO;
         

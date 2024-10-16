@@ -37,7 +37,7 @@ public class ExecutorLog1 {
         int limit = 1024 * 5; // 1 MB file size limit
         int count = 1; // Number of log files
 
-        String logFileNamePattern = "/logs/executorlog1/exelog_" + topicname + ".%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/executorlog1/exelog_" + topicname + ".%g.log";
         Level loglevel = Level.INFO;
 
         String loglevelFromEnv = System.getenv("loglevel");

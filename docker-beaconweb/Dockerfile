@@ -5,7 +5,6 @@ EXPOSE 8080 9990
 
 RUN mkdir -p /opt/jboss/wildfly/logs
 
-RUN ln -s /opt/jboss/wildfly/logs /logs
 
 
 COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml

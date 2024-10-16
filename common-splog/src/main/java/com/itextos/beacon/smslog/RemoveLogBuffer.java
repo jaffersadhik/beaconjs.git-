@@ -16,7 +16,7 @@ public class RemoveLogBuffer {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/removelogbuffer.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/removelogbuffer.%g.log";
 
         Level loglevel=Level.INFO;
         

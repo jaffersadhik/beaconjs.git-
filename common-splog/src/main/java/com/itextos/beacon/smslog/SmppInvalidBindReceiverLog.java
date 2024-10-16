@@ -18,7 +18,7 @@ public class SmppInvalidBindReceiverLog {
          int count = 1; // N
     	
 
-        String logFileNamePattern = "/logs/smppinvalidbindreceiver.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/smppinvalidbindreceiver.%g.log";
 
         Level loglevel=Level.INFO;
         

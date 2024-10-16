@@ -16,7 +16,7 @@ public class payLoadReceiverLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/logs/payloadreceiver.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/payloadreceiver.%g.log";
 
         Level loglevel=Level.INFO;
         

@@ -18,7 +18,7 @@ public class ConsumerTopicList {
          int count = 1; // N
     	
 
-        String logFileNamePattern = "/logs/consumertopiclist.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/consumertopiclist.%g.log";
 
         Level loglevel=Level.INFO;
         
