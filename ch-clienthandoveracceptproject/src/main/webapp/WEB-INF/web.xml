@@ -6,7 +6,7 @@
 		<description></description>
 		<display-name>ErrorServlet</display-name>
 		<servlet-name>ErrorServlet</servlet-name>
-		<servlet-class>com.itextos.beacon.commonlib.servlets.errorhandler.ErrorServlet</servlet-class>
+		<servlet-class>com.itextos.beacon.commonlib.apperrorhandler.servlets.ErrorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ErrorServlet</servlet-name>
@@ -16,7 +16,7 @@
 		<description></description>
 		<display-name>ExceptionServlet</display-name>
 		<servlet-name>ExceptionServlet</servlet-name>
-		<servlet-class>com.itextos.beacon.commonlib.servlets.errorhandler.ExceptionServlet</servlet-class>
+		<servlet-class>com.itextos.beacon.commonlib.apperrorhandler.servlets.ExceptionServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ExceptionServlet</servlet-name>

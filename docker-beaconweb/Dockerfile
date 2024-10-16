@@ -45,5 +45,7 @@ COPY prometheus.control.properties /prometheus.control.properties
 
 
 COPY ./target/docker-beaconweb-1.0.ear /opt/jboss/wildfly/standalone/deployments/docker-beaconweb-1.0.ear
+COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
+
 VOLUME ["/logs"]
 CMD ["/opt/jboss/wildfly/bin/standalone.sh","-b","0.0.0.0","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/global.properties"]
