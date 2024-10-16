@@ -50,6 +50,14 @@
 							         
 
 		</dependency>
+		
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>mainmodule</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-elasticsearchutil</artifactId>
