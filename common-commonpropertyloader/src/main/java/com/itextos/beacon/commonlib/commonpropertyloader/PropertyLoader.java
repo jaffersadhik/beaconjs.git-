@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
@@ -18,6 +20,14 @@ public class PropertyLoader
     private static final Log    log                          = LogFactory.getLog(PropertyLoader.class);
     private static final String COMMON_PROPERY_FILE_LOCATION = "common.property.file.location";
 
+    private static final Set<String> profileFile=new HashSet<String>();
+    static {
+    	
+    	profileFile.add("/common-db.properties");
+    	profileFile.add("/kafka-consumer.properties");
+    	profileFile.add("/kafka-producer.properties");
+
+    }
     private static class SingletonHolder
     {
 
@@ -147,7 +157,11 @@ public class PropertyLoader
             	propertiesPath=propertiesPath.substring(propertiesPath.lastIndexOf('/'));
 
             }
-            
+
+            if(profileFile.contains(propertiesPath)) {
+            	
+            	propertiesPath+="_"+System.getenv("profile");
+            }
             
             final PropertiesConfiguration propConfiguration = new PropertiesConfiguration(propertiesPath);
             propConfiguration.setReloadingStrategy(new FileChangedReloadingStrategy());

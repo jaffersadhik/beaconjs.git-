@@ -45,13 +45,14 @@ public class App {
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog1");
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog2");
 
+		/*
 		try {
 			AppendToHosts.appendCustomHostsToSystemHosts();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
     }
 	public static void main(String[] args) throws IOException {
 		
