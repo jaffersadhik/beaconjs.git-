@@ -23,6 +23,7 @@ public class AppendToHosts {
             }
         }catch(Exception e) {
         	
+        	e.printStackTrace();
         }
     }
 }

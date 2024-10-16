@@ -3,6 +3,8 @@ ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
 
+RUN mkdir -p /logs
+
 COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
 COPY log4j2-common.xml /log4j2-common.xml

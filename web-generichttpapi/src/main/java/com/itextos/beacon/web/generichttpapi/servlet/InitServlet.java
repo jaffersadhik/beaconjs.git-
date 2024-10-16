@@ -48,7 +48,8 @@ public final class InitServlet
 
         try
         {
-        	
+        	com.itextos.beacon.App.createfolder();
+            
             final MessageIdentifier lMsgIdentifier = MessageIdentifier.getInstance();
             lMsgIdentifier.init(InterfaceType.HTTP_JAPI);
 
@@ -68,7 +69,6 @@ public final class InitServlet
                 System.exit(-1);
             }
 
-            com.itextos.beacon.App.createfolder();
             
             String module=System.getenv("module");
             if(module!=null&&(module.equals("japi")||module.equals("all"))) {
