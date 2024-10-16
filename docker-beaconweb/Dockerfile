@@ -1,4 +1,4 @@
-FROM quay.io/wildfly/wildfly:latest-jdk17
+FROM quay.io/wildfly/wildfly:latest-jdk21
 ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
