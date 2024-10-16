@@ -112,6 +112,14 @@
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>	
+
+	  	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>web-migrationapi</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>	
+
 		
 			  	<dependency>
 			<groupId>beacon</groupId>
@@ -151,13 +159,20 @@
 			<type>war</type>
 		</dependency>
 
-				  	<dependency>
+		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-messagetoolweb</artifactId>
 			<version>1.0</version>
 			<type>war</type>
 		</dependency>
 				
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>ch-clienthandoveracceptproject</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+
 		
 			<dependency>
 			<groupId>beacon</groupId>
@@ -187,6 +202,13 @@
                             <contextRoot>/genericapi</contextRoot>
                         </webModule>
                         
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>web-migrationapi</artifactId>
+                            <contextRoot>/migrationapi</contextRoot>
+                        </webModule>
+
+
                             <webModule>
                             <groupId>beacon</groupId>
                             <artifactId>platform-dnr</artifactId>
@@ -223,6 +245,15 @@
                             <artifactId>platform-messagetoolweb</artifactId>
                             <contextRoot>/msgtool</contextRoot>
                         </webModule>
+
+                        <webModule>
+                            <groupId>beacon</groupId>
+                            <artifactId>ch-clienthandoveracceptproject</artifactId>
+                            <contextRoot>/clienthandoveraccept</contextRoot>
+                        </webModule>
+
+
+
                         
                         <webModule>
                             <groupId>beacon</groupId>
