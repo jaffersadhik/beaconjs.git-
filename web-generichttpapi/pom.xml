@@ -9,6 +9,15 @@
   	<packaging>war</packaging>
 
   <dependencies>
+
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>mainmodule</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>   
+
+		</dependency>		
+
 	  
 		<dependency>
 			<groupId>beacon</groupId>

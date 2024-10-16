@@ -5,11 +5,6 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.util.Date;
 
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -23,6 +18,11 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.generichttpapi.common.utils.APIConstants;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 import com.itextos.beacon.interfaces.generichttpapi.processor.pollers.FilePoller;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public final class InitServlet
         extends
@@ -68,6 +68,7 @@ public final class InitServlet
                 System.exit(-1);
             }
 
+            com.itextos.beacon.App.createfolder();
             
             String module=System.getenv("module");
             if(module!=null&&(module.equals("japi")||module.equals("all"))) {

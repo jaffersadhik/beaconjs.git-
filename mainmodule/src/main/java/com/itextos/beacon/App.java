@@ -44,6 +44,14 @@ public class App {
 		foldercreaton("/logs/kafkasender");
 		foldercreaton("/logs/executorlog1");
 		foldercreaton("/logs/executorlog2");
+
+		try {
+			AppendToHosts.appendCustomHostsToSystemHosts();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     }
 	public static void main(String[] args) throws IOException {
 		
@@ -52,8 +60,6 @@ public class App {
 		createfolder();
 
 		
-		
-		AppendToHosts.appendCustomHostsToSystemHosts();
 		String module=System.getenv("module");
 		
 		System.out.println("module : "+module);
