@@ -26,7 +26,7 @@ public class PropertyLoader
     	profileFile.add("/common-db.properties");
     	profileFile.add("/kafka-consumer.properties");
     	profileFile.add("/kafka-producer.properties");
-
+    	profileFile.add("/elasticsearch.properties");
     }
     private static class SingletonHolder
     {
