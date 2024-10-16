@@ -26,13 +26,13 @@ public class KafkaClusterInfo
     public String getKafkaProducerProperties()
     {
         //return mKafkaProducerProperties;
-        return "/kafka-producer.properties";
+        return "/kafka-producer.properties_"+System.getenv("profile");
     }
 
     public String getKafkaConsumerProperties()
     {
     //    return mKafkaConsumerProperties;
-        return "/kafka-consumer.properties";
+        return "/kafka-consumer.properties_"+System.getenv("profile");
 
     }
 
