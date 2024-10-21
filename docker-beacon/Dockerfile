@@ -5,10 +5,7 @@ ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
 
-RUN apt-get update && \
-    apt-get install -y iputils-ping telnet vim curl procps  && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+
 
 COPY log4j2-common.xml /log4j2-common.xml
 
