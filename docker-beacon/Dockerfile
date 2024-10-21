@@ -1,4 +1,6 @@
-FROM dk-reg.mas:5000/openjdk:21-jdk-slim
+#FROM dk-reg.mas:5000/openjdk:21-jdk-slim
+FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
+
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
