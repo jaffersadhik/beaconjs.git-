@@ -15,17 +15,23 @@ COPY custom_hosts_production.properties /custom_hosts_production.properties
 COPY smpp-interface.properties /smpp-interface.properties
 COPY encrypt.properties /encrypt.properties
 COPY elasticsearch.properties /elasticsearch.properties
+COPY elasticsearch.properties_cat /elasticsearch.properties_cat
+
 COPY dnd.properties /dnd.properties
 COPY dlttemplateconfig.properties /dlttemplateconfig.properties
 COPY common.properties /common.properties
 COPY common-db.properties /common-db.properties
+COPY common-db.properties_cat /common-db.properties_cat
+
 COPY callback-params.properties /callback-params.properties
 COPY payload-params.properties /payload-params.properties
 COPY midconfig.properties /midconfig.properties
 COPY messageremove.properties /messageremove.properties
 COPY kafka-producer.properties /kafka-producer.properties
+COPY kafka-producer.properties_cat /kafka-producer.properties_cat
 COPY kafka-custom.properties /kafka-custom.properties
 COPY kafka-consumer.properties /kafka-consumer.properties
+COPY kafka-consumer.properties_cat /kafka-consumer.properties_cat
 COPY jndi.properties /jndi.properties
 COPY internal-ui.properties /internal-ui.properties
 COPY inmem-refresh-interval.properties /inmem-refresh-interval.properties
