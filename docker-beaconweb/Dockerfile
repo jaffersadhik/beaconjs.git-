@@ -1,4 +1,6 @@
-FROM quay.io/wildfly/wildfly:latest-jdk21
+#FROM quay.io/wildfly/wildfly:latest-jdk21
+FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
+
 ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
