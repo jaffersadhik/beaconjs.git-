@@ -49,7 +49,7 @@ COPY ./target/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/prometheus.control.properties /prometheus.control.properties
 
 
-COPY mcc-mnc-list.json /mcc-mnc-list.json
+COPY ./target/mcc-mnc-list.json /mcc-mnc-list.json
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
 ENTRYPOINT ["java","-Xss1m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
 
