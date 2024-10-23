@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.smslog.RedisDataPopulatorLog;
+
 public class RedisDataPopulator
 {
 
@@ -111,6 +113,9 @@ public class RedisDataPopulator
             String       userName = "Jaffer Sadhik";
             final String ip       = InetAddress.getLocalHost().getHostAddress();
 
+            RedisDataPopulatorLog.log("userName : "+userName);
+            RedisDataPopulatorLog.log("ip : "+ip);
+
             userName = userName.toUpperCase();
 
             if (log.isInfoEnabled())
@@ -118,6 +123,8 @@ public class RedisDataPopulator
 
             final String userInfo = "IP : '" + ip + "' User : '" + userName + "': ";
             String       choice   = CHOICE_POPULATE_NEW_INSTANCE_ID;
+
+            RedisDataPopulatorLog.log("CHOICE_POPULATE_NEW_INSTANCE_ID : "+CHOICE_POPULATE_NEW_INSTANCE_ID);
 
             while (true)
             {
@@ -127,7 +134,7 @@ public class RedisDataPopulator
                     case CHOICE_POPULATE_NEW_INSTANCE_ID:
                         if (log.isInfoEnabled())
                             log.info(userInfo + "Populate new instance ID");
-                        final InstanceIDPopulator instanceIDPopulator = new InstanceIDPopulator(userName, ip, reader);
+                        final InstanceIDPopulatorStatic instanceIDPopulator = new InstanceIDPopulatorStatic(userName, ip);
                         instanceIDPopulator.process();
                         break;
 

@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.RedisDataPopulatorLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -67,6 +68,11 @@ class PopulateDataStatic
     {
         if (log.isInfoEnabled())
             log.info(mUserInfo + "Populating data into redis");
+        
+        
+        RedisDataPopulatorLog.log(" populateData() : mExistingAvailableInstanceIDs : "+mExistingAvailableInstanceIDs);
+
+        RedisDataPopulatorLog.log(" populateData() : mAlreadyInUseInstanceIDs : "+mAlreadyInUseInstanceIDs);
 
         final List<String> tobeAdded   = new ArrayList<>();
         final List<String> tobeCleared = new ArrayList<>();
@@ -104,11 +110,15 @@ class PopulateDataStatic
             }
         }
 
+        RedisDataPopulatorLog.log(" populateData() : tobeCleared : "+tobeCleared);
+
         if (!tobeCleared.isEmpty())
         {
             clearExistingInstnaceIDs(tobeCleared);
             tobeAdded.addAll(tobeCleared);
         }
+
+        RedisDataPopulatorLog.log(" populateData() : tobeAdded : "+tobeAdded);
 
         if (!tobeAdded.isEmpty())
             addIntoAvailableList(tobeAdded);
@@ -254,6 +264,8 @@ class PopulateDataStatic
                 for (final Entry<String, Response<Map<String, String>>> entry : responses.entrySet())
                     mInstanceStatus.put(entry.getKey(), entry.getValue().get());
             }
+            
+            RedisDataPopulatorLog.log("getDataFromRedis() : mInstanceStatus "+mInstanceStatus);
         }
         catch (final Exception e)
         {
