@@ -18,7 +18,7 @@ public class ProducerFlushLog {
          int count = 1; // N
     	
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/producerflush.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/producer/producerflush.%g.log";
 
         Level loglevel=Level.INFO;
         

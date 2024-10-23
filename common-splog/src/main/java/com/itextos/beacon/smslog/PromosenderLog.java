@@ -17,7 +17,7 @@ public class PromosenderLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/promosender.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkasender/promosender.%g.log";
 
         Level loglevel=Level.INFO;
         

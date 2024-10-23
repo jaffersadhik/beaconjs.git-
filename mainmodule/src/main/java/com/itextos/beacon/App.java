@@ -46,6 +46,7 @@ public class App {
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog1");
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog2");
 		foldercreaton("/opt/jboss/wildfly/logs/application");
+		foldercreaton("/opt/jboss/wildfly/logs/kafkareceiver");
 
 		
 		/*
