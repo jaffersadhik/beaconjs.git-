@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn">
         <Properties>
-                <Property name="basePath">/logs</Property>
+                <Property name="basePath">/opt/jboss/wildfly/logs/application</Property>
 <Property name="sp">sp</Property>
                 <Property name="mainLog">application</Property>
                 <Property name="commonlibLog">commonlib</Property>

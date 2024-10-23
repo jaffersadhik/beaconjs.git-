@@ -45,7 +45,9 @@ public class App {
 		foldercreaton("/opt/jboss/wildfly/logs/kafkasender");
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog1");
 		foldercreaton("/opt/jboss/wildfly/logs/executorlog2");
+		foldercreaton("/opt/jboss/wildfly/logs/application");
 
+		
 		/*
 		try {
 			AppendToHosts.appendCustomHostsToSystemHosts();
