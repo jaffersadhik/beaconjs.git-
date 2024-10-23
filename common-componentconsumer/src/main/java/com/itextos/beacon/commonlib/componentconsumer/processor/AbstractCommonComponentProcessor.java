@@ -126,7 +126,7 @@ public abstract class AbstractCommonComponentProcessor
             try
             {
                 if (isNoRecordAvailable) {
-                    TopicLog.getInstance(mTopicName).log("goto sleep mSleepInMillis"+mSleepInMillis+"  mTopicName : "+mTopicName +" : "+new Date()+ " : error : "+ErrorMessage.getStackTraceAsString(e));
+                    TopicLog.getInstance(mTopicName).log("goto sleep mSleepInMillis : "+mSleepInMillis+"  mTopicName : "+mTopicName +" : "+new Date());
 
                     CommonUtility.sleepForAWhile(mSleepInMillis);
                 }
