@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import com.itextos.beacon.commonlib.componentconsumer.processor.extend.Utility;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaUtility;
@@ -104,6 +105,8 @@ public abstract class AbstractCommonComponentProcessor
                     if (mStopped)
                     {
                        
+                        TopicLog.getInstance(mTopicName).log("Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'"+"  mTopicName : "+mTopicName +" : "+new Date());
+
                     	log.fatal("Stopped invoked and no messages to process. Exiting the while loop. Messages Processed after stop invoked '" + messageProcessedAfterStopped + "'");
                         break;
                     }
@@ -111,6 +114,9 @@ public abstract class AbstractCommonComponentProcessor
             catch (final Exception e)
             {
                 log.error("Exxception whil processing the messages. Resending them to the Topics", e);
+                
+                TopicLog.getInstance(mTopicName).log("Exxception whil processing the messages. Resending them to the Topics"+"  mTopicName : "+mTopicName +" : "+new Date()+ " : error : "+ErrorMessage.getStackTraceAsString(e));
+
                 sendBackToTopic(lReadMessage);
             }
 
@@ -119,8 +125,11 @@ public abstract class AbstractCommonComponentProcessor
         
             try
             {
-                if (isNoRecordAvailable)
+                if (isNoRecordAvailable) {
+                    TopicLog.getInstance(mTopicName).log("goto sleep mSleepInMillis"+mSleepInMillis+"  mTopicName : "+mTopicName +" : "+new Date()+ " : error : "+ErrorMessage.getStackTraceAsString(e));
+
                     CommonUtility.sleepForAWhile(mSleepInMillis);
+                }
             }
            
             catch (final Exception e)
@@ -129,6 +138,8 @@ public abstract class AbstractCommonComponentProcessor
             }
              
         }
+
+        TopicLog.getInstance(mTopicName).log("come out from while loop mTopicName : "+mTopicName +" : "+new Date());
 
         processPendingMessages();
 
