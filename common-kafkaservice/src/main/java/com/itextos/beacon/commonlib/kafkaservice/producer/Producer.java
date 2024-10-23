@@ -347,12 +347,12 @@ public class Producer
         if (aEvent != null) {
             log.fatal(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
        
-            ProducerFlushLog.log(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+            ProducerFlushLog.log("mTopicName : "+mTopicName+ " : "+threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
         } else {
             if (log.isDebugEnabled())
                 log.debug("Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
         
-            ProducerFlushLog.log(threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
+            ProducerFlushLog.log("mTopicName : "+mTopicName+ " : "+threadName+" aEvent "+aEvent + " Producer " + KafkaUtility.formatTopicName(mTopicName) + " Batch count :" + String.format("%8s", mBatchCounter));
 
         }
         mProducer.flush();
