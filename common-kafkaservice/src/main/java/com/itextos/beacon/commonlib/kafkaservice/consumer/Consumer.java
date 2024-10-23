@@ -94,18 +94,12 @@ public class Consumer
         {
             isCompletelyStopped = false;
 
-            long starttime=System.currentTimeMillis();
-           final long stime=System.currentTimeMillis();
             
             while (!mClosed)
             {
             	ConsumerTPLog.getInstance(mTopicName).log(mTopicName+" : "+new Date());
             	
-            	if(mConsumerInMemCollection.getInMemSize()>500) {
-                    CommonUtility.sleepForAWhile(25);
-
-            		continue;
-            	}
+            
             
                 final long                              startTime = System.currentTimeMillis();
                 final ConsumerRecords<String, IMessage> records   = mConsumer.poll(Duration.ofMillis(KafkaCustomProperties.getInstance().getConsumerPollInterval()));
@@ -115,10 +109,7 @@ public class Consumer
                 final long                              endTime   = System.currentTimeMillis();
 
                 if (log.isDebugEnabled()) {
-                	if((System.currentTimeMillis()-starttime)>4000) {
-                		starttime=System.currentTimeMillis();
                     log.debug("Started consuming messages from '" + mTopicName + "' pollCount : "+pollCount);
-                	}
                 }
                 
                 if (pollCount != 0)
@@ -141,6 +132,8 @@ public class Consumer
                 
                 	 checkAndCommit(0);
                     
+                 	ConsumerTPLog.getInstance(mTopicName).log("sleepForAWhile(100); : mTopicName "+mTopicName+" : "+new Date());
+
                 	 CommonUtility.sleepForAWhile(100);
                 }
                 

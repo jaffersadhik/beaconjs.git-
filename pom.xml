@@ -344,7 +344,8 @@
    	<module>docker-fb</module>
    	<module>node-cm</module>
    	<module>node-cm-jobs</module>
-   
+
+   	<module>applicationproperties</module>
   </modules>
   
 

@@ -24,9 +24,7 @@
 								
    								<copy todir="${project.build.directory}/">		
                                     <fileset file="../mainmodule/target/mainmodule-1.0-executable.jar"/>
- 								<fileset dir="../properties/">
-                                    <include name="**/*"/> <!-- Include all files -->
-                                </fileset>
+    
                                 </copy>
 
                 
