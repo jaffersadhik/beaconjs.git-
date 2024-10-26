@@ -15,6 +15,7 @@ import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.QSRequestReader;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.smslog.QSReceiverLog;
+import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,6 +63,8 @@ public class QSGenericReceiver
                 + "' milliseconds").append("\n");
 
         sb.append("\n##########################################\n");
+
+        TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + (lProcessEnd - lProcessStart)  + "' milliseconds");
 
         QSReceiverLog.log(sb.toString());
     }

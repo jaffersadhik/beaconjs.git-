@@ -346,6 +346,7 @@
    	<module>node-cm-jobs</module>
 
    	<module>applicationproperties</module>
+   	<module>platform-asynprocessor</module>
   </modules>
   
 

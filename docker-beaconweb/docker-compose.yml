@@ -1,5 +1,5 @@
 version: "3.1"
 services:
   beaconwebear:
-    image: dk-reg.mas:5000/beaconwebear:23oct2024
+    image: dk-reg.mas:5000/beaconwebear:26oct2024
     build: .

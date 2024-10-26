@@ -75,7 +75,7 @@ public final class InitServlet
             	
             	FallbackQReaper.getInstance();
 
-            	startConsumers();
+   //         	startConsumers();
             }
         }
         catch (final Exception e)

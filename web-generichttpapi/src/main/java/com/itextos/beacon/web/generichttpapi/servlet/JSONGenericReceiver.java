@@ -13,6 +13,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.JSONRequestReader;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
+import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,8 +51,8 @@ public class JSONGenericReceiver
         final long end    = System.currentTimeMillis();
         final long result = end - start;
 
-        if (log.isInfoEnabled())
-            log.info("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + result + "' milliseconds");
+        TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + result + "' milliseconds");
+
     }
 
     @Override
@@ -84,9 +85,9 @@ public class JSONGenericReceiver
         {
             final long lProcessEnd = System.currentTimeMillis();
 
-            if (log.isInfoEnabled())
-                log.info("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '"
-                        + (lProcessEnd - lProcessStart) + "' milliseconds");
+            TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + (lProcessEnd - lProcessStart)  + "' milliseconds");
+
+          
         }
     }
 

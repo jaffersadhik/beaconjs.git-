@@ -17,6 +17,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.QSRequestReader;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
+import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
 public class QSCustomReceiver
         extends
@@ -46,10 +47,8 @@ public class QSCustomReceiver
 
         final long end = System.currentTimeMillis();
 
-        if (log.isInfoEnabled())
-            log.info(
-                    "Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + (end - start) + "' milliseconds");
-    }
+        TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + (end-start) + "' milliseconds");
+   }
 
     @Override
     protected void doPost(
