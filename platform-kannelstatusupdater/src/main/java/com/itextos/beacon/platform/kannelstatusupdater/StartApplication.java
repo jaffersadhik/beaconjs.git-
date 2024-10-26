@@ -162,18 +162,8 @@ public class StartApplication
 			
 			int intMonth=Integer.parseInt(month);
 
-			for(int i=1;i<32;i++) {
-				
-				if(i>9) {
-				currentmonthtablelist.add(month+i);
-				}else {
-					
-				currentmonthtablelist.add(month+"0"+i);
+			addMonth(intMonth,currentmonthtablelist);
 
-				}
-				
-			}
-			
 			result.put("billing_"+month, currentmonthtablelist);
 
 			if(month.endsWith("12")) {
@@ -190,17 +180,8 @@ public class StartApplication
 				
 				month=intYear+""+01;
 				
-				for(int i=1;i<32;i++) {
-					
-					if(i>9) {
-					nextmonthtablelist.add(month+i);
-					}else {
-						
-					nextmonthtablelist.add(month+"0"+i);
-
-					}
-					
-				}
+				addMonth(Integer.parseInt(month),nextmonthtablelist);
+				
 				result.put("billing_"+month, nextmonthtablelist);
 
 
@@ -208,18 +189,9 @@ public class StartApplication
 			
 				intMonth++;
 				month=""+intMonth;
-				
-				for(int i=1;i<32;i++) {
-					
-					if(i>9) {
-					nextmonthtablelist.add(month+i);
-					}else {
-						
-					nextmonthtablelist.add(month+"0"+i);
 
-					}
-					
-				}
+				addMonth(intMonth,nextmonthtablelist);
+
 				result.put("billing_"+month, nextmonthtablelist);
 
 				
@@ -228,6 +200,22 @@ public class StartApplication
 			
 			
 			return result;
+		}
+
+		private void addMonth(int month, List<String> monthtablelist) {
+			
+			for(int i=1;i<32;i++) {
+				
+				if(i>9) {
+					monthtablelist.add(month+""+i);
+				}else {
+					
+					monthtablelist.add(month+"0"+i);
+
+				}
+				
+			}
+			
 		}
     }
    
