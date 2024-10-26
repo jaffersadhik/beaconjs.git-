@@ -174,9 +174,10 @@ public class StartApplication
 				
 			}
 			
+			result.put("billing_"+month, currentmonthtablelist);
+
 			if(month.endsWith("12")) {
 				
-				result.put("billing_"+intMonth, currentmonthtablelist);
 				
 				SimpleDateFormat sdf2 =new SimpleDateFormat("yyyy");
 				
