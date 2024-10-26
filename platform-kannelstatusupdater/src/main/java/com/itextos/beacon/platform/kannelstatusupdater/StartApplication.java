@@ -42,7 +42,7 @@ public class StartApplication
         {
             KannelStatusRefresher.getInstance();
             
-
+            ExecutorSheduler.getInstance().addTask(new TableCreation(), "TableCreation");
 
         }
         catch (final Exception e)
@@ -149,17 +149,10 @@ public class StartApplication
 
 		private Map<String,List<String>> getSchemaList() {
 			
-			List<String> schemalist=new ArrayList<String>();
-			
-			SimpleDateFormat sdf1 =new SimpleDateFormat("yyyymmdd");
+			List<String> currentmonthtablelist=new ArrayList<String>();
+			List<String> nextmonthtablelist=new ArrayList<String>();
 
-			String day=sdf1.format(new Date());
-			int intDay=Integer.parseInt(day);
 			
-			schemalist.add(""+intDay);
-			intDay++;
-						
-			schemalist.add(""+intDay);
 			
 			Map<String,List<String>> result=new HashMap<String,List<String>>();
 			
@@ -167,12 +160,23 @@ public class StartApplication
 			
 			String month=sdf.format(new Date());
 			
-			
+			int intMonth=Integer.parseInt(month);
+
+			for(int i=1;i<32;i++) {
+				
+				if(i>9) {
+				currentmonthtablelist.add(month+i);
+				}else {
+					
+				currentmonthtablelist.add(month+"0"+i);
+
+				}
+				
+			}
 			
 			if(month.endsWith("12")) {
 				
-				int intMonth=Integer.parseInt(month);
-				result.put("billing_"+intMonth, schemalist);
+				result.put("billing_"+intMonth, currentmonthtablelist);
 				
 				SimpleDateFormat sdf2 =new SimpleDateFormat("yyyy");
 				
@@ -182,26 +186,43 @@ public class StartApplication
 				
 				intYear++;
 				
-				List<String> l=new ArrayList<String>();
 				
-				l.add(""+intYear+"0101");
-				result.put("billing_"+intYear+"01", l);
+				month=intYear+""+01;
+				
+				for(int i=1;i<32;i++) {
+					
+					if(i>9) {
+					nextmonthtablelist.add(month+i);
+					}else {
+						
+					nextmonthtablelist.add(month+"0"+i);
+
+					}
+					
+				}
+				result.put("billing_"+month, nextmonthtablelist);
 
 
 			}else {
 			
-
-				int intMonth=Integer.parseInt(month);
-				result.put("billing_"+intMonth, schemalist);
-				
 				intMonth++;
+				month=""+intMonth;
 				
-				List<String> l=new ArrayList<String>();
-				
-				l.add(""+intMonth+"01");
-				
-				result.put("billing_"+intMonth, l);
+				for(int i=1;i<32;i++) {
+					
+					if(i>9) {
+					nextmonthtablelist.add(month+i);
+					}else {
+						
+					nextmonthtablelist.add(month+"0"+i);
 
+					}
+					
+				}
+				result.put("billing_"+month, nextmonthtablelist);
+
+				
+			
 			}
 			
 			
