@@ -156,7 +156,7 @@ public class StartApplication
 			
 			Map<String,List<String>> result=new HashMap<String,List<String>>();
 			
-			SimpleDateFormat sdf =new SimpleDateFormat("yyyymm");
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyyMM");
 			
 			String month=sdf.format(new Date());
 			
