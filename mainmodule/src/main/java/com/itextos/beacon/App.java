@@ -492,7 +492,7 @@ public class App {
 			
 			com.itextos.beacon.platform.ic.StartApplication.main(args);
 			
-			com.itextos.beacon.platform.rch.StartApplication.main(args);
+		//	com.itextos.beacon.platform.rch.StartApplication.main(args);
 
 			
 			IS_START_PROMETHEUS=true;
