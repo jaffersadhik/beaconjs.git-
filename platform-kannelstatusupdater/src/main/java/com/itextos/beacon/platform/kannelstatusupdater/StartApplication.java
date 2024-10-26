@@ -43,7 +43,6 @@ public class StartApplication
             KannelStatusRefresher.getInstance();
             
 
-            ExecutorSheduler.getInstance().addTask(new TableCreation(), "TableCreation");
 
         }
         catch (final Exception e)
