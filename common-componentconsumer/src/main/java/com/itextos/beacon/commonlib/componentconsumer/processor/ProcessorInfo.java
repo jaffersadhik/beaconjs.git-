@@ -877,6 +877,7 @@ public class ProcessorInfo
 
     private void updateLockFileForShutdownStart()
     {
+    	/*
         final File lFile = new File(getLockFilename());
 
         if (!lFile.exists())
@@ -897,6 +898,7 @@ public class ProcessorInfo
         }
         final String s = mComponent + " Lock file updated for shutdown start";
         logContent(s);
+        */
     }
 
     private void createLockFile()
