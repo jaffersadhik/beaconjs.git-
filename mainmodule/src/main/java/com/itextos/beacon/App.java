@@ -499,6 +499,14 @@ public class App {
 			IS_START_PROMETHEUS=true;
 			return true;
 			
+		}else if(module.equals("ac")){
+			
+			com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("smppinterface")){
 			
 			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
