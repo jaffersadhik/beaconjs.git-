@@ -66,6 +66,8 @@ public class StartApplication
             
             DebugLog.log("lClusters " + lClusters);
 
+        	lClusters=System.getenv("smpp.cluster");
+
             
             String[] lClusterList = null;
             
