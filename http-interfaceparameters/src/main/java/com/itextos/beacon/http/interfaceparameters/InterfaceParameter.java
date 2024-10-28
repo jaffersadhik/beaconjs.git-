@@ -31,6 +31,7 @@ public enum InterfaceParameter
     MSG_TAG("Message Tag"),
     DLT_ENTITY_ID("Dlt EntityId"),
     DLT_TEMPLATE_ID("Dlt TemplateId"),
+    DLT_TMA_ID("Dlt TMA Id"),
     PARAM1("param1"),
     PARAM2("param2"),
     PARAM3("param3"),

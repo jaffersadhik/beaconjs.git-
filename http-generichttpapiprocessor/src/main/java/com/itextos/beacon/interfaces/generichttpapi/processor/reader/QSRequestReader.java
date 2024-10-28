@@ -341,6 +341,8 @@ public class QSRequestReader
         String lTemplateValues = null;
         String lDltEntityId    = null;
         String lDltTemplateId  = null;
+        String lDltTMAId  = null;
+
         String lMsgtag         = null;
         String lParam1         = null;
         String lParam2         = null;
@@ -383,6 +385,8 @@ public class QSRequestReader
             lTemplateValues = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_TEMPLATE_VALUES);
             lDltEntityId    = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_DLT_ENTITY_ID);
             lDltTemplateId  = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_DLT_TEMPLATE_ID);
+            lDltTMAId  = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_DLT_TMA_ID);
+
             lMsgtag         = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_MSG_TAG);
             lParam1         = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_PARAM1);
             lParam2         = mHttpRequest.getParameter(InterfaceInputParameters.REQ_PARAMETER_PARAM2);
@@ -433,6 +437,8 @@ public class QSRequestReader
             lUrlTrack       = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.URL_TRACKING));
             lDltEntityId    = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.DLT_ENTITY_ID));
             lDltTemplateId  = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.DLT_TEMPLATE_ID));
+            lDltTMAId  = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.DLT_TMA_ID));
+
             lMsgtag         = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.MSG_TAG));
             lParam1         = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.PARAM1));
             lParam2         = mHttpRequest.getParameter(interfaceParams.getParamterKey(aClientId, InterfaceType.HTTP_JAPI, InterfaceParameter.PARAM2));

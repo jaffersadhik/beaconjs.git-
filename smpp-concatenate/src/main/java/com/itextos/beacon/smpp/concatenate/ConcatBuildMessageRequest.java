@@ -61,6 +61,7 @@ public class ConcatBuildMessageRequest
         lMessageRequest.setDestinationPort(aSmppMessageRequest.getDestPort());
         lMessageRequest.setDltEntityId(aSmppMessageRequest.getDltEntityId());
         lMessageRequest.setDltTemplateId(aSmppMessageRequest.getDltTemplateId());
+        lMessageRequest.setDltTelemarketerId(aSmppMessageRequest.getDltTelemarketerId());
         lMessageRequest.setDlrRequestFromClient(CommonUtility.isTrue(aSmppMessageRequest.getDlrReqFromClient()));
         lMessageRequest.setTreatDomesticAsSpecialSeries(aSmppMessageRequest.isSpecialSeriesNumber());
         lMessageRequest.setIsHexMessage(aSmppMessageRequest.isHexMsg());
@@ -136,6 +137,8 @@ public class ConcatBuildMessageRequest
         lMessageRequest.setDestinationPort(aSmppMessageRequest.getDestPort());
         lMessageRequest.setDltEntityId(aSmppMessageRequest.getDltEntityId());
         lMessageRequest.setDltTemplateId(aSmppMessageRequest.getDltTemplateId());
+        lMessageRequest.setDltTelemarketerId(aSmppMessageRequest.getDltTelemarketerId());
+
         lMessageRequest.setDlrRequestFromClient(CommonUtility.isTrue(aSmppMessageRequest.getDlrReqFromClient()));
         lMessageRequest.setTreatDomesticAsSpecialSeries(aSmppMessageRequest.isSpecialSeriesNumber());
         lMessageRequest.setIsHexMessage(aSmppMessageRequest.isHexMsg());

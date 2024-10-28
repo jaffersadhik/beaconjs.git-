@@ -273,6 +273,12 @@ public class MessageRequest
     {
         return getValue(MiddlewareConstant.MW_DLT_TEMPLATE_ID);
     }
+    
+    
+    public String getDltTelemarketerId()
+    {
+        return getValue(MiddlewareConstant.MW_DLT_TMA_ID);
+    }
 
     public String getDltTemplateType()
     {
@@ -1388,6 +1394,14 @@ public class MessageRequest
         putValue(MiddlewareConstant.MW_DLT_TEMPLATE_ID, aDltTemplateId);
     }
 
+    
+    public void setDltTelemarketerId(
+            String aDltTelemarketerId)
+    {
+        putValue(MiddlewareConstant.MW_DLT_TMA_ID, aDltTelemarketerId);
+    }
+
+    
     public void setDltTemplateType(
             String aDltTemmplateType)
     {

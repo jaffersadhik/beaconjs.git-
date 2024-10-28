@@ -41,6 +41,7 @@ import com.itextos.beacon.platform.ch.util.CHProcessUtil;
 import com.itextos.beacon.platform.ch.util.CHProducer;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelStatsCollector;
+import com.itextos.beacon.smslog.KannelURLLog;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -229,10 +230,11 @@ public class CarrierHandoverProcess
                        if ((lSubmissionObject.getMtMessageRetryIdentifier() == null) || !lRouteId.equals(lActualRouteId))
                            setCallBackUrl(lMessageRequest, lSubmissionObject);
 
-                       final String lKannelUrl = makelowercase(getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable));
+                       final String lKannelUrl =getKannelUrlByHardcoded( makelowercase(getKannelUrl(lKannelRouteInfo, lSubmissionObject, lMessageRequest, lUdh, lRetryAttempt, isDLTEnable)),lMessageRequest);
 
                     
-
+                       KannelURLLog.log(" Featurecd : "+lKannelRouteInfo.getFeatureCode()+" :  lKannelUrl : "+ lKannelUrl);
+                       
                     	lMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(lMessageRequest.getBaseMessageId()+" :: kannel URL--->" + lKannelUrl );
 
                        if (!isKannelAvailable && canDoMsgRetry)
@@ -632,7 +634,143 @@ public class CarrierHandoverProcess
         return MessageFormat.format(aKannelRouteInfo.getUrlTemplate(), lUrlparams);
     }
 
-    private static void doMessageRetry(
+    /*
+     * 
+     * 
+     * MariaDB [carrier_handover]> select * from kannel_url_config where route_id='VNSPBA'\G;
+*************************** 1. row ***************************
+  route_id: VNSPBA
+feature_cd: PMS
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=0&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050
+*************************** 2. row ***************************
+  route_id: VNSPBA
+feature_cd: PMM
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=0&udh={6}&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050
+*************************** 3. row ***************************
+  route_id: VNSPBA
+feature_cd: US
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&dlr-url={7}&dlr-mask=3&alt-dcs=1&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050
+*************************** 4. row ***************************
+  route_id: VNSPBA
+feature_cd: UM
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&udh={6}&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050
+*************************** 5. row ***************************
+  route_id: VNSPBA
+feature_cd: FLS
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=0&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050&msgclass=0
+*************************** 6. row ***************************
+  route_id: VNSPBA
+feature_cd: FLM
+kannel_url: http://{0}:{1}/cgi-BIN/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&TEXT={5}&priority={8}&validity={9}&coding=0&udh={6}&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1702166693997804050&msgclass=0
+*************************** 7. row ***************************
+  route_id: VNSPBA
+feature_cd: FLUM
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&udh={6}&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1602100000000006745&mclass=0
+*************************** 8. row ***************************
+  route_id: VNSPBA
+feature_cd: FLUS
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&dlr-url={7}&dlr-mask=3&alt-dcs=1&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1602100000000006745&mclass=0
+*************************** 9. row ***************************
+  route_id: VNSPBA
+feature_cd: FLUM
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&udh={6}&dlr-url={7}&dlr-mask=3&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1602100000000006745&mclass=0
+*************************** 10. row ***************************
+  route_id: VNSPBA
+feature_cd: FLUS
+kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&smsc-id={2}&cliid={10}&sdate={11}&to={3}&from={4}&text={5}&priority={8}&validity={9}&coding=2&dlr-url={7}&dlr-mask=3&alt-dcs=1&accpriority={13}&rp={14}&meta-data=%3Fsmpp%3Fentityid={15}%26templateid={16}%26telemarketerid=1602100000000006745&mclass=0
+
+     */
+    
+    
+    private static String getKannelUrlByHardcoded(
+    		String kannelUrl,
+            MessageRequest aMessageRequest
+           )
+            throws UnsupportedEncodingException
+    {
+    	
+    	try {
+			URL url=new URL(kannelUrl);
+			StringBuffer sb=new StringBuffer();
+			sb.append(url.getProtocol()).append("://").append(url.getHost()).append(":").append(url.getPort()).append(url.getPath().toLowerCase()).append("?");
+
+	        Map<String,String> reqmap= getDataMap(kannelUrl,aMessageRequest);
+
+			
+			reqmap.forEach((k,v)->{
+				
+				sb.append(k).append("=").append(v).append("&");
+			});
+			
+
+			return sb.toString();
+
+    	} catch (MalformedURLException e) {
+			
+			
+
+		}
+    	
+			return null;
+
+   
+    }
+    
+    private static Map<String, String> getDataMap(String kannelUrl,MessageRequest aMessageRequest) throws UnsupportedEncodingException {
+
+		Map<String,String> reqmap=new HashMap<String,String>();
+
+			    	try {
+					URL url=new URL(kannelUrl);
+			
+					
+					StringTokenizer st=new StringTokenizer(url.getQuery(),"&");
+		    	
+					while(st.hasMoreTokens()) {
+						
+						String param=st.nextToken();
+						
+						if(!param.startsWith("meta-data")) {
+							
+							StringTokenizer st1=new StringTokenizer(param,"=");
+	 						
+	 						
+	 						reqmap.put(st1.nextToken().toLowerCase(), st1.nextToken());
+
+						}
+						
+						
+					}
+					
+					String entityid=URLEncoder.encode(CommonUtility.nullCheck(aMessageRequest.getDltEntityId(), true), Constants.ENCODER_FORMAT);
+					
+					String templateid=URLEncoder.encode(CommonUtility.nullCheck(aMessageRequest.getDltTemplateId(), true), Constants.ENCODER_FORMAT);
+					
+					String telemarketerid="1702166693997804050";
+					
+					if(aMessageRequest.getDltTelemarketerId()==null&&aMessageRequest.getDltTelemarketerId().trim().length()>0) {
+						
+						telemarketerid=aMessageRequest.getDltTelemarketerId()+","+telemarketerid;
+					}
+					
+					telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
+
+					String metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
+					
+					reqmap.put("meta-data", metadata);
+				
+		    	} catch (MalformedURLException e) {
+					
+					
+
+				}
+		    	
+					return reqmap;
+
+			
+	}
+
+	private static void doMessageRetry(
             MessageRequest aMessageRequest,
             SubmissionObject aSubmissionObject)
     {

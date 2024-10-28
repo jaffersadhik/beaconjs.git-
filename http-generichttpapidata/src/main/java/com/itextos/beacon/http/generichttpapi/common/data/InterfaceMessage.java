@@ -29,6 +29,7 @@ public class InterfaceMessage
     private String                 mUrlTrack;
     private String                 mCustRef;
     private String                 mTemplateId;
+    private String                 mTelemarketerId;
     private String[]               mTemplateValues;
     private String                 mMsgTag;
     private String                 mParam1;
@@ -45,6 +46,8 @@ public class InterfaceMessage
     private InterfaceRequestStatus mRequestStatus;
     private String                 mRequestSource;
     private String                 mDltTemplateId;
+    private String                 mDltTelemarketerId;
+
     private String                 mDltEntityId;
     private RouteType              mRouteType;
     private String                 mIsSpecialSeriesNumber;
@@ -238,6 +241,17 @@ public class InterfaceMessage
     {
         mTemplateId = aTemplateId;
     }
+    
+    public String getTelemarketerId()
+    {
+        return mTelemarketerId;
+    }
+
+    public void setTelemarketerId(
+            String aTelemarketerId)
+    {
+        mTelemarketerId = aTelemarketerId;
+    }
 
     public String[] getTemplateValues()
     {
@@ -404,6 +418,17 @@ public class InterfaceMessage
         mRequestSource = aRequestSource;
     }
 
+    public String getDltTelemarketerId()
+    {
+        return mDltTelemarketerId;
+    }
+
+    public void setDltTelemarketerId(
+            String aDltTelemarketerId)
+    {
+        mDltTelemarketerId = aDltTelemarketerId;
+    }
+    
     public String getDltTemplateId()
     {
         return mDltTemplateId;

@@ -387,6 +387,8 @@ public class Messagerequest
         protected String                                 msgtype;
         protected String                                 dltentityid;
         protected String                                 dlttemplateid;
+        protected String                                 dlttelemarketerid;
+
         protected String                                 dcs;
         protected String                                 udhi;
         protected String                                 port;
@@ -561,7 +563,8 @@ public class Messagerequest
         {
             return dlttemplateid;
         }
-
+        
+        
         /**
          * Sets the value of the dlttemplateid property.
          *
@@ -574,7 +577,38 @@ public class Messagerequest
         {
             this.dlttemplateid = value;
         }
+        
+        
 
+        /**
+         * Gets the value of the dlttemplateid property.
+         *
+         * @return
+         *         possible object is
+         *         {@link String }
+         */
+        public String getDlttelemarketerid()
+        {
+            return dlttelemarketerid;
+        }
+
+        
+        /**
+         * Sets the value of the dlttemplateid property.
+         *
+         * @param value
+         *              allowed object is
+         *              {@link String }
+         */
+        public void setDlttelemarketerid(
+                String value)
+        {
+            this.dlttelemarketerid = value;
+        }
+       
+
+   
+       
         /**
          * Gets the value of the dcs property.
          *

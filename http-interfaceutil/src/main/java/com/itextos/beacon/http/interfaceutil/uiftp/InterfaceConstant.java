@@ -15,6 +15,7 @@ public enum InterfaceConstant
     CLIENT_MESSAGE_ID(MiddlewareConstant.MW_CLIENT_MESSAGE_ID),
     DLT_ENTITY_ID(MiddlewareConstant.MW_DLT_ENTITY_ID),
     DLT_TEMPLATE_ID(MiddlewareConstant.MW_DLT_TEMPLATE_ID),
+    DLT_TMA_ID(MiddlewareConstant.MW_DLT_TMA_ID),
     DLR_REQURIED(MiddlewareConstant.MW_DLR_REQ_FROM_CLI),
     MAX_MESSAGE_VALIDITY_SEC(MiddlewareConstant.MW_MAX_VALIDITY_IN_SEC),
     RECEIVED_TIME(MiddlewareConstant.MW_MSG_RECEIVED_TIME),

@@ -53,6 +53,8 @@
                                                                 minOccurs="0" maxOccurs="1" />
                                                         <xs:element type="xs:string" name="dlttemplateid"
                                                                 minOccurs="0" maxOccurs="1" />
+                                                        <xs:element type="xs:string" name="dlttelemarketerid"
+                                                                minOccurs="0" maxOccurs="1" />
                                                         <xs:element type="xs:string" name="dcs" minOccurs="0"
                                                                 maxOccurs="1" />
                                                         <xs:element type="xs:string" name="udhi"

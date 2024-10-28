@@ -121,6 +121,8 @@ public class InterfaceRequest
             lMessageRequest.setClientMessageId(aRequest.get(InterfaceConstant.CLIENT_MESSAGE_ID));
             lMessageRequest.setDltEntityId(aRequest.get(InterfaceConstant.DLT_ENTITY_ID));
             lMessageRequest.setDltTemplateId(aRequest.get(InterfaceConstant.DLT_TEMPLATE_ID));
+            lMessageRequest.setDltTelemarketerId(aRequest.get(InterfaceConstant.DLT_TMA_ID));
+
             lMessageRequest.setDlrRequestFromClient(CommonUtility.isEnabled(aRequest.get(InterfaceConstant.DLR_REQURIED)));
             lMessageRequest.setIsHexMessage(CommonUtility.isTrue(aRequest.get(InterfaceConstant.IS_HEX_MSG)));
             lMessageRequest.setMessageClass(aRequest.get(InterfaceConstant.MESSAGE_CLASS));

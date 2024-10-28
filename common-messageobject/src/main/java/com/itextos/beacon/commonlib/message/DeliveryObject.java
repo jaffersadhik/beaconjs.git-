@@ -234,6 +234,12 @@ public class DeliveryObject
     {
         return getValue(MiddlewareConstant.MW_DLT_TEMPLATE_ID);
     }
+    
+    
+    public String getDltTelemarketerId()
+    {
+        return getValue(MiddlewareConstant.MW_DLT_TMA_ID);
+    }
 
     public String getDnClientStatusCode()
     {
@@ -401,6 +407,8 @@ public class DeliveryObject
         lMessageRequest.setFileName(getFileName());
         lMessageRequest.setDltEntityId(getDltEntityId());
         lMessageRequest.setDltTemplateId(getDltTemplateId());
+        lMessageRequest.setDltTelemarketerId(getDltTelemarketerId());
+
         lMessageRequest.setAppType(getAppType());
         lMessageRequest.setSubOriginalStatusCode(getSubOriStatusCode());
         lMessageRequest.setSyncRequest(isSyncRequest());

@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
+import com.itextos.beacon.smslog.DebugLog;
 
 public class ScheduleBlockoutPollarHolder
         implements
@@ -58,6 +59,8 @@ public class ScheduleBlockoutPollarHolder
         {
             if (log.isDebugEnabled())
                 log.debug("Get Instance ids from Runtime : " + appInstanceIds);
+            
+            DebugLog.log("Get Instance ids from Runtime : " + appInstanceIds);
 
             final List<String> aInstanceIds = appInstanceIds.get("all");
 

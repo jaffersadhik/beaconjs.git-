@@ -124,6 +124,7 @@ public enum MiddlewareConstant
     MW_SCHE_DATE_TIME("sch_ts", "sch_date_time", "interface.sche_date_time Schedule Message Time"),
     MW_DLT_TEMPLATE_ID("dlt_tmpl_id", "dlt_tmpl_id", "dlt template id from client"),
     MW_DLT_ENTITY_ID("dlt_enty_id", "dlt_entity_id", "dlt entity id from client"),
+    MW_DLT_TMA_ID("dlt_tma_id", "dlt_tma_id", "dlt Telemarketer id from client"),
     MW_APP_INSTANCE_ID("app_ins_id", "app_ins_id", "Application Instance Id"),
     MW_INTERFACE_REJECTED("if_reject", "intf_reject", "Interface Reject flag"),
     MW_CARRIER_DATE_TIME_FORMAT("car_ts_format", "carrier_datetime_format", "Date Time format used to parse the carrier date and time"),

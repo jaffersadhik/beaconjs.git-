@@ -53,6 +53,8 @@ public class SubmitSmRequest
     private String           mClientIp            = null;
     private String           mDltEntityId         = null;
     private String           mDltTemplateId       = null;
+    private String           mDltTelemarketerId       = null;
+
     private boolean          mIsHexMsg            = false;
     private int              mDestPort            = 0;
     private SessionDetail    mSessionDetail       = null;
@@ -108,6 +110,7 @@ public class SubmitSmRequest
 
         mDltEntityId    = getOptionalParameter(mSystemId, aSubmitSm, aSessionDetail.getDltEntityId());
         mDltTemplateId  = getOptionalParameter(mSystemId, aSubmitSm, aSessionDetail.getDltTemplateId());
+        mDltTelemarketerId  = getOptionalParameter(mSystemId, aSubmitSm, aSessionDetail.getClientMidTag());
         mClientMid      = getOptionalParameter(mSystemId, aSubmitSm, aSessionDetail.getClientMidTag());
 
         isConcatMessage = isConcatMessage();
@@ -639,6 +642,8 @@ public class SubmitSmRequest
         lMessageRequest.setUdhReferenceNumber(mUdhRefNum);
         lMessageRequest.setDlrReqFromClient(mDlrReqFromClient);
         lMessageRequest.setDltTemplateId(CommonUtility.nullCheck(mDltTemplateId, true));
+        lMessageRequest.setDltTelemarketerId(CommonUtility.nullCheck(mDltTelemarketerId, true));
+
         lMessageRequest.setTotalParts(mTotalMsgParts);
         lMessageRequest.setConcatMessage(isConcatMessage);
         lMessageRequest.setHeader(CommonUtility.nullCheck(mHeader, true));

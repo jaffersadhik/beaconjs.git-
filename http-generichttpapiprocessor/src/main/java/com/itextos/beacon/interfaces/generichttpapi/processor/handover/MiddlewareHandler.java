@@ -173,11 +173,15 @@ public class MiddlewareHandler
         messageRequest.setDestinationPort(mInterfaceMessage.getDestinationPort());
         messageRequest.setDltEntityId(mInterfaceMessage.getDltEntityId());
         messageRequest.setDltTemplateId(mInterfaceMessage.getDltTemplateId());
+        messageRequest.setDltTelemarketerId(mInterfaceMessage.getDltTelemarketerId());
+
         messageRequest.setDlrRequestFromClient(CommonUtility.isTrue(mInterfaceMessage.getDlrReq()));
         messageRequest.setClientMaxSplit(CommonUtility.getInteger(mInterfaceMessage.getSplitMax()));
         messageRequest.setUrlTrackEnabled(CommonUtility.isEnabled(mInterfaceMessage.getUrlTrack()));
         messageRequest.setTreatDomesticAsSpecialSeries(CommonUtility.isTrue(mInterfaceMessage.getIsSpecialSeriesNumber()));
         messageRequest.setClientTemplateId(mInterfaceMessage.getTemplateId());
+        messageRequest.setDltTelemarketerId(mInterfaceMessage.getTelemarketerId());
+
         messageRequest.setInterfaceCoutryCode(mInterfaceMessage.getCountryCode());
         messageRequest.setMsgSource(aReqType);
         messageRequest.setUrlShortnerReq(mInterfaceMessage.getUrlShortner());

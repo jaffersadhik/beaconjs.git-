@@ -57,6 +57,7 @@ public final class InterfaceInputParameters
     public static final String REQ_PARAMETER_USERNAME        = "username";
     public static final String REQ_PARAMETER_DLT_ENTITY_ID   = "dlt_entity_id";
     public static final String REQ_PARAMETER_DLT_TEMPLATE_ID = "dlt_template_id";
+    public static final String REQ_PARAMETER_DLT_TMA_ID      = "dlt_telemarketer_id";
     public static final String REQ_PARAMETER_DLR_REQ         = "dlr_req";
     public static final String REQ_PARAMETER_URL_SHORTNER    = "url_shortner";
     public static final String REQ_PARAMETER_EMAIL_TO    = "email_to";

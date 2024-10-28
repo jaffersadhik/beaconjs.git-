@@ -33,6 +33,7 @@ public class SmppMessageRequest
     private String            mDlrReqFromClient;
     private String            mDltEntityId;
     private String            mDltTemplateId;
+    private String            mDltTelemarketerId;    
     private boolean           mDndCheckRequired;
     private String            mEsmClass;
     private FeatureCode       mFeatureCode;
@@ -227,6 +228,18 @@ public class SmppMessageRequest
         mDltTemplateId = aDltTemplateId;
     }
 
+    
+    public String getDltTelemarketerId()
+    {
+        return mDltTelemarketerId;
+    }
+
+    public void setDltTelemarketerId(
+            String aDltTelemarketerId)
+    {
+        mDltTelemarketerId = aDltTelemarketerId;
+    }
+    
     public boolean isDndCheckRequired()
     {
         return mDndCheckRequired;
