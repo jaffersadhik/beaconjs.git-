@@ -320,6 +320,13 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("smppsimulator")) {
+		
+			com.itextos.beacon.smppsimulator.interfaces.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;
 		}
 		return false;
 	}

@@ -348,6 +348,7 @@
 
    	<module>applicationproperties</module>
    	<module>platform-asynprocessor</module>
+   	<module>smppsimulator</module>
   </modules>
   
 
