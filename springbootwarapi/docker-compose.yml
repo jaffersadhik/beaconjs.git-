@@ -1,0 +1,5 @@
+version: "3.1"
+services:
+  beacon:
+    image: dk-reg.mas:5000/beaconspringbootapi:29oct2024
+    build: .

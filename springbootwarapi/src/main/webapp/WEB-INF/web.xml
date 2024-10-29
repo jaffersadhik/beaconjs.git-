@@ -1,0 +1,22 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>web-generichttpapi-1.0</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>genericapi</param-name>
+            <param-value>/genericapi</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>web-generichttpapi-1.0</servlet-name>
+        <url-pattern>/genericapi/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Repeat for war2 and war3 -->
+</web-app>
