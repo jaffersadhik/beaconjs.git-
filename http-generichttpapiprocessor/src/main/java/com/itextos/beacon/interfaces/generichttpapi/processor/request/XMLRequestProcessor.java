@@ -439,7 +439,7 @@ public class XMLRequestProcessor
         message.setDlrReq(CommonUtility.nullCheck(aMessage.getDlrReq()));
         message.setDltEntityId(aMessage.getDltentityid());
         message.setDltTemplateId(aMessage.getDlttemplateid());
-        message.setDltTelemarketerId(aMessage.getDltTelemarketerid());
+   //     message.setDltTelemarketerId(aMessage.getDltTelemarketerid());
 
         message.setUrlShortner(aMessage.getUrlShortner());
 
