@@ -300,6 +300,8 @@
 		<module>docker-base</module>
 		<module>gw-smppclient</module> 
 	<module>docker-docker</module>  -->
+	   	<module>beaconapi</module>
+
   	<module>mainmodule</module>
 
   	<module>common-message</module>
