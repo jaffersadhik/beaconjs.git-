@@ -37,7 +37,11 @@ public class App {
     }
     
     public static void createfolder() {
-    	
+
+    	System.setProperty("common.property.file.location", "/global.properties");
+    	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
+    	System.setProperty("prometheus.jetty.port", "20000");
+
     	foldercreaton("/opt/jboss/wildfly/logs/topic");
 		foldercreaton("/opt/jboss/wildfly/logs/table2db");
 		foldercreaton("/opt/jboss/wildfly/logs/consumer");

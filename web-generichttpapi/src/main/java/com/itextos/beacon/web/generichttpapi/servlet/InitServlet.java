@@ -43,12 +43,14 @@ public final class InitServlet
             ServletConfig config)
             throws ServletException
     {
+    	
+    	com.itextos.beacon.App.createfolder();
+
         if (log.isDebugEnabled())
             log.debug(" init() -  start ");
 
         try
         {
-        	com.itextos.beacon.App.createfolder();
             
             final MessageIdentifier lMsgIdentifier = MessageIdentifier.getInstance();
             lMsgIdentifier.init(InterfaceType.HTTP_JAPI);
