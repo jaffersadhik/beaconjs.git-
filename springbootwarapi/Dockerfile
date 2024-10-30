@@ -1,5 +1,5 @@
 #FROM dk-reg.mas:5000/openjdk:21-jdk-slim
-FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
+FROM dk-reg.mas:5000/tomcat:10.1.0-jdk21-temurin
 
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
@@ -50,6 +50,5 @@ COPY ./target/prometheus.control.properties /prometheus.control.properties
 
 
 COPY ./target/mcc-mnc-list.json /mcc-mnc-list.json
-COPY ./target/springbootwarapi-1.0.war /springbootwarapi-1.0.war
-ENTRYPOINT ["java","-Xss1m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/springbootwarapi-1.0.war"]
+COPY ./target/springbootwarapi-1.0.war /usr/local/tomcat/webapps/springbootwarapi-1.0.war
 
