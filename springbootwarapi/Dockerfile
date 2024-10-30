@@ -1,5 +1,5 @@
 #FROM dk-reg.mas:5000/openjdk:21-jdk-slim
-FROM dk-reg.mas:5000/tomcat:10.1.0-jdk21-temurin
+FROM dk-reg.mas:5000/custom-tomcat-jdk21:1.0
 
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
