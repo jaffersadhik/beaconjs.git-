@@ -41,21 +41,20 @@
 			<artifactId>commons-logging</artifactId>
 			<version>${commons-logging-version}</version>
 		</dependency>
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.20.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.20.0</version>
-    </dependency>
-    
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j-2-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j-2-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
-			<version>2.17.2</version>
+			<version>${log4j-2-version}</version>
 		</dependency>
 
 
@@ -419,7 +418,6 @@
 
  <dependencyManagement>
         <dependencies>
-            <!-- Spring Boot Starter Parent Dependency -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -427,7 +425,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Add other dependencies you want to manage -->
         </dependencies>
     </dependencyManagement>
+    
+ 
 </project>
