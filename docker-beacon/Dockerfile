@@ -12,27 +12,35 @@ COPY ./target/log4j2-common.xml /log4j2-common.xml
 COPY ./target/custom_hosts_production.properties /custom_hosts_production.properties
 COPY ./target/smpp-interface.properties /smpp-interface.properties
 COPY ./target/encrypt.properties /encrypt.properties
+
 COPY ./target/elasticsearch.properties /elasticsearch.properties
+COPY ./target/elasticsearch.properties_do1 /elasticsearch.properties_do1
 COPY ./target/elasticsearch.properties_cat /elasticsearch.properties_cat
 COPY ./target/elasticsearch.properties_horse /elasticsearch.properties_horse
 
 COPY ./target/dnd.properties /dnd.properties
 COPY ./target/dlttemplateconfig.properties /dlttemplateconfig.properties
+
 COPY ./target/common.properties /common.properties
 COPY ./target/common-db.properties /common-db.properties
 COPY ./target/common-db.properties_cat /common-db.properties_cat
 COPY ./target/common-db.properties_horse /common-db.properties_horse
+COPY ./target/common-db.properties_do1 /common-db.properties_do1
 
 COPY ./target/callback-params.properties /callback-params.properties
 COPY ./target/payload-params.properties /payload-params.properties
 COPY ./target/midconfig.properties /midconfig.properties
 COPY ./target/messageremove.properties /messageremove.properties
+
 COPY ./target/kafka-producer.properties /kafka-producer.properties
 COPY ./target/kafka-producer.properties_cat /kafka-producer.properties_cat
 COPY ./target/kafka-producer.properties_horse /kafka-producer.properties_horse
+COPY ./target/kafka-producer.properties_do1 /kafka-producer.properties_do1
 
 COPY ./target/kafka-custom.properties /kafka-custom.properties
+
 COPY ./target/kafka-consumer.properties /kafka-consumer.properties
+COPY ./target/kafka-consumer.properties_do1 /kafka-consumer.properties_do1
 COPY ./target/kafka-consumer.properties_cat /kafka-consumer.properties_cat
 COPY ./target/kafka-consumer.properties_horse /kafka-consumer.properties_horse
 
