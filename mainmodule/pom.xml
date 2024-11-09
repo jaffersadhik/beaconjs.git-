@@ -463,7 +463,17 @@
 			<artifactId>ch-clienthandoveracceptproject</artifactId>
 			<version>1.0</version>
 			<type>war</type>
-	</dependency><dependency>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-apperrorhandler</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+	</dependency>
+	
+	
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>ch-httpclienthandover</artifactId>
 			<version>1.0</version>
