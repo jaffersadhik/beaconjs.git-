@@ -11,7 +11,7 @@ RUN mkdir -p /opt/jboss/wildfly/logs
 
 
 
-COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
+#COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
 COPY ./target/log4j2-common.xml /log4j2-common.xml
 
