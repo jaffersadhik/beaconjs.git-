@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y curl tar
 
 RUN mkdir -p /opt/jboss/
 
-# Download and install WildFly 21.0.0.Final
-RUN curl -fsSL https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz -o /tmp/tomcat.tar.gz \
-    && mkdir /opt/tomcat \
-    && tar -xvzf /tmp/tomcat.tar.gz -C /opt/tomcat --strip-components=1 \
-    && rm /tmp/tomcat.tar.gz
+# Download and install Tomcat
+RUN curl -fsSL https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz -o /tmp/tomcat.tar.gz 
+RUN mkdir /opt/tomcat 
+RUN tar -xvzf /tmp/tomcat.tar.gz -C /opt/tomcat --strip-components=1 
+RUN rm /tmp/tomcat.tar.gz
 RUN mkdir -p /opt/jboss/wildfly/logs
 
 
