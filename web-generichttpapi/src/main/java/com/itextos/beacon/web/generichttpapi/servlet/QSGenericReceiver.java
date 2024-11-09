@@ -17,9 +17,9 @@ import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestRead
 import com.itextos.beacon.smslog.QSReceiverLog;
 import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class QSGenericReceiver
         extends
