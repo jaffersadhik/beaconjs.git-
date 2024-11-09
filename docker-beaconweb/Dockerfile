@@ -13,7 +13,7 @@ RUN mkdir -p /opt/jboss/wildfly/logs
 # Download and install WildFly 21.0.0.Final
 RUN curl -L https://download.jboss.org/wildfly/21.0.0.Final/wildfly-21.0.0.Final.tar.gz -o /opt/wildfly.tar.gz
 RUN tar -xzvf /opt/wildfly.tar.gz -C /opt/jboss/
-RUN rm /opt/jboss/wildfly.tar.gz
+RUN rm /opt/wildfly.tar.gz
 RUN mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
 
 
