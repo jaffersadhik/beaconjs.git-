@@ -17,10 +17,7 @@ RUN mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
 
 RUN mkdir -p /opt/jboss/wildfly/logs
 
-# Set WildFly environment variables
-ENV WILDFLY_HOME=/opt/jboss/wildfly
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
-ENV PATH=$JAVA_HOME/bin:$WILDFLY_HOME/bin:$PATH
+
 
 
 
