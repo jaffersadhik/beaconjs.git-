@@ -353,8 +353,9 @@
    	<module>smppsimulator</module>
    	<module>springbootwarapi</module>
    	<module>wildfly</module>
+   	   	<module>beaconlib</module>
+
    	<module>docker-tomacat</module>
-   	<module>beaconlib</module>
   </modules>
   
 
