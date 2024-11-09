@@ -17,7 +17,13 @@
 			<artifactId>common-daemonprocess</artifactId>
 			<version>1.0</version>
 			</dependency>
+ <dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>5.0.0</version>
+        <scope>provided</scope>  <!-- This ensures it's provided by the container, like Tomcat or WildFly -->
 
+	</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-topic2table</artifactId>

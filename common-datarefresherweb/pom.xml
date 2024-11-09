@@ -23,6 +23,13 @@
 			<scope>provided</scope>
 
 		</dependency>	
+		 <dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>5.0.0</version>
+        <scope>provided</scope>  <!-- This ensures it's provided by the container, like Tomcat or WildFly -->
+
+	</dependency>
 	</dependencies>
 
 </project>
