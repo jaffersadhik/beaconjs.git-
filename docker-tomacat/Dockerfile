@@ -27,7 +27,7 @@ ENV TZ="Asia/Kolkata"
 
 COPY ./target/mainmodule-1.0-executable.jar /opt/tomcat/lib/
 
-RUN rm /opt/tomcat/webapps/ROOT.war
+RUN rm -rf /opt/tomcat/webapps/ROOT
 
 COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
 COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
