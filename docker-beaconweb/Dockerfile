@@ -1,13 +1,35 @@
 #FROM quay.io/wildfly/wildfly:latest-jdk21
 #FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
 
-FROM wildfly:09nov2024
+# Use OpenJDK 21 as base image
+FROM openjdk:21-jdk-slim
+
+# Install necessary utilities
+RUN apt-get update && apt-get install -y curl unzip
+
+RUN mkdir -p /opt/jboss/wildfly/logs
+
+
+# Download and install WildFly 21.0.0.Final
+RUN curl -L https://github.com/wildfly/wildfly/releases/download/21.0.0.Final/wildfly-21.0.0.Final.zip -o /opt/wildfly.zip \
+    && unzip /opt/wildfly.zip -d /opt/jboss/ \
+    && rm /opt/wildfly.zip \
+	&& mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
+
+# Set WildFly environment variables
+ENV WILDFLY_HOME=/opt/jboss/wildfly
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+ENV PATH=$JAVA_HOME/bin:$WILDFLY_HOME/bin:$PATH
+
+
+
+
+
 
 ENV TZ="Asia/Kolkata"
 
 EXPOSE 8080 9990
 
-RUN mkdir -p /opt/jboss/wildfly/logs
 
 
 
