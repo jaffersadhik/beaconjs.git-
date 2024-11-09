@@ -25,20 +25,20 @@ RUN mkdir -p /opt/jboss/wildfly/logs
 
 ENV TZ="Asia/Kolkata"
 
-COPY ./mainmodule-1.0-executable.jar /opt/tomcat/lib/
+COPY ./target/mainmodule-1.0-executable.jar /opt/tomcat/lib/
 
 RUN rm /opt/tomcat/webapps/ROOT.war
 
-COPY ./web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
-COPY ./web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
-COPY ./platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
-COPY ./platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
-COPY ./platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
-COPY ./dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
-COPY ./ch-clienthandoveracceptproject-1.0.war /opt/tomcat/webapps/clienthandoveraccept.war
-COPY ./common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/password.war
-COPY ./platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
-COPY ./common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
+COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
+COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
+COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
+COPY ./target/platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
+COPY ./target/platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
+COPY ./target/dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
+COPY ./target/ch-clienthandoveracceptproject-1.0.war /opt/tomcat/webapps/clienthandoveraccept.war
+COPY ./target/common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/password.war
+COPY ./target/platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
+COPY ./target/common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
 
 
 
