@@ -25,7 +25,7 @@ RUN mkdir -p /opt/jboss/wildfly/logs
 
 ENV TZ="Asia/Kolkata"
 
-COPY ./target/mainmodule-1.0-executable.jar /opt/tomcat/lib/
+COPY ./target/beaconlib-1.0-jar-with-dependencies.jar /opt/tomcat/lib/
 
 RUN rm -rf /opt/tomcat/webapps/ROOT
 

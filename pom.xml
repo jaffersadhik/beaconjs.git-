@@ -354,6 +354,7 @@
    	<module>springbootwarapi</module>
    	<module>wildfly</module>
    	<module>docker-tomacat</module>
+   	<module>beaconlib</module>
   </modules>
   
 

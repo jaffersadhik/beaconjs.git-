@@ -26,7 +26,7 @@
  								<fileset dir="../properties/">
                                     <include name="**/*"/> <!-- Include all files -->
                                 </fileset>
-                                <fileset file="../mainmodule/target/mainmodule-1.0-executable.jar"/>
+                                <fileset file="../beaconlib/target/beaconlib-1.0-jar-with-dependencies.jar"/>
                                 <fileset file="../web-generichttpapi/target/web-generichttpapi-1.0.war"/>
                                 <fileset file="../web-migrationapi/target/web-migrationapi-1.0.war"/>
                                 <fileset file="../platform-dnr/target/platform-dnr-1.0.war"/>
