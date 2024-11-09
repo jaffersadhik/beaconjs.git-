@@ -1,7 +1,9 @@
 #FROM dk-reg.mas:5000/openjdk:21-jdk-slim
 #FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
 
-FROM wildfly:09nov2024
+FROM openjdk:21-jdk-slim
+
+RUN mkdir -p /opt/jboss/wildfly/logs
 
 ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp

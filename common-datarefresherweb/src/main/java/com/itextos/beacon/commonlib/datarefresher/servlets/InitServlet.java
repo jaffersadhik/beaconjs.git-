@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.itextos.beacon.commonlib.apperrorhandler.servlets.BasicServlet;
 import com.itextos.beacon.commonlib.datarefresher.DataRefresher;
 
-@WebServlet(
-        value = "/initservlet",
-        loadOnStartup = 1)
+//@WebServlet(value = "/initservlet",        loadOnStartup = 1)
+@WebServlet(loadOnStartup = 1)
+
 public class InitServlet
         extends
         BasicServlet
