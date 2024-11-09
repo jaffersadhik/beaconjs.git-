@@ -96,4 +96,4 @@ COPY ./target/prometheus.control.properties /prometheus.control.properties
 
 VOLUME ["/logs"]
 
-CMD ["bin/catalina.sh", "run"]
+CMD [" /opt/tomcat/bin/catalina.sh", "run"]
