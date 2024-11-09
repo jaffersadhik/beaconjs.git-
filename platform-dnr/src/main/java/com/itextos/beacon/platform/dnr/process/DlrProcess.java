@@ -20,7 +20,7 @@ import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.smslog.DNLog;
 import com.itextos.beacon.smslog.UserLog;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public class DlrProcess
 {

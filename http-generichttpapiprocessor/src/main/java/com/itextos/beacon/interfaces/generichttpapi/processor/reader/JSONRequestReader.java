@@ -24,8 +24,8 @@ import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.request.JSONRequestProcessor;
 
 import io.prometheus.client.Histogram.Timer;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class JSONRequestReader
         extends

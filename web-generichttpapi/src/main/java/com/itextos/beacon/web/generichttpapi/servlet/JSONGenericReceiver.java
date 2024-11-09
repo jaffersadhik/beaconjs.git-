@@ -15,9 +15,9 @@ import com.itextos.beacon.interfaces.generichttpapi.processor.reader.JSONRequest
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
 import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class JSONGenericReceiver
         extends
