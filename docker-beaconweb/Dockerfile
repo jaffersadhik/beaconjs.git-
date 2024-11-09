@@ -1,5 +1,7 @@
 #FROM quay.io/wildfly/wildfly:latest-jdk21
-FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
+#FROM dk-reg.mas:5000/wildfly/wildfly:latest-jdk21
+
+FROM jboss/wildfly:21.0.0.Final
 
 ENV TZ="Asia/Kolkata"
 
