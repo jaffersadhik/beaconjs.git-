@@ -300,7 +300,7 @@
 		<module>docker-base</module>
 		<module>gw-smppclient</module> 
 	<module>docker-docker</module>  -->
-	   	<module>beaconapi</module>
+	<!--   	<module>beaconapi</module> -->
 
   	<module>mainmodule</module>
 
@@ -351,7 +351,7 @@
    	<module>applicationproperties</module>
    	<module>platform-asynprocessor</module>
    	<module>smppsimulator</module>
-   	<module>springbootwarapi</module>
+<!--   	<module>springbootwarapi</module> -->
    	<module>wildfly</module>
    	   	<module>beaconlib</module>
 
