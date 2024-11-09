@@ -11,10 +11,11 @@ RUN mkdir -p /opt/jboss/wildfly/logs
 
 
 # Download and install WildFly 21.0.0.Final
-RUN curl -L https://github.com/wildfly/wildfly/releases/download/21.0.0.Final/wildfly-21.0.0.Final.zip -o /opt/wildfly.zip \
-    && unzip /opt/wildfly.zip -d /opt/jboss/ \
-    && rm /opt/wildfly.zip \
-	&& mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
+RUN curl -L https://github.com/wildfly/wildfly/releases/download/21.0.0.Final/wildfly-21.0.0.Final.zip -o /opt/wildfly.zip
+RUN unzip /opt/wildfly.zip -d /opt/jboss/
+RUN rm /opt/wildfly.zip
+RUN mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
+
 
 # Set WildFly environment variables
 ENV WILDFLY_HOME=/opt/jboss/wildfly
