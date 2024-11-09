@@ -30,7 +30,7 @@
                                 <fileset file="../web-generichttpapi/target/web-generichttpapi-1.0.war"/>
                                 <fileset file="../web-migrationapi/target/web-migrationapi-1.0.war"/>
                                 <fileset file="../platform-dnr/target/platform-dnr-1.0.war"/>
-                                <fileset file="../common-datarefresherweb/target/common-datarefresher-1.0.war"/>
+                                <fileset file="../common-datarefresherweb/target/common-datarefresherweb-1.0.war"/>
                                 <fileset file="../dlrquery-dlrqueryweb/target/dlrquery-dlrqueryweb-1.0.war"/>
                                 <fileset file="../common-pwdencryptionapplication/target/common-pwdencryptionapplication-1.0.war"/>
                                 <fileset file="../platform-prepaiduIweb/target/platform-prepaiduIweb-1.0.war"/>

@@ -38,7 +38,7 @@ COPY ./dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
 COPY ./ch-clienthandoveracceptproject-1.0.war /opt/tomcat/webapps/clienthandoveraccept.war
 COPY ./common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/password.war
 COPY ./platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
-COPY ./common-datarefresher-1.0.war /opt/tomcat/webapps/datarefresher.war
+COPY ./common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
 
 
 
