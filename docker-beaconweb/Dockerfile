@@ -5,15 +5,15 @@
 FROM openjdk:21-jdk-slim
 
 # Install necessary utilities
-RUN apt-get update && apt-get install -y curl unzip
+RUN apt-get update && apt-get install -y curl tar
 
 RUN mkdir -p /opt/jboss/wildfly/logs
 
 
 # Download and install WildFly 21.0.0.Final
-RUN curl -L https://github.com/wildfly/wildfly/releases/download/21.0.0.Final/wildfly-21.0.0.Final.zip -o /opt/jboss/wildfly.zip
-RUN unzip /opt/jboss/wildfly.zip -d /opt/jboss/
-RUN rm /opt/jboss/wildfly.zip
+RUN curl -L https://download.jboss.org/wildfly/21.0.0.Final/wildfly-21.0.0.Final.tar.gz -o /opt/wildfly.tar.gz
+RUN tar -xzvf /opt/wildfly.tar.gz -C /opt/jboss/
+RUN rm /opt/jboss/wildfly.tar.gz
 RUN mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
 
 
