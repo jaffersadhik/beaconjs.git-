@@ -11,7 +11,6 @@ RUN mkdir -p /opt/jboss/
 
 # Download and install Tomcat
 RUN curl -fsSL https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz -o /tmp/tomcat.tar.gz
-RUN mkdir /opt/tomcat 
 RUN tar -xvzf /tmp/tomcat.tar.gz -C /opt/tomcat --strip-components=1 
 RUN rm /tmp/tomcat.tar.gz
 RUN mkdir -p /opt/jboss/wildfly/logs
