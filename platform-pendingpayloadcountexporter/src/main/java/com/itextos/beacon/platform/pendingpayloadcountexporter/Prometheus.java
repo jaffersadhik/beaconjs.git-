@@ -21,7 +21,7 @@ class Prometheus
 
         try
         {
-            final String aPort               = System.getProperty("prometheus.jetty.port");
+            final String aPort               = "1075";
             final int    prometheusJettyPort = Integer.parseInt(aPort);
 
             if (log.isDebugEnabled())

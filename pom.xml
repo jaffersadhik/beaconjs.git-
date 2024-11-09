@@ -353,6 +353,7 @@
    	<module>smppsimulator</module>
    	<module>springbootwarapi</module>
    	<module>wildfly</module>
+   	<module>docker-tomacat</module>
   </modules>
   
 

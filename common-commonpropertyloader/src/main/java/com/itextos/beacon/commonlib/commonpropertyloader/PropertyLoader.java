@@ -53,8 +53,10 @@ public class PropertyLoader
 
     private void loadCommonProperties()
     {
-        final String commonPropertiesLocation = System.getProperty(COMMON_PROPERY_FILE_LOCATION);
+         String commonPropertiesLocation = System.getProperty(COMMON_PROPERY_FILE_LOCATION);
 
+        commonPropertiesLocation="/global.properties";
+        
         if (log.isDebugEnabled())
             log.debug("Common Properties Key : '" + COMMON_PROPERY_FILE_LOCATION + "'. Common Properties Path : '" + commonPropertiesLocation + "'");
 

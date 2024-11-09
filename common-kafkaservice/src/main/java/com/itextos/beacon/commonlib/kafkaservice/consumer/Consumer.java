@@ -424,7 +424,7 @@ public class Consumer
         if (lDbInsertReqForPartitions)
         {
             final Map<Integer, Long> lPartitionOffsets = KafkaUtility.getPartitionOffset(mTopicName, aPartitions);
-            final int                jettyPort         = CommonUtility.getInteger(System.getProperty("prometheus.jetty.port", "-999"));
+            final int                jettyPort         = CommonUtility.getInteger("1075");
 
             for (final TopicPartition partition : aPartitions)
             {

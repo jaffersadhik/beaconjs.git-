@@ -40,7 +40,7 @@ public class App {
 
     	System.setProperty("common.property.file.location", "/global.properties");
     	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
-    	System.setProperty("prometheus.jetty.port", "20000");
+    	System.setProperty("prometheus.jetty.port", "1075");
 
     	foldercreaton("/opt/jboss/wildfly/logs/topic");
 		foldercreaton("/opt/jboss/wildfly/logs/table2db");
