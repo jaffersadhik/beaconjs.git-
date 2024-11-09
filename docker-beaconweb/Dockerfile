@@ -7,7 +7,6 @@ FROM openjdk:21-jdk-slim
 # Install necessary utilities
 RUN apt-get update && apt-get install -y curl tar
 
-RUN mkdir -p /opt/jboss/wildfly/logs
 
 
 # Download and install WildFly 21.0.0.Final
@@ -16,6 +15,7 @@ RUN tar -xzvf /opt/wildfly.tar.gz -C /opt/jboss/
 RUN rm /opt/wildfly.tar.gz
 RUN mv /opt/jboss/wildfly-21.0.0.Final /opt/jboss/wildfly
 
+RUN mkdir -p /opt/jboss/wildfly/logs
 
 # Set WildFly environment variables
 ENV WILDFLY_HOME=/opt/jboss/wildfly
