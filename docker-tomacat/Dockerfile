@@ -93,8 +93,7 @@ COPY ./target/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/prometheus.control.properties /prometheus.control.properties
 
 
-COPY ./target/docker-beaconweb-1.0.ear /opt/jboss/wildfly/standalone/deployments/docker-beaconweb-1.0.ear
 
 VOLUME ["/logs"]
 
-CMD ["bin/catalina.sh", "run","-Dprometheus.jetty.port=1075","-Dcommon.property.file.location=/global.properties"]
+CMD ["bin/catalina.sh", "run"]
