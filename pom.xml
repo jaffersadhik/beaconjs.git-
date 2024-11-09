@@ -352,6 +352,7 @@
    	<module>platform-asynprocessor</module>
    	<module>smppsimulator</module>
    	<module>springbootwarapi</module>
+   	<module>wildfly</module>
   </modules>
   
 
