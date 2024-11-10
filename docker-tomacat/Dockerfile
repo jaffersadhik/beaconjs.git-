@@ -49,7 +49,7 @@ COPY ./target/common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/passwo
 COPY ./target/common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
 
 
-COPY ./target/platform-r3r-1.0.war /opt/tomcat/webapps/a.war
+#COPY ./target/platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
 
 
 #COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
