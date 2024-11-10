@@ -35,17 +35,17 @@ RUN rm -rf /opt/tomcat/webapps/ROOT
 
 #RUN rm -rf /opt/tomcat/conf/server.xml
 
-COPY server.xml /opt/tomcat/conf/server.xml
+#COPY server.xml /opt/tomcat/conf/server.xml
 COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
-COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
-COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
-COPY ./target/platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
-COPY ./target/platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
-COPY ./target/dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
-COPY ./target/ch-clienthandoveracceptproject-1.0.war /opt/tomcat/webapps/clienthandoveraccept.war
-COPY ./target/common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/password.war
-COPY ./target/platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
-COPY ./target/common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
+#COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
+#COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
+#COPY ./target/platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
+#COPY ./target/platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
+#COPY ./target/dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
+#COPY ./target/ch-clienthandoveracceptproject-1.0.war /opt/tomcat/webapps/clienthandoveraccept.war
+#COPY ./target/common-pwdencryptionapplication-1.0.war /opt/tomcat/webapps/password.war
+#COPY ./target/platform-r3r-1.0.war /opt/tomcat/webapps/ROOT.war
+#COPY ./target/common-datarefresherweb-1.0.war /opt/tomcat/webapps/datarefresher.war
 
 
 
@@ -99,11 +99,11 @@ COPY ./target/replace-iso.properties /replace-iso.properties
 COPY ./target/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/prometheus.control.properties /prometheus.control.properties
 
-RUN rm -rf /opt/tomcat/webapps
+#RUN rm -rf /opt/tomcat/webapps
 
-RUN mkdir /opt/tomcat/webapps
+#RUN mkdir /opt/tomcat/webapps
 
-RUN cp -rp /opt/tomcat/webappsBKUP/* /opt/tomcat/webapps/.
+#RUN cp -rp /opt/tomcat/webappsBKUP/* /opt/tomcat/webapps/.
 
 VOLUME ["/logs"]
 
