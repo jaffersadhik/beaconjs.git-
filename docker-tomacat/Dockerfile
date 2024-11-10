@@ -29,6 +29,9 @@ COPY ./target/beaconlib-1.0-jar-with-dependencies.jar /opt/tomcat/lib/
 
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
+RUN rm -rf /opt/tomcat/conf/server.xml
+
+COPY server.xml /opt/tomcat/conf/server.xml
 COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
 COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
 COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war

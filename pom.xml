@@ -356,6 +356,7 @@
    	   	<module>beaconlib</module>
 
    	<module>docker-tomacat</module>
+   	<module>tomacatvirtualthreadpool</module>
   </modules>
   
 
