@@ -37,8 +37,8 @@ RUN rm -rf /opt/tomcat/webapps/ROOT
 
 #COPY server.xml /opt/tomcat/conf/server.xml
 COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
-#COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
-#COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
+COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war
+COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
 #COPY ./target/platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
 #COPY ./target/platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
 #COPY ./target/dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
