@@ -29,10 +29,7 @@
 		<servlet-name>ExceptionServlet</servlet-name>
 		<servlet-class>com.itextos.beacon.commonlib.apperrorhandler.servlets.ExceptionServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>InitServlet</servlet-name>
-		<url-pattern>/InitServlet</url-pattern>
-	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>ExceptionServlet</servlet-name>
 		<url-pattern>/exceptionservlet</url-pattern>
