@@ -27,6 +27,7 @@ ENV TZ="Asia/Kolkata"
 
 COPY ./target/beaconlib-1.0-jar-with-dependencies.jar /opt/tomcat/lib/
 
+RUN cp -rp /opt/tomcat/webapps /opt/tomcat/webappsBKUP
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
 RUN rm -rf /opt/tomcat/conf/server.xml
@@ -95,7 +96,8 @@ COPY ./target/replace-iso.properties /replace-iso.properties
 COPY ./target/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/prometheus.control.properties /prometheus.control.properties
 
-
+RUN rm -rf /opt/tomcat/webapps
+RUN cp -rp /opt/tomcat/webappsBKUP /opt/tomcat/webapps
 
 VOLUME ["/logs"]
 
