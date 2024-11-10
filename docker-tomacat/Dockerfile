@@ -29,6 +29,18 @@ COPY ./target/beaconlib-1.0-jar-with-dependencies.jar /opt/tomcat/lib/
 
 RUN mkdir /opt/tomcat/webappsBKUP
 
+RUN mkdir -p /opt/jboss/wildfly/logs/topic
+RUN mkdir -p /opt/jboss/wildfly/logs/table2db
+RUN mkdir -p /opt/jboss/wildfly/logs/consumer
+RUN mkdir -p /opt/jboss/wildfly/logs/producer
+RUN mkdir -p /opt/jboss/wildfly/logs/kafkasender
+RUN mkdir -p /opt/jboss/wildfly/logs/executorlog1
+RUN mkdir -p /opt/jboss/wildfly/logs/executorlog2
+RUN mkdir -p /opt/jboss/wildfly/logs/application
+RUN mkdir -p /opt/jboss/wildfly/logs/kafkareceiver
+RUN mkdir -p /opt/jboss/wildfly/logs/timetaken
+RUN mkdir -p /opt/jboss/wildfly/logs/aux
+
 RUN cp -rp /opt/tomcat/webapps/* /opt/tomcat/webappsBKUP/.
 
 RUN rm -rf /opt/tomcat/webapps/ROOT
