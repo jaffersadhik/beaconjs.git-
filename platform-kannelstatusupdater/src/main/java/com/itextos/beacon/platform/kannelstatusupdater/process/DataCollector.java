@@ -109,6 +109,8 @@ public class DataCollector
     {
         final HashMap<String, KannelStatusInfo> resultMap = new HashMap<>();
 
+        KannelStatusLog.log("Checking : aAllRouteConfigs '" +aAllRouteConfigs);
+
         Iterator itr=aAllRouteConfigs.iterator();
         
         while(itr.hasNext()) {
@@ -128,14 +130,28 @@ public class DataCollector
             {
                 final String kannelURL = Utility.formatURL(ip,port);
 
-                if (log.isInfoEnabled())
-                    log.info("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
-                
+         
                 KannelStatusLog.log("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
 
              
+                String xml=KannelConnector.getKannelStatus(kannelId, kannelURL);
+                
+	             KannelStatusLog.log("Response from server for the Kannel id :" + kannelId + " URL : " + kannelURL + " is : \n '" + xml + "'");   
+
+          	   KannelStatusInfo ksi=new KannelStatusInfo(kannelId);
+
+               if(xml!=null&&xml.trim().length()>0) {
+            	   
+            	   KannelConnector.setKannelStatus(xml, ksi);
+            	   
+            	   ksi.setKannelAvailable(true);
+
+               }else {
+            	   
+            	   ksi.setKannelAvailable(false);
+               }
                
-                resultMap.put(kannelId, KannelConnector.getKannelStatus(kannelId, kannelURL));
+                resultMap.put(kannelId,ksi );
             }
             catch (final Exception e)
             {

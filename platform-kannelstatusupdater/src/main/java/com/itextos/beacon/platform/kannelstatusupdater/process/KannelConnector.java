@@ -25,7 +25,7 @@ public class KannelConnector
     private KannelConnector()
     {}
 
-    public static KannelStatusInfo getKannelStatus(
+    public static String getKannelStatus(
             String aKannelID,
             String aKannelURL)
     {
@@ -45,24 +45,12 @@ public class KannelConnector
             {
                 final String xml = httpResult.getResponseString();
 
-                if (log.isDebugEnabled())
-                    log.debug("Response from server for the Kannel id :" + aKannelID + " URL : " + aKannelURL + " is : '" + xml + "'");
                 
-	             KannelStatusLog.log("Response from server for the Kannel id :" + aKannelID + " URL : " + aKannelURL + " is : \n '" + xml + "'");   
 
-                if (!"".equals(CommonUtility.nullCheck(xml, true)))
-                    setKannelStatus(xml, kannelStatusInfo);
-                else
-                    kannelStatusInfo.setKannelAvailable(false);
-            }
-            else
-            {
-                kannelStatusInfo.setKannelAvailable(false);
+                return xml;
 
-                if (log.isDebugEnabled())
-                    log.debug("Kannel Status for Url:'" + aKannelURL + "', " + kannelStatusInfo.isKannelAvailable());
-                KannelStatusLog.log("Kannel Status for Url:'" + aKannelURL + "', " + kannelStatusInfo.isKannelAvailable());
             }
+           
         }
         catch (final Exception e)
         {
@@ -71,10 +59,10 @@ public class KannelConnector
 
             kannelStatusInfo.setKannelAvailable(false);
         }
-        return kannelStatusInfo;
+        return null;
     }
 
-    private static void setKannelStatus(
+    public static void setKannelStatus(
             String xml,
             KannelStatusInfo kannelStatusInfo)
     {
