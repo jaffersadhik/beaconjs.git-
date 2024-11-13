@@ -9,11 +9,13 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.kannelstatusupdater.beans.KannelStatusInfo;
 import com.itextos.beacon.platform.kannelstatusupdater.xmlparser.Gateway;
+import com.itextos.beacon.smslog.KannelStatusLog;
 
 public class KannelConnector
 {
@@ -45,6 +47,8 @@ public class KannelConnector
 
                 if (log.isDebugEnabled())
                     log.debug("Response from server for the Kannel id :" + aKannelID + " URL : " + aKannelURL + " is : '" + xml + "'");
+                
+	             KannelStatusLog.log("Response from server for the Kannel id :" + aKannelID + " URL : " + aKannelURL + " is : \n '" + xml + "'");   
 
                 if (!"".equals(CommonUtility.nullCheck(xml, true)))
                     setKannelStatus(xml, kannelStatusInfo);
@@ -57,11 +61,14 @@ public class KannelConnector
 
                 if (log.isDebugEnabled())
                     log.debug("Kannel Status for Url:'" + aKannelURL + "', " + kannelStatusInfo.isKannelAvailable());
+                KannelStatusLog.log("Kannel Status for Url:'" + aKannelURL + "', " + kannelStatusInfo.isKannelAvailable());
             }
         }
         catch (final Exception e)
         {
             log.error("Error while getting the Kannel Status", e);
+            KannelStatusLog.log("Kannel Status for Url:'" + aKannelURL + "', " +ErrorMessage.getStackTraceAsString(e));
+
             kannelStatusInfo.setKannelAvailable(false);
         }
         return kannelStatusInfo;

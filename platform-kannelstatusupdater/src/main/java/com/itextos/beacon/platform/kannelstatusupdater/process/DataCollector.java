@@ -41,16 +41,18 @@ public class DataCollector
         
             log.debug("Kannel info to be validated " + lAllRouteConfigs);
 
-            KannelStatusLog.log("lAllRouteConfigs : "+lAllRouteConfigs);
+            KannelStatusLog.log("kannelSet : "+kannelSet);
 
         final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(kannelSet);
+
+        KannelStatusLog.log("resultMap : "+resultMap);
 
 
         final Map<String, KannelStatusInfo> outputMap = getResults(resultMap);
 
             log.debug("resultMap=" + resultMap);
 
-        KannelStatusLog.log("result : "+outputMap);
+        KannelStatusLog.log("outputMap : "+outputMap);
         RedisProcess.populateDataIntoRedis( outputMap);
     }
 
@@ -130,6 +132,8 @@ public class DataCollector
 
                 if (log.isInfoEnabled())
                     log.info("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
+                
+                KannelStatusLog.log("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
 
                 final KannelConnectTask        task   = new KannelConnectTask(kannelId, kannelURL);
                 final Future<KannelStatusInfo> future = ThreadPoolTon.getInstance().getExecutor().submit(task);
