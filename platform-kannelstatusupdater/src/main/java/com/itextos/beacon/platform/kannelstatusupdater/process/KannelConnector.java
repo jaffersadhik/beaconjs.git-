@@ -15,6 +15,7 @@ import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.kannelstatusupdater.beans.KannelStatusInfo;
 import com.itextos.beacon.platform.kannelstatusupdater.xmlparser.Gateway;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KannelStatusLog;
 
 public class KannelConnector
@@ -67,11 +68,17 @@ public class KannelConnector
             KannelStatusInfo kannelStatusInfo)
     {
 
+        KannelStatusLog.log("setKannelStatus entered");
+
         try
         {
             final JAXBContext  context = JAXBContext.newInstance(Gateway.class);
             final Unmarshaller um      = context.createUnmarshaller();
+            KannelStatusLog.log("setKannelStatus get  Unmarshaller um");
+
             final Gateway      gateway = (Gateway) um.unmarshal(new StringReader(xml));
+
+            KannelStatusLog.log("setKannelStatus get  Gateway ");
 
             if (log.isDebugEnabled())
                 log.debug("Parsed the XML successfully");
@@ -97,9 +104,11 @@ public class KannelConnector
         }
         catch (final Exception e)
         {
-            log.error("Exception while parsing and getting the details from XML", e);
+            ErrorLog.log("Exception while parsing and getting the details from XML \n"+ErrorMessage.getStackTraceAsString(e));
             kannelStatusInfo.setKannelAvailable(false);
         }
+        
+        KannelStatusLog.log("setKannelStatus complete");
     }
 
 }
