@@ -69,10 +69,10 @@ public class Utility
     }
 
     public static String formatURL(
-            KannelInfo aKannelInfo)
+    		final String        ip,
+    		final String        statusPort)
     {
-        final String        ip         = aKannelInfo.getKannelIp();
-        final String        statusPort = aKannelInfo.getStatusPort();
+               
 
         final StringBuilder url        = new StringBuilder();
         url.append("http://").append(ip).append(":").append(statusPort).append("/status.xml");

@@ -2,6 +2,7 @@ package com.itextos.beacon.platform.kannelstatusupdater.utility;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,10 +15,9 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
-import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.inmemory.carrierhandover.bean.KannelInfo;
 import com.itextos.beacon.platform.kannelstatusupdater.beans.KannelStatusInfo;
+import com.itextos.beacon.platform.kannelstatusupdater.beans.SmscBean;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
@@ -32,8 +32,7 @@ public class RedisProcess
     {}
 
     public static void populateDataIntoRedis(
-            Map<String, KannelInfo> aAllRouteConfigs,
-            Map<String, KannelStatusInfo> aOutputMap)
+                      Map<String, KannelStatusInfo> aOutputMap)
     {
 
         try (
@@ -45,13 +44,8 @@ public class RedisProcess
             {
                 final String           kannelId     = entry.getKey();
                 final KannelStatusInfo status       = entry.getValue();
-                final KannelInfo       lKannelInfo  = aAllRouteConfigs.get(kannelId);
 
-                final String           kannelIpPort = CommonUtility.combine(':', lKannelInfo.getKannelIp(), lKannelInfo.getKannelPort(), "StatusPort", lKannelInfo.getStatusPort());
-
-                    log.debug("KannelIpPort : '" + kannelIpPort + "' Status : '" + status + "'");
-
-                boolean kannelAvailability = false;
+                  boolean kannelAvailability = false;
                 long    storeSize          = 0;
 
                 if (status != null)
@@ -60,14 +54,25 @@ public class RedisProcess
                     storeSize          = status.getSMS() != null ? status.getSMS().getStoreSize() : -1;
                 }
 
+                
+                Set<String> smscidset=getSet(status.getSMSCList());
+                
+                Iterator itr=smscidset.iterator();
+                
+                while(itr.hasNext()) {
+                	
+                	String smscid=itr.next().toString();
+                	
+               
                 final Map<String, String> toRedis = new HashMap<>();
-                toRedis.put(KannelRedisConstants.KANNEL_KEY_IP_PORT, kannelIpPort);
+                toRedis.put(KannelRedisConstants.KANNEL_KEY_IP_PORT, kannelId);
                 toRedis.put(KannelRedisConstants.KANNEL_KEY_AVAILABLE, Boolean.toString(kannelAvailability));
                 toRedis.put(KannelRedisConstants.KANNEL_KEY_STORESIZE, Long.toString(storeSize));
                 toRedis.put(KannelRedisConstants.KANNEL_KEY_LAST_UPDATED, DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS));
 
-                final String kannelAvailable = KannelRedisConstants.KANNEL_KEY + kannelId.toLowerCase();
+                final String kannelAvailable = KannelRedisConstants.KANNEL_KEY + smscid.toLowerCase();
                 pipe.hmset(kannelAvailable, toRedis);
+                }
             }
             pipe.sync();
         }
@@ -77,7 +82,17 @@ public class RedisProcess
         }
     }
 
-    public static void updateCountsInRedis(
+    private static Set<String> getSet(List<SmscBean> smscList) {
+		Set<String> result=new HashSet<String>();
+		
+		smscList.forEach((smscid)->{
+			
+			result.add(smscid.getId());
+		});
+		return result;
+	}
+
+	public static void updateCountsInRedis(
             Map<String, Integer> aTimeTakenMap,
             Map<String, Integer> aSuccessCountMap,
             Map<String, Integer> aInvalidTimeMap)

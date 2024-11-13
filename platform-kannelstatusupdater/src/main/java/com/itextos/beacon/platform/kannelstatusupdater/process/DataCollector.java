@@ -1,13 +1,19 @@
 package com.itextos.beacon.platform.kannelstatusupdater.process;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.concurrent.Future;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.carrierhandover.bean.KannelInfo;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.platform.kannelstatusupdater.beans.KannelStatusInfo;
@@ -28,12 +34,16 @@ public class DataCollector
     public static void getKannelStatusData()
     {
         final Map<String, KannelInfo> lAllRouteConfigs = ICHUtil.getAllRouteConfig();
+        
+        
 
+        Set<String> kannelSet=getKannelSet(lAllRouteConfigs);
+        
             log.debug("Kannel info to be validated " + lAllRouteConfigs);
 
             KannelStatusLog.log("lAllRouteConfigs : "+lAllRouteConfigs);
 
-        final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(lAllRouteConfigs);
+        final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(kannelSet);
 
 
         final Map<String, KannelStatusInfo> outputMap = getResults(resultMap);
@@ -41,10 +51,20 @@ public class DataCollector
             log.debug("resultMap=" + resultMap);
 
         KannelStatusLog.log("result : "+outputMap);
-        RedisProcess.populateDataIntoRedis(lAllRouteConfigs, outputMap);
+        RedisProcess.populateDataIntoRedis( outputMap);
     }
 
-    private static Map<String, KannelStatusInfo> getResults(
+    private static Set<String> getKannelSet(Map<String, KannelInfo> lAllRouteConfigs) {
+    	Set<String> result=new HashSet<String>();
+    	lAllRouteConfigs.forEach((k,v)->{
+    		
+    		final String           kannelIpPort = CommonUtility.combine(':', v.getKannelIp(), v.getKannelPort(), "StatusPort", v.getStatusPort());
+    		result.add(kannelIpPort);
+    	});
+		return null;
+	}
+
+	private static Map<String, KannelStatusInfo> getResults(
             HashMap<String, Future<KannelStatusInfo>> aResultMap)
     {
         final Map<String, KannelStatusInfo> outputMap   = new HashMap<>();
@@ -91,21 +111,28 @@ public class DataCollector
     }
 
     private static HashMap<String, Future<KannelStatusInfo>> getHttpConnect(
-            Map<String, KannelInfo> aAllRouteConfigs)
+            Set<String> aAllRouteConfigs)
     {
         final HashMap<String, Future<KannelStatusInfo>> resultMap = new HashMap<>();
 
-        for (final Entry<String, KannelInfo> entry : aAllRouteConfigs.entrySet())
-        {
-            final String     kannelId   = entry.getKey();
-            final KannelInfo kannelInfo = entry.getValue();
+        Iterator itr=aAllRouteConfigs.iterator();
+        
+        while(itr.hasNext()) {
+            final String     kannelId   =itr.next().toString();
+            StringTokenizer st=new StringTokenizer(kannelId,":");
+            
+            String ip=st.nextToken();
+            st.nextToken();
+            st.nextToken();
+            String port=st.nextToken();
+            
 
             if (log.isInfoEnabled())
-                log.info("Kannel Id : '" + kannelId + "' ===> '" + kannelInfo + "'");
+                log.info("Kannel Id : '" + kannelId );
 
             try
             {
-                final String kannelURL = Utility.formatURL(kannelInfo);
+                final String kannelURL = Utility.formatURL(ip,port);
 
                 if (log.isInfoEnabled())
                     log.info("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
