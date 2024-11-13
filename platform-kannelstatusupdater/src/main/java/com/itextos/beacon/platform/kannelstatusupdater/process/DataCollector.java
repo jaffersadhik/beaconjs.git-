@@ -43,14 +43,12 @@ public class DataCollector
 
             KannelStatusLog.log("kannelSet : "+kannelSet);
 
-        final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(kannelSet);
-
-        KannelStatusLog.log("resultMap : "+resultMap);
+     
 
 
-        final Map<String, KannelStatusInfo> outputMap = getResults(resultMap);
+        final Map<String, KannelStatusInfo> outputMap =  getHttpConnect(kannelSet);
 
-            log.debug("resultMap=" + resultMap);
+
 
         KannelStatusLog.log("outputMap : "+outputMap);
         RedisProcess.populateDataIntoRedis( outputMap);
@@ -106,10 +104,10 @@ public class DataCollector
         return outputMap;
     }
 
-    private static HashMap<String, Future<KannelStatusInfo>> getHttpConnect(
+    private static HashMap<String, KannelStatusInfo> getHttpConnect(
             Set<String> aAllRouteConfigs)
     {
-        final HashMap<String, Future<KannelStatusInfo>> resultMap = new HashMap<>();
+        final HashMap<String, KannelStatusInfo> resultMap = new HashMap<>();
 
         Iterator itr=aAllRouteConfigs.iterator();
         
@@ -135,9 +133,9 @@ public class DataCollector
                 
                 KannelStatusLog.log("Checking status for : '" + kannelId + "' with URL : '" + kannelURL + "'");
 
-                final KannelConnectTask        task   = new KannelConnectTask(kannelId, kannelURL);
-                final Future<KannelStatusInfo> future = ThreadPoolTon.getInstance().getExecutor().submit(task);
-                resultMap.put(kannelId, future);
+             
+               
+                resultMap.put(kannelId, KannelConnector.getKannelStatus(kannelId, kannelURL));
             }
             catch (final Exception e)
             {
