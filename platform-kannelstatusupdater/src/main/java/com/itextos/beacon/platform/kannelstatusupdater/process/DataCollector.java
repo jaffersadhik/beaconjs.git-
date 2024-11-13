@@ -31,6 +31,8 @@ public class DataCollector
 
             log.debug("Kannel info to be validated " + lAllRouteConfigs);
 
+            KannelStatusLog.log("lAllRouteConfigs : "+lAllRouteConfigs);
+
         final HashMap<String, Future<KannelStatusInfo>> resultMap = getHttpConnect(lAllRouteConfigs);
 
 
