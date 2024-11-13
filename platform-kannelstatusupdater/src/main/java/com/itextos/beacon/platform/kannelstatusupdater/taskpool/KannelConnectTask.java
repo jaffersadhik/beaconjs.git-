@@ -24,7 +24,8 @@ public class KannelConnectTask
     @Override
     public KannelStatusInfo call()
     {
-        return KannelConnector.getKannelStatus(kannelid, kannelurl);
+       // return KannelConnector.getKannelStatus(kannelid, kannelurl);
+    	return null;
     }
 
 }
