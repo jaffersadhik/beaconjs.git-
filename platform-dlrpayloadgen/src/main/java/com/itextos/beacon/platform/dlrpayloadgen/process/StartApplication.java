@@ -25,7 +25,7 @@ public class StartApplication
             
             if(lCluster==null) {
             	
-            	lCluster=System.getenv("cluster");
+            	lCluster=System.getenv("dlrpayloadgen.cluster");
             }
 
             if (log.isDebugEnabled())
