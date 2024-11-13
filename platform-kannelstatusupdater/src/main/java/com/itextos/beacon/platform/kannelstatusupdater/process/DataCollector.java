@@ -68,39 +68,33 @@ public class DataCollector
             HashMap<String, Future<KannelStatusInfo>> aResultMap)
     {
         final Map<String, KannelStatusInfo> outputMap   = new HashMap<>();
-        boolean                             isCompleted = false;
 
         try
         {
 
-            while (!isCompleted)
-            {
-                String kannelId = null;
-
+         
                 for (final Entry<String, Future<KannelStatusInfo>> entry : aResultMap.entrySet())
                 {
-                    kannelId = entry.getKey();
+                  String  kannelId = entry.getKey();
+                  
+                    while(true) {
+
                     final Future<KannelStatusInfo> futureList = entry.getValue();
 
                     if (futureList.get() != null)
                     {
-                        isCompleted = true;
                         outputMap.put(kannelId, futureList.get());
+                        break;
                     }
                     else
                     {
-                        // Wait to finish the HTTP call.
-                        isCompleted = false;
-                        break;
+                    	 Thread.sleep(500);
                     }
+                    }
+                    
                 }
 
-                if (!isCompleted)
-                {
-                    log.error("Waiting for the Kannel Status to complete. for Kannel '" + kannelId + "'");
-                    Thread.sleep(1000);
-                }
-            }
+               
         }
         catch (final Exception e)
         {
