@@ -63,7 +63,7 @@ public class DataCollector
     		final String           kannelIpPort = CommonUtility.combine(':', v.getKannelIp(), v.getKannelPort(), "StatusPort", v.getStatusPort());
     		result.add(kannelIpPort);
     	});
-		return null;
+		return result;
 	}
 
 	private static Map<String, KannelStatusInfo> getResults(
