@@ -15,6 +15,7 @@ import com.itextos.beacon.platform.kannelstatusupdater.taskpool.KannelConnectTas
 import com.itextos.beacon.platform.kannelstatusupdater.taskpool.ThreadPoolTon;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.RedisProcess;
 import com.itextos.beacon.platform.kannelstatusupdater.utility.Utility;
+import com.itextos.beacon.smslog.KannelStatusLog;
 
 public class DataCollector
 {
@@ -37,6 +38,7 @@ public class DataCollector
 
             log.debug("resultMap=" + resultMap);
 
+        KannelStatusLog.log("result : "+outputMap);
         RedisProcess.populateDataIntoRedis(lAllRouteConfigs, outputMap);
     }
 
