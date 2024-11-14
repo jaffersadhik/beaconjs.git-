@@ -31,6 +31,7 @@ import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.dlrpayloadgen.util.DlrPayloadGenUtil;
 import com.itextos.beacon.platform.dlrpayloadgen.util.PushToDlrProcessor;
+import com.itextos.beacon.smslog.DNgenerationFromPayloadLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
@@ -68,6 +69,7 @@ public class GenerateDnsFromPayloadStore
         if (log.isDebugEnabled())
             log.debug("payLoadId:" + mPayloadId + " thread started its job canContinue:" + canContinue);
 
+        DNgenerationFromPayloadLog.log("payLoadId:" + mPayloadId + " thread started its job canContinue:" + canContinue);
         try
         {
             if (mPayloadId.equals("mysql"))
@@ -106,8 +108,8 @@ public class GenerateDnsFromPayloadStore
             final Date               lTimeToGenerateDlr = DlrPayloadGenUtil.getTimeToGenerateDn();
             final java.sql.Timestamp sqlTimestamp       = new java.sql.Timestamp(lTimeToGenerateDlr.getTime());
 
-            if (log.isDebugEnabled())
-                log.debug("TimeToGenerateDlr: " + lTimeToGenerateDlr + "sqlTimestamp: " + sqlTimestamp);
+             
+            DNgenerationFromPayloadLog.log("TimeToGenerateDlr: " + lTimeToGenerateDlr + "sqlTimestamp: " + sqlTimestamp);
 
             lSqlConn = DBDataSourceFactory.getConnection(JndiInfoHolder.getInstance().getJndiInfoUsingName(DatabaseSchema.PAYLOAD.getKey()));
 
@@ -155,6 +157,8 @@ public class GenerateDnsFromPayloadStore
 
             if (log.isDebugEnabled())
                 log.debug("generateMysqlDns payloadDtLs: " + payloadDtLs);
+            
+            DNgenerationFromPayloadLog.log("generateMysqlDns payloadDtLs: " + payloadDtLs);
 
             if ((payloadDtLs != null) && (payloadMap != null))
             {
@@ -199,12 +203,18 @@ public class GenerateDnsFromPayloadStore
             final Set<String> lRedisKeys = lJedisCon.keys("dnpayload-expire:*");
             if (log.isDebugEnabled())
                 log.debug("redis keys:" + lRedisKeys + " for the rid:" + mPayloadId);
+            
+            
+            DNgenerationFromPayloadLog.log("redis keys:" + lRedisKeys + " for the rid:" + mPayloadId);
 
             for (final String redisKey : lRedisKeys)
                 if (DlrPayloadGenUtil.isKeyToGenerateDNs(redisKey))
                 {
                     if (log.isDebugEnabled())
                         log.debug("redis key: " + redisKey + " payLoadId: " + mPayloadId);
+                    
+                    DNgenerationFromPayloadLog.log("redis key: " + redisKey + " payLoadId: " + mPayloadId);
+
 
                     try
                     {
