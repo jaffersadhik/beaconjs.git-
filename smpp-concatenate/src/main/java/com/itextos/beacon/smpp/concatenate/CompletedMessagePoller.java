@@ -25,6 +25,7 @@ import com.itextos.beacon.smpp.objects.SmppUserInfo;
 import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.ItextosSmppConstants;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
+import com.itextos.beacon.smslog.ConcatePollerLog;
 
 public class CompletedMessagePoller
         implements
@@ -80,6 +81,8 @@ public class CompletedMessagePoller
             if (log.isDebugEnabled())
                 log.debug("Concat Message Ref Numbers :" + lCompletedMessageRefNumbers);
 
+            ConcatePollerLog.log("Concat Message Ref Numbers :" + lCompletedMessageRefNumbers);
+            
             for (final String key : lCompletedMessageRefNumbers)
             {
                 if (log.isDebugEnabled())

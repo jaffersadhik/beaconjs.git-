@@ -13,6 +13,7 @@ import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvi
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
+import com.itextos.beacon.smslog.DuplicateRemovalLog;
 
 import redis.clients.jedis.Jedis;
 
@@ -52,6 +53,8 @@ public class ExpiryRemovalTask
         {
             if (log.isInfoEnabled())
                 log.info("duplicatecheck:.... available keys querying");
+            
+            DuplicateRemovalLog.log("duplicatecheck:.... available keys querying");
             final Set<String> lKeys = lRedisCon.keys("duplicatecheck:*");
 
             if (lKeys.isEmpty())
@@ -59,6 +62,9 @@ public class ExpiryRemovalTask
 
             if (log.isInfoEnabled())
                 log.info("going to remove expired records...");
+            
+            DuplicateRemovalLog.log("going to remove expired records...");
+
             long lRemovedKeysCount = 0;
             for (final String key : lKeys)
                 lRemovedKeysCount = lRedisCon.zremrangeByScore(key, 0, System.currentTimeMillis());

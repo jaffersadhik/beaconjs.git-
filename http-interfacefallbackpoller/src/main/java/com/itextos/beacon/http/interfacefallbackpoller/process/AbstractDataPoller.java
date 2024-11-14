@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.http.interfacefallback.dao.FallBackDao;
+import com.itextos.beacon.smslog.FallbackPollerLog;
 
 public abstract class AbstractDataPoller
         implements
@@ -69,6 +70,8 @@ public abstract class AbstractDataPoller
             final List<String>                toDelete       = new ArrayList<>(lRecords.keySet());
             final List<MessageRequest>        toProcess      = new ArrayList<>(lRecords.values());
 
+            FallbackPollerLog.log("do Process() lRecords size ;  "+lRecords.size());
+            
             if(!toProcess.isEmpty()) {
             	
             final List<String>                failedMessages = sendToNextQueue(toProcess);

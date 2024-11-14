@@ -15,6 +15,7 @@ import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
 import com.itextos.beacon.smslog.DebugLog;
+import com.itextos.beacon.smslog.SchedulePollerLog;
 
 public class ScheduleBlockoutPollarHolder
         implements
@@ -80,6 +81,8 @@ public class ScheduleBlockoutPollarHolder
         final Map<String, List<String>> appInstanceIds = DBPoller.getInstanceIds();
         if (log.isDebugEnabled())
             log.debug("Get Instance ids from DB : " + appInstanceIds);
+        
+        SchedulePollerLog.log("Get Instance ids from DB : " + appInstanceIds);
 
         if (!appInstanceIds.isEmpty())
         {
