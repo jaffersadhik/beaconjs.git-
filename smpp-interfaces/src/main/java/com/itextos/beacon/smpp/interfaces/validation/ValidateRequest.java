@@ -18,6 +18,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.DCS;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.MessageClass;
 import com.itextos.beacon.commonlib.constants.MessageType;
@@ -45,6 +46,7 @@ import com.itextos.beacon.smpp.utils.ItextosSmppConstants;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 import com.itextos.beacon.smpp.utils.SmppErrorCodes;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.BindLog;
 import com.itextos.beacon.smslog.ConcateReceiverLog;
 
 public class ValidateRequest
@@ -62,8 +64,7 @@ public class ValidateRequest
             SessionDetail aSessionDetail)
             throws SmppProcessingException
     {
-        if (log.isDebugEnabled())
-            log.debug("Validate Bind Request :: Instance Id '" + aSessionDetail.getInstanceId() + "' System id '" + aSessionDetail.getSystemId() + "' commandid '" + aSessionDetail.getCommandId()
+        	 BindLog.log("Validate Bind Request :: Instance Id '" + aSessionDetail.getInstanceId() + "' System id '" + aSessionDetail.getSystemId() + "' commandid '" + aSessionDetail.getCommandId()
                     + "' Bindname '" + aSessionDetail.getBindName() + "', Host : '" + aSessionDetail.getHost() + "'");
 
         try
@@ -100,13 +101,13 @@ public class ValidateRequest
 
             if (!(e instanceof SmppProcessingException))
             {
-                log.error("Exception while binding for user '" + aSessionDetail.getSystemId() + "'", e);
+            	 BindLog.log("Exception while binding for user '" + aSessionDetail.getSystemId() + "' \n "+ErrorMessage.getStackTraceAsString(e) );
 
                 Communicator.sendBindFailureLog(aSessionDetail, "0x" + HexUtil.toHexString(SmppConstants.STATUS_SYSERR), "Internal Error");
                 throw new SmppProcessingException(SmppConstants.STATUS_SYSERR, "Internal Error");
             }
 
-            log.error("Exception while binding for user '" + aSessionDetail.getSystemId() + "'");
+            BindLog.log("Exception while binding for user '" + aSessionDetail.getSystemId() + "'");
 
             throw e;
         }

@@ -19,6 +19,7 @@ import com.itextos.beacon.smpp.interfaces.util.Communicator;
 import com.itextos.beacon.smpp.interfaces.validation.ValidateRequest;
 import com.itextos.beacon.smpp.objects.SessionDetail;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.BindLog;
 
 abstract class ItextosSmppServerHelper
         implements
@@ -57,21 +58,19 @@ abstract class ItextosSmppServerHelper
         }
         final String lSystemId = aSessionConfiguration.getSystemId();
 
-        if (log.isDebugEnabled())
-            log.debug("Bind Request for : " + lSystemId);
-
+  
+        BindLog.log("Bind Request for : " + lSystemId);
+        
         Communicator.sendBindReqLog(aSessionConfiguration, aBindRequest);
 
         final SessionDetail sessionDetail     = new SessionDetail(aSessionId, aSessionConfiguration, aBindRequest);
 
         final int           sessionWindowSize = SmppProperties.getInstance().getApiSessionWindowSize();
 
-        if (log.isInfoEnabled())
-        {
-            log.info("Binding with System ID : '" + sessionDetail.getSystemId() + "'");
-            log.info("SMPP Session window size :" + sessionWindowSize);
-        }
-
+        
+        	 BindLog.log("Binding with System ID : '" + sessionDetail.getSystemId() + "'");
+        	 BindLog.log("SMPP Session window size :" + sessionWindowSize);
+        
         sessionDetail.setConnectionTimeout(30000);
         sessionDetail.setBindTimeout(30000);
         sessionDetail.setWindowSize(sessionWindowSize);

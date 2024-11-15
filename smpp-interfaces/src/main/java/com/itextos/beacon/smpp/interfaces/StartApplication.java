@@ -41,6 +41,7 @@ import com.itextos.beacon.smpp.redisoperations.SessionInfoRedisUpdate;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.SmppApplicationParams;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.SmppServerLog;
 
 public class StartApplication
 {
@@ -54,27 +55,38 @@ public class StartApplication
         try
         {
             System.out.println("Entering start()");
+            SmppServerLog.log("Entering start()");
 
             initialize();
 
             System.out.println("Entering after initialize()");
 
+            SmppServerLog.log("Entering after initialize()");
+
             startServersAndInmemory();
 
             System.out.println("Entering after startServersAndInmemory()");
 
+            SmppServerLog.log("Entering after startServersAndInmemory()");
             updateRedisRelatedEntries();
 
             System.out.println("Entering after updateRedisRelatedEntries()");
+            
+            SmppServerLog.log("Entering after updateRedisRelatedEntries()");
+
 
    //         startConcatenateAndExpiryProcessors();
 
             System.out.println("Entering after startConcatenateAndExpiryProcessors()");
+            
+            SmppServerLog.log("Entering after startConcatenateAndExpiryProcessors()");
+
 
             addShutdownhook();
 
             System.out.println("Entering after addShutdownhook()");
 
+            SmppServerLog.log("Entering after addShutdownhook()");
             FallbackQReaper.getInstance();
             
             System.out.println("going to start Monitroing thread");

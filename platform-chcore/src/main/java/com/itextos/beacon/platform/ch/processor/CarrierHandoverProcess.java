@@ -748,9 +748,14 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					
 					String telemarketerid="1702166693997804050";
 					
-					if(aMessageRequest.getDltTelemarketerId()!=null&&aMessageRequest.getDltTelemarketerId().trim().length()>0) {
+					String temptelemartkerid=aMessageRequest.getDltTelemarketerId();
+					
+					if(temptelemartkerid==null) {
+						temptelemartkerid="";
+					}
+					if(temptelemartkerid.trim().length()>0) {
 						
-						telemarketerid=aMessageRequest.getDltTelemarketerId()+","+telemarketerid;
+						telemarketerid=temptelemartkerid+","+telemarketerid;
 					}
 					
 					telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);

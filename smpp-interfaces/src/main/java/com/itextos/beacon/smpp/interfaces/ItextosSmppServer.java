@@ -19,6 +19,7 @@ import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppServerHandle
 import com.itextos.beacon.smpp.interfaces.util.counters.ClientCounter;
 import com.itextos.beacon.smpp.utils.ItextosSmppConstants;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.SmppServerLog;
 
 public class ItextosSmppServer
 {
@@ -81,6 +82,8 @@ public class ItextosSmppServer
 
         if (log.isInfoEnabled())
             log.info("Starting SMPP server...");
+        
+        SmppServerLog.log("Starting SMPP server...");
 
         final String lClientId = SmppProperties.getInstance().getTraceMonitorClientId();
         ClientCounter.getInstance().init(lClientId);
@@ -89,6 +92,10 @@ public class ItextosSmppServer
 
         if (log.isInfoEnabled())
             log.info("SMPP server started");
+        
+        
+        SmppServerLog.log("SMPP server started");
+
     }
 
     public void stop()
