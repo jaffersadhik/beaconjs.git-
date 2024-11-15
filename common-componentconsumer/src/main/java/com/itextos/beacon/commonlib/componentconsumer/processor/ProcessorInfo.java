@@ -313,14 +313,10 @@ public class ProcessorInfo
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                final int                     tempThreadCount = topicName.endsWith(KafkaDBConstants.INTL_SUFFIX) ? intlThreadsCount : threadsCount;
                 
                 boolean isInternational=false;
                 
-                if( topicName.endsWith(KafkaDBConstants.INTL_SUFFIX)) {
-                
-                	isInternational=true;
-                }
+            
 
                 boolean isHigh=false;
 
@@ -342,7 +338,7 @@ public class ProcessorInfo
                 	  if (log.isDebugEnabled())
                           log.debug("Working for the topic '" + topicName + "'");
 
-                  	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                  	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
                         {
                             totalThreadsCount++;
                             startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
@@ -367,7 +363,7 @@ public class ProcessorInfo
                             if (log.isDebugEnabled())
                                 log.debug("Working for the topic '" + topicName + "'");
 
-                    	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                    	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
                           {
                               totalThreadsCount++;
                               startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
@@ -381,7 +377,7 @@ public class ProcessorInfo
                                 log.debug("Working for the topic '" + topicName + "'");
 
                             
-                      	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                      	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
                             {
                                 totalThreadsCount++;
                                 startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
@@ -394,7 +390,7 @@ public class ProcessorInfo
                             if (log.isDebugEnabled())
                                 log.debug("Working for the topic '" + topicName + "'");
 
-                        	  for (int threadIndex = 1; threadIndex <= tempThreadCount; threadIndex++)
+                        	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
                               {
                                   totalThreadsCount++;
                                   startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
@@ -750,9 +746,7 @@ public class ProcessorInfo
 
         if (lDefaultTopicName != null)
         {
-            final String lDefaultTopicNameIntl = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, lDefaultTopicName, KafkaDBConstants.INTL_SUFFIX);
             defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(lDefaultTopicName));
-            defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(lDefaultTopicNameIntl));
         }
         return defaultTopics;
     }
@@ -770,10 +764,8 @@ public class ProcessorInfo
     private static List<String> getDomAndIntlTopics(
             String aDefaultTopicName)
     {
-        final String       lDefaultTopicNameIntl = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aDefaultTopicName, KafkaDBConstants.INTL_SUFFIX);
         final List<String> defaultTopics         = new ArrayList<>();
         defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(aDefaultTopicName));
-        defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(lDefaultTopicNameIntl));
         return defaultTopics;
     }
 

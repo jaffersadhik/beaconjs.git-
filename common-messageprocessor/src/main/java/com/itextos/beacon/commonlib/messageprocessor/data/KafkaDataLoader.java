@@ -904,11 +904,8 @@ public class KafkaDataLoader
                     sjTopicName.add(s);
                     final String topicName = sjTopicName.toString();
 
-                    sjTopicName.add(INTL_SUFFIX);
-                    final String topicNameIntl = sjTopicName.toString();
 
                     priorityBasedTopics.add(KafkaDataLoaderUtility.updateTopicName(topicName));
-                    priorityBasedTopics.add(KafkaDataLoaderUtility.updateTopicName(topicNameIntl));
                 }
             }
             return priorityBasedTopics;

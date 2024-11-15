@@ -5,7 +5,6 @@ public class KafkaDBConstants
 
     public static final char      TOPIC_SEPARATOR                                         = '-';
     public static final String    DEFAULT                                                 = "DEFAULT";
-    public static final String    INTL_SUFFIX                                             = "intl";
     public static final String    OTP_SUFFIX                                              = "otp";
     public static final String    HIGH_SUFFIX                                             = "high";
 

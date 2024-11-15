@@ -11,6 +11,7 @@ public enum ClusterType
     BULK("bulk"),
     TRANSACTION("trans"),
     OTP("otp"),
+    INTL("intl"),
     COMMON("common");
 
     ClusterType(
