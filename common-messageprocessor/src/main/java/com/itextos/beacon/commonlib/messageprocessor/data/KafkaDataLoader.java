@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;s
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
@@ -881,17 +881,7 @@ public class KafkaDataLoader
             if (clusterMap != null)
             {
 
-                if (aIntfGroup == null)
-                {
-                    final Set<String> lIntfGroupNameList = clusterMap.keySet();
-
-                    for (final String intfGroupName : lIntfGroupNameList)
-                }
-                else
-                {
-                    final Map<String, Map<String, String>> msgTypeMap = clusterMap.get(aIntfGroup.getKey());
-                    if (msgTypeMap != null)
-                }
+               
 
                 for (final String s : tempTopics)
                 {
