@@ -587,7 +587,9 @@ public final class CommonUtility
 
         try
         {
-            return InetAddress.getLocalHost().getHostAddress();
+            return System.getenv("hostname")+"-"+InetAddress.getLocalHost().getHostAddress();
+            
+            
         }
         catch (final UnknownHostException e)
         {
