@@ -107,343 +107,100 @@ public class ProcessorInfo
     public void process()
             throws Exception
     {
-        final KafkaComponentInfo   kafkaComponentInfo  = KafkaDataLoader.getInstance().getKafkaProcessorInfo(mComponent);
-        final List<ClusterType>    platformClusterList = getClustersToProcess();
+        
+        final ClusterType    cluster = getClustersToProcess();
 
-        final List<InterfaceGroup> lInterfaceGroupList = mStartupRuntimeArguments.getInterfaceGroup();
-        if (lInterfaceGroupList.isEmpty())
-            lInterfaceGroupList.add(null);
-
-        final List<MessagePriority> lMessagePriorityList = mStartupRuntimeArguments.getMessagePriority();
-        if (lMessagePriorityList.isEmpty())
-            lMessagePriorityList.add(null);
-
-        final Map<String, List<String>> clientBasedTopics         = getClientBasedTopics();
-        Map<String, List<String>>       clusterBasedDefaultTopics = new HashMap<>();
-        final Map<String, List<String>> priorityBasedTopicsList   = new HashMap<>();
-
-        final List<ClusterType>         types                     = KafkaDataLoader.getInstance().isSeparateInstanceClusters();
-
-        for (final ClusterType cluster : platformClusterList)
-        {
-            if (log.isDebugEnabled())
-                log.debug("Processing for the cluster Type '" + cluster + "'");
+        final String priority=System.getenv("priority");
             
             StartupFlowLog.log("Processing for the cluster Type '" + cluster + "'");
             
             
-            if (cluster != null)
+            if (cluster == null)
             {
-                final KafkaClusterComponentMap lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, cluster);
-
-                if (lKafkaCLusterInformation == null)
-                {
-                    final String s = "Component '" + mComponent.getKey() + "' is not configured to Platform cluster '" + cluster + "'. Please configuration in table '"
-                            + KafkaDBConstants.TABLE_NAME_PLATFORM_CLUSTER_COMPONENT_KAFKA_CLUSTER_MAP + "'";
-                    logAndThrowException(s);
-                }
-            }
-
-            if (clusterNotSpecified && types.contains(cluster))
-            {
-            	StartupFlowLog.log("Skipping '" + cluster + "' cluster as it has separate instance setup.");
-            	log.fatal("Skipping '" + cluster + "' cluster as it has separate instance setup.");
-                continue;
-            }
-
-            final List<String> defaultTopicNamesForCluster = getDefaultTopics(cluster);
-
-            clusterBasedDefaultTopics.put(KafkaDataLoaderUtility.getNameOrDefault(cluster), defaultTopicNamesForCluster);
-
-            for (final InterfaceGroup intfGroup : lInterfaceGroupList)
-            {
-                if (log.isDebugEnabled()) {
-                	
-                    log.debug("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
-
-                }
                 
-                StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "'");
-                	
-                for (final MessagePriority msgPriority : lMessagePriorityList)
-                {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
-                    }
+                StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' given env cluster : "+System.getenv("cluster")+" not present in DataBase");
+                System.exit(0);
+            }
+
+            if (priority == null)
+            {
+                
+                StartupFlowLog.log("Processing for the priority Type '" + priority + "' given env priorityr : "+System.getenv("cluster")+" not present in DataBase");
+                System.exit(0);
+            }
+
+            String topicName=mComponent.getKey()+"-"+cluster.getKey()+"-"+priority;
+           
                     
-                    StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' and interface group '" + intfGroup + "' IMessage Priority '" + msgPriority + "'");
-                    final List<String> priorityBasedTopics = getPriorityBasedTopics(cluster, intfGroup, mStartupRuntimeArguments.getMessageType(), msgPriority);
-
-                    if ((priorityBasedTopics != null) && !priorityBasedTopics.isEmpty())
-                    {
-                        final String lPriorityKeys = getPriorityKeys(cluster, intfGroup, mStartupRuntimeArguments.getMessageType(), msgPriority);
-                        priorityBasedTopicsList.put(lPriorityKeys, priorityBasedTopics);
-                    }
-                }// for (final MessagePriority msgPriority : lMessagePriorityList)
-            }// for (final InterfaceGroup intfGroup : lInterfaceGroupList)
-        }// for (final ClusterType cluster : platformClusterList)
-
-        if ((clusterBasedDefaultTopics.size() == 0) || ((clusterBasedDefaultTopics.size() == 1) && (clusterBasedDefaultTopics.containsKey(KafkaDBConstants.DEFAULT))))
-            clusterBasedDefaultTopics = getDefaultTopicsForAllClusters();
-
-        final Map<String, List<String>> topicsToConsume = consolidateAllTopics(platformClusterList, lInterfaceGroupList, lMessagePriorityList, clientBasedTopics, priorityBasedTopicsList,
-                clusterBasedDefaultTopics);
-
-        printTopicList(topicsToConsume);
-
-        String module=System.getenv("module");
     	
-    	
-    	if(module.equals("smppdlrhandover")||module.equals("dnpost")) {
-    		
-    	List<String> tempTpopics=topicsToConsume.get("bulk");
+        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
 
-    	if(tempTpopics!=null) {
-    	tempTpopics.add("smpp-dlr-handover");
-    	
-    	tempTpopics.add("smpp-dlr-handover-intl");
-    	
-    	topicsToConsume.put("bulk", tempTpopics);
-    	}
-    	
-    	}else if(module.equals("dnpostlogt2tb")||module.equals("biller")) {
-    		
-    		
-    		List<String> tempTpopics=topicsToConsume.get("bulk");
-
-        	if(tempTpopics!=null) {
-        	tempTpopics.add("t2db-smpp-post-log");
-        	
-        	tempTpopics.add("t2db-smpp-post-log-intl");
-        	
-        	topicsToConsume.put("bulk", tempTpopics);
-        	}
-    	}
-    	
-        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(topicsToConsume);
-
-        createConsumerThreads(topicsToConsume, kafkaComponentInfo, lConsumerInmemCollection);
+        createConsumerThreads(cluster,topicName, lConsumerInmemCollection);
     }
 
-    private List<ClusterType> getClustersToProcess()
+    private ClusterType getClustersToProcess()
     {
-        final List<ClusterType> platformClusterList = mStartupRuntimeArguments.getPlatformCluster();
-
-        if (platformClusterList.isEmpty())
-        {
-            clusterNotSpecified = true;
-            final Set<String> lComponentClusters = KafkaDataLoader.getInstance().getComponentClusters(mComponent);
-
-            if (lComponentClusters == null)
-                platformClusterList.add(null);
-            else
-                for (final String strCluster : lComponentClusters)
-                {
-                    if (log.isDebugEnabled())
-                        log.debug("Cluster Type passed '" + strCluster + "'");
-
-                    if (KafkaDBConstants.DEFAULT.equals(strCluster))
-                        platformClusterList.add(null);
-                    else
-                    {
-                        final ClusterType lCluster = ClusterType.getCluster(strCluster);
-
-                        if (lCluster != null)
-                        {
-                            final boolean lSeparateInstance = KafkaDataLoader.getInstance().isSeparateInstance(lCluster);
-                            if (!lSeparateInstance)
-                                platformClusterList.add(lCluster);
-                            // else
-                            // throw new ItextosRuntimeException("Cluster specific instance not specified in
-                            // configuration.cluster_type table for cluster '" + strCluster + "'");
-                        }
-                        else
-                            throw new ItextosRuntimeException("Invalid Cluster specified '" + strCluster + "'");
-                    }
-                }
-        }
-        else
-            for (final ClusterType lCluster : platformClusterList)
-            {
-                final boolean lSeparateInstance = KafkaDataLoader.getInstance().isSeparateInstance(lCluster);
-                if (!lSeparateInstance)
-                    throw new ItextosRuntimeException("Cluster specific instance not specified in configuration.cluster_type table for cluster '" + lCluster + "'");
-            }
-        return platformClusterList;
+        
+        return mStartupRuntimeArguments.getCluster();
+        
     }
 
     private void createConsumerThreads(
-            Map<String, List<String>> aTopicsToConsume,
-            KafkaComponentInfo aKafkaComponentInfo,
-            Map<String, Map<String, ConsumerInMemCollection>> aConsumerInmemCollection)
+    		ClusterType platformCluster, String topicName,
+           Map<String, Map<String, ConsumerInMemCollection>> aConsumerInmemCollection)
     {
 
         int totalThreadsCount = 0;
 
-        StartupFlowLog.log("aTopicsToConsume : '" + aTopicsToConsume );
+        StartupFlowLog.log("aTopicsToConsume : '" + topicName );
 
-        for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
-        {
-            final String      clusterName     = entry.getKey();
-            
-            StartupFlowLog.log("clusterName : '" + clusterName );
+       
+        final KafkaComponentInfo   aKafkaComponentInfo  = KafkaDataLoader.getInstance().getKafkaProcessorInfo(mComponent);
 
-            final ClusterType platformCluster = ClusterType.getCluster(clusterName);
+
 
             StartupFlowLog.log("platformCluster : '" + platformCluster );
 
   
             final KafkaClusterComponentMap             lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, platformCluster);
             final String                               className                = aKafkaComponentInfo.getComponentProcessClass();
-            final int                                  threadsCount             = lKafkaCLusterInformation.getThreadsCount();
-            final int                                  intlThreadsCount         = lKafkaCLusterInformation.getIntlThreadsCount();
+            final int                                  threadsCount             = 1;
             final int                                  sleepInMillis            = lKafkaCLusterInformation.getSleepTimeInMillis();
 
-            final List<String>                         topics                   = entry.getValue();
-            final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(clusterName);
+            final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(platformCluster.getKey());
 
-            if (log.isInfoEnabled())
-                log.info("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster+ " topics : "+topics+" topicInMemCollection : "+topicInMemCollection);
     
-            StartupFlowLog.log("Consumer to start for the Cluster Type Name : '" + clusterName + "' Cluster " + platformCluster+ " topics : "+topics+" topicInMemCollection : "+topicInMemCollection);
+            StartupFlowLog.log("Consumer to start for the Cluster Type Name : '" + platformCluster.getKey() + "' Cluster " + platformCluster+ " topics : "+platformCluster.getKey()+" topicInMemCollection : "+topicInMemCollection);
        
-            for (final String topicName : topics)
-            {
+         
 
 
                 final ConsumerInMemCollection inMemCollection = topicInMemCollection.get(topicName);
 
-                
-                boolean isInternational=false;
-                
-            
-
-                boolean isHigh=false;
-
-                if( topicName.indexOf(KafkaDBConstants.HIGH_SUFFIX)>-1) {
-                    
-                	isHigh=true;
-                }
-
-                String intl =System.getenv("intl");
-                
-               
-                
-                String priority =System.getenv("priority");
-             
-                
-                if(intl==null || priority ==null) {
-                	
-                	
-                	  if (log.isDebugEnabled())
-                          log.debug("Working for the topic '" + topicName + "'");
-
-                  	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
-                        {
-                            totalThreadsCount++;
-                            startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                        }
-           
-                     
-                }else {
-                	
-                	
-                	 if(intl==null) {
-                      	intl="";
-                      }
-                 	 
-                 	   
-                      if(priority==null) {
-                      	priority="";
-                      }
-                      
-                    if(isInternational) {
-                    	
-                    	if(intl.equals("1")) {
-                            if (log.isDebugEnabled())
-                                log.debug("Working for the topic '" + topicName + "'");
-
-                    	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
-                          {
-                              totalThreadsCount++;
-                              startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                          }
-                    	}
-                    }else if(isHigh) {
-                    	
-                    	if(intl.equals("0")&&priority.equals("high")) {
-                    		
-                            if (log.isDebugEnabled())
-                                log.debug("Working for the topic '" + topicName + "'");
-
-                            
-                      	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
-                            {
-                                totalThreadsCount++;
-                                startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                            }
-                      	}
-                    }else {
-                    	
-                      	if(intl.equals("0")&&priority.equals("normal")) {
-                      		
-                            if (log.isDebugEnabled())
-                                log.debug("Working for the topic '" + topicName + "'");
-
-                        	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
-                              {
-                                  totalThreadsCount++;
-                                  startANewThread(clusterName, platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
-                              }
-                        	}
-                    }
-                    
-                   
-                }
-                log.debug("intl: "+intl +" : priority :  "+priority+" : ");
-                
-                
-              
-            	
-              
-            
-            }// for (final String topicName : topics)
-        }// for (final Entry<String, List<String>> entry : topicsToConsume.entrySet())
-        
-        log.error("For component " + mComponent + " Total thread created " + totalThreadsCount);
-
-    }
+      	  for (int threadIndex = 1; threadIndex <= threadsCount; threadIndex++)
+          {
+               totalThreadsCount++;
+                startANewThread(platformCluster.getKey(), platformCluster, topicName, className, inMemCollection, sleepInMillis, threadIndex);
+          }
+   	}
 
     private Map<String, Map<String, ConsumerInMemCollection>> createConsumersBeforeStartingThread(
-            Map<String, List<String>> aTopicsToConsume)
+    		ClusterType platformCluster, String topicName)
     {
     
     	
-    	
-    	
-    	StartupFlowLog.log("aTopicsToConsume : "+aTopicsToConsume);
-
         final Map<String, Map<String, ConsumerInMemCollection>> clusterInMemCollection = new HashMap<>();
+      
+        final Map<String, ConsumerInMemCollection> topicInMemCollection = clusterInMemCollection.computeIfAbsent(platformCluster.getKey(), k -> new HashMap<>());
 
-        for (final Entry<String, List<String>> entry : aTopicsToConsume.entrySet())
-        {
-            final String                               clusterName          = entry.getKey();
-            final ClusterType                          platformCluster      = ClusterType.getCluster(clusterName);
-            final Map<String, ConsumerInMemCollection> topicInMemCollection = clusterInMemCollection.computeIfAbsent(clusterName, k -> new HashMap<>());
-
-        	StartupFlowLog.log("clusterName : "+clusterName);
-        	StartupFlowLog.log("platformCluster : "+platformCluster);
-
-            for (final String topicName : entry.getValue())
-            {
-            	StartupFlowLog.log("clusterName : "+clusterName+"platformCluster : "+platformCluster+" topicName : "+topicName);
+     
+       
+            	StartupFlowLog.log("platformCluster : "+platformCluster+" topicName : "+topicName);
 
                 final ConsumerInMemCollection temp = KafkaInformation.getInstance().createConsumer(mComponent, platformCluster, topicName);
                 topicInMemCollection.put(topicName, temp);
                 
-            }
-        }
-        
+       
     	StartupFlowLog.log("clusterInMemCollection : "+clusterInMemCollection);
 
         return clusterInMemCollection;
@@ -468,81 +225,7 @@ public class ProcessorInfo
             }
     }
 
-    private Map<String, List<String>> consolidateAllTopics(
-            List<ClusterType> aPlatformClusterList,
-            List<InterfaceGroup> aInterfaceGroupList,
-            List<MessagePriority> aMessagePriorityList,
-            Map<String, List<String>> aClientBasedTopics,
-            Map<String, List<String>> aPriorityBasedTopicsList,
-            Map<String, List<String>> aClusterBasedDefaultTopics)
-    {
-        final Map<String, List<String>> topicsToConsume = new HashMap<>();
-
-        if (log.isDebugEnabled())
-        {
-            log.debug(">>>>>>>>>>>>>>>> Client Based Topics ");
-
-            for (final Entry<String, List<String>> entry : aClientBasedTopics.entrySet())
-            {
-                log.debug("\t'" + entry.getKey() + "'");
-
-                for (final String topicName : entry.getValue())
-                    log.debug("\t\t'" + topicName + "'");
-            }
-
-            log.debug(">>>>>>>>>>>>>>>> Priority Based Topics");
-
-            for (final Entry<String, List<String>> entry : aPriorityBasedTopicsList.entrySet())
-            {
-                log.debug("\t'" + entry.getKey() + "'");
-
-                for (final String topicName : entry.getValue())
-                    log.debug("\t\t'" + topicName + "'");
-            }
-
-            log.debug(">>>>>>>>>>>>>>>> Cluster Based Default Topics");
-
-            for (final Entry<String, List<String>> entry : aClusterBasedDefaultTopics.entrySet())
-            {
-                log.debug("\t'" + entry.getKey() + "'");
-                if (entry.getValue() != null)
-                    for (final String topicName : entry.getValue())
-                        log.debug("\t\t'" + topicName + "'");
-                else
-                    log.debug("\t\t'IT SHOULD NOT BE NULL. NEED TO CHECK THIS.'");
-            }
-        }
-
-        if (mStartupRuntimeArguments.isClientSpecific())
-            addClientSpecificTopics(topicsToConsume, aClientBasedTopics);
-
-        if (mStartupRuntimeArguments.isPrioritySpecific())
-            addPrioritySpecificTopics(aPlatformClusterList, aInterfaceGroupList, aMessagePriorityList, topicsToConsume, aPriorityBasedTopicsList);
-
-        if (!mStartupRuntimeArguments.isClientSpecific() && !mStartupRuntimeArguments.isPrioritySpecific())
-        {
-            final List<String> lClientBasedTopic = KafkaDataLoader.getInstance().getClientBasedTopic(mComponent);
-
-            if (!lClientBasedTopic.isEmpty())
-                addClientList(topicsToConsume, lClientBasedTopic);
-
-            final Map<String, List<String>> lTopicNameBasedOnPriorities = new HashMap<>();
-
-            if (mStartupRuntimeArguments.isClusterSpecific())
-                for (final ClusterType clusterType : mStartupRuntimeArguments.getPlatformCluster())
-                    lTopicNameBasedOnPriorities.putAll(KafkaDataLoader.getInstance().getTopicNameBasedOnPriorities(mComponent, clusterType));
-            else
-                for (final ClusterType clusterType : aPlatformClusterList)
-                    lTopicNameBasedOnPriorities.putAll(KafkaDataLoader.getInstance().getTopicNameBasedOnPriorities(mComponent, clusterType));
-
-            if (!lTopicNameBasedOnPriorities.isEmpty())
-                addClusterSpecificTopics(topicsToConsume, lTopicNameBasedOnPriorities);
-
-            addPrioritySpecificTopics(aPlatformClusterList, aInterfaceGroupList, aMessagePriorityList, topicsToConsume, aPriorityBasedTopicsList);
-            addClusterSpecificTopics(topicsToConsume, aClusterBasedDefaultTopics);
-        }
-        return topicsToConsume;
-    }
+  
 
     private void startANewThread(
             String aClusterName,
@@ -588,91 +271,16 @@ public class ProcessorInfo
         }
     }
 
-    private static void addClientList(
-            Map<String, List<String>> aTopicsToConsume,
-            List<String> aClientBasedTopic)
-    {
-        final List<String> lList = aTopicsToConsume.computeIfAbsent(KafkaDBConstants.DEFAULT, k -> new ArrayList<>());
-        lList.addAll(aClientBasedTopic);
-    }
+   
 
-    private static void addClusterSpecificTopics(
-            Map<String, List<String>> aTopicsToConsume,
-            Map<String, List<String>> aClusterBasedDefaultTopics)
-    {
-
-        for (final Entry<String, List<String>> entry : aClusterBasedDefaultTopics.entrySet())
-        {
-            final List<String> topicsList = entry.getValue();
-
-            if ((topicsList != null) && !topicsList.isEmpty())
-            {
-                final List<String> mainList = aTopicsToConsume.computeIfAbsent(entry.getKey(), k -> new ArrayList<>());
-                addToList(mainList, topicsList);
-            }
-        }
-    }
-
+   
     private void addPrioritySpecificTopics(
-            List<ClusterType> aPlatformClusterList,
+            ClusterType cluster,
             List<InterfaceGroup> aInterfaceGroupList,
             List<MessagePriority> aMessagePriorityList,
             Map<String, List<String>> aTopicsToConsume,
             Map<String, List<String>> aPriorityBasedTopics)
-    {
-
-        if (mStartupRuntimeArguments.isPrioritySpecific() || mStartupRuntimeArguments.isClusterSpecific())
-        {
-
-            if (mStartupRuntimeArguments.isPrioritySpecific() && aPriorityBasedTopics.isEmpty())
-            {
-                final String errorInfo = "Configuration to start the application with Priority based topics Interface Group '" + mStartupRuntimeArguments.getInterfaceGroup() + "' IMessage Type '"
-                        + mStartupRuntimeArguments.getMessageType() + "' IMessage Priority '" + mStartupRuntimeArguments.getMessagePriority() + "'. But no topics configured in the table '"
-                        + KafkaDBConstants.TABLE_NAME_PLATFORM_CLUSTER_KAFKA_TOPIC_MAP + "' for the component '" + mComponent.getKey() + "' and clusters '"
-                        + mStartupRuntimeArguments.getPlatformCluster() + "'";
-                logAndThrowException(errorInfo);
-            }
-
-            boolean            topicAvailable = false;
-            final List<String> keys           = new ArrayList<>();
-
-            for (final ClusterType cluster : aPlatformClusterList)
-            {
-                final String       lPlatformCluster = KafkaDataLoaderUtility.getNameOrDefault(cluster);
-                final List<String> topicsList       = aTopicsToConsume.computeIfAbsent(lPlatformCluster, k -> new ArrayList<>());
-
-                for (final InterfaceGroup intfGroup : aInterfaceGroupList)
-                {
-                    final String lInterfaceGroup = KafkaDataLoaderUtility.getNameOrDefault(intfGroup);
-                    final String lMessageType    = KafkaDataLoaderUtility.getNameOrDefault(mStartupRuntimeArguments.getMessageType());
-
-                    for (final MessagePriority mp : aMessagePriorityList)
-                    {
-                        final String mpName = KafkaDataLoaderUtility.getNameOrDefault(mp);
-                        final String key    = CommonUtility.combine(lPlatformCluster, lInterfaceGroup, lMessageType, mpName);
-                        keys.add(key);
-
-                        final List<String> lList = aPriorityBasedTopics.get(key);
-
-                        if ((lList != null) && !lList.isEmpty())
-                        {
-                            topicAvailable = true;
-                            addToList(topicsList, lList);
-                        }
-                        else
-                            logPriorityError(key);
-                    }
-                }
-            }
-
-            if (!topicAvailable)
-            {
-                final String errorInfo = "Unable to find the topics passed Priroties " + keys + ". Please check table configuration in '" + KafkaDBConstants.TABLE_NAME_PLATFORM_CLUSTER_KAFKA_TOPIC_MAP
-                        + "'";
-                logAndThrowException(errorInfo);
-            }
-        }
-    }
+    {}
 
     private static void addToList(
             List<String> aTopicsToConsume,
@@ -697,124 +305,12 @@ public class ProcessorInfo
         throw lItextosRuntimeException;
     }
 
-    private void addClientSpecificTopics(
-            Map<String, List<String>> aTopicsToConsume,
-            Map<String, List<String>> aClientBasedTopics)
-    {
+  
 
-        if (mStartupRuntimeArguments.isClientSpecific())
-        {
+   
 
-            if (aClientBasedTopics.isEmpty())
-            {
-                final String errorInfo = "Configuration to start the application with specfied client id '" + mStartupRuntimeArguments.getClientIds() + "'. But no topics configured in the table '"
-                        + KafkaDBConstants.TABLE_NAME_CLIENT_SPECIFIC_COMPONENT + "' for the component '" + mComponent.getKey() + "'";
-                logAndThrowException(errorInfo);
-            }
-
-            boolean            topicAvailable = false;
-            final List<String> lClientIds     = mStartupRuntimeArguments.getClientIds();
-            final List<String> topicList      = aTopicsToConsume.get(KafkaDBConstants.DEFAULT);
-
-            for (final String cliId : lClientIds)
-            {
-                final List<String> lList = aClientBasedTopics.get(cliId);
-
-                if ((lList != null) && !lList.isEmpty())
-                {
-                    topicAvailable = true;
-                    topicList.addAll(lList);
-                }
-                else
-                    log.error("'" + cliId + "' does not have a proper configuration for the client specific topics in '" + KafkaDBConstants.TABLE_NAME_CLIENT_SPECIFIC_COMPONENT + "'");
-            }
-
-            if (!topicAvailable)
-            {
-                final String errorInfo = "Unable to find the client specific topics passed " + lClientIds + ". Please check table configuration in '"
-                        + KafkaDBConstants.TABLE_NAME_CLIENT_SPECIFIC_COMPONENT + "'";
-                logAndThrowException(errorInfo);
-            }
-        }
-    }
-
-    private List<String> getDefaultTopics(
-            ClusterType lPlatformCluster)
-    {
-        final List<String> defaultTopics     = new ArrayList<>();
-        final String       lDefaultTopicName = KafkaDataLoader.getInstance().getDefaultTopicName(mComponent, lPlatformCluster);
-
-        if (lDefaultTopicName != null)
-        {
-            defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(lDefaultTopicName));
-        }
-        return defaultTopics;
-    }
-
-    private Map<String, List<String>> getDefaultTopicsForAllClusters()
-    {
-        final Map<String, List<String>> returnValue       = new HashMap<>();
-        final Map<String, String>       lDefaultTopicName = KafkaDataLoader.getInstance().getDefaultTopicName(mComponent);
-
-        for (final Entry<String, String> entry : lDefaultTopicName.entrySet())
-            returnValue.put(entry.getKey(), getDomAndIntlTopics(entry.getValue()));
-        return returnValue;
-    }
-
-    private static List<String> getDomAndIntlTopics(
-            String aDefaultTopicName)
-    {
-        final List<String> defaultTopics         = new ArrayList<>();
-        defaultTopics.add(KafkaDataLoaderUtility.updateTopicName(aDefaultTopicName));
-        return defaultTopics;
-    }
-
-    private List<String> getPriorityBasedTopics(
-            ClusterType aPlatformCluster,
-            InterfaceGroup aInterfaceGroup,
-            MessageType aMessageType,
-            MessagePriority aMessagePriority)
-    {
-        return KafkaDataLoader.getInstance().getTopicNameBasedOnPriorities(mComponent, aPlatformCluster, aInterfaceGroup, aMessageType, aMessagePriority);
-    }
-
-    private static String getPriorityKeys(
-            ClusterType lPlatformCluster,
-            InterfaceGroup lInterfaceGroup,
-            MessageType lMessageType,
-            MessagePriority mp)
-    {
-        return CommonUtility.combine(KafkaDataLoaderUtility.getNameOrDefault(lPlatformCluster), KafkaDataLoaderUtility.getNameOrDefault(lInterfaceGroup),
-                KafkaDataLoaderUtility.getNameOrDefault(lMessageType), KafkaDataLoaderUtility.getNameOrDefault(mp));
-    }
-
-    private Map<String, List<String>> getClientBasedTopics()
-    {
-        final Map<String, List<String>> clientBasedTopics = new HashMap<>();
-        final List<String>              lClientIds        = mStartupRuntimeArguments.getClientIds();
-
-        if (lClientIds.isEmpty())
-        {
-            // When client Ids are not given in startup, start the consumer for all client
-            // ids.
-            final List<String> lClientBasedTopic = KafkaDataLoader.getInstance().getClientBasedTopic(mComponent);
-            if (!lClientBasedTopic.isEmpty())
-                clientBasedTopics.put(ALL, lClientBasedTopic);
-        }
-        else
-            for (final String cliId : lClientIds)
-            {
-                final String lClientBasedTopic = KafkaDataLoader.getInstance().getClientBasedTopic(mComponent, cliId);
-
-                if (lClientBasedTopic != null)
-                {
-                    final List<String> temp = new ArrayList<>();
-                    temp.add(lClientBasedTopic);
-                    clientBasedTopics.put(cliId, temp);
-                }
-            }
-        return clientBasedTopics;
-    }
+   
+   
 
     /**
      * This method should be called in-case the shutdown hook default behavior is

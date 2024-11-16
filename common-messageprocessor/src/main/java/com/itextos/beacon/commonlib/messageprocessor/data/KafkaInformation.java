@@ -593,7 +593,7 @@ public class KafkaInformation
         	}
         }else {
         	
-          	if(intl.equals("0")&&priority.equals("normal")) {
+          	if(intl.equals("0")&&priority.equals("low")) {
 
                 for (int consumerClientIndex = 1; consumerClientIndex <= consumerClientCount; consumerClientIndex++)
                 {

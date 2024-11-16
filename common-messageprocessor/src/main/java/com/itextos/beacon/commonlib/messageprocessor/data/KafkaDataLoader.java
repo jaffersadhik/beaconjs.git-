@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;
+import org.apache.commons.logging.Log;s
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
@@ -886,13 +886,11 @@ public class KafkaDataLoader
                     final Set<String> lIntfGroupNameList = clusterMap.keySet();
 
                     for (final String intfGroupName : lIntfGroupNameList)
-                        getTopicsForIntfGroup(tempTopics, clusterMap.get(intfGroupName), aMsgType, aMsgPriority);
                 }
                 else
                 {
                     final Map<String, Map<String, String>> msgTypeMap = clusterMap.get(aIntfGroup.getKey());
                     if (msgTypeMap != null)
-                        getTopicsForIntfGroup(tempTopics, msgTypeMap, aMsgType, aMsgPriority);
                 }
 
                 for (final String s : tempTopics)
@@ -918,79 +916,11 @@ public class KafkaDataLoader
         return null;
     }
 
-    private static void getTopicsForIntfGroup(
-            List<String> aTempTopics,
-            Map<String, Map<String, String>> aMsgTypeMap,
-            MessageType aMsgType,
-            MessagePriority aMsgPriority)
-    {
+    
+  
 
-        if (aMsgType == null)
-        {
-            final Set<String> msgTypeNameList = aMsgTypeMap.keySet();
 
-            for (final String msgTypeName : msgTypeNameList)
-            {
-                final Map<String, String> lMessageTypeMap = aMsgTypeMap.get(msgTypeName);
-                getTopicsForMsgType(aTempTopics, lMessageTypeMap, aMsgPriority);
-            }
-        }
-        else
-        {
-            final Map<String, String> lMap = aMsgTypeMap.get(aMsgType.getKey());
-            getTopicsForMsgType(aTempTopics, lMap, aMsgPriority);
-        }
-    }
 
-    private static void getTopicsForMsgType(
-            List<String> aTempTopics,
-            Map<String, String> aMessageTypeMap,
-            MessagePriority aMsgPriority)
-    {
 
-        if (aMsgPriority == null)
-        {
-            final Set<String> lKeySet = aMessageTypeMap.keySet();
-            for (final String lString : lKeySet)
-                if ((lString != null))
-                {
-                    final String temp = aMessageTypeMap.get(lString);
-                    if (!aTempTopics.contains(temp))
-                        aTempTopics.add(temp);
-                }
-        }
-        else
-        {
-            final String lString = aMessageTypeMap.get(aMsgPriority.getKey());
-
-            if ((lString != null))
-                if (!aTempTopics.contains(lString))
-                    aTempTopics.add(lString);
-        }
-    }
-
-    public boolean isSeparateInstance(
-            ClusterType aClusterType)
-    {
-        boolean returnValue = false;
-
-        if (aClusterType != null)
-        {
-            final Boolean temp = mPlatformCluster.get(aClusterType);
-            if (temp != null)
-                returnValue = temp;
-        }
-        return returnValue;
-    }
-
-    public List<ClusterType> isSeparateInstanceClusters()
-    {
-        final List<ClusterType> returnValue = new ArrayList<>();
-
-        for (final Entry<ClusterType, Boolean> entry : mPlatformCluster.entrySet())
-            if (entry.getValue())
-                returnValue.add(entry.getKey());
-        return returnValue;
-    }
-
+  
 }

@@ -163,6 +163,11 @@ public class StartupRuntimeArguments
         return returnValue;
     }
 
+    public ClusterType getCluster() {
+    	
+    	return ClusterType.getCluster(System.getenv("cluster"));
+    }
+    
     private static List<ClusterType> readCluster()
     {
         final String            pfCluster   = readProperty(RUNTIME_ARG_PF_CLUSTER, STRING_PF_CLUSTER);
