@@ -130,8 +130,11 @@ public class ProcessorInfo
             StringTokenizer st=new StringTokenizer(cluster,",");
             
             while(st.hasMoreTokens()) {
+            	String sCLuster=st.nextToken();
             	
-            	ClusterType platformCluster= ClusterType.getCluster(System.getenv(st.nextToken()));
+            	StartupFlowLog.log(" process : sCLuster : "+sCLuster);
+            	
+            	ClusterType platformCluster= ClusterType.getCluster(sCLuster);
             	
             	if(platformCluster!=null) {
             		
@@ -141,14 +144,21 @@ public class ProcessorInfo
             			
             			String smspriority=st2.nextToken();
             			
-            		       String topicName=mComponent.getKey()+"-"+platformCluster.getKey()+"-"+smspriority;
+                    	StartupFlowLog.log(" process : sCLuster : "+sCLuster+" smspriority : "+smspriority);
+
+            			
+            		    String topicName=mComponent.getKey()+"-"+platformCluster.getKey()+"-"+smspriority;
             	           
+                       	StartupFlowLog.log("topicName : "+topicName);
 
             	    	
             	        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(platformCluster,topicName);
 
             	        createConsumerThreads(platformCluster,topicName, lConsumerInmemCollection);
             		}
+            	}else {
+                	StartupFlowLog.log(" not found : sCLuster : "+sCLuster);
+
             	}
             	
             }
