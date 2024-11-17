@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,14 +25,12 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
-import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDBConstants;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
-import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoaderUtility;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
@@ -108,34 +106,54 @@ public class ProcessorInfo
             throws Exception
     {
         
-        final ClusterType    cluster = getClustersToProcess();
+        final String cluster=System.getenv("cluster");
 
         final String priority=System.getenv("priority");
             
             StartupFlowLog.log("Processing for the cluster Type '" + cluster + "'");
             
             
-            if (cluster == null)
+            if (cluster == null||cluster.trim().length()<1)
             {
                 
                 StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' given env cluster : "+System.getenv("cluster")+" not present in DataBase");
                 System.exit(0);
             }
 
-            if (priority == null)
+            if (priority == null||priority.trim().length()<1)
             {
                 
                 StartupFlowLog.log("Processing for the priority Type '" + priority + "' given env priorityr : "+System.getenv("cluster")+" not present in DataBase");
                 System.exit(0);
             }
 
-            String topicName=mComponent.getKey()+"-"+cluster.getKey()+"-"+priority;
-           
-                    
-    	
-        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
+            StringTokenizer st=new StringTokenizer(cluster,",");
+            
+            while(st.hasMoreTokens()) {
+            	
+            	ClusterType platformCluster= ClusterType.getCluster(System.getenv(st.nextToken()));
+            	
+            	if(platformCluster!=null) {
+            		
+            		StringTokenizer st2=new StringTokenizer(priority,",");
+            		
+            		while(st2.hasMoreTokens()) {
+            			
+            			String smspriority=st2.nextToken();
+            			
+            		       String topicName=mComponent.getKey()+"-"+platformCluster.getKey()+"-"+smspriority;
+            	           
 
-        createConsumerThreads(cluster,topicName, lConsumerInmemCollection);
+            	    	
+            	        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(platformCluster,topicName);
+
+            	        createConsumerThreads(platformCluster,topicName, lConsumerInmemCollection);
+            		}
+            	}
+            	
+            }
+            
+     
     }
 
     private ClusterType getClustersToProcess()
