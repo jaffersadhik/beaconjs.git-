@@ -551,7 +551,9 @@ public class KafkaDataLoader
         KafkaDataLoaderUtility.addToTopic(sjTopicName, lPlatformCluster);
         final String              topicName     = KafkaDataLoaderUtility.updateTopicName(sjTopicName.toString());
         final Map<String, String> platformTopic = mComponentKafkaClusterTopics.computeIfAbsent(aKafkaClusterComponentMap.getComponent().getKey(), k -> new HashMap<>());
-        final String              pfClusterName = KafkaDataLoaderUtility.getNameOrDefault(lPlatformCluster);
+//        final String              pfClusterName = KafkaDataLoaderUtility.getNameOrDefault(lPlatformCluster);
+        final String              pfClusterName = lPlatformCluster.getKey();
+        
         platformTopic.put(pfClusterName, topicName);
     }
 
@@ -741,7 +743,10 @@ public class KafkaDataLoader
         try
         {
             final Map<String, String> lClusterTopicList   = mComponentKafkaClusterTopics.get(aComponent.getKey());
-            final String              platformClusterName = KafkaDataLoaderUtility.getNameOrDefault(aPlatformCluster);
+   //         final String              platformClusterName = KafkaDataLoaderUtility.getNameOrDefault(aPlatformCluster);
+     
+            final String              platformClusterName = aPlatformCluster.getKey();
+            
             return lClusterTopicList.get(platformClusterName);
         }
         catch (final Exception e)

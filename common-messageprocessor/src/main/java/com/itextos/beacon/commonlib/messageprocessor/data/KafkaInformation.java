@@ -32,6 +32,7 @@ import com.itextos.beacon.commonlib.utility.RoundRobin;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaConsumer;
 import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
+import com.itextos.beacon.smslog.ProducerTopicLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 
 public class KafkaInformation
@@ -118,6 +119,9 @@ public class KafkaInformation
         }
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
+        
+        ProducerTopicLog.log("getDefaultProducer :  topicName : "+topicName);
+
 
         return getOrCreateProducer(aProducerKafkaRequest, topicName);
     }
@@ -142,6 +146,8 @@ public class KafkaInformation
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
 
+        ProducerTopicLog.log("getProducerBasedOnPriority :  topicName : "+topicName);
+        
         return getOrCreateProducer(aProducerKafkaRequest, topicName);
     }
 
@@ -154,6 +160,9 @@ public class KafkaInformation
             return null;
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
+        
+        ProducerTopicLog.log("getProducerBasedOnClient :  topicName : "+topicName);
+
         return getOrCreateProducer(aProducerKafkaRequest, topicName);
     }
 
