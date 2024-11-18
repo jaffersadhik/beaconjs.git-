@@ -85,6 +85,8 @@ public class TimedProcessor
                 // log.debug(mTimedProcess.getClass() + " Going on sleep for " +
                 // mSleepTimeInMilliSeconds + " millis");
 
+            	ExecutorLog1.getInstance("t_"+mThreadName).log("t_"+mThreadName+" : goto sleep for the milli second  : "+mSleepTimeInMilliSeconds);
+
                 CommonUtility.sleepForAWhile(mSleepTimeInMilliSeconds);
 
                 // if (log.isDebugEnabled())
