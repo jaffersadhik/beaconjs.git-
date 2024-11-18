@@ -521,14 +521,6 @@ public class App {
 
 			return true;
 			
-		}else if(module.equals("beaconapi")){
-			
-			com.itextos.beacon.beaconapi.BeaconApiApplication.main(args);
-			
-			IS_START_PROMETHEUS=true;
-
-			return true;
-			
 		}else if(module.equals("smppinterface")){
 			
 			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
