@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.StringTokenizer;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,12 +25,14 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
+import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDBConstants;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
+import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoaderUtility;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
@@ -106,64 +108,29 @@ public class ProcessorInfo
             throws Exception
     {
         
-        final String cluster=System.getenv("cluster");
+        final ClusterType    cluster = ClusterType.COMMON;
 
         final String priority=System.getenv("priority");
             
             StartupFlowLog.log("Processing for the cluster Type '" + cluster + "'");
             
             
-            if (cluster == null||cluster.trim().length()<1)
-            {
-                
-                StartupFlowLog.log("Processing for the cluster Type '" + cluster + "' given env cluster : "+System.getenv("cluster")+" not present in DataBase");
-                System.exit(0);
-            }
+      
 
-            if (priority == null||priority.trim().length()<1)
+            if (priority == null)
             {
                 
                 StartupFlowLog.log("Processing for the priority Type '" + priority + "' given env priorityr : "+System.getenv("cluster")+" not present in DataBase");
                 System.exit(0);
             }
 
-            StringTokenizer st=new StringTokenizer(cluster,",");
-            
-            while(st.hasMoreTokens()) {
-            	String sCLuster=st.nextToken();
-            	
-            	StartupFlowLog.log(" process : sCLuster : "+sCLuster);
-            	
-            	ClusterType platformCluster= ClusterType.getCluster(sCLuster);
-            	
-            	if(platformCluster!=null) {
-            		
-            		StringTokenizer st2=new StringTokenizer(priority,",");
-            		
-            		while(st2.hasMoreTokens()) {
-            			
-            			String smspriority=st2.nextToken();
-            			
-                    	StartupFlowLog.log(" process : sCLuster : "+sCLuster+" smspriority : "+smspriority);
+            String topicName=mComponent.getKey()+"-"+cluster.getKey()+"-"+priority;
+           
+                    
+    	
+        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
 
-            			
-            		    String topicName=mComponent.getKey()+"-"+platformCluster.getKey()+"-"+smspriority;
-            	           
-                       	StartupFlowLog.log("topicName : "+topicName);
-
-            	    	
-            	        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(platformCluster,topicName);
-
-            	        createConsumerThreads(platformCluster,topicName, lConsumerInmemCollection);
-            		}
-            	}else {
-                	StartupFlowLog.log(" not found : sCLuster : "+sCLuster);
-
-            	}
-            	
-            }
-            
-     
+        createConsumerThreads(cluster,topicName, lConsumerInmemCollection);
     }
 
     private ClusterType getClustersToProcess()

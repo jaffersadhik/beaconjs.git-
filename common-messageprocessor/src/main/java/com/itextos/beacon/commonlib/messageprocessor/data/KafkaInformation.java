@@ -142,7 +142,7 @@ public class KafkaInformation
         }
 
 
-        topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), aProducerKafkaRequest.getPlatformCluster().getKey(), topicName);
+        topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
 
