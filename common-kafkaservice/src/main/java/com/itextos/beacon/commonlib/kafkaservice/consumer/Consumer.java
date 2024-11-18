@@ -132,9 +132,22 @@ public class Consumer
                 
                 	 checkAndCommit(0);
                     
-                 	ConsumerTPLog.getInstance(mTopicName).log("sleepForAWhile(100); : mTopicName "+mTopicName+" : "+new Date());
+                 	
+                 	if(mComponent.getKey().equals(Component.IC.getKey())) {
+                 		
+                   	 CommonUtility.sleepForAWhile(100);
+                   	 
+                  	ConsumerTPLog.getInstance(mTopicName).log("sleepForAWhile(100); : mTopicName "+mTopicName+" : "+new Date());
 
-                	 CommonUtility.sleepForAWhile(100);
+
+                 	}else {
+                 		
+                 		 CommonUtility.sleepForAWhile(1000);
+                       	 
+                       	ConsumerTPLog.getInstance(mTopicName).log("sleepForAWhile(1000); : mTopicName "+mTopicName+" : "+new Date());
+
+                 	}
+
                 }
                 
             }
