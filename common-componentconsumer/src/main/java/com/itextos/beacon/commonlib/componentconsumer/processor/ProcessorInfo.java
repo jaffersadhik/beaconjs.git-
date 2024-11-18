@@ -124,7 +124,7 @@ public class ProcessorInfo
                 System.exit(0);
             }
 
-            String topicName=mComponent.getKey()+"-"+cluster.getKey()+"-"+priority;
+            String topicName=mComponent.getKey()+"-"+priority;
            
                     
     	
