@@ -164,7 +164,7 @@ public class T2DbTableWrapper
     {
     	
     	process(false);
-        return isQueue();
+        return !isQueue();
         
     }
 
