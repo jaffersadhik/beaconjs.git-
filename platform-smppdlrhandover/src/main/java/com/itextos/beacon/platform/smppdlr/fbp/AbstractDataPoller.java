@@ -59,7 +59,7 @@ public abstract class AbstractDataPoller
             if(log.isDebugEnabled()) {
             log.debug("SmppDlrFallBackDao.getRecordsFromTable() : data size : "+ lRecords.size());
             }
-            SmppDlrUtil.smppDeliveryProcess(toProcess, null);
+            SmppDlrUtil.smppDeliveryProcess(toProcess);
 
             SmppDlrFallBackDao.deleteRecordsFromTable(toDelete);
         }
