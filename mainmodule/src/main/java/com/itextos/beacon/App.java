@@ -384,6 +384,13 @@ public class App {
 			IS_START_PROMETHEUS=true;
 
 			return true;			
+		}else if(module.equals("smppdlrpoller")) {
+			
+			com.itextos.beacon.platform.smppdlrpoller.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
 		}else if(module.equals("httpclienthandover")) {
 			
 			com.itextos.beacon.httpclienthandover.StartApplication.main(args);

@@ -354,11 +354,18 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-singledn</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-smppdlrhandover</artifactId>
 			<version>1.0</version>
-	</dependency><dependency>
+	</dependency>
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-smppdlrpoller</artifactId>
+			<version>1.0</version>
+	</dependency>
+	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-smpputil</artifactId>
 			<version>1.0</version>
