@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
@@ -21,13 +20,11 @@ public class InmemoryQueueReaper
     private static final Log     log         = LogFactory.getLog(InmemoryQueueReaper.class);
 
     private final TimedProcessor mTimedProcessor;
-    private final ClusterType    mCluster;
+
     private boolean              canContinue = true;
 
-    public InmemoryQueueReaper(
-            ClusterType aCluster)
+    public InmemoryQueueReaper()
     {
-        mCluster        = aCluster;
         
         mTimedProcessor = new TimedProcessor("TimerThread-InmemoryReaper", this, TimerIntervalConstant.SMPP_DLR_INMEM_PROCESS_INTERVAL);
 
@@ -44,10 +41,10 @@ public class InmemoryQueueReaper
             if (log.isDebugEnabled())
                 log.debug("Drained a list>>>" + lDeliveryObjectList.size());
 
-            SmppDlrUtil.smppDeliveryProcess(lDeliveryObjectList, mCluster);
+            SmppDlrUtil.smppDeliveryProcess(lDeliveryObjectList);
         }
 
-        return false;
+        return  !InmemoryQueue.getInstance().isEmpty();
     }
 
     @Override

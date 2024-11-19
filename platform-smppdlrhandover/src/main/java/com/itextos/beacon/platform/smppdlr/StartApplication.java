@@ -48,7 +48,7 @@ public class StartApplication
             	
             	System.setProperty("modvalue", System.getenv("modvalue"));
 
-            }
+            } 
             final ProcessorInfo lProcessor = new ProcessorInfo(THIS_COMPONENT);
             lProcessor.process();
 
@@ -66,29 +66,7 @@ public class StartApplication
             
             DebugLog.log("lClusters " + lClusters);
 
-        	lClusters=System.getenv("smpp.cluster");
-
-            
-            String[] lClusterList = null;
-            
-            if(lClusters.indexOf(',')>0) {
-            	
-            	lClusterList= lClusters.split(",");
-            }else {
-            
-            	lClusterList = new String[1];
-            	
-            	lClusterList[0]= lClusters;
-            	
-            }
-               
-
-            for (final String lCluster : lClusterList)
-            {
-                final ClusterType lClusterType = ClusterType.getCluster(lCluster);
-
-                new InmemoryQueueReaper(lClusterType);
-            }
+            new InmemoryQueueReaper();
 
             final int lRedisPoolCnt = RedisConnectionProvider.getInstance().getRedisPoolCount(ClusterType.COMMON, Component.SMPP_SESSION);
 

@@ -9,13 +9,11 @@ import java.util.Map.Entry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
 import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
-import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueue;
 import com.itextos.beacon.smslog.PromoConsumerLog;
 import com.itextos.beacon.smslog.TransConsumerLog;
 
@@ -69,8 +67,7 @@ public class SmppDlrUtil
     }
 
     public static void smppDeliveryProcess(
-            List<DeliveryObject> lDeliveryObjectList,
-            ClusterType aCluster)
+            List<DeliveryObject> lDeliveryObjectList)
     {
         final Map<String, List<DeliveryObject>> result = SmppDlrUtil.groupByClientId(lDeliveryObjectList);
 
