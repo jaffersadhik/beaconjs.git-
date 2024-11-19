@@ -10,7 +10,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
+import com.itextos.beacon.platform.smppdlrutil.util.SmppDlrUtil;
 
 public class InmemoryQueueReaper
         implements

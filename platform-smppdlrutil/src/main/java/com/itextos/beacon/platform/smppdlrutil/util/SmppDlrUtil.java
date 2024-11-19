@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.util;
+package com.itextos.beacon.platform.smppdlrutil.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
-import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
+import com.itextos.beacon.platform.smppdlrutil.dao.SmppDlrFallBackDao;
 import com.itextos.beacon.smslog.PromoConsumerLog;
 import com.itextos.beacon.smslog.TransConsumerLog;
 

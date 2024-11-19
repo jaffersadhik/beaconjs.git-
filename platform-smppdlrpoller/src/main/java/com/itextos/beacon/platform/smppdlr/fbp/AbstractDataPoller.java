@@ -12,8 +12,8 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
-import com.itextos.beacon.platform.smppdlr.dao.SmppDlrFallBackDao;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrUtil;
+import com.itextos.beacon.platform.smppdlrutil.dao.SmppDlrFallBackDao;
+import com.itextos.beacon.platform.smppdlrutil.util.SmppDlrUtil;
 
 public abstract class AbstractDataPoller
         implements
@@ -43,11 +43,11 @@ public abstract class AbstractDataPoller
     @Override
     public boolean processNow()
     {
-        doProcess();
-        return false;
+        
+        return doProcess();
     }
 
-    private static void doProcess()
+    private static boolean doProcess()
     {
 
         try
@@ -62,11 +62,15 @@ public abstract class AbstractDataPoller
             SmppDlrUtil.smppDeliveryProcess(toProcess);
 
             SmppDlrFallBackDao.deleteRecordsFromTable(toDelete);
+            
+            return toDelete.size()>0;
         }
         catch (final Exception e)
         {
             log.error("Exception while sending the message to Client wise DN Redis..", e);
         }
+        
+        return false;
     }
 
     @Override

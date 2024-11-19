@@ -5,13 +5,8 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-smppdlrhandover</artifactId>
-  
-  	<properties>
-		<main.class>com.itextos.beacon.platform.smppdlrhandover.StartApplication</main.class>
-	</properties>
-
-	<dependencies>
+  <artifactId>platform-smppdlrpoller</artifactId>
+  	<dependencies>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-componentconsumer</artifactId>
@@ -35,11 +30,6 @@
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-smppdlrutil</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>platform-smppdlrpoller</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>

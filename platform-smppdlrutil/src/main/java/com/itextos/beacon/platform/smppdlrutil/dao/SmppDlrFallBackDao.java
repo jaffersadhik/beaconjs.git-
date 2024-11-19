@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.dao;
+package com.itextos.beacon.platform.smppdlrutil.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

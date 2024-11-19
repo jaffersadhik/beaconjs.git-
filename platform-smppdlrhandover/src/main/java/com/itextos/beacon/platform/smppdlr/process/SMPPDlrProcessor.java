@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueue;
-import com.itextos.beacon.platform.smppdlr.util.SmppDlrProducer;
+import com.itextos.beacon.platform.smppdlrutil.util.SmppDlrProducer;
 import com.itextos.beacon.smslog.PromoConsumerLog;
 import com.itextos.beacon.smslog.TransConsumerLog;
 

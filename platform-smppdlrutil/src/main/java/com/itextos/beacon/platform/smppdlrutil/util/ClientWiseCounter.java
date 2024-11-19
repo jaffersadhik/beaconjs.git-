@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.smppdlr.util;
+package com.itextos.beacon.platform.smppdlrutil.util;
 
 import java.util.Date;
 
