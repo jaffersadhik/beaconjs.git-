@@ -9,65 +9,67 @@ ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
 
+COPY ./target/common/log4j2-common.xml /log4j2-common.xml
+COPY ./target/common/custom_hosts_production.properties /custom_hosts_production.properties
+COPY ./target/common/smpp-interface.properties /smpp-interface.properties
+COPY ./target/common/encrypt.properties /encrypt.properties
+COPY ./target/common/dnd.properties /dnd.properties
+COPY ./target/common/dlttemplateconfig.properties /dlttemplateconfig.properties
+COPY ./target/common/common.properties /common.properties
+COPY ./target/common/callback-params.properties /callback-params.properties
+COPY ./target/common/payload-params.properties /payload-params.properties
+COPY ./target/common/midconfig.properties /midconfig.properties
+COPY ./target/common/messageremove.properties /messageremove.properties
+COPY ./target/common/kafka-custom.properties /kafka-custom.properties
+COPY ./target/common/jndi.properties /jndi.properties
+COPY ./target/common/internal-ui.properties /internal-ui.properties
+COPY ./target/common/inmem-refresh-interval.properties /inmem-refresh-interval.properties
+COPY ./target/common/http-connector.properties /http-connector.properties
+COPY ./target/common/global.properties /global.properties
+COPY ./target/common/genericapi.properties /genericapi.properties
+COPY ./target/common/exception-case.properties /exception-case.properties
+COPY ./target/common/wallet-history.properties /wallet-history.properties
+COPY ./target/common/wallet-balance-reminder.properties /wallet-balance-reminder.properties
+COPY ./target/common/url_hitter.properties /url_hitter.properties
+COPY ./target/common/timezone.properties /timezone.properties
+COPY ./target/common/timer-procesor-interval.properties /timer-procesor-interval.properties
+COPY ./target/common/sms_request.xsd /sms_request.xsd
+COPY ./target/common/shortcode-provider.properties /shortcode-provider.properties
+COPY ./target/common/replace-iso.properties /replace-iso.properties
+COPY ./target/common/r3c_addinfo.properties /r3c_addinfo.properties
+COPY ./target/common/prometheus.control.properties /prometheus.control.properties
+COPY ./target/common/mcc-mnc-list.json /mcc-mnc-list.json
 
 
-COPY ./target/log4j2-common.xml /log4j2-common.xml
-
-COPY ./target/custom_hosts_production.properties /custom_hosts_production.properties
-COPY ./target/smpp-interface.properties /smpp-interface.properties
-COPY ./target/encrypt.properties /encrypt.properties
-
-COPY ./target/elasticsearch.properties /elasticsearch.properties
-COPY ./target/elasticsearch.properties_do1 /elasticsearch.properties_do1
-COPY ./target/elasticsearch.properties_cat /elasticsearch.properties_cat
-COPY ./target/elasticsearch.properties_horse /elasticsearch.properties_horse
-
-COPY ./target/dnd.properties /dnd.properties
-COPY ./target/dlttemplateconfig.properties /dlttemplateconfig.properties
-
-COPY ./target/common.properties /common.properties
-COPY ./target/common-db.properties /common-db.properties
-COPY ./target/common-db.properties_cat /common-db.properties_cat
-COPY ./target/common-db.properties_horse /common-db.properties_horse
-COPY ./target/common-db.properties_do1 /common-db.properties_do1
-
-COPY ./target/callback-params.properties /callback-params.properties
-COPY ./target/payload-params.properties /payload-params.properties
-COPY ./target/midconfig.properties /midconfig.properties
-COPY ./target/messageremove.properties /messageremove.properties
-
-COPY ./target/kafka-producer.properties /kafka-producer.properties
-COPY ./target/kafka-producer.properties_cat /kafka-producer.properties_cat
-COPY ./target/kafka-producer.properties_horse /kafka-producer.properties_horse
-COPY ./target/kafka-producer.properties_do1 /kafka-producer.properties_do1
-
-COPY ./target/kafka-custom.properties /kafka-custom.properties
-
-COPY ./target/kafka-consumer.properties /kafka-consumer.properties
-COPY ./target/kafka-consumer.properties_do1 /kafka-consumer.properties_do1
-COPY ./target/kafka-consumer.properties_cat /kafka-consumer.properties_cat
-COPY ./target/kafka-consumer.properties_horse /kafka-consumer.properties_horse
-
-COPY ./target/jndi.properties /jndi.properties
-COPY ./target/internal-ui.properties /internal-ui.properties
-COPY ./target/inmem-refresh-interval.properties /inmem-refresh-interval.properties
-COPY ./target/http-connector.properties /http-connector.properties
-COPY ./target/global.properties /global.properties
-COPY ./target/genericapi.properties /genericapi.properties
-COPY ./target/exception-case.properties /exception-case.properties
-COPY ./target/wallet-history.properties /wallet-history.properties
-COPY ./target/wallet-balance-reminder.properties /wallet-balance-reminder.properties
-COPY ./target/url_hitter.properties /url_hitter.properties
-COPY ./target/timezone.properties /timezone.properties
-COPY ./target/timer-procesor-interval.properties /timer-procesor-interval.properties
-COPY ./target/sms_request.xsd /sms_request.xsd
-COPY ./target/shortcode-provider.properties /shortcode-provider.properties
-COPY ./target/replace-iso.properties /replace-iso.properties
-COPY ./target/r3c_addinfo.properties /r3c_addinfo.properties
-COPY ./target/prometheus.control.properties /prometheus.control.properties
+COPY ./target/profile/default/kafka-producer.properties /kafka-producer.properties
+COPY ./target/profile/default/kafka-consumer.properties /kafka-consumer.properties
+COPY ./target/profile/default/common-db.properties /common-db.properties
+COPY ./target/profile/default/elasticsearch.properties /elasticsearch.properties
 
 
-COPY ./target/mcc-mnc-list.json /mcc-mnc-list.json
+COPY ./target/profile/cat/kafka-producer.properties_cat /kafka-producer.properties_cat
+COPY ./target/profile/cat/kafka-consumer.properties_cat /kafka-consumer.properties_cat
+COPY ./target/profile/cat/common-db.properties_cat /common-db.properties_cat
+COPY ./target/profile/cat/elasticsearch.properties_cat /elasticsearch.properties_cat
+
+
+
+
+COPY ./target/profile/horse/kafka-producer.properties_horse /kafka-producer.properties_horse
+COPY ./target/profile/horse/kafka-consumer.properties_horse /kafka-consumer.properties_horse
+COPY ./target/profile/horse/common-db.properties_horse /common-db.properties_horse
+COPY ./target/profile/horse/elasticsearch.properties_horse /elasticsearch.properties_horse
+
+
+
+COPY ./target/profile/digitalocean1/kafka-producer.properties_do1 /kafka-producer.properties_do1
+COPY ./target/profile/digitalocean1/kafka-consumer.properties_do1 /kafka-consumer.properties_do1
+COPY ./target/profile/digitalocean1/common-db.properties_do1 /common-db.properties_do1
+COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.properties_do1
+
+
+
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
+
 ENTRYPOINT ["java","-Xss1m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
 
