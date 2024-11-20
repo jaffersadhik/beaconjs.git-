@@ -153,7 +153,7 @@ public final class KafkaDataLoaderUtility
     public static String getNameOrDefault(
             ItextosEnum aItextosEnum)
     {
-        return aItextosEnum == null ? KafkaDBConstants.DEFAULT : aItextosEnum.getKey();
+        return aItextosEnum == null ? ClusterType.BULK.getKey() : aItextosEnum.getKey();
     }
 
 }
