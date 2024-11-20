@@ -35,7 +35,12 @@ public class DlrFallbackPollerHolder
 
     private void startPollars()
     {
-        final String lCluster = System.getProperty("cluster");
+         String lCluster = System.getProperty("cluster");
+        
+        if(lCluster==null) {
+        	
+        	lCluster=System.getenv("dlrpayloadgen.cluster");
+        }
 
         if (log.isDebugEnabled())
             log.debug("Cluster Type : " + lCluster);

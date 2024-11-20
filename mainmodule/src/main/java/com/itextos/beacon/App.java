@@ -570,6 +570,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("dnfp")){
+			
+			com.itextos.beacon.platform.dnrfallbackpoller.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("ksu")){
 			
 			com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);

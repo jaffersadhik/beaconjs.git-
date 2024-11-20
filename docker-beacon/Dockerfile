@@ -71,5 +71,5 @@ COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.
 
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
 
-ENTRYPOINT ["java","-Xss10m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
+ENTRYPOINT ["java","-Xss1m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
 
