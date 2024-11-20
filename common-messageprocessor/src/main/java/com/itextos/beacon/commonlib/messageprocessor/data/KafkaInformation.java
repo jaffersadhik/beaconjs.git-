@@ -144,10 +144,13 @@ public class KafkaInformation
 
         if(topicName==null) {
         
-        	topicName="low";
+        	topicName=aProducerKafkaRequest.getNextComponent().getKey();
+        }else {
+        
+            topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
+
         }
 
-        topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
 
