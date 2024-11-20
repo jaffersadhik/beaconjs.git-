@@ -551,8 +551,8 @@ public class KafkaDataLoader
         KafkaDataLoaderUtility.addToTopic(sjTopicName, lPlatformCluster);
         final String              topicName     = KafkaDataLoaderUtility.updateTopicName(sjTopicName.toString());
         final Map<String, String> platformTopic = mComponentKafkaClusterTopics.computeIfAbsent(aKafkaClusterComponentMap.getComponent().getKey(), k -> new HashMap<>());
-//        final String              pfClusterName = KafkaDataLoaderUtility.getNameOrDefault(lPlatformCluster);
-        final String              pfClusterName = lPlatformCluster.getKey();
+        final String              pfClusterName = KafkaDataLoaderUtility.getNameOrDefault(lPlatformCluster);
+//        final String              pfClusterName = lPlatformCluster.getKey();
         
         platformTopic.put(pfClusterName, topicName);
     }
