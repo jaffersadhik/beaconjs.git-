@@ -125,7 +125,7 @@ public class XMLRequestReader
                 }
                 else
                     if (aMessagesCount == 1)
-                        processSingleMessage(aRequestProcessor, aReqStatus);
+                        processSingleMessage(aRequestProcessor, aReqStatus,sb);
                     else
                         processMultipleMessages(aRequestProcessor, aReqStatus);
             }
@@ -196,9 +196,10 @@ public class XMLRequestReader
 
     private static void processSingleMessage(
             IRequestProcessor aRequestProcessor,
-            InterfaceRequestStatus aReqStatus)
+            InterfaceRequestStatus aReqStatus,
+            StringBuffer sb)
     {
-        final InterfaceMessage message   = aRequestProcessor.getSingleMessage();
+        final InterfaceMessage message   = aRequestProcessor.getSingleMessage(sb);
         final String           messageId = aReqStatus.getMessageId();
 
         if (message == null)

@@ -357,7 +357,7 @@ public class JSONRequestProcessor
                 if (log.isDebugEnabled())
                     log.debug("message Object:  '" + lMessage + "'");
 
-                final MessageValidater    lMessageValidater        = new MessageValidater(lMessage, mBasicInfo);
+                final MessageValidater    lMessageValidater        = new MessageValidater(lMessage, mBasicInfo,sb);
                 final InterfaceStatusCode lMessageValidationStatus = lMessageValidater.validate();
                 InterfaceStatusCode       lMiddlewareStatus        = getMiddlewareStatus(lClientAccessStatus, lMessageValidationStatus);
 

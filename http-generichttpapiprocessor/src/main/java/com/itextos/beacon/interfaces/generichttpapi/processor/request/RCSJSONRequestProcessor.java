@@ -36,15 +36,18 @@ public class RCSJSONRequestProcessor
     private static final Log log           = LogFactory.getLog(RCSJSONRequestProcessor.class);
     private JSONArray        mMessageArray = null;
 
+    private StringBuffer sb;
     public RCSJSONRequestProcessor(
             String aRequestString,
             String aCustomerIP,
             long aRequestedTime,
             String aReqType,
-            String aResponseType)
+            String aResponseType,
+            StringBuffer sb)
     {
+    	
         super(aRequestString, aCustomerIP, aRequestedTime, aReqType, aResponseType);
-
+        this.sb=sb;
         if (MessageSource.GENERIC_QS.equals(aResponseType))
             mResponseProcessor = new GenerateQueryStringResponse(aCustomerIP);
         else
@@ -180,7 +183,7 @@ public class RCSJSONRequestProcessor
     }
 
     @Override
-    public InterfaceMessage getSingleMessage()
+    public InterfaceMessage getSingleMessage(StringBuffer sb)
     {
         InterfaceMessage lMessage = null;
 
@@ -264,7 +267,7 @@ public class RCSJSONRequestProcessor
         if (log.isDebugEnabled())
             log.debug("mobile Number:  '" + lDest + "'");
 
-        final MessageValidater lMessageValidater = new MessageValidater(lMessage, mBasicInfo);
+        final MessageValidater lMessageValidater = new MessageValidater(lMessage, mBasicInfo,sb);
 
         // lDest = appendCountryCode(lMessage, lDest);
 
@@ -354,7 +357,7 @@ public class RCSJSONRequestProcessor
                 if (log.isDebugEnabled())
                     log.debug("message Object:  '" + lMessage + "'");
 
-                final MessageValidater    lMessageValidater        = new MessageValidater(lMessage, mBasicInfo);
+                final MessageValidater    lMessageValidater        = new MessageValidater(lMessage, mBasicInfo,sb);
                 final InterfaceStatusCode lMessageValidationStatus = lMessageValidater.validate();
                 InterfaceStatusCode       lMiddlewareStatus        = getMiddlewareStatus(lClientAccessStatus, lMessageValidationStatus);
 

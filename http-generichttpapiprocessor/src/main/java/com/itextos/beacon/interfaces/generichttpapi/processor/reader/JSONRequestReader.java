@@ -239,7 +239,7 @@ public class JSONRequestReader
             String aMessageId,
             StringBuffer sb)
     {
-        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage();
+        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage( sb);
 
         if (log.isDebugEnabled())
             log.debug("Processing Single message " + lMessageObj);

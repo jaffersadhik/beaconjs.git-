@@ -71,7 +71,7 @@ public class RCSJSONRequestReader
             final String            lReqJson         = lJsonObj.toJSONString();
 
             final IRequestProcessor requestProcessor = new RCSJSONRequestProcessor(lReqJson, mHttpRequest.getRemoteAddr(), System.currentTimeMillis(), MessageSource.RCS_JSON,
-                    MessageSource.RCS_JSON);
+                    MessageSource.RCS_JSON,sb);
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 
@@ -212,7 +212,7 @@ public class RCSJSONRequestReader
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, mHttpRequest.getRemoteAddr(), lUserName);
 
         if (lMessagesCount == 1)
-            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId);
+            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId,sb);
         else
             processMultipleMessage(aRequestProcessor, aReqStatus, lMessageId);
         return userSpecificTimer;
@@ -240,9 +240,9 @@ public class RCSJSONRequestReader
     private static void processSingleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
-            String aMessageId)
+            String aMessageId,StringBuffer sb)
     {
-        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage();
+        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage(sb);
 
         if (log.isDebugEnabled())
             log.debug("Processing Single message " + lMessageObj);

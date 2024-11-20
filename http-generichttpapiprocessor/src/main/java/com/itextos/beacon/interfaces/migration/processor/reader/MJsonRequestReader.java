@@ -187,7 +187,7 @@ public class MJsonRequestReader
         sendResponse(aRequestProcessor);
     }
 
-    private static void handleNoMessage(
+    private  void handleNoMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus)
     {
@@ -195,20 +195,21 @@ public class MJsonRequestReader
         aRequestProcessor.setRequestStatus(aReqStatus);
     }
 
-    private static void processValidMessages(
+    private  void processValidMessages(
             IRequestProcessor aRequestProcessor,
-            InterfaceRequestStatus aReqStatus)
+            InterfaceRequestStatus aReqStatus
+           )
     {
         final int    lMessagesCount = aRequestProcessor.getMessagesCount();
         final String lMessageId     = aReqStatus.getMessageId();
 
         if (lMessagesCount == 1)
-            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId);
+            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId,sb);
         else
             processMultipleMessage(aRequestProcessor, aReqStatus, lMessageId);
     }
 
-    private static void processMultipleMessage(
+    private  void processMultipleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
             String aMessageId)
@@ -227,12 +228,13 @@ public class MJsonRequestReader
         aRequestProcessor.setRequestStatus(aReqStatus);
     }
 
-    private static void processSingleMessage(
+    private  void processSingleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
-            String aMessageId)
+            String aMessageId,
+            StringBuffer sb)
     {
-        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage();
+        final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage(sb);
 
         if (log.isDebugEnabled())
             log.debug("Processing Single message " + lMessageObj);

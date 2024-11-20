@@ -163,7 +163,7 @@ public class XMLRequestProcessor
     }
 
     @Override
-    public InterfaceMessage getSingleMessage()
+    public InterfaceMessage getSingleMessage(StringBuffer sb)
     {
         InterfaceMessage lMessage  = null;
         Messages         lMessages = null;
@@ -239,7 +239,7 @@ public class XMLRequestProcessor
             log.debug("parse message:  '" + lMessage + "'");
         }
 
-        final MessageValidater lMsgValidater            = new MessageValidater(lMessage, mBasicInfo);
+        final MessageValidater lMsgValidater            = new MessageValidater(lMessage, mBasicInfo,sb);
 
         // aMobileNumber = appendCountryCode(lMessage, aMobileNumber);
 
@@ -330,7 +330,7 @@ public class XMLRequestProcessor
                 if (log.isDebugEnabled())
                     log.debug("message Object:  '" + message + "'");
 
-                final MessageValidater    validater             = new MessageValidater(message, mBasicInfo);
+                final MessageValidater    validater             = new MessageValidater(message, mBasicInfo,sb);
                 final InterfaceStatusCode messageValidateStatus = validater.validate();
                 final InterfaceStatusCode lMiddlewareStatus     = getMiddlewareStatus(clientAccessStatus, messageValidateStatus);
 

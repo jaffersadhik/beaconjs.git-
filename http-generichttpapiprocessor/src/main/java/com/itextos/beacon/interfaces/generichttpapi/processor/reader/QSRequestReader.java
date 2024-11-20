@@ -189,14 +189,14 @@ public class QSRequestReader
         }
     }
 
-    private static void processValidMessages(
+    private void processValidMessages(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus)
     {
         final int messagesCount = aRequestProcessor.getMessagesCount();
 
         if (messagesCount == 1)
-            processSingleMessage(aRequestProcessor, aReqStatus);
+            processSingleMessage(aRequestProcessor, aReqStatus,sb);
         else
             processMultipleMessage(aRequestProcessor, aReqStatus);
     }
@@ -229,9 +229,9 @@ public class QSRequestReader
 
     private static void processSingleMessage(
             IRequestProcessor aRequestProcessor,
-            InterfaceRequestStatus aReqStatus)
+            InterfaceRequestStatus aReqStatus,StringBuffer sb)
     {
-        final InterfaceMessage message   = aRequestProcessor.getSingleMessage();
+        final InterfaceMessage message   = aRequestProcessor.getSingleMessage(sb);
         final String           messageId = aReqStatus.getMessageId();
 
         if (message == null)
