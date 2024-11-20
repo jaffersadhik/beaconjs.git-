@@ -336,7 +336,7 @@ public class MessageValidater
         return lClientStatus;
     }
 
-    public String decryptString(
+    private String decryptString(
             String aEncryptString)
             throws Exception
     {
@@ -345,7 +345,7 @@ public class MessageValidater
 
         final String lEncryptedStr = CommonUtility.nullCheck(mBasicInfo.getEncrypt());
 
-        if ("1".equals(lEncryptedStr))
+        if ("1".equals(lEncryptedStr)) {
             try
             {
                 final String      lClientId    = mBasicInfo.getClientId();
@@ -366,6 +366,7 @@ public class MessageValidater
                 log.error("Exception occured while encryption ");
                 throw e;
             }
+        }
         return aEncryptString;
     }
 
