@@ -18,6 +18,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.JSONRequestReader;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
+import com.itextos.beacon.smslog.JSONReceiverLog;
 import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
 public class JSONCustomReceiver
@@ -44,6 +45,9 @@ public class JSONCustomReceiver
 
         StringBuffer sb=new StringBuffer();
         
+        sb.append("\n##########################################\n");
+        sb.append("JSONCustomReceiver request received in doGet").append("\n");
+ 
         final long start = System.currentTimeMillis();
 
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
@@ -55,6 +59,12 @@ public class JSONCustomReceiver
 
         TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + (end-start) + "' milliseconds");
 
+        sb.append("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" +   (end-start)
+                + "' milliseconds").append("\n");
+
+        sb.append("\n##########################################\n");
+        
+        JSONReceiverLog.log(sb.toString());
     }
 
     /**
@@ -69,10 +79,13 @@ public class JSONCustomReceiver
             IOException
     {
         final long lProcessStart = System.currentTimeMillis();
+        StringBuffer sb=new StringBuffer();
 
         try
         {
-            StringBuffer sb=new StringBuffer();
+            sb.append("\n##########################################\n");
+            sb.append("JSONCustomReceiver request received in doPost").append("\n");
+     
 
             if (log.isDebugEnabled())
                 log.debug("Custom JSON request received in doPost");
@@ -92,6 +105,13 @@ public class JSONCustomReceiver
             final long lProcessEnd = System.currentTimeMillis();
 
             TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + (lProcessEnd - lProcessStart)  + "' milliseconds");
+
+            sb.append("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" +  (lProcessEnd - lProcessStart)
+                    + "' milliseconds").append("\n");
+
+            sb.append("\n##########################################\n");
+            
+            JSONReceiverLog.log(sb.toString());
 
         }
     }

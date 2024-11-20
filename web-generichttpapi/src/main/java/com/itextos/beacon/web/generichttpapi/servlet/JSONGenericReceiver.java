@@ -39,8 +39,7 @@ public class JSONGenericReceiver
             throws ServletException,
             IOException
     {
-        if (log.isDebugEnabled())
-            log.debug("JSONGenericReceiver JSON  request received in doGet");
+       
 
         StringBuffer sb=new StringBuffer();
         sb.append("\n##########################################\n");
@@ -74,13 +73,14 @@ public class JSONGenericReceiver
             IOException
     {
         final long lProcessStart = System.currentTimeMillis();
+        StringBuffer sb=new StringBuffer();
 
         try
         {
-            StringBuffer sb=new StringBuffer();
 
-            if (log.isDebugEnabled())
-                log.debug("Generic JSON request received in doPost");
+            sb.append("\n##########################################\n");
+            sb.append("JSONGenericReceiver request received in doGet").append("\n");
+       
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
@@ -95,9 +95,15 @@ public class JSONGenericReceiver
         finally
         {
             final long lProcessEnd = System.currentTimeMillis();
+            final long lProcessTaken = lProcessEnd - lProcessStart;
 
             TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + (lProcessEnd - lProcessStart)  + "' milliseconds");
+            sb.append("Request Start time : '" + Utility.getFormattedDateTime(lProcessStart) + "' End time : '" + Utility.getFormattedDateTime(lProcessEnd) + "' Processing time : '" + lProcessTaken
+                    + "' milliseconds").append("\n");
 
+            sb.append("\n##########################################\n");
+            
+            JSONReceiverLog.log(sb.toString());
           
         }
     }
