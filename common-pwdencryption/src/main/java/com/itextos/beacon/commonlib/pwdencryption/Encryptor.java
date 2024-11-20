@@ -52,6 +52,7 @@ public class Encryptor
     {
         String returnValue = null;
 
+        try {
         switch (aCryptoType)
         {
             case ENCRYPTION_AES_256:
@@ -68,6 +69,9 @@ public class Encryptor
 
             default:
                 throw new ItextosRuntimeException("Invalid crypto type specified. CryptoType : '" + aCryptoType + "'");
+        }
+        }catch(Exception e) {
+        	
         }
         return returnValue;
     }
