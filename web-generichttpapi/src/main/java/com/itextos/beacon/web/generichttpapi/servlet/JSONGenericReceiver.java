@@ -79,7 +79,7 @@ public class JSONGenericReceiver
         {
 
             sb.append("\n##########################################\n");
-            sb.append("JSONGenericReceiver request received in doGet").append("\n");
+            sb.append("JSONGenericReceiver request received in doPost").append("\n");
        
 
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());

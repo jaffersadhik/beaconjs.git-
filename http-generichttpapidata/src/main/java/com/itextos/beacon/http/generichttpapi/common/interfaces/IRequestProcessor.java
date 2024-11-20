@@ -22,7 +22,7 @@ public interface IRequestProcessor
     int getNumbersCount(
             int aIndex);
 
-    InterfaceMessage getSingleMessage();
+    InterfaceMessage getSingleMessage(StringBuffer sb);
 
     void setRequestStatus(
             InterfaceRequestStatus aRequestStatus);

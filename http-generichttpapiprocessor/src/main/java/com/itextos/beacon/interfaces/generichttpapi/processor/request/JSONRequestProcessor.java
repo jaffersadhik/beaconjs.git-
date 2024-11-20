@@ -184,7 +184,7 @@ public class JSONRequestProcessor
     }
 
     @Override
-    public InterfaceMessage getSingleMessage()
+    public InterfaceMessage getSingleMessage(StringBuffer sb)
     {
         InterfaceMessage lMessage = null;
 
@@ -201,18 +201,17 @@ public class JSONRequestProcessor
 
                 if (lMultipleDests.isEmpty())
                 {
-                    if (log.isDebugEnabled())
-                        log.debug("Destination array is empty:  '" + lMultipleDests.size() + "' status '" + InterfaceStatusCode.DESTINATION_EMPTY + "'");
+         
                     lMessage = handleNoDest(lJsonMessage);
                     lMessage.setRouteType(RouteType.DOMESTIC);
+                    sb.append("Destination array is empty:  '" + lMultipleDests.size() + "' status '" + InterfaceStatusCode.DESTINATION_EMPTY + "'").append("\n");
                     send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb);
                 }
                 else
                     if (lMultipleDests.size() == 1)
                     {
-                        if (log.isDebugEnabled())
-                            log.debug("Processing single message");
-                        lMessage = processSingleMessage(lJsonMessage, lMultipleDests);
+                      
+                        lMessage = processSingleMessage(lJsonMessage, lMultipleDests,sb);
                     }
                     else
                     {
@@ -255,7 +254,7 @@ public class JSONRequestProcessor
 
     private InterfaceMessage processSingleMessage(
             JSONObject lJsonMessage,
-            JSONArray lMultipleDests)
+            JSONArray lMultipleDests,StringBuffer sb)
             throws Exception
     {
         final InterfaceMessage lMessage = getMessage(lJsonMessage);
@@ -268,7 +267,7 @@ public class JSONRequestProcessor
         if (log.isDebugEnabled())
             log.debug("mobile Number:  '" + lDest + "'");
 
-        final MessageValidater lMessageValidater = new MessageValidater(lMessage, mBasicInfo);
+        final MessageValidater lMessageValidater = new MessageValidater(lMessage, mBasicInfo,sb);
 
         // lDest = appendCountryCode(lMessage, lDest);
 
@@ -654,5 +653,7 @@ public class JSONRequestProcessor
         final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, InterfaceStatusCode.SUCCESS);
         middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
     }
+
+	
 
 }

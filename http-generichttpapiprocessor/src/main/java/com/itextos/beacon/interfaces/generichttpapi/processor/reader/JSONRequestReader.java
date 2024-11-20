@@ -74,7 +74,7 @@ public class JSONRequestReader
 
             requestProcessor.parseBasicInfo(mHttpRequest.getHeader(InterfaceInputParameters.AUTHORIZATION));
 
-            jsonTimer = processRequest(requestProcessor, lJsonObj);
+            jsonTimer = processRequest(requestProcessor, lJsonObj,sb);
         }
         catch (final Exception e)
         {
@@ -102,7 +102,7 @@ public class JSONRequestReader
 
     private Timer processRequest(
             IRequestProcessor aRequestProcessor,
-            JSONObject lJsonObj)
+            JSONObject lJsonObj,StringBuffer sb)
     {
         InterfaceRequestStatus reqStatus = aRequestProcessor.validateBasicInfo();
 
@@ -148,7 +148,7 @@ public class JSONRequestReader
                     return doSyncProcess(aRequestProcessor, reqStatus);
                     */
             	
-            }                    return doSyncProcess(aRequestProcessor, reqStatus);
+            }                    return doSyncProcess(aRequestProcessor, reqStatus,sb);
 
         }
         return null;
@@ -156,7 +156,7 @@ public class JSONRequestReader
 
     private Timer doSyncProcess(
             IRequestProcessor aRequestProcessor,
-            InterfaceRequestStatus aReqStatus)
+            InterfaceRequestStatus aReqStatus,StringBuffer sb)
     {
         Timer jsonTimer = null;
 
@@ -179,7 +179,7 @@ public class JSONRequestReader
                 if (log.isDebugEnabled())
                     log.debug("Processing valid messages");
 
-                jsonTimer = processValidMessages(aRequestProcessor, aReqStatus);
+                jsonTimer = processValidMessages(aRequestProcessor, aReqStatus,sb);
             }
         }
         sendResponse(aRequestProcessor);
@@ -196,7 +196,7 @@ public class JSONRequestReader
 
     private Timer processValidMessages(
             IRequestProcessor aRequestProcessor,
-            InterfaceRequestStatus aReqStatus)
+            InterfaceRequestStatus aReqStatus,StringBuffer sb)
     {
         final int    lMessagesCount    = aRequestProcessor.getMessagesCount();
         final String lMessageId        = aReqStatus.getMessageId();
@@ -208,16 +208,16 @@ public class JSONRequestReader
             PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, mHttpRequest.getRemoteAddr(), lUserName);
 
         if (lMessagesCount == 1)
-            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId);
+            processSingleMessage(aRequestProcessor, aReqStatus, lMessageId,sb);
         else
-            processMultipleMessage(aRequestProcessor, aReqStatus, lMessageId);
+            processMultipleMessage(aRequestProcessor, aReqStatus, lMessageId,sb);
         return userSpecificTimer;
     }
 
     private static void processMultipleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
-            String aMessageId)
+            String aMessageId,StringBuffer sb)
     {
         // multiple messages
         if (log.isDebugEnabled())
@@ -236,7 +236,8 @@ public class JSONRequestReader
     private static void processSingleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
-            String aMessageId)
+            String aMessageId,
+            StringBuffer sb)
     {
         final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage();
 

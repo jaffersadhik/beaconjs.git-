@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
@@ -34,12 +35,15 @@ public class MessageValidater
     private final BasicInfo        mBasicInfo;
     private final InterfaceMessage mInterfaceMessage;
 
+    private StringBuffer sb;
     public MessageValidater(
             InterfaceMessage aInterfaceMessage,
-            BasicInfo aBasicInfo)
+            BasicInfo aBasicInfo,
+            StringBuffer sb)
     {
         mInterfaceMessage = aInterfaceMessage;
         mBasicInfo        = aBasicInfo;
+        this.sb=sb;
     }
 
     public InterfaceStatusCode validate()
@@ -385,13 +389,16 @@ public class MessageValidater
         if (log.isDebugEnabled())
             log.debug("template from db:  '" + lTemplate + "'");
 
-        if (lTemplate == null)
+        if (lTemplate == null) {
+            sb.append("INVALID_TEMPLATEID" ).append("\n");
+
             return InterfaceStatusCode.INVALID_TEMPLATEID;
+        }
 
         if (lTemplateValues == null)
         {
-            if (log.isDebugEnabled())
-                log.debug("template values : '" + lTemplateValues + "'");
+
+            sb.append("TEMPLATE_VALUES_EMPTY" ).append("\n");
 
             return InterfaceStatusCode.TEMPLATE_VALUES_EMPTY;
         }
@@ -429,9 +436,8 @@ public class MessageValidater
 
         if (lMessage.isBlank())
         {
-            if (log.isDebugEnabled())
-                log.debug("Message Empty :  '" + lMessage + "'");
 
+            sb.append("Message Empty :  '" + lMessage + "'").append("\n");
             return InterfaceStatusCode.MESSAGE_EMPTY;
         }
 
@@ -441,7 +447,8 @@ public class MessageValidater
         }
         catch (final Exception e)
         {
-            log.error("Exception occured while decrypting message", e);
+            sb.append("Exception occured while decrypting message").append("\t").append(ErrorMessage.getStackTraceAsString(e)).append("\n");
+
             return InterfaceStatusCode.MESSAGE_EMPTY;
         }
 
@@ -577,7 +584,7 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateAppCountry(
+    private  InterfaceStatusCode validateAppCountry(
             String aAppCountry)
     {
 
@@ -585,13 +592,15 @@ public class MessageValidater
         {
             if (log.isDebugEnabled())
                 log.debug("append country option is invalid:  '" + aAppCountry + "'");
+            
+           sb.append("append country option is invalid:  '" + aAppCountry + "'  InterfaceStatusCode.COUNTRY_CODE_INVALID_APPEND").append(InterfaceStatusCode.COUNTRY_CODE_INVALID_APPEND).append("\n");
 
             return InterfaceStatusCode.COUNTRY_CODE_INVALID_APPEND;
         }
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateCountryCode(
+    private  InterfaceStatusCode validateCountryCode(
             String aAppCountry,
             String aCountryCode)
     {
@@ -608,7 +617,7 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateDestinationPort(
+    private  InterfaceStatusCode validateDestinationPort(
             String aDestinationPort,
             String aMsgType)
     {
@@ -634,7 +643,7 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateVLinkMessage(
+    private  InterfaceStatusCode validateVLinkMessage(
             String aUrlTrack)
     {
 
@@ -648,7 +657,7 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateCustomerRefrenceNumber(
+    private  InterfaceStatusCode validateCustomerRefrenceNumber(
             String aCustomerRefrenceNum)
     {
 
