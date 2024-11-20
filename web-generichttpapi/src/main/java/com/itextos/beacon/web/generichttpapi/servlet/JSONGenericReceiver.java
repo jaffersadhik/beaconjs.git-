@@ -13,6 +13,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.MessageSource;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.JSONRequestReader;
 import com.itextos.beacon.interfaces.generichttpapi.processor.reader.RequestReader;
+import com.itextos.beacon.smslog.JSONReceiverLog;
 import com.itextos.beacon.smslog.TimeTakenInterfaceLog;
 
 import javax.servlet.ServletException;
@@ -39,9 +40,12 @@ public class JSONGenericReceiver
             IOException
     {
         if (log.isDebugEnabled())
-            log.debug("Generic JSON  request received in doGet");
+            log.debug("JSONGenericReceiver JSON  request received in doGet");
 
         StringBuffer sb=new StringBuffer();
+        sb.append("\n##########################################\n");
+        sb.append("JSONGenericReceiver request received in doGet").append("\n");
+    
         final long start = System.currentTimeMillis();
         PrometheusMetrics.apiIncrementAcceptCount(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, aRequest.getRemoteAddr());
 
@@ -49,9 +53,16 @@ public class JSONGenericReceiver
         reader.processGetRequest();
 
         final long end    = System.currentTimeMillis();
-        final long result = end - start;
+        final long lProcessTaken = end - start;
 
-        TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + result + "' milliseconds");
+        TimeTakenInterfaceLog.log("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + lProcessTaken + "' milliseconds");
+
+        sb.append("Request Start time : '" + Utility.getFormattedDateTime(start) + "' End time : '" + Utility.getFormattedDateTime(end) + "' Processing time : '" + lProcessTaken
+                + "' milliseconds").append("\n");
+
+        sb.append("\n##########################################\n");
+        
+        JSONReceiverLog.log(sb.toString());
 
     }
 
