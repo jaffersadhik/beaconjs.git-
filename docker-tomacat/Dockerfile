@@ -99,10 +99,10 @@ COPY ./target/common/prometheus.control.properties /prometheus.control.propertie
 COPY ./target/common/mcc-mnc-list.json /mcc-mnc-list.json
 
 
-COPY ./target/profile/default/kafka-producer.properties /kafka-producer.properties
-COPY ./target/profile/default/kafka-consumer.properties /kafka-consumer.properties
-COPY ./target/profile/default/common-db.properties /common-db.properties
-COPY ./target/profile/default/elasticsearch.properties /elasticsearch.properties
+COPY ./target/profile/default/kafka-producer.properties /kafka-producer.properties_default
+COPY ./target/profile/default/kafka-consumer.properties /kafka-consumer.properties_default
+COPY ./target/profile/default/common-db.properties /common-db.properties_default
+COPY ./target/profile/default/elasticsearch.properties /elasticsearch.properties_default
 
 
 COPY ./target/profile/cat/kafka-producer.properties_cat /kafka-producer.properties_cat
