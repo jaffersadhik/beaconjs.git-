@@ -113,7 +113,7 @@ public class MessageIdentifier
         {
             final String message = "Message Identifier is already initialized for the Interface Type : '" + mInterfaceType + "' and assigned AppInstanceID is : '" + mAppInstanceId + "'";
             log.error(message, new ItextosRuntimeException(message));
-            throw new ItextosRuntimeException(message);
+         //   throw new ItextosRuntimeException(message);
         }
     }
 
