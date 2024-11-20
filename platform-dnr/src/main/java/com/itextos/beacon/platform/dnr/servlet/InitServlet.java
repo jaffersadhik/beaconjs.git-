@@ -35,6 +35,8 @@ public class InitServlet
             ServletConfig config)
             throws ServletException
     {
+    	com.itextos.beacon.App.createfolder();
+
         PrometheusMetrics.registerServer();
         PrometheusMetrics.registerApiMetrics();
         DlrFallbackQReaper.getInstance();
