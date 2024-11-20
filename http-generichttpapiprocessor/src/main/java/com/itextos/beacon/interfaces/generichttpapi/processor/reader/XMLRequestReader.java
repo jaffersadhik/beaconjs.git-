@@ -67,10 +67,17 @@ public class XMLRequestReader
 
             xmlProcess = PrometheusMetrics.apiStartTimer(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_XML, APIConstants.CLUSTER_INSTANCE, mHttpRequest.getRemoteAddr(), lUserName);
 
-            if (requestProcessor.getBasicInfo().isIsAsync())
+            /*
+            if (requestProcessor.getBasicInfo().isIsAsync()) {
                 doAsyncProcess(requestProcessor, reqStatus);
-            else
+            }
+            else {
                 doSyncProcess(requestProcessor, reqStatus, aXmlString, lUserName);
+            }
+            */
+            
+            doSyncProcess(requestProcessor, reqStatus, aXmlString, lUserName);
+
         }
         catch (final Exception e)
         {
@@ -125,7 +132,7 @@ public class XMLRequestReader
         }
         sendResponse(aRequestProcessor);
     }
-
+/*
     private void doAsyncProcess(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus)
@@ -151,7 +158,7 @@ public class XMLRequestReader
         else
             sendResponse(aRequestProcessor);
     }
-
+*/
     private static void handleNoMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus)

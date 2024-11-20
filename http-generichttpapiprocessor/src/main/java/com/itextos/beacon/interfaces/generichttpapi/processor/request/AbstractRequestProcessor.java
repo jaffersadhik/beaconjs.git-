@@ -194,7 +194,7 @@ public abstract class AbstractRequestProcessor
         return queueSucess;
     }
 
-    public boolean pushQueue(
+    private boolean pushQueue(
             QueueObject aQueueObj)
     {
 

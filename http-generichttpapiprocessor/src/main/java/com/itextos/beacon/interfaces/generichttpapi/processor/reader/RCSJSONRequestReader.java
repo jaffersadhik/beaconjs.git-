@@ -141,11 +141,19 @@ public class RCSJSONRequestReader
 
                 sendResponse(aRequestProcessor);
             }
-            else
-                if (aRequestProcessor.getBasicInfo().isIsAsync())
+            else {
+            	/*
+                if (aRequestProcessor.getBasicInfo().isIsAsync()) {
                     doAsyncProcess(aRequestProcessor, reqStatus);
-                else
+                }
+                else {
                     return doSyncProcess(aRequestProcessor, reqStatus);
+                }
+                */
+            	
+                return doSyncProcess(aRequestProcessor, reqStatus);
+
+            }
         }
         return null;
     }
@@ -265,6 +273,8 @@ public class RCSJSONRequestReader
              */
         }
     }
+    
+    /*
 
     private void doAsyncProcess(
             IRequestProcessor aRequestProcessor,
@@ -299,7 +309,7 @@ public class RCSJSONRequestReader
         else
             sendResponse(aRequestProcessor);
     }
-
+*/
     private static JSONObject getParsedJson(
             String aJSonString,
             String aRequestType)
