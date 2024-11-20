@@ -89,19 +89,20 @@ public class KafkaInformation
 
         Producer returnValue = null;
 
+        /*
         if (aProducerKafkaRequest.isClientSpecific())
             returnValue = getProducerBasedOnClient(aProducerKafkaRequest);
-
+	
         if (returnValue != null)
             return returnValue;
-
+*/
         if (aProducerKafkaRequest.isPriorityTopic())
             returnValue = getProducerBasedOnPriority(aProducerKafkaRequest);
 
-        if (returnValue != null)
+    //    if (returnValue != null)
             return returnValue;
 
-        return getDefaultProducer(aProducerKafkaRequest);
+  //      return getDefaultProducer(aProducerKafkaRequest);
     }
 
     private Producer getDefaultProducer(
@@ -141,6 +142,10 @@ public class KafkaInformation
                     aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());
         }
 
+        if(topicName==null) {
+        
+        	topicName="low";
+        }
 
         topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
 
