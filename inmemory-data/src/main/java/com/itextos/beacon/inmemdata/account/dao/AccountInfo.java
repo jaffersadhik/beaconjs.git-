@@ -85,7 +85,7 @@ public class AccountInfo
                 tempUserPassMap.put(userInfo.getUserName(), userInfo);
                 tempClientIdMap.put(userInfo.getClientId(), userInfo);
 
-                if (!userInfo.getApiPassword().isBlank())
+                if (userInfo.getApiPassword()!=null&&!userInfo.getApiPassword().isBlank())
                     tempAccessKeyMap.put(userInfo.getApiPassword(), userInfo);
             }
             catch (final Exception e)
