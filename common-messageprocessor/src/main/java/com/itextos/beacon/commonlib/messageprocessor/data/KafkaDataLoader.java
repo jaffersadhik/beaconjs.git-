@@ -688,12 +688,14 @@ public class KafkaDataLoader
         try
         {
             final String                                  passedClusterKeyName  = KafkaDataLoaderUtility.getNameOrDefault(aPassedCluster);
-            final String                                  passedIntfGroupName   = KafkaDataLoaderUtility.getNameOrDefault(aPassedIntfGroup);
+        //    final String                                  passedIntfGroupName   = KafkaDataLoaderUtility.getNameOrDefault(aPassedIntfGroup);
+            final String                                  passedIntfGroupName   = DEFAULT;
+            
             final String                                  passedMessageType     = KafkaDataLoaderUtility.getNameOrDefault(aPassedMsgType);
             final String                                  passedMessagePriority = KafkaDataLoaderUtility.getNameOrDefault(aPassedMsgPriority);
 
             ProducerTopicLog.log("getTopicNameBasedOnPriorityForProducer : passedClusterKeyName : "+passedClusterKeyName +" used for search : passedClusterKeyName : "+passedClusterKeyName.toLowerCase());
-        
+
             Map<String, Map<String, Map<String, String>>> clusterMap            = mKafkaPriorityTopics.get(passedClusterKeyName.toLowerCase());
             
             ProducerTopicLog.log(" mKafkaPriorityTopics : "+mKafkaPriorityTopics);
