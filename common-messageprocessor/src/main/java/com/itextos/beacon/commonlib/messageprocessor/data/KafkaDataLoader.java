@@ -695,6 +695,8 @@ public class KafkaDataLoader
             ProducerTopicLog.log("getTopicNameBasedOnPriorityForProducer : passedClusterKeyName : "+passedClusterKeyName +" used for search : passedClusterKeyName : "+passedClusterKeyName.toLowerCase());
         
             Map<String, Map<String, Map<String, String>>> clusterMap            = mKafkaPriorityTopics.get(passedClusterKeyName.toLowerCase());
+            
+            ProducerTopicLog.log(" mKafkaPriorityTopics : "+mKafkaPriorityTopics);
 
             if (clusterMap == null)
                 clusterMap = mKafkaPriorityTopics.get(KafkaDataLoaderUtility.getNameOrDefault(null));
