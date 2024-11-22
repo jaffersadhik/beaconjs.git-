@@ -32,6 +32,7 @@ import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaComponentInfo;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaTopicMap;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
+import com.itextos.beacon.smslog.ProducerTopicLog;
 
 public class KafkaDataLoader
         extends
@@ -691,7 +692,9 @@ public class KafkaDataLoader
             final String                                  passedMessageType     = KafkaDataLoaderUtility.getNameOrDefault(aPassedMsgType);
             final String                                  passedMessagePriority = KafkaDataLoaderUtility.getNameOrDefault(aPassedMsgPriority);
 
-            Map<String, Map<String, Map<String, String>>> clusterMap            = mKafkaPriorityTopics.get(passedClusterKeyName);
+            ProducerTopicLog.log("getTopicNameBasedOnPriorityForProducer : passedClusterKeyName : "+passedClusterKeyName +" used for search : passedClusterKeyName : "+passedClusterKeyName.toLowerCase());
+        
+            Map<String, Map<String, Map<String, String>>> clusterMap            = mKafkaPriorityTopics.get(passedClusterKeyName.toLowerCase());
 
             if (clusterMap == null)
                 clusterMap = mKafkaPriorityTopics.get(KafkaDataLoaderUtility.getNameOrDefault(null));
