@@ -277,7 +277,7 @@ public class RCSJSONRequestProcessor
             log.debug("message object validation:  '" + lClientStatus + "'");
 
         if (lClientStatus == InterfaceStatusCode.SUCCESS)
-            lClientStatus = lMessageValidater.validateDest(lDest);
+            lClientStatus = lMessageValidater.validateDest(lDest,sb);
 
         if (lClientStatus != InterfaceStatusCode.SUCCESS)
             lMessage.setRouteType(RouteType.DOMESTIC);
@@ -455,7 +455,7 @@ public class RCSJSONRequestProcessor
             {
                 // lDest = appendCountryCode(aMessage, lDest);
 
-                destStatus = aMessageValidater.validateDest(lDest);
+                destStatus = aMessageValidater.validateDest(lDest,sb);
 
                 if (log.isDebugEnabled())
                     log.debug("Mobile number validation status:  '" + destStatus + "'");

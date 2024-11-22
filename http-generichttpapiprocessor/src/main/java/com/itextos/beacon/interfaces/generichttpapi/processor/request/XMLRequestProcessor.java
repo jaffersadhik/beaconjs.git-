@@ -249,7 +249,7 @@ public class XMLRequestProcessor
 
         if (lMessageValidationStatus == InterfaceStatusCode.SUCCESS)
         {
-            lDestValidationStatus = lMsgValidater.validateDest(aMobileNumber);
+            lDestValidationStatus = lMsgValidater.validateDest(aMobileNumber,sb);
             if (log.isDebugEnabled())
                 log.debug("Mobile Number validation Status:  '" + lDestValidationStatus + "'");
 
@@ -372,7 +372,7 @@ public class XMLRequestProcessor
              */
             // number = appendCountryCode(aMessage, number);
 
-            destStatus = aValidater.validateDest(number);
+            destStatus = aValidater.validateDest(number,sb);
 
             if (log.isDebugEnabled())
                 log.debug("mobile number validation status:  '" + destStatus + "'");

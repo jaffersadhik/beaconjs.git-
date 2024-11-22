@@ -198,7 +198,7 @@ public class MessageValidater
     }
 
     public InterfaceStatusCode validateDest(
-            String aDestination)
+            String aDestination,StringBuffer sb)
     {
         String lMobileNumber = CommonUtility.nullCheck(aDestination, true);
 
@@ -206,6 +206,7 @@ public class MessageValidater
         {
             if (log.isDebugEnabled())
                 log.debug("Destination is empty:  '" + lMobileNumber + "'");
+            sb.append("Destination is empty:  '" + lMobileNumber + "' InterfaceStatusCode.DESTINATION_EMPTY :"+ InterfaceStatusCode.DESTINATION_EMPTY).append("\n");
 
             return InterfaceStatusCode.DESTINATION_EMPTY;
         }
@@ -218,7 +219,7 @@ public class MessageValidater
         {
             log.error("Exception occured while decrypting destination...", e1);
             
-            sb.append("Exception occured while decrypting destination...").append("\t").append(ErrorMessage.getStackTraceAsString(e1)).append("\n");
+            sb.append("Exception occured while decrypting destination...InterfaceStatusCode.DESTINATION_INVALID : "+InterfaceStatusCode.DESTINATION_INVALID).append("\t").append(ErrorMessage.getStackTraceAsString(e1)).append("\n");
             		
            return InterfaceStatusCode.DESTINATION_INVALID;
         }
