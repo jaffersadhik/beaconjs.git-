@@ -48,6 +48,7 @@ public class JSONRequestReader
     {
         super("json", aRequest, aResponse);
         this.sb=sb;
+        this.sb.append("JSONRequestReader ").append("\n");
         mSource      = aSource;
         mRequestType = aRequestType;
     }
@@ -214,7 +215,7 @@ public class JSONRequestReader
         return userSpecificTimer;
     }
 
-    private static void processMultipleMessage(
+    private  void processMultipleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
             String aMessageId,StringBuffer sb)
@@ -233,7 +234,7 @@ public class JSONRequestReader
         aRequestProcessor.setRequestStatus(aReqStatus);
     }
 
-    private static void processSingleMessage(
+    private void processSingleMessage(
             IRequestProcessor aRequestProcessor,
             InterfaceRequestStatus aReqStatus,
             String aMessageId,

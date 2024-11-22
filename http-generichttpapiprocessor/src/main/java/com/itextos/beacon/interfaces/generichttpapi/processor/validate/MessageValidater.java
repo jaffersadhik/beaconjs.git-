@@ -44,6 +44,9 @@ public class MessageValidater
         mInterfaceMessage = aInterfaceMessage;
         mBasicInfo        = aBasicInfo;
         this.sb=sb;
+        
+        this.sb.append("MessageValidater").append("\n");
+        
     }
 
     public InterfaceStatusCode validate()

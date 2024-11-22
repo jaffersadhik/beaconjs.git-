@@ -154,7 +154,7 @@ public class KafkaInformation
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
 
-        ProducerTopicLog.log("getProducerBasedOnPriority :  topicName : "+topicName);
+        ProducerTopicLog.log("getProducerBasedOnPriority :  topicName : "+topicName+" aProducerKafkaRequest.isIntlFlag() : "+aProducerKafkaRequest.isIntlFlag()+" aProducerKafkaRequest.getNextComponent()  :  "+aProducerKafkaRequest.getNextComponent()+" aProducerKafkaRequest.getPlatformCluster() : "+aProducerKafkaRequest.getPlatformCluster()+ " aProducerKafkaRequest.getMessagePriority() :  "+ aProducerKafkaRequest.getMessagePriority());
         
         return getOrCreateProducer(aProducerKafkaRequest, topicName);
     }
