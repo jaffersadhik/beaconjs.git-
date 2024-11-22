@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
@@ -445,6 +446,7 @@ public class JSONRequestProcessor
             {
                 lDest = APIConstants.DEFAULT_DEST;
                 log.error("Dest validation failed for " + lElement, e);
+                sb.append("Dest validation failed for " + lElement+" error : "+ErrorMessage.getStackTraceAsString(e));
                 destStatus = InterfaceStatusCode.DESTINATION_INVALID;
             }
 
