@@ -42,7 +42,7 @@ public interface IRequestProcessor
 
     boolean pushRRQueue(
             QueueObject aQueueObj,
-            String aType);
+            String aType,StringBuffer sb);
 
     BasicInfo getBasicInfo();
 

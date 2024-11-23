@@ -167,20 +167,20 @@ public abstract class AbstractRequestProcessor
 
         final QueueObject queueObject = new QueueObject(mBasicInfo.getFileId(), mCustIp, mRequestString, aReqType, mRequestedTime, lClientId, lCluster, lMsgType);
 
-        pushRRQueue(queueObject, "Queue");
+        pushRRQueue(queueObject, "Queue",sb);
     }
 
     @Override
     public boolean pushRRQueue(
             QueueObject aQueueObj,
-            String type)
+            String type,StringBuffer sb)
     {
         boolean       queueSucess      = false;
 
         final boolean isKafkaAvailable = CommonUtility.isEnabled(Utility.getConfigParamsValueAsString(ConfigParamConstants.IS_KAFKA_AVAILABLE));
 
         if (isKafkaAvailable)
-            queueSucess = pushQueue(aQueueObj);
+            queueSucess = pushQueue(aQueueObj,sb);
 
         if (!queueSucess)
         {
@@ -195,7 +195,7 @@ public abstract class AbstractRequestProcessor
     }
 
     private boolean pushQueue(
-            QueueObject aQueueObj)
+            QueueObject aQueueObj,StringBuffer sb)
     {
 
         try

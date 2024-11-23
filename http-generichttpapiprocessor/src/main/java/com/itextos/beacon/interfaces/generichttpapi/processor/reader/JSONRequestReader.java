@@ -146,14 +146,19 @@ public class JSONRequestReader
                 sendResponse(aRequestProcessor);
             }
             else {
-            	
+            /*	
                 if (aRequestProcessor.getBasicInfo().isIsAsync())
                      doAsyncProcess(aRequestProcessor, reqStatus,sb);
                 else
                     return doSyncProcess(aRequestProcessor, reqStatus,sb);
                   
+            	*/
             	
-            }   //                 return doSyncProcess(aRequestProcessor, reqStatus,sb); 
+                return doSyncProcess(aRequestProcessor, reqStatus,sb);
+
+            }   
+            
+            return doSyncProcess(aRequestProcessor, reqStatus,sb); 
             
             
 
@@ -285,6 +290,8 @@ public class JSONRequestReader
              */
         }
     }
+    
+    /*
 
     private void doAsyncProcess(
             IRequestProcessor aRequestProcessor,
@@ -321,7 +328,7 @@ public class JSONRequestReader
         else
             sendResponse(aRequestProcessor);
     }
-
+*/
     private static JSONObject getParsedJson(
             String aJSonString,
             String aRequestType)
