@@ -43,11 +43,8 @@ RUN mkdir -p /opt/jboss/wildfly/logs/aux
 
 RUN cp -rp /opt/tomcat/webapps/* /opt/tomcat/webappsBKUP/.
 
-RUN rm -rf /opt/tomcat/webapps/ROOT
-RUN rm -rf /opt/tomcat/webapps/docs
-RUN rm -rf /opt/tomcat/webapps/examples
-RUN rm -rf /opt/tomcat/webapps/manager
-RUN rm -rf /opt/tomcat/webapps/host-manager
+RUN rm -rf /opt/tomcat/webapps/*
+
 #RUN rm -rf /opt/tomcat/conf/server.xml
 
 #COPY server.xml /opt/tomcat/conf/server.xml
