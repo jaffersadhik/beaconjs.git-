@@ -38,7 +38,7 @@ public interface IRequestProcessor
      * String aMobileNumber);
      */
     void pushKafkaTopic(
-            String aReqType);
+            String aReqType,StringBuffer sb);
 
     boolean pushRRQueue(
             QueueObject aQueueObj,

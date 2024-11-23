@@ -178,7 +178,7 @@ public class RCSJSONRequestProcessor
         {
             e.printStackTrace();
             log.error("Error While continuing from queue", e);
-            pushKafkaTopic(MessageSource.GENERIC_JSON);
+            pushKafkaTopic(MessageSource.GENERIC_JSON,sb);
         }
     }
 

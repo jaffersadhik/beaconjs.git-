@@ -316,7 +316,7 @@ public class JSONRequestReader
 
             sendResponse(aRequestProcessor);
 
-            aRequestProcessor.pushKafkaTopic(MessageSource.GENERIC_JSON);
+            aRequestProcessor.pushKafkaTopic(MessageSource.GENERIC_JSON,sb);
         }
         else
             sendResponse(aRequestProcessor);

@@ -158,7 +158,7 @@ public class XMLRequestProcessor
         catch (final Exception e)
         {
             log.error("Error While continuing from queue", e);
-            pushKafkaTopic(MessageSource.GENERIC_XML);
+            pushKafkaTopic(MessageSource.GENERIC_XML,sb);
         }
     }
 

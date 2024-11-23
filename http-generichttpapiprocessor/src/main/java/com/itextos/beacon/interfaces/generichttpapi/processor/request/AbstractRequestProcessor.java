@@ -156,7 +156,7 @@ public abstract class AbstractRequestProcessor
      */
     @Override
     public void pushKafkaTopic(
-            String aReqType)
+            String aReqType,StringBuffer sb)
     {
         if (log.isDebugEnabled())
             log.debug("Request Type : " + aReqType);
