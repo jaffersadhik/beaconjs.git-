@@ -360,8 +360,13 @@ public class MessageValidater
     {
         if (log.isDebugEnabled())
             log.debug("Encrypt String :" + aEncryptString);
+        
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         final String lEncryptedStr = CommonUtility.nullCheck(mBasicInfo.getEncrypt());
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" lEncryptedStr : "+lEncryptedStr); 
 
         if ("1".equals(lEncryptedStr)) {
             try
@@ -385,6 +390,9 @@ public class MessageValidater
                 throw e;
             }
         }
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" finished"); 
+
         return aEncryptString;
     }
 

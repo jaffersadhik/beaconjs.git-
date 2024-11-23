@@ -292,6 +292,9 @@ public class JSONRequestProcessor
         if (lClientStatus == InterfaceStatusCode.SUCCESS)
             lClientStatus = lMessageValidater.validateDest(lDest,sb);
 
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" lClientStatus : " +lClientStatus); 
+
         if (lClientStatus != InterfaceStatusCode.SUCCESS)
             lMessage.setRouteType(RouteType.DOMESTIC);
 
