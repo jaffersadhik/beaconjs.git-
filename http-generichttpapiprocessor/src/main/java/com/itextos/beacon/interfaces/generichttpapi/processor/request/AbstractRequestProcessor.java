@@ -156,7 +156,7 @@ public abstract class AbstractRequestProcessor
      */
     @Override
     public void pushKafkaTopic(
-            String aReqType,StringBuffer sb)
+            String aReqType)
     {
         if (log.isDebugEnabled())
             log.debug("Request Type : " + aReqType);
@@ -167,20 +167,20 @@ public abstract class AbstractRequestProcessor
 
         final QueueObject queueObject = new QueueObject(mBasicInfo.getFileId(), mCustIp, mRequestString, aReqType, mRequestedTime, lClientId, lCluster, lMsgType);
 
-        pushRRQueue(queueObject, "Queue",sb);
+        pushRRQueue(queueObject, "Queue");
     }
 
     @Override
     public boolean pushRRQueue(
             QueueObject aQueueObj,
-            String type,StringBuffer sb)
+            String type)
     {
         boolean       queueSucess      = false;
 
         final boolean isKafkaAvailable = CommonUtility.isEnabled(Utility.getConfigParamsValueAsString(ConfigParamConstants.IS_KAFKA_AVAILABLE));
 
         if (isKafkaAvailable)
-            queueSucess = pushQueue(aQueueObj,sb);
+            queueSucess = pushQueue(aQueueObj);
 
         if (!queueSucess)
         {
@@ -195,7 +195,7 @@ public abstract class AbstractRequestProcessor
     }
 
     private boolean pushQueue(
-            QueueObject aQueueObj,StringBuffer sb)
+            QueueObject aQueueObj)
     {
 
         try

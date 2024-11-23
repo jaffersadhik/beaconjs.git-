@@ -38,11 +38,11 @@ public interface IRequestProcessor
      * String aMobileNumber);
      */
     void pushKafkaTopic(
-            String aReqType,StringBuffer sb);
+            String aReqType);
 
     boolean pushRRQueue(
             QueueObject aQueueObj,
-            String aType,StringBuffer sb);
+            String aType);
 
     BasicInfo getBasicInfo();
 

@@ -183,7 +183,7 @@ public class JSONRequestProcessor
         {
             e.printStackTrace();
             log.error("Error While continuing from queue", e);
-            pushKafkaTopic(MessageSource.GENERIC_JSON,sb);
+            pushKafkaTopic(MessageSource.GENERIC_JSON);
         }
     }
 
