@@ -269,7 +269,7 @@ public class MessageValidater
         final String                aAppendCountryCode                = CommonUtility.nullCheck(mInterfaceMessage.getCountryCode(), true);
 
         final MobileNumberValidator lMobileValidator                  = InterfaceUtil.validateMobile(lMobileNumber, lCountryCD, isIntlServiceAllow, isConsiderDefaultLengthAsDomestic,
-                isAppendCountryCode, aAppendCountryCode, isDomesticSpecialSeriesAllow,sb);
+                isAppendCountryCode, aAppendCountryCode, isDomesticSpecialSeriesAllow);
 
         try
         {

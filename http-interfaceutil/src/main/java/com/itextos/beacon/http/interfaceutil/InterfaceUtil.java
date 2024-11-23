@@ -40,7 +40,7 @@ public class InterfaceUtil
             boolean aConsiderDefaultLengthAsDomestic,
             boolean isAppendCountryCode,
             String aAppendCountryCode,
-            boolean isDomesticSpecialSeriesAllow,StringBuffer sb)
+            boolean isDomesticSpecialSeriesAllow)
     {
         if (log.isDebugEnabled())
             log.debug("Default Contury From Account Table : " + aCountryCode);
