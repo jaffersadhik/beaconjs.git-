@@ -1,7 +1,8 @@
 version: "3.1"
+
 services:
   beaconwebear:
     image: dk-reg.mas:5000/beacontomcatdn:17nov2024
     build:
-	  context: .
-	  dockerfile: Dockerfile_dn	
+      context: .
+      dockerfile: Dockerfile_dn
