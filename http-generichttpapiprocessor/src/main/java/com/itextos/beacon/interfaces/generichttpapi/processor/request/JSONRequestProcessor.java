@@ -48,6 +48,8 @@ public class JSONRequestProcessor
             StringBuffer sb)
     {
         super(aRequestString, aCustomerIP, aRequestedTime, aReqType, aResponseType);
+        
+        sb.append(" JSONRequestProcessor :  aResponseType : "+aResponseType).append("\n");
 
         this.sb=sb;
         if (MessageSource.GENERIC_QS.equals(aResponseType))

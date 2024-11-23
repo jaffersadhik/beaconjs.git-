@@ -12,6 +12,7 @@ import com.itextos.beacon.commonlib.constants.InterfaceStatusCode;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceRequestStatus;
 import com.itextos.beacon.http.generichttpapi.common.interfaces.IRequestProcessor;
@@ -107,6 +108,9 @@ public class JSONRequestReader
     {
         InterfaceRequestStatus reqStatus = aRequestProcessor.validateBasicInfo();
 
+        sb.append("processRequest : " );
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t"); 
+
         if (mRequestType != null)
         {
             if (log.isDebugEnabled())
@@ -160,6 +164,8 @@ public class JSONRequestReader
             InterfaceRequestStatus aReqStatus,StringBuffer sb)
     {
         Timer jsonTimer = null;
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" aReqStatus.getStatusCode() : "+aReqStatus.getStatusCode()).append("\t"); 
 
         if (aReqStatus.getStatusCode() == InterfaceStatusCode.SUCCESS)
         {
