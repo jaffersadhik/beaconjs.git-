@@ -205,6 +205,9 @@ public class JSONRequestProcessor
 
                 if (log.isDebugEnabled())
                     log.debug("Destination Array:  '" + lMultipleDests + "'");
+                
+                sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("Destination array is :  '" + lMultipleDests.size()); 
+
 
                 if (lMultipleDests.isEmpty())
                 {
@@ -265,6 +268,9 @@ public class JSONRequestProcessor
             throws Exception
     {
         final InterfaceMessage lMessage = getMessage(lJsonMessage);
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\n"); 
+
 
         if (log.isDebugEnabled())
             log.debug("parse message:  '" + lMessage + "'");

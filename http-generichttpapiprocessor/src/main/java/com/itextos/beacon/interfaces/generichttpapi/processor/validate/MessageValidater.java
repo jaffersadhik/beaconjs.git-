@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.mobilevalidation.MobileNumberValidator;
 import com.itextos.beacon.http.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceMessage;
@@ -51,6 +52,8 @@ public class MessageValidater
 
     public InterfaceStatusCode validate()
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         final InterfaceStatusCode    lClientStatusCode = validateMessageRequest();
         final InterfaceRequestStatus lRequestStatus    = new InterfaceRequestStatus(lClientStatusCode, null);
 
@@ -63,6 +66,9 @@ public class MessageValidater
 
     private InterfaceStatusCode validateMessageRequest()
     {
+
+    	
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         try
         {
@@ -150,9 +156,11 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateDltEntityId(
+    private  InterfaceStatusCode validateDltEntityId(
             String aDltEntityId)
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         if (!aDltEntityId.isEmpty())
             if (!validateNumaricAndLength(aDltEntityId))
                 return InterfaceStatusCode.INVALID_DLT_ENTITY_ID;
@@ -160,9 +168,11 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateDltTemplateId(
+    private  InterfaceStatusCode validateDltTemplateId(
             String aDltTemplateId)
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         if (!aDltTemplateId.isEmpty())
             if (!validateNumaricAndLength(aDltTemplateId))
                 return InterfaceStatusCode.INVALID_DLT_TEMPLATE_ID;
@@ -377,6 +387,9 @@ public class MessageValidater
     private InterfaceStatusCode validateMessage(
             boolean isMsgIdenAllow)
     {
+    	
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         final String lTemplateId = CommonUtility.nullCheck(mInterfaceMessage.getTemplateId(), true);
 
         if (lTemplateId.isBlank())
@@ -390,6 +403,8 @@ public class MessageValidater
     {
         if (log.isDebugEnabled())
             log.debug("Template Id: '" + aTemplateId + "'");
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         final String[] lTemplateValues = mInterfaceMessage.getTemplateValues();
         final String   lTemplate       = IInterfaceUtil.getInterfaceSMSTeamplate((String) mBasicInfo.getUserAccountInfo().get(MiddlewareConstant.MW_CLIENT_ID.getName()), aTemplateId);
@@ -440,6 +455,9 @@ public class MessageValidater
     private InterfaceStatusCode processNonTemplateMessage(
             boolean isMsgIdenAllow)
     {
+    	
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         String lMessage = CommonUtility.nullCheck(mInterfaceMessage.getMessage());
 
         if (lMessage.isBlank())
@@ -515,11 +533,13 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateHeader(
+    private  InterfaceStatusCode validateHeader(
             String aHeader)
     {
         if (log.isDebugEnabled())
             log.debug("Sender Id: '" + aHeader + "'");
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         if (aHeader.isBlank())
             return InterfaceStatusCode.SENDER_ID_EMPTY;
@@ -530,9 +550,12 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateMessageExpiry(
+    private  InterfaceStatusCode validateMessageExpiry(
             String aMsgExpiry)
     {
+    	
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
 
         if (!aMsgExpiry.isBlank())
         {
@@ -556,11 +579,13 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateMsgType(
+    private  InterfaceStatusCode validateMsgType(
             String aMsgType,
             String aDcs)
     {
         aMsgType = CommonUtility.nullCheck(aMsgType, true);
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("aMsgType : "+aMsgType); 
 
         if (aMsgType.isBlank())
             return InterfaceStatusCode.INVALID_MSGTYPE;
@@ -595,6 +620,7 @@ public class MessageValidater
     private  InterfaceStatusCode validateAppCountry(
             String aAppCountry)
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         if (!aAppCountry.isBlank() && (!(aAppCountry.equals("1")) && !(aAppCountry.equals("0"))))
         {
@@ -614,6 +640,7 @@ public class MessageValidater
     {
         final boolean isAppendCountryCode = CommonUtility.isEnabled(aAppCountry);
         final String  lCountryCode        = CommonUtility.nullCheck(aCountryCode, true);
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         if (isAppendCountryCode && lCountryCode.isBlank())
         {
@@ -631,6 +658,8 @@ public class MessageValidater
     {
         if (log.isDebugEnabled())
             log.debug("Special Port : " + aDestinationPort);
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
         if (!aDestinationPort.isBlank() && (CommonUtility.getInteger(aDestinationPort) != 0))
         {
@@ -655,6 +684,8 @@ public class MessageValidater
             String aUrlTrack)
     {
 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         if (!aUrlTrack.isBlank() && (!(aUrlTrack.equals("1")) && !(aUrlTrack.equals("0"))))
         {
             if (log.isDebugEnabled())
@@ -669,6 +700,8 @@ public class MessageValidater
             String aCustomerRefrenceNum)
     {
 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
+
         if (!aCustomerRefrenceNum.isBlank() && (aCustomerRefrenceNum.length() > APIConstants.CUST_REF_MAX_VALUE))
         {
             if (log.isDebugEnabled())
@@ -679,9 +712,11 @@ public class MessageValidater
         return InterfaceStatusCode.SUCCESS;
     }
 
-    private static InterfaceStatusCode validateMessageType(
+    private  InterfaceStatusCode validateMessageType(
             String aMsgType)
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("aMsgType : "+aMsgType); 
+
         final InterfaceMessageClass lMessageType = InterfaceMessageClass.getMessageType(aMsgType);
 
         if (log.isDebugEnabled())
