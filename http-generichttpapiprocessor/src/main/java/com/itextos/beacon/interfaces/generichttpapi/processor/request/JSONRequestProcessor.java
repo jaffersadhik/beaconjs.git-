@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.http.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceRequestStatus;
@@ -189,6 +190,9 @@ public class JSONRequestProcessor
     @Override
     public InterfaceMessage getSingleMessage(StringBuffer sb)
     {
+    	
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t"); 
+
         InterfaceMessage lMessage = null;
 
         try
@@ -329,6 +333,9 @@ public class JSONRequestProcessor
 
     {
         InterfaceRequestStatus lRequestStatus = null;
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t"); 
+
 
         try
         {

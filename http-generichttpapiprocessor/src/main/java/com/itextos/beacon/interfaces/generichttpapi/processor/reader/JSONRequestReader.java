@@ -208,6 +208,8 @@ public class JSONRequestReader
         final int    lMessagesCount    = aRequestProcessor.getMessagesCount();
         final String lMessageId        = aReqStatus.getMessageId();
 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" lMessagesCount : "+lMessagesCount).append("\t"); 
+
         final String lUserName         = getUserName(aRequestProcessor);
         final Timer  userSpecificTimer = PrometheusMetrics.apiStartTimer(InterfaceType.HTTP_JAPI, MessageSource.GENERIC_JSON, APIConstants.CLUSTER_INSTANCE, mHttpRequest.getRemoteAddr(), lUserName);
 
@@ -230,6 +232,8 @@ public class JSONRequestReader
         if (log.isDebugEnabled())
             log.debug("MultipleMessage:  '" + InterfaceStatusCode.SUCCESS + "'");
 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t"); 
+
         aReqStatus = aRequestProcessor.getMultipleMessages(false);
 
         if (aReqStatus == null)
@@ -246,6 +250,8 @@ public class JSONRequestReader
             String aMessageId,
             StringBuffer sb)
     {
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t"); 
+
         final InterfaceMessage lMessageObj = aRequestProcessor.getSingleMessage( sb);
 
         if (log.isDebugEnabled())
