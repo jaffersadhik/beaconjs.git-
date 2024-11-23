@@ -269,7 +269,7 @@ public class MessageValidater
         final String                aAppendCountryCode                = CommonUtility.nullCheck(mInterfaceMessage.getCountryCode(), true);
 
         final MobileNumberValidator lMobileValidator                  = InterfaceUtil.validateMobile(lMobileNumber, lCountryCD, isIntlServiceAllow, isConsiderDefaultLengthAsDomestic,
-                isAppendCountryCode, aAppendCountryCode, isDomesticSpecialSeriesAllow);
+                isAppendCountryCode, aAppendCountryCode, isDomesticSpecialSeriesAllow,sb);
 
         try
         {
@@ -311,6 +311,8 @@ public class MessageValidater
         {
             if (log.isDebugEnabled())
                 log.debug("exception while parsing number as long  :  '" + lMobileNumber + "'", e);
+
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("exception while parsing number as long  :  '" + lMobileNumber + "'"+ ErrorMessage.getStackTraceAsString(e)); 
 
             return InterfaceStatusCode.DESTINATION_INVALID;
         }
