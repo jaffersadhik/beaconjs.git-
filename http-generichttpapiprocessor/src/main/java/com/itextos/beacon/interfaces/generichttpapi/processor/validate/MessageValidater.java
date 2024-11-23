@@ -275,8 +275,14 @@ public class MessageValidater
         {
             if (log.isDebugEnabled())
                 log.debug("Mobile Number Validation Details :" + lMobileValidator.toString());
+            
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("Mobile Number Validation Details :" + lMobileValidator.toString()); 
+
 
             final boolean isValidMobileNumber = lMobileValidator.isValidMobileNumber();
+
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("isValidMobileNumber :" + isValidMobileNumber); 
+
             mInterfaceMessage.setMobileNumber(lMobileValidator.getMobileNumber());
 
             if (isValidMobileNumber)
