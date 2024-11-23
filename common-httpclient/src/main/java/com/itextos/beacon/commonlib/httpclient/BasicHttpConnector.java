@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.httpclient.helper.HttpUtility;
 public class BasicHttpConnector
 {
 
-    private static final int DEFAULT_CONNECT_TIMEOUT_MILLIS = 250;
+    private static final int DEFAULT_CONNECT_TIMEOUT_MILLIS = 2000;
     private static final int DEFAULT_READ_TIMEOUT_MILLIS    = 2000;
     private static final Log log                            = LogFactory.getLog(BasicHttpConnector.class);
 
