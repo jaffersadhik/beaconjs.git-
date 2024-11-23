@@ -234,7 +234,7 @@ public class MessageValidater
             sb.append("Exception occured while decrypting destination...InterfaceStatusCode.DESTINATION_INVALID : "+InterfaceStatusCode.DESTINATION_INVALID).append("\t").append(ErrorMessage.getStackTraceAsString(e1)).append("\n");
             		
             log.error("Exception occured while decrypting destination...", e1);
-
+            
            return InterfaceStatusCode.DESTINATION_INVALID;
         }
 
