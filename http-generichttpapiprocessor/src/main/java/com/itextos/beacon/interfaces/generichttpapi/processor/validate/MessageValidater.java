@@ -231,6 +231,8 @@ public class MessageValidater
         catch (final Exception e1)
         {
             
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" exception got"); 
+
             sb.append("Exception occured while decrypting destination...InterfaceStatusCode.DESTINATION_INVALID : "+InterfaceStatusCode.DESTINATION_INVALID).append("\t").append(ErrorMessage.getStackTraceAsString(e1)).append("\n");
             		
             log.error("Exception occured while decrypting destination...", e1);
