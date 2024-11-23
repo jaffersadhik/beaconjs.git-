@@ -126,6 +126,10 @@ public class ProcessorInfo
 
             String topicName=mComponent.getKey()+"-"+priority;
            
+            if(priority.equals("default")) {
+            	
+            	topicName=mComponent.getKey();
+            }
                     
     	
         final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
