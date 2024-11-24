@@ -133,6 +133,21 @@ COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.
 
 VOLUME ["/logs"]
 
+# Copy the log rotation script into the container
+COPY rotate_logs.sh /opt/tomcat/rotate_logs.sh
+
+# Make the script executable
+RUN chmod +x /opt/tomcat/rotate_logs.sh
+
+# Install cron
+RUN apt-get update && apt-get install -y cron
+
+# Add the cron job to the crontab
+RUN echo "0 * * * * /opt/tomcat/rotate_logs.sh" | crontab -
+
+
+WORKDIR /opt/tomcat
+
 WORKDIR /opt/tomcat
 
 CMD ["bin/catalina.sh", "run"]
