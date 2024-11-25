@@ -759,7 +759,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 
 					}else {
 					
-						telemarketerid=entityid+","+temptelemartkerid;
+						telemarketerid=entityid+","+telemarketerid;
 						KannelURLLog.log("telemarketerid :"+telemarketerid);
 
 					}
