@@ -754,11 +754,14 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 						temptelemartkerid="";
 					}
 					if(temptelemartkerid.trim().length()>0) {
-						
 						telemarketerid=entityid+","+temptelemartkerid+","+telemarketerid;
+						KannelURLLog.log("telemarketerid :"+telemarketerid);
+
 					}else {
 					
 						telemarketerid=entityid+","+temptelemartkerid;
+						KannelURLLog.log("telemarketerid :"+telemarketerid);
+
 					}
 					
 					telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
