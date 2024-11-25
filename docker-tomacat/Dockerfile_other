@@ -49,6 +49,8 @@ RUN rm -rf /opt/tomcat/webapps/*
 RUN rm -rf /opt/tomcat/conf/logging.properties
 
 COPY logging.properties /opt/tomcat/conf/logging.properties
+COPY logging.properties /opt/tomcat/conf/logging.properties_bkup
+
 #COPY server.xml /opt/tomcat/conf/server.xml
 #COPY ./target/web-generichttpapi-1.0.war /opt/tomcat/webapps/genericapi.war
 #COPY ./target/web-migrationapi-1.0.war /opt/tomcat/webapps/migrationapi.war

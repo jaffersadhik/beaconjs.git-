@@ -1,5 +1,0 @@
-version: "3.1"
-services:
-  beaconwebear:
-    image: dk-reg.mas:5000/beacontomcat:17nov2024
-    build: .
