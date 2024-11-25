@@ -58,6 +58,9 @@
         maxThreads="150" minSpareThreads="4"/>
     -->
 
+<Executor name="virtualThreadPool" 
+          className="com.itextos.beacon.tomacatvirtualthreadpool.VirtualThreadExecutor" />
+
 
     <!-- A "Connector" represents an endpoint by which requests are received
          and responses are returned. Documentation at :
@@ -66,11 +69,27 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
+    <!-- 
     <Connector port="8080" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443"
                maxParameterCount="1000"
                />
+     -->
+    <!-- 
+    <Connector port="8080" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           redirectPort="8443"
+           maxParameterCount="1000"
+           maxThreads="7"         
+           minSpareThreads="2" />   
+    
+    -->
+    <Connector executor="virtualThreadPool"
+           port="8080" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           redirectPort="8443" />
+     
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -170,11 +189,9 @@
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
-              <!--
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-                 -->
 
       </Host>
     </Engine>
