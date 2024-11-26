@@ -105,10 +105,12 @@ public class SessionDetail
     {
         final UserInfo userInfo = AccountDetails.getUserInfo(mSystemId);
 
-        if (userInfo != null)
+        if (userInfo != null) {
             mSmppUserInfo = new SmppUserInfo(userInfo);
-        else
+        }
+        else {
             throw new ItextosException("Unable to find the user details for the user '" + mSystemId + "'");
+        }
     }
 
     public void close()
