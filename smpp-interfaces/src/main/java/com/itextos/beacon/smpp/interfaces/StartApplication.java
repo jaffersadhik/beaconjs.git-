@@ -123,7 +123,7 @@ public class StartApplication
         startSmppServer();
         startInMemDrainers();
         startTimerBasedTasks();
-        // startAdminServer();
+   //     startAdminServer();
     }
 
     private static void startSmppServer()

@@ -74,6 +74,8 @@ public class ItextosSessionManager
     public int removeExpiredSessions(
             long aInactiveInterval)
     {
+        ExpiredSessionRemoveLog.log(" aInactiveInterval : "+aInactiveInterval);
+
         int                                 lTotalRemovedSessions = 0;
         final Collection<SessionRoundRobin> col1                  = txSessionsMap.values();
         final Collection<SessionRoundRobin> col2                  = rxTrxSessionsMap.values();
@@ -85,9 +87,9 @@ public class ItextosSessionManager
             lTotalRemovedSessions += srr.unbindExpired(aInactiveInterval);
         
         
-        if(lTotalRemovedSessions>0) {
+     //   if(lTotalRemovedSessions>0) {
         ExpiredSessionRemoveLog.log(" lTotalRemovedSessions : "+lTotalRemovedSessions);
-        }
+       // }
         return lTotalRemovedSessions;
     }
 
