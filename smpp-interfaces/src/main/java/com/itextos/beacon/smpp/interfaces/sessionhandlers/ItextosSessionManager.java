@@ -35,6 +35,7 @@ import com.itextos.beacon.smpp.redisoperations.RedisBindOperation;
 import com.itextos.beacon.smpp.redisoperations.SessionInfoRedisUpdate;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
+import com.itextos.beacon.smslog.ExpiredSessionRemoveLog;
 
 public class ItextosSessionManager
 {
@@ -82,7 +83,11 @@ public class ItextosSessionManager
 
         for (final SessionRoundRobin srr : col2)
             lTotalRemovedSessions += srr.unbindExpired(aInactiveInterval);
-
+        
+        
+        if(lTotalRemovedSessions>0) {
+        ExpiredSessionRemoveLog.log(" lTotalRemovedSessions : "+lTotalRemovedSessions);
+        }
         return lTotalRemovedSessions;
     }
 

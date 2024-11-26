@@ -10,9 +10,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.cloudhopper.smpp.SmppServerSession;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
 import com.itextos.beacon.smpp.interfaces.sessionhandlers.ItextosSessionManager;
+import com.itextos.beacon.smslog.ExpiredSessionRemoveLog;
 
 public class SessionRoundRobin
 {
@@ -142,6 +144,9 @@ public class SessionRoundRobin
         for (final ItextosSmppSessionHandler handler : unbindList)
             try
             {
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId());
+
+            	
                 handler.setExpired();
                 handler.updateAndResetCounters();
                 handler.closeSession();
@@ -150,6 +155,8 @@ public class SessionRoundRobin
             catch (final Exception e)
             {
                 log.error("Exception while closing and destroying session.", e);
+                ExpiredSessionRemoveLog.log("Exception while closing and destroying session." + ErrorMessage.getStackTraceAsString(e));
+
             }
             finally
             {
