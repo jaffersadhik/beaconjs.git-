@@ -9,7 +9,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.cloudhopper.commons.util.windowing.WindowFuture;
 import com.cloudhopper.smpp.SmppServerSession;
+import com.cloudhopper.smpp.pdu.EnquireLink;
+import com.cloudhopper.smpp.pdu.EnquireLinkResp;
+import com.cloudhopper.smpp.pdu.PduRequest;
+import com.cloudhopper.smpp.pdu.PduResponse;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.smpp.interfaces.event.handlers.ItextosSmppSessionHandler;
@@ -147,6 +152,8 @@ public class SessionRoundRobin
         for (final ItextosSmppSessionHandler handler : unbindList)
             try
             {
+            	if(isENquireLinkFailed(handler)) {
+            	
                 ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId());
 
                 
@@ -168,6 +175,12 @@ public class SessionRoundRobin
                 handler.destroySession();
                 
                 ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " destroySession()");
+                
+            	}else {
+                	
+                    ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " not do the Unbind got the EnquireLink Resp");
+
+                }
 
             }
             catch (final Exception e)
@@ -194,7 +207,55 @@ public class SessionRoundRobin
         return unboundCount;
     }
 
-    public void resetCounters()
+    private boolean isENquireLinkFailed(ItextosSmppSessionHandler handler) {
+		
+    	EnquireLink enquirelink=new EnquireLink();
+    	
+    	try {
+    		WindowFuture<Integer, PduRequest, PduResponse> responsefuture=handler.sendRequestPdu(enquirelink, 100, true);
+    		
+    		while(true) {
+    			
+    			if(responsefuture!=null&&!responsefuture.isDone()) {
+    				
+    				Thread.sleep(1);
+    				continue;
+    			}
+    			
+    			PduResponse response=responsefuture.getResponse();
+    			
+    			if(response instanceof EnquireLinkResp) {
+    				
+    	            ExpiredSessionRemoveLog.log(" EnquireLink got EnquireLinkResp");
+    	            
+    	            ExpiredSessionRemoveLog.log(" response code : "+ response.getCommandStatus() );
+
+    	            if( response.getCommandStatus()==0) {
+    	        
+    	            	handler.updateLastUsedTime();
+    	            	return false;
+    	            }
+
+    			}else {
+    				
+    	            ExpiredSessionRemoveLog.log(" EnquireLink got other than EnquireLinkResp");
+    	            
+    	            ExpiredSessionRemoveLog.log(" response code : "+ response.getCommandStatus() );
+
+
+    			}
+    		}
+    		
+		} catch (Exception e) {
+			
+            ExpiredSessionRemoveLog.log("Exception while sending EnquireLink." + ErrorMessage.getStackTraceAsString(e));
+
+		}
+    	
+		return true;
+	}
+
+	public void resetCounters()
     {
         for (final ItextosSmppSessionHandler handler : sessionHandlers)
             handler.resetCounters();

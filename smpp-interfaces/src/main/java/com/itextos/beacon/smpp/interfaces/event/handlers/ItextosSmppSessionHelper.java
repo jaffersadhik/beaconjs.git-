@@ -30,7 +30,6 @@ import com.cloudhopper.smpp.pdu.UnbindResp;
 import com.google.gson.Gson;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
-import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -51,9 +50,7 @@ import com.itextos.beacon.smslog.DnMissedLog;
 import com.itextos.beacon.smslog.DnRollbackLog;
 import com.itextos.beacon.smslog.DnSendLog;
 import com.itextos.beacon.smslog.EntryLog;
-import com.itextos.beacon.smslog.ExitLog;
 import com.itextos.beacon.smslog.SmppInvalidBindReceiverLog;
-import com.itextos.beacon.smslog.SmppSMErrorLog;
 import com.itextos.beacon.smslog.SubmitsmLog;
 
 import io.prometheus.client.Histogram.Timer;
@@ -651,6 +648,15 @@ abstract class ItextosSmppSessionHelper
 
     public WindowFuture<Integer, PduRequest, PduResponse> sendRequestPdu(
             DeliverSm aRequest,
+            int aDnRequestTimeout,
+            boolean aIsSync)
+            throws Exception
+    {
+        return mSessionDetail.sendRequestPdu(aRequest, aDnRequestTimeout, aIsSync);
+    }
+    
+    public WindowFuture<Integer, PduRequest, PduResponse> sendRequestPdu(
+            EnquireLink aRequest,
             int aDnRequestTimeout,
             boolean aIsSync)
             throws Exception

@@ -12,6 +12,7 @@ import com.cloudhopper.smpp.SmppSessionConfiguration;
 import com.cloudhopper.smpp.impl.DefaultSmppSession;
 import com.cloudhopper.smpp.pdu.BaseBind;
 import com.cloudhopper.smpp.pdu.DeliverSm;
+import com.cloudhopper.smpp.pdu.EnquireLink;
 import com.cloudhopper.smpp.pdu.PduRequest;
 import com.cloudhopper.smpp.pdu.PduResponse;
 import com.itextos.beacon.commonlib.constants.AccountStatus;
@@ -22,6 +23,7 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.platform.smpputil.AbstractSmppInfo;
 import com.itextos.beacon.smpp.objects.counters.ServerRequestCounter;
+import com.itextos.beacon.smpp.objects.request.EnquireLinkRequest;
 import com.itextos.beacon.smpp.utils.AccountDetails;
 import com.itextos.beacon.smpp.utils.ItextosSmppUtil;
 import com.itextos.beacon.smpp.utils.generator.BindIdGenerator;
@@ -252,6 +254,15 @@ public class SessionDetail
         return mSession.sendRequestPdu(aRequest, aRequestTimeout, aIsSync);
     }
 
+    public WindowFuture<Integer, PduRequest, PduResponse> sendRequestPdu(
+            EnquireLink aRequest,
+            int aRequestTimeout,
+            boolean aIsSync)
+            throws Exception
+    {
+        return mSession.sendRequestPdu(aRequest, aRequestTimeout, aIsSync);
+    }
+    
     public String getClientId()
     {
         return mSmppUserInfo.getClientId();
