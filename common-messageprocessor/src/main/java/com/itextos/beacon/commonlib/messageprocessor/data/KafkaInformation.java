@@ -431,15 +431,9 @@ public class KafkaInformation
         final List<Consumer>              consumersList                      = consumerMap.computeIfAbsent(topicName, k -> new ArrayList<>());
         final List<Consumer>              componentConsumersList             = mKafkaConsumerCollectionAtClusterComponentLevel.computeIfAbsent(key, k -> new ArrayList<>());
         final String                      lKafkaServerConsumerPropertiesPath = aKafkaClusterInfo.getKafkaConsumerProperties();
-        final String                      lKafkaServerProducerPropertiesPath = aKafkaClusterInfo.getKafkaProducerProperties();
+  //      final String                      lKafkaServerProducerPropertiesPath = aKafkaClusterInfo.getKafkaProducerProperties();
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("Kafka Cluster Producer Properties found : '" + lKafkaServerProducerPropertiesPath + "'");
-            log.debug("Kafka Cluster Consumer Properties found : '" + lKafkaServerConsumerPropertiesPath + "'");
-        }
-        
-        StartupFlowLog.log("Kafka Cluster Producer Properties found : '" + lKafkaServerProducerPropertiesPath + "'");
+     
         StartupFlowLog.log("Kafka Cluster Consumer Properties found : '" + lKafkaServerConsumerPropertiesPath + "'");
 
         final Properties              consumerProps           = PropertyLoader.getInstance().getPropertiesByFileName(lKafkaServerConsumerPropertiesPath);

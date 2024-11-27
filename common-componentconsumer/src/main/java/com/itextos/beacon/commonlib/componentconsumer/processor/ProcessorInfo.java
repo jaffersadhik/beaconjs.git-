@@ -163,7 +163,7 @@ public class ProcessorInfo
   
             final KafkaClusterComponentMap             lKafkaCLusterInformation = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(mComponent, platformCluster);
             final String                               className                = aKafkaComponentInfo.getComponentProcessClass();
-            final int                                  threadsCount             = 1;
+            final int                                  threadsCount             = lKafkaCLusterInformation.getThreadsCount();
             final int                                  sleepInMillis            = lKafkaCLusterInformation.getSleepTimeInMillis();
 
             final Map<String, ConsumerInMemCollection> topicInMemCollection     = aConsumerInmemCollection.get(platformCluster.getKey());

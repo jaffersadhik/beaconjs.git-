@@ -1,7 +1,8 @@
 #bootstrap.servers=192.168.1.115:9092,192.168.1.116:9092,192.168.1.117:9092
 bootstrap.servers=10.122.0.4:30091
 
-acks=all
+acks=1
+#acks=all
 retries=0
 
 #batch.size=200000

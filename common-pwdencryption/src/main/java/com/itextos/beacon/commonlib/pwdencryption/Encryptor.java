@@ -165,13 +165,16 @@ public class Encryptor
         	 final String lApiPassword = getApiDecryptedPassword("i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY");
              System.out.println(lApiPassword);//WPzDMqbaVqG8
         	
-        	
 
-        	final String lDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
+        	 String lDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
 
            System.out.println(lDbPassword);//Sy5Cf8@123
 
-       
+
+     lDbPassword = getDecryptedDbPassword("YSrU1+RIM5hwN+ycQQdy4XhlOGhoU3RrYmtELgjZwSBQBXSHJ8AUHk/I");
+
+          System.out.println(lDbPassword);//itextos@202110
+
            
             
         }
