@@ -584,7 +584,9 @@ abstract class ItextosSmppSessionHelper
 
     public void closeSession()
     {
-        mSessionDetail.close();
+    	if(!mSessionDetail.isClosed()) {
+    		mSessionDetail.close();
+    	}
     }
 
     public void destroySession()

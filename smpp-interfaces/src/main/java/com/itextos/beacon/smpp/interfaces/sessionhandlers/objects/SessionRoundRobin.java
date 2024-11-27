@@ -137,8 +137,11 @@ public class SessionRoundRobin
                 log.debug("System.currentTimeMillis()-anHandler.getLastUsedTime().getTime()=" + (System.currentTimeMillis() - handler.getLastUsedTime().getTime()));
             }
 
-            if (handler.isSessionClosed() || (aExpiryTime <= (System.currentTimeMillis() - handler.getLastUsedTime().getTime())))
-                unbindList.add(handler);
+            if (handler.isSessionClosed() || (aExpiryTime <= (System.currentTimeMillis() - handler.getLastUsedTime().getTime()))) {
+            	
+            	unbindList.add(handler);
+            }
+                
         }
 
         for (final ItextosSmppSessionHandler handler : unbindList)
@@ -146,11 +149,26 @@ public class SessionRoundRobin
             {
                 ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId());
 
+                
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " Session State : "+handler.getSession().getStateName());
+
             	
                 handler.setExpired();
+                
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " after setExpired() ");
+
                 handler.updateAndResetCounters();
+                
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " after updateAndResetCounters()");
+
                 handler.closeSession();
+                
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " after closeSession()");
+
                 handler.destroySession();
+                
+                ExpiredSessionRemoveLog.log("going to unbind : handler.getSystemId() " +handler.getSystemId()+ " destroySession()");
+
             }
             catch (final Exception e)
             {
