@@ -146,8 +146,23 @@ public class KafkaInformation
         
         	topicName=aProducerKafkaRequest.getNextComponent().getKey();
         }else {
+        	
+        	if(aProducerKafkaRequest.getNextComponent()==Component.T2DB_ERROR_LOG
+        			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_NO_PAYLOAD_DN
+        			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_LOG
+        			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_MASTER_LOG
+        			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_RETRY_DATA
+        			||aProducerKafkaRequest.getNextComponent()==Component.DLR_POST_LOG) {
+        		
+            	topicName=aProducerKafkaRequest.getNextComponent().getKey();
+
+        		
+        	}else {
+        		
+                topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
+
+        	}
         
-            topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
 
         }
 
