@@ -173,7 +173,7 @@ public class MiddlewareHandler
         messageRequest.setDestinationPort(mInterfaceMessage.getDestinationPort());
         messageRequest.setDltEntityId(mInterfaceMessage.getDltEntityId());
         messageRequest.setDltTemplateId(mInterfaceMessage.getDltTemplateId());
-        messageRequest.setDltTelemarketerId(mInterfaceMessage.getDltTelemarketerId());
+        messageRequest.setDltTelemarketerId(mInterfaceMessage.getTelemarketerId());
 
         messageRequest.setDlrRequestFromClient(CommonUtility.isTrue(mInterfaceMessage.getDlrReq()));
         messageRequest.setClientMaxSplit(CommonUtility.getInteger(mInterfaceMessage.getSplitMax()));

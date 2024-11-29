@@ -551,6 +551,8 @@ public class JSONRequestProcessor
         messageBean.setDltEntityId(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_DLT_ENTITY_ID));
         messageBean.setDltTemplateId(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_DLT_TEMPLATE_ID));
         messageBean.setDltTelemarketerId(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_DLT_TMA_ID));
+        messageBean.setTelemarketerId(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_DLT_TMA_ID));
+
         messageBean.setDlrReq(CommonUtility.nullCheck(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_DLR_REQ)));
 
         return messageBean;
