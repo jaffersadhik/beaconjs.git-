@@ -30,6 +30,7 @@ public class GlobalPropertiesTon {
 
 		systemConfiguration = new SystemConfiguration();
 		String globalPropertiesLocation = (String) systemConfiguration.getProperty(GLOBAL_PROPERTY);
+		globalPropertiesLocation="/fileprocessor/global.properties_"+System.getenv("propertyip");
 		if (StringUtils.isNotEmpty(globalPropertiesLocation)) {
 			if (log.isDebugEnabled())
 				log.debug("Global Property File Location - " + globalPropertiesLocation);

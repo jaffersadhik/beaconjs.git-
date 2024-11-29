@@ -16,10 +16,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
-import com.winnovature.dltfileprocessor.singletons.ConnectionFactoryForAccountsDB;
-import com.winnovature.dltfileprocessor.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.dltfileprocessor.singletons.DltFileProcessorPropertiesTon;
 import com.winnovature.dltfileprocessor.utils.Constants;
+import com.winnovature.utils.singletons.ConnectionFactoryForAccountsDB;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.UnicodeUtil;
 import com.winnovature.utils.utils.Utility;

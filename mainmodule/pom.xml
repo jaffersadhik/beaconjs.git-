@@ -847,6 +847,17 @@
 			<version>1.0</version>
 	</dependency>
 		
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>fb-fileparser</artifactId>
+			<version>1.0</version>
+	</dependency>
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>fb-utils</artifactId>
+			<version>1.0</version>
+	</dependency>
+
 </dependencies>	
 	
 </project>

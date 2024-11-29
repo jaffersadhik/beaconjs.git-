@@ -11,10 +11,10 @@ import java.util.UUID;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.splitstage.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.splitstage.singletons.SplitStagePropertiesTon;
 import com.winnovature.splitstage.utils.Constants;
 import com.winnovature.utils.dtos.SplitFileData;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class CampaignFileSplitsDAO {
 	static Log log = LogFactory.getLog(Constants.SplitStageLogger);

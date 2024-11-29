@@ -1,4 +1,4 @@
-package com.winnovature.initialstate.singletons;
+package com.winnovature.utils.singletons;
 
 import java.sql.Connection;
 
@@ -8,20 +8,22 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.initialstate.utils.Constants;
-import com.winnovature.utils.singletons.JndiPropertiesTon;
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
+import com.winnovature.utils.utils.Constants;
 
-public class ConnectionFactoryForCMDB {
-	static Log log = LogFactory.getLog(Constants.InitialStageLogger);
+public class ConnectionFactoryForAccountsDB {
+	static Log log = LogFactory.getLog(Constants.UtilsLogger);
 	/**
 	 * ConnectionFactory singleton instance.
 	 */
-	private static ConnectionFactoryForCMDB conFact = new ConnectionFactoryForCMDB();
+	private static ConnectionFactoryForAccountsDB conFact = new ConnectionFactoryForAccountsDB();
 
 	/**
 	 * class name for logging purpose.
 	 */
-	private static final String className = "[ConnectionFactoryForCMDB]";
+	private static final String className = "[ConnectionFactoryForAccountsDB]";
 
 	/**
 	 * Private constructor.
@@ -29,7 +31,7 @@ public class ConnectionFactoryForCMDB {
 
 	static DataSource ds = null;
 
-	private ConnectionFactoryForCMDB() {
+	private ConnectionFactoryForAccountsDB() {
 
 	}
 
@@ -38,7 +40,7 @@ public class ConnectionFactoryForCMDB {
 	 * 
 	 * @return ConnectionFactory instance.
 	 */
-	public static ConnectionFactoryForCMDB getInstance() {
+	public static ConnectionFactoryForAccountsDB getInstance() {
 		return conFact;
 	}
 
@@ -47,12 +49,14 @@ public class ConnectionFactoryForCMDB {
 	 * 
 	 * @return Connection sql connection instance.
 	 */
+	
+	/*
 	public Connection getConnection() {
 		String logName = className + " [getConnection] ";
 
 		try {
 			String dsJNDI = JndiPropertiesTon.getInstance().getPropertiesConfiguration()
-					.getString(com.winnovature.utils.utils.Constants.MARIADB_JNDI_NAME_CM_DB);
+					.getString(com.winnovature.utils.utils.Constants.MARIADB_JNDI_NAME_ACCOUNTS_DB);
 
 			if (log.isDebugEnabled())
 				log.debug(logName + " Getting connection to fileprocessing database " + dsJNDI);
@@ -69,6 +73,18 @@ public class ConnectionFactoryForCMDB {
 		}
 
 		return null;
+
+	}
+	*/
+	
+	public Connection getConnection() {
+		
+        try {
+			return DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
+		} catch (Exception e) {
+			
+			return null;
+		}
 
 	}
 }

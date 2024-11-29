@@ -8,6 +8,9 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.winnovature.utils.utils.Constants;
 
 public class ConnectionFactoryForCMDB {
@@ -46,6 +49,7 @@ public class ConnectionFactoryForCMDB {
 	 * 
 	 * @return Connection sql connection instance.
 	 */
+	/*
 	public Connection getConnection() {
 		String logName = className + " [getConnection] ";
 
@@ -69,6 +73,18 @@ public class ConnectionFactoryForCMDB {
 		}
 
 		return null;
+
+	}
+	*/
+	
+	public Connection getConnection() {
+		
+        try {
+			return DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
+		} catch (Exception e) {
+			
+			return null;
+		}
 
 	}
 }

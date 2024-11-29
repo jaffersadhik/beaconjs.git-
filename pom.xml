@@ -359,6 +359,7 @@
    	<module>tomacatvirtualthreadpool</module>
    	<module>platform-smppdlrpoller</module>
    	<module>platform-smppdlrutil</module>
+   	<module>docker-fileprocessor</module>
   </modules>
   
 

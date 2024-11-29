@@ -17,11 +17,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.groupsprocessor.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.groupsprocessor.singletons.GroupsProcessorPropertiesTon;
 import com.winnovature.groupsprocessor.utils.Constants;
 import com.winnovature.groupsprocessor.utils.FileSender;
 import com.winnovature.utils.dtos.SplitFileData;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GroupsMasterDAO {
 

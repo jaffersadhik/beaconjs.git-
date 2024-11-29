@@ -13,9 +13,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.handoverstage.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.handoverstage.utils.Constants;
 import com.winnovature.utils.dtos.RedisServerDetailsBean;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GenericDAO {
 

@@ -15,8 +15,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.cronjobs.singletons.ConnectionFactoryForConfigDB;
 import com.winnovature.cronjobs.utils.Constants;
+import com.winnovature.utils.singletons.ConnectionFactoryForConfigDB;
 
 public class CurrencyUpdateDAO {
 

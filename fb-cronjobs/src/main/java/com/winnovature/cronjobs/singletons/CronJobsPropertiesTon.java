@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.cronjobs.utils.Constants;
+import com.winnovature.utils.singletons.GlobalPropertiesTon;
 
 public class CronJobsPropertiesTon {
 

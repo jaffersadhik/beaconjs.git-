@@ -15,10 +15,10 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.initialstate.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.initialstate.singletons.InitialStagePropertiesTon;
 import com.winnovature.initialstate.utils.Constants;
 import com.winnovature.initialstate.utils.FileSender;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GroupCampaignDAO {
 

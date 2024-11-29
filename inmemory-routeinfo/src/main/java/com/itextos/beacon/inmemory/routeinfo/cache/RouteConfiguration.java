@@ -82,9 +82,10 @@ public class RouteConfiguration
             final String          lPromoHeaderType   = aResultSet.getString("promo_header_type");
             final String          lPromoHeader       = CommonUtility.nullCheck(aResultSet.getString("promo_header"), true);
             final String          lRouteId           = aResultSet.getString("route_id");
+            final String          lTelemarketerId           = getValueAsString(aResultSet,"telemarkater_id");
 
             final RouteConfigInfo lRouteInfo         = new RouteConfigInfo(lHeaderWhitelisted, lRouteType, lPrefix, isPrefix, lSmscId, isTxnRoute, isPromoRoute, isIntlRoute, isDummyRoute,
-                    lDtimeFormat, lCarrierFullDN, lPromoHeaderType, lRouteId, lPromoHeader);
+                    lDtimeFormat, lCarrierFullDN, lPromoHeaderType, lRouteId, lPromoHeader,lTelemarketerId);
 
             if (!lPromoHeader.isEmpty() && (lPromoHeaderType != null) && lPromoHeaderType.equalsIgnoreCase("0"))
                 lTempRouteBasedHeader.put(lRouteId, lPromoHeader);
@@ -95,5 +96,16 @@ public class RouteConfiguration
 
         mRouteConfigMap   = lTempRouteConfigMap;
     }
+
+	private String getValueAsString(ResultSet aResultSet,String columnName) {
+		
+		try {
+		return aResultSet.getString(columnName);
+		}catch(Exception e) {
+		
+			return null;
+		}
+		
+	}
 
 }

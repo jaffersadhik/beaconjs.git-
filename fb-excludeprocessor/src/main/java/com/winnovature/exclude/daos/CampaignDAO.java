@@ -7,9 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.exclude.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.exclude.singletons.ExcludeProcessorPropertiesTon;
 import com.winnovature.exclude.utils.Constants;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class CampaignDAO {
 	static Log log = LogFactory.getLog(Constants.ExcludeLogger);

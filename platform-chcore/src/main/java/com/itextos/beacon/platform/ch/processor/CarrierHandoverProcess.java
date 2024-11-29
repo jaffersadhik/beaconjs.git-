@@ -35,6 +35,8 @@ import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.carrierhandover.RouteKannelInfo;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
+import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
+import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 import com.itextos.beacon.platform.carrierhandoverutility.util.CHUtil;
 import com.itextos.beacon.platform.carrierhandoverutility.util.GenerateDNUrl;
 import com.itextos.beacon.platform.ch.util.CHProcessUtil;
@@ -746,8 +748,15 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					
 					String templateid=URLEncoder.encode(CommonUtility.nullCheck(aMessageRequest.getDltTemplateId(), true), Constants.ENCODER_FORMAT);
 					
-					String telemarketerid="1702166693997804050";
 					
+			        final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(aMessageRequest.getRouteId());
+
+			        String telemarketerid=lRouteConfigInfo.getTelemartkerId();
+					
+			        if(telemarketerid==null) {
+			        	
+			        	telemarketerid="";
+			        }
 					String temptelemartkerid=aMessageRequest.getDltTelemarketerId();
 					
 					if(temptelemartkerid==null) {

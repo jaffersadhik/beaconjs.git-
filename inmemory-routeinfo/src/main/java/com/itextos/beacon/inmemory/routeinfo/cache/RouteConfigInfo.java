@@ -16,6 +16,7 @@ public class RouteConfigInfo
     private final String  mCarrierFullDn;
     private final String  mPromoHeaderType;
     private final String  mRouteId;
+    private final String  mTelemartkerId;
     private final String  mPromoHeader;
 
     public RouteConfigInfo(
@@ -32,7 +33,8 @@ public class RouteConfigInfo
             String aCarrierFullDn,
             String aPromoHeaderType,
             String aRouteId,
-            String aPromoHeader)
+            String aPromoHeader,
+            String  aTelemartkerId)
     {
         super();
         mHeaderWhitelisted = aHeaderWhitelisted;
@@ -49,6 +51,7 @@ public class RouteConfigInfo
         mPromoHeaderType   = aPromoHeaderType;
         mRouteId           = aRouteId;
         mPromoHeader       = aPromoHeader;
+        mTelemartkerId	   = aTelemartkerId;
     }
 
     public String getHeaderWhitelisted()
@@ -114,6 +117,11 @@ public class RouteConfigInfo
     public String getRouteId()
     {
         return mRouteId;
+    }
+    
+    public String getTelemartkerId()
+    {
+        return mTelemartkerId;
     }
 
     public String getPromoHeader()

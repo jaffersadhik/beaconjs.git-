@@ -13,10 +13,10 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.dltfileprocessor.singletons.ConnectionFactoryForAccountsDB;
-import com.winnovature.dltfileprocessor.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.dltfileprocessor.utils.Constants;
 import com.winnovature.utils.dtos.RedisServerDetailsBean;
+import com.winnovature.utils.singletons.ConnectionFactoryForAccountsDB;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GenericDAO {
 	static Log log = LogFactory.getLog(Constants.FileUploadLogger);

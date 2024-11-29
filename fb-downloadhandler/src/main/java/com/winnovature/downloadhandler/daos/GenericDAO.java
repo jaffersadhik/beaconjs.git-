@@ -11,9 +11,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.downloadhandler.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.downloadhandler.utils.Constants;
 import com.winnovature.utils.dtos.RedisServerDetailsBean;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GenericDAO {
 	static Log log = LogFactory.getLog(Constants.DownloadHandlerLogger);

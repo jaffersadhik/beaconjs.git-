@@ -64,5 +64,11 @@
 			<artifactId>platform-messageflowutility</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-routeinfo</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

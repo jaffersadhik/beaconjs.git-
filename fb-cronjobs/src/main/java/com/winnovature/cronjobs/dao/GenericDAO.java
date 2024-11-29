@@ -13,8 +13,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.cronjobs.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.cronjobs.utils.Constants;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class GenericDAO {
 

@@ -12,9 +12,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.campaignfinisher.singletons.CampaignFinisherPropertiesTon;
-import com.winnovature.campaignfinisher.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.campaignfinisher.utils.Constants;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class UpdateCampaignFilesCompletedDAO {
 	static Log log = LogFactory.getLog(Constants.CampaignFinisherLogger);

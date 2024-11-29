@@ -3,10 +3,11 @@ package com.itextos.beacon.commonlib.commondbpool;
 public enum DatabaseSchema
 {
 
+    CM("cm"),
     ACCOUNTS("accounts"),
     // Configuration should not be read from property file.
     // It is always be 1 and it was hard coded in code.
-    // CONFIGURATION("configuration"),
+    CONFIGURATION("configuration"),
     BILLING("billing"),
     CARRIER_HANDOVER("carrier_handover"),
     SMART_LINK("smartlink"),

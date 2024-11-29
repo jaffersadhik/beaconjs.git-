@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.downloadhandler.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.downloadhandler.utils.Constants;
 import com.winnovature.downloadhandler.utils.FileSender;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 public class DownloadReqDAO {
 	static Log log = LogFactory.getLog(Constants.DownloadHandlerLogger);

@@ -18,10 +18,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.inmemdata.account.UserInfo;
-import com.winnovature.initialstate.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.initialstate.singletons.InitialStagePropertiesTon;
 import com.winnovature.initialstate.utils.Constants;
 import com.winnovature.initialstate.utils.FileSender;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.UserDetails;
 

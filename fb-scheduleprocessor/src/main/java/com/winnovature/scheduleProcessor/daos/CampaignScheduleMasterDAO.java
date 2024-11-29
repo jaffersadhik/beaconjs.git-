@@ -18,9 +18,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
-import com.winnovature.scheduleProcessor.singletons.ConnectionFactoryForCMDB;
 import com.winnovature.scheduleProcessor.singletons.ScheduleProcessorPropertiesTon;
 import com.winnovature.scheduleProcessor.utils.Constants;
+import com.winnovature.utils.singletons.ConnectionFactoryForCMDB;
 
 
 
