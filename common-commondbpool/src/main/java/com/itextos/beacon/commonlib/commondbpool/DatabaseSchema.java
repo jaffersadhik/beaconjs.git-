@@ -9,6 +9,7 @@ public enum DatabaseSchema
     // It is always be 1 and it was hard coded in code.
     CONFIGURATION("configuration"),
     BILLING("billing"),
+    BILLINGBKUP("billingbkup"),
     CARRIER_HANDOVER("carrier_handover"),
     SMART_LINK("smartlink"),
     LOGGING("logging"),

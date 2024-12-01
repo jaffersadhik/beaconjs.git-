@@ -13,6 +13,7 @@ public enum Table2DBInserterId
 
     SUBMISSION("submission"),
     DELIVERIES("deliveries"),
+    DELIVERIES_BKUP("deliveries_bkup"),
     FULL_MESSAGE("full_message"),
     INTERIM_FAILUERS("interim_failuers"),
     INTERIM_DELIVERIES("interim_deliveries"),

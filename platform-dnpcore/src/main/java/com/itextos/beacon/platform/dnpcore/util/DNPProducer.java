@@ -5,6 +5,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
@@ -65,6 +67,15 @@ public class DNPProducer
                 	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
 
                     MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue());
+                    
+                    if(e.getKey()==Component.T2DB_DELIVERIES) {
+                    
+                    	if(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.BILLINGBKUP.getKey())!=null) {
+                    		
+                            MessageProcessor.writeMessage(Component.DNP, Component.T2DB_DELIVERIES_BKUP, e.getValue());
+
+                    	}
+                    }
                 }
             }
             catch (final ItextosException e1)

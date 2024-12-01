@@ -21,6 +21,7 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.http.generichttpapi.common.data.BasicInfo;
 import com.itextos.beacon.http.generichttpapi.common.data.InterfaceMessage;
 import com.itextos.beacon.http.generichttpapi.common.interfaces.IResponseProcessor;
@@ -68,6 +69,9 @@ public class MiddlewareHandler
             log.debug("Request Type for response : " + aReqType);
 
         final MessageRequest    lMessageRequest = generateMessageRequestObj(aReqType);
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" telemarketerid : lMessageRequest "+lMessageRequest.getDltTelemarketerId()).append("\t"); 
+
 
         final GenericResponse   lGenericResp    = IInterfaceUtil.getGenericResponse();
         final InterfaceResponse responseObject  = lGenericResp.getInterfaceResponse(lMessageRequest.getClientId(), responseHandler.getRequestType());

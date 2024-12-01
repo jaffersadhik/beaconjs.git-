@@ -150,7 +150,8 @@ public class KafkaInformation
     			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_RETRY_DATA
     			||aProducerKafkaRequest.getNextComponent()==Component.DLR_POST_LOG
     			||aProducerKafkaRequest.getNextComponent()==Component.INTERFACE_ASYNC_PROCESS
-    			||aProducerKafkaRequest.getNextComponent()==Component.RCH) {
+    			||aProducerKafkaRequest.getNextComponent()==Component.RCH
+    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_DELIVERIES_BKUP) {
         
         	topicName=aProducerKafkaRequest.getNextComponent().getKey();
         }else {

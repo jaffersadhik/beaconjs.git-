@@ -269,7 +269,7 @@ public class JSONRequestProcessor
     {
         final InterfaceMessage lMessage = getMessage(lJsonMessage);
         
-        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\n"); 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("InterfaceMessage : getTelemarketerId() : "+lMessage.getTelemarketerId()).append("\n"); 
 
 
         if (log.isDebugEnabled())
@@ -672,6 +672,10 @@ public class JSONRequestProcessor
             throws Exception
     {
         Utility.setMessageId(aMessage);
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" telemarketerid : InterfaceMessage "+aMessage.getTelemarketerId()).append("\t"); 
+
+        
         final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, InterfaceStatusCode.SUCCESS);
         middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
     }

@@ -55,7 +55,8 @@ public class ProducerCallbackForInterface
                 	log.debug("ProducerCallbackInterface got error put the message to fallbackHolder");
                 	ErrorLog.log( "ProducerCallbackInterface got error put the message to fallbackHolder");
 
-                	mFallBackHolder.put(mMessage);
+                	//commanded as of now we need to handle
+                //	mFallBackHolder.put(mMessage);
                 }
                 else
                 {
@@ -65,13 +66,15 @@ public class ProducerCallbackForInterface
                 	ErrorLog.log( "Exception while adding the message to InMemqueue while the Kafka is not available. " + "But the fallback inmemory queue is null. "
                             + "This data will be available in the Redis. " + "Please check in Redis.");
 
-                    KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
+                	//commanded as of now we need to handle
+                    //KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
                 }
             }
             catch (final Exception e)
             {
                 log.error("Exception while adding the message to InMemqueue while the Kafka is not available. This data will be available in the Redis. Please check in Redis.", e);
-                KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
+              //commanded as of now we need to handle
+                //KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
             }
         }
 

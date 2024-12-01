@@ -60,7 +60,8 @@ public class StartApplication
     		while(true) {
     			
     			doTableCreation();
-    			
+    			doTableBkupCreation();
+
                 CommonUtility.sleepForAWhile(15*60*1000);
 
     		}
@@ -132,6 +133,71 @@ public class StartApplication
 			
 		}
 
+		
+
+		   private void doTableBkupCreation() {
+			
+
+
+
+				Connection con=null;
+				try {
+					
+					 final TableInserterInfoCollection tiic = (TableInserterInfoCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.TABLE_INSERTER_INFO);
+
+					 TableInserterInfo  mTableInserterInfo = tiic.getTableInserterInfo(Table2DBInserterId.DELIVERIES_BKUP);
+
+
+				 con = DBDataSourceFactory.getConnection(mTableInserterInfo.getJndiInfo());
+				 
+				 Map<String,List<String>> schemamap=getSchemaList();
+				 
+				 Iterator itr=schemamap.keySet().iterator();
+				 
+				 while(itr.hasNext()) {
+					 
+					 String schema=itr.next().toString();
+					 
+					 if (!isSchemaExists(con, schema)) {
+			                createSchema(con, schema);
+			                
+			                TableCreationLog.log(" schema : "+schema+" : Schema Created On : "+new Date());
+			            }
+					 
+					 List<String> tablelist=schemamap.get(schema);
+					 
+					 for(int i=0;i<tablelist.size();i++) {
+						 
+						 createTable(con,schema+".deliveries_"+tablelist.get(i));
+
+
+						 
+
+					 }
+				 }
+				 
+				
+				 
+			
+					
+				}catch(Exception e) {
+					
+					
+				}finally {
+					
+					if(con!=null) {
+						try {
+						con.close();
+						}catch(Exception e) {}
+					}
+					
+				}
+				
+			
+		}
+
+		   
+		   
 		private void createTable(Connection con, String tablename) {
 			
 			
@@ -242,7 +308,7 @@ public class StartApplication
        }
    }
    
-   private static void createTableInSchema(Connection connection, String tablename)  {
+private static void createTableInSchema(Connection connection, String tablename)  {
 	   
        String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."));
        Statement statement=null;

@@ -453,6 +453,13 @@ public class App {
 			IS_START_PROMETHEUS=true;
 
 			return true;			
+		}else if(module.equals("dnt2tbbkup")) {
+			
+			com.itextos.beacon.platform.dnt2tbbkup.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
 		}else if(module.equals("fullmsgt2tb")) {
 			
 			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);

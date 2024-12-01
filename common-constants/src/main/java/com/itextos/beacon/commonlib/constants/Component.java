@@ -96,6 +96,7 @@ public enum Component
     // Topic 2 DB Components
     T2DB_SUBMISSION("t2db_submission"),
     T2DB_DELIVERIES("t2db_deliveries"),
+    T2DB_DELIVERIES_BKUP("t2db_deliveries_bkup"),
     T2DB_FULL_MESSAGE("t2db_full_message"),
     T2DB_INTERIM_FAILUERS("t2db_interim_failuers"),
     T2DB_INTERIM_DELIVERIES("t2db_interim_deliveries"),

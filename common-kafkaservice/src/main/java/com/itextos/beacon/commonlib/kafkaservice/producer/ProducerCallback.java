@@ -60,7 +60,8 @@ public class ProducerCallback
 
     private void doFallbackForKafka()
     {
-        KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
+    	//commanded need to handle
+       // KafkaRedisHandler.addToProducerRedis(mProducer.getComponent(), mTopicName, mMessage);
     }
 
 }

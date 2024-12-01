@@ -193,7 +193,12 @@
 			<artifactId>platform-dnt2tb</artifactId>
 			<version>1.0</version>
 	</dependency>
-		
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-dnt2tbbkup</artifactId>
+			<version>1.0</version>
+	</dependency>	
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-dnrfallbackpoller</artifactId>

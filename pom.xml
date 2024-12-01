@@ -360,6 +360,8 @@
    	<module>platform-smppdlrpoller</module>
    	<module>platform-smppdlrutil</module>
    	<module>docker-fileprocessor</module>
+   	<module>smsc</module>
+   	<module>platform-dnt2tbbkup</module>
   </modules>
   
 
