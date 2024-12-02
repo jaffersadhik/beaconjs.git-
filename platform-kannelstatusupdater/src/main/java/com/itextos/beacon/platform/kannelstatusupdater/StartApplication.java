@@ -3,8 +3,9 @@ package com.itextos.beacon.platform.kannelstatusupdater;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
@@ -25,6 +27,7 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollection;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.TableCreationLog;
+import com.itextos.beacon.smslog.TableCreationOntimeLog;
 
 public class StartApplication
 {
@@ -89,9 +92,14 @@ public class StartApplication
 				 String schema=itr.next().toString();
 				 
 				 if (!isSchemaExists(con, schema)) {
+					 
+		                TableCreationOntimeLog.log(" schema : "+schema+" : not Present  : on  "+new Date()+ " Try to Create");
+
 		                createSchema(con, schema);
 		                
-		                TableCreationLog.log(" schema : "+schema+" : Schema Created On : "+new Date());
+		                TableCreationOntimeLog.log(" schema : "+schema+" : Schema Created On : "+new Date());
+		            }else {
+		               TableCreationLog.log(" schema : "+schema+" :Available on  : "+new Date());
 		            }
 				 
 				 List<String> tablelist=schemamap.get(schema);
@@ -205,9 +213,11 @@ public class StartApplication
 				
 			}else {
 				
+                TableCreationOntimeLog.log(" table : "+tablename+" : not available  On : "+new Date());
+
 				createTableInSchema(con,tablename);
 				
-                TableCreationLog.log(" table : "+tablename+" : Table Created On : "+new Date());
+                TableCreationOntimeLog.log(" table : "+tablename+" : Table Created On : "+new Date());
 
 			}
 			
@@ -222,45 +232,40 @@ public class StartApplication
 			
 			Map<String,List<String>> result=new HashMap<String,List<String>>();
 			
-			SimpleDateFormat sdf =new SimpleDateFormat("yyyyMM");
+	        Calendar calendar = Calendar.getInstance();
+
+			int year =calendar.get(Calendar.YEAR);
+			int month=calendar.get(Calendar.MONTH)+1;
 			
-			String month=sdf.format(new Date());
-			
-			int intMonth=Integer.parseInt(month);
+			 DecimalFormat df = new DecimalFormat("00");
 
-			addMonth(intMonth,currentmonthtablelist);
+			addMonth(year,month,currentmonthtablelist);
 
-			result.put("billing_"+month, currentmonthtablelist);
+			result.put("billing_"+year+""+df.format(month), currentmonthtablelist);
 
-			if(month.endsWith("12")) {
+			if(month==12) {
 				
 				
-				SimpleDateFormat sdf2 =new SimpleDateFormat("yyyy");
-				
-				String year=sdf2.format(new Date());
-				
-				int intYear=Integer.parseInt(year);
+				int intYear=year+1;
 				
 				intYear++;
 				
 				
-				month=intYear+""+01;
+				month=1;
 				
-				addMonth(Integer.parseInt(month),nextmonthtablelist);
-				
-				result.put("billing_"+month, nextmonthtablelist);
+				addMonth(year,month,nextmonthtablelist);
+
+				result.put("billing_"+year+""+df.format(month), nextmonthtablelist);
+
 
 
 			}else {
 			
-				intMonth++;
-				month=""+intMonth;
+				month++;
+			
+				addMonth(year,month,nextmonthtablelist);
 
-				addMonth(intMonth,nextmonthtablelist);
-
-				result.put("billing_"+month, nextmonthtablelist);
-
-				
+				result.put("billing_"+year+""+df.format(month), nextmonthtablelist);
 			
 			}
 			
@@ -268,15 +273,15 @@ public class StartApplication
 			return result;
 		}
 
-		private void addMonth(int month, List<String> monthtablelist) {
+		private void addMonth(int year,int month, List<String> monthtablelist) {
 			
 			for(int i=1;i<32;i++) {
 				
 				if(i>9) {
-					monthtablelist.add(month+""+i);
+					monthtablelist.add(year+""+month+""+i);
 				}else {
 					
-					monthtablelist.add(month+"0"+i);
+					monthtablelist.add(year+""+month+"0"+i);
 
 				}
 				
@@ -310,7 +315,7 @@ public class StartApplication
    
 private static void createTableInSchema(Connection connection, String tablename)  {
 	   
-       String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."));
+       String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."),tablename.indexOf("_"));
        Statement statement=null;
 
        try {
@@ -318,6 +323,8 @@ private static void createTableInSchema(Connection connection, String tablename)
            statement.executeUpdate(query);
        }catch(Exception e) {
     	   
+           TableCreationOntimeLog.log(" table : "+tablename+" :createTableInSchema err : "+new Date()+" \n "+ErrorMessage.getStackTraceAsString(e));
+
        }finally {
     	
     	   if(statement!=null) {
