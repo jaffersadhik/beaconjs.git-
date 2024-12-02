@@ -190,6 +190,7 @@ public class StartApplication
 					
 				}catch(Exception e) {
 					
+					TableCreationOntimeLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
 					
 				}finally {
 					
@@ -211,6 +212,8 @@ public class StartApplication
 			
 			if(isTableExists(con,tablename)) {
 				
+                TableCreationLog.log(" table : "+tablename+" :  available  On : "+new Date());
+
 			}else {
 				
                 TableCreationOntimeLog.log(" table : "+tablename+" : not available  On : "+new Date());
@@ -315,10 +318,11 @@ public class StartApplication
    
 private static void createTableInSchema(Connection connection, String tablename)  {
 	   
-       String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."),tablename.indexOf("_"));
        Statement statement=null;
 
        try {
+           String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."),tablename.indexOf("_"));
+
     	   statement = connection.createStatement();
            statement.executeUpdate(query);
        }catch(Exception e) {
