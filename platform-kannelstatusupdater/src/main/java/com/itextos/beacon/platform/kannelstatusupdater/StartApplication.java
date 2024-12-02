@@ -321,7 +321,7 @@ private static void createTableInSchema(Connection connection, String tablename)
        Statement statement=null;
 
        try {
-           String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."),tablename.indexOf("_"));
+           String query = "create table "+tablename+" as select * from "+tablename.substring(tablename.indexOf("."),tablename.lastIndexOf("_"));
 
     	   statement = connection.createStatement();
            statement.executeUpdate(query);
