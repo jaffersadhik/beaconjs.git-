@@ -42,6 +42,8 @@ public class App {
     	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
     	System.setProperty("prometheus.jetty.port", "1075");
 
+    	foldercreaton("/opt/jboss/wildfly/logs/k2e");
+
     	foldercreaton("/opt/jboss/wildfly/logs/topic");
 		foldercreaton("/opt/jboss/wildfly/logs/table2db");
 		foldercreaton("/opt/jboss/wildfly/logs/consumer");
@@ -439,6 +441,20 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("subk2e")) {
+			
+			com.itextos.beacon.subk2e.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
+		}else if(module.equals("dnk2e")) {
+			
+			com.itextos.beacon.dnk2e.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
 		}else if(module.equals("subt2tb")) {
 			
 			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);

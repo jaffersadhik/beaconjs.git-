@@ -249,23 +249,20 @@ public class StartApplication
 			if(month==12) {
 				
 				
-				int intYear=year+1;
-				
-				intYear++;
-				
+				int intYear=year+1;				
 				
 				month=1;
 				
-				addMonth(year,month,nextmonthtablelist);
+				addMonth(intYear,month,nextmonthtablelist);
 
-				result.put("billing_"+year+""+df.format(month), nextmonthtablelist);
+				result.put("billing_"+intYear+""+df.format(month), nextmonthtablelist);
 
 
 
 			}else {
 			
 				month++;
-			
+							
 				addMonth(year,month,nextmonthtablelist);
 
 				result.put("billing_"+year+""+df.format(month), nextmonthtablelist);

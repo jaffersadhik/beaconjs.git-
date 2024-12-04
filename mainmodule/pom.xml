@@ -122,6 +122,18 @@
 			<version>1.0</version>
 	</dependency>
 	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>subk2e</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>dnk2e</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>platform-cappingcheck</artifactId>

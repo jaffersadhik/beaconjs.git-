@@ -9,6 +9,7 @@ ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
 
+COPY ./target/common/log4j2-kafka2elastic.xml /log4j2-kafka2elastic.xml
 COPY ./target/common/log4j2-common.xml /log4j2-common.xml
 COPY ./target/common/custom_hosts_production.properties /custom_hosts_production.properties
 COPY ./target/common/smpp-interface.properties /smpp-interface.properties
@@ -40,7 +41,8 @@ COPY ./target/common/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/common/prometheus.control.properties /prometheus.control.properties
 COPY ./target/common/mcc-mnc-list.json /mcc-mnc-list.json
 
-
+COPY ./target/profile/default/kafka2es_del.properties /kafka2es_del.properties_default
+COPY ./target/profile/default/kafka2es_sub.properties /kafka2es_sub.properties_default
 COPY ./target/profile/default/kafka-producer.properties /kafka-producer.properties_default
 COPY ./target/profile/default/kafka-consumer.properties /kafka-consumer.properties_default
 COPY ./target/profile/default/common-db.properties /common-db.properties_default
