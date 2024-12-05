@@ -76,7 +76,7 @@ public class StartApplication
 
         log.info("ES Index Column Map SQL: " + SQL);
 
-        final Connection conn = DBDataSourceFactory.getConnection(JndiInfo.SYSTEM_DB);
+        final Connection conn =DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
         final Statement  stmt = conn.createStatement();
         stmt.setFetchSize(100);
         final ResultSet rsColMap = stmt.executeQuery(SQL);
