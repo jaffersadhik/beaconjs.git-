@@ -17,7 +17,8 @@ public class StartApplication
     public static void main(
             String[] args)
     {
-       
+    	System.setProperty("log4j.configurationFile", "/log4j2-kafka2elastic.xml");
+
     	System.setProperty("kafka.2.elasticsearch.config.file", "/kafka2es_sub.properties_"+System.getenv("profile"));
     	
     	List<String> topiclist=getTopicList();

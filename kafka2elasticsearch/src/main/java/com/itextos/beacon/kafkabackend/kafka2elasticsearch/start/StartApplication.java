@@ -1,6 +1,7 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.start;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,10 +12,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.client.RestClient;
 
-import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
-import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
-import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
-import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -69,6 +66,14 @@ public class StartApplication
     void fetchESColMapFromDB()
             throws Exception
     {
+        final String MariaDBHost     = AppConfig.getString("mariadb.host");
+        final String MariaDBPort     = AppConfig.getString("mariadb.port");
+        final String MariaDBDatabase = AppConfig.getString("mariadb.database");
+        final String MariaDBUser     = AppConfig.getString("mariadb.user");
+        final String MysqlPassword   = AppConfig.getString("mariadb.password");
+
+        final String MariaDBJDBCURL  = "jdbc:mariadb://" + MariaDBHost + ":" + MariaDBPort + "/" + MariaDBDatabase;
+
     
         String       SQL             = "select column_name, mapped_name, column_type, default_value, ci_column_required ";
         SQL += " from configuration.es_sub_del_t2_col_map where index_type='" + AppMode;
@@ -76,7 +81,8 @@ public class StartApplication
 
         log.info("ES Index Column Map SQL: " + SQL);
 
-        final Connection conn =DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
+        final Connection conn =DriverManager.getConnection(MariaDBJDBCURL, MariaDBUser, MysqlPassword);
+        
         final Statement  stmt = conn.createStatement();
         stmt.setFetchSize(100);
         final ResultSet rsColMap = stmt.executeQuery(SQL);
