@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,14 +25,12 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
-import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHandler;
 import com.itextos.beacon.commonlib.daemonprocess.ShutdownHook;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDBConstants;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
-import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoaderUtility;
 import com.itextos.beacon.commonlib.messageprocessor.data.KafkaInformation;
 import com.itextos.beacon.commonlib.messageprocessor.data.StartupRuntimeArguments;
 import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
@@ -123,18 +121,37 @@ public class ProcessorInfo
                 StartupFlowLog.log("Processing for the priority Type '" + priority + "' given env priorityr : "+System.getenv("cluster")+" not present in DataBase");
                 System.exit(0);
             }
-
-            String topicName=mComponent.getKey()+"-"+priority;
-           
-            if(priority.equals("default")) {
+            
+            StringTokenizer st=new StringTokenizer(priority,",");
+            
+            while(st.hasMoreTokens()) {
             	
-            	topicName=mComponent.getKey();
-            }
-                    
-    	
-        final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
+            	String p=st.nextToken();
+            	
+            	String componentname=mComponent.getKey();
 
-        createConsumerThreads(cluster,topicName, lConsumerInmemCollection);
+            	if(mComponent.getKey().equals(Component.K2E_SUBMISSION)) {
+            		
+            		componentname=Component.T2DB_SUBMISSION.getKey();
+            		
+            	}else if(mComponent.getKey().equals(Component.K2E_DELIVERIES)||mComponent.getKey().equals(Component.T2DB_DELIVERIES_BKUP)) {
+            		
+            		componentname=Component.T2DB_DELIVERIES.getKey();
+            	}
+            	
+                String topicName=componentname+"-"+p;
+               
+                if(p.equals("default")) {
+                	
+                	topicName=componentname;
+                }
+                        
+        	
+            final Map<String, Map<String, ConsumerInMemCollection>> lConsumerInmemCollection = createConsumersBeforeStartingThread(cluster,topicName);
+
+            createConsumerThreads(cluster,topicName, lConsumerInmemCollection);
+
+            }
     }
 
     private ClusterType getClustersToProcess()

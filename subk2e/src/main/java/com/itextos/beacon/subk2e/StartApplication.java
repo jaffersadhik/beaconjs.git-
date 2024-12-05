@@ -1,13 +1,10 @@
 package com.itextos.beacon.subk2e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 
 public class StartApplication
 {
@@ -17,50 +14,27 @@ public class StartApplication
     public static void main(
             String[] args)
     {
-    	System.setProperty("log4j.configurationFile", "/log4j2-kafka2elastic.xml");
 
-    	System.setProperty("kafka.2.elasticsearch.config.file", "/kafka2es_sub.properties_"+System.getenv("profile"));
-    	
-    	List<String> topiclist=getTopicList();
-    	
-    	if(topiclist!=null) {
-    		
-			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main("submission",topiclist);
-    	
-    	}
+        try
+        {
+            if (log.isDebugEnabled())
+                log.debug("Starting the application " + Component.K2E_SUBMISSION);
+
+            final ProcessorInfo lSubProcessor = new ProcessorInfo(Component.K2E_SUBMISSION);
+            lSubProcessor.process();
+
+            // if (log.isDebugEnabled())
+            // log.debug("Starting the application " + Component.T2DB_FULL_MESSAGE);
+            //
+            // final ProcessorInfo lFullMsgProcessor = new
+            // ProcessorInfo(Component.T2DB_FULL_MESSAGE, false);
+            // lFullMsgProcessor.process();
+        }
+        catch (final Exception e)
+        {
+            log.error("Exception occer while starting Platform Biller Submission component ..", e);
+            System.exit(-1);
+        }
     }
-
-
-	private static List<String> getTopicList() {
-		
-		String priority=System.getenv("priority");
-		
-		List<String> result=new ArrayList<String>();
-	
-		if(priority!=null&&priority.trim().length()>0) {
-			
-			StringTokenizer st=new StringTokenizer(priority,",");
-			while(st.hasMoreTokens()) {
-				
-				String token=st.nextToken();
-				
-				if(token.equals("default")) {
-					result.add(Component.T2DB_SUBMISSION.getKey());
-				}else {
-					result.add(Component.T2DB_SUBMISSION.getKey()+"-"+token);
-
-				}
-				
-			}
-			
-			return result;
-			
-		}else {
-			System.err.print("no priority find");
-			System.exit(0);
-		}
-		
-		return null;
-	}
 
 }

@@ -44,6 +44,8 @@ public class EsProcess
     private final TimedProcessor          mTimedProcessor;
     private boolean                       canContinue             = true;
     private final Map<Long, EsConnection> mThreadBasedRestClients = new ConcurrentHashMap<>();
+    private final Map<Long, Kafka2ElasticSearchEsConnection> mThreadBasedRestClientsKafka2ElasticSearch = new ConcurrentHashMap<>();
+
 
     private EsProcess()
     {
@@ -158,6 +160,14 @@ public class EsProcess
         return conection.getConnection();
     }
 
+    
+    public RestHighLevelClient getKafka2ElasticSearchEsConnection()
+    {
+        final long         threadId  = Thread.currentThread().getId();
+        final Kafka2ElasticSearchEsConnection conection = mThreadBasedRestClientsKafka2ElasticSearch.computeIfAbsent(threadId, k -> new Kafka2ElasticSearchEsConnection(threadId));
+        return conection.getConnection();
+    }
+    
     public void updateLastUsed()
     {
 

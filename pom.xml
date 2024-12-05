@@ -367,6 +367,8 @@
    	<module>subk2e</module>
    	<module>dnk2e</module>
    	<module>kafka-stats</module>
+   	<module>platform-topic2elasticsearch</module>
+   	<module>inmemory-elasticsearchcolumn</module>
   </modules>
   
 

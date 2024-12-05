@@ -5,26 +5,21 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>dnk2e</artifactId>
-    	<dependencies>
+  <artifactId>inmemory-elasticsearchcolumn</artifactId>
+  <dependencies>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>kafka2elasticsearch</artifactId>
+			<artifactId>inmemory-loader</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>common-apperrorhandler</artifactId>
+			<artifactId>common-constants</artifactId>
 			<version>1.0</version>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>platform-topic2elasticsearch</artifactId>
-			<version>1.0</version>
-		</dependency>
-			<dependency>
-			<groupId>beacon</groupId>
-			<artifactId>common-componentconsumer</artifactId>
+			<artifactId>common-utility</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>

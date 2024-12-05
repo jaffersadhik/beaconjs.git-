@@ -10,6 +10,7 @@ public enum InmemoryId
 {
 
     ACCOUNT_INFO("account_info"),
+    ELASTIC_SEARCH_COLUMN("elastic_search_column"),
     APPLICATION_CONFIG("application_config"),
     CUSTOM_FEATURES("custom_features"),
     SMPP_PARENT_CHILD_ACC_MAP("smpp_parent_child_acc_map"),

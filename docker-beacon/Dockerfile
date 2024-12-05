@@ -41,8 +41,7 @@ COPY ./target/common/r3c_addinfo.properties /r3c_addinfo.properties
 COPY ./target/common/prometheus.control.properties /prometheus.control.properties
 COPY ./target/common/mcc-mnc-list.json /mcc-mnc-list.json
 
-COPY ./target/profile/default/kafka2es_del.properties /kafka2es_del.properties_default
-COPY ./target/profile/default/kafka2es_sub.properties /kafka2es_sub.properties_default
+COPY ./target/profile/default/kafka2elasticsearch.properties /kafka2elasticsearch.properties_default
 COPY ./target/profile/default/kafka-producer.properties /kafka-producer.properties_default
 COPY ./target/profile/default/kafka-consumer.properties /kafka-consumer.properties_default
 COPY ./target/profile/default/common-db.properties /common-db.properties_default

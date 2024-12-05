@@ -7,6 +7,17 @@
   </parent>
   <artifactId>subk2e</artifactId>
   	<dependencies>
+  	
+  		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-topic2elasticsearch</artifactId>
+			<version>1.0</version>
+		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-componentconsumer</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>kafka2elasticsearch</artifactId>

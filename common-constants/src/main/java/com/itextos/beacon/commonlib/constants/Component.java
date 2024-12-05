@@ -93,6 +93,9 @@ public enum Component
     PROMO_KANNEL_REDIS_CLEANER("promo_kannel_redis_cleaner"),
     CAPPING_CHK("capping_chk"),
 
+    K2E_SUBMISSION("k2e_submission"),
+    K2E_DELIVERIES("k2e_deliveries"),
+
     // Topic 2 DB Components
     T2DB_SUBMISSION("t2db_submission"),
     T2DB_DELIVERIES("t2db_deliveries"),
