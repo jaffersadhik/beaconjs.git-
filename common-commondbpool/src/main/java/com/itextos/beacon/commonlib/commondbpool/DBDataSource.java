@@ -35,7 +35,7 @@ class DBDataSource
         }
         catch (final Exception e)
         {
-            log.error("Unable to create a database connection.", e);
+            log.error("Unable to create a database connection. \n "+dataSourceConfig.getConfigAsProperties()+"\n", e);
             e.printStackTrace();
         }
         return false;
