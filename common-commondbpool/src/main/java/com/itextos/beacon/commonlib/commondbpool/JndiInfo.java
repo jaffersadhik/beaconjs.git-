@@ -5,7 +5,7 @@ import java.util.Objects;
 public class JndiInfo
 {
 
-    static final JndiInfo        SYSTEM_DB        = new JndiInfo(0, "System DB");
+    public static final JndiInfo        SYSTEM_DB        = new JndiInfo(0, "System DB");
     public static final JndiInfo CONFIGURARION_DB = new JndiInfo(1, "Configurarion DB");
 
     private final int            id;
