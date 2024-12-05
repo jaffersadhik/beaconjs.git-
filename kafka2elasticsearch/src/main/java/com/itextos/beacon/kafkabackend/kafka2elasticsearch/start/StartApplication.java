@@ -13,6 +13,7 @@ import org.elasticsearch.client.RestClient;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -75,7 +76,7 @@ public class StartApplication
 
         log.info("ES Index Column Map SQL: " + SQL);
 
-        final Connection conn = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CONFIGURATION.getKey()));
+        final Connection conn = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
         final Statement  stmt = conn.createStatement();
         stmt.setFetchSize(100);
         final ResultSet rsColMap = stmt.executeQuery(SQL);
