@@ -282,7 +282,7 @@ public class StartApplication
 	      mainThread      = Thread.currentThread();
 
           AppMode         = appmode;
-          KafkaTopicName  = "";
+          KafkaTopicName  = topicname;
           KafkaConsGrpSeq = 2;
           final int threadCount = 2;
 
