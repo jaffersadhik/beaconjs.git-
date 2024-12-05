@@ -18,7 +18,7 @@ public class K2ELog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
          
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/k2e.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/k2e/k2e.%g.log";
 
         Level loglevel=Level.INFO;
         

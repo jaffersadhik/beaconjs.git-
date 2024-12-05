@@ -352,7 +352,7 @@ public class Kafka2ESConsumerThread
                 if (log.isDebugEnabled())
                     log.debug("Poll Count: " + pollCount);
                 
-                K2ELog.log("Poll Count: " + pollCount);
+                K2ELog.log("Poll Count: " + pollCount+" "+TopicConsumer.groupMetadata());
 
 
                 if (pollCount == 0)
