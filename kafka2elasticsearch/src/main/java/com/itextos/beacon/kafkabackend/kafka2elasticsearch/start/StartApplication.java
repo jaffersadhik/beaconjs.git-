@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,7 +29,7 @@ public class StartApplication
     private static final Log                              log                     = LogFactory.getLog(StartApplication.class);
     public static String                                  ESClientTypeConfig      = null;
     public static AppConfiguration                        AppConfig               = null;
-    public static String                                  AppMode                 = null;
+    public  String                                  AppMode                 = null;
 
     public static String                                  AppProcID               = null;
     public static String                                  HostIPAddr              = null;
@@ -43,22 +44,18 @@ public class StartApplication
 
     public static ArrayList<ESIndexColMapValue>           ListESColMap            = null;
 
-    public static String                                  KafkaTopicName          = null;
-    public static int                                     KafkaConsGrpSeq         = -1;
-    public static String                                  KafkaConsGrpID          = null;
+    public  String                                  KafkaTopicName          = null;
+    public  int                                     KafkaConsGrpSeq         = -1;
+    public  String                                  KafkaConsGrpID          = null;
 
     public static HashMap<String, Kafka2ESConsumerThread> HMConsumerThreads       = null;
 
     public static Thread                                  mainThread              = null;
 
-    public static RestClient                              ES_LRC_Client           = null;
-    public static RestClient                              ESErr_LRC_Client        = null;
+    public  RestClient                              ES_LRC_Client           = null;
+    public  RestClient                              ESErr_LRC_Client        = null;
 
-    public static void testConsumer()
-            throws Exception
-    {
-        TestKafkaConsumer.testConsumeSubMessage("t2db-submission", "cg-t2sub-zz-2");
-    }
+  
 
     public static synchronized void logMsg(
             String msg)
@@ -68,7 +65,7 @@ public class StartApplication
     }
 
     @SuppressWarnings("resource")
-    static void fetchESColMapFromDB()
+    void fetchESColMapFromDB()
             throws Exception
     {
     
@@ -212,6 +209,215 @@ public class StartApplication
             throw ex;
         }
     }
+
+    public static void main(
+            String appmode,List<String> topiclist)
+    {
+
+        try
+        {
+
+        	for(int i=0;i<topiclist.size();i++) {
+        		
+        		StartApplication obj=new StartApplication();
+        		obj.processConsumer(appmode,topiclist.get(i));
+        		
+        		
+        	}
+      
+            log.info("Adding Shutdown Hook ...");
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                Thread.currentThread().setName("ShutdownHook");
+                log.info("Shutdown signal received");
+                log.info("Waiting for Consumer Threads to join...");
+
+                try
+                {
+                    StartApplication.stopConsumerThreads();
+                    StartApplication.mainThread.join();
+                }
+                catch (final Exception ex)
+                {
+                    // TODO Auto-generated catch block
+                    ex.printStackTrace(System.err);
+                }
+            }));
+
+            for (final Kafka2ESConsumerThread ct : HMConsumerThreads.values())
+                ct.join();
+        }
+        catch (final Exception ex)
+        {
+            log.error(ex.getMessage(), ex);
+            ex.printStackTrace(System.err);
+        }
+        finally
+        {
+
+            try
+            {
+                if (HMConsumerThreads != null)
+                    for (final Kafka2ESConsumerThread ct : HMConsumerThreads.values())
+                        if (!ct.isConsumerStopped())
+                        {
+                            ct.stopConsumer();
+                            ct.join();
+                            CommonUtility.sleepForAWhile();
+                        }
+
+                CommonUtility.sleepForAWhile(1000);
+                log.info("Kafka2ES Consumer Application Mode: stopped");
+                logMsg("Kafka2ES Consumer Application Mode:  stopped");
+            }
+            catch (final Exception ex2)
+            {
+                log.error(ex2.getMessage(), ex2);
+                ex2.printStackTrace(System.err);
+            }
+        }
+    }
+
+	private  void processConsumer(String appmode, String topicname) throws Exception {
+		
+	      mainThread      = Thread.currentThread();
+
+          AppMode         = appmode;
+          KafkaTopicName  = "";
+          KafkaConsGrpSeq = 2;
+          final int threadCount = 2;
+
+          KafkaConsGrpID = "cg-" + KafkaTopicName + "-" + KafkaConsGrpSeq;
+
+         
+
+          if (!AppMode.equals(Kafka2ESConstants.subMode) && !AppMode.equals(Kafka2ESConstants.delMode))
+          {
+              log.error("Invalid Consumer Mode: " + AppMode);
+              log.error("Valid Modes are : " + Kafka2ESConstants.subMode + ", " + Kafka2ESConstants.delMode);
+              System.err.println("Invalid Consumer Mode: " + AppMode);
+              return;
+          }
+
+          if (AppMode.equals(Kafka2ESConstants.subMode))
+              ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
+          else
+              if (AppMode.equals(Kafka2ESConstants.delMode))
+                  ESDocUpdTmColumn = Kafka2ESConstants.delUpdTmColumn;
+
+          if ("".equals(KafkaTopicName))
+          {
+              log.error("Kafka Topic name is empty");
+              System.err.println("Kafka Topic name is empty");
+              return;
+          }
+          else
+              if (!KafkaTopicName.contains(AppMode))
+              {
+                  log.error("Invalid Kafka Topic name for Consumer Mode");
+                  System.err.println("Invalid Kafka Topic name for Consumer Mode");
+                  return;
+              }
+
+          // final String vmName = ManagementFactory.getRuntimeMXBean().getName();
+          // AppProcID = vmName.substring(0, vmName.indexOf("@"));
+
+          AppProcID = CommonUtility.getJvmProcessId();
+
+          if (AppProcID.equals("-999999"))
+          {
+              log.error("Unable to get JVM Proces Id, Exiting...");
+              System.err.println("Unable to get JVM Proces Id, Exiting...");
+              return;
+          }
+
+          HostIPAddr = CommonUtility.getApplicationServerIp();
+
+          if (HostIPAddr.equals("unknown"))
+          {
+              log.error("Unable to get Host IP Address, Exiting...");
+              System.err.println("Unable to get Host IP Address, Exiting...");
+              return;
+          }
+
+          AppConfig   = AppConfigLoader.getInstance().getAppConfiguration();
+          ESIndexName = AppConfig.getString("es.index.name");
+
+          if ("".equals(ESIndexName))
+          {
+              log.error("Elastic Index name is empty");
+              System.err.println("Elastic Index name is empty");
+              return;
+          }
+
+          ESIndexUniqueColumn = AppConfig.getString("es.index.uidcolumn");
+
+          if ("".equals(ESIndexUniqueColumn))
+          {
+              log.error("Elastic Index Unique Column name is empty");
+              System.err.println("Elastic Index Unique Column name is empty");
+              return;
+          }
+
+          ESFmsgIndexName = AppConfig.getString("es.fmsg.index.name");
+
+          if ("".equals(ESFmsgIndexName))
+          {
+              log.error("Elastic Full Message Index name is empty");
+              System.err.println("Elastic Full Message Index name is empty");
+              return;
+          }
+
+          ESFmsgIndexUniqueColumn = AppConfig.getString("es.fmsg.index.uidcolumn");
+
+          if ("".equals(ESFmsgIndexUniqueColumn))
+          {
+              log.error("Elastic Full Message Index Unique Column name is empty");
+              System.err.println("Elastic Full Message Index Unique Column name is empty");
+              return;
+          }
+
+          log.info("Kafka Consumer for ES started, Mode: " + AppMode);
+          log.info("Host IP Address: " + HostIPAddr);
+          log.info("App Process ID: " + AppProcID);
+          log.info("Kafka2ES Consumer Application started, Mode: " + AppMode);
+          log.info("Kafka Topic Name: " + KafkaTopicName);
+          log.info("Kafka Consumer Group ID: " + KafkaConsGrpID);
+          log.info("Elastic Index name: " + ESIndexName);
+          log.info("Elastic Index Unique Column Name : " + ESIndexUniqueColumn);
+          log.info("Elastic Full Message Index name: " + ESFmsgIndexName);
+          log.info("Elastic Full Message Index Unique Column Name : " + ESFmsgIndexUniqueColumn);
+
+          log.info("Fetching Column map details from DB ...");
+          fetchESColMapFromDB();
+
+          if ((ListESColMap == null) || (ListESColMap.size() == 0))
+          {
+              log.error("No Mapping Column details found, exiting ...");
+              System.err.println("No Mapping Column details found, exiting ...");
+              return;
+          }
+
+          HMConsumerThreads = new HashMap<>();
+
+          for (int ti = 1; ti <= threadCount; ti++)
+          {
+              final String           thName = "t-" + KafkaConsGrpID + "-" + ti;
+
+              Kafka2ESConsumerThread ct     = null;
+
+              ct = new Kafka2ESConsumerThread(thName,appmode,KafkaConsGrpID,topicname);
+              HMConsumerThreads.put(thName, ct);
+              log.info("Starting Consumer Thread: " + thName);
+              ct.start();
+              CommonUtility.sleepForAWhile();
+          }
+
+		
+	}
+
+    /*
+      
+     
 
     public static void main(
             String[] args)
@@ -415,5 +621,6 @@ public class StartApplication
             }
         }
     }
+     */
 
 }

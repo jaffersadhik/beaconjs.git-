@@ -75,17 +75,19 @@ public class Kafka2ESConsumerThreadHRC
     private int                                 LogProcCount  = 0;
 
     public Kafka2ESConsumerThreadHRC(
-            String pThreadName)
+            String pThreadName,String appmode,String groupname,String topicname)
     {
+        super(pThreadName,appmode,groupname,topicname);
+
         this.setName(pThreadName);
         ConsumerThreadName        = pThreadName;
-        this.ConsumerMode         = StartApplication.AppMode;
+        this.ConsumerMode         = appmode;
         this.AppConfig            = StartApplication.AppConfig;
         this.ListESColMap         = StartApplication.ListESColMap;
         this.ESIndexName          = StartApplication.ESIndexName;
         this.ESIndexUniqueColumn  = StartApplication.ESIndexUniqueColumn;
-        this.KafkaTopicName       = StartApplication.KafkaTopicName;
-        this.KafkaConsumerGroupId = StartApplication.KafkaConsGrpID;
+        this.KafkaTopicName       = topicname;
+        this.KafkaConsumerGroupId = groupname;
         this.ESDocUpdTmColumn     = StartApplication.ESDocUpdTmColumn;
         this.ESRetryConflictCount = this.AppConfig.getInt("es.update.retry.count");
         this.FlushLimit           = this.AppConfig.getInt("es.index.flush.limit");
@@ -459,7 +461,7 @@ public class Kafka2ESConsumerThreadHRC
             log.debug("Executing ES BulkAsync ...");
 
         // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
-        final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest);
+        final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest,false);
         ESClient.bulkAsync(bulkRequest, RequestOptions.DEFAULT, bal);
 
         if (log.isDebugEnabled())

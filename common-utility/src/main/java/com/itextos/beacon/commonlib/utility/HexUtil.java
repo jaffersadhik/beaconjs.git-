@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
  * Use {@link MessageConvertionUtility} class and its methods.
  */
 @Deprecated
-class HexUtil
+public class HexUtil
 {
 
     private HexUtil()
@@ -147,7 +147,7 @@ class HexUtil
         return returnValue;
     }
 
-    private static byte[] toByteArray(
+    public static byte[] toByteArray(
             CharSequence hexString)
     {
         if (hexString == null)

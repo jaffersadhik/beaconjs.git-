@@ -24,26 +24,11 @@ public class StartApplication
     	
     	if(topiclist!=null) {
     		
-    		for(int i=0;i<topiclist.size();i++) {
-    			
-    			String arsg[]=getArgs(topiclist.get(i));
-    			
-    			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main(args);
-    			
-    		}
+			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main("submission",topiclist);
+    	
     	}
     }
 
-	private static String[] getArgs(String topicname) {
-		
-		
-		String args[]=new String[3];
-		args[0]="submission";
-		args[1]=topicname;
-		args[2]="2";
-		args[3]="2";
-		return args;
-	}
 
 	private static List<String> getTopicList() {
 		

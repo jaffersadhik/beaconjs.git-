@@ -73,19 +73,20 @@ public class Kafka2ESConsumerThreadLRC
     private ArrayList<JSONObject>               alESBatch     = new ArrayList<>();
 
     public Kafka2ESConsumerThreadLRC(
-            String pThreadName)
+            String pThreadName,String appmode,String groupname,String topicname,RestClient ES_LRC_Client,RestClient ESErr_LRC_Client )
     {
+        super(pThreadName,appmode,groupname,topicname);
         this.setName(pThreadName);
         ConsumerThreadName        = pThreadName;
-        this.ConsumerMode         = StartApplication.AppMode;
+        this.ConsumerMode         = appmode;
         this.AppConfig            = StartApplication.AppConfig;
         this.ListESColMap         = StartApplication.ListESColMap;
         this.ESIndexName          = StartApplication.ESIndexName;
         this.ESIndexUniqueColumn  = StartApplication.ESIndexUniqueColumn;
-        this.KafkaTopicName       = StartApplication.KafkaTopicName;
-        this.KafkaConsumerGroupId = StartApplication.KafkaConsGrpID;
-        this.ESClient             = StartApplication.ES_LRC_Client;
-        this.ESErrClient          = StartApplication.ESErr_LRC_Client;
+        this.KafkaTopicName       = topicname;
+        this.KafkaConsumerGroupId = groupname;
+        this.ESClient             = ES_LRC_Client;
+        this.ESErrClient          = ESErr_LRC_Client;
 
         if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
             this.ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
@@ -100,6 +101,7 @@ public class Kafka2ESConsumerThreadLRC
                 + pThreadName;
     }
 
+    /*
     RestClient esConnect()
     {
         final String         ESHosts         = this.AppConfig.getString("es.servers");
@@ -125,6 +127,7 @@ public class Kafka2ESConsumerThreadLRC
         return restClient;
     }
 
+*/
     KafkaConsumer<String, IMessage> kafkaConnect()
     {
         final Properties ConsumerProps = new Properties();
