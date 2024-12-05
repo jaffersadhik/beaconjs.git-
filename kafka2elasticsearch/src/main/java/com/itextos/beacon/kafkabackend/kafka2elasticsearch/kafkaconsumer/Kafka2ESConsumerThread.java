@@ -29,10 +29,12 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.json.simple.JSONObject;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.smslog.K2ELog;
 
 public class Kafka2ESConsumerThread
         extends
@@ -108,6 +110,9 @@ public class Kafka2ESConsumerThread
                 .collect(Collectors.toList());
 
         log.info("Connecting to ElasticSearch Nodes: " + httpHosts.toString());
+        
+        K2ELog.log("Connecting to ElasticSearch Nodes: " + httpHosts.toString());
+
 
         final RestClientBuilder   builder    = RestClient.builder(
                 httpHosts.toArray(new HttpHost[httpHosts.size()]))
@@ -135,6 +140,9 @@ public class Kafka2ESConsumerThread
         ConsumerProps.put(ConsumerConfig.CLIENT_ID_CONFIG, this.ConsumerClientID);
 
         log.info("Kafka Bootstap Servers: " + KafkaServers);
+        
+        K2ELog.log("Kafka Bootstap Servers: " + KafkaServers);
+
         final KafkaConsumer<String, IMessage> consumer = new KafkaConsumer<>(ConsumerProps);
         return consumer;
     }
@@ -160,6 +168,7 @@ public class Kafka2ESConsumerThread
             catch (final Exception ex)
             {
                 log.error("Error while processing Message Object", ex);
+                K2ELog.log("Error while processing Message Object \n "+ErrorMessage.getStackTraceAsString(ex));
                 ex.printStackTrace(System.err);
                 if (log.isDebugEnabled())
                     log.debug(iMsg.toString());
@@ -168,6 +177,9 @@ public class Kafka2ESConsumerThread
             if (dataJSON == null)
             {
                 log.error("Unable to build JSON Object from Message Object");
+                
+                K2ELog.log("Unable to build JSON Object from Message Object");
+
 
                 if (log.isDebugEnabled())
                     log.debug(iMsg.toString());
@@ -209,6 +221,9 @@ public class Kafka2ESConsumerThread
             {
                 if (log.isDebugEnabled())
                     log.debug("Batch Count: " + BatchCount + ", Flusing Data...");
+                
+                K2ELog.log("Batch Count: " + BatchCount + ", Flusing Data...");
+
 
                 writeData();
             }
@@ -223,11 +238,17 @@ public class Kafka2ESConsumerThread
         {
             if (log.isDebugEnabled())
                 log.debug("BulkRequest is empty");
+            
+            K2ELog.log("BulkRequest is empty");
+
             return;
         }
 
         if (log.isDebugEnabled())
             log.debug("Executing ES BulkAsync ...");
+        
+        K2ELog.log("Executing ES BulkAsync ...");
+
 
         // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
         final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest, false);
@@ -238,6 +259,9 @@ public class Kafka2ESConsumerThread
         {
             if (log.isDebugEnabled())
                 log.debug("Executing ES BulkAsync for Full Message Info...");
+            
+            K2ELog.log("Executing ES BulkAsync for Full Message Info...");
+
             // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
             final ESBulkAsyncListener balFmsg = new ESBulkAsyncListener(fmsgBulkRequest, true);
             ESClient.bulkAsync(fmsgBulkRequest, RequestOptions.DEFAULT, balFmsg);
@@ -246,24 +270,26 @@ public class Kafka2ESConsumerThread
 
         if (log.isDebugEnabled())
             log.debug("Executing Kafka Consumer CommitAsync ...");
+        
+        K2ELog.log("Executing Kafka Consumer CommitAsync ...");
+
 
         TopicConsumer.commitAsync();
         CommonUtility.sleepForAWhile(5);
 
         ProcCount += BatchCount;
 
-        if (log.isDebugEnabled())
-            log.debug(ProcCount + " records procesed");
-        else
-        {
+      
             LogProcCount += BatchCount;
 
             if (LogProcCount >= LogProcLimit)
             {
                 log.info(ProcCount + " records procesed");
+                K2ELog.log(ProcCount + " records procesed");
+
                 LogProcCount = 0;
             }
-        }
+       
 
         BatchCount = 0;
     }
@@ -276,16 +302,26 @@ public class Kafka2ESConsumerThread
         {
             log.info("Consumer Thread started");
             log.info("Connecting to ElaticSearch...");
+            
+            K2ELog.log("Consumer Thread started");
+            K2ELog.log("Connecting to ElaticSearch...");
+
             ESClient = esConnect();
             log.info("Creating Kafka Consumer...");
+            K2ELog.log("Creating Kafka Consumer...");
+
             TopicConsumer = kafkaConnect();
             log.info("subscribing topic: " + this.KafkaTopicName);
+            K2ELog.log("subscribing topic: " + this.KafkaTopicName);
+
             TopicConsumer.subscribe(Collections.singleton(this.KafkaTopicName), this);
 
             final int PollMS    = this.AppConfig.getInt("consumer.poll.ms");
             final int PollDelay = this.AppConfig.getInt("consumer.poll.delay.ms");
 
             log.info("polling topic");
+
+            K2ELog.log("polling topic");
 
             bulkRequest     = new BulkRequest();
             fmsgBulkRequest = new BulkRequest();
@@ -300,6 +336,9 @@ public class Kafka2ESConsumerThread
                 {
                     if (log.isDebugEnabled())
                         log.debug("Idle Time threshold has exceeded, Flushing data, Batch Count: " + BatchCount);
+                    
+                    K2ELog.log("Idle Time threshold has exceeded, Flushing data, Batch Count: " + BatchCount);
+
 
                     writeData();
                     IdleTimeMS = DateTimeUtility.getCurrentTimeInMillis();
@@ -312,6 +351,9 @@ public class Kafka2ESConsumerThread
 
                 if (log.isDebugEnabled())
                     log.debug("Poll Count: " + pollCount);
+                
+                K2ELog.log("Poll Count: " + pollCount);
+
 
                 if (pollCount == 0)
                 {
@@ -337,6 +379,9 @@ public class Kafka2ESConsumerThread
         catch (final Exception ex)
         {
             log.error(ex.getMessage(), ex);
+            
+            K2ELog.log("  err " + ErrorMessage.getStackTraceAsString(ex));
+
             ex.printStackTrace(System.err);
         }
         finally
@@ -358,12 +403,17 @@ public class Kafka2ESConsumerThread
 
                 log.info("Total records processed: " + ProcCount);
                 log.info("Consumer Thread stopped");
+                K2ELog.log("Total records processed: " + ProcCount);
+                K2ELog.log("Consumer Thread stopped");
+
                 StartApplication.logMsg("Total records processed: " + ProcCount);
                 StartApplication.logMsg("Consumer Thread stopped");
             }
             catch (final Exception ex2)
             {
                 log.error(ex2.getMessage(), ex2);
+                K2ELog.log("  err " + ErrorMessage.getStackTraceAsString(ex2));
+
                 ex2.printStackTrace(System.err);
             }
         }
@@ -385,6 +435,8 @@ public class Kafka2ESConsumerThread
             return;
         stopped.set(true);
         StartApplication.logMsg("Stop Flag has been set");
+        K2ELog.log("Stop Flag has been set");
+
         CommonUtility.sleepForAWhile(500);
         if (TopicConsumer != null)
             TopicConsumer.wakeup();
@@ -395,6 +447,8 @@ public class Kafka2ESConsumerThread
             Collection<TopicPartition> partitions)
     {
         log.info("Partitions revoked: " + partitions);
+        K2ELog.log("Partitions revoked: " + partitions);
+
     }
 
     @Override
@@ -402,6 +456,9 @@ public class Kafka2ESConsumerThread
             Collection<TopicPartition> partitions)
     {
         log.info("Partitions assigned: " + partitions);
+        
+        K2ELog.log("Partitions assigned: " + partitions);
+
     }
 
 }
