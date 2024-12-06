@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.json.simple.JSONObject;
 
@@ -27,6 +26,7 @@ import com.itextos.beacon.platform.elasticsearchutil.utility.ESBulkAsyncListener
 import com.itextos.beacon.platform.elasticsearchutil.utility.Kafka2ESConstants;
 import com.itextos.beacon.platform.elasticsearchutil.utility.Kafka2ESJSONUtil;
 import com.itextos.beacon.smslog.K2ELog;
+import com.itextos.beacon.smslog.K2EPushLog;
 
 public class K2ETableWrapper
         implements
@@ -208,7 +208,7 @@ public class K2ETableWrapper
         if(bulkRequest.requests().size()>0) {
         final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest, false);
         EsProcess.getInstance().getKafka2ElasticSearchEsConnection().bulkAsync(bulkRequest, RequestOptions.DEFAULT, bal);
-        K2ELog.log("Executing ES BulkAsync ... size : "+bulkRequest.requests().size());
+        K2EPushLog.log("Executing ES BulkAsync ...bulkRequest  size : "+bulkRequest.requests().size());
 
         bulkRequest = new BulkRequest();
         }
@@ -223,7 +223,7 @@ public class K2ETableWrapper
             // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
             final ESBulkAsyncListener balFmsg = new ESBulkAsyncListener(fmsgBulkRequest, true);
             EsProcess.getInstance().getKafka2ElasticSearchEsConnection().bulkAsync(fmsgBulkRequest, RequestOptions.DEFAULT, balFmsg);
-            K2ELog.log("Executing ES BulkAsync ... size : "+fmsgBulkRequest.requests().size());
+            K2EPushLog.log("Executing ES BulkAsync ...fmsgBulkRequest size : "+fmsgBulkRequest.requests().size());
 
             fmsgBulkRequest = new BulkRequest();
         }
