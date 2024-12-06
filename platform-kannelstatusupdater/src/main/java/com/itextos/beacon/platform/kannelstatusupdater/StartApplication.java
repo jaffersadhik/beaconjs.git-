@@ -155,6 +155,8 @@ public class StartApplication
 
 					 TableInserterInfo  mTableInserterInfo = tiic.getTableInserterInfo(Table2DBInserterId.DELIVERIES_BKUP);
 
+		                TableCreationOntimeLog.log(" JndiInfo : "+mTableInserterInfo.getJndiInfo()+" : Schema Created On : "+new Date());
+
 
 				 con = DBDataSourceFactory.getConnection(mTableInserterInfo.getJndiInfo());
 				 
