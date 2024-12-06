@@ -8,6 +8,7 @@ import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.smslog.DataSourceLog;
 
 class DBDataSource
@@ -33,11 +34,16 @@ class DBDataSource
         try
         {
             mBasicDataSource = BasicDataSourceFactory.createDataSource(dataSourceConfig.getConfigAsProperties());
+            DataSourceLog.log(" Created dataSourceConfig  : "+dataSourceConfig.getConfigAsProperties());
+
             return true;
         }
         catch (final Exception e)
         {
             log.error("Unable to create a database connection. \n "+dataSourceConfig.getConfigAsProperties()+"\n", e);
+            
+            DataSourceLog.log("Unable to create a database connection. \n "+dataSourceConfig.getConfigAsProperties()+"\n"+ErrorMessage.getStackTraceAsString(e) );
+
             e.printStackTrace();
         }
         return false;
