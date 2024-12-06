@@ -18,6 +18,7 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.DataSourceLog;
 
 final class InitializeConnectionPool
 {
@@ -240,6 +241,7 @@ final class InitializeConnectionPool
                 try
                 {
                     DataSourceCollection.getInstance().createDataSource(config.getDbConID(), config);
+                    DataSourceLog.log(" Select from "+ SYSTEM_SCHEMA + ".jndi_info"+  "  jndi info : "+ jndiInfoId);
                     addJndiInfo(jndiInfoId);
                     successCount++;
                 }

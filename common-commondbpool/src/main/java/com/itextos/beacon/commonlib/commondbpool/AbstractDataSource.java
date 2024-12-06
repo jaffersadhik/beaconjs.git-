@@ -3,6 +3,8 @@ package com.itextos.beacon.commonlib.commondbpool;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.smslog.DataSourceLog;
+
 abstract class AbstractDataSource
 {
 
@@ -31,6 +33,8 @@ abstract class AbstractDataSource
         {
             if (log.isInfoEnabled())
                 log.info("Creating connection pool : connection ID : '" + conId + "'");
+            
+            DataSourceLog.log("Creating connection pool : connection ID : '" + conId + "'");
 
             dataSourceCreated = createDataSource();
 

@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.smslog.DataSourceLog;
 
 class DataSourceCollection
 {
@@ -56,6 +57,8 @@ class DataSourceCollection
 
         if (log.isDebugEnabled())
             log.debug("ConnectionPoolFactory Adding configuration for " + aJndiInfo);
+        
+        DataSourceLog.log("ConnectionPoolFactory Adding configuration for " + aJndiInfo);
     }
 
     Connection getConnection(
