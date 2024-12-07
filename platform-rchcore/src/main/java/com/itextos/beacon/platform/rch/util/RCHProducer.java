@@ -36,13 +36,13 @@ public class RCHProducer
 
         try
         {
-         //   MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
+            MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
         
-        	
+        /*	
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
-  	
+  		*/
         }
         catch (final Exception e)
         {
@@ -163,12 +163,13 @@ public class RCHProducer
 
         try
         {
-        //    MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
-            
+           MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
+        
+           /*
             aSubmissionObject.setFromComponent(Component.RCH.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aSubmissionObject,sb);
- 
+ 			*/
         }
         catch (final Exception e1)
         {

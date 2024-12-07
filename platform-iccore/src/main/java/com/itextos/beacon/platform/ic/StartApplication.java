@@ -24,7 +24,7 @@ public class StartApplication
       
         try
         {
-        	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
+       // 	com.itextos.beacon.platform.sbc.StartApplication.startInutialParam();
 
         	ICProcessor.SEGMENT=System.getenv("NODE_HOSTNAME");
         	

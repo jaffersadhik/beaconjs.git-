@@ -27,11 +27,13 @@ public class PRProducer
 
         try
         {
-      //      MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
+            MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
             
+            /*
             aSubmissionObject.setFromComponent(Component.PRC.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aSubmissionObject,sb);
+            */
         }
         catch (final Exception e)
         {

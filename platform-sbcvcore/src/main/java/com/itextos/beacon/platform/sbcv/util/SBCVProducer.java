@@ -95,11 +95,11 @@ public class SBCVProducer
         try
         {
             MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
-            
+            /*
             aMessageRequest.setFromComponent(Component.SBCV.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
- 			
+ 			*/
         }
         catch (final Exception e)
         {
@@ -116,12 +116,12 @@ public class SBCVProducer
 
         try
         {
-           // MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
-        	
+            MessageProcessor.writeMessage(Component.SBCV, Component.SBC, aMessageRequest);
+        	/*
             aMessageRequest.setFromComponent(Component.SBCV.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
-  			
+  			*/
         }
         catch (final Exception e)
         {

@@ -38,11 +38,13 @@ public class CHProducer
 
         try
         {
-        //    MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
+        
+            /*
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
+            */
         }
         catch (final Exception e)
         {
@@ -185,13 +187,14 @@ public class CHProducer
 
         try
         {
-         //   MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
+            MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
             
+        	/*
             
             aBaseMessage.setFromComponent(Component.CH.getKey());
             aBaseMessage.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aBaseMessage,sb);
-
+			*/
         }
         catch (final Exception e)
         {
