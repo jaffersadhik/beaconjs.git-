@@ -129,15 +129,6 @@ public class ProcessorInfo
             	String p=st.nextToken();
             	
             	String componentname=mComponent.getKey();
-
-            	if(mComponent.getKey().equals(Component.K2E_SUBMISSION)) {
-            		
-            		componentname=Component.T2DB_SUBMISSION.getKey();
-            		
-            	}else if(mComponent.getKey().equals(Component.K2E_DELIVERIES)||mComponent.getKey().equals(Component.T2DB_DELIVERIES_BKUP)) {
-            		
-            		componentname=Component.T2DB_DELIVERIES.getKey();
-            	}
             	
                 String topicName=componentname+"-"+p;
                

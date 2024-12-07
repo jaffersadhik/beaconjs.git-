@@ -142,24 +142,14 @@ public class KafkaInformation
                     aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());
         }
 
-        if(topicName==null
-        		||aProducerKafkaRequest.getNextComponent()==Component.T2DB_ERROR_LOG
-    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_NO_PAYLOAD_DN
-    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_LOG
-    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_MASTER_LOG
-    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_CLIENT_HANDOVER_RETRY_DATA
-    			||aProducerKafkaRequest.getNextComponent()==Component.DLR_POST_LOG
-    			||aProducerKafkaRequest.getNextComponent()==Component.INTERFACE_ASYNC_PROCESS
-    			||aProducerKafkaRequest.getNextComponent()==Component.RCH
-    			||aProducerKafkaRequest.getNextComponent()==Component.T2DB_DELIVERIES_BKUP) {
+        if(topicName==null) {
         
         	topicName=aProducerKafkaRequest.getNextComponent().getKey();
-        }else {
-        	
-        	
-                topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
         
-
+        }else {
+     
+        	topicName = CommonUtility.combine(KafkaDBConstants.TOPIC_SEPARATOR, aProducerKafkaRequest.getNextComponent().getKey(), topicName);
+        
         }
 
 
