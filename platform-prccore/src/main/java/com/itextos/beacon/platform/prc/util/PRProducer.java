@@ -47,12 +47,12 @@ public class PRProducer
     {
 
         try
-        {
+        {/*
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.PRC.getKey());
         	DlrInternalProcessor.forDLRInternal(aDeliveryObject,sb);
-
-          //  MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
+*/
+            MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
         }
         catch (final Exception e)
         {

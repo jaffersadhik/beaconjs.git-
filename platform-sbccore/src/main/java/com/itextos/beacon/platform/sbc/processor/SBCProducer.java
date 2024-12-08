@@ -57,12 +57,12 @@ public class SBCProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-       //     MessageProcessor.writeMessage(Component.SBC, Component.PRC, aMessageRequest);
-
+            MessageProcessor.writeMessage(Component.SBC, Component.PRC, aMessageRequest);
+/*
             aMessageRequest.setFromComponent(Component.SBC.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-
+*/
         }
         catch (final Exception e)
         {

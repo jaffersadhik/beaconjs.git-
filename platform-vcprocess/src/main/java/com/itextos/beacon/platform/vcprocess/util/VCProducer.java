@@ -4,10 +4,10 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.message.MessageRequest;
+import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
-import com.itextos.beacon.platform.rc.process.RConsumer;
 import com.itextos.beacon.platform.wc.process.WalletProcessor;
 
 public class VCProducer
@@ -69,13 +69,13 @@ public class VCProducer
         try
         {
         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to PRC topic ..");
-
+/*
             aMessageRequest.setPlatfromRejected(true);
             aMessageRequest.setFromComponent(aComponent.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-
-//            MessageProcessor.writeMessage(aComponent, Component.PRC, aMessageRequest);
+*/
+           MessageProcessor.writeMessage(aComponent, Component.PRC, aMessageRequest);
         }
         catch (final Exception e)
         {
@@ -94,11 +94,13 @@ public class VCProducer
         {
         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to WC topic ..");
 
-         //   MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(aComponent, Component.WC, aMessageRequest);
+         /*   
             aMessageRequest.setFromComponent(aComponent.getKey());
             aMessageRequest.setNextComponent(Component.WC.getKey());
             WalletProcessor.forWC(aMessageRequest);
+            
+          */
         }
         catch (final Exception e)
         {
@@ -118,10 +120,12 @@ public class VCProducer
  
         	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getBaseMessageId()+" : Request sending to RC topic ..");
 
-            //MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
+            MessageProcessor.writeMessage(aComponent, Component.RC, aMessageRequest);
+            /*
             aMessageRequest.setFromComponent(aComponent.getKey());
             aMessageRequest.setNextComponent(Component.RC.getKey());
             RConsumer.forRC(aMessageRequest);
+            */
         }
         catch (final Exception e)
         {

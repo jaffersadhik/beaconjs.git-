@@ -26,12 +26,12 @@ public class RCProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-          //  MessageProcessor.writeMessage(Component.RC, Component.PRC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.RC, Component.PRC, aMessageRequest);
+          /*  
             aMessageRequest.setFromComponent(Component.RC.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-
+	*/
         }
         catch (final Exception e)
         {
@@ -47,10 +47,12 @@ public class RCProducer
         try
         {
             aMessageRequest.setActualRouteId(aMessageRequest.getRouteId());
-         //  MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
+           MessageProcessor.writeMessage(Component.RC, Component.CH, aMessageRequest);
+         /*
            aMessageRequest.setFromComponent(Component.RC.getKey());
            aMessageRequest.setNextComponent(Component.CH.getKey());
            CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
+           */
         }
         catch (final Exception e)
         {

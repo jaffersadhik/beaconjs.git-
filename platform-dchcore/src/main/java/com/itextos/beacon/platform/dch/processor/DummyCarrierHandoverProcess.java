@@ -71,13 +71,13 @@ public class DummyCarrierHandoverProcess
 
         try
         {
-        //    MessageProcessor.writeMessage(Component.DCH, Component.DLRINTLP, aDeliveryObject);
-        	
+            MessageProcessor.writeMessage(Component.DCH, Component.DLRINTLP, aDeliveryObject);
+        /*	
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DCH.getKey());
        
         	DlrInternalProcessor.forDLRInternal(aDeliveryObject,sb);
-        }
+        */}
         catch (final Exception e)
         {
             log.error("Exception occer while sending to Dlr Internal Processor topic ..", e);

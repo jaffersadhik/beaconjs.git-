@@ -28,12 +28,12 @@ public class SBPProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-       //     MessageProcessor.writeMessage(Component.SBP, Component.PRC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.SBP, Component.PRC, aMessageRequest);
+       /*     
             aMessageRequest.setFromComponent(Component.SBP.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-
+		*/
         }
         catch (final Exception e)
         {
@@ -49,12 +49,13 @@ public class SBPProducer
 
         try
         {
-   //         MessageProcessor.writeMessage(Component.SBP, Component.CH, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.SBP, Component.CH, aMessageRequest);
+   
+            /*
             aMessageRequest.setFromComponent(Component.SBP.getKey());
             aMessageRequest.setNextComponent(Component.CH.getKey());
             CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
-
+			*/
 
         }
         catch (final Exception e)
@@ -71,11 +72,12 @@ public class SBPProducer
 
         try
         {
-      //      MessageProcessor.writeMessage(Component.SBP, Component.BWC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.SBP, Component.BWC, aMessageRequest);
+      /*      
         	aMessageRequest.setFromComponent(Component.SBP.getKey());
         	aMessageRequest.setNextComponent(Component.BWC.getKey());
             BlockoutWalletProcessor.forBWC(aMessageRequest);
+        */
         }
         catch (final Exception e)
         {
@@ -92,18 +94,20 @@ public class SBPProducer
         try
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
- //               MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
+                MessageProcessor.writeMessage(Component.SBP, Component.VC, aMessageRequest);
+                /*
               	aMessageRequest.setFromComponent(Component.SBP.getKey());
             	aMessageRequest.setNextComponent(Component.VC.getKey());
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
-            		
+            	*/
             }else {
-            //    MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);
-              	aMessageRequest.setFromComponent(Component.SBP.getKey());
+                MessageProcessor.writeMessage(Component.SBP, Component.DLTVC, aMessageRequest);
+            /*
+                aMessageRequest.setFromComponent(Component.SBP.getKey());
             	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
 
                 DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
-
+			*/
             }
         }
         catch (final Exception e)

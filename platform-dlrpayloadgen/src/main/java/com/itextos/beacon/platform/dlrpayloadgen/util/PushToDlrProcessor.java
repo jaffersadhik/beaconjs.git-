@@ -20,11 +20,11 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
+import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
-import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 
 public class PushToDlrProcessor
 {
@@ -152,12 +152,12 @@ public class PushToDlrProcessor
     {
 
         try
-        {
+        {/*
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLR_GEN.getKey());
         	DlrInternalProcessor.forDLRInternal(aDeliveryObject,new StringBuffer());
-
-        //    MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
+*/
+            MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
         }
         catch (final Exception e)
         {

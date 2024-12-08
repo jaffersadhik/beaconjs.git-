@@ -42,11 +42,12 @@ public class R3CProducer
                 if (log.isDebugEnabled())
                     log.debug("Request sending to SBCV..");
                 
-         //       MessageProcessor.writeMessage(Component.R3C, Component.SBCV, aMessageRequest);
-           
+                MessageProcessor.writeMessage(Component.R3C, Component.SBCV, aMessageRequest);
+         /*  
                 aMessageRequest.setFromComponent(Component.R3C.getKey());
                 aMessageRequest.setNextComponent(Component.SBCV.getKey());
                 SBCVProcess.forSBCV(aMessageRequest);
+               */
             }
         }
         catch (final Exception e)
@@ -63,19 +64,21 @@ public class R3CProducer
         try
         {
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl()) {
-         //       MessageProcessor.writeMessage(Component.R3C, Component.VC, aMessageRequest);
-              	aMessageRequest.setFromComponent(Component.R3C.getKey());
+                MessageProcessor.writeMessage(Component.R3C, Component.VC, aMessageRequest);
+         /*
+                aMessageRequest.setFromComponent(Component.R3C.getKey());
             	aMessageRequest.setNextComponent(Component.VC.getKey());
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
+           */
             	
             }else {
-              //  MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);
-            
+                MessageProcessor.writeMessage(Component.R3C, Component.DLTVC, aMessageRequest);
+            /*
              	aMessageRequest.setFromComponent(Component.R3C.getKey());
             	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
 
                 DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
- 
+ */
             }
             
         }    
@@ -103,11 +106,11 @@ public class R3CProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-         //   MessageProcessor.writeMessage(Component.R3C, Component.PRC, aMessageRequest);
-            aMessageRequest.setFromComponent(Component.R3C.getKey());
+            MessageProcessor.writeMessage(Component.R3C, Component.PRC, aMessageRequest);
+         /*   aMessageRequest.setFromComponent(Component.R3C.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-
+		*/
         }
         catch (final Exception e)
         {

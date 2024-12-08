@@ -119,11 +119,13 @@ public class SetNextComponent
 
         try
         {
-//            MessageProcessor.writeMessage(Component.DLRR, Component.CH, aMessageRequest);
-            aMessageRequest.setFromComponent(Component.DLRR.getKey());
+
+        	MessageProcessor.writeMessage(Component.DLRR, Component.CH, aMessageRequest);
+            /*
+        	aMessageRequest.setFromComponent(Component.DLRR.getKey());
             aMessageRequest.setNextComponent(Component.CH.getKey());
             CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
-          
+          	*/
         }
         catch (final Exception e)
         {
