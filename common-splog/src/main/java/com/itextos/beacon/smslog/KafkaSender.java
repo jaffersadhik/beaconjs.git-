@@ -15,16 +15,20 @@ public class KafkaSender {
 
     private  final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
 
-	private static KafkaSender obj=new KafkaSender();
+	private static Map<String,KafkaSender> objmap=new HashMap<String,KafkaSender>();
 	
 	
 	
-	public static KafkaSender getInstance() {
+public static KafkaSender getInstance(String nextcomponent) {
 	
+		
+		KafkaSender obj=objmap.get(nextcomponent);
+		
 		if(obj==null) {
 			
-			obj=new KafkaSender();
-		
+			obj=new KafkaSender(nextcomponent);
+			
+			objmap.put(nextcomponent, obj);
 		}
 		
 		
@@ -43,7 +47,7 @@ public class KafkaSender {
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkasender/kafkasender.%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkasender/kafkasender_"+nextcomponent+".%g.log";
 
         Level loglevel=Level.INFO;
         

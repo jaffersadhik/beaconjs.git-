@@ -231,7 +231,7 @@ public class Producer
             callBackList.add(lProducerCallbackForInterface);
             mProducer.send(kafkaRecord, lProducerCallbackForInterface);
 
-            KafkaSender.getInstance().log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
+            KafkaSender.getInstance(toComponent).log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
             
             mBatchCounter++;
             totalCount++;
@@ -370,7 +370,7 @@ public class Producer
             addToInMemory(aMessage);
             final ProducerRecord<String, IMessage> kafkaRecord = getProducerRecord(aMessage);
             mProducer.send(kafkaRecord, new ProducerCallback(this, mTopicName, aMessage));
-            KafkaSender.getInstance().log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
+            KafkaSender.getInstance(toComponent).log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
 
             mBatchCounter++;
             totalCount++;
