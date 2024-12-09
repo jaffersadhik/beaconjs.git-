@@ -38,13 +38,13 @@ public class CHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
+            //MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
         
-            /*
+            
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
-            */
+            
         }
         catch (final Exception e)
         {
@@ -78,11 +78,11 @@ public class CHProducer
         try
         {
             aSubmissionObject.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.CH, Component.PRC, aSubmissionObject);
-      /*      aSubmissionObject.setFromComponent(Component.CH.getKey());
+//            MessageProcessor.writeMessage(Component.CH, Component.PRC, aSubmissionObject);
+            aSubmissionObject.setFromComponent(Component.CH.getKey());
             aSubmissionObject.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aSubmissionObject);
-*/
+
         }
         catch (final Exception e)
         {
@@ -100,12 +100,12 @@ public class CHProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.CH, Component.PRC, aMessageRequest);
-        /*
+        //    MessageProcessor.writeMessage(Component.CH, Component.PRC, aMessageRequest);
+        
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-*/
+
         }
         catch (final Exception e)
         {
@@ -122,12 +122,12 @@ public class CHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.CH, Component.DCH, aSubmissionObject);
-            /*
+            //MessageProcessor.writeMessage(Component.CH, Component.DCH, aSubmissionObject);
+            
             aSubmissionObject.setFromComponent(Component.CH.getKey());
             aSubmissionObject.setNextComponent(Component.DCH.getKey());
             DummyCarrierHandoverProcess.forDCH(aSubmissionObject,sb);
-            */
+            
         }
         catch (final Exception e)
         {
@@ -189,14 +189,14 @@ public class CHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
+        //    MessageProcessor.writeMessage(Component.CH, Component.SUBBC, aBaseMessage);
             
-        	/*
+        	
             
             aBaseMessage.setFromComponent(Component.CH.getKey());
             aBaseMessage.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aBaseMessage,sb);
-			*/
+			
         }
         catch (final Exception e)
         {

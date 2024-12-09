@@ -28,11 +28,11 @@ public class BWCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to CH topic .. " + aMessageRequest);
 
-         MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
-/*          aMessageRequest.setFromComponent(Component.BWC.getKey());
+    //     MessageProcessor.writeMessage(Component.BWC, Component.CH, aMessageRequest);
+          aMessageRequest.setFromComponent(Component.BWC.getKey());
           aMessageRequest.setNextComponent(Component.CH.getKey());
           CarrierHandoverProcess.forCH(aMessageRequest, aMessageRequest.getClusterType());
-  */          
+          
         }
         catch (final Exception e)
         {
@@ -50,11 +50,11 @@ public class BWCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to PRC topic .. " + aMessageRequest);
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.BWC, Component.PRC, aMessageRequest);
- /*         aMessageRequest.setFromComponent(Component.BWC.getKey());
+//            MessageProcessor.writeMessage(Component.BWC, Component.PRC, aMessageRequest);
+          aMessageRequest.setFromComponent(Component.BWC.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-*/
+
         }
         catch (final Exception e)
         {

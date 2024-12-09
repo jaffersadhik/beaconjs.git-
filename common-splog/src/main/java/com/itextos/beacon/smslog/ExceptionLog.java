@@ -1,49 +1,24 @@
 package com.itextos.beacon.smslog;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 
-public class KafkaSender {
+public class ExceptionLog {
 
 
-    private  final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
-
-	private static KafkaSender obj=new KafkaSender();
-	
-	
-	
-	public static KafkaSender getInstance() {
-	
-		if(obj==null) {
-			
-			obj=new KafkaSender();
-		
-		}
-		
-		
-		return obj;
-	}
-	
-	
-	private KafkaSender() {
-		
-	}
-	
-	private KafkaSender(String nextcomponent) {
-		
-
+    private static final  Logger logger = Logger.getLogger(ExceptionLog.class.getName());
+    
+    static {
     	
-        int limit = 1024 * 1024*5; // 1 MB file size limit
-        int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkasender/kafkasender.%g.log";
+    	 int limit = 1024 * 1024*5; // 1 MB file size limit
+         int count = 1; // N
+         
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/aux/exception.%g.log";
 
         Level loglevel=Level.INFO;
         
@@ -64,8 +39,8 @@ public class KafkaSender {
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
+
 			fileHandler = new FileHandler(logFileNamePattern, limit, count, true);
-			
 			   // Set the logging level for the handler
 	        fileHandler.setLevel(loglevel);
 
@@ -88,24 +63,11 @@ public class KafkaSender {
      
 
         // Set the logging level for the logger
-    
-	}
+    }
 
-    public void log(String fromComponent,String toComponent,String topicName,String fileId,String msgId,String username,String statusCode,String statusDescription) {
-    	
-    	Map<String,String> data=new HashMap<String,String>();
-    	data.put("fromComponent", fromComponent);
-    	data.put("toComponent", toComponent);
-    	data.put("topicName", topicName);
-    	data.put("fileId", fileId);
-    	data.put("msgId", msgId);
-    	data.put("username", username);
-    	data.put("statusCode", statusCode);
-    	data.put("statusDescription", statusDescription);
-    	data.put("date", new Date(System.currentTimeMillis()).toLocaleString());
+    public static void log(String string) {
 
-
-    	logger.info(data.toString());
+    	logger.info(string);
     	
     }
 }

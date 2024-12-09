@@ -13,6 +13,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
@@ -25,6 +26,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaProducer;
+import com.itextos.beacon.smslog.KafkaSender;
 import com.itextos.beacon.smslog.ProducerFlushLog;
 import com.itextos.beacon.smslog.PromosenderLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
@@ -137,26 +139,71 @@ public class Producer
         	
         	String msgtype="notfind";
         	
+        	String fromComponent=null;
+        	
+        	String toComponent=null;
+
+        	String topicName=this.mTopicName;
+
+        	String fileId=null;
+        	
+        	String msgId=null;
+        	
+        	String status=null;
+        	
+        	String username=null;
+
+        	
+        	String statusDescription=null;
+        	
         	if(aMessage instanceof DeliveryObject) {
         		
-        		msgtype=((DeliveryObject)aMessage).getMessageType().getKey();
+        		
+        		fromComponent=((DeliveryObject)aMessage).getFromComponent();
+        		
+        		toComponent=((DeliveryObject)aMessage).getNextComponent();
 
-        		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
-        		if(msgtype!=null&&msgtype.equals("0")) {
-        			
-        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		fileId = ((DeliveryObject)aMessage).getFileId();
 
-        		}else {
-        			
-        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-        		}
+        		msgid =((DeliveryObject)aMessage).getMessageId();
+        		
+        		status =((DeliveryObject)aMessage).getDeliveryStatus();
+        		
+        		username=((DeliveryObject)aMessage).getUser();
+        		
         	}else if(aMessage instanceof SubmissionObject ) {
         		
         		msgid =((SubmissionObject)aMessage).getFileId();
+        		
+        		fromComponent=((SubmissionObject)aMessage).getFromComponent();
+        		
+        		toComponent=((SubmissionObject)aMessage).getNextComponent();
+
+        		fileId = ((SubmissionObject)aMessage).getFileId();
+
+        		msgid =((SubmissionObject)aMessage).getMessageId();
+        		
+        		status=((SubmissionObject)aMessage).getDeliveryStatus();
+        		
+        		username=((DeliveryObject)aMessage).getUser();
+
+
 
         	}else if(aMessage instanceof MessageRequest ) {
         		
         		
+        		msgid =((MessageRequest)aMessage).getFileId();
+        		
+        		fromComponent=((MessageRequest)aMessage).getFromComponent();
+        		
+        		toComponent=((MessageRequest)aMessage).getNextComponent();
+
+        		fileId = ((MessageRequest)aMessage).getFileId();
+        		
+        		status=((MessageRequest)aMessage).getValue(MiddlewareConstant.MW_SUB_ORI_STATUS_DESC);
+        		
+        		username=((DeliveryObject)aMessage).getUser();
+
 
         		
   		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
@@ -172,14 +219,7 @@ public class Producer
         		msgid=msgidparts.toString();
         		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
        
-        		if(msgtype!=null&&msgtype.equals("0")) {
-        			
-        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-
-        		}else {
-        			
-        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-        		}
+        
        
         	
 
@@ -191,6 +231,8 @@ public class Producer
             callBackList.add(lProducerCallbackForInterface);
             mProducer.send(kafkaRecord, lProducerCallbackForInterface);
 
+            KafkaSender.getInstance().log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
+            
             mBatchCounter++;
             totalCount++;
 
@@ -232,32 +274,75 @@ public class Producer
         try
         {
             String threadName = Thread.currentThread().getName();
-
-        	
-        	StringBuffer msgidparts=new StringBuffer();
-        	String msgid="notfind";
+            
+ 	String msgid="notfind";
         	
         	String msgtype="notfind";
+        	
+        	String fromComponent=null;
+        	
+        	String toComponent=null;
+
+        	String topicName=this.mTopicName;
+
+        	String fileId=null;
+        	
+        	String msgId=null;
+        	
+        	String status=null;
+        	
+        	String statusDescription=null;
+
+        	String username=null;
+        	
+        	StringBuffer msgidparts=new StringBuffer();
+        	
         	if(aMessage instanceof DeliveryObject) {
         		
-        		msgtype=((DeliveryObject)aMessage).getMessageType().getKey();
+        		fromComponent=((DeliveryObject)aMessage).getFromComponent();
+        		
+        		toComponent=((DeliveryObject)aMessage).getNextComponent();
 
-        		msgid =((DeliveryObject)aMessage).getMessageId()+" msgtype : "+msgtype+ " getClusterType : "+((DeliveryObject)aMessage).getClusterType().toString()+ " getSmsPriority : "+((DeliveryObject)aMessage).getSmsPriority()+ " getMessagePriority : "+((DeliveryObject)aMessage).getMessagePriority();
-        		if(msgtype!=null&&msgtype.equals("0")) {
-        			
-        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
+        		fileId = ((DeliveryObject)aMessage).getFileId();
 
-        		}else {
-        			
-        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((DeliveryObject)aMessage).getUser()+" fileid :  "+ ((DeliveryObject)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-        		}
+        		msgid =((DeliveryObject)aMessage).getMessageId();
+        		
+        		status =((DeliveryObject)aMessage).getDeliveryStatus();
+        		
+        		username=((DeliveryObject)aMessage).getUser();
+
+        		
         	}else if(aMessage instanceof SubmissionObject ) {
         		
-        		msgid =((SubmissionObject)aMessage).getFileId();
+        		
+        		fromComponent=((SubmissionObject)aMessage).getFromComponent();
+        		
+        		toComponent=((SubmissionObject)aMessage).getNextComponent();
 
+        		fileId = ((SubmissionObject)aMessage).getFileId();
+
+        		msgid =((SubmissionObject)aMessage).getMessageId();
+        		
+        		status =((SubmissionObject)aMessage).getDeliveryStatus();
+        		
+        		username=((SubmissionObject)aMessage).getUser();
+
+        		
         	}else if(aMessage instanceof MessageRequest ) {
         		
         		
+         		
+        		msgid =((MessageRequest)aMessage).getFileId();
+        		
+        		fromComponent=((MessageRequest)aMessage).getFromComponent();
+        		
+        		toComponent=((MessageRequest)aMessage).getNextComponent();
+
+        		fileId = ((MessageRequest)aMessage).getFileId();
+        		
+        		status=((MessageRequest)aMessage).getValue(MiddlewareConstant.MW_SUB_ORI_STATUS_DESC);
+
+        		username=((MessageRequest)aMessage).getUser();
 
         		
   		List<MessagePart> parts=((MessageRequest)aMessage).getMessageParts();
@@ -271,17 +356,13 @@ public class Producer
         		}
 
         		msgid=msgidparts.toString();
+        		
+
+        		
+  	
         		msgtype=((MessageRequest)aMessage).getMessageType().getKey();
        
-        		if(msgtype!=null&&msgtype.equals("0")) {
-        			
-        			PromosenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId() +" : msgid[ "+msgid+" ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-
-        		}else {
-        			
-        			TranssenderLog.log(new Date()+" : "+threadName+" : "+ ((MessageRequest)aMessage).getUser()+" fileid :  "+ ((MessageRequest)aMessage).getFileId()+" : msgid[  "+msgid+ " ] "+ mLogTopicName + " IMessage sent successfully in Non-Trans mode (Async)");
-        		}
-       
+           
         	
 
         	}
@@ -289,6 +370,7 @@ public class Producer
             addToInMemory(aMessage);
             final ProducerRecord<String, IMessage> kafkaRecord = getProducerRecord(aMessage);
             mProducer.send(kafkaRecord, new ProducerCallback(this, mTopicName, aMessage));
+            KafkaSender.getInstance().log(fromComponent, toComponent, topicName, fileId, msgid, username, status, statusDescription);
 
             mBatchCounter++;
             totalCount++;

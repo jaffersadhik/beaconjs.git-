@@ -28,12 +28,12 @@ public class WCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to RC topic .. " + aMessageRequest.getBaseMessageId());
 
-            MessageProcessor.writeMessage(Component.WC, Component.RC, aMessageRequest);
-/*
+        //    MessageProcessor.writeMessage(Component.WC, Component.RC, aMessageRequest);
+
             aMessageRequest.setFromComponent(Component.WC.getKey());
             aMessageRequest.setNextComponent(Component.RC.getKey());
             RConsumer.forRC(aMessageRequest);
-        */
+        
         }
         catch (final Exception e)
         {
@@ -51,12 +51,12 @@ public class WCProducer
             if (log.isDebugEnabled())
                 log.debug("Request sending to PRC topic .. " + aMessageRequest.getBaseMessageId());
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.WC, Component.PRC, aMessageRequest);
-         /*
+      //      MessageProcessor.writeMessage(Component.WC, Component.PRC, aMessageRequest);
+         
             aMessageRequest.setFromComponent(Component.WC.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-	*/
+	
         }
         catch (final Exception e)
         {

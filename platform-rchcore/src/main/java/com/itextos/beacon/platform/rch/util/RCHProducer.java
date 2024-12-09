@@ -36,13 +36,13 @@ public class RCHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
+        //    MessageProcessor.writeMessage(Component.RCH, Component.SBC, aMessageRequest);
         
-        /*	
+        	
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
-  		*/
+  		
         }
         catch (final Exception e)
         {
@@ -58,12 +58,12 @@ public class RCHProducer
         try
         {
             aMessageRequest.setPlatfromRejected(true);
-            MessageProcessor.writeMessage(Component.RCH, Component.PRC, aMessageRequest);
-     /*  
+//            MessageProcessor.writeMessage(Component.RCH, Component.PRC, aMessageRequest);
+       
             aMessageRequest.setFromComponent(Component.RCH.getKey());
             aMessageRequest.setNextComponent(Component.PRC.getKey());
             RejectionProcess.forPRC(aMessageRequest);
-*/
+
         }
         catch (final Exception e)
         {
@@ -98,12 +98,12 @@ public class RCHProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.RCH, Component.DCH, aSubmissionObject);
-         /*
+         //   MessageProcessor.writeMessage(Component.RCH, Component.DCH, aSubmissionObject);
+         
             aSubmissionObject.setFromComponent(Component.RCH.getKey());
             aSubmissionObject.setNextComponent(Component.DCH.getKey());
             DummyCarrierHandoverProcess.forDCH(aSubmissionObject,sb);
-  		*/
+  		
         }
         catch (final Exception e)
         {
@@ -164,13 +164,13 @@ public class RCHProducer
 
         try
         {
-           MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
+      //     MessageProcessor.writeMessage(Component.RCH, Component.SUBBC, aSubmissionObject);
         
-           /*
+           
             aSubmissionObject.setFromComponent(Component.RCH.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aSubmissionObject,sb);
- 			*/
+ 			
         }
         catch (final Exception e1)
         {

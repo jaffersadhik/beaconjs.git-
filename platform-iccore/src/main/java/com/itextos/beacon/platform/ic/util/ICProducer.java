@@ -29,12 +29,12 @@ public class ICProducer
 
         try
         {
-           MessageProcessor.writeMessage(Component.IC, Component.PRC, aMessageRequest);
-     /*      
+      //     MessageProcessor.writeMessage(Component.IC, Component.PRC, aMessageRequest);
+           
            aMessageRequest.setFromComponent(Component.IC.getKey());
            aMessageRequest.setNextComponent(Component.PRC.getKey());
            RejectionProcess.forPRC(aMessageRequest);
-*/
+
         }
         catch (final Exception e)
         {
@@ -51,13 +51,13 @@ public class ICProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.IC, Component.R3C, aMessageRequest);
-        /*
+      //      MessageProcessor.writeMessage(Component.IC, Component.R3C, aMessageRequest);
+        
         	aMessageRequest.setFromComponent(Component.IC.getKey());
         	aMessageRequest.setNextComponent(Component.R3C.getKey());
         	R3CProcess.forR3C(aMessageRequest);
         	
-        */
+        
         }
         catch (final Exception e)
         {
@@ -84,12 +84,12 @@ public class ICProducer
             else
             {
             	aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" : Request sending to SBCV..");
-                MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
-             /*   
+         //       MessageProcessor.writeMessage(Component.IC, Component.SBCV, aMessageRequest);
+                
                 aMessageRequest.setFromComponent(Component.IC.getKey());
                 aMessageRequest.setNextComponent(Component.SBCV.getKey());
                 SBCVProcess.forSBCV(aMessageRequest);
-                */
+             
             }
         }
         catch (final Exception e)
@@ -112,21 +112,21 @@ public class ICProducer
             if (aMessageRequest.isBypassDltCheck() || aMessageRequest.isIsIntl() || aMessageRequest.isIldo()) {
                
             	
-            	MessageProcessor.writeMessage(Component.IC, Component.VC, aMessageRequest);
-            	/*
+            	//MessageProcessor.writeMessage(Component.IC, Component.VC, aMessageRequest);
+            	
             	aMessageRequest.setFromComponent(Component.IC.getKey());
             	aMessageRequest.setNextComponent(Component.VC.getKey());
             	com.itextos.beacon.platform.vc.process.MessageProcessor.forVC(Component.VC, aMessageRequest);
-            	*/
+            	
             }
             else {
-                MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
-           /*
+             //   MessageProcessor.writeMessage(Component.IC, Component.DLTVC, aMessageRequest);
+           
                 aMessageRequest.setFromComponent(Component.IC.getKey());
             	aMessageRequest.setNextComponent(Component.DLTVC.getKey());
 
                 DltProcessor.forDLT(aMessageRequest, Component.DLTVC);
-            */
+            
             }
         }
         catch (final Exception e)

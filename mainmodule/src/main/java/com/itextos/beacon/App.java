@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.exception.GlobalExceptionHandler;
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.smslog.DebugLog;
@@ -41,7 +42,9 @@ public class App {
     	System.setProperty("common.property.file.location", "/global.properties");
     	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
     	System.setProperty("prometheus.jetty.port", "1075");
-
+    	
+        Thread.setDefaultUncaughtExceptionHandler(new GlobalExceptionHandler());
+        
     	foldercreaton("/opt/jboss/wildfly/logs/k2e");
 
     	foldercreaton("/opt/jboss/wildfly/logs/topic");
@@ -123,10 +126,24 @@ public class App {
 		
 		long end=System.currentTimeMillis();
 		
+		throwException();
+		
 		TimeTakenLog.log("Time Taken for Start : "+(end-start)/1000+" seconds");
 	}
 	
-	 private static boolean isAllSingleTon(String module, String[] args) {
+	 private static void throwException() {
+		 
+		try {
+			
+			throw new DontCareException("Dont care about this error this for Testing Exception Log");
+			
+		}catch(Exception  e) {
+			
+		}
+		
+	}
+
+	private static boolean isAllSingleTon(String module, String[] args) {
 		 
 		 if(module.trim().equals("singleton")) {
 			 DebugLog.log("Start the module : singleton ");

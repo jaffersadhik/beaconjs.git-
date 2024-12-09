@@ -27,13 +27,13 @@ public class PRProducer
 
         try
         {
-            MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
+            //MessageProcessor.writeMessage(Component.PRC, Component.SUBBC, aSubmissionObject);
             
-            /*
+            
             aSubmissionObject.setFromComponent(Component.PRC.getKey());
             aSubmissionObject.setNextComponent(Component.SUBBC.getKey());
             BillerProcessor.forSUBPC(aSubmissionObject,sb);
-            */
+            
         }
         catch (final Exception e)
         {
@@ -47,12 +47,12 @@ public class PRProducer
     {
 
         try
-        {/*
+        {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.PRC.getKey());
         	DlrInternalProcessor.forDLRInternal(aDeliveryObject,sb);
-*/
-            MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
+
+//            MessageProcessor.writeMessage(Component.PRC, Component.DLRINTLP, aDeliveryObject);
         }
         catch (final Exception e)
         {
