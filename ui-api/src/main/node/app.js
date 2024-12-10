@@ -101,7 +101,13 @@ fastify.register(require('fastify-mariadb'), {
     password: process.env.MARIA_DB_CM_PASSWORD,
     database: process.env.MARIA_DB_CM_DATABASE,
     connectionLimit: process.env.MARIA_DB_CM_CONNECTION_LIMIT,
-});
+}	, (err) => {
+	    if (err) {
+	        console.log(`[MariaDB] Connection registration failed: ${err.message}`);
+	    } else {
+	        console.log('[MariaDB] Connection registration successful');
+	    }
+	});
 
 
 
@@ -113,7 +119,13 @@ fastify.register(require('fastify-postgres'), {
     name: PG_SUMMARY_NAMESPACE,
     connectionString: DB_URL_SUMMARY,
     max: PG_SUMMARY_POOLSIZE,
-});
+}	, (err) => {
+		    if (err) {
+		        console.log(`[Posgres] Connection registration failed: ${err.message}`);
+		    } else {
+		        console.log('[Posgres] Connection registration successful');
+		    }
+		});
 
 fastify.register(require('fastify-cookie'));
 
@@ -121,30 +133,62 @@ fastify.register(require('fastify-csrf'));
 
 fastify.register(helmet, { contentSecurityPolicy: false });
 
+console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_GEN_HOST);
+console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_GEN_PORT);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GEN_DB);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GEN_NAMESPACE);
+
+
 fastify.register(require('fastify-redis'), {
     host: REDIS_GEN_HOST,
     port: REDIS_GEN_PORT,
     db: REDIS_GEN_DB,
     namespace: REDIS_GEN_NAMESPACE,
 });
+
+console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_GROUP_HOST);
+console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_GROUP_PORT);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GROUP_DB);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GROUP_NAMESPACE);
+
+
 fastify.register(require('fastify-redis'), {
     host: REDIS_GROUP_HOST,
     port: REDIS_GROUP_PORT,
     db: REDIS_GROUP_DB,
     namespace: REDIS_GROUP_NAMESPACE,
 });
+
+
+console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_EGROUP_HOST);
+console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_EGROUP_PORT);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_EGROUP_DB);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_EGROUP_NAMESPACE);
+
+
+
 fastify.register(require('fastify-redis'), {
     host: REDIS_EGROUP_HOST,
     port: REDIS_EGROUP_PORT,
     db: REDIS_EGROUP_DB,
     namespace: REDIS_EGROUP_NAMESPACE,
 });
+
+console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_WALLET_HOST);
+console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_WALLET_PORT);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_WALLET_DB);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_WALLET_NAMESPACE);
+
+
 fastify.register(require('fastify-redis'), {
     host: REDIS_WALLET_HOST,
     port: REDIS_WALLET_PORT,
     db: REDIS_WALLET_DB,
     namespace: REDIS_WALLET_NAMESPACE,
 });
+
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.ES_NODE_URL);
+
 
 fastify.register(require('fastify-elasticsearch'), { node: process.env.ES_NODE_URL });
 
