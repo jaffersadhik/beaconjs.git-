@@ -40,6 +40,33 @@ const fastify = Fastify({
     trustProxy: true,
 });
 
+
+const fs = require('fs');
+const util = require('util');
+
+// Get log file path from environment variable
+const logFilePath = process.env.LOG_FILE_PATH || 'app.log';
+
+// Create a writable stream for logs
+const logFile = fs.createWriteStream(logFilePath, { flags: 'a' });
+
+// Redirect console.log and console.error to the file
+console.log = (message) => {
+  const logMessage = `${new Date().toISOString()} - LOG: ${util.format(message)}\n`;
+  logFile.write(logMessage);
+  process.stdout.write(logMessage); // Optionally, print to console as well
+};
+
+console.error = (message) => {
+  const errorMessage = `${new Date().toISOString()} - ERROR: ${util.format(message)}\n`;
+  logFile.write(errorMessage);
+  process.stderr.write(errorMessage); // Optionally, print to console as well
+};
+
+// Example usage
+console.log('This is a log message.');
+console.error('This is an error message.');
+
 fastify.register(fjwt, {
     secret: 'supersecret',
     cookie: {
