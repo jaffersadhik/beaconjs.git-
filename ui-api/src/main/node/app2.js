@@ -29,6 +29,7 @@ const {
 const fastify = Fastify({
     logger: {
         prettyPrint: false,
+        // prettyPrint: {colorize: true, translateTime: 'SYS:standard'},
         level: 'debug',
         file: '/logs/cm.log',
     },
@@ -104,6 +105,7 @@ fastify.register(require('fastify-redis'), {
     namespace: REDIS_WALLET_NAMESPACE,
 });
 
+// fastify.register(require('fastify-elasticsearch'), { node: 'http://192.168.1.137:9200' });
 fastify.register(require('fastify-elasticsearch'), { node: process.env.ES_NODE_URL });
 
 /** Run the schedulers ** */
@@ -113,25 +115,26 @@ const job2 = schedule.scheduleJob(`*/${process.env.ERROR_Q_CONSUMER_INETRVAL_INS
 /** ****************************************************************************************************** */
 
 /** global prehandler to check if the session has not logged out. this hook is called after preValidation hook * */
+// eslint-disable-next-line consistent-return
 fastify.addHook('preHandler', async (req, reply) => {
-    try {
-        if (req.user) {
-            const { cli_id, sessionid } = req.user;
-            console.log(`[preHandler] User cli_id: ${cli_id}, sessionid: ${sessionid}`);
+    if (req.user) {
+        const { cli_id, sessionid } = req.user;
+        console.log(cli_id);
+        // check if the user with this access token sessionid has logged out
+        const r1 = await fastify.hasLoggedOut(cli_id, sessionid);
+        console.log('/preHandler Checking if this user has already logged out...');
 
-            // Check if the user with this access token sessionid has logged out
-            const r1 = await fastify.hasLoggedOut(cli_id, sessionid);
-            console.log('[preHandler] Checking if this user has already logged out...');
-
-            if (r1.length > 0) {
-                console.log('[preHandler] User has already logged out...YES');
-                return reply.send(fastify.httpErrors.unauthorized('Invalid Session'));
-            }
-            console.log('[preHandler] User has already logged out...NO');
+        if (r1.length > 0) {
+            console.log('/preHandler Checking if this user has already logged out...YES');
+            // const resp = {
+            //     statusCode: fastify.CONSTANTS.INVALID_AUTH,
+            //     message: 'Invalid Session',
+            // };
+            // reply.code(200);
+            // return reply.send(resp);
+            return reply.send(fastify.httpErrors.unauthorized('Invalid Session'));
         }
-    } catch (error) {
-        console.error('[preHandler] Error in preHandler hook:', error);
-        return reply.send(fastify.httpErrors.internalServerError('Internal Server Error'));
+        console.log('/login Checking if this user has already logged out...NO');
     }
 });
 
@@ -168,29 +171,80 @@ fastify.addHook('onError', async (request, reply, error) => {
 
         const q = errorQTon.getErrorsQ();
         const obj = { url, reqid, sessionid, cliid, username, params, httpcode, errmsg, errstack, ip };
-        console.log(`[onError] Error queue size: ${q.size()}, max size: ${process.env.ERROR_Q_MAX_SIZE}`);
+        console.log(q.size(), process.env.ERROR_Q_MAX_SIZE);
         request.log.error(errstack);
-
-        // Push if in-memory threshold is not reached
+        // push if in mem threshold is not reached
         if (q.size() < process.env.ERROR_Q_MAX_SIZE) q.push(obj);
     } catch (e) {
-        request.log.error(`[onError] Error in onError hook IGNORING: ${e}`);
+        request.log.error(`error in onError hook IGNORING ${e}`);
     }
 });
 
 /** subscribe to diagnostic events * */
 onResponse.subscribe((data) => {
+    // console.log('#### ', data.request.url);
+    // console.log('#### ', data.request.routerMethod);
+    // console.log('#### ', data.request.routerPath);
+    // console.log('#### ', data.reply.request.id);
+    // console.log('#### ', data.reply.getResponseTime());
     const cli_id = data.request.user?.cli_id;
     const { url } = data.request;
     const responseTimeInMillis = data.reply.getResponseTime();
     const obj = { cli_id, url, response_in_millis: responseTimeInMillis };
     const q = telemetricTon.getTelemetricQ();
 
-    console.log(`[onResponse] Response time for ${url}: ${responseTimeInMillis}ms`);
-
-    // Push if in-memory threshold is not reached
+    // push if in mem threshold is not reached
     if (q.size() < process.env.TELEMETRIC_Q_MAX_SIZE) q.push(obj);
 });
+
+/** subscribe to error events * */
+// onError.subscribe((data) => {
+//     // console.log(data);
+//     // console.log('#### route', data.request.url);
+//     // console.log('#### routerPath', data.request.routerPath);
+//     // console.log('#### router method', data.request.routerMethod);
+//     // console.log('#### ', data.request.routerMethod);
+//     // console.log('#### reqid', data.reply.request.id);
+//     // console.log('#### req user', data.reply.request.user);
+//     // console.log('#### req body', data.reply.request.body);
+//     // console.log('#### req query', data.reply.request.query);
+//     // console.log('#### statuscode', data.reply.statusCode);
+//     // console.log('#### error', data.error);
+//     // console.log('#### error', data.error.err);
+//
+//     let params = '';
+//     let { url } = data.request;
+//     let method = data.request?.routerMethod;
+//     let reqid = data.reply?.request?.id;
+//     let sessionid = data.reply.request?.user?.sessionid;
+//     let cliid = data.reply.request?.user?.cli_id;
+//     let username = data.reply?.request?.user?.user;
+//     let httpcode = data.reply.statusCode;
+//     let errstack = data.error;
+//     const errArr = _.split(data.error.err, '\n');
+//     let errmsg = errArr[0];
+//
+//     if (_.eq(method, 'GET')) params = data.reply.request.query;
+//     else params = data.reply.request.body;
+//     params = (_.isEmpty(params)) ? '' : JSON.stringify(params);
+//
+//     if (_.isUndefined(cliid)) cliid = 0;
+//     if (_.isUndefined(username)) username = '';
+//     if (_.isUndefined(sessionid)) sessionid = '';
+//     if (_.isUndefined(reqid)) reqid = '';
+//     if (_.isUndefined(method)) method = '';
+//     if (_.isUndefined(url)) url = '';
+//     if (_.isUndefined(httpcode)) httpcode = '';
+//     if (_.isUndefined(errstack)) errstack = '';
+//     if (_.isUndefined(errmsg)) errmsg = '';
+//     if (_.isUndefined(params)) params = '';
+//
+//     const q = errorQTon.getErrorsQ();
+//     const obj = { url, reqid, sessionid, cliid, username, params, httpcode, errmsg, errstack };
+//     console.log('>>>>>>>>>>>>> Pushing err object to q ', obj);
+//     // push if in mem threshold is not reached
+//     if (q.size() < process.env.ERROR_Q_MAX_SIZE) q.push(obj);
+// });
 
 /**  Do not change the following sections *********** */
 /* This loads all plugins defined in plugins folder which that are reused
@@ -198,12 +252,14 @@ through your application */
 
 fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
+    // options: Object.assign({}, opts),
 });
 
 // This loads all plugins defined in routes
 // define your routes in one of these
 fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
+    // options: Object.assign({}, opts),
 });
 /** ************************************************* */
 
@@ -212,9 +268,9 @@ const start = async () => {
         await fastify.listen(PORT, HOST);
         fastify.swagger();
         console.log('=>', fastify.printRoutes({ commonPrefix: false }));
-        fastify.log.info(`Server listening on http://${HOST}:${PORT}`);
+        fastify.log.info(`listening on ${fastify.server.address().port}`);
     } catch (err) {
-        fastify.log.error(`[start] Error starting server: ${err}`);
+        fastify.log.error(err);
         process.exit(1);
     }
 };
