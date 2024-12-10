@@ -133,10 +133,10 @@ fastify.register(require('fastify-csrf'));
 
 fastify.register(helmet, { contentSecurityPolicy: false });
 
-console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_GEN_HOST);
-console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_GEN_PORT);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GEN_DB);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GEN_NAMESPACE);
+console.log('process.env.REDIS_GEN_HOST : '+process.env.REDIS_GEN_HOST);
+console.log('process.env.REDIS_GEN_PORT : '+process.env.REDIS_GEN_PORT);
+console.log('process.env.REDIS_GEN_DB : '+process.env.REDIS_GEN_DB);
+console.log('process.env.REDIS_GEN_NAMESPACE : '+process.env.REDIS_GEN_NAMESPACE);
 
 
 fastify.register(require('fastify-redis'), {
@@ -146,10 +146,10 @@ fastify.register(require('fastify-redis'), {
     namespace: REDIS_GEN_NAMESPACE,
 });
 
-console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_GROUP_HOST);
-console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_GROUP_PORT);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GROUP_DB);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_GROUP_NAMESPACE);
+console.log('process.env.REDIS_GROUP_HOST : '+process.env.REDIS_GROUP_HOST);
+console.log('process.env.REDIS_GROUP_PORT : '+process.env.REDIS_GROUP_PORT);
+console.log('process.env.REDIS_GROUP_DB : '+process.env.REDIS_GROUP_DB);
+console.log('process.env.REDIS_GROUP_NAMESPACE : '+process.env.REDIS_GROUP_NAMESPACE);
 
 
 fastify.register(require('fastify-redis'), {
@@ -160,10 +160,10 @@ fastify.register(require('fastify-redis'), {
 });
 
 
-console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_EGROUP_HOST);
-console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_EGROUP_PORT);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_EGROUP_DB);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_EGROUP_NAMESPACE);
+console.log('process.env.REDIS_EGROUP_HOST : '+process.env.REDIS_EGROUP_HOST);
+console.log('process.env.REDIS_EGROUP_PORT : '+process.env.REDIS_EGROUP_PORT);
+console.log('process.env.REDIS_EGROUP_DB : '+process.env.REDIS_EGROUP_DB);
+console.log('process.env.REDIS_EGROUP_NAMESPACE : '+process.env.REDIS_EGROUP_NAMESPACE);
 
 
 
@@ -174,10 +174,10 @@ fastify.register(require('fastify-redis'), {
     namespace: REDIS_EGROUP_NAMESPACE,
 });
 
-console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.REDIS_WALLET_HOST);
-console.log('process.env.DB_URL_SUMMARY : '+process.env.REDIS_WALLET_PORT);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_WALLET_DB);
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.REDIS_WALLET_NAMESPACE);
+console.log('process.env.REDIS_WALLET_HOST : '+process.env.REDIS_WALLET_HOST);
+console.log('process.env.REDIS_WALLET_PORT : '+process.env.REDIS_WALLET_PORT);
+console.log('process.env.REDIS_WALLET_DB : '+process.env.REDIS_WALLET_DB);
+console.log('process.env.REDIS_WALLET_NAMESPACE : '+process.env.REDIS_WALLET_NAMESPACE);
 
 
 fastify.register(require('fastify-redis'), {
@@ -187,10 +187,13 @@ fastify.register(require('fastify-redis'), {
     namespace: REDIS_WALLET_NAMESPACE,
 });
 
-console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.ES_NODE_URL);
+console.log('process.env.ES_NODE_URL : '+process.env.ES_NODE_URL);
 
 
 fastify.register(require('fastify-elasticsearch'), { node: process.env.ES_NODE_URL });
+
+console.log('process.env.TELEMETRIC_Q_CONSUMER_INETRVAL_INSEC : '+process.env.TELEMETRIC_Q_CONSUMER_INETRVAL_INSEC);
+console.log('process.env.ERROR_Q_CONSUMER_INETRVAL_INSEC : '+process.env.ERROR_Q_CONSUMER_INETRVAL_INSEC);
 
 /** Run the schedulers ** */
 const job1 = schedule.scheduleJob(`*/${process.env.TELEMETRIC_Q_CONSUMER_INETRVAL_INSEC} * * * * *`, telemetricTask);
@@ -199,6 +202,9 @@ const job2 = schedule.scheduleJob(`*/${process.env.ERROR_Q_CONSUMER_INETRVAL_INS
 /** ****************************************************************************************************** */
 
 /** global prehandler to check if the session has not logged out. this hook is called after preValidation hook * */
+
+console.log('addHook(\'preHandler\', async (req, reply) ');
+
 fastify.addHook('preHandler', async (req, reply) => {
     try {
         if (req.user) {
@@ -220,6 +226,11 @@ fastify.addHook('preHandler', async (req, reply) => {
         return reply.send(fastify.httpErrors.internalServerError('Internal Server Error'));
     }
 });
+
+
+console.log('addHook(\'onError\', async (request, reply, error)');
+
+
 
 fastify.addHook('onError', async (request, reply, error) => {
     try {
@@ -265,6 +276,9 @@ fastify.addHook('onError', async (request, reply, error) => {
 });
 
 /** subscribe to diagnostic events * */
+
+console.log('onResponse.subscribe((data)');
+
 onResponse.subscribe((data) => {
     const cli_id = data.request.user?.cli_id;
     const { url } = data.request;
@@ -282,25 +296,32 @@ onResponse.subscribe((data) => {
 /* This loads all plugins defined in plugins folder which that are reused
 through your application */
 
+console.log('AutoLoad plugins');
+
 fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
 });
 
 // This loads all plugins defined in routes
 // define your routes in one of these
+
+console.log('AutoLoad routes');
+
 fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
 });
 /** ************************************************* */
 
+console.log('process.env.HOST : '+process.env.HOST);
+console.log('process.env.PORT : '+process.env.PORT);
 const start = async () => {
     try {
         await fastify.listen(PORT, HOST);
         fastify.swagger();
         console.log('=>', fastify.printRoutes({ commonPrefix: false }));
-        fastify.log.info(`Server listening on http://${HOST}:${PORT}`);
+        console.log(`Server listening on http://${HOST}:${PORT}`);
     } catch (err) {
-        fastify.log.error(`[start] Error starting server: ${err}`);
+        console.error(`[start] Error starting server: ${err}`);
         process.exit(1);
     }
 };
