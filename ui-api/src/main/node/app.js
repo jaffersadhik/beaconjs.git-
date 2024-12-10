@@ -81,8 +81,17 @@ if (_.eq(process.env.ENV, 'dev')) {
     fastify.register(require('fastify-cors'), { origin: true, methods: ['GET', 'PUT', 'POST'] });
 }
 
+console.log('process.env.ENV : '+process.env.ENV);
+
 fastify.register(require('fastify-swagger'), swaggerOpts.options);
 fastify.register(require('fastify-diagnostics-channel'), {});
+
+console.log('process.env.MARIA_DB_CM_HOST : '+process.env.MARIA_DB_CM_HOST);
+console.log('process.env.MARIA_DB_CM_PORT : '+process.env.MARIA_DB_CM_PORT);
+console.log('process.env.MARIA_DB_CM_USER : '+process.env.MARIA_DB_CM_USER);
+console.log('process.env.MARIA_DB_CM_PASSWORD : '+process.env.MARIA_DB_CM_PASSWORD);
+console.log('process.env.MARIA_DB_CM_DATABASE : '+process.env.MARIA_DB_CM_DATABASE);
+console.log('process.env.MARIA_DB_CM_CONNECTION_LIMIT : '+process.env.MARIA_DB_CM_CONNECTION_LIMIT);
 
 fastify.register(require('fastify-mariadb'), {
     promise: true,
@@ -93,6 +102,9 @@ fastify.register(require('fastify-mariadb'), {
     database: process.env.MARIA_DB_CM_DATABASE,
     connectionLimit: process.env.MARIA_DB_CM_CONNECTION_LIMIT,
 });
+
+
+
 
 fastify.register(require('fastify-postgres'), {
     name: PG_SUMMARY_NAMESPACE,
