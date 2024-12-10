@@ -105,6 +105,9 @@ fastify.register(require('fastify-mariadb'), {
 
 
 
+console.log('process.env.PG_SUMMARY_NAMESPACE : '+process.env.PG_SUMMARY_NAMESPACE);
+console.log('process.env.DB_URL_SUMMARY : '+process.env.DB_URL_SUMMARY);
+console.log('process.env.PG_SUMMARY_POOLSIZE : '+process.env.PG_SUMMARY_POOLSIZE);
 
 fastify.register(require('fastify-postgres'), {
     name: PG_SUMMARY_NAMESPACE,
