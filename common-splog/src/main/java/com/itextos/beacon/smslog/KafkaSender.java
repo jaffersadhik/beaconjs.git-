@@ -12,25 +12,32 @@ import java.util.logging.SimpleFormatter;
 public class KafkaSender {
 
 
-    private  final  Logger logger = Logger.getLogger(KafkaSender.class.getName());
+	private static KafkaSender obj=null;
 
-	private static Map<String,KafkaSender> objmap=new HashMap<String,KafkaSender>();
+
+	private Map<String,Logger> objmap=new HashMap<String,Logger>();
 	
 	
+
 	
 	public static KafkaSender getInstance(String nextcomponent) {
 	
-		
-		KafkaSender obj=objmap.get(nextcomponent);
-		
 		if(obj==null) {
 			
-			obj=new KafkaSender(nextcomponent);
+			obj=new KafkaSender();
 			
-			objmap.put(nextcomponent, obj);
 		}
 		
+		Logger logger =obj.objmap.get(nextcomponent);
 		
+		if(logger==null) {
+			
+			logger=Logger.getLogger(KafkaSender.class.getName()+":"+nextcomponent);
+			
+			init(logger, nextcomponent);
+			
+			obj.objmap.put(nextcomponent,logger );
+		}
 		return obj;
 	}
 	
@@ -39,7 +46,7 @@ public class KafkaSender {
 		
 	}
 	
-	private KafkaSender(String nextcomponent) {
+	private static void init(Logger logger,String nextcomponent) {
 		
 
     	
@@ -94,9 +101,9 @@ public class KafkaSender {
     
 	}
 
-    public void log(String string) {
+    public void log(String nextcomponent,String message) {
 
-    	logger.info(string);
+    	objmap.get(nextcomponent).info(message);
     	
     }
 }
