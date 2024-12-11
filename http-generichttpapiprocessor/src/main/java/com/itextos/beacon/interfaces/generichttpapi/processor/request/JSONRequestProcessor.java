@@ -326,7 +326,7 @@ public class JSONRequestProcessor
         return lMessage;
     }
 
-    private static InterfaceMessage handleNoDest(
+    private  InterfaceMessage handleNoDest(
             JSONObject aJsonMessage)
     {
         final InterfaceRequestStatus lRequestStatus = new InterfaceRequestStatus(InterfaceStatusCode.DESTINATION_EMPTY, null);
