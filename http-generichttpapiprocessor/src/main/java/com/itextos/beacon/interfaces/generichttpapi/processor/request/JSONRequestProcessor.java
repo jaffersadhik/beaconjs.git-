@@ -50,7 +50,7 @@ public class JSONRequestProcessor
     {
         super(aRequestString, aCustomerIP, aRequestedTime, aReqType, aResponseType);
         
-        sb.append(" JSONRequestProcessor :  aResponseType : "+aResponseType).append("\n");
+        sb.append(" JSONRequestProcessor : aRequestString : "+aRequestString +"  aResponseType : "+aResponseType).append("\n");
 
         this.sb=sb;
         if (MessageSource.GENERIC_QS.equals(aResponseType))
@@ -511,10 +511,12 @@ public class JSONRequestProcessor
         }
     }
 
-    private static InterfaceMessage getMessage(
+    private  InterfaceMessage getMessage(
             JSONObject aMessageJson)
     {
         final InterfaceMessage messageBean = new InterfaceMessage();
+
+        sb.append(" JSONRequestProcessor :  aMessageJson.toJSONString() : "+aMessageJson.toJSONString()).append("\n");
 
         messageBean.setMessage(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_MSG));
         messageBean.setHeader(Utility.getJSONValue(aMessageJson, InterfaceInputParameters.REQ_PARAMETER_HEADER));

@@ -488,6 +488,8 @@ public class QSRequestReader
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_TEMPLATE_ID, CommonUtility.nullCheck(lTemplateId, true));
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_DLT_ENTITY_ID, CommonUtility.nullCheck(lDltEntityId, true));
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_DLT_TEMPLATE_ID, CommonUtility.nullCheck(lDltTemplateId, true));
+        messageObject.put(InterfaceInputParameters.REQ_PARAMETER_DLT_TMA_ID, CommonUtility.nullCheck(lDltTMAId, true));
+
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_MSG_TAG, CommonUtility.nullCheck(lMsgtag, true));
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_PARAM1, CommonUtility.nullCheck(lParam1, true));
         messageObject.put(InterfaceInputParameters.REQ_PARAMETER_PARAM2, CommonUtility.nullCheck(lParam2, true));
