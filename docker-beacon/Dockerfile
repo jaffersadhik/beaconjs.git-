@@ -70,6 +70,11 @@ COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.
 
 
 
+COPY ./target/profile/digitalocean2/kafka-producer.properties_do2 /kafka-producer.properties_do2
+COPY ./target/profile/digitalocean2/kafka-consumer.properties_do2 /kafka-consumer.properties_do2
+COPY ./target/profile/digitalocean2/common-db.properties_do2 /common-db.properties_do2
+COPY ./target/profile/digitalocean2/elasticsearch.properties_do2 /elasticsearch.properties_do2
+
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
 
 ENTRYPOINT ["java","-Xss1m","-Xmx512m","-Xms512m","-Dprometheus.jetty.port=20000","-Dcommon.property.file.location=/global.properties","-Dlog4j.configurationFile=file:/log4j2-common.xml","-jar","/mainmodule-1.0-executable.jar"]
