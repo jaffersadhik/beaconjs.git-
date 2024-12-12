@@ -13,6 +13,7 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.smslog.LossLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 
 import io.prometheus.client.Histogram.Timer;
@@ -54,9 +55,10 @@ public abstract class AbstractKafkaComponentProcessor
         }
         catch (final Exception e)
         {
-            ErrorLog.log("Exception while processing the message \n " +ErrorMessage.getStackTraceAsString(e));
+            ErrorLog.log("Exception while processing the message \n "+aMessage.getLogBuffer().toString()+"" +ErrorMessage.getStackTraceAsString(e));
             
-            sendBackToTopic(aMessage);
+            LossLog.log(aMessage.getJsonString());
+            //sendBackToTopic(aMessage);
         }
         finally
         {
