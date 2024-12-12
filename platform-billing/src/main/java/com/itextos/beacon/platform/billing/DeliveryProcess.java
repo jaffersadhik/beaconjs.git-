@@ -17,6 +17,7 @@ import com.itextos.beacon.inmemory.errorinfo.data.IErrorInfo;
 import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class DeliveryProcess
         extends
@@ -39,7 +40,7 @@ public class DeliveryProcess
     }
 
     @Override
-    public void process(StringBuffer sb)
+    public void process(SMSLog sb)
     {
         mDeliveryObject = (DeliveryObject) mBaseMessage;
 

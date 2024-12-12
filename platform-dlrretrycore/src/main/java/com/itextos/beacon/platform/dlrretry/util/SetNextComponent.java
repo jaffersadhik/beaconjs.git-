@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class SetNextComponent
 {
@@ -43,7 +44,7 @@ public class SetNextComponent
         {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLRR.getKey());
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,new StringBuffer());
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,SMSLog.getInstance());
 
          //   MessageProcessor.writeMessage(Component.DLRR, Component.DLRINTLP, aDeliveryObject);
         }

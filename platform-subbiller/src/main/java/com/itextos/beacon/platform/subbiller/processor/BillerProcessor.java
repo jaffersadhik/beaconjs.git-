@@ -12,6 +12,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.platform.billing.SubmissionProcess;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class BillerProcessor
         extends
@@ -38,10 +39,10 @@ public class BillerProcessor
         if (log.isDebugEnabled())
             log.debug("Biller Received Object .. " + aBaseMessage);
 
-        BillerProcessor.forSUBPC(aBaseMessage,new StringBuffer());
+        BillerProcessor.forSUBPC(aBaseMessage,SMSLog.getInstance());
     }
 
-    public static void forSUBPC(BaseMessage aBaseMessage,StringBuffer sb) {
+    public static void forSUBPC(BaseMessage aBaseMessage,SMSLog sb) {
     	
     	 try
          {

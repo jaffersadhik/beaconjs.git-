@@ -20,6 +20,7 @@ import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableInden
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletRefundInput;
 import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
+import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class CommonProcess
         implements
@@ -59,7 +60,7 @@ public abstract class CommonProcess
     }
 
     protected void sendToOtherTopic(
-            NextTopic aNextTopic,StringBuffer sb)
+            NextTopic aNextTopic,SMSLog sb)
     {
         if (log.isDebugEnabled())
             log.debug("Send to next topic '" + aNextTopic + "'");

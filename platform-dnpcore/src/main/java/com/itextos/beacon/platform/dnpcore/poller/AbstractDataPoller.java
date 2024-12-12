@@ -24,6 +24,7 @@ import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryUpdateQ;
 import com.itextos.beacon.platform.dnpcore.process.DlrProcessUtil;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
+import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class AbstractDataPoller
         implements
@@ -69,7 +70,7 @@ public abstract class AbstractDataPoller
             final List<String>                toDelete       = new ArrayList<>(lRecords.keySet());
             final List<DeliveryObject>        toProcess      = new ArrayList<>(lRecords.values());
 
-            final List<String>                failedMessages = sendToNextQueue(toProcess,new StringBuffer());
+            final List<String>                failedMessages = sendToNextQueue(toProcess,SMSLog.getInstance());
 
             if (!failedMessages.isEmpty())
                 toDelete.removeAll(failedMessages);
@@ -83,7 +84,7 @@ public abstract class AbstractDataPoller
     }
 
     private static List<String> sendToNextQueue(
-            List<DeliveryObject> aToProcess,StringBuffer sb)
+            List<DeliveryObject> aToProcess,SMSLog sb)
     {
         final List<String> lSNoList          = new ArrayList<>();
 
@@ -115,7 +116,7 @@ public abstract class AbstractDataPoller
                         if (log.isDebugEnabled())
                             log.debug("Sending to " + lProcessDnReceiverQ.keySet() + " BaseMessage:" + lDelvObj.getJsonString());
 
-                        DNPProducer.sendToNextComponents(lProcessDnReceiverQ,new StringBuffer());
+                        DNPProducer.sendToNextComponents(lProcessDnReceiverQ,SMSLog.getInstance());
                     }
                 }
                 else

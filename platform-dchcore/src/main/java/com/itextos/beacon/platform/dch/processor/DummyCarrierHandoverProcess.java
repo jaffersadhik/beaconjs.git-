@@ -6,16 +6,15 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.componentconsumer.processor.AbstractKafkaComponentProcessor;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
-import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dch.util.DCHUtil;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class DummyCarrierHandoverProcess
         extends
@@ -44,11 +43,11 @@ public class DummyCarrierHandoverProcess
         if (log.isDebugEnabled())
             log.debug("Dummy Carrier Handover receiver  : " + lSubmissionObject.getJsonString());
 
-        DummyCarrierHandoverProcess.forDCH(lSubmissionObject,new StringBuffer());
+        DummyCarrierHandoverProcess.forDCH(lSubmissionObject,SMSLog.getInstance());
     }
 
     
-    public static void forDCH(SubmissionObject lSubmissionObject,StringBuffer sb) {
+    public static void forDCH(SubmissionObject lSubmissionObject,SMSLog sb) {
     	
     	 try
          {
@@ -66,7 +65,7 @@ public class DummyCarrierHandoverProcess
          }
     }
     public static void sendToDlrReceiver(
-            DeliveryObject aDeliveryObject,StringBuffer sb)
+            DeliveryObject aDeliveryObject,SMSLog sb)
     {
 
         try

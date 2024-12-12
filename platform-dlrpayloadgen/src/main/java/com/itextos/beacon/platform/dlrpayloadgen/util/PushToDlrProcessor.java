@@ -25,6 +25,7 @@ import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class PushToDlrProcessor
 {
@@ -155,7 +156,7 @@ public class PushToDlrProcessor
         {
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLR_GEN.getKey());
-        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,new StringBuffer());
+        	DlrInternalProcessor.forDLRInternal(aDeliveryObject,SMSLog.getInstance());
 
         //    MessageProcessor.writeMessage(Component.DLR_GEN, Component.DLRINTLP, aDeliveryObject);
         }

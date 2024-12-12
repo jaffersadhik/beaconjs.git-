@@ -28,6 +28,7 @@ import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.cappingcheck.CappingIntervalType;
 import com.itextos.beacon.platform.cappingcheck.CappingMessageChecker;
 import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class SubmissionProcess
         extends
@@ -53,7 +54,7 @@ public class SubmissionProcess
 
     // Common
     @Override
-    public void process(StringBuffer sb)
+    public void process(SMSLog sb)
             throws ItextosException
     {
         mSubmissionObject = (SubmissionObject) mBaseMessage;
@@ -148,7 +149,7 @@ public class SubmissionProcess
         }
     }
 
-    private void sendToBillingTopic(StringBuffer sb)
+    private void sendToBillingTopic(SMSLog sb)
     {
         PrometheusMetrics.platformIncrement(Component.T2DB_SUBMISSION, mSubmissionObject.getClusterType(), "SUB_BILLING");
         sendToOtherTopic(NextTopic.SUB_BILLING,sb);
@@ -268,7 +269,7 @@ public class SubmissionProcess
         mSubmissionObject.setRefExchangeRate(0.0d);
     }
 
-    private void sendToFullMessageTopic(StringBuffer sb)
+    private void sendToFullMessageTopic(SMSLog sb)
     {
         // Need to send to Full Message only if the message is multipart.
         final int retryAttempt = mSubmissionObject.getRetryAttempt();
@@ -466,7 +467,7 @@ public class SubmissionProcess
         }
     }
 
-    private void sendToDlrQueryTopic(StringBuffer sb)
+    private void sendToDlrQueryTopic(SMSLog sb)
     {
         final ClientDlrConfig lClientDlrConfig = ClientDlrConfigUtil.getDlrHandoverConfig(mSubmissionObject.getValue(MiddlewareConstant.MW_CLIENT_ID), "sms", mSubmissionObject.getInterfaceType(),
                 mSubmissionObject.isDlrRequestFromClient());

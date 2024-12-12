@@ -9,6 +9,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class BillingProducer
 {
@@ -19,7 +20,7 @@ public class BillingProducer
     {}
 
     public static void sendToBillingTopic(
-            BaseMessage aBaseMessage,StringBuffer sb)
+            BaseMessage aBaseMessage,SMSLog sb)
     {
 
         try
@@ -36,7 +37,7 @@ public class BillingProducer
     }
 
     public static void sendToDlrQueryTopic(
-            BaseMessage aBaseMessage,StringBuffer sb)
+            BaseMessage aBaseMessage,SMSLog sb)
     {
 
         try
@@ -70,7 +71,7 @@ public class BillingProducer
     }
 
     public static void sendToFullMessageTopic(
-            BaseMessage aBaseMessage,StringBuffer sb)
+            BaseMessage aBaseMessage,SMSLog sb)
     {
 
         try

@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
@@ -17,6 +16,7 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class DNPProducer
 {
@@ -27,7 +27,7 @@ public class DNPProducer
     {}
 
     public static void sendToNextComponents(
-            Map<Component, DeliveryObject> aNextProcess,StringBuffer sb)
+            Map<Component, DeliveryObject> aNextProcess,SMSLog sb)
     {
         aNextProcess.entrySet().stream().forEach(e -> {
 

@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class DlrInternalProcessor
         extends
@@ -42,10 +43,10 @@ public class DlrInternalProcessor
 
         final DeliveryObject lDeliveryObject = (DeliveryObject) aBaseMessage;
 
-        forDLRInternal(lDeliveryObject,new StringBuffer());
+        forDLRInternal(lDeliveryObject,SMSLog.getInstance());
     }
 
-    public static void forDLRInternal(final DeliveryObject lDeliveryObject,StringBuffer sb) {
+    public static void forDLRInternal(final DeliveryObject lDeliveryObject,SMSLog sb) {
     	
     	 try
          {

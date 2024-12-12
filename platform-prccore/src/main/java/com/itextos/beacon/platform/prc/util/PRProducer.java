@@ -4,14 +4,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
-import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
-import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class PRProducer
 {
@@ -22,7 +21,7 @@ public class PRProducer
     {}
 
     public static void sendToBillerTopic(
-            SubmissionObject aSubmissionObject,StringBuffer sb)
+            SubmissionObject aSubmissionObject,SMSLog sb)
     {
 
         try
@@ -41,7 +40,7 @@ public class PRProducer
     }
 
     public static void sendToDLRTopic(
-            DeliveryObject aDeliveryObject,StringBuffer sb)
+            DeliveryObject aDeliveryObject,SMSLog sb)
     {
 
         try

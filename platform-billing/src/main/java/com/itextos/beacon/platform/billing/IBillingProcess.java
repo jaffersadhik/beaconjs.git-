@@ -1,12 +1,13 @@
 package com.itextos.beacon.platform.billing;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.smslog.SMSLog;
 
 public interface IBillingProcess
 {
 
     // Common
-    void process(StringBuffer sb)
+    void process(SMSLog sb)
             throws ItextosException;
 
     // Submission

@@ -82,6 +82,13 @@ public class SMSLog {
     	
     	return obj;
     }
+    
+ public SMSLog append(int message) {
+    	
+    	log(""+message);
+    	
+    	return obj;
+    }
     public static void log(String string) {
 
     	logger.info(string);

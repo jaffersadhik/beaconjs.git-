@@ -31,6 +31,7 @@ import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelStatsCollector;
 import com.itextos.beacon.platform.rch.util.RCHProcessUtil;
 import com.itextos.beacon.platform.rch.util.RCHProducer;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class RetryCarrierHandover
 {
@@ -48,7 +49,7 @@ public class RetryCarrierHandover
     public void doProcess()
     {
 
-    	StringBuffer sb=new StringBuffer();
+    	SMSLog sb=SMSLog.getInstance();
         try
         {
             final boolean isHexMsg = mMessageRequest.isHexMessage();

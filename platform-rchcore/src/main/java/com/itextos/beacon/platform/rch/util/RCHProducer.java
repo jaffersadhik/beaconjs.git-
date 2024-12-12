@@ -21,6 +21,7 @@ import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.sbc.processor.SBConsumer;
 import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class RCHProducer
 {
@@ -93,7 +94,7 @@ public class RCHProducer
     }
 
     public static void sendToDummyRoute(
-            SubmissionObject aSubmissionObject,StringBuffer sb)
+            SubmissionObject aSubmissionObject,SMSLog sb)
     {
 
         try
@@ -158,7 +159,7 @@ public class RCHProducer
     }
 
     public static void sendToSubBilling(
-            SubmissionObject aSubmissionObject,StringBuffer sb)
+            SubmissionObject aSubmissionObject,SMSLog sb)
     {
 
         try
