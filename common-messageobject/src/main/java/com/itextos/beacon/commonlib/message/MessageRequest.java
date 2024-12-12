@@ -698,7 +698,7 @@ public class MessageRequest
         final SubmissionObject subObj = new SubmissionObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // Set Parent Object
-        subObj.setLogBufferValue(getLogBuffer());
+        subObj.setLogBufferValue(getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
         subObj.setActualRouteId(getActualRouteId());
         subObj.setAddSubClientHeader(isAddSubClientHeader());
         subObj.setAlpha(getAlpha());
@@ -2261,6 +2261,10 @@ public class MessageRequest
         updateReceivedTime(aMessageObject);
     }
 
+    public StringBuffer getLogBuffer() {
+    	
+    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    }
     private void updateReceivedTime(
             MessagePart aMessageObject)
     {

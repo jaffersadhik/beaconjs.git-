@@ -127,7 +127,7 @@ public class DlrRequestProcess
         // TimeAdjustmentUtility.adjustAndSetDTime(aNewNunMessage);
 
         final DeliveryProcess lDeliveryProcess = new DeliveryProcess(aDeliveryObject);
-        lDeliveryProcess.process(aDeliveryObject.getLogBuffer());
+        lDeliveryProcess.process(aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
     }
 
 }

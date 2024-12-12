@@ -192,14 +192,5 @@ public class AsyncRequestObject
         }
     }
 
-	@Override
-	public StringBuffer getLogBuffer() {
-
-		if(mLogBuffer==null) {
-			
-			mLogBuffer=new StringBuffer();
-		}
-		return mLogBuffer;
-	}
-
+	
 }

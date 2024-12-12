@@ -379,14 +379,11 @@ public abstract class BaseMessage
     }
     
     
-    @Override
-    public StringBuffer getLogBuffer()
-    {
-        return (StringBuffer)messageAttributes.get(MiddlewareConstant.MW_LOG_BUFFER.getKey());
-    //	   return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
-    	    
+ public StringBuffer getLogBuffer() {
+    	
+    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
     }
-
+ 
     public StringBuffer getLogBufferValue(MiddlewareConstant aLogBufferKey) {
     	  if (aLogBufferKey == null)
               return null;
@@ -395,13 +392,8 @@ public abstract class BaseMessage
           
           if(value==null) {
         	  
-        	  System.out.println("Log Buffer null");
         	  value=new StringBuffer();
         	  putValueLocally(aLogBufferKey, value);
-          }else {
-        	 
-        	  System.out.println("Log Buffer not null");
-
           }
           return (StringBuffer)value;
 

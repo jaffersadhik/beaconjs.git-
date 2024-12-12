@@ -56,6 +56,11 @@ public class DeliveryObject
         return temp == null ? null : DateTimeUtility.getDateFromString(temp, DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS);
     }
 
+    public StringBuffer getLogBuffer() {
+    	
+    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    }
+ 
     public String getAgeingType()
     {
         return getValue(MiddlewareConstant.MW_AGING_TYPE);

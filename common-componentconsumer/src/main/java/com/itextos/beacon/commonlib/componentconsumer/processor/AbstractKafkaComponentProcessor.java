@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
+import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
@@ -55,10 +56,19 @@ public abstract class AbstractKafkaComponentProcessor
         }
         catch (final Exception e)
         {
-            ErrorLog.log("Exception while processing the message \n "+aMessage.getLogBuffer().toString()+"" +ErrorMessage.getStackTraceAsString(e));
+        	if(aMessage instanceof BaseMessage) {
+        		
+                ErrorLog.log("Exception while processing the message \n "+((BaseMessage)aMessage).getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).toString()+"" +ErrorMessage.getStackTraceAsString(e));
+
+        	}else {
+        	
+                ErrorLog.log("Exception while processing the message \n "+aMessage+" \n" +ErrorMessage.getStackTraceAsString(e));
+
+        	}
             
             LossLog.log(aMessage.getJsonString());
-            //sendBackToTopic(aMessage);
+            
+       //     sendBackToTopic(aMessage);
         }
         finally
         {
@@ -102,6 +112,7 @@ public abstract class AbstractKafkaComponentProcessor
         return timer;
     }
 
+    /*
     @Override
     protected void sendBackToTopic(
             IMessage aMessage)
@@ -117,7 +128,7 @@ public abstract class AbstractKafkaComponentProcessor
             log.error("Exception while sending the message to the same topic", e);
         }
     }
-
+	*/
     public abstract void doProcess(
             BaseMessage aMessage)
             throws Exception;

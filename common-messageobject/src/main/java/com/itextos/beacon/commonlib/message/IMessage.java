@@ -29,7 +29,6 @@ public interface IMessage
     void setProcessorComponent(
             String aFromComponentKey);
     
-    StringBuffer getLogBuffer();
     
     
 }

@@ -24,6 +24,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TopicLog;
 
@@ -115,9 +116,10 @@ public abstract class AbstractCommonComponentProcessor
             {
                 log.error("Exxception whil processing the messages. Resending them to the Topics", e);
                 
+                ErrorLog.log("Exxception whil processing the messages. message loss ln"+ErrorMessage.getStackTraceAsString(e));
                 TopicLog.getInstance(mTopicName).log("Exxception whil processing the messages. Resending them to the Topics"+"  mTopicName : "+mTopicName +" : "+new Date()+ " : error : "+ErrorMessage.getStackTraceAsString(e));
 
-                sendBackToTopic(lReadMessage);
+           //     sendBackToTopic(lReadMessage);
             }
 
            
@@ -292,6 +294,7 @@ public abstract class AbstractCommonComponentProcessor
         log.fatal("Completed pending messages. Messages count " + count);
     }
 
+    /*
     void sendBackToTopic(
             List<IMessage> aMessageList)
     {
@@ -303,6 +306,7 @@ public abstract class AbstractCommonComponentProcessor
     protected abstract void sendBackToTopic(
             IMessage aMessage);
 
+*/
     protected abstract void updateBeforeSendBack(
             IMessage aMessage);
 

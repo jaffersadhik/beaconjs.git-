@@ -187,12 +187,17 @@ public class SubmissionObject
         return CommonUtility.getInteger(getValue(MiddlewareConstant.MW_DCS));
     }
 
+ public StringBuffer getLogBuffer() {
+    	
+    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    }
+ 
     public DeliveryObject getDeliveryObject()
     {
         final DeliveryObject lDeliveryObject = new DeliveryObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // TODO Need to add the remaining data
-        lDeliveryObject.setLogBufferValue(getLogBuffer());
+        lDeliveryObject.setLogBufferValue(getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
         lDeliveryObject.setClientId(getClientId());
         lDeliveryObject.setBaseMessageId(getBaseMessageId());
         lDeliveryObject.setMessage(getMessage());
