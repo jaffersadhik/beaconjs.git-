@@ -37,8 +37,9 @@ public class ConsumerId {
 	public synchronized String getConsumerId() {
 		
 		if(INDEX<COUNSUMERIDLIST.size()) {		
+			String result= COUNSUMERIDLIST.get(INDEX);
 			INDEX++;
-			return COUNSUMERIDLIST.get(INDEX);
+			return result;
 		}else {
 			INDEX=0;
 			
