@@ -5,12 +5,14 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
+import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 
 import io.prometheus.client.Histogram.Timer;
@@ -52,7 +54,8 @@ public abstract class AbstractKafkaComponentProcessor
         }
         catch (final Exception e)
         {
-            log.error("Exception while processing the message " + aMessage, e);
+            ErrorLog.log("Exception while processing the message \n " +ErrorMessage.getStackTraceAsString(e));
+            
             sendBackToTopic(aMessage);
         }
         finally
