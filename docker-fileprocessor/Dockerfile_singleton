@@ -60,6 +60,13 @@ COPY ./target/fb-scheduleprocessor-1.0.war /opt/tomcat/webapps/scheduleprocessor
 COPY ./target/fb-initialstage-1.0.war /opt/tomcat/webapps/initialstage.war
 
 
+COPY ./target/fb-dltfileprocessor-1.0.war /opt/tomcat/webapps/dltfileprocessor.war
+COPY ./target/fb-downloadhandler-1.0.war /opt/tomcat/webapps/downloadhandler.war
+COPY ./target/fb-excludeprocessor-1.0.war /opt/tomcat/webapps/excludeprocessor.war
+COPY ./target/fb-fileupload-1.0.war /opt/tomcat/webapps/fileupload.war
+COPY ./target/fb-groupsprocessor-1.0.war /opt/tomcat/webapps/groupsprocessor.war
+COPY ./target/fb-handoverstage-1.0.war /opt/tomcat/webapps/handoverstage.war
+COPY ./target/fb-splitstage-1.0.war /opt/tomcat/webapps/splitstage.war
 
 #COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
