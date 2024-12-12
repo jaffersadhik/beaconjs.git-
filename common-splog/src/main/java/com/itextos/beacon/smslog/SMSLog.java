@@ -12,6 +12,8 @@ public class SMSLog {
 
     private static final  Logger logger = Logger.getLogger(SMSLog.class.getName());
     
+    private static SMSLog obj=new SMSLog();
+    
     static {
     	
 
@@ -64,6 +66,22 @@ public class SMSLog {
         // Set the logging level for the logger
     }
 
+    public static SMSLog getInstance() {
+    	
+    	if(obj==null) {
+    		
+    		 obj=new SMSLog();
+    	}
+    	
+    	return obj;
+    }
+    
+    public SMSLog append(String message) {
+    	
+    	log(message);
+    	
+    	return obj;
+    }
     public static void log(String string) {
 
     	logger.info(string);

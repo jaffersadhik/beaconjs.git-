@@ -33,6 +33,7 @@ import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.smslog.RemoveLogBuffer;
+import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class BaseMessage
         extends
@@ -379,12 +380,14 @@ public abstract class BaseMessage
     }
     
     
- public StringBuffer getLogBuffer() {
+ public SMSLog getLogBuffer() {
     	
     	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
     }
  
-    public StringBuffer getLogBufferValue(MiddlewareConstant aLogBufferKey) {
+    public SMSLog getLogBufferValue(MiddlewareConstant aLogBufferKey) {
+    	
+    	/*
     	  if (aLogBufferKey == null)
               return null;
 
@@ -396,7 +399,8 @@ public abstract class BaseMessage
         	  putValueLocally(aLogBufferKey, value);
           }
           return (StringBuffer)value;
-
+		*/
+    	return SMSLog.getInstance();
 	}
     
   

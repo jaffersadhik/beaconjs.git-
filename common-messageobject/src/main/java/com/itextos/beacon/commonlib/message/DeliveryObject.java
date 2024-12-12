@@ -13,6 +13,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class DeliveryObject
         extends
@@ -56,9 +57,9 @@ public class DeliveryObject
         return temp == null ? null : DateTimeUtility.getDateFromString(temp, DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS);
     }
 
-    public StringBuffer getLogBuffer() {
+    public SMSLog getLogBuffer() {
     	
-    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    	return SMSLog.getInstance();
     }
  
     public String getAgeingType()

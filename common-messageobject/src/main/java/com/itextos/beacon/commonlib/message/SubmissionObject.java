@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class SubmissionObject
         extends
@@ -187,9 +188,9 @@ public class SubmissionObject
         return CommonUtility.getInteger(getValue(MiddlewareConstant.MW_DCS));
     }
 
- public StringBuffer getLogBuffer() {
+ public SMSLog getLogBuffer() {
     	
-    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    	return SMSLog.getInstance();
     }
  
     public DeliveryObject getDeliveryObject()
@@ -197,7 +198,6 @@ public class SubmissionObject
         final DeliveryObject lDeliveryObject = new DeliveryObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // TODO Need to add the remaining data
-        lDeliveryObject.setLogBufferValue(getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
         lDeliveryObject.setClientId(getClientId());
         lDeliveryObject.setBaseMessageId(getBaseMessageId());
         lDeliveryObject.setMessage(getMessage());

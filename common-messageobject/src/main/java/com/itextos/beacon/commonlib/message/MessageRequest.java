@@ -23,6 +23,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.smslog.SMSLog;
 
 public class MessageRequest
         extends
@@ -698,7 +699,6 @@ public class MessageRequest
         final SubmissionObject subObj = new SubmissionObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
         // Set Parent Object
-        subObj.setLogBufferValue(getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
         subObj.setActualRouteId(getActualRouteId());
         subObj.setAddSubClientHeader(isAddSubClientHeader());
         subObj.setAlpha(getAlpha());
@@ -2261,9 +2261,9 @@ public class MessageRequest
         updateReceivedTime(aMessageObject);
     }
 
-    public StringBuffer getLogBuffer() {
+ public SMSLog getLogBuffer() {
     	
-    	return getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER);
+    	return SMSLog.getInstance();
     }
     private void updateReceivedTime(
             MessagePart aMessageObject)
