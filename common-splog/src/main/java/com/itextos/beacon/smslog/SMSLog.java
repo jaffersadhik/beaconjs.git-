@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 
 public class SMSLog {
@@ -36,6 +35,7 @@ public class SMSLog {
         		loglevel=Level.OFF;
         	}
         }
+        logger.setUseParentHandlers(false);
         
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
@@ -46,7 +46,7 @@ public class SMSLog {
 	        fileHandler.setLevel(loglevel);
 
 	        // Set a formatter for the handler (optional)
-	        fileHandler.setFormatter(new SimpleFormatter());
+	        fileHandler.setFormatter(new SMSLogCustomFormatter());
 
 	        // Add the handler to the logger
 	        logger.addHandler(fileHandler);
