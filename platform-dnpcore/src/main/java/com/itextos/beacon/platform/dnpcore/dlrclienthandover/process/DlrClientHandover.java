@@ -41,6 +41,7 @@ public class DlrClientHandover
         	
         	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :Error :: " + ErrorMessage.getStackTraceAsString(e));
 
+            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " :Error :: " + ErrorMessage.getStackTraceAsString(e) );
 
         }
     }
@@ -53,18 +54,21 @@ public class DlrClientHandover
 
         try
         {
-            if (aDeliveryObject == null)
+            if (aDeliveryObject == null) {
+                DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : aDeliveryObject :: is null ");
+
                 return;
+            }
           
             
             final ClientDlrConfig lClientDlrConfig = ClientDlrConfigUtil.getDlrHandoverConfig(aDeliveryObject.getClientId(), "sms", aDeliveryObject.getInterfaceType(),
                     aDeliveryObject.isDlrRequestFromClient());
             
             
-            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " :lClientDlrConfig :: " + lClientDlrConfig.toString() );
+            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " :lClientDlrConfig :: " + lClientDlrConfig);
 
             
-        	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :lClientDlrConfig :: " + lClientDlrConfig.toString());
+        	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :lClientDlrConfig :: " + lClientDlrConfig);
 
 
             if (lClientDlrConfig == null)
