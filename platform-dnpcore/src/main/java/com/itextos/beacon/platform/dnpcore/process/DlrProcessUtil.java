@@ -18,6 +18,7 @@ import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.dnpcore.util.AgingDlrProcessUtil;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrProcessUtil
 {
@@ -36,6 +37,8 @@ public class DlrProcessUtil
 
         final List<Component>                lProcessDnRetryLs = DlrRetryProcess.processRetry(aDeliveryObject);
      
+        DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : next Level Components : "+lProcessDnRetryLs );
+
         aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+  " : Begin processDnRetryLs:" + lProcessDnRetryLs + " Message Id:" + aDeliveryObject.getMessageId() + " status_id:" + aDeliveryObject.getDnOrigianlstatusCode());
 
         for (final Component lComponentName : lProcessDnRetryLs)

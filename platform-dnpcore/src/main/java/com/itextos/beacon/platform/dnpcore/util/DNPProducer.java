@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.DNPLog;
 import com.itextos.beacon.smslog.SMSLog;
 
 public class DNPProducer
@@ -35,6 +36,8 @@ public class DNPProducer
             {
                 if (log.isDebugEnabled())
                     log.debug(e.getValue().getMessageId()+" : Sending to Next Component : " + e.getKey() + ":: " + e.getValue());
+
+                DNPLog.getInstance( e.getValue().getClientId()).log( e.getValue().getClientId(), e.getValue().getFileId()+ " : "+  e.getValue().getMessageId() + " : Sending to Next Component :  "+e.getKey());
 
                 if (Component.HTTP_DLR == e.getKey())
                 {

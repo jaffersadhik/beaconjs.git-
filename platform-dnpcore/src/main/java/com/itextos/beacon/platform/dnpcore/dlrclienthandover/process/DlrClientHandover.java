@@ -58,6 +58,10 @@ public class DlrClientHandover
             
             final ClientDlrConfig lClientDlrConfig = ClientDlrConfigUtil.getDlrHandoverConfig(aDeliveryObject.getClientId(), "sms", aDeliveryObject.getInterfaceType(),
                     aDeliveryObject.isDlrRequestFromClient());
+            
+            
+        	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :lClientDlrConfig :: " + lClientDlrConfig.toString());
+
 
             if (lClientDlrConfig == null)
                 return;

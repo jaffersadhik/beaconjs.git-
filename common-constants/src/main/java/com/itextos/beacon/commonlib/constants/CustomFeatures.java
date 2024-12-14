@@ -25,7 +25,8 @@ public enum CustomFeatures
     CUSTOM_BLACKLIST_ENABLE("custom.blacklist.enabled"),
     EXPLICIT_URL_SHORTNER_YN("explicit.url.shortner.yn"),
     USE_DEFAULT_INTL_PRICE("use.default.intl.price"),
-    UDH_VALIDATE_IN_SMPP("udh.validate.in.smpp");
+    UDH_VALIDATE_IN_SMPP("udh.validate.in.smpp"),
+    USER_DEBUG_LOG("user.debug.log");
 
     private String key;
 

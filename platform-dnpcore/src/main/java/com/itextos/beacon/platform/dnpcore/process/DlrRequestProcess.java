@@ -17,6 +17,7 @@ import com.itextos.beacon.platform.billing.DeliveryProcess;
 import com.itextos.beacon.platform.dnpcore.dlrclienthandover.process.DlrClientHandover;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
 import com.itextos.beacon.platform.dnpcore.util.DlrConstants;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrRequestProcess
 {
@@ -78,6 +79,9 @@ public class DlrRequestProcess
 
         if (log.isDebugEnabled())
             log.debug(aDeliveryObject.getMessageId() +" : DlrType Confiug : " + lDlrTypeInfo);
+        
+        DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : DlrType Confiug : " + lDlrTypeInfo );
+
 
         int lTotalMsgParts = 0;
 
@@ -96,7 +100,10 @@ public class DlrRequestProcess
         if ((aDeliveryObject.getDlrFromInternal() != null) && aDeliveryObject.getDlrFromInternal().equals("dummyroute_dlr_came_from_MW"))
             isProcessClientHandover = true;
 
+
+        DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " :isProcessClientHandover :: " + isProcessClientHandover );
         
+
     	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :isProcessClientHandover :: " + isProcessClientHandover);
 
         if (isProcessClientHandover || aDeliveryObject.isPlatfromRejected())

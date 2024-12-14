@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
+import com.itextos.beacon.smslog.DNPLog;
 import com.itextos.beacon.smslog.SMSLog;
 
 public class DlrInternalProcessor
@@ -52,6 +53,8 @@ public class DlrInternalProcessor
          {
              lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(" LOG START");
 
+             DNPLog.getInstance(lDeliveryObject.getClientId()).log(lDeliveryObject.getClientId(),lDeliveryObject.getFileId()+ " : "+ lDeliveryObject.getMessageId() + " enter forDLRInternal : ");
+        
              final Map<Component, DeliveryObject> processInternalDNQ = DlrProcessUtil.processDnReceiverQ(lDeliveryObject);
 
              DNPProducer.sendToNextComponents(processInternalDNQ,sb);

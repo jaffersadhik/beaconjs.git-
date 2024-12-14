@@ -42,6 +42,8 @@ public class App {
     	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
     	System.setProperty("prometheus.jetty.port", "1075");
 
+    	foldercreaton("/opt/jboss/wildfly/logs/dnp");
+
     	foldercreaton("/opt/jboss/wildfly/logs/k2e");
 
     	foldercreaton("/opt/jboss/wildfly/logs/topic");

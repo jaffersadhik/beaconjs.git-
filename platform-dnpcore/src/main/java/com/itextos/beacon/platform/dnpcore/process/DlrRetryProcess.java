@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.errorinfo.data.FailureType;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrRetryProcess
 {
@@ -34,6 +35,8 @@ public class DlrRetryProcess
         {
             if (log.isDebugEnabled())
                 log.debug(" Processing middleware rejected msg MessageId:" + aDeliveryObject.getMessageId());
+            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : Processing middleware rejected msg MessageId:");
+
             nextComponets.add(Component.T2DB_DELIVERIES);
             return nextComponets;
         }
