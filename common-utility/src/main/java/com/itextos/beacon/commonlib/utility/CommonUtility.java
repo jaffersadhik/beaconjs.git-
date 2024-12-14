@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.StringJoiner;
-import java.util.logging.ErrorManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -31,7 +30,6 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.smslog.ErrorLog;
 
 public final class CommonUtility
 {
@@ -280,7 +278,8 @@ public final class CommonUtility
         }
         catch (final InterruptedException e)
         {
-            ErrorLog.log(ErrorMessage.getStackTraceAsString(e));
+        	
+        	e.printStackTrace();
         }
     }
 

@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.TimerIntervalConstant;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.ExecutorLog1;
 
 public class TimedProcessor
         extends
@@ -64,7 +63,6 @@ public class TimedProcessor
             // if (log.isDebugEnabled())
             // log.debug(mTimedProcess.getClass() + " Invoking processNow");
 
-        	ExecutorLog1.getInstance("t_"+mThreadName).log("t_"+mThreadName+" : "+new Date());
 
         	synchronized (mTimedProcess)
             {
@@ -85,7 +83,6 @@ public class TimedProcessor
                 // log.debug(mTimedProcess.getClass() + " Going on sleep for " +
                 // mSleepTimeInMilliSeconds + " millis");
 
-            	ExecutorLog1.getInstance("t_"+mThreadName).log("t_"+mThreadName+" : goto sleep for the milli second  : "+mSleepTimeInMilliSeconds);
 
                 CommonUtility.sleepForAWhile(mSleepTimeInMilliSeconds);
 
