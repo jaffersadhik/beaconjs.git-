@@ -13,12 +13,12 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.log.DataSourceLog;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.DataSourceLog;
 
 final class InitializeConnectionPool
 {

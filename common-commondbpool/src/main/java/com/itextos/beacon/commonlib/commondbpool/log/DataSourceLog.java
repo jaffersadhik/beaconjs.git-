@@ -1,4 +1,4 @@
-package com.itextos.beacon.smslog;
+package com.itextos.beacon.commonlib.commondbpool.log;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
