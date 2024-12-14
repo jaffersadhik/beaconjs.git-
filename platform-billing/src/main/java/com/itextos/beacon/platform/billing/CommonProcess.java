@@ -12,6 +12,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.msgutil.cache.CarrierCircle;
 import com.itextos.beacon.inmemory.msgutil.util.IndiaNPFinder;
 import com.itextos.beacon.platform.billing.support.BillingProducer;
@@ -20,7 +21,6 @@ import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableInden
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletRefundInput;
 import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
-import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class CommonProcess
         implements

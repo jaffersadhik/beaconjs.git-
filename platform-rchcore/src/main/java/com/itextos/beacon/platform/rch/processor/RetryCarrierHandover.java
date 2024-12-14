@@ -23,6 +23,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.carrierhandover.RouteKannelInfo;
 import com.itextos.beacon.inmemory.carrierhandover.util.ICHUtil;
 import com.itextos.beacon.platform.carrierhandoverutility.util.CHUtil;
@@ -31,7 +32,6 @@ import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelStatsCollector;
 import com.itextos.beacon.platform.rch.util.RCHProcessUtil;
 import com.itextos.beacon.platform.rch.util.RCHProducer;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class RetryCarrierHandover
 {

@@ -11,7 +11,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.config.RedisConfig;
 import com.itextos.beacon.commonlib.redisconnectionprovider.config.RedisConfigLoader;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 
 import redis.clients.jedis.Jedis;
 

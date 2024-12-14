@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.smslog.SMSLog;
+import com.itextos.beacon.errorlog.SMSLog;
 
 public class SubmissionObject
         extends

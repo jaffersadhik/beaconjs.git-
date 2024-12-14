@@ -1,24 +1,23 @@
-package com.itextos.beacon.smslog;
+package com.itextos.beacon.errorlog;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
-public class SMSLog {
+public class ErrorLog {
 
 
-    private static final  Logger logger = Logger.getLogger(SMSLog.class.getName());
-    
-    private static SMSLog obj=new SMSLog();
+    private static final  Logger logger = Logger.getLogger(ErrorLog.class.getName());
     
     static {
     	
-
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/smslog.%g.log";
+
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/error.%g.log";
 
         Level loglevel=Level.INFO;
         
@@ -35,7 +34,6 @@ public class SMSLog {
         		loglevel=Level.OFF;
         	}
         }
-        logger.setUseParentHandlers(false);
         
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
@@ -46,7 +44,7 @@ public class SMSLog {
 	        fileHandler.setLevel(loglevel);
 
 	        // Set a formatter for the handler (optional)
-	        fileHandler.setFormatter(new SMSLogCustomFormatter());
+	        fileHandler.setFormatter(new SimpleFormatter());
 
 	        // Add the handler to the logger
 	        logger.addHandler(fileHandler);
@@ -66,29 +64,6 @@ public class SMSLog {
         // Set the logging level for the logger
     }
 
-    public static SMSLog getInstance() {
-    	
-    	if(obj==null) {
-    		
-    		 obj=new SMSLog();
-    	}
-    	
-    	return obj;
-    }
-    
-    public SMSLog append(String message) {
-    	
-    	log(message);
-    	
-    	return obj;
-    }
-    
- public SMSLog append(int message) {
-    	
-    	log(""+message);
-    	
-    	return obj;
-    }
     public static void log(String string) {
 
     	logger.info(string);

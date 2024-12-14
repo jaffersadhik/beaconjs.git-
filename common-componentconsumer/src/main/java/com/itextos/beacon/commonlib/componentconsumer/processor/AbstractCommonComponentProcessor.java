@@ -24,7 +24,7 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 import com.itextos.beacon.smslog.TopicLog;
 

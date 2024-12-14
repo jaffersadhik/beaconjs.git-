@@ -17,6 +17,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
 import com.itextos.beacon.inmemory.errorinfo.ErrorCodeUtil;
@@ -28,7 +29,6 @@ import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.cappingcheck.CappingIntervalType;
 import com.itextos.beacon.platform.cappingcheck.CappingMessageChecker;
 import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class SubmissionProcess
         extends

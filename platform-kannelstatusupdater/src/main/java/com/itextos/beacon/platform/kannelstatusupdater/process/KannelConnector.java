@@ -13,9 +13,9 @@ import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.httpclient.BasicHttpConnector;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.platform.kannelstatusupdater.beans.KannelStatusInfo;
 import com.itextos.beacon.platform.kannelstatusupdater.xmlparser.Gateway;
-import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KannelStatusLog;
 
 public class KannelConnector

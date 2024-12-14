@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;

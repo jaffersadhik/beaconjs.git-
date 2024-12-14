@@ -8,8 +8,8 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class BillingProducer
 {

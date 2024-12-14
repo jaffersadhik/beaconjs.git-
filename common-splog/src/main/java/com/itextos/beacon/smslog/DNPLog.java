@@ -84,6 +84,8 @@ public class DNPLog {
         	}
         }
         
+        logger.setUseParentHandlers(false);
+
         // Create a FileHandler with the specified log file name
         FileHandler fileHandler=null;
 		try {
@@ -93,7 +95,7 @@ public class DNPLog {
 	        fileHandler.setLevel(loglevel);
 
 	        // Set a formatter for the handler (optional)
-	        fileHandler.setFormatter(new SimpleFormatter());
+	        fileHandler.setFormatter(new LogCustomFormatter());
 
 	        // Add the handler to the logger
 	        logger.addHandler(fileHandler);

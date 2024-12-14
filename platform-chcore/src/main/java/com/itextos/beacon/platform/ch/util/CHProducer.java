@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.dch.processor.DummyCarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.msgflowutil.billing.BillingDatabaseTableIndentifier;
@@ -23,7 +24,6 @@ import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 import com.itextos.beacon.platform.prc.process.RejectionProcess;
 import com.itextos.beacon.platform.sbc.processor.SBConsumer;
 import com.itextos.beacon.platform.subbiller.processor.BillerProcessor;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class CHProducer
 {

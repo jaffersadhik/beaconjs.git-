@@ -369,6 +369,7 @@
    	<module>kafka-stats</module>
    	<module>platform-topic2elasticsearch</module>
    	<module>inmemory-elasticsearchcolumn</module>
+   	<module>common-errorlog</module>
   </modules>
   
 

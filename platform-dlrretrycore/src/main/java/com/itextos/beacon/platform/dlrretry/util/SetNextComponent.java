@@ -11,10 +11,10 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class SetNextComponent
 {

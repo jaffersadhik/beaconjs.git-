@@ -1,7 +1,7 @@
 package com.itextos.beacon.platform.billing;
 
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.smslog.SMSLog;
+import com.itextos.beacon.errorlog.SMSLog;
 
 public interface IBillingProcess
 {

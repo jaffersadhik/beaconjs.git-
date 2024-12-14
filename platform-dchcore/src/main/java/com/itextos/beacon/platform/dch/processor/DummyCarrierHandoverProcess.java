@@ -11,10 +11,10 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.dch.util.DCHUtil;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class DummyCarrierHandoverProcess
         extends

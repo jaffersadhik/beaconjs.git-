@@ -11,8 +11,8 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.billing.SubmissionProcess;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class BillerProcessor
         extends

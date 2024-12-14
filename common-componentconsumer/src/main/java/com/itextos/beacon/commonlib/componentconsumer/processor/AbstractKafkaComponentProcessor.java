@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.smslog.LossLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 

@@ -32,8 +32,8 @@ import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.smslog.RemoveLogBuffer;
-import com.itextos.beacon.smslog.SMSLog;
+import com.itextos.beacon.errorlog.RemoveLogBuffer;
+import com.itextos.beacon.errorlog.SMSLog;
 
 public abstract class BaseMessage
         extends

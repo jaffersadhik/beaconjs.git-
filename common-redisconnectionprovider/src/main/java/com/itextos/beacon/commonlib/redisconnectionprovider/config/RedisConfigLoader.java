@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 
 public class RedisConfigLoader
 {

@@ -22,11 +22,11 @@ import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.ic.util.ICProducer;
 import com.itextos.beacon.platform.ic.util.ICUtility;
 import com.itextos.beacon.smslog.EntryLog;
 import com.itextos.beacon.smslog.ExitLog;
-import com.itextos.beacon.smslog.SMSLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 
 public class ICProcessor

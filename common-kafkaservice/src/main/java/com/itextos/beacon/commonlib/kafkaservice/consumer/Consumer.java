@@ -32,9 +32,9 @@ import com.itextos.beacon.commonlib.kafkaservice.producer.Producer;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.smslog.ConsumerLog;
 import com.itextos.beacon.smslog.ConsumerTPLog;
-import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.KafkaReceiver;
 
 public class Consumer

@@ -30,7 +30,7 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.RoundRobin;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaConsumer;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.smslog.KILog;
 import com.itextos.beacon.smslog.ProducerTopicLog;
 import com.itextos.beacon.smslog.StartupFlowLog;

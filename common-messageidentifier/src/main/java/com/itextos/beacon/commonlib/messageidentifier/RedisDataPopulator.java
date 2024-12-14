@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextos.beacon.smslog.RedisDataPopulatorLog;
+import com.itextos.beacon.errorlog.RedisDataPopulatorLog;
 
 public class RedisDataPopulator
 {

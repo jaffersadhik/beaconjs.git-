@@ -22,11 +22,11 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.itextos.beacon.platform.sbpcore.dao.DBPoller;
 import com.itextos.beacon.platform.sbpcore.util.SBPProducer;
-import com.itextos.beacon.smslog.SMSLog;
 
 public abstract class AbstractDataPoller
         implements

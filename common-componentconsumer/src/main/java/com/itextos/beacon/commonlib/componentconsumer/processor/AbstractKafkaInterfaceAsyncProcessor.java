@@ -13,7 +13,7 @@ import com.itextos.beacon.commonlib.message.AsyncRequestObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.messageprocessor.request.ProducerKafkaRequest;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 
 public abstract class AbstractKafkaInterfaceAsyncProcessor
         extends

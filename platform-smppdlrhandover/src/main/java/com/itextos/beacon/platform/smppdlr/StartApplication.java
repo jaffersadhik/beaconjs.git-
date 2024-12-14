@@ -8,10 +8,10 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.platform.smppdlr.inmemq.InmemoryQueueReaper;
 import com.itextos.beacon.platform.smppdlrutil.util.SmppDlrRedis;
 import com.itextos.beacon.smslog.DebugLog;
-import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.StartupFlowLog;
 
 public class StartApplication

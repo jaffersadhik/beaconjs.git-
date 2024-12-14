@@ -22,8 +22,8 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.smslog.ConsumerRedisLog;
-import com.itextos.beacon.smslog.ErrorLog;
 import com.itextos.beacon.smslog.ProducertoRedisLog;
 
 import redis.clients.jedis.Jedis;

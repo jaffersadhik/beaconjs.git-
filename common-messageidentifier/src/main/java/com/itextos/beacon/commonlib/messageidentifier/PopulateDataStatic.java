@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.smslog.RedisDataPopulatorLog;
+import com.itextos.beacon.errorlog.RedisDataPopulatorLog;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;

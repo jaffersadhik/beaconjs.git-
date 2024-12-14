@@ -21,11 +21,11 @@ import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.dnpayload.util.DNPUtil;
 import com.itextos.beacon.inmemory.routeinfo.cache.RouteConfigInfo;
 import com.itextos.beacon.inmemory.routeinfo.util.RouteUtil;
 import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class PushToDlrProcessor
 {

@@ -16,13 +16,13 @@ import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.platform.walletbase.data.WalletDeductInput;
 import com.itextos.beacon.platform.walletbase.data.WalletInput;
 import com.itextos.beacon.platform.walletbase.data.WalletResult;
 import com.itextos.beacon.platform.walletbase.util.WalletUtil;
 import com.itextos.beacon.platform.walletprocess.WalletDeductRefundProcessor;
 import com.itextos.beacon.platform.wc.util.WCProducer;
-import com.itextos.beacon.smslog.ErrorLog;
 
 public class WalletProcessor
         extends

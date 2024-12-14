@@ -8,7 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaRedisHandler;
 import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.smslog.ErrorLog;
+import com.itextos.beacon.errorlog.ErrorLog;
 
 public class ProducerCallback
         implements

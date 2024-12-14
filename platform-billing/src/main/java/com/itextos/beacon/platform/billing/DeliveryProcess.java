@@ -11,13 +11,13 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.errorinfo.ErrorCodeUtil;
 import com.itextos.beacon.inmemory.errorinfo.data.ErrorCategory;
 import com.itextos.beacon.inmemory.errorinfo.data.IErrorInfo;
 import com.itextos.beacon.inmemory.errorinfo.data.PlatformErrorInfo;
 import com.itextos.beacon.platform.billing.support.BillingUtility;
 import com.itextos.beacon.platform.dnpayloadutil.common.TimeAdjustmentUtility;
-import com.itextos.beacon.smslog.SMSLog;
 
 public class DeliveryProcess
         extends

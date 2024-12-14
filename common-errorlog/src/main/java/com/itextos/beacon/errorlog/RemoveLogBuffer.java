@@ -1,4 +1,4 @@
-package com.itextos.beacon.smslog;
+package com.itextos.beacon.errorlog;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -7,18 +7,16 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 
-public class RedisDataPopulatorLog {
+public class RemoveLogBuffer {
 
 
-    private static final  Logger logger = Logger.getLogger(RedisDataPopulatorLog.class.getName());
+    private static final  Logger logger = Logger.getLogger(RemoveLogBuffer.class.getName());
     
     static {
-    	
-
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
-         
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/redisdatapopulator.%g.log";
+
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/removelogbuffer.%g.log";
 
         Level loglevel=Level.INFO;
         
