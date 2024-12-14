@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.utility.ItextosClient;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrAdminDelivery;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrClientHandover
 {
@@ -60,6 +61,9 @@ public class DlrClientHandover
                     aDeliveryObject.isDlrRequestFromClient());
             
             
+            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " :lClientDlrConfig :: " + lClientDlrConfig.toString() );
+
+            
         	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" :lClientDlrConfig :: " + lClientDlrConfig.toString());
 
 
@@ -101,7 +105,9 @@ public class DlrClientHandover
 
             final DlrHandoverMode lDlrHandoverMode = lClientDlrConfig.getDlrHandoverMode();
 
-           	aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" : Dlr Handover Mode : " + lDlrHandoverMode);
+            DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : Dlr Handover Mode : " + lDlrHandoverMode );
+          
+            aDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).append("\n").append(aDeliveryObject.getMessageId()+" : Dlr Handover Mode : " + lDlrHandoverMode);
 
 
             switch (lDlrHandoverMode)

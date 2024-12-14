@@ -120,6 +120,9 @@ public class DlrRequestProcess
             {
                 if (log.isDebugEnabled())
                     log.debug(aDeliveryObject.getMessageId() + " : Sending request to Client Handover Process..");
+                
+                DNPLog.getInstance(aDeliveryObject.getClientId()).log(aDeliveryObject.getClientId(),aDeliveryObject.getFileId()+ " : "+ aDeliveryObject.getMessageId() + " : Sending request to Client Handover Process.." );
+
                 DlrClientHandover.processClientHandover(lNewDeliveryObj, nextComponentMap);
             }
         }
