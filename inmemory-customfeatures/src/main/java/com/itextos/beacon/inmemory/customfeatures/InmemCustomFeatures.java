@@ -8,11 +8,12 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
 import com.itextos.beacon.inmemory.loader.process.AbstractAutoRefreshInMemoryProcessor;
 import com.itextos.beacon.inmemory.loader.process.InmemoryInput;
-
+import com.itextos.beacon.errorlog.ErrorLog;
 public class InmemCustomFeatures
         extends
         AbstractAutoRefreshInMemoryProcessor
@@ -41,7 +42,7 @@ public class InmemCustomFeatures
             return mAccCustomFeatures.get(CommonUtility.combine(aClientId, aCustomFeature));
         }
 
- //       try {
+       try {
         final ItextosClient lClient = new ItextosClient(aClientId);
 
         String              key     = CommonUtility.combine(lClient.getClientId(), aCustomFeature);
@@ -57,11 +58,11 @@ public class InmemCustomFeatures
 
         if (mAccCustomFeatures.get(key) != null)
             return mAccCustomFeatures.get(key);
-/*
+
         }catch(Exception e) {
         	
-        	Error
-        } */
+        	ErrorLog.log(" getValueOfCustomFeature error :  "+ErrorMessage.getStackTraceAsString(e));
+        } 
         return null;
     }
 

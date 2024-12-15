@@ -42,7 +42,7 @@ public class ItextosClient
             case CLIENT_ID_ADMIN_USER_LEVEL_LENGTH:
             {
                 final String errorMsg = "Passed clientid is at Admin User Level. Please check the calling application .... Client Id '" + aClientId + "'";
-                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errorMsg, new ItextosException(errorMsg));
+                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errorMsg);
                 mClientId    = aClientId;
                 mAdmin       = aClientId;
                 mSuperAdmin  = mClientId.substring(0, 8);
@@ -53,7 +53,7 @@ public class ItextosClient
             case CLIENT_ID_SUPER_USER_LEVEL_LENGTH:
             {
                 final String errMsg = "Passed clientid is at Super User Level. Please check the calling application .... Client Id '" + aClientId + "'";
-                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg, new ItextosException(errMsg));
+                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg);
                 mClientId    = aClientId;
                 mAdmin       = aClientId;
                 mSuperAdmin  = aClientId;
@@ -64,7 +64,7 @@ public class ItextosClient
             default:
             {
                 final String errMsg = "Passed clientid is not in valid length. Please check the calling application .... Client Id '" + aClientId + "'";
-                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg, new ItextosRuntimeException(errMsg));
+                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg);
                 mClientId    = null;
                 mAdmin       = null;
                 mSuperAdmin  = null;
