@@ -67,7 +67,9 @@ public class ItextosClient
             default:
             {
                 final String errMsg = "Passed clientid is not in valid length. Please check the calling application .... Client Id '" + aClientId + "'";
-                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg, new ItextosRuntimeException(errMsg));
+    //            log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg, new ItextosRuntimeException(errMsg));
+                log.error(">>>>>>>>>>>>>>>>>>>>>>>>> " + errMsg);
+                
                 mClientId    = null;
                 mAdmin       = null;
                 mSuperAdmin  = null;

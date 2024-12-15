@@ -2,7 +2,7 @@ package com.itextos.beacon.commonlib.constants.exception;
 
 public class InternationalSMSRateNotAvailableRuntimeException
         extends
-        RuntimeException
+        Exception
 {
 
     private static final long serialVersionUID = 5501361566335613837L;
