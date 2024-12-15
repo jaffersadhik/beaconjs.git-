@@ -238,7 +238,9 @@ public class Consumer
 
             final IMessage message = messageFromKafka.value();
 
-            KafkaReceiver.getInstance(message.getNextComponent()).log(message.getJsonString());
+            KafkaReceiver.getInstance(message.getNextComponent()).log(message.getNextComponent(),"Consumed \t" + mTopicName + "\t" + messageFromKafka.partition() + "\t" + messageFromKafka.offset());
+
+            KafkaReceiver.getInstance(message.getNextComponent()).log(message.getNextComponent(),message.getJsonString());
             
             mConsumerInMemCollection.addMessage(message);
 

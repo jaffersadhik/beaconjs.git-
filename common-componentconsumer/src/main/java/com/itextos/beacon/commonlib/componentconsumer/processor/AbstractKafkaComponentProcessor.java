@@ -56,16 +56,10 @@ public abstract class AbstractKafkaComponentProcessor
         }
         catch (final Exception e)
         {
-        	if(aMessage instanceof BaseMessage) {
-        		
-                ErrorLog.log("Exception while processing the message \n "+((BaseMessage)aMessage).getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER).toString()+"" +ErrorMessage.getStackTraceAsString(e));
-
-        	}else {
         	
-                ErrorLog.log("Exception while processing the message \n "+aMessage+" \n" +ErrorMessage.getStackTraceAsString(e));
-
-        	}
             
+            ErrorLog.log("Exception while processing the message \n "+aMessage+" \n" +ErrorMessage.getStackTraceAsString(e));
+
             LossLog.log(aMessage.getJsonString());
             
        //     sendBackToTopic(aMessage);

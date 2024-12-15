@@ -9,51 +9,44 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 
-public class KafkaReceiver {
+public class KafkaReceiver2 {
 
 
-	private static KafkaReceiver obj=null;
+    private  final  Logger logger = Logger.getLogger(KafkaReceiver2.class.getName());
 
-
-	private Map<String,Logger> objmap=new HashMap<String,Logger>();
+	private static Map<String,KafkaReceiver2> objmap=new HashMap<String,KafkaReceiver2>();
 	
 	
-
 	
-	public static KafkaReceiver getInstance(String nextcomponent) {
+	public static KafkaReceiver2 getInstance(String fromcomponent) {
 	
+		
+		KafkaReceiver2 obj=objmap.get(fromcomponent);
+		
 		if(obj==null) {
 			
-			obj=new KafkaReceiver();
+			obj=new KafkaReceiver2(fromcomponent);
 			
+			objmap.put(fromcomponent, obj);
 		}
 		
-		Logger logger =obj.objmap.get(nextcomponent);
 		
-		if(logger==null) {
-			
-			logger=Logger.getLogger(KafkaReceiver.class.getName()+":"+nextcomponent);
-			
-			init(logger, nextcomponent);
-			
-			obj.objmap.put(nextcomponent,logger );
-		}
 		return obj;
 	}
 	
 	
-	private KafkaReceiver() {
+	private KafkaReceiver2() {
 		
 	}
 	
-	private static void init(Logger logger,String nextcomponent) {
+	private KafkaReceiver2(String nextcomponent) {
 		
 
     	
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkasender/kafkasender_"+nextcomponent+".%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/kafkareceiver/kafkareceiver_"+nextcomponent+".%g.log";
 
         Level loglevel=Level.INFO;
         
@@ -101,9 +94,9 @@ public class KafkaReceiver {
     
 	}
 
-    public void log(String nextcomponent,String message) {
+    public void log(String string) {
 
-    	objmap.get(nextcomponent).info(message);
+    	logger.info(string);
     	
     }
 }
