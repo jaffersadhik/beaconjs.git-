@@ -17,8 +17,8 @@ import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.customfeatures.InmemCustomFeatures;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.platform.dnpcore.log.DNPLog;
 import com.itextos.beacon.platform.dnpcore.util.AgingDlrProcessUtil;
-import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrProcessUtil
 {

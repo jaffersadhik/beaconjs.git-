@@ -1,4 +1,4 @@
-package com.itextos.beacon.smslog;
+package com.itextos.beacon.platform.dnpcore.log;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
 import com.itextos.beacon.inmemdata.account.UserInfo;
+import com.itextos.beacon.smslog.LogCustomFormatter;
 import com.itextos.beacon.smslog.util.FeatureData;
 
 

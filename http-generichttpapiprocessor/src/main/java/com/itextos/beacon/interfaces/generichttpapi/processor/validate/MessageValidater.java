@@ -24,6 +24,7 @@ import com.itextos.beacon.http.generichttpapi.common.utils.InterfaceMessageClass
 import com.itextos.beacon.http.generichttpapi.common.utils.TraiBlockoutCheck;
 import com.itextos.beacon.http.generichttpapi.common.utils.Utility;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
+import com.itextos.beacon.http.interfaceutil.log.HttpInterfaceLog;
 import com.itextos.beacon.inmemory.encryptinfo.CustomerEncryptUtil;
 import com.itextos.beacon.inmemory.encryptinfo.EncryptInfo;
 import com.itextos.beacon.inmemory.interfaces.util.IInterfaceUtil;
@@ -214,12 +215,17 @@ public class MessageValidater
         
         sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()); 
 
+         
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+ " :  validateDest :() aDestination : "+aDestination);
 
         if (lMobileNumber.isBlank())
         {
             if (log.isDebugEnabled())
                 log.debug("Destination is empty:  '" + lMobileNumber + "'");
             sb.append("Destination is empty:  '" + lMobileNumber + "' InterfaceStatusCode.DESTINATION_EMPTY :"+ InterfaceStatusCode.DESTINATION_EMPTY).append("\n");
+            
+            HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+ " : InterfaceStatusCode.DESTINATION_EMPTY : "+aDestination);
+
 
             return InterfaceStatusCode.DESTINATION_EMPTY;
         }
@@ -237,6 +243,9 @@ public class MessageValidater
             		
             log.error("Exception occured while decrypting destination...", e1);
             
+            HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+ " : Exception occured while decrypting destination...InterfaceStatusCode.DESTINATION_INVALID : "+InterfaceStatusCode.DESTINATION_INVALID);
+
+            
            return InterfaceStatusCode.DESTINATION_INVALID;
         }
 
@@ -251,6 +260,10 @@ public class MessageValidater
 
         if (log.isDebugEnabled())
             log.debug("Default Contury From Config Values : " + lCountryCD);
+        
+        
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+ " : Default Country From Config Values : " + lCountryCD);
+
 
         // lCountryCD = (!lAccDefaultCountryCD.isEmpty()) ? lAccDefaultCountryCD :
         // lCountryCD;
@@ -258,19 +271,40 @@ public class MessageValidater
         if (log.isDebugEnabled())
             log.debug("Validate Country Code :" + lCountryCD);
 
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+" : Validate Country Code : " + lCountryCD);
+
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("Validate Country Code :" + lCountryCD); 
+
+        
         final boolean               isConsiderDefaultLengthAsDomestic = CommonUtility
                 .isEnabled(CommonUtility.nullCheck(mBasicInfo.getUserAccountInfo().get(MiddlewareConstant.MW_CONSIDER_DEFAULTLENGTH_AS_DOMESTIC.getName()), true));
+        
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+" : isConsiderDefaultLengthAsDomestic : " + isConsiderDefaultLengthAsDomestic);
+
 
         final boolean               isDomesticSpecialSeriesAllow      = CommonUtility
                 .isEnabled(CommonUtility.nullCheck(mBasicInfo.getUserAccountInfo().get(MiddlewareConstant.MW_DOMESTIC_SPECIAL_SERIES_ALLOW.getName()), true));
 
+        
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+" : isDomesticSpecialSeriesAllow : " + isDomesticSpecialSeriesAllow);
+        
+
         final boolean               isIntlServiceAllow                = InterfaceUtil.isIntlServiceAllow(mBasicInfo.getUserAccountInfo());
+        
+        
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+" : isIntlServiceAllow : " + isIntlServiceAllow);
+
+        
         final boolean               isAppendCountryCode               = CommonUtility.isEnabled(mInterfaceMessage.getAppendCountry());
         final String                aAppendCountryCode                = CommonUtility.nullCheck(mInterfaceMessage.getCountryCode(), true);
 
         final MobileNumberValidator lMobileValidator                  = InterfaceUtil.validateMobile(lMobileNumber, lCountryCD, isIntlServiceAllow, isConsiderDefaultLengthAsDomestic,
                 isAppendCountryCode, aAppendCountryCode, isDomesticSpecialSeriesAllow);
 
+        
+        HttpInterfaceLog.getInstance(mBasicInfo.getClientId()).log(mBasicInfo.getClientId(), mBasicInfo.getFileId()+" : AccountMobileInfo : " + lMobileValidator.getmAccountMobileInfo());
+
+        
         try
         {
             if (log.isDebugEnabled())

@@ -40,6 +40,7 @@ RUN mkdir -p /opt/jboss/wildfly/logs/application
 RUN mkdir -p /opt/jboss/wildfly/logs/kafkareceiver
 RUN mkdir -p /opt/jboss/wildfly/logs/timetaken
 RUN mkdir -p /opt/jboss/wildfly/logs/aux
+RUN mkdir -p /opt/jboss/wildfly/logs/http
 
 RUN cp -rp /opt/tomcat/webapps/* /opt/tomcat/webappsBKUP/.
 

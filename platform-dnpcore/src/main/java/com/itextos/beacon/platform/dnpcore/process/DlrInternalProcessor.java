@@ -14,8 +14,8 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.errorlog.SMSLog;
+import com.itextos.beacon.platform.dnpcore.log.DNPLog;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
-import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrInternalProcessor
         extends

@@ -16,8 +16,8 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
+import com.itextos.beacon.platform.dnpcore.log.DNPLog;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
-import com.itextos.beacon.smslog.DNPLog;
 
 public class DNPProducer
 {

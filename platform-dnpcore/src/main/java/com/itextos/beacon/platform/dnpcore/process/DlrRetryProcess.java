@@ -13,8 +13,8 @@ import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemory.errorinfo.data.FailureType;
+import com.itextos.beacon.platform.dnpcore.log.DNPLog;
 import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
-import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrRetryProcess
 {

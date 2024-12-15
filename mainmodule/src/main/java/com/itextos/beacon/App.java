@@ -43,6 +43,7 @@ public class App {
     	System.setProperty("prometheus.jetty.port", "1075");
 
     	foldercreaton("/opt/jboss/wildfly/logs/dnp");
+    	foldercreaton("/opt/jboss/wildfly/logs/http");
 
     	foldercreaton("/opt/jboss/wildfly/logs/k2e");
 

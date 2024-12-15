@@ -74,8 +74,15 @@ public final class MobileNumberValidator
 
         checkNumber();
     }
+    
+    
+    
 
-    public String getMobileNumber()
+    public AccountMobileInfo getmAccountMobileInfo() {
+		return mAccountMobileInfo;
+	}
+
+	public String getMobileNumber()
     {
         return mMobileNumber;
     }

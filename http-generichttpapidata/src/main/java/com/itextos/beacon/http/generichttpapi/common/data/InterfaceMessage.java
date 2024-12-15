@@ -12,6 +12,7 @@ public class InterfaceMessage
 
     private static final long      serialVersionUID = -8881822394459509447L;
 
+    private String                 mFileId;
     private String                 mMsgId;
     private String                 mBaseMessageId;
     private String                 mMessage;
@@ -54,13 +55,23 @@ public class InterfaceMessage
     private String                 mDlrReq;
     private String                 mMegTypeHex;
     private String                 mUrlShortner;
+    
+    
 
-    public String getMsgId()
+    public String getFileId() {
+		return mFileId;
+	}
+
+	public void setFileId(String aFileId) {
+		this.mFileId = aFileId;
+	}
+
+	public String getMsgId()
     {
         return mMsgId;
     }
 
-    public void setMsgId(
+	public void setMsgId(
             String aMsgId)
     {
         mMsgId = aMsgId;
