@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.CustomFeatures;
+import com.itextos.beacon.commonlib.constants.exception.InternationalSMSRateNotAvailableRuntimeException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.ItextosClient;
@@ -101,7 +102,7 @@ public class CurrencyUtil
                     final String s = "Intl rate for the country '" + aCountry + "' or Rest of World is not specified in the intl_rates table";
 
                     log.error(s);
-                    throw new ItextosRuntimeException(s);
+                    throw new InternationalSMSRateNotAvailableRuntimeException(s);
                 }
             }
             else
@@ -110,7 +111,7 @@ public class CurrencyUtil
                         + "' Using Default Intl Rate is disbaled for the Client '" + aClientId + "'";
 
                 log.error(s);
-                throw new ItextosRuntimeException(s);
+                throw new InternationalSMSRateNotAvailableRuntimeException(s);
             }
         }
 

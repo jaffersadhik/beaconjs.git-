@@ -7,6 +7,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
+import com.itextos.beacon.commonlib.constants.exception.InternationalSMSRateNotAvailableRuntimeException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -85,6 +86,11 @@ public class IntlMsgVerifyProcessor
 
             mMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
             mMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
+        }catch(final InternationalSMSRateNotAvailableRuntimeException e) {
+        	
+        	   mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.PRICE_CONVERSION_FAILED.getStatusCode());
+               mMessageRequest.setAdditionalErrorInfo(e.getMessage());
+               VCProducer.sendToPlatformRejection(mSourceComponent, mMessageRequest);
         }
         catch (final ItextosRuntimeException e)
         {
