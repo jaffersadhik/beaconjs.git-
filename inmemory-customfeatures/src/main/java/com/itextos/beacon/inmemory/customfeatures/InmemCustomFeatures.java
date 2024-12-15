@@ -41,7 +41,7 @@ public class InmemCustomFeatures
             return mAccCustomFeatures.get(CommonUtility.combine(aClientId, aCustomFeature));
         }
 
-        try {
+ //       try {
         final ItextosClient lClient = new ItextosClient(aClientId);
 
         String              key     = CommonUtility.combine(lClient.getClientId(), aCustomFeature);
@@ -57,11 +57,11 @@ public class InmemCustomFeatures
 
         if (mAccCustomFeatures.get(key) != null)
             return mAccCustomFeatures.get(key);
-
+/*
         }catch(Exception e) {
         	
         	Error
-        }
+        } */
         return null;
     }
 
