@@ -61,6 +61,8 @@ public class IntlMsgVerifyProcessor
 
         try
         {
+            mMessageRequest.setRefCurrency(lPlatformBaseCurrency);
+
         	   mMessageRequest.setBaseCurrency(lPlatformIntlBaseCurrency);
         
             lCalculateBillingPrice = lBillingPrice.calculate();

@@ -66,7 +66,7 @@ public class HttpInterfaceLog {
         int limit = 1024 * 1024*5; // 1 MB file size limit
         int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/http/dnp_"+lUserInfo.getUserName()+".%g.log";
+        String logFileNamePattern = "/opt/jboss/wildfly/logs/http/http_"+lUserInfo.getUserName()+".%g.log";
 
         Level loglevel=Level.INFO;
         
