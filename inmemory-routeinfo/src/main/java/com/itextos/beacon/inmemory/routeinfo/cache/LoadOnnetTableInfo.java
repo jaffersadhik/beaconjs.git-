@@ -34,7 +34,7 @@ public class LoadOnnetTableInfo
     private boolean              mCanContinue        = true;
 
     Map<String, String>          mOnneTableRouteInfo = new HashMap<>();
-    private final TimedProcessor mTimedProcessor;
+    private  TimedProcessor mTimedProcessor;
 
     private static class SingletonHolder
     {
@@ -63,7 +63,7 @@ public class LoadOnnetTableInfo
         {
             final String s = "Exception while loading Onnet table information from DB";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+       //     throw new ItextosRuntimeException(s, e);
         }
     }
 

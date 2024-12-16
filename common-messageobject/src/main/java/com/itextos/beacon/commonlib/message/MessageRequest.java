@@ -20,6 +20,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -45,7 +46,7 @@ public class MessageRequest
             InterfaceGroup aInterfaceGroup,
             MessageType aMessageType,
             MessagePriority aMessagePriority,
-            RouteType aIsInt)
+            RouteType aIsInt) throws ItextosRuntimeException
     {
         this(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aIsInt, null);
     }
@@ -57,7 +58,7 @@ public class MessageRequest
             MessageType aMessageType,
             MessagePriority aMessagePriority,
             RouteType aRouteType,
-            String aAccountJsonString)
+            String aAccountJsonString) throws ItextosRuntimeException
     {
         super(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aRouteType, "MessageRequest", aAccountJsonString);
     }
@@ -694,7 +695,7 @@ public class MessageRequest
     }
 
     private SubmissionObject getSubmission(
-            MessagePart aMessageObject)
+            MessagePart aMessageObject) throws ItextosRuntimeException
     {
         final SubmissionObject subObj = new SubmissionObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 
@@ -894,7 +895,7 @@ public class MessageRequest
         return subObj;
     }
 
-    public List<BaseMessage> getSubmissions()
+    public List<BaseMessage> getSubmissions() throws ItextosRuntimeException
     {
         final List<BaseMessage> returnValue = new ArrayList<>();
 

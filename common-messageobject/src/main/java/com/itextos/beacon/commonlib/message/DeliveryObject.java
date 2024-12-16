@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -28,7 +29,7 @@ public class DeliveryObject
             InterfaceGroup aInterfaceGroup,
             MessageType aMessageType,
             MessagePriority aMessagePriority,
-            RouteType aIsInt)
+            RouteType aIsInt) throws ItextosRuntimeException
     {
         super(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aIsInt, "DeliveryObject");
     }
@@ -371,7 +372,7 @@ public class DeliveryObject
         return temp == null ? null : DateTimeUtility.getDateFromString(temp, DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS);
     }
 
-    public MessageRequest getMessageRequestForRetry()
+    public MessageRequest getMessageRequestForRetry() throws ItextosRuntimeException
     {
         final MessageRequest lMessageRequest = new MessageRequest(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 

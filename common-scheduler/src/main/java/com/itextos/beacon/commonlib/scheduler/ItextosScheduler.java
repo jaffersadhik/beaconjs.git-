@@ -83,7 +83,7 @@ public class ItextosScheduler
         {
             final String s = "Exception while starting the Itextos Scheduler";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+        //    throw new ItextosRuntimeException(s, e);
         }
         finally
         {
@@ -116,7 +116,7 @@ public class ItextosScheduler
         {
             final String s = "";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+    //        throw new ItextosRuntimeException(s, e);
         }
     }
 

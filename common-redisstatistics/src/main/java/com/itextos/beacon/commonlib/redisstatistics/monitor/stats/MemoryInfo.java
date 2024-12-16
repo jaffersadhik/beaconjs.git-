@@ -61,6 +61,7 @@ public class MemoryInfo
 
     public float getMemoryUsage()
     {
+    	/*
         final long maxMemory     = Long.parseLong(mMaxmemory);
         final long usedMemoryRss = Long.parseLong(mUsedMemoryRss);
 
@@ -68,6 +69,17 @@ public class MemoryInfo
             throw new ItextosRuntimeException("Max memory returned as 0. May be not configured in redis.conf file. Please check.");
 
         return ((usedMemoryRss / (float) maxMemory) * 100F);
+    	*/
+    	
+    	 long maxMemory     = Long.parseLong(mMaxmemory);
+        final long usedMemoryRss = Long.parseLong(mUsedMemoryRss);
+
+      if(maxMemory==0) {
+    	  maxMemory=1L;
+      }
+
+        return ((usedMemoryRss / (float) maxMemory) * 100F);
+
     }
 
     @Override

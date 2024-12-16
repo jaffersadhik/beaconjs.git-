@@ -66,7 +66,7 @@ public class InmemoryLoaderCollection
         {
             final String s = "Exception while loading inmemory input information from DB";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+            //throw new ItextosRuntimeException(s, e);
         }
     }
 

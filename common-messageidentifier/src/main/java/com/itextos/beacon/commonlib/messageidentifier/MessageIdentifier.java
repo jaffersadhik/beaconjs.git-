@@ -65,14 +65,19 @@ public class MessageIdentifier
     private final Date               mDate                  = new Date();
     private final SimpleDateFormat   mIdDateFormat          = new SimpleDateFormat("yyMMddHHmmss");
 
-    private MessageIdentifier()
+    private MessageIdentifier() 
     {
-        getIPAddress();
+        try {
+			getIPAddress();
+		} catch (ItextosRuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         mIdDateFormat.setLenient(false);
     }
 
     public void init(
-            final InterfaceType aInterfaceType)
+            final InterfaceType aInterfaceType) throws ItextosRuntimeException
     {
         mInterfaceType = aInterfaceType;
 
@@ -117,7 +122,7 @@ public class MessageIdentifier
         }
     }
 
-    private void getIPAddress()
+    private void getIPAddress() throws ItextosRuntimeException
     {
 
         try

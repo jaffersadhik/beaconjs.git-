@@ -37,8 +37,13 @@ public abstract class DBPoller
 
     private DBPoller()
     {
-        if ((MOD_VALUE == null) || MOD_VALUE.isBlank())
-            throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        if ((MOD_VALUE == null) || MOD_VALUE.isBlank()) {
+          //  throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        
+        	log.error("Invalid Modvalue set in Runtime... System going to down'" + MOD_VALUE + "'");
+        	
+        	System.exit(-1);
+        }
 
         {
             if (log.isDebugEnabled())
@@ -49,8 +54,11 @@ public abstract class DBPoller
             for (final String s : mods)
             {
                 final int mod = CommonUtility.getInteger(s, -999);
-                if ((mod == -999) || (mod >= 4))
-                    throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                if ((mod == -999) || (mod >= 4)) {
+                    //throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                    log.error("Invalid Modvalue set in Runtime... system going down'" + MOD_VALUE + "'");
+                    System.exit(-1);
+                }
             }
         }
     }

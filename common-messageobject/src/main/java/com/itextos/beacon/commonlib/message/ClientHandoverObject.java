@@ -1,5 +1,7 @@
 package com.itextos.beacon.commonlib.message;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+
 public class ClientHandoverObject
         extends
         BaseMessage
@@ -8,7 +10,7 @@ public class ClientHandoverObject
     private static final long serialVersionUID = -4398747152379260881L;
 
     public ClientHandoverObject(
-            DeliveryObject aDeliveryObject)
+            DeliveryObject aDeliveryObject) throws ItextosRuntimeException
     {
         super(aDeliveryObject.getClusterType(), aDeliveryObject.getInterfaceType(), aDeliveryObject.getInterfaceGroupType(), aDeliveryObject.getMessageType(), aDeliveryObject.getMessagePriority(),
                 aDeliveryObject.getMessageRouteType(), "ClientHandoverObject");

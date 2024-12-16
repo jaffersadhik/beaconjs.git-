@@ -14,13 +14,13 @@ public class IncomingMessageParser
     private DataToPlatform mDataToPlatformRequest;
 
     public IncomingMessageParser(
-            String aString)
+            String aString) throws ItextosRuntimeException
     {
         mIncomingString = aString;
         parse();
     }
 
-    private void parse()
+    private void parse() throws ItextosRuntimeException
     {
         final String[] lSplit = StringUtils.split(mIncomingString, CONCATE_STRING);
 

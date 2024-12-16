@@ -6,6 +6,7 @@ import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 
 public class ErrorObject
         extends
@@ -20,7 +21,7 @@ public class ErrorObject
             InterfaceGroup aInterfaceGroup,
             MessageType aMessageType,
             MessagePriority aMessagePriority,
-            RouteType aRouteType)
+            RouteType aRouteType) throws ItextosRuntimeException
     {
         super(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aRouteType, "ErrorObject");
     }

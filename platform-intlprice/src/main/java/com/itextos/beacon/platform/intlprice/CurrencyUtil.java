@@ -56,7 +56,7 @@ public class CurrencyUtil
     public static double getConversionRate(
             String aFromCurrency,
             String aToCurrency,
-            boolean aConvertDatewise)
+            boolean aConvertDatewise) throws ItextosRuntimeException
     {
         CurrencyReloader lCurrencyReloader;
 
@@ -77,7 +77,7 @@ public class CurrencyUtil
             String aClientId,
             String aCountry,
             String mcc,
-            String mnc)
+            String mnc) throws InternationalSMSRateNotAvailableRuntimeException
     {
         final ItextosClient lItextosClient = new ItextosClient(aClientId);
         

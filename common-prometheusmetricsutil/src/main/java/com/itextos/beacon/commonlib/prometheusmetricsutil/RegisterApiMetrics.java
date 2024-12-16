@@ -3,6 +3,8 @@ package com.itextos.beacon.commonlib.prometheusmetricsutil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+
 public class RegisterApiMetrics extends
 PrometheusMetricsConstants{
 
@@ -49,7 +51,7 @@ PrometheusMetricsConstants{
         }
     }
     
-    private static void registerUserApiLatency()
+    private static void registerUserApiLatency() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.HISTOGRAM, API_USER_PROCESS_LATENCY, PrometheusController.getInstance().getHistogramBuckgets(), "API request processing latency",
                 API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, USER);
@@ -75,7 +77,7 @@ PrometheusMetricsConstants{
 	        }
 	    }
 
-	   private static void registerUserApiStatusCounter()
+	   private static void registerUserApiStatusCounter() throws ItextosRuntimeException
 	    {
 	        PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, API_USER_STATUS_COUNT, "Status Counter for Messages", API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, STATUS_CODE, USER);
 	    }
@@ -102,7 +104,7 @@ PrometheusMetricsConstants{
 	    }
 
 	   
-	   private static void regiterUserApiAcceptCounter()
+	   private static void regiterUserApiAcceptCounter() throws ItextosRuntimeException
 	    {
 	        PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, API_USER_ACCEPT_COUNT, "Accept Counter for Messages", API, MESSAGE_SOURCE, CLUSTER_NAME, IP, CLIENT_IP, USER);
 	    }

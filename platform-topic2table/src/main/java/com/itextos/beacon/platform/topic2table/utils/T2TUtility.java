@@ -577,7 +577,8 @@ public class T2TUtility
                     | IllegalArgumentException
                     | InvocationTargetException e)
             {
-                throw new ItextosRuntimeException(e.getMessage(), e);
+              //  throw new ItextosRuntimeException(e.getMessage(), e);
+            	log.error(e.getMessage(), e);
             }
         return tableNameFinder;
     }

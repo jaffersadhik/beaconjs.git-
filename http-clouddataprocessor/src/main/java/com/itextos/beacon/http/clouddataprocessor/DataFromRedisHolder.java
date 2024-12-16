@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.http.clouddataprocessor.process.HttpCall;
 
 public class DataFromRedisHolder
@@ -23,7 +24,7 @@ public class DataFromRedisHolder
         clientWiseList.add(aRequestData);
     }
 
-    public void process()
+    public void process() throws ItextosRuntimeException
     {
         final JsonObject jsonObj             = new JsonObject();
         final JsonArray  messageRequestArray = new JsonArray();

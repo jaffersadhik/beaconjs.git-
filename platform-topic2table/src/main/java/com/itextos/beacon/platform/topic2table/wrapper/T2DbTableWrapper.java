@@ -74,9 +74,11 @@ public class T2DbTableWrapper
         final TableInserterInfoCollection lTableInserterInfoCollection = (TableInserterInfoCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.TABLE_INSERTER_INFO);
         final TableInserterInfo           lTableInserterInfo           = lTableInserterInfoCollection.getTableInserterInfo(mTableInsertId);
 
-        if (lTableInserterInfo == null)
-            throw new ItextosRuntimeException("Unable to find the table insert information for component '" + mComponent + "' and table inserter id '" + mTableInsertId + "'");
-
+        if (lTableInserterInfo == null) {
+         //   throw new ItextosRuntimeException("Unable to find the table insert information for component '" + mComponent + "' and table inserter id '" + mTableInsertId + "'");
+        
+        	log.error("Unable to find the table insert information for component '" + mComponent + "' and table inserter id '" + mTableInsertId + "'");
+        }else {
         mSleepTimeSecs        = lTableInserterInfo.getSleepSecs();
         mBatchSize            = lTableInserterInfo.getBatchSize();
         isStaticTableInserter = lTableInserterInfo.isStaticTableInserter();
@@ -88,6 +90,7 @@ public class T2DbTableWrapper
             log.debug("Table Inserter Sleep Sec  " + mSleepTimeSecs);
             log.debug("Table Inserter Batch Size " + mBatchSize);
             log.debug("Table Inserter is Static  " + isStaticTableInserter);
+        }
         }
     }
 

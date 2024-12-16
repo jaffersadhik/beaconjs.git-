@@ -19,6 +19,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.kafkaservice.producer.Producer;
 import com.itextos.beacon.commonlib.message.BaseMessage;
@@ -366,9 +367,17 @@ public class MessageProcessor
         try
         {
             final ErrorObject errorObject = aBaseMessage.getErrorObject(aComponent, aException);
-            MessageProcessor.writeMessage(aComponent, Component.T2DB_ERROR_LOG, errorObject);
+            
+            try {
+				MessageProcessor.writeMessage(aComponent, Component.T2DB_ERROR_LOG, errorObject);
+			} catch (ItextosException e) {
+				// TODO Auto-generated catch block
+				 log.error("Exception while sending the message to error log topic for the component '" + aComponent + "' Message '" + aBaseMessage + "' Error [[[" + CommonUtility.getStackTrace(aException)
+                 + "]]]", e);
+				e.printStackTrace();
+			}
         }
-        catch (final ItextosException e)
+        catch (final ItextosRuntimeException e)
         {
             log.error("Exception while sending the message to error log topic for the component '" + aComponent + "' Message '" + aBaseMessage + "' Error [[[" + CommonUtility.getStackTrace(aException)
                     + "]]]", e);

@@ -66,7 +66,7 @@ public class InterfaceParameterLoader
         {
             final String s = "Exception while loading Parameter Keys the intial. Cannot continue.";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+        //    throw new ItextosRuntimeException(s, e);
         }
        
         mTimedProcessor = new TimedProcessor("InterfaceParameterLoader", this, TimerIntervalConstant.INTERFACE_PARAMETER_LOADER);

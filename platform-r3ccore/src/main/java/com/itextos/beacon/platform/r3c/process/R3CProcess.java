@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollection;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
@@ -55,7 +56,7 @@ public class R3CProcess
         R3CProcess.forR3C(lMessageRequest);
     }
 
-    public static void forR3C(MessageRequest lMessageRequest) {
+    public static void forR3C(MessageRequest lMessageRequest) throws ItextosRuntimeException {
     	
     	   if (R3CUtil.isDuplicate(lMessageRequest))
            {
@@ -89,7 +90,7 @@ public class R3CProcess
     }
 
     private static void smartLinkCheckProcess(
-            MessageRequest aMessageRequest)
+            MessageRequest aMessageRequest) throws ItextosRuntimeException
     {
 
         if (aMessageRequest.getUrlSmartlinkEnable() != 0)
@@ -142,7 +143,7 @@ public class R3CProcess
     {}
 
     public static void main(
-            String[] args)
+            String[] args) throws ItextosRuntimeException
     {
         final MessageRequest lMessageRequest = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_2,
                 RouteType.DOMESTIC);

@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.platform.topic2table.inserter.DynamicTableInserter;
@@ -83,7 +84,7 @@ public class Tester
     // }
 
     public static void main(
-            String[] args)
+            String[] args) throws ItextosRuntimeException
     {
         final List<BaseMessage> messageList   = new ArrayList<>();
         final MessageRequest    sampleMessage = new MessageRequest(ClusterType.BULK, InterfaceType.FTP, InterfaceGroup.API, MessageType.PROMOTIONAL, MessagePriority.PRIORITY_0,

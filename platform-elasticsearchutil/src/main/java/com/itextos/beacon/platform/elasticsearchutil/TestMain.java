@@ -36,6 +36,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.MessagePart;
@@ -127,7 +128,10 @@ public class TestMain
 
         for (int index = 0; index < 10; index++)
         {
-            final MessageRequest message = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+            MessageRequest message;
+			try {
+				message = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+			
 
             c.add(Calendar.SECOND, 1);
 
@@ -140,6 +144,10 @@ public class TestMain
                 message.putValue(MiddlewareConstant.MW_MOBILE_NUMBER, "919884227204");
             message.putValue(MiddlewareConstant.MW_DELIVERY_TIME, DateTimeUtility.getFormattedDateTime(c.getTime(), DateTimeFormat.DEFAULT_WITH_MILLI_SECONDS));
             // EsProcess.insertSingleDn(message);
+			} catch (ItextosRuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 
@@ -279,7 +287,10 @@ public class TestMain
 
         for (int index = 0; index < 10; index++)
         {
-            final MessageRequest message = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+            MessageRequest message;
+			try {
+				message = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+			
 
             c.add(Calendar.SECOND, 1);
 
@@ -297,6 +308,10 @@ public class TestMain
             final String commonJson = EsUtility.getJsonContent(message, EsConstant.SINGLE_DN_INSERT_FIELDS, EsCreateTimeStamp.SINGLE_DN_CTIME);
             indexRequest.source(commonJson, XContentType.JSON);
             bulkRequest.add(indexRequest);
+			} catch (ItextosRuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
         final BulkResponse lBulkResponse = lEsClient.bulk(bulkRequest, RequestOptions.DEFAULT);
@@ -335,7 +350,10 @@ class DlrQueryInsert
 
         for (int index = 1; index <= 10; index++)
         {
-            final MessageRequest mr = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.PROMOTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+            MessageRequest mr;
+			try {
+				mr = new MessageRequest(ClusterType.BULK, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.PROMOTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
+			
 
             mr.setClientId("7000000200000000-" + testIterations + "-" + index);
             mr.setClientMessageId("NoMsgId-" + testIterations + "-" + index);
@@ -387,7 +405,13 @@ class DlrQueryInsert
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                
+                
             }
+			} catch (ItextosRuntimeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 

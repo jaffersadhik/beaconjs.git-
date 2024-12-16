@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -32,7 +33,7 @@ public class SubmissionObject
             InterfaceGroup aInterfaceGroup,
             MessageType aMessageType,
             MessagePriority aMessagePriority,
-            RouteType aIsInt)
+            RouteType aIsInt) throws ItextosRuntimeException
     {
         super(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aIsInt, "SubmissionObject");
     }
@@ -193,7 +194,7 @@ public class SubmissionObject
     	return SMSLog.getInstance();
     }
  
-    public DeliveryObject getDeliveryObject()
+    public DeliveryObject getDeliveryObject() throws ItextosRuntimeException
     {
         final DeliveryObject lDeliveryObject = new DeliveryObject(getClusterType(), getInterfaceType(), getInterfaceGroupType(), getMessageType(), getMessagePriority(), getMessageRouteType());
 

@@ -72,7 +72,7 @@ public class FileToKafkaPush
     private void processFile(
             String aFilePath,
             QueueObject aQueueObject)
-            throws ItextosException
+            throws ItextosException, ItextosRuntimeException
     {
         IRequestProcessor reqHandler;
         
@@ -98,14 +98,14 @@ public class FileToKafkaPush
 
     private void moveToErrorFolder(
             String aFilepath,
-            String aErrorMessage)
+            String aErrorMessage) throws ItextosRuntimeException
     {
         log.error("Unable to process the file " + aFilepath + ". Reason : " + aErrorMessage);
         FileGenUtil.fileMove(aFilepath, getFileName(FolderType.ERROR_FOLDER), fileName);
     }
 
     private static String getFileName(
-            FolderType aType)
+            FolderType aType) throws ItextosRuntimeException
     {
         String folderName;
 

@@ -159,9 +159,19 @@ public abstract class WalletInput
 
     public WalletInput getRefundObject()
     {
+    	/*
         if (mType == WalletProcessType.REFUND)
             throw new ItextosRuntimeException("Invalid object type to get the Refund Object.");
         return getRefundInput(mClientId, mFileId, mBaseMessageId, mBaseMessageId, mNoOfParts, mSmsRate, mDltRate, mReason, mIsIntl);
+    
+    	*/
+    	if (mType == WalletProcessType.REFUND) {
+    		
+    		return null;
+    	}else {
+            return getRefundInput(mClientId, mFileId, mBaseMessageId, mBaseMessageId, mNoOfParts, mSmsRate, mDltRate, mReason, mIsIntl);
+
+    	}
     }
 
     @Override

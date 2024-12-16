@@ -61,7 +61,7 @@ public class ScheduleDataLoader
         {
             final String s = "Exception on loading the schedule data from db";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+        //    throw new ItextosRuntimeException(s, e);
         }
     }
 
@@ -82,7 +82,7 @@ public class ScheduleDataLoader
         {
             final String s = "Exception on loading the schedule data from db";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+         //   throw new ItextosRuntimeException(s, e);
         }
     }
 

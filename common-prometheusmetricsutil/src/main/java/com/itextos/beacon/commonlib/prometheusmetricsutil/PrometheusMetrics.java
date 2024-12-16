@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.Action;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.RequestType;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.smpp.SmppPrometheusInfo;
@@ -217,7 +218,7 @@ public class PrometheusMetrics
         }
     }
 
-    public static void registerSmppMetrics()
+    public static void registerSmppMetrics() throws ItextosRuntimeException
     {
         registerBindMetrics();
         registerEnquireLinkMetrics();
@@ -227,13 +228,13 @@ public class PrometheusMetrics
         registerFaiureCountMetrics();
     }
 
-    private static void registerFaiureCountMetrics()
+    private static void registerFaiureCountMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_FAILURE_COUNTS, "Smpp Failure Counts", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE, ERROR_CODE,
                 REASON);
     }
 
-    private static void registerUnbindMetrics()
+    private static void registerUnbindMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_UNBIND_REQUEST, "Smpp Unbind Request Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_UNBIND_RESPONSE, "Smpp Unbind Response Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
@@ -241,7 +242,7 @@ public class PrometheusMetrics
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_UNBIND_COUNTS, "Smpp Unbind Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE, REASON);
     }
 
-    private static void registerDeliverSmMetrics()
+    private static void registerDeliverSmMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_DELIVERSM_REQUEST, "Smpp DeliverSm Request Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_DELIVERSM_RESPONSE, "Smpp DeliverSm Response Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, BIND_TYPE);
@@ -249,21 +250,21 @@ public class PrometheusMetrics
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_DELIVERSM_FAILURE, "Smpp DeliverSm Failure Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, BIND_TYPE, REASON);
     }
 
-    private static void registerSubmitSmMetrics()
+    private static void registerSubmitSmMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_SUBMITSM_REQUEST, "Smpp SubmitSm Request Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_SUBMITSM_RESPONSE, "Smpp SubmitSm Response Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.HISTOGRAM, SMPP_SUBMITSM_LATENCY, "Smpp SubmitSm Latency", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
     }
 
-    private static void registerEnquireLinkMetrics()
+    private static void registerEnquireLinkMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_ENQUIRE_LINK_REQUEST, "Smpp EnquireLink Request Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_ENQUIRE_LINK_RESPONSE, "Smpp EnquireLink Response Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.HISTOGRAM, SMPP_ENQUIRE_LINK_LATENCY, "Smpp EnquireLink Latency", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
     }
 
-    private static void registerBindMetrics()
+    private static void registerBindMetrics() throws ItextosRuntimeException
     {
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_BIND_REQUEST, "Smpp Bind Request Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);
         PrometheusDataHolder.getInstance().createMetrics(MetricType.COUNTER, SMPP_BIND_RESPONSE, "Smpp Bind Response Count", CLUSTER_NAME, INSTANCE_ID, SYSTEM_ID, CLIENT_IP, BIND_TYPE);

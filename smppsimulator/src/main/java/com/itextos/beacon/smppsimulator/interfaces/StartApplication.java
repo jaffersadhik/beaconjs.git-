@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.cloudhopper.smpp.type.SmppChannelException;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -78,7 +79,7 @@ public class StartApplication
         }
     }
 
-    private static void initialize()
+    private static void initialize() throws ItextosRuntimeException
     {
         final String lInstanceId = SmppProperties.getInstance().getInstanceId();
 

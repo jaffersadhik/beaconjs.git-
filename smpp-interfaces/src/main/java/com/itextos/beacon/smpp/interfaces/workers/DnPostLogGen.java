@@ -10,6 +10,7 @@ import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -29,7 +30,7 @@ public class DnPostLogGen
 
     public static DeliveryObject getDeliverObject(
             DeliverSmInfo aDeliverSm,
-            SessionDetail aSessionDetail)
+            SessionDetail aSessionDetail) throws ItextosRuntimeException
     {
         final SmppUserInfo   lUserINfo       = aSessionDetail.getSmppUserInfo();
 

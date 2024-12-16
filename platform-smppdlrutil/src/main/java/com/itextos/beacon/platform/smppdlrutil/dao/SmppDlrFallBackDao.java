@@ -31,9 +31,13 @@ public class SmppDlrFallBackDao
 
     private SmppDlrFallBackDao()
     {
-        if ((MOD_VALUE == null) || MOD_VALUE.isBlank())
-            throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
-
+        if ((MOD_VALUE == null) || MOD_VALUE.isBlank()) {
+            //throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        	log.error("Invalid Modvalue set in Runtime...' System going to down" + MOD_VALUE + "'");
+        	
+        	System.exit(-1);
+        }
+        
         {
             if (log.isDebugEnabled())
                 log.debug("Modvalues passed '" + MOD_VALUE + "'");
@@ -43,8 +47,12 @@ public class SmppDlrFallBackDao
             for (final String s : mods)
             {
                 final int mod = CommonUtility.getInteger(s, -999);
-                if ((mod == -999) || (mod >= 4))
-                    throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                if ((mod == -999) || (mod >= 4)) {
+                 //   throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                	log.error("Invalid Modvalue set in Runtime...' System going to down" + MOD_VALUE + "'");
+                	
+                	System.exit(-1);
+                }
             }
         }
     }

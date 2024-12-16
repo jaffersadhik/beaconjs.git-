@@ -1,5 +1,6 @@
 package com.itextos.beacon.platform.intlprice;
 
+import com.itextos.beacon.commonlib.constants.exception.InternationalSMSRateNotAvailableRuntimeException;
 import com.itextos.beacon.inmemory.msgutil.cache.IntlSmsRates;
 
 public class CalculateIntlBillingPrice
@@ -36,7 +37,7 @@ public class CalculateIntlBillingPrice
         mMnc=aMnc;
     }
 
-    public CalculateBillingPrice calculate()
+    public CalculateBillingPrice calculate() throws InternationalSMSRateNotAvailableRuntimeException
     {
         final IntlSmsRates          lIntlPrice             = CurrencyUtil.getIntlPrice(mClientId, mCountry,mMcc,mMnc);
         final CalculateBillingPrice lCalculateBillingPrice = new CalculateBillingPrice(mClientId, lIntlPrice.getBaseSmsRate(), lIntlPrice.getBaseAddlFixedRate(), mFromCurrency, mBillingCurrency,

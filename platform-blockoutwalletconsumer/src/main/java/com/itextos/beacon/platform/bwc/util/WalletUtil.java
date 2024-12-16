@@ -10,8 +10,8 @@ import com.itextos.beacon.commonlib.constants.BillType;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
+import com.itextos.beacon.commonlib.constants.exception.InternationalSMSRateNotAvailableRuntimeException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
-import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.inmemdata.account.ClientAccountDetails;
@@ -270,7 +270,7 @@ public class WalletUtil
             aMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
             aMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
         }
-        catch (final ItextosRuntimeException e)
+        catch (final InternationalSMSRateNotAvailableRuntimeException e)
         {
             aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.INTL_CREDIT_NOT_SPECIFIED.getStatusCode());
             aMessageRequest.setAdditionalErrorInfo("Intl Credit Not specified for Country - '" + lCountry + "'");
@@ -292,41 +292,28 @@ public class WalletUtil
 
         CalculateBillingPrice lCalculateBillingPrice = null;
 
-        try
-        {
+        if (!aMessageRequest.isIsIntl())
+		{
+		    final double                lBaseSmsRate      = aMessageRequest.getBaseSmsRate();
+		    final double                lBaseAddFixedRate = aMessageRequest.getBaseAddFixedRate();
+		    final CalculateBillingPrice lCBP              = new CalculateBillingPrice(lClientId, lBaseSmsRate, lBaseAddFixedRate, lBillingCurrency, lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
+		            lConvertDatewise);
+		    CurrencyUtil.getBillingPrice(lCBP);
+		    lCalculateBillingPrice = lCBP;
 
-            if (!aMessageRequest.isIsIntl())
-            {
-                final double                lBaseSmsRate      = aMessageRequest.getBaseSmsRate();
-                final double                lBaseAddFixedRate = aMessageRequest.getBaseAddFixedRate();
-                final CalculateBillingPrice lCBP              = new CalculateBillingPrice(lClientId, lBaseSmsRate, lBaseAddFixedRate, lBillingCurrency, lPlatformIntlBaseCurrency, lPlatformBaseCurrency,
-                        lConvertDatewise);
-                CurrencyUtil.getBillingPrice(lCBP);
-                lCalculateBillingPrice = lCBP;
+		    aMessageRequest.setBaseCurrency(lPlatformIntlBaseCurrency);
+		    aMessageRequest.setBillingCurrency(lBillingCurrency);
+		    aMessageRequest.setRefCurrency(lPlatformBaseCurrency);
+		    aMessageRequest.setBillingSmsRate(lCalculateBillingPrice.getBillingSmsRate());
+		    aMessageRequest.setBillingAddFixedRate(lCalculateBillingPrice.getBillingAdditionalFixedRate());
 
-                aMessageRequest.setBaseCurrency(lPlatformIntlBaseCurrency);
-                aMessageRequest.setBillingCurrency(lBillingCurrency);
-                aMessageRequest.setRefCurrency(lPlatformBaseCurrency);
-                aMessageRequest.setBillingSmsRate(lCalculateBillingPrice.getBillingSmsRate());
-                aMessageRequest.setBillingAddFixedRate(lCalculateBillingPrice.getBillingAdditionalFixedRate());
-
-                aMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
-                aMessageRequest.setBaseAddFixedRate(lCalculateBillingPrice.getBaseAdditionalFixedRate());
-                aMessageRequest.setRefSmsRate(lCalculateBillingPrice.getRefSmsRate());
-                aMessageRequest.setRefAddFixedRate(lCalculateBillingPrice.getRefAdditionalFixedRate());
-                aMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
-                aMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
-            }
-        }
-        catch (final ItextosRuntimeException ire)
-        {
-            log.error("Exception occer while price convertion ...", ire);
-
-            aMessageRequest.setPlatfromRejected(true);
-            aMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.PRICE_CONVERSION_FAILED.getKey());
-            BWCProducer.sendToPlatformRejection(aMessageRequest);
-            return false;
-        }
+		    aMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
+		    aMessageRequest.setBaseAddFixedRate(lCalculateBillingPrice.getBaseAdditionalFixedRate());
+		    aMessageRequest.setRefSmsRate(lCalculateBillingPrice.getRefSmsRate());
+		    aMessageRequest.setRefAddFixedRate(lCalculateBillingPrice.getRefAdditionalFixedRate());
+		    aMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
+		    aMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
+		}
 
         return true;
     }

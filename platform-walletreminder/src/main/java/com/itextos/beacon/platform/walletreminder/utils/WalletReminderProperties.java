@@ -52,10 +52,16 @@ public class WalletReminderProperties
         mClientTrigger       = CommonUtility.nullCheck(mProps.getString(PROP_KEY_CLIENT_BALANCE_CHECK_TRIGGER), true);
         mWalletBackupTrigger = CommonUtility.nullCheck(mProps.getString(PROP_KEY_WALLET_BACKUP_TRIGGER), true);
 
-        validate();
+        try {
+			validate();
+		} catch (ItextosRuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
     }
 
-    private void validate()
+    private void validate() throws ItextosRuntimeException
     {
         validate(mEmailApiType, "Email API Type");
         validate(mEmailApiUrl, "Email API URL");
@@ -70,7 +76,7 @@ public class WalletReminderProperties
 
     private static void validate(
             String aValue,
-            String aErrorString)
+            String aErrorString) throws ItextosRuntimeException
     {
         if ("".equals(aValue))
             throw new ItextosRuntimeException("Invalid " + aErrorString);

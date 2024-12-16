@@ -15,6 +15,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorKafkaProducer;
@@ -143,7 +144,10 @@ public class TestKafkaProducerConsumer
                 catch (final ItextosException e)
                 {
                     e.printStackTrace();
-                }
+                } catch (ItextosRuntimeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             final long endTime = System.currentTimeMillis();
             System.out.println("Thread " + aIndex + " Time taken " + (endTime - startTime) + " counts " + count + " Total Size " + totalLength);
         });
@@ -154,7 +158,7 @@ public class TestKafkaProducerConsumer
         return t;
     }
 
-    private static MessageRequest getMessage()
+    private static MessageRequest getMessage() throws ItextosRuntimeException
     {
         return new MessageRequest(ClusterType.OTP, InterfaceType.FTP, InterfaceGroup.FTP, MessageType.PROMOTIONAL, MessagePriority.PRIORITY_0, RouteType.DOMESTIC);
     }

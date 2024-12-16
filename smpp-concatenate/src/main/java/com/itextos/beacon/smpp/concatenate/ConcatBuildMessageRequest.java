@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.RouteType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
@@ -41,7 +42,7 @@ public class ConcatBuildMessageRequest
             SmppUserInfo aSmppUserInfo,
             ClusterType aCluster,
             PlatformStatusCode aPlatformStatusCode,
-            int aTotalMsgParts)
+            int aTotalMsgParts) throws ItextosRuntimeException
     {
         final ClusterType     lClusterType    = aCluster;
         final MessageType     lMsgType        = aSmppUserInfo.getMessageType();
@@ -118,7 +119,7 @@ public class ConcatBuildMessageRequest
     public static MessageRequest getMessageRequest(
             SmppMessageRequest aSmppMessageRequest,
             SmppUserInfo aUserInfo,
-            PlatformStatusCode aPlatformStatusCode)
+            PlatformStatusCode aPlatformStatusCode) throws ItextosRuntimeException
     {
         final ClusterType     lClusterType    = aUserInfo.getClusterType();
         final MessageType     lMsgType        = aUserInfo.getMessageType();

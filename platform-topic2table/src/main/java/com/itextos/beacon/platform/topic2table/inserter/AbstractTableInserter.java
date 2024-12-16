@@ -167,8 +167,10 @@ abstract class AbstractTableInserter
         final TableInserterInfoCollection tiic = (TableInserterInfoCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.TABLE_INSERTER_INFO);
 
         mTableInserterInfo = tiic.getTableInserterInfo(mTableInsereterId);
-        if (mTableInserterInfo == null)
-            throw new ItextosRuntimeException("Cannot proceed with '" + mTableInsereterId + "' as not data found for it.");
+        if (mTableInserterInfo == null) {
+         //   throw new ItextosRuntimeException("Cannot proceed with '" + mTableInsereterId + "' as not data found for it.");
+           log.error("Cannot proceed with '" + mTableInsereterId + "' as not data found for it."); 
+        }
     }
 
     @Override
@@ -423,6 +425,10 @@ abstract class AbstractTableInserter
         {
             final ErrorObject errorObject = aBaseMessage.getErrorObject(aComponent, aException);
             MessageProcessor.writeMessage(aComponent, Component.T2DB_ERROR_LOG, errorObject);
+        } catch (final ItextosRuntimeException e)
+        {
+            log.error("Exception while sending the message to error log topic for the component '" + aComponent + "' Message '" + aBaseMessage + "' Error [[[" + CommonUtility.getStackTrace(aException)
+                    + "]]]", e);
         }
         catch (final ItextosException e)
         {

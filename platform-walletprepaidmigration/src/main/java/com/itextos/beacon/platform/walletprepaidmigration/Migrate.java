@@ -3,13 +3,15 @@ package com.itextos.beacon.platform.walletprepaidmigration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+
 public class Migrate
 {
 
     private static final Log log = LogFactory.getLog(Migrate.class);
 
     public static void main(
-            String[] args)
+            String[] args) throws ItextosRuntimeException
     {
         Process.check();
         final Process process = new Process();

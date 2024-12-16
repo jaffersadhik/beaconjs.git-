@@ -37,8 +37,11 @@ public class NoPayloadRetryDao
 
     private NoPayloadRetryDao()
     {
-        if ((MOD_VALUE == null) || MOD_VALUE.isBlank())
-            throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        if ((MOD_VALUE == null) || MOD_VALUE.isBlank()) {
+        	
+            //throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        	log.error("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+        }
 
         {
             if (log.isDebugEnabled())
@@ -49,8 +52,10 @@ public class NoPayloadRetryDao
             for (final String s : mods)
             {
                 final int mod = CommonUtility.getInteger(s, -999);
-                if ((mod == -999) || (mod >= 4))
-                    throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                if ((mod == -999) || (mod >= 4)) {
+                  //  throw new ItextosRuntimeException("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                    log.error("Invalid Modvalue set in Runtime...'" + MOD_VALUE + "'");
+                }
             }
         }
     }

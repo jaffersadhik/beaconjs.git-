@@ -44,20 +44,25 @@ final class InitializeConnectionPool
     private boolean                      isStarting  = false;
     private final Map<Integer, JndiInfo> jndiInfoMap = new HashMap<>();
 
-    private InitializeConnectionPool()
+    private InitializeConnectionPool() 
     {
         final long startTime = System.currentTimeMillis();
         if (log.isDebugEnabled())
             log.debug("Initialize Connection pool started...");
 
-        initialize();
+        try {
+			initialize();
+		} catch (ItextosRuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         final long timeTaken = System.currentTimeMillis() - startTime;
         if (log.isDebugEnabled())
             log.debug("Completed Initializing Connection pool. Time taken '" + timeTaken + "'");
     }
 
-    void initialize()
+    void initialize() throws ItextosRuntimeException
     {
 
         if (isStarted)
@@ -148,7 +153,7 @@ final class InitializeConnectionPool
         return isStarted;
     }
 
-    private static Properties readProperties()
+    private static Properties readProperties() throws ItextosRuntimeException
     {
 
         try

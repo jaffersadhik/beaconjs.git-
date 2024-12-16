@@ -55,8 +55,9 @@ public class DlrQuerySubBulk
             final String                  errorMessage = "Unable to create the index " + aEsIndexName;
             final ItextosRuntimeException nre          = new ItextosRuntimeException(errorMessage, e);
             log.error(errorMessage, nre);
-            throw nre;
+           // throw nre;
         }
+        return null;
     }
 
 }

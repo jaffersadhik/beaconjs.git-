@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.platform.elasticsearchutil.EsProcess;
 import com.itextos.beacon.platform.elasticsearchutil.data.R3Info;
@@ -32,7 +33,8 @@ public class TestClass
         queryDlrMulti();
     }
 
-    private static void inserDlrDn()
+    
+    private static void inserDlrDn() throws ItextosRuntimeException
     {
         final String           date   = "2021-05-31";
         final DecimalFormat    df     = new DecimalFormat("00");
@@ -128,7 +130,7 @@ public class TestClass
         return returnValue;
     }
 
-    private static void insetDlrSub()
+    private static void insetDlrSub() throws ItextosRuntimeException
     {
         final String           date   = "2021-05-31";
         final DecimalFormat    df     = new DecimalFormat("00");

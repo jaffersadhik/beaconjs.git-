@@ -51,7 +51,7 @@ public class ColumnInfoHandler
         {
             final String s = "Invalid Schema / Table specified. Schema : '" + aSchemaName + "' TableName : '" + aTableName + "'";
             log.error(s);
-            throw new ItextosRuntimeException(s);
+         //   throw new ItextosRuntimeException(s);
         }
 
         addTableCollectionInSchemaCollection(schemaName);
@@ -61,7 +61,7 @@ public class ColumnInfoHandler
         if (columnInfo.isEmpty()) // (columnInfo == null) Not Required here.
         {
             final String s = "There is some problem in getting the column details from the database. Schema : '" + aSchemaName + "', Tablename : '" + aTableName + "'";
-            throw new ItextosRuntimeException(s);
+        //    throw new ItextosRuntimeException(s);
         }
         return columnInfo;
     }

@@ -131,7 +131,7 @@ abstract class ScheduleDataLoaderHelper
         {
             final String s = "";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+        //    throw new ItextosRuntimeException(s, e);
         }
         return lScheduleTime;
     }

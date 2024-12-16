@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessagePart;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -34,7 +35,7 @@ public class BuildMessageRequest
     public static MessageRequest getMessageRequest(
             SmppMessageRequest aSmppMessageRequest,
             SessionDetail aSessionDetail,
-            PlatformStatusCode aPlatformStatusCode)
+            PlatformStatusCode aPlatformStatusCode) throws ItextosRuntimeException
     {
         final ClusterType     lClusterType    = aSessionDetail.getClusterType();
         final MessageType     lMsgType        = aSessionDetail.getMessageType();

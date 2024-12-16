@@ -18,6 +18,7 @@ import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 
 class RedisConfigLoader
@@ -132,7 +133,7 @@ class RedisConfigLoader
 
     private static Map<ClusterType, Map<Component, Map<Integer, RedisConfig>>> getRedisConfigMap(
             ResultSet aRs)
-            throws SQLException
+            throws SQLException, ItextosRuntimeException
     {
         final Map<ClusterType, Map<Component, Map<Integer, RedisConfig>>> tempClusterRedisTypeRedisConfigMap = new EnumMap<>(ClusterType.class);
         final String                                                      invalidMessage                     = "Invalid %1 for Cluster '%2' Component '%3' Seq No '%4' RID '%5' IP '%6'";

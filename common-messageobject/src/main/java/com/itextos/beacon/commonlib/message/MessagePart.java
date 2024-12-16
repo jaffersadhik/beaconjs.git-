@@ -197,10 +197,10 @@ public class MessagePart
             MiddlewareConstant aMWConstant,
             String aValue)
     {
-        if (CONSTANTS.contains(aMWConstant))
+        if (CONSTANTS.contains(aMWConstant)) {
             mAttributes.put(aMWConstant.getKey(), aValue);
-        else
-            throw new ItextosRuntimeException("Middleware Constant '" + aMWConstant + "' is not in the specified list.");
+        }else {}
+         //   throw new ItextosRuntimeException("Middleware Constant '" + aMWConstant + "' is not in the specified list.");
     }
 
     public String getValueExt(
@@ -213,10 +213,10 @@ public class MessagePart
             MiddlewareConstant aMWConstant,
             String aValue)
     {
-        if (CONSTANTS.contains(aMWConstant))
+        if (CONSTANTS.contains(aMWConstant)) {
             mAttributes.put(aMWConstant.getKey(), aValue);
-        else
-            throw new ItextosRuntimeException("Middleware Constant '" + aMWConstant + "' is not in the specified list.");
+        }else {}
+            //throw new ItextosRuntimeException("Middleware Constant '" + aMWConstant + "' is not in the specified list.");
     }
 
     public void setActualCarrierSubmitTime(

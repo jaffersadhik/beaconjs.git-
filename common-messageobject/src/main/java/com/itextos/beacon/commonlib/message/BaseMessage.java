@@ -80,7 +80,7 @@ public abstract class BaseMessage
             MessageType aMessageType,
             MessagePriority aMessagePriority,
             RouteType aRouteType,
-            String aProgramMessageType)
+            String aProgramMessageType) throws ItextosRuntimeException
     {
         this(aClusterType, aInterfaceType, aInterfaceGroup, aMessageType, aMessagePriority, aRouteType, aProgramMessageType, null);
     }
@@ -93,7 +93,7 @@ public abstract class BaseMessage
             MessagePriority aMessagePriority,
             RouteType aRouteType,
             String aProgramMessageType,
-            String aAccountJsonString)
+            String aAccountJsonString) throws ItextosRuntimeException
     {
         mClusterType        = aClusterType;
         mInterfaceType      = aInterfaceType;
@@ -169,7 +169,7 @@ public abstract class BaseMessage
             MessageType aMessageType,
             MessagePriority aMessagePriority,
             long aCreatedTs,
-            String aProgramMessageType)
+            String aProgramMessageType) throws ItextosRuntimeException
     {
         if (aClusterType == null)
             throw new ItextosRuntimeException("Invalid Cluster spcified.");
@@ -577,7 +577,7 @@ public abstract class BaseMessage
 
     public ErrorObject getErrorObject(
             Component aComponent,
-            Throwable aException)
+            Throwable aException) throws ItextosRuntimeException
     {
         final ErrorObject errorObject = new ErrorObject(mClusterType, mInterfaceType, mInterfaceGroupType, mMessageType, mMessagePriority, mRouteType);
         errorObject.putValue(MiddlewareConstant.MW_COMPONENT_NAME, aComponent.getKey());

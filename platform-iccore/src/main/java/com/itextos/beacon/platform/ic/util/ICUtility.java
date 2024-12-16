@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.constants.MessageClass;
 import com.itextos.beacon.commonlib.constants.MessageClassLength;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
-import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
+import com.itextos.beacon.commonlib.constants.exception.InternationalSMSRateNotAvailableRuntimeException;
 import com.itextos.beacon.commonlib.dndchecker.DNDCheck;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.utility.MessageUtil;
@@ -680,47 +680,40 @@ public class ICUtility
 
         CalculateBillingPrice lCalculateBillingPrice = null;
 
-        try
-        {
-           	log.debug(aMessageRequest.getBaseMessageId()+" : lPlatformBaseCurrency : "+lPlatformBaseCurrency);
-        	log.debug(aMessageRequest.getBaseMessageId()+" : lBillingCurrency : "+lBillingCurrency);
-        	log.debug(aMessageRequest.getBaseMessageId()+" : lConvertDatewise : "+lConvertDatewise);
+        log.debug(aMessageRequest.getBaseMessageId()+" : lPlatformBaseCurrency : "+lPlatformBaseCurrency);
+		log.debug(aMessageRequest.getBaseMessageId()+" : lBillingCurrency : "+lBillingCurrency);
+		log.debug(aMessageRequest.getBaseMessageId()+" : lConvertDatewise : "+lConvertDatewise);
 
-            if (!aMessageRequest.isIsIntl())
-            {
-                final double                lBaseSmsRate      = aMessageRequest.getBaseSmsRate();
-                final double                lBaseAddFixedRate = aMessageRequest.getBaseAddFixedRate();
+		if (!aMessageRequest.isIsIntl())
+		{
+		    final double                lBaseSmsRate      = aMessageRequest.getBaseSmsRate();
+		    final double                lBaseAddFixedRate = aMessageRequest.getBaseAddFixedRate();
 
-                final CalculateBillingPrice lCBP              = new CalculateBillingPrice(lClientId, lBaseSmsRate, lBaseAddFixedRate, lBillingCurrency,lBillingCurrency,lBillingCurrency,
-                		
-                        lConvertDatewise);
-                CurrencyUtil.getBillingPrice(lCBP);
-                lCalculateBillingPrice = lCBP;
+		    final CalculateBillingPrice lCBP              = new CalculateBillingPrice(lClientId, lBaseSmsRate, lBaseAddFixedRate, lBillingCurrency,lBillingCurrency,lBillingCurrency,
+		    		
+		            lConvertDatewise);
+		    CurrencyUtil.getBillingPrice(lCBP);
+		    lCalculateBillingPrice = lCBP;
 
-                aMessageRequest.setBaseCurrency(lBillingCurrency);
-                aMessageRequest.setBillingCurrency(lBillingCurrency);
-                aMessageRequest.setRefCurrency(lBillingCurrency);
-             	log.debug(aMessageRequest.getBaseMessageId()+" : BaseCurrency : "+aMessageRequest.getBillingCurrency());
-            	log.debug(aMessageRequest.getBaseMessageId()+" : BillingCurrency : "+aMessageRequest.getBillingCurrency());
-            	log.debug(aMessageRequest.getBaseMessageId()+" : RefCurrency : "+aMessageRequest.getBillingCurrency()
-            	);
+		    aMessageRequest.setBaseCurrency(lBillingCurrency);
+		    aMessageRequest.setBillingCurrency(lBillingCurrency);
+		    aMessageRequest.setRefCurrency(lBillingCurrency);
+		 	log.debug(aMessageRequest.getBaseMessageId()+" : BaseCurrency : "+aMessageRequest.getBillingCurrency());
+			log.debug(aMessageRequest.getBaseMessageId()+" : BillingCurrency : "+aMessageRequest.getBillingCurrency());
+			log.debug(aMessageRequest.getBaseMessageId()+" : RefCurrency : "+aMessageRequest.getBillingCurrency()
+			);
 
-                aMessageRequest.setBillingSmsRate(lCalculateBillingPrice.getBillingSmsRate());
-                aMessageRequest.setBillingAddFixedRate(lCalculateBillingPrice.getBillingAdditionalFixedRate());
+		    aMessageRequest.setBillingSmsRate(lCalculateBillingPrice.getBillingSmsRate());
+		    aMessageRequest.setBillingAddFixedRate(lCalculateBillingPrice.getBillingAdditionalFixedRate());
 
-                aMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
-                aMessageRequest.setBaseAddFixedRate(lCalculateBillingPrice.getBaseAdditionalFixedRate());
-                aMessageRequest.setRefSmsRate(lCalculateBillingPrice.getRefSmsRate());
-                aMessageRequest.setRefAddFixedRate(lCalculateBillingPrice.getRefAdditionalFixedRate());
-                aMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
-                aMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
-            }
-        }
-        catch (final ItextosRuntimeException ire)
-        {
-            log.error("Exception occer while price convertion ...", ire);
-            return false;
-        }
+		    aMessageRequest.setBaseSmsRate(lCalculateBillingPrice.getBaseSmsRate());
+		    aMessageRequest.setBaseAddFixedRate(lCalculateBillingPrice.getBaseAdditionalFixedRate());
+		    aMessageRequest.setRefSmsRate(lCalculateBillingPrice.getRefSmsRate());
+		    aMessageRequest.setRefAddFixedRate(lCalculateBillingPrice.getRefAdditionalFixedRate());
+		    aMessageRequest.setBillingExchangeRate(lCalculateBillingPrice.getBillingConversionRate());
+		    aMessageRequest.setRefExchangeRate(lCalculateBillingPrice.getRefConversionRate());
+		}
+        
 
         return true;
     }

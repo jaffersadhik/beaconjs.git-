@@ -24,7 +24,7 @@ public class Basic3DESEncryption
     private String           keyAlgorithm;
 
     public Basic3DESEncryption(
-            String algorithm)
+            String algorithm) throws ItextosRuntimeException
     {
 
         if (algorithm == null)

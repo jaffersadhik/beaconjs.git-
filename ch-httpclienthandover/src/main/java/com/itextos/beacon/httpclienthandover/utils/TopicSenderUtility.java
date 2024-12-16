@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.ErrorObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
@@ -41,6 +42,10 @@ public class TopicSenderUtility
         {
             final ErrorObject errorObject = aBaseMessage.getErrorObject(aComponent, aException);
             MessageProcessor.writeMessage(aComponent, Component.T2DB_ERROR_LOG, errorObject);
+        } catch (final ItextosRuntimeException e)
+        {
+            log.error("Exception while sending the message to error log topic for the component '" + aComponent + "' Message '" + aBaseMessage + "' Error [[[" + CommonUtility.getStackTrace(aException)
+                    + "]]]", e);
         }
         catch (final ItextosException e)
         {

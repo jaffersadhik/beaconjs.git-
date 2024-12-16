@@ -11,6 +11,7 @@ import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.ErrorObject;
 import com.itextos.beacon.commonlib.message.MessageRequest;
@@ -80,6 +81,10 @@ public abstract class PlatformUtil
         {
             final ErrorObject errorObject = aBaseMessage.getErrorObject(aComponent, aException);
             MessageProcessor.writeMessage(aComponent, Component.T2DB_ERROR_LOG, errorObject);
+        } catch (final ItextosRuntimeException e)
+        {
+            log.error("Exception while sending the message to error log topic for the component '" + aComponent + "' Message '" + aBaseMessage + "' Error [[[" + CommonUtility.getStackTrace(aException)
+                    + "]]]", e);
         }
         catch (final ItextosException e)
         {

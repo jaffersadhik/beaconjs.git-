@@ -50,10 +50,16 @@ public class PrepaidMigrationProperties
         mApprovalFilePath   = CommonUtility.nullCheck(pc.getString(PROP_KEY_APPROVAL_FILE_PATH), true);
         mFinalFilePath      = CommonUtility.nullCheck(pc.getString(PROP_KEY_FINAL_FILE_PATH), true);
 
-        validate();
+        try {
+			validate();
+		} catch (ItextosRuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
     }
 
-    private void validate()
+    private void validate() throws ItextosRuntimeException
     {
         if (mCsvFilePath.equals(""))
             throw new ItextosRuntimeException("CSV File path is empty");

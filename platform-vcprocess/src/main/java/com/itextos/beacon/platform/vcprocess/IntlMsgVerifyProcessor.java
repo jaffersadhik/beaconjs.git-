@@ -92,13 +92,6 @@ public class IntlMsgVerifyProcessor
                mMessageRequest.setAdditionalErrorInfo(e.getMessage());
                VCProducer.sendToPlatformRejection(mSourceComponent, mMessageRequest);
         }
-        catch (final ItextosRuntimeException e)
-        {
-            mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.PRICE_CONVERSION_FAILED.getStatusCode());
-            mMessageRequest.setAdditionalErrorInfo("Pice Convertion failed for currency - '" + lPlatformIntlBaseCurrency + "'");
-            VCProducer.sendToPlatformRejection(mSourceComponent, mMessageRequest);
-            return;
-        }
         catch (final Exception e)
         {
             mMessageRequest.setSubOriginalStatusCode(PlatformStatusCode.INTL_CREDIT_NOT_SPECIFIED.getStatusCode());

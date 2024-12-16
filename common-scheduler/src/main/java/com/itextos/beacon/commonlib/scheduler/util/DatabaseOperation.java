@@ -111,7 +111,7 @@ public class DatabaseOperation
         {
             final String s = "Exception on updatings the schedule data from db";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+      //      throw new ItextosRuntimeException(s, e);
         }
     }
 
@@ -139,7 +139,7 @@ public class DatabaseOperation
         {
             final String s = "Exception on updating records for unschedule data in db";
             log.error(s, e);
-            throw new ItextosRuntimeException(s, e);
+         //   throw new ItextosRuntimeException(s, e);
         }
     }
 

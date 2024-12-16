@@ -146,7 +146,7 @@ public class RedisConfig
         return mDebugEnabled;
     }
 
-    public void isValidConfiig()
+    public void isValidConfiig() throws ItextosRuntimeException
     {
 
         if (mIP.equals(""))

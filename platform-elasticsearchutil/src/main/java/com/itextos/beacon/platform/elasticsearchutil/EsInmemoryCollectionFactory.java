@@ -69,7 +69,11 @@ class EsInmemoryCollectionFactory
             case SINGLE_DN_QUERY:
             case SINGLE_DN_DELETE:
             default:
-                throw new ItextosRuntimeException(aElasticSearchType + " is not supported for Async process.");
+            {
+            	log.error(aElasticSearchType + " is not supported for Async process.");
+            	return null;
+            	// throw new ItextosRuntimeException(aElasticSearchType + " is not supported for Async process.");
+            }
         }
     }
 

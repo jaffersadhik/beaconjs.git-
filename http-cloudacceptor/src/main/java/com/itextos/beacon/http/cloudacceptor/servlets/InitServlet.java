@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler2;
@@ -44,7 +45,9 @@ public final class InitServlet
     {
         log.warn("Initializing the RedisConnectionPool and RedisPusher");
 
-        MessageIdentifier.getInstance().init(InterfaceType.CLOUD_API);
+        try {
+			MessageIdentifier.getInstance().init(InterfaceType.CLOUD_API);
+		
         final CloudDataConfigInfo clientConfigurationInfo = (CloudDataConfigInfo) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.CLOUD_INTERFACE_CONFIGURATION);
         while (!clientConfigurationInfo.getLoadedFrstTime())
             try
@@ -70,6 +73,12 @@ public final class InitServlet
                 ExecutorSheduler2.getInstance().addTask(rp,  "RedisPusher:" + key + ("-" + (index + 1)));
             }
         }
+        
+        } catch (ItextosRuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e);
+		}
     }
 
     @Override

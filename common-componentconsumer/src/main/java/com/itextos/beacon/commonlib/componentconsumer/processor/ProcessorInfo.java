@@ -309,7 +309,7 @@ public class ProcessorInfo
     {
         final ItextosRuntimeException lItextosRuntimeException = new ItextosRuntimeException(aErrorInfo);
         log.error("Exception while loading the Topics for " + mStartupRuntimeArguments, lItextosRuntimeException);
-        throw lItextosRuntimeException;
+       // throw lItextosRuntimeException;
     }
 
   

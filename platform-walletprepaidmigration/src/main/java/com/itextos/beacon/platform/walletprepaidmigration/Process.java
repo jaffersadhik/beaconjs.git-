@@ -57,7 +57,7 @@ public class Process
     private String                      approvalFileName;
     private final BufferedReader        reader                        = new BufferedReader(new InputStreamReader(System.in));
 
-    public void readBalanceCreditFromCsvFile()
+    public void readBalanceCreditFromCsvFile() throws ItextosRuntimeException
     {
         if (log.isDebugEnabled())
             log.debug("Reading CSV File from '" + PrepaidMigrationProperties.getInstance().getCsvFilePath() + "'");
@@ -119,7 +119,7 @@ public class Process
         // }
     }
 
-    public void createApprovalFile()
+    public void createApprovalFile() throws ItextosRuntimeException
     {
         final Map<String, UserInfo> tempUserInfoMap = new TreeMap<>();
         for (final Entry<String, UserInfo> entry : mUserInfoMap.entrySet())
@@ -163,7 +163,7 @@ public class Process
         // WalletUpdateProcessor.addWalletAmount(updateList);
     }
 
-    public void getAccountInfo()
+    public void getAccountInfo() throws ItextosRuntimeException
     {
         String             sql = "select user, cli_id, sms_rate, dlt_rate from accounts.accounts_view where user in ";
 
@@ -231,7 +231,7 @@ public class Process
         return true;
     }
 
-    public static void check()
+    public static void check() throws ItextosRuntimeException
     {
         if (log.isDebugEnabled())
             log.debug("Checking for the input values.");
@@ -241,7 +241,7 @@ public class Process
         checkDbConnection();
     }
 
-    private static void checkFileExists()
+    private static void checkFileExists() throws ItextosRuntimeException
     {
         final String fileName = PrepaidMigrationProperties.getInstance().getCsvFilePath();
         final File   file     = new File(fileName);
@@ -250,7 +250,7 @@ public class Process
             throw new ItextosRuntimeException("CSV file not found. Filepath provided : '" + fileName + "'");
     }
 
-    private static void checkDbConnection()
+    private static void checkDbConnection() throws ItextosRuntimeException
     {
 
         try (
@@ -262,7 +262,7 @@ public class Process
         }
     }
 
-    private static void checkRedisConnection()
+    private static void checkRedisConnection() throws ItextosRuntimeException
     {
 
         try (
@@ -326,7 +326,7 @@ public class Process
     }
 
     private void writeToFile(
-            Map<String, String> aFinalValues)
+            Map<String, String> aFinalValues) throws ItextosRuntimeException
     {
         final String finalFileName = PrepaidMigrationProperties.getInstance().getFinalFilePath().getAbsolutePath() + File.separator + "Final-file-"
                 + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".csv";

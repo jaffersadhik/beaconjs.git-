@@ -48,9 +48,9 @@ class MessageIdentifierProperties
 
         final List<Object>            list = pc.getList(MESSAGEIDENTIFIER_INTERFACE_TYPES);
 
-        if ((list == null) || (list.isEmpty()))
-            throw new ItextosRuntimeException("Interface types not defined.");
-
+        if ((list == null) || (list.isEmpty())) {
+            //throw new ItextosRuntimeException("Interface types not defined.");
+        }
         interfaceTypes = new ArrayList<>(list.size());
 
         for (final Object s : list)

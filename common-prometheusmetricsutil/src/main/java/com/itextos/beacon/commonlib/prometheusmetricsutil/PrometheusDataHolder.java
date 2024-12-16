@@ -47,7 +47,7 @@ class PrometheusDataHolder
             MetricType aMetricType,
             String aMetricName,
             String aHelpInfo,
-            String... aLabels)
+            String... aLabels) throws ItextosRuntimeException
     {
         return createMetrics(aMetricType, aMetricName, null, aHelpInfo, aLabels);
     }
@@ -57,7 +57,7 @@ class PrometheusDataHolder
             String aMetricName,
             double[] aBuckets,
             String aHelpInfo,
-            String... aLabels)
+            String... aLabels) throws ItextosRuntimeException
     {
         IPrometheusDataHandlers dataHandlers = null;
 

@@ -14,6 +14,7 @@ import com.itextos.beacon.commonlib.constants.MessagePriority;
 import com.itextos.beacon.commonlib.constants.MessageType;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.RouteType;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.dlrquery.request.RequestData;
 
@@ -31,7 +32,7 @@ class QueryProcessorHelper
 
     static List<MessageRequest> getParsedData(
             RequestData aRequestData,
-            List<Map<MiddlewareConstant, String>> aDlrQueryInfo)
+            List<Map<MiddlewareConstant, String>> aDlrQueryInfo) throws ItextosRuntimeException
     {
         final List<MessageRequest> returnValue = new ArrayList<>();
 
@@ -62,7 +63,7 @@ class QueryProcessorHelper
             List<MessageRequest> aReturnValue,
             List<Map<MiddlewareConstant, String>> aDlrQueryInfo,
             List<String> aSearchList,
-            int aSearchType)
+            int aSearchType) throws ItextosRuntimeException
     {
         final List<String> addedList = new ArrayList<>();
 
@@ -125,7 +126,7 @@ class QueryProcessorHelper
 
     static List<MessageRequest> getMissedRecords(
             int aSearchType,
-            List<String> aDuplicate)
+            List<String> aDuplicate) throws ItextosRuntimeException
     {
         List<MessageRequest> retrunValue = new ArrayList<>();
 
@@ -149,7 +150,7 @@ class QueryProcessorHelper
     }
 
     static List<MessageRequest> getFileIdRecords(
-            List<String> aDuplicate)
+            List<String> aDuplicate) throws ItextosRuntimeException
     {
         final List<MessageRequest> returnValue = new ArrayList<>();
 
@@ -160,7 +161,7 @@ class QueryProcessorHelper
     }
 
     static List<MessageRequest> getCustRefIdRecords(
-            List<String> aDuplicate)
+            List<String> aDuplicate) throws ItextosRuntimeException
     {
         final List<MessageRequest> returnValue = new ArrayList<>();
 
@@ -171,7 +172,7 @@ class QueryProcessorHelper
     }
 
     static List<MessageRequest> getDestRecords(
-            List<String> aDuplicate)
+            List<String> aDuplicate) throws ItextosRuntimeException
     {
         final List<MessageRequest> returnValue = new ArrayList<>();
 
@@ -184,7 +185,7 @@ class QueryProcessorHelper
     static MessageRequest getBlankMessageRequest(
             String aDest,
             String aFileId,
-            String aCustRefId)
+            String aCustRefId) throws ItextosRuntimeException
     {
         final MessageRequest lMessageRequest = getDefaultMessageRequest();
 
@@ -201,7 +202,7 @@ class QueryProcessorHelper
     }
 
     static MessageRequest createMessageRequest(
-            Map<MiddlewareConstant, String> aRecord)
+            Map<MiddlewareConstant, String> aRecord) throws ItextosRuntimeException
     {
         final MessageRequest lMessageRequest = getDefaultMessageRequest();
 
@@ -227,7 +228,7 @@ class QueryProcessorHelper
         return lMessageRequest;
     }
 
-    static MessageRequest getDefaultMessageRequest()
+    static MessageRequest getDefaultMessageRequest() throws ItextosRuntimeException
     {
         return new MessageRequest(ClusterType.COMMON, InterfaceType.HTTP_JAPI, InterfaceGroup.API, MessageType.TRANSACTIONAL, MessagePriority.PRIORITY_5, RouteType.DOMESTIC);
     }

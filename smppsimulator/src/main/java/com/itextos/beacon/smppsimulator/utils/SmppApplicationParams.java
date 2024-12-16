@@ -50,7 +50,8 @@ public class SmppApplicationParams
             final String s = "Cluster type is not specified in the runtime";
             log.fatal(s, new Throwable(s));
             log.fatal("Exiting the application.");
-            throw new ItextosRuntimeException(s);
+        //    throw new ItextosRuntimeException(s);
+            System.exit(-1);
         }
         lClusterList = getClusters(lArgClusters.split(","));
     }

@@ -48,9 +48,16 @@ public class MessageUtil
             Map<String, Object> aMap,
             MiddlewareConstant aMiddlewareConstant)
     {
+    	/*
         final String lValue = (String) aMap.get(aMiddlewareConstant.getName());
         if (lValue == null)
             throw new ItextosRuntimeException("No valid value found for " + aMiddlewareConstant);
+        aMap.remove(aMiddlewareConstant.getName());
+        return lValue;
+        */
+
+        final String lValue = (String) aMap.get(aMiddlewareConstant.getName());
+        
         aMap.remove(aMiddlewareConstant.getName());
         return lValue;
     }

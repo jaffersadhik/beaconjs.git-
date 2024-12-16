@@ -182,8 +182,8 @@ public class RedisOperations
 
             if (aRetryCount >= DndPropertyProvider.getInstance().getRedisRetryCount())
             {
-                log.error("Unable to update the DND");
-                throw new ItextosRuntimeException("There is some serios problem in updating the DND details.", aSomeException);
+                log.error("Unable to update the DND",aSomeException);
+            //    throw new ItextosRuntimeException("There is some serios problem in updating the DND details.", aSomeException);
             }
 
             return updateDestPref(aRedisIndex, aDeleteList, aRetryCount + 1);
