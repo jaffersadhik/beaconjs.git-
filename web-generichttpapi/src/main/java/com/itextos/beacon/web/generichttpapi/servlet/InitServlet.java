@@ -44,10 +44,12 @@ public final class InitServlet
             throws ServletException
     {
     	
+    	   if (log.isDebugEnabled())
+               log.debug(" init() -  start ");
+    	
     	com.itextos.beacon.App.createfolder();
 
-        if (log.isDebugEnabled())
-            log.debug(" init() -  start ");
+     
 
         try
         {
@@ -68,7 +70,7 @@ public final class InitServlet
             if (APIConstants.CLUSTER_INSTANCE == null)
             {
                 log.error("InitServlet.inti() - Instance Cluster value is not Configured..., Hence Stoping the Instance.");
-                System.exit(-1);
+              //  System.exit(-1);
             }
 
             
