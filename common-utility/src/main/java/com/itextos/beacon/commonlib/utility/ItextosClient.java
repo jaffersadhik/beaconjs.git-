@@ -48,6 +48,7 @@ public class ItextosClient
                 mAdmin       = aClientId;
                 mSuperAdmin  = mClientId.substring(0, 8);
                 mClientLevel = ClientLevel.ADMIN_USER;
+
                 break;
             }
 
@@ -76,6 +77,9 @@ public class ItextosClient
                 mClientLevel = null;
             }
         }
+        
+        throw new NullPointerException();
+
     }
 
     public ClientLevel getClientLevel()
