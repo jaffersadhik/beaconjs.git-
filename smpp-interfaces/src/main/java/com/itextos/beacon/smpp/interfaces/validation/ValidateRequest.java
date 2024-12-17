@@ -87,7 +87,7 @@ public class ValidateRequest
 
      //       checkForValidCluster(aSessionDetail);
 
-            checkforBindTypeAllowed(aSessionDetail);
+      //      checkforBindTypeAllowed(aSessionDetail);
 
             checkForMaxBindReached(aSessionDetail);
 
