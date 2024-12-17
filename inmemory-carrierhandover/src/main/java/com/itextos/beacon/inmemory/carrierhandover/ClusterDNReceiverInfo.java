@@ -40,7 +40,10 @@ public class ClusterDNReceiverInfo
             // get receiverid from cluster
             if (aCluster != null)
             {
-                final List<String> dnReceiverIds = mClusterDnReceiverMap.get(aCluster.toLowerCase());
+            	
+            	String profile=System.getenv("profile");
+            	
+                final List<String> dnReceiverIds = mClusterDnReceiverMap.get(profile.toLowerCase()+"~"+aCluster.toLowerCase());
 
                 if (!dnReceiverIds.isEmpty())
                 {
@@ -87,9 +90,10 @@ public class ClusterDNReceiverInfo
         while (aResultSet.next())
         {
             final String       lCluster        = aResultSet.getString("cluster").toLowerCase();
+            final String       lProfile        = aResultSet.getString("profile").toLowerCase();
             final String       lDnReceiverId   = aResultSet.getString("dn_receiver_id").toLowerCase();
 
-            final List<String> lDnReceiverIdLs = lTempClusterDNReceiverIdMap.computeIfAbsent(lCluster, k -> new ArrayList<>());
+            final List<String> lDnReceiverIdLs = lTempClusterDNReceiverIdMap.computeIfAbsent(lProfile+"~"+lCluster, k -> new ArrayList<>());
 
             lDnReceiverIdLs.add(lDnReceiverId);
         }
