@@ -2,7 +2,7 @@ package com.itextos.beacon.commonlib.constants.exception;
 
 public class ItextosException
         extends
-        Exception
+        RuntimeException
 {
 
     private static final long serialVersionUID = -755738883904377432L;
