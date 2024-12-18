@@ -11,7 +11,7 @@ COPY ./html/malertservices /usr/share/nginx/html/malertservices
 COPY ./html/telcofiles /usr/share/nginx/html/telcofiles
 COPY ./html/404.html /usr/share/nginx/html/404.html
 
-COPY ./html/index.html /usr/share/nginx/html/index.html
+#COPY ./html/index.html /usr/share/nginx/html/index.html
 COPY ./html/50x.html /usr/share/nginx/html/50x.html
 COPY ./html/nginx-logo.png /usr/share/nginx/html/nginx-logo.png
 COPY ./html/poweredby.png /usr/share/nginx/html/poweredby.png
