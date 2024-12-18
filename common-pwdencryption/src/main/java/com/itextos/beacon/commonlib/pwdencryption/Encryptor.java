@@ -164,8 +164,15 @@ public class Encryptor
         	
         	  String lApiPassword = getApiDecryptedPassword("i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY");
              System.out.println(lApiPassword);//WPzDMqbaVqG8
-        	
+             
+             
+            // $2a$10$QZbSGc10EcUdBX9Z00Hmgepw5RK8RFaP4xPbcZX87GEWddoUGHna.
+        	// gui ; EncryptedObject [mActualString=HyePFO6oNqNz, mEncryptedWithIvAndSalt=$2a$10$d8jxByZmbR2ZFziViQbSneaGzPJ5rs/R.c8J6n1OyvBm8zrVhrHpa]
+
+             System.out.println(" gui ; "+getGuiPassword());//
+         	//
              lApiPassword = getApiDecryptedPassword("O3qFcs1c5VVFk3++2mG3D0FrMUxWdGtkcUplWxQtjQmiXylt8NDgNRj+");
+             //
              System.out.println(lApiPassword);//LSIqeA3pGMsi
         	
              

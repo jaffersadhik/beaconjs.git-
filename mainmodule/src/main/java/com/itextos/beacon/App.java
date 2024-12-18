@@ -725,25 +725,26 @@ public class App {
 
 		com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication.main(args);
 
-		
+		com.itextos.beacon.platform.rch.StartApplication.main(args);
+		com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
+		com.itextos.beacon.platform.t2e.StartApplication.main(args);
+		com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.sbc.StartApplication.main(args);
+
 	}
 
 	private static void startDigitalBiller(String args[]) {
 		
 		com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
-		com.itextos.beacon.platform.rch.StartApplication.main(args);
-		com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
-
+	
 		com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
 
 		
 		com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 
 		com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.t2e.StartApplication.main(args);
-		com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);

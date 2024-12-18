@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.*; 
+import java.security.MessageDigest; 
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -751,6 +753,17 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					
 			        final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(aMessageRequest.getRouteId());
 
+			        String ishash=lRouteConfigInfo.getIshash();
+			        
+					String metadata=null;
+
+
+			        if(ishash==null||ishash.trim().length()<1){
+			        	
+			        	ishash="2";
+			        }
+			        if(ishash.equals("1")||ishash.equals("2"))
+			        {
 			        String telemarketerid=lRouteConfigInfo.getTelemartkerId();
 					
 			        if(telemarketerid==null) {
@@ -763,7 +776,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 						temptelemartkerid="";
 					}
 					if(temptelemartkerid.trim().length()>0) {
-						telemarketerid=entityid+","+temptelemartkerid+","+telemarketerid;
+						telemarketerid=temptelemartkerid+","+telemarketerid;
 						KannelURLLog.log("telemarketerid :"+telemarketerid);
 
 					}else {
@@ -773,9 +786,23 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 
 					}
 					
-					telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
+			        
+			        if(ishash!=null&&ishash.equals("1")) {
+			        	
+			        	telemarketerid=getHashValue(telemarketerid);
+			        	
+			        }else {
+			        	
+						telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
 
-					String metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
+			        }
+			        metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
+
+			    	}else {
+			    		
+					metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
+
+			    	}
 					
 					reqmap.put("meta-data", metadata);
 				
@@ -788,6 +815,29 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					return reqmap;
 
 			
+	}
+
+	private static String getHashValue(String telemarketerid) {
+		  String hash = ""; 
+		    try { 
+		      MessageDigest digest = MessageDigest.getInstance("SHA-256"); 
+		      byte[] valbyte = digest.digest(telemarketerid.getBytes()); 
+		 
+		 
+		      StringBuilder hexString = new StringBuilder(2 * valbyte.length); 
+		      for (byte b : valbyte) { 
+		        String hex = Integer.toHexString(0xff & b); 
+		        if (hex.length() == 1) { 
+		          hexString.append('0'); 
+		        } 
+		        hexString.append(hex); 
+		      } 
+		      hash = hexString.toString(); 
+		    }  
+		    catch (Exception e) { 
+		    } 
+		    return hash; 
+
 	}
 
 	private static void doMessageRetry(

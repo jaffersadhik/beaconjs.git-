@@ -370,6 +370,7 @@
    	<module>platform-topic2elasticsearch</module>
    	<module>inmemory-elasticsearchcolumn</module>
    	<module>common-errorlog</module>
+   	<module>node-mui</module>
   </modules>
   
 

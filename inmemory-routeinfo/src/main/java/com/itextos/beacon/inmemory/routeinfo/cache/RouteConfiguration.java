@@ -83,9 +83,10 @@ public class RouteConfiguration
             final String          lPromoHeader       = CommonUtility.nullCheck(aResultSet.getString("promo_header"), true);
             final String          lRouteId           = aResultSet.getString("route_id");
             final String          lTelemarketerId           = getValueAsString(aResultSet,"telemarkater_id");
+            final String          lIshash           = getValueAsString(aResultSet,"ishash");
 
             final RouteConfigInfo lRouteInfo         = new RouteConfigInfo(lHeaderWhitelisted, lRouteType, lPrefix, isPrefix, lSmscId, isTxnRoute, isPromoRoute, isIntlRoute, isDummyRoute,
-                    lDtimeFormat, lCarrierFullDN, lPromoHeaderType, lRouteId, lPromoHeader,lTelemarketerId);
+                    lDtimeFormat, lCarrierFullDN, lPromoHeaderType, lRouteId, lPromoHeader,lTelemarketerId,lIshash);
 
             if (!lPromoHeader.isEmpty() && (lPromoHeaderType != null) && lPromoHeaderType.equalsIgnoreCase("0"))
                 lTempRouteBasedHeader.put(lRouteId, lPromoHeader);

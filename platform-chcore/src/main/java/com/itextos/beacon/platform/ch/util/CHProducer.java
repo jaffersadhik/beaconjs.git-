@@ -39,11 +39,12 @@ public class CHProducer
 
         try
         {
-        //    MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
-            
+            MessageProcessor.writeMessage(Component.CH, Component.SBC, aMessageRequest);
+        /*    
             aMessageRequest.setFromComponent(Component.CH.getKey());
             aMessageRequest.setNextComponent(Component.SBC.getKey());
             SBConsumer.forSPC(aMessageRequest);
+        */
         }
         catch (final Exception e)
         {

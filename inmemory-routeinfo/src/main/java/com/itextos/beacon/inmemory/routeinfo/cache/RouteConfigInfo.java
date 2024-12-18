@@ -17,6 +17,7 @@ public class RouteConfigInfo
     private final String  mPromoHeaderType;
     private final String  mRouteId;
     private final String  mTelemartkerId;
+    private final String  mIshash;
     private final String  mPromoHeader;
 
     public RouteConfigInfo(
@@ -34,7 +35,8 @@ public class RouteConfigInfo
             String aPromoHeaderType,
             String aRouteId,
             String aPromoHeader,
-            String  aTelemartkerId)
+            String  aTelemartkerId,
+            String  aIshash)
     {
         super();
         mHeaderWhitelisted = aHeaderWhitelisted;
@@ -52,6 +54,7 @@ public class RouteConfigInfo
         mRouteId           = aRouteId;
         mPromoHeader       = aPromoHeader;
         mTelemartkerId	   = aTelemartkerId;
+        mIshash			   = aIshash;
     }
 
     public String getHeaderWhitelisted()
@@ -124,7 +127,13 @@ public class RouteConfigInfo
         return mTelemartkerId;
     }
 
-    public String getPromoHeader()
+    
+    public String getIshash() {
+    	
+		return mIshash;
+	}
+
+	public String getPromoHeader()
     {
         return mPromoHeader;
     }
