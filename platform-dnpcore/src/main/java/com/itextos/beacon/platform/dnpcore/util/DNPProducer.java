@@ -72,12 +72,16 @@ public class DNPProducer
                     MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue());
                     
                     if(e.getKey()==Component.T2DB_DELIVERIES) {
+                    	
+                    	/*
                     
                     	if(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.BILLINGBKUP.getKey())!=null) {
                     		
                             MessageProcessor.writeMessage(Component.DNP, Component.T2DB_DELIVERIES_BKUP, e.getValue());
 
                     	}
+                    	
+                    	*/
                     }
                 }
             }
