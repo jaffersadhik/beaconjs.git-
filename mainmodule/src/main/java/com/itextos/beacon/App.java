@@ -718,8 +718,6 @@ public class App {
 		com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
 
 		com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
-		com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
-
 
 		com.itextos.beacon.platform.smppdlrpoller.StartApplication.main(args);
 		
@@ -736,6 +734,9 @@ public class App {
 		com.itextos.beacon.platform.rch.StartApplication.main(args);
 		com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
 
+		com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
+
+		
 		com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 
 		com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
