@@ -6,7 +6,9 @@ COPY ./target /usr/share/nginx/html
 COPY ./html/en-US /usr/share/nginx/html/en-US
 COPY ./html/icons /usr/share/nginx/html/icons
 COPY ./html/img /usr/share/nginx/html/img
+COPY ./html/assets /usr/share/nginx/html/assets
 COPY ./html/logos /usr/share/nginx/html/logos
+
 COPY ./html/malertservices /usr/share/nginx/html/malertservices
 COPY ./html/telcofiles /usr/share/nginx/html/telcofiles
 COPY ./html/404.html /usr/share/nginx/html/404.html
