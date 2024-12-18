@@ -59,7 +59,7 @@ export class SidebarComponent implements OnInit {
             
             this.LOGO = '/cm' + logoPath;
         }else{
-            this.LOGO = logoPath;
+            this.LOGO = '/mui' +logoPath;
         }
     
         // NOTE:  To handle page refresh
