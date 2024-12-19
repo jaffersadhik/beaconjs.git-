@@ -130,6 +130,17 @@ public class ProcessorInfo
             	
             	String componentname=mComponent.getKey();
             	
+            	if(mComponent.getKey().equals(Component.K2E_DELIVERIES.getKey())) {
+            		
+            		componentname=Component.T2DB_DELIVERIES.getKey();
+            		
+            	}else if(mComponent.getKey().equals(Component.K2E_SUBMISSION.getKey())) {
+            	
+            		componentname=Component.T2DB_SUBMISSION.getKey();
+
+            	}
+            	
+            	
                 String topicName=componentname+"-"+p;
                
                 if(p.equals("default")) {
