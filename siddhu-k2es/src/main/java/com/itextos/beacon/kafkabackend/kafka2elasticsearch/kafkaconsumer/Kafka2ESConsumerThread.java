@@ -10,8 +10,6 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHost;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
@@ -32,6 +30,7 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.K2ESDataLog;
 import com.itextos.beacon.errorlog.K2ESLog;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
@@ -43,6 +42,8 @@ public class Kafka2ESConsumerThread
 {
 
     private static final K2ESLog                              log                     = K2ESLog.getInstance();
+    private static final K2ESDataLog                              logdata                     = K2ESDataLog.getInstance();
+
     private final AtomicBoolean             stopped         = new AtomicBoolean(false);
 
     private KafkaConsumer<String, IMessage> TopicConsumer   = null;
@@ -311,9 +312,15 @@ public class Kafka2ESConsumerThread
 
                 final int                               pollCount   = pollRecords.count();
 
+                
+                if(pollCount==0) {
                 if (log.isDebugEnabled())
-                    log.debug("Poll Count: " + pollCount);
+                    log.debug("KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
+                }else {
+                	
+                    logdata.debug("KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
 
+                }
                 if (pollCount == 0)
                 {
                     CommonUtility.sleepForAWhile(PollDelay);
