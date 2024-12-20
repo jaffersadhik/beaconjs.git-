@@ -94,8 +94,24 @@ public class K2ESLog {
     	
     }
     
+    public void error(String string,Throwable e) {
+
+    	logger.info(string+" \n "+ ErrorMessage.getStackTraceAsString(e));
+    	
+    }
+    
     public void error(String string) {
 
     	logger.info(string);
+    }
+    
+    public void debug(String string) {
+
+    	logger.info(string);
+    }
+    
+    public boolean isDebugEnabled() {
+    	
+    	return true;
     }
 }
