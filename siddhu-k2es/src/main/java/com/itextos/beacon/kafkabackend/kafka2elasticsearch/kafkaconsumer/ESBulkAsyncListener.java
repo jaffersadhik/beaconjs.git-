@@ -8,12 +8,14 @@ import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 
+import com.itextos.beacon.errorlog.K2ESLog;
+
 public class ESBulkAsyncListener
         implements
         ActionListener<BulkResponse>
 {
 
-    private static final Log log       = LogFactory.getLog(ESBulkAsyncListener.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     protected BulkRequest    bRequest;
     protected boolean        isFullMsg = false;
 

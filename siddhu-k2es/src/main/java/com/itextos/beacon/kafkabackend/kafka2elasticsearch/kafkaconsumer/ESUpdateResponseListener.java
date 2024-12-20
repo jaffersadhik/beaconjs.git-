@@ -8,6 +8,7 @@ import org.elasticsearch.client.ResponseListener;
 import org.elasticsearch.client.RestClient;
 import org.json.simple.JSONObject;
 
+import com.itextos.beacon.errorlog.K2ESLog;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
 public class ESUpdateResponseListener
@@ -15,7 +16,7 @@ public class ESUpdateResponseListener
         ResponseListener
 {
 
-    private static final Log log = LogFactory.getLog(ESUpdateResponseListener.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     protected JSONObject     ESData;
     RestClient               ESClient;
 

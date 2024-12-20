@@ -3,10 +3,12 @@ package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.K2ESLog;
+
 public class AppConfigLoader
 {
 
-    private static final Log    log                      = LogFactory.getLog(AppConfigLoader.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     private static final String APP_CONFIG_FILE_LOCATION = "kafka.2.elasticsearch.config.file";
     private AppConfiguration    APP_CONFG;
 

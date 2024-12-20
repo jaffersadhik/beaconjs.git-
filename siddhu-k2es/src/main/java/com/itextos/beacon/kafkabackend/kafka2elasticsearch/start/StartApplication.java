@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.K2ESLog;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfigLoader;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfiguration;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.ESIndexColMapValue;
@@ -25,7 +26,7 @@ import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.Kafka2E
 public class StartApplication
 {
 
-    private static final Log                              log                     = LogFactory.getLog(StartApplication.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     public static String                                  ESClientTypeConfig      = null;
     public static AppConfiguration                        AppConfig               = null;
     public static String                                  AppMode                 = null;

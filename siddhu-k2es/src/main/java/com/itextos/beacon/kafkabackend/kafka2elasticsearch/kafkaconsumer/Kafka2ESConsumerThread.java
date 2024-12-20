@@ -32,6 +32,7 @@ import org.json.simple.JSONObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.K2ESLog;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
 public class Kafka2ESConsumerThread
@@ -41,7 +42,7 @@ public class Kafka2ESConsumerThread
         ConsumerRebalanceListener
 {
 
-    private static final Log                log             = LogFactory.getLog(StartApplication.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     private final AtomicBoolean             stopped         = new AtomicBoolean(false);
 
     private KafkaConsumer<String, IMessage> TopicConsumer   = null;

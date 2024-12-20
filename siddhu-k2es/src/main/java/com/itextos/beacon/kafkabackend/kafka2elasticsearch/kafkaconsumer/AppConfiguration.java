@@ -6,10 +6,12 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.K2ESLog;
+
 public class AppConfiguration
 {
 
-    private static final Log log       = LogFactory.getLog(AppConfiguration.class);
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
     private final Properties prpConfig = new Properties();
 
     public AppConfiguration(
