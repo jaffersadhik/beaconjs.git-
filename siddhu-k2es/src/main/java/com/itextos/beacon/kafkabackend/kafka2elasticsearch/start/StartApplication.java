@@ -49,7 +49,7 @@ public class StartApplication
     public static String                                  PRIORITY          = null;
 
     public static int                                     KafkaConsGrpSeq         = -1;
-    public static String                                  KafkaConsGrpID          = null;
+    public  String                                  KafkaConsGrpID          = null;
 
     public static HashMap<String, Kafka2ESConsumerThread> HMConsumerThreads       = null;
 
@@ -184,7 +184,7 @@ public class StartApplication
             KafkaConsGrpSeq = Integer.parseInt(System.getenv("topicgroupid"));//Integer.parseInt(args[2]);
             final int threadCount = Integer.parseInt(System.getenv("threadcount"));//Integer.parseInt(args[3]);
 
-            KafkaConsGrpID = "cg-" + KafkaTopicName + "-" + KafkaConsGrpSeq;
+         //   KafkaConsGrpID = "cg-" + KafkaTopicName + "-" + KafkaConsGrpSeq;
 
             if (threadCount <= 0)
             {
@@ -289,7 +289,7 @@ public class StartApplication
             log.info("App Process ID: " + AppProcID);
             log.info("Kafka2ES Consumer Application started, Mode: " + AppMode);
             log.info("Kafka Topic Name: " + KafkaTopicName);
-            log.info("Kafka Consumer Group ID: " + KafkaConsGrpID);
+      //      log.info("Kafka Consumer Group ID: " + KafkaConsGrpID);
             log.info("Elastic Index name: " + ESIndexName);
             log.info("Elastic Index Unique Column Name : " + ESIndexUniqueColumn);
             log.info("Elastic Full Message Index name: " + ESFmsgIndexName);
@@ -322,11 +322,15 @@ public class StartApplication
            
             	 for (int ti = 1; ti <= threadCount; ti++)
                  {
+                     
+                     String   KafkaConsGrpID = "cg-" + topicname + "-" + KafkaConsGrpSeq;
+
                      final String           thName = "t-" + KafkaConsGrpID + "-" + ti;
+
 
                      Kafka2ESConsumerThread ct     = null;
 
-                     ct = new Kafka2ESConsumerThread(thName,topicname);
+                     ct = new Kafka2ESConsumerThread(thName,topicname,KafkaConsGrpID);
                      HMConsumerThreads.put(thName, ct);
                      log.info("Starting Consumer Thread: " + thName);
                      ct.start();

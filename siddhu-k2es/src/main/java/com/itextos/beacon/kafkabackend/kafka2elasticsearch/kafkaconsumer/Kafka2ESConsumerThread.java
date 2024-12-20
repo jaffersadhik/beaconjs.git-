@@ -75,7 +75,7 @@ public class Kafka2ESConsumerThread
     private int                             LogProcCount    = 0;
 
     public Kafka2ESConsumerThread(
-            String pThreadName,String topicname)
+            String pThreadName,String topicname,String groupname)
     {
         this.setName(pThreadName);
         ConsumerThreadName           = pThreadName;
@@ -86,7 +86,7 @@ public class Kafka2ESConsumerThread
         this.ESFmsgIndexName         = StartApplication.ESFmsgIndexName;
         this.ESFmsgIndexUniqueColumn = StartApplication.ESFmsgIndexUniqueColumn;
         this.KafkaTopicName          = topicname;
-        this.KafkaConsumerGroupId    = StartApplication.KafkaConsGrpID;
+        this.KafkaConsumerGroupId    = groupname;
         this.ESRetryConflictCount    = this.AppConfig.getInt("es.update.retry.count");
         this.FlushLimit              = this.AppConfig.getInt("es.index.flush.limit");
         this.IdleFlushTime           = this.AppConfig.getInt("consumer.idle.flushtime.ms");
@@ -315,10 +315,10 @@ public class Kafka2ESConsumerThread
                 
                 if(pollCount==0) {
                 if (log.isDebugEnabled())
-                    log.debug("KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
+                    log.debug("KafkaConsumerGroupId : "+KafkaConsumerGroupId+" : KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
                 }else {
                 	
-                    logdata.debug("KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
+                    logdata.debug("KafkaConsumerGroupId : "+KafkaConsumerGroupId+" : KafkaTopicName : "+KafkaTopicName+" Poll Count: " + pollCount);
 
                 }
                 if (pollCount == 0)

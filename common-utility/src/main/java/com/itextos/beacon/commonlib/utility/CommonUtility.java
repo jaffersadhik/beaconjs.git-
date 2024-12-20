@@ -586,8 +586,8 @@ public final class CommonUtility
 
         try
         {
-          //  return System.getenv("hostname")+"-"+InetAddress.getLocalHost().getHostAddress();
-        	  return HostIPFetcher.hostip()+"-"+InetAddress.getLocalHost().getHostAddress();
+            return System.getenv("hostname")+"-"+InetAddress.getLocalHost().getHostAddress();
+        	//  return HostIPFetcher.hostip()+"-"+InetAddress.getLocalHost().getHostAddress();
               
             
         }
