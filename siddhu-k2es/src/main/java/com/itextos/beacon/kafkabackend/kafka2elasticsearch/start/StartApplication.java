@@ -203,11 +203,11 @@ public class StartApplication
 
             if (AppMode.equals(Kafka2ESConstants.subMode)) {
                 ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
-                KafkaTopicName=Component.T2DB_SUBMISSION.getKey();
+                KafkaTopicName=rechangeTopicName(Component.T2DB_SUBMISSION.getKey());
             }else {
                 if (AppMode.equals(Kafka2ESConstants.delMode)) {
                     ESDocUpdTmColumn = Kafka2ESConstants.delUpdTmColumn;
-                    KafkaTopicName=Component.T2DB_DELIVERIES.getKey();
+                    KafkaTopicName=rechangeTopicName(Component.T2DB_DELIVERIES.getKey());
 
                 }
             }
@@ -392,4 +392,9 @@ public class StartApplication
         }
     }
 
+    
+    public static String rechangeTopicName(String topicname) {
+    	
+    	return topicname.replaceAll("_", "-");
+    }
 }
