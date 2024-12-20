@@ -310,7 +310,7 @@
   	<module>http-japi</module>
   	<module>commonwardependency</module>
   	<module>common-splog</module>
-  	<!-- -->
+  	<!--
     	<module>ui-mui</module>
   	<module>ui-customer</module>
   	<module>ui-nginx</module> 
@@ -318,7 +318,7 @@
   	<module>ui-api</module>
   	
 
-
+ -->
   	<module>platform-mccmncload</module>
 
  
@@ -371,7 +371,8 @@
    	<module>inmemory-elasticsearchcolumn</module>
    	<module>common-errorlog</module>
    	<module>node-mui</module>
-  </modules>
+   	<module>siddhu-k2es</module>
+</modules>
   
 
 	<build>
