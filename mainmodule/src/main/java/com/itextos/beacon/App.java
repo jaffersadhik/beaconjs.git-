@@ -465,6 +465,13 @@ public class App {
 			IS_START_PROMETHEUS=true;
 
 			return true;			
+		}else if(module.equals("k2es")) {
+			
+			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;			
 		}else if(module.equals("dnt2tb")) {
 			
 			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);

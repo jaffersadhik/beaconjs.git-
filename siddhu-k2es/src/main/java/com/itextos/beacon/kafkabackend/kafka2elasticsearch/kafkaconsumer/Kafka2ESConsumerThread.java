@@ -73,7 +73,7 @@ public class Kafka2ESConsumerThread
     private int                             LogProcCount    = 0;
 
     public Kafka2ESConsumerThread(
-            String pThreadName)
+            String pThreadName,String topicname)
     {
         this.setName(pThreadName);
         ConsumerThreadName           = pThreadName;
@@ -83,7 +83,7 @@ public class Kafka2ESConsumerThread
         this.ESIndexUniqueColumn     = StartApplication.ESIndexUniqueColumn;
         this.ESFmsgIndexName         = StartApplication.ESFmsgIndexName;
         this.ESFmsgIndexUniqueColumn = StartApplication.ESFmsgIndexUniqueColumn;
-        this.KafkaTopicName          = StartApplication.KafkaTopicName;
+        this.KafkaTopicName          = topicname;
         this.KafkaConsumerGroupId    = StartApplication.KafkaConsGrpID;
         this.ESRetryConflictCount    = this.AppConfig.getInt("es.update.retry.count");
         this.FlushLimit              = this.AppConfig.getInt("es.index.flush.limit");

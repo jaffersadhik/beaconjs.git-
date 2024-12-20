@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
+package com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer;
 
 public class ESIndexColMapValue
 {

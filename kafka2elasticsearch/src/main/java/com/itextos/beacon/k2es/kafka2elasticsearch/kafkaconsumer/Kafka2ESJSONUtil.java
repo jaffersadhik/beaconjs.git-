@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
+package com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.k2es.kafka2elasticsearch.start.StartApplication;
 
 public class Kafka2ESJSONUtil
 {

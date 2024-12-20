@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
+package com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -33,7 +33,7 @@ import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.k2es.kafka2elasticsearch.start.StartApplication;
 import com.itextos.beacon.smslog.K2ELog;
 
 public class Kafka2ESConsumerThread

@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.start;
+package com.itextos.beacon.k2es.kafka2elasticsearch.start;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;

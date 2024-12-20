@@ -302,6 +302,7 @@
 		<module>gw-smppclient</module> 
 	<module>docker-docker</module>  -->
 	<!--   	<module>beaconapi</module> -->
+   	<module>siddhu-k2es</module>
 
   	<module>mainmodule</module>
 
@@ -371,7 +372,6 @@
    	<module>inmemory-elasticsearchcolumn</module>
    	<module>common-errorlog</module>
    	<module>node-mui</module>
-   	<module>siddhu-k2es</module>
 </modules>
   
 

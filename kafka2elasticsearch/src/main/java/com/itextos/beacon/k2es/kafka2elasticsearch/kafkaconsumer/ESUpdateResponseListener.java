@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
+package com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,7 +8,7 @@ import org.elasticsearch.client.ResponseListener;
 import org.elasticsearch.client.RestClient;
 import org.json.simple.JSONObject;
 
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.k2es.kafka2elasticsearch.start.StartApplication;
 
 public class ESUpdateResponseListener
         implements

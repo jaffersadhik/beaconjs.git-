@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
+package com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer;
 
 import java.io.FileReader;
 import java.util.Properties;

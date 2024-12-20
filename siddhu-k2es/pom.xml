@@ -9,7 +9,7 @@
   
   
   	<properties>
-		<main.class>com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication</main.class>
+		<main.class>com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication2</main.class>
 	</properties>
 	<build>
 	

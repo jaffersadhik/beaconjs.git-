@@ -115,6 +115,12 @@
 			<artifactId>platform-mccmncload</artifactId>
 			<version>1.0</version>
 	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>siddhu-k2es</artifactId>
+			<version>1.0</version>
+	</dependency>
 
 	<dependency>
 			<groupId>beacon</groupId>

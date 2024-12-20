@@ -300,7 +300,7 @@ public class StartApplication2
 
                 Kafka2ESConsumerThread ct     = null;
 
-                ct = new Kafka2ESConsumerThread(thName);
+                ct = new Kafka2ESConsumerThread(thName,KafkaTopicName);
                 HMConsumerThreads.put(thName, ct);
                 log.info("Starting Consumer Thread: " + thName);
                 ct.start();

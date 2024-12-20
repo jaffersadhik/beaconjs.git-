@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.client.RestClient;
 
+import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
@@ -42,6 +44,9 @@ public class StartApplication
     public static ArrayList<ESIndexColMapValue>           ListESColMap            = null;
 
     public static String                                  KafkaTopicName          = null;
+    
+    public static String                                  PRIORITY          = null;
+
     public static int                                     KafkaConsGrpSeq         = -1;
     public static String                                  KafkaConsGrpID          = null;
 
@@ -163,18 +168,20 @@ public class StartApplication
         try
         {
 
+        	/*
             if (args.length < 4)
             {
                 System.err.println("Invalid Arguments");
                 System.err.println("Usage: StartApplication <Mode> <TOPIC_NAME> <Consumer Greqp Seq> <Thread Count>");
             }
 
+			*/
             mainThread      = Thread.currentThread();
 
-            AppMode         = args[0];
-            KafkaTopicName  = args[1];
-            KafkaConsGrpSeq = Integer.parseInt(args[2]);
-            final int threadCount = Integer.parseInt(args[3]);
+            AppMode         = System.getenv("appmode");//args[0];
+            PRIORITY  = System.getenv("priority");//args[1];
+            KafkaConsGrpSeq = Integer.parseInt(System.getenv("topicgroupid"));//Integer.parseInt(args[2]);
+            final int threadCount = Integer.parseInt(System.getenv("threadcount"));//Integer.parseInt(args[3]);
 
             KafkaConsGrpID = "cg-" + KafkaTopicName + "-" + KafkaConsGrpSeq;
 
@@ -193,11 +200,16 @@ public class StartApplication
                 return;
             }
 
-            if (AppMode.equals(Kafka2ESConstants.subMode))
+            if (AppMode.equals(Kafka2ESConstants.subMode)) {
                 ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
-            else
-                if (AppMode.equals(Kafka2ESConstants.delMode))
+                KafkaTopicName=Component.T2DB_SUBMISSION.getKey();
+            }else {
+                if (AppMode.equals(Kafka2ESConstants.delMode)) {
                     ESDocUpdTmColumn = Kafka2ESConstants.delUpdTmColumn;
+                    KafkaTopicName=Component.T2DB_DELIVERIES.getKey();
+
+                }
+            }
 
             if ("".equals(KafkaTopicName))
             {
@@ -293,20 +305,36 @@ public class StartApplication
             }
 
             HMConsumerThreads = new HashMap<>();
+            
+            StringTokenizer st=new StringTokenizer(PRIORITY,",");
+            
+            while(st.hasMoreTokens()) {
+            	
+            	String priority=st.nextToken();
+            	
+            	String topicname=KafkaTopicName;
+            	
+            	if(!priority.equals("default")) {
+            		
+            		topicname=topicname+"-"+priority;
+            	}
+           
+            	 for (int ti = 1; ti <= threadCount; ti++)
+                 {
+                     final String           thName = "t-" + KafkaConsGrpID + "-" + ti;
 
-            for (int ti = 1; ti <= threadCount; ti++)
-            {
-                final String           thName = "t-" + KafkaConsGrpID + "-" + ti;
+                     Kafka2ESConsumerThread ct     = null;
 
-                Kafka2ESConsumerThread ct     = null;
+                     ct = new Kafka2ESConsumerThread(thName,topicname);
+                     HMConsumerThreads.put(thName, ct);
+                     log.info("Starting Consumer Thread: " + thName);
+                     ct.start();
+                     CommonUtility.sleepForAWhile();
+                 }
 
-                ct = new Kafka2ESConsumerThread(thName);
-                HMConsumerThreads.put(thName, ct);
-                log.info("Starting Consumer Thread: " + thName);
-                ct.start();
-                CommonUtility.sleepForAWhile();
             }
 
+           
             log.info("Adding Shutdown Hook ...");
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 Thread.currentThread().setName("ShutdownHook");

@@ -1,4 +1,4 @@
-package com.itextos.beacon.kafkabackend.kafka2elasticsearch.start;
+package com.itextos.beacon.k2es.kafka2elasticsearch.start;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,11 +15,11 @@ import org.elasticsearch.client.RestClient;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfigLoader;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfiguration;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.ESIndexColMapValue;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.Kafka2ESConstants;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.Kafka2ESConsumerThread;
+import com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer.AppConfigLoader;
+import com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer.AppConfiguration;
+import com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer.ESIndexColMapValue;
+import com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer.Kafka2ESConstants;
+import com.itextos.beacon.k2es.kafka2elasticsearch.kafkaconsumer.Kafka2ESConsumerThread;
 
 public class StartApplication
 {
