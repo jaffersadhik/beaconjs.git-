@@ -8,6 +8,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
+import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN;
+import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.TimeTakenLog;
 
@@ -123,6 +125,8 @@ public class App {
 			startPrometheusServer(true);
 
 		}
+		
+		addShutdownHook();
 		
 		long end=System.currentTimeMillis();
 		
@@ -322,6 +326,29 @@ public class App {
 	        }
 	    }
 
+	private static void addShutdownHook() {
+	
+		 log.info("Adding Shutdown Hook ...");
+         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+             Thread.currentThread().setName("ShutdownHook");
+             log.info("Shutdown signal received");
+             log.info("Waiting for Consumer Threads to join...");
+
+             try
+             {
+                 StartApplicationDN.stopConsumerThreads();
+                 StartApplicationSub.stopConsumerThreads();
+
+             }
+             catch (final Exception ex)
+             {
+                 // TODO Auto-generated catch block
+                 ex.printStackTrace(System.err);
+             }
+         }));
+
+	}
+	
 	private static boolean isSMPP(String module, String[] args) {
 		
 		if(module.equals("smpp")) {
@@ -467,8 +494,9 @@ public class App {
 			return true;			
 		}else if(module.equals("k2es")) {
 			
-			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main(args);
-			
+			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub.main(args);
+			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN.main(args);
+
 			IS_START_PROMETHEUS=true;
 
 			return true;			
@@ -564,6 +592,14 @@ public class App {
 		}else if(module.equals("digitalbiller")){
 			
 			startDigitalBiller(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
+		}else if(module.equals("digitalt2dbes")){
+			
+			startDigitalT2DBEs(args);
 			
 			IS_START_PROMETHEUS=true;
 
@@ -716,6 +752,19 @@ public class App {
 		return false;
 	}
 
+	private static void startDigitalT2DBEs(String[] args) {
+		
+		
+
+		com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub.main(args);
+		com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN.main(args);
+		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
+		
+	}
+
 	private static void startDigitalDnpost(String[] args) {
 		
 
@@ -752,10 +801,7 @@ public class App {
 
 		com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
+
 		
 	}
 

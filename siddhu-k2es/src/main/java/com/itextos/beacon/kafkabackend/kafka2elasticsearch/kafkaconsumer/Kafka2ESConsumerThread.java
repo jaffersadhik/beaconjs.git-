@@ -2,16 +2,12 @@ package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
-import org.apache.http.HttpHost;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -21,18 +17,22 @@ import org.apache.kafka.common.errors.WakeupException;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.json.simple.JSONObject;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
+import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.message.IMessage;
+import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
+import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
+import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.errorlog.K2ESDataLog;
 import com.itextos.beacon.errorlog.K2ESLog;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.platform.elasticsearchutil.EsProcess;
 
 public class Kafka2ESConsumerThread
         extends
@@ -43,21 +43,30 @@ public class Kafka2ESConsumerThread
 
     private static final K2ESLog                              log                     = K2ESLog.getInstance();
     private static final K2ESDataLog                              logdata                     = K2ESDataLog.getInstance();
+    
+    private static final String AppProcID = CommonUtility.getJvmProcessId();
 
+    private final Component COMPONENT;
+    
+    private static final String PROPERTY_KAFKA_TOPIC = "kafka.topic.name";
+    private static final String PROPERTY_CLIENT_ID   = "client.id";
+    private static final String PROPERTY_GROUP_ID    = "group.id";
+    
     private final AtomicBoolean             stopped         = new AtomicBoolean(false);
 
     private KafkaConsumer<String, IMessage> TopicConsumer   = null;
     private final String                    KafkaTopicName;
     private final String                    KafkaConsumerGroupId;
+    
 
     public String                           ConsumerThreadName;
-    private final String                    ConsumerMode;
     private final String                    ConsumerClientID;
     private final AppConfiguration          AppConfig;
     private final String                    ESIndexName;
     private final String                    ESIndexUniqueColumn;
     public final String                     ESFmsgIndexName;
     public final String                     ESFmsgIndexUniqueColumn;
+    public ArrayList<ESIndexColMapValue>           ListESColMap            = null;
 
     private final int                       ESRetryConflictCount;
 
@@ -75,30 +84,35 @@ public class Kafka2ESConsumerThread
     private int                             LogProcCount    = 0;
 
     public Kafka2ESConsumerThread(
-            String pThreadName,String topicname,String groupname)
+            String pThreadName,String topicname,String groupname,AppConfiguration appConfig,Component component,ArrayList<ESIndexColMapValue> listESColMap)
     {
         this.setName(pThreadName);
         ConsumerThreadName           = pThreadName;
-        this.ConsumerMode            = StartApplication.AppMode;
-        this.AppConfig               = StartApplication.AppConfig;
-        this.ESIndexName             = StartApplication.ESIndexName;
-        this.ESIndexUniqueColumn     = StartApplication.ESIndexUniqueColumn;
-        this.ESFmsgIndexName         = StartApplication.ESFmsgIndexName;
-        this.ESFmsgIndexUniqueColumn = StartApplication.ESFmsgIndexUniqueColumn;
+        this.ListESColMap 			 = listESColMap;
+        this.AppConfig               = appConfig;
+        this.ESIndexName             = appConfig.getString("es.index.name");
+        this.ESIndexUniqueColumn     = appConfig.getString("es.index.uidcolumn");
+
+        this.ESFmsgIndexName         = appConfig.getString("es.fmsg.index.name");
+
+        this.ESFmsgIndexUniqueColumn =  appConfig.getString("es.fmsg.index.uidcolumn");
         this.KafkaTopicName          = topicname;
         this.KafkaConsumerGroupId    = groupname;
-        this.ESRetryConflictCount    = this.AppConfig.getInt("es.update.retry.count");
-        this.FlushLimit              = this.AppConfig.getInt("es.index.flush.limit");
-        this.IdleFlushTime           = this.AppConfig.getInt("consumer.idle.flushtime.ms");
-        this.LogProcLimit            = this.AppConfig.getInt("consumer.log.proc.limit");
+        this.ESRetryConflictCount    = appConfig.getInt("es.update.retry.count");
+        this.FlushLimit              = appConfig.getInt("es.index.flush.limit");
+        this.IdleFlushTime           = appConfig.getInt("consumer.idle.flushtime.ms");
+        this.LogProcLimit            = appConfig.getInt("consumer.log.proc.limit");
+        
+        this.COMPONENT =component;
+       String  HostIPAddr = CommonUtility.getApplicationServerIp();
 
-        ConsumerClientID             = StartApplication.HostIPAddr + ":"
-                + StartApplication.AppProcID + ":"
-                + pThreadName;
+
+        ConsumerClientID             = HostIPAddr + ":" + AppProcID + ":"+ pThreadName;
     }
 
     RestHighLevelClient esConnect()
     {
+    	/*
         final String         ESHosts         = this.AppConfig.getString("es.servers");
         final String[]       ESHSplit        = ESHosts.split("[,]");
         final int            ESConnecTimeOut = this.AppConfig.getInt("es.connection.timeout");
@@ -117,13 +131,30 @@ public class Kafka2ESConsumerThread
                         requestConfigBuilder -> requestConfigBuilder
                                 .setConnectTimeout(ESConnecTimeOut)
                                 .setSocketTimeout(ESSocketTimeout));
-        final RestHighLevelClient restClient = new RestHighLevelClient(builder);
+                                */
+      //  final RestHighLevelClient restClient = new RestHighLevelClient(builder);
+        
+        final RestHighLevelClient restClient = EsProcess.getInstance().getEsConnection();
 
         return restClient;
     }
 
     KafkaConsumer<String, IMessage> kafkaConnect()
     {
+
+    	
+        final KafkaClusterComponentMap lKafkaClusterComponentMap = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(COMPONENT, ClusterType.COMMON);
+
+        final String lKafkaConsumerClusterName = lKafkaClusterComponentMap.getKafkaConsumerClusterName();
+
+        final KafkaClusterInfo lKafkaClusterInfo = KafkaDataLoader.getInstance().getKafkaClusterInfo(lKafkaConsumerClusterName);
+
+        final Properties              consumerProps           = PropertyLoader.getInstance().getPropertiesByFileName( lKafkaClusterInfo.getKafkaConsumerProperties());
+
+        consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, KafkaTopicName);
+        consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaClusterComponentMap.getKafkaConsumerGroupName()+"-k2e-"+System.getenv("topicgroupid"));
+        consumerProps.setProperty(PROPERTY_CLIENT_ID, ConsumerClientID);
+  /*      
         final Properties ConsumerProps = new Properties();
         final String     KafkaServers  = this.AppConfig.getString("kafka.bootstrap.servers");
         ConsumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaServers);
@@ -135,9 +166,8 @@ public class Kafka2ESConsumerThread
         ConsumerProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, this.AppConfig.getString("kafka.max.poll.records"));
         ConsumerProps.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, this.AppConfig.getString("kafka.session.timeout.ms"));
         ConsumerProps.put(ConsumerConfig.CLIENT_ID_CONFIG, this.ConsumerClientID);
-
-        log.info("Kafka Bootstap Servers: " + KafkaServers);
-        final KafkaConsumer<String, IMessage> consumer = new KafkaConsumer<>(ConsumerProps);
+*/
+        final KafkaConsumer<String, IMessage> consumer = new KafkaConsumer<>(consumerProps);
         return consumer;
     }
 
@@ -153,11 +183,21 @@ public class Kafka2ESConsumerThread
 
             try
             {
-                if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    dataJSON = Kafka2ESJSONUtil.buildSubJSON(iMsg);
-                else
-                    if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        dataJSON = Kafka2ESJSONUtil.buildDelJSON(iMsg);
+                if (COMPONENT==Component.T2DB_SUBMISSION){
+                    dataJSON = Kafka2ESJSONUtil.buildSubJSON(iMsg,
+                             ESIndexUniqueColumn,
+                             Kafka2ESConstants.subUpdTmColumn,
+                             ListESColMap);
+                }
+                else if(COMPONENT==Component.T2DB_DELIVERIES) {
+                	
+                    dataJSON = Kafka2ESJSONUtil.buildDelJSON(iMsg,
+                            ESIndexUniqueColumn,
+                            Kafka2ESConstants.delUpdTmColumn,
+                            ListESColMap);
+
+                }
+                   
             }
             catch (final Exception ex)
             {
@@ -189,12 +229,11 @@ public class Kafka2ESConsumerThread
             if (!"".equals(baseMsgId))
             {
                 JSONObject fmsgJSON = null;
-                if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    fmsgJSON = Kafka2ESJSONUtil.buildSubFMSGJSON(dataJSON, baseMsgId);
-                else
-                    if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        fmsgJSON = Kafka2ESJSONUtil.buildDelFMSGJSON(dataJSON, baseMsgId);
-
+                if (COMPONENT==Component.T2DB_SUBMISSION){
+                    fmsgJSON = Kafka2ESJSONUtil.buildSubFMSGJSON(dataJSON, baseMsgId,ESFmsgIndexUniqueColumn);
+                } else if(COMPONENT==Component.T2DB_DELIVERIES) {
+                        fmsgJSON = Kafka2ESJSONUtil.buildDelFMSGJSON(dataJSON, baseMsgId,ESFmsgIndexUniqueColumn);
+                }
                 if (fmsgJSON != null)
                 {
                     final UpdateRequest fmsgupdateRequest = new UpdateRequest(this.ESFmsgIndexName, baseMsgId)
@@ -366,8 +405,7 @@ public class Kafka2ESConsumerThread
 
                 log.info("Total records processed: " + ProcCount);
                 log.info("Consumer Thread stopped");
-                StartApplication.logMsg("Total records processed: " + ProcCount);
-                StartApplication.logMsg("Consumer Thread stopped");
+              
             }
             catch (final Exception ex2)
             {
@@ -392,7 +430,6 @@ public class Kafka2ESConsumerThread
         if (stopped.get())
             return;
         stopped.set(true);
-        StartApplication.logMsg("Stop Flag has been set");
         CommonUtility.sleepForAWhile(500);
         if (TopicConsumer != null)
             TopicConsumer.wakeup();

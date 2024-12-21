@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.client.RestClient;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
@@ -23,22 +24,13 @@ import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.ESIndex
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.Kafka2ESConstants;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.Kafka2ESConsumerThread;
 
-public class StartApplication
+public class StartApplicationSub
 {
 
     private static final K2ESLog                              log                     = K2ESLog.getInstance();
     public static String                                  ESClientTypeConfig      = null;
     public static AppConfiguration                        AppConfig               = null;
-    public static String                                  AppMode                 = null;
 
-    public static String                                  AppProcID               = null;
-    public static String                                  HostIPAddr              = null;
-
-    public static String                                  ESIndexName             = null;
-    public static String                                  ESIndexUniqueColumn     = null;
-
-    public static String                                  ESFmsgIndexName         = null;
-    public static String                                  ESFmsgIndexUniqueColumn = null;
 
     public static String                                  ESDocUpdTmColumn        = null;
 
@@ -49,11 +41,12 @@ public class StartApplication
     public static String                                  PRIORITY          = null;
 
     public static int                                     KafkaConsGrpSeq         = -1;
+
     public  String                                  KafkaConsGrpID          = null;
 
     public static HashMap<String, Kafka2ESConsumerThread> HMConsumerThreads       = null;
 
-    public static Thread                                  mainThread              = null;
+ //   public static Thread                                  mainThread              = null;
 
     public static RestClient                              ES_LRC_Client           = null;
     public static RestClient                              ESErr_LRC_Client        = null;
@@ -75,22 +68,13 @@ public class StartApplication
     static void fetchESColMapFromDB()
             throws Exception
     {
-        final String MariaDBHost     = AppConfig.getString("mariadb.host");
-        final String MariaDBPort     = AppConfig.getString("mariadb.port");
-        final String MariaDBDatabase = AppConfig.getString("mariadb.database");
-        final String MariaDBUser     = AppConfig.getString("mariadb.user");
-        final String MysqlPassword   = AppConfig.getString("mariadb.password");
-
-        final String MariaDBJDBCURL  = "jdbc:mariadb://" + MariaDBHost + ":" + MariaDBPort + "/" + MariaDBDatabase;
-
+       
         String       SQL             = "select column_name, mapped_name, column_type, default_value, ci_column_required ";
-        SQL += " from configuration.es_sub_del_t2_col_map where index_type='" + AppMode;
-        SQL += "' and column_name != '" + ESIndexUniqueColumn + "'";
+        SQL += " from configuration.es_sub_del_t2_col_map where index_type='submission' and column_name != '" + AppConfig.getString("es.index.uidcolumn") + "'";
 
         log.info("ES Index Column Map SQL: " + SQL);
-        log.info("Connecting MariaDB: " + MariaDBJDBCURL);
 
-        final Connection conn = DriverManager.getConnection(MariaDBJDBCURL, MariaDBUser, MysqlPassword);
+        final Connection conn = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CONFIGURATION.getKey()));
         final Statement  stmt = conn.createStatement();
         stmt.setFetchSize(100);
         final ResultSet rsColMap = stmt.executeQuery(SQL);
@@ -132,7 +116,7 @@ public class StartApplication
         }
     }
 
-    static void stopConsumerThreads()
+    public static void stopConsumerThreads()
             throws Exception
     {
 
@@ -177,9 +161,7 @@ public class StartApplication
             }
 
 			*/
-            mainThread      = Thread.currentThread();
 
-            AppMode         = System.getenv("appmode");//args[0];
             PRIORITY  = System.getenv("priority");//args[1];
             KafkaConsGrpSeq = Integer.parseInt(System.getenv("topicgroupid"));//Integer.parseInt(args[2]);
             final int threadCount = Integer.parseInt(System.getenv("threadcount"));//Integer.parseInt(args[3]);
@@ -193,107 +175,25 @@ public class StartApplication
                 return;
             }
 
-            if (!AppMode.equals(Kafka2ESConstants.subMode) && !AppMode.equals(Kafka2ESConstants.delMode))
-            {
-                log.error("Invalid Consumer Mode: " + AppMode);
-                log.error("Valid Modes are : " + Kafka2ESConstants.subMode + ", " + Kafka2ESConstants.delMode);
-                System.err.println("Invalid Consumer Mode: " + AppMode);
-                return;
-            }
+        
 
-            if (AppMode.equals(Kafka2ESConstants.subMode)) {
-                ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
-                KafkaTopicName=rechangeTopicName(Component.T2DB_SUBMISSION.getKey());
-            }else {
-                if (AppMode.equals(Kafka2ESConstants.delMode)) {
-                    ESDocUpdTmColumn = Kafka2ESConstants.delUpdTmColumn;
-                    KafkaTopicName=rechangeTopicName(Component.T2DB_DELIVERIES.getKey());
-
-                }
-            }
-
-            if ("".equals(KafkaTopicName))
-            {
-                log.error("Kafka Topic name is empty");
-                System.err.println("Kafka Topic name is empty");
-                return;
-            }
-            else
-                if (!KafkaTopicName.contains(AppMode))
-                {
-                    log.error("Invalid Kafka Topic name for Consumer Mode");
-                    System.err.println("Invalid Kafka Topic name for Consumer Mode");
-                    return;
-                }
+         
+             
+                    ESDocUpdTmColumn = Kafka2ESConstants.subUpdTmColumn;
+                    KafkaTopicName=rechangeTopicName(Component.T2DB_SUBMISSION.getKey());
 
             // final String vmName = ManagementFactory.getRuntimeMXBean().getName();
             // AppProcID = vmName.substring(0, vmName.indexOf("@"));
 
-            AppProcID = CommonUtility.getJvmProcessId();
 
-            if (AppProcID.equals("-999999"))
-            {
-                log.error("Unable to get JVM Proces Id, Exiting...");
-                System.err.println("Unable to get JVM Proces Id, Exiting...");
-                return;
-            }
+           
 
-            HostIPAddr = CommonUtility.getApplicationServerIp();
-
-            if (HostIPAddr.equals("unknown"))
-            {
-                log.error("Unable to get Host IP Address, Exiting...");
-                System.err.println("Unable to get Host IP Address, Exiting...");
-                return;
-            }
 
             AppConfig   = AppConfigLoader.getInstance().getAppConfiguration();
-            ESIndexName = AppConfig.getString("es.index.name");
 
-            if ("".equals(ESIndexName))
-            {
-                log.error("Elastic Index name is empty");
-                System.err.println("Elastic Index name is empty");
-                return;
-            }
+           
 
-            ESIndexUniqueColumn = AppConfig.getString("es.index.uidcolumn");
-
-            if ("".equals(ESIndexUniqueColumn))
-            {
-                log.error("Elastic Index Unique Column name is empty");
-                System.err.println("Elastic Index Unique Column name is empty");
-                return;
-            }
-
-            ESFmsgIndexName = AppConfig.getString("es.fmsg.index.name");
-
-            if ("".equals(ESFmsgIndexName))
-            {
-                log.error("Elastic Full Message Index name is empty");
-                System.err.println("Elastic Full Message Index name is empty");
-                return;
-            }
-
-            ESFmsgIndexUniqueColumn = AppConfig.getString("es.fmsg.index.uidcolumn");
-
-            if ("".equals(ESFmsgIndexUniqueColumn))
-            {
-                log.error("Elastic Full Message Index Unique Column name is empty");
-                System.err.println("Elastic Full Message Index Unique Column name is empty");
-                return;
-            }
-
-            log.info("Kafka Consumer for ES started, Mode: " + AppMode);
-            log.info("Host IP Address: " + HostIPAddr);
-            log.info("App Process ID: " + AppProcID);
-            log.info("Kafka2ES Consumer Application started, Mode: " + AppMode);
             log.info("Kafka Topic Name: " + KafkaTopicName);
-      //      log.info("Kafka Consumer Group ID: " + KafkaConsGrpID);
-            log.info("Elastic Index name: " + ESIndexName);
-            log.info("Elastic Index Unique Column Name : " + ESIndexUniqueColumn);
-            log.info("Elastic Full Message Index name: " + ESFmsgIndexName);
-            log.info("Elastic Full Message Index Unique Column Name : " + ESFmsgIndexUniqueColumn);
 
             log.info("Fetching Column map details from DB ...");
             fetchESColMapFromDB();
@@ -330,7 +230,7 @@ public class StartApplication
 
                      Kafka2ESConsumerThread ct     = null;
 
-                     ct = new Kafka2ESConsumerThread(thName,topicname,KafkaConsGrpID);
+                     ct = new Kafka2ESConsumerThread(thName,topicname,KafkaConsGrpID,AppConfig,Component.T2DB_SUBMISSION,ListESColMap);
                      HMConsumerThreads.put(thName, ct);
                      log.info("Starting Consumer Thread: " + thName);
                      ct.start();
@@ -340,24 +240,7 @@ public class StartApplication
             }
 
            
-            log.info("Adding Shutdown Hook ...");
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                Thread.currentThread().setName("ShutdownHook");
-                log.info("Shutdown signal received");
-                log.info("Waiting for Consumer Threads to join...");
-
-                try
-                {
-                    StartApplication.stopConsumerThreads();
-                    StartApplication.mainThread.join();
-                }
-                catch (final Exception ex)
-                {
-                    // TODO Auto-generated catch block
-                    ex.printStackTrace(System.err);
-                }
-            }));
-
+           
             for (final Kafka2ESConsumerThread ct : HMConsumerThreads.values())
                 ct.join();
         }
@@ -381,8 +264,8 @@ public class StartApplication
                         }
 
                 CommonUtility.sleepForAWhile(1000);
-                log.info("Kafka2ES Consumer Application Mode: " + AppMode + ", stopped");
-                logMsg("Kafka2ES Consumer Application Mode: " + AppMode + ", stopped");
+                log.info("Kafka2ES Consumer Application Mode:  stopped");
+                logMsg("Kafka2ES Consumer Application Mode:  stopped");
             }
             catch (final Exception ex2)
             {

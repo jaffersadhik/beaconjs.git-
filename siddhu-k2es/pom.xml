@@ -68,9 +68,15 @@
   
   <dependency>
 			<groupId>beacon</groupId>
+			<artifactId>platform-elasticsearchutil</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>common-splog</artifactId>
 			<version>1.0</version>
 		</dependency>
+	
 		 <dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-constants</artifactId>
@@ -117,6 +123,11 @@
 
 		
 		
-</dependencies>
+    	<dependency>
+    		<groupId>beacon</groupId>
+    		<artifactId>common-messageprocessor</artifactId>
+    		<version>1.0</version>
+    	</dependency>
+    </dependencies>
 
 </project>

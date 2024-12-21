@@ -1,18 +1,21 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
 import java.io.FileReader;
+import java.util.Iterator;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
+import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.errorlog.K2ESLog;
 
 public class AppConfiguration
 {
 
     private static final K2ESLog                              log                     = K2ESLog.getInstance();
-    private final Properties prpConfig = new Properties();
+    private  Properties prpConfig = new Properties();
 
     public AppConfiguration(
             String fileName)
@@ -26,10 +29,39 @@ public class AppConfiguration
             throws Exception
     {
         final FileReader cfgReader = new FileReader(fileName);
-        prpConfig.load(cfgReader);
-        cfgReader.close();
+        prpConfig= readProperties();
     }
 
+    private static Properties readProperties() throws ItextosRuntimeException
+    {
+
+        try
+        {
+            final PropertiesConfiguration pc = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.COMMON_K2ES_PROPERTIES, true);
+
+            if (pc != null)
+            {
+                final Properties       props   = new Properties();
+                final Iterator<String> keys    = pc.getKeys();
+                String                 currKey = null;
+
+                while (keys.hasNext())
+                {
+                    currKey = keys.next();
+                    props.setProperty(currKey, pc.getString(currKey));
+                }
+
+                return props;
+            }
+            throw new ItextosRuntimeException("Unable to load the common db properties");
+        }
+        catch (final Exception exp)
+        {
+            log.error("Problem loading property file...", exp);
+            throw new ItextosRuntimeException("Unable to load the common db properties");
+        }
+    }
+    
     public String getString(
             String key)
     {

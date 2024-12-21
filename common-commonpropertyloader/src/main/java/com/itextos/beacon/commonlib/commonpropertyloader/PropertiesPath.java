@@ -3,6 +3,7 @@ package com.itextos.beacon.commonlib.commonpropertyloader;
 public enum PropertiesPath
 {
 
+    COMMON_K2ES_PROPERTIES("commmon.k2es.properties.key"),
     COMMON_DATABASE_PROPERTIES("commmon.database.properties.key"),
     COMMON_REDIS_PROPERTIES("common.redis.properties.key"),
     MESSAGE_ID_GENERATOR_PROPERTIES("messageid.generator.properties.key"),

@@ -1,7 +1,5 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.client.Request;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.ResponseListener;
@@ -9,7 +7,6 @@ import org.elasticsearch.client.RestClient;
 import org.json.simple.JSONObject;
 
 import com.itextos.beacon.errorlog.K2ESLog;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
 public class ESUpdateResponseListener
         implements
@@ -42,7 +39,7 @@ public class ESUpdateResponseListener
 
         if (ESClient != null)
         {
-            final String msgId = (String) ESData.get(StartApplication.ESIndexUniqueColumn);
+            final String msgId = (String) ESData.get("msg_id");
             final String msg   = String.format("Error while updating Data:[%s] %s", msgId, ESData.toJSONString());
             log.error("Error while updating Data: " + ESData.toJSONString());
             final String err_msg = String.format("Error occurred [%s]", msgId);
@@ -50,8 +47,7 @@ public class ESUpdateResponseListener
 
             try
             {
-                final Request ESReq = new Request("POST", "/" + StartApplication.ESIndexName +
-                        "/_update/" + msgId);
+                final Request ESReq = new Request("POST", "/sub_del_t2/_update/" + msgId);
                 ESReq.setJsonEntity(ESData.toJSONString());
                 final ESUpdateResponseListener uRL = new ESUpdateResponseListener(ESData,
                         null);

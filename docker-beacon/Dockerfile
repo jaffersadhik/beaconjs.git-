@@ -15,6 +15,7 @@ COPY ./target/common/custom_hosts_production.properties /custom_hosts_production
 COPY ./target/common/smpp-interface.properties /smpp-interface.properties
 COPY ./target/common/encrypt.properties /encrypt.properties
 COPY ./target/common/dnd.properties /dnd.properties
+COPY ./target/common/common-k2es.properties /common-k2es.properties
 COPY ./target/common/dlttemplateconfig.properties /dlttemplateconfig.properties
 COPY ./target/common/common.properties /common.properties
 COPY ./target/common/callback-params.properties /callback-params.properties

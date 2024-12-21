@@ -1,6 +1,7 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.json.simple.JSONObject;
@@ -14,7 +15,6 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
 public class Kafka2ESJSONUtil
 {
@@ -30,7 +30,10 @@ public class Kafka2ESJSONUtil
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubJSON(
-            IMessage iMsg)
+            IMessage iMsg,
+            String ESIndexUniqueColumn,
+            String ESDocUpdTmColumn,
+            ArrayList<ESIndexColMapValue> ListESColMap)
     {
         boolean                isEmptyJSON = true;
         final SubmissionObject subObject   = (SubmissionObject) iMsg;
@@ -39,12 +42,12 @@ public class Kafka2ESJSONUtil
         final JSONObject       subJSON     = new JSONObject();
 
         final String           msgId       = subObject.getMessageId();
-        subJSON.put(StartApplication.ESIndexUniqueColumn, msgId);
+        subJSON.put(ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);
-        subJSON.put(StartApplication.ESDocUpdTmColumn, dataUpdTime);
+        subJSON.put(ESDocUpdTmColumn, dataUpdTime);
 
-        for (final ESIndexColMapValue esColMap : StartApplication.ListESColMap)
+        for (final ESIndexColMapValue esColMap : ListESColMap)
         {
             final String  colName       = esColMap.ColumnName;
             final String  colType       = esColMap.ColumnType;
@@ -251,13 +254,14 @@ public class Kafka2ESJSONUtil
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubFMSGJSON(
             JSONObject joSubObject,
-            String baseMsgId)
+            String baseMsgId,
+            String ESFmsgIndexUniqueColumn)
     {
         boolean          isEmptyJSON = true;
         String           colValue    = null;
         String           colName     = null;
         final JSONObject fmsgJSON    = new JSONObject();
-        fmsgJSON.put(StartApplication.ESFmsgIndexUniqueColumn, baseMsgId);
+        fmsgJSON.put(ESFmsgIndexUniqueColumn, baseMsgId);
 
         final int msgPartNo = (int) joSubObject.get("msg_part_no");
 
@@ -352,7 +356,7 @@ public class Kafka2ESJSONUtil
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildDelJSON(
-            IMessage iMsg)
+            IMessage iMsg,String ESIndexUniqueColumn,String ESDocUpdTmColumn,ArrayList<ESIndexColMapValue> ListESColMap)
     {
         boolean              isEmptyJSON = true;
         final DeliveryObject delObject   = (DeliveryObject) iMsg;
@@ -361,12 +365,12 @@ public class Kafka2ESJSONUtil
         final JSONObject     delJSON     = new JSONObject();
 
         final String         msgId       = delObject.getMessageId();
-        delJSON.put(StartApplication.ESIndexUniqueColumn, msgId);
+        delJSON.put(ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);
-        delJSON.put(StartApplication.ESDocUpdTmColumn, dataUpdTime);
+        delJSON.put(ESDocUpdTmColumn, dataUpdTime);
 
-        for (final ESIndexColMapValue esColMap : StartApplication.ListESColMap)
+        for (final ESIndexColMapValue esColMap : ListESColMap)
         {
             final String  colName       = esColMap.ColumnName;
             final String  colType       = esColMap.ColumnType;
@@ -470,13 +474,14 @@ public class Kafka2ESJSONUtil
     @SuppressWarnings("unchecked")
     public static JSONObject buildDelFMSGJSON(
             JSONObject joDelObject,
-            String baseMsgId)
+            String baseMsgId,
+            String ESFmsgIndexUniqueColumn)
     {
         boolean          isEmptyJSON = true;
         String           colValue    = null;
         String           colName     = null;
         final JSONObject fmsgJSON    = new JSONObject();
-        fmsgJSON.put(StartApplication.ESFmsgIndexUniqueColumn, baseMsgId);
+        fmsgJSON.put(ESFmsgIndexUniqueColumn, baseMsgId);
         colName  = "dn_ori_sts_code";
         colValue = CommonUtility.nullCheck(joDelObject.get(colName));
 
