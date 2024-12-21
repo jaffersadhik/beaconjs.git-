@@ -12,11 +12,14 @@ import org.elasticsearch.client.RestClient;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
+import com.itextos.beacon.errorlog.ErrorLog;
 import com.itextos.beacon.errorlog.K2ESLog;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfigLoader;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer.AppConfiguration;
@@ -74,10 +77,15 @@ public class StartApplicationSub
 
         log.info("ES Index Column Map SQL: " + SQL);
 
-        final Connection conn = DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CONFIGURATION.getKey()));
-        final Statement  stmt = conn.createStatement();
-        stmt.setFetchSize(100);
-        final ResultSet rsColMap = stmt.executeQuery(SQL);
+        Connection conn=null;
+        Statement  stmt=null;
+        ResultSet rsColMap=null;
+        try {
+         conn =DBDataSourceFactory.getConnectionFromThin(JndiInfo.CONFIGURARION_DB);
+       
+        stmt = conn.createStatement();
+        stmt.setFetchSize(500);
+         rsColMap = stmt.executeQuery(SQL);
 
         ListESColMap = new ArrayList<>();
         boolean ErrorFlag    = false;
@@ -105,15 +113,31 @@ public class StartApplicationSub
             ListESColMap.add(new ESIndexColMapValue(column_name, map_name, column_type, default_value, ci_req_flag));
         }
 
-        rsColMap.close();
-        stmt.close();
-        conn.close();
-
-        if (ErrorFlag)
-        {
-            log.error(ErrorMessage);
-            throw new Exception(ErrorMessage);
+        }catch(Exception e) {
+        	
+        	ErrorLog.log(ErrorMessage.getStackTraceAsString(e));
+        	
+        }finally {
+        	
+        	try {
+        		rsColMap.close();
+        	}catch(Exception e) {
+        		
+        	}
+        	try {
+                stmt.close();
+        	}catch(Exception e) {
+        		
+        	}
+        	try {
+                conn.close();
+        	}catch(Exception e) {
+        		
+        	}
         }
+        
+
+       
     }
 
     public static void stopConsumerThreads()
