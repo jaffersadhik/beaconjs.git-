@@ -129,7 +129,7 @@ public class StartApplication
         }
     }
 
-    static void stopConsumerThreads()
+    public static void stopConsumerThreads()
             throws Exception
     {
 

@@ -8,8 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN;
-import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub;
+import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.TimeTakenLog;
 
@@ -336,8 +335,10 @@ public class App {
 
              try
              {
-                 StartApplicationDN.stopConsumerThreads();
-                 StartApplicationSub.stopConsumerThreads();
+                  StartApplication.stopConsumerThreads();
+
+              //   StartApplicationDN.stopConsumerThreads();
+                // StartApplicationSub.stopConsumerThreads();
 
              }
              catch (final Exception ex)
@@ -494,8 +495,7 @@ public class App {
 			return true;			
 		}else if(module.equals("k2es")) {
 			
-			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub.main(args);
-			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN.main(args);
+			com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
@@ -597,9 +597,9 @@ public class App {
 
 			return true;
 			
-		}else if(module.equals("digitalt2dbes")){
+		}else if(module.equals("digitalt2db")){
 			
-			startDigitalT2DBEs(args);
+			startDigitalT2DB(args);
 			
 			IS_START_PROMETHEUS=true;
 
@@ -752,12 +752,9 @@ public class App {
 		return false;
 	}
 
-	private static void startDigitalT2DBEs(String[] args) {
+	private static void startDigitalT2DB(String[] args) {
 		
 		
-
-		com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationSub.main(args);
-		com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplicationDN.main(args);
 		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
