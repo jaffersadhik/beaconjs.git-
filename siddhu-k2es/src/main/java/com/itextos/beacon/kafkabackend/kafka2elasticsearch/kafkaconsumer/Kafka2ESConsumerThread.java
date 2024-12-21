@@ -3,11 +3,16 @@ package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
+import org.apache.http.HttpHost;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -17,22 +22,18 @@ import org.apache.kafka.common.errors.WakeupException;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.json.simple.JSONObject;
 
-import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
-import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.commonlib.messageprocessor.data.KafkaDataLoader;
-import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterComponentMap;
-import com.itextos.beacon.commonlib.messageprocessor.data.db.KafkaClusterInfo;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.errorlog.K2ESDataLog;
 import com.itextos.beacon.errorlog.K2ESLog;
-import com.itextos.beacon.platform.elasticsearchutil.EsProcess;
 
 public class Kafka2ESConsumerThread
         extends
@@ -112,7 +113,7 @@ public class Kafka2ESConsumerThread
 
     RestHighLevelClient esConnect()
     {
-    	/*
+    	
         final String         ESHosts         = this.AppConfig.getString("es.servers");
         final String[]       ESHSplit        = ESHosts.split("[,]");
         final int            ESConnecTimeOut = this.AppConfig.getInt("es.connection.timeout");
@@ -131,10 +132,10 @@ public class Kafka2ESConsumerThread
                         requestConfigBuilder -> requestConfigBuilder
                                 .setConnectTimeout(ESConnecTimeOut)
                                 .setSocketTimeout(ESSocketTimeout));
-                                */
-      //  final RestHighLevelClient restClient = new RestHighLevelClient(builder);
+                                
+        final RestHighLevelClient restClient = new RestHighLevelClient(builder);
         
-        final RestHighLevelClient restClient = EsProcess.getInstance().getEsConnection();
+      //  final RestHighLevelClient restClient = EsProcess.getInstance().getEsConnection();
 
         return restClient;
     }
@@ -142,7 +143,7 @@ public class Kafka2ESConsumerThread
     KafkaConsumer<String, IMessage> kafkaConnect()
     {
 
-    	
+    /*	
         final KafkaClusterComponentMap lKafkaClusterComponentMap = KafkaDataLoader.getInstance().getKafkaClusterComponentMap(COMPONENT, ClusterType.COMMON);
 
         final String lKafkaConsumerClusterName = lKafkaClusterComponentMap.getKafkaConsumerClusterName();
@@ -154,7 +155,7 @@ public class Kafka2ESConsumerThread
         consumerProps.setProperty(PROPERTY_KAFKA_TOPIC, KafkaTopicName);
         consumerProps.setProperty(PROPERTY_GROUP_ID, lKafkaClusterComponentMap.getKafkaConsumerGroupName()+"-k2e-"+System.getenv("topicgroupid"));
         consumerProps.setProperty(PROPERTY_CLIENT_ID, ConsumerClientID);
-  /*      
+ */      
         final Properties ConsumerProps = new Properties();
         final String     KafkaServers  = this.AppConfig.getString("kafka.bootstrap.servers");
         ConsumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaServers);
@@ -166,8 +167,8 @@ public class Kafka2ESConsumerThread
         ConsumerProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, this.AppConfig.getString("kafka.max.poll.records"));
         ConsumerProps.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, this.AppConfig.getString("kafka.session.timeout.ms"));
         ConsumerProps.put(ConsumerConfig.CLIENT_ID_CONFIG, this.ConsumerClientID);
-*/
-        final KafkaConsumer<String, IMessage> consumer = new KafkaConsumer<>(consumerProps);
+
+        final KafkaConsumer<String, IMessage> consumer = new KafkaConsumer<>(ConsumerProps);
         return consumer;
     }
 

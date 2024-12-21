@@ -73,7 +73,7 @@ public class StartApplicationDN
     {
        
         String       SQL             = "select column_name, mapped_name, column_type, default_value, ci_column_required ";
-        SQL += " from configuration.es_sub_del_t2_col_map where index_type='delivery' and column_name != '" + AppConfig.getString("es.index.uidcolumn") + "'";
+        SQL += " from configuration.es_sub_del_t2_col_map where index_type='deliveries' and column_name != '" + AppConfig.getString("es.index.uidcolumn") + "'";
 
         log.info("ES Index Column Map SQL: " + SQL);
 
