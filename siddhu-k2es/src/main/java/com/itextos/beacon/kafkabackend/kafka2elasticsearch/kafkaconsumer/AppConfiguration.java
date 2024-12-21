@@ -1,14 +1,8 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
 import java.io.FileReader;
-import java.util.Iterator;
 import java.util.Properties;
 
-import org.apache.commons.configuration.PropertiesConfiguration;
-
-import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
-import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
-import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.errorlog.K2ESLog;
 
 public class AppConfiguration
@@ -28,10 +22,13 @@ public class AppConfiguration
             String fileName)
             throws Exception
     {
-        final FileReader cfgReader = new FileReader(fileName);
-        prpConfig= readProperties();
-    }
 
+        final FileReader cfgReader = new FileReader(fileName);
+        prpConfig.load(cfgReader);
+        cfgReader.close();
+
+    }
+/*
     private static Properties readProperties() throws ItextosRuntimeException
     {
 
@@ -61,7 +58,7 @@ public class AppConfiguration
             throw new ItextosRuntimeException("Unable to load the common db properties");
         }
     }
-    
+  */  
     public String getString(
             String key)
     {
