@@ -1,7 +1,6 @@
 package com.itextos.beacon.kafkabackend.kafka2elasticsearch.kafkaconsumer;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.json.simple.JSONObject;
@@ -15,6 +14,7 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.HexUtil;
+import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
 
 public class Kafka2ESJSONConverter
 {
@@ -30,10 +30,7 @@ public class Kafka2ESJSONConverter
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubJSON(
-            IMessage iMsg,
-            String ESIndexUniqueColumn,
-            String ESDocUpdTmColumn,
-            ArrayList<ESIndexColMapValue> ListESColMap)
+            IMessage iMsg)
             throws Exception
     {
         boolean                isEmptyJSON = true;
@@ -43,12 +40,12 @@ public class Kafka2ESJSONConverter
         final JSONObject       subJSON     = new JSONObject();
 
         final String           msgId       = subObject.getMessageId();
-        subJSON.put(ESIndexUniqueColumn, msgId);
+        subJSON.put(StartApplication.ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);
-        subJSON.put(ESDocUpdTmColumn, dataUpdTime);
+        subJSON.put(StartApplication.ESDocUpdTmColumn, dataUpdTime);
 
-        for (final ESIndexColMapValue esColMap : ListESColMap)
+        for (final ESIndexColMapValue esColMap : StartApplication.ListESColMap)
         {
             final String  colName     = esColMap.ColumnName;
             final String  colType     = esColMap.ColumnType;
@@ -222,10 +219,7 @@ public class Kafka2ESJSONConverter
     }
 
     public static JSONObject buildDelJSON(
-            IMessage iMsg,
-            String ESIndexUniqueColumn,
-            String ESDocUpdTmColumn,
-            ArrayList<ESIndexColMapValue> ListESColMap)
+            IMessage iMsg)
             throws Exception
     {
         boolean              isEmptyJSON = true;
@@ -235,12 +229,12 @@ public class Kafka2ESJSONConverter
         final JSONObject     delJSON     = new JSONObject();
 
         final String         msgId       = delObject.getMessageId();
-        delJSON.put(ESIndexUniqueColumn, msgId);
+        delJSON.put(StartApplication.ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);
-        delJSON.put(ESDocUpdTmColumn, dataUpdTime);
+        delJSON.put(StartApplication.ESDocUpdTmColumn, dataUpdTime);
 
-        for (final ESIndexColMapValue esColMap : ListESColMap)
+        for (final ESIndexColMapValue esColMap : StartApplication.ListESColMap)
         {
             final String  colName     = esColMap.ColumnName;
             final String  colType     = esColMap.ColumnType;
