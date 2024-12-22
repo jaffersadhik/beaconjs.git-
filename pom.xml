@@ -378,6 +378,7 @@
    	<module>queryprocessor-paramvalidator</module>
    	<module>queryprocessor-threadpoolexecutor</module>
    	<module>queryprocessor-requestreceiver</module>
+   	<module>siddhu-jar</module>
   </modules>
   
 
