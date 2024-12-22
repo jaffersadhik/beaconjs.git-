@@ -49,13 +49,13 @@ public class QueryEngine
             final ServletContextHandler handler = new ServletContextHandler(server, "/");
 
             log.info("Preparing api routes");
-            handler.addServlet(GetData.class, "/get_data");
+            handler.addServlet(GetData.class.getName(), "/get_data");
 
-            handler.addServlet(CreateLogDataQueue.class, "/log_queue/initiate");
+            handler.addServlet(CreateLogDataQueue.class.getName(), "/log_queue/initiate");
 
-            handler.addServlet(LogDataQueueStatus.class, "/log_queue/status");
+            handler.addServlet(LogDataQueueStatus.class.getName(), "/log_queue/status");
 
-            handler.addServlet(LogDataQueueList.class, "/log_queue/list");
+            handler.addServlet(LogDataQueueList.class.getName(), "/log_queue/list");
 
             server.start();
 
