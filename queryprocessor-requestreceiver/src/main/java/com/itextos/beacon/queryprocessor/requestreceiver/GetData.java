@@ -24,6 +24,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
 import com.itextos.beacon.queryprocessor.databaseconnector.ConnectionPoolSingleton;
@@ -44,7 +45,7 @@ public class GetData
         HttpServlet
 {
 
-    private static final Log               log      = LogFactory.getLog(GetData.class);
+    private static final QPRLog log           = QPRLog.getInstance();
     private static ConnectionPoolSingleton connPool = null;
     public static String                   API_NAME = CommonVariables.GET_DATA_API;
 

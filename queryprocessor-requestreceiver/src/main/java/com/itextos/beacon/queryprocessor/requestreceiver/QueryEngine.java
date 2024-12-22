@@ -3,13 +3,12 @@ package com.itextos.beacon.queryprocessor.requestreceiver;
 import java.io.FileReader;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
+import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.databaseconnector.ConnectionPoolSingleton;
 
 public class QueryEngine
@@ -17,7 +16,7 @@ public class QueryEngine
 
     public static Server     server        = null;
     static final Properties  mySQL_cfg_val = new Properties();
-    private static final Log log           = LogFactory.getLog(QueryEngine.class);
+    private static final QPRLog log           = QPRLog.getInstance();
 
     public static void main(
             String[] args)

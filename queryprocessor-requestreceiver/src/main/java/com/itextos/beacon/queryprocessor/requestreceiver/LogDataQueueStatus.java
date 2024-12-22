@@ -13,6 +13,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
 import com.itextos.beacon.queryprocessor.databaseconnector.DBConnectionProvider;
@@ -32,7 +33,7 @@ public class LogDataQueueStatus
         HttpServlet
 {
 
-    private static final Log log           = LogFactory.getLog(LogDataQueueStatus.class);
+    private static final QPRLog log           = QPRLog.getInstance();
     public static String     API_NAME      = CommonVariables.LOG_QUEUE_STATUS_API;
     static Pattern           queid_pattern = Pattern
             .compile("\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b");

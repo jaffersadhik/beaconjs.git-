@@ -136,6 +136,8 @@ public class StartApplication
         try
         {
 
+        	if(HMConsumerThreads!=null) {
+        		
             for (final Kafka2ESConsumerThread ct : HMConsumerThreads.values())
             {
                 final String ctName = ct.getConsumerThreadName();
@@ -151,6 +153,7 @@ public class StartApplication
                 }
             }
             logMsg("Consumer Threads are stopped");
+        	}
         }
         catch (final Exception ex)
         {

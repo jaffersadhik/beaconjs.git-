@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.databaseconnector.DBConnectionProvider;
 import com.itextos.beacon.queryprocessor.databaseconnector.ResultSetConverter;
@@ -31,7 +32,7 @@ public class LogDataQueueList
         HttpServlet
 {
 
-    private static final Log log      = LogFactory.getLog(LogDataQueueList.class);
+    private static final QPRLog log           = QPRLog.getInstance();
     public static String     API_NAME = CommonVariables.LOG_QUEUE_LIST_API;
 
     /**

@@ -13,6 +13,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
 import com.itextos.beacon.queryprocessor.databaseconnector.ConnectionPoolSingleton;
@@ -32,7 +33,7 @@ public class CreateLogDataQueue
         HttpServlet
 {
 
-    private static final Log               log      = LogFactory.getLog(QueryEngine.class);
+    private static final QPRLog log           = QPRLog.getInstance();
     public static String                   API_NAME = CommonVariables.LOG_QUEUE_CREATE_API;
     private static ConnectionPoolSingleton connPool = null;
 
