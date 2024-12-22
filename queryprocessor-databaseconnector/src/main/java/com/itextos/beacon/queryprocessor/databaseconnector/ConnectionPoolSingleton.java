@@ -321,7 +321,7 @@ public class ConnectionPoolSingleton
         final Statement stmt           = mDBConnection.createStatement();
         final String    ssql           = "select id, url, description, username, password, driver_class_name, "
                 + "validation_query, num_tests_per_eviction_run, min_evictable_idle_time_millis,max_total "
-                + " from jndi_info";
+                + " from sysconfig.jndi_info";
         final ResultSet rsDatabaseInfo = stmt.executeQuery(ssql);
 
         // map the db id with the host id - currently description is used
