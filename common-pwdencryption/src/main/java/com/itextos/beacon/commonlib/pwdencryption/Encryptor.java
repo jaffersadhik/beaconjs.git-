@@ -122,6 +122,12 @@ public class Encryptor
         return encrypt(CryptoType.HASHING_BCRYPT, RandomString.getGuiPassword(), null);
     }
     
+    public static EncryptedObject getGuiPassword(String password)
+            throws Exception
+    {
+        return encrypt(CryptoType.HASHING_BCRYPT, password, null);
+    }
+    
     public static String getGuiDecryptedPassword(String pass)
             throws Exception
     {
@@ -159,32 +165,32 @@ public class Encryptor
         	}*/
         	
       	  final String lDecryptedDbPassword = getSmppDecryptedPassword("hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3");
-          System.out.println(lDecryptedDbPassword);//Pf5X7wpt
+        //  System.out.println(lDecryptedDbPassword);//Pf5X7wpt
           
         	
         	  String lApiPassword = getApiDecryptedPassword("i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY");
-             System.out.println(lApiPassword);//WPzDMqbaVqG8
+          //   System.out.println(lApiPassword);//WPzDMqbaVqG8
              
              
             // $2a$10$QZbSGc10EcUdBX9Z00Hmgepw5RK8RFaP4xPbcZX87GEWddoUGHna.
         	// gui ; EncryptedObject [mActualString=HyePFO6oNqNz, mEncryptedWithIvAndSalt=$2a$10$d8jxByZmbR2ZFziViQbSneaGzPJ5rs/R.c8J6n1OyvBm8zrVhrHpa]
 
-             System.out.println(" gui ; "+getGuiPassword());//
+             System.out.println(" gui : "+getGuiPassword("test@123"));// $2a$10$bOcAL/Bp4sEeMrZM0IJfVueXiux3UJT5JzmlT1Bx5YPSQDJE8RwFi
          	//
              lApiPassword = getApiDecryptedPassword("O3qFcs1c5VVFk3++2mG3D0FrMUxWdGtkcUplWxQtjQmiXylt8NDgNRj+");
              //
-             System.out.println(lApiPassword);//LSIqeA3pGMsi
+        //     System.out.println(lApiPassword);//LSIqeA3pGMsi
         	
              
 
         	 String lDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
 
-           System.out.println(lDbPassword);//Sy5Cf8@123
+          // System.out.println(lDbPassword);//Sy5Cf8@123
 
 
      lDbPassword = getDecryptedDbPassword("YSrU1+RIM5hwN+ycQQdy4XhlOGhoU3RrYmtELgjZwSBQBXSHJ8AUHk/I");
 
-          System.out.println(lDbPassword);//itextos@202110
+      //    System.out.println(lDbPassword);//itextos@202110
 
            
             

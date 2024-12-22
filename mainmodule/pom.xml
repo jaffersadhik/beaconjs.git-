@@ -880,6 +880,18 @@
 			<artifactId>fb-utils</artifactId>
 			<version>1.0</version>
 	</dependency>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>queryprocessor-requestreceiver</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>queryprocessor-threadpoolexecutor</artifactId>
+			<version>1.0</version>
+	</dependency>
 
 </dependencies>	
 	
