@@ -24,7 +24,7 @@ public class QueryEngine
 
         try
         {
-            final String cfg_fn = args[0];
+            final String cfg_fn = "/req_receiver.properties";//args[0];
             log.info("Reading values from config file: " + cfg_fn);
             final FileReader file = new FileReader(cfg_fn);
             mySQL_cfg_val.load(file);
