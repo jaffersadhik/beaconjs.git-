@@ -1,9 +1,9 @@
 version: '3'
 services:
   api:
-    image: dk-reg.mas:5000/node-cmjobs:07apr2024
+    image: dk-reg.mas:5000/node-cmjobs:24dec2024
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes: ['./logs:/logs']
   
