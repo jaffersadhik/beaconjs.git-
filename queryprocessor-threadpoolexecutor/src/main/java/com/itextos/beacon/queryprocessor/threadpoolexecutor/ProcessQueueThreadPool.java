@@ -22,11 +22,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
@@ -42,7 +45,7 @@ public class ProcessQueueThreadPool
 
     private static final Log log           = LogFactory.getLog(ProcessQueueThreadPool.class);
     static int               MAX_T         = 1;
-    static final Properties  mySQL_cfg_val = new Properties();
+	static PropertiesConfiguration pc   = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.QUERY_LOG_PROCESSOR_PROPERTIES, true);
 
     public static void main(
             String[] args)
@@ -62,7 +65,7 @@ public class ProcessQueueThreadPool
         	final ConnectionPoolSingleton connPool = ConnectionPoolSingleton.createInstance();
             masterDBConn = DBConnectionProvider.getMasterDBConnection();
 
-            MAX_T        = Utility.getInteger(mySQL_cfg_val.getProperty("maxExecutorThreads").trim());
+            MAX_T        = Utility.getInteger(pc.getString("maxExecutorThreads").trim());
             log.info("Queue Processor Executor Max Threads: " + MAX_T);
             // creates a thread pool with MAX_T no. of
             // threads as the fixed pool size(Step 2)
@@ -237,7 +240,7 @@ class GenerateRequestedData
                 final JSONObject paramFilters   = (JSONObject) paramJson.get("filters");
 
                 final boolean    sort_available = !Utility.nullCheck(paramJson.get("sort_by"), true).equals("");
-                final String     sqliteFilePath = ProcessQueueThreadPool.mySQL_cfg_val.getProperty("sqlLiteFilePath")
+                final String     sqliteFilePath = ProcessQueueThreadPool.pc.getString("sqlLiteFilePath")
                         .trim();
 
                 String           sort_field     = null;
@@ -274,7 +277,7 @@ class GenerateRequestedData
                     sqliteCP.GetDBConnection();
                 }
 
-                final String         csvFilePath    = ProcessQueueThreadPool.mySQL_cfg_val.getProperty("csvFilePath")
+                final String         csvFilePath    = ProcessQueueThreadPool.pc.getString("csvFilePath")
                         .trim();
                 final String         csvFilename    = csvFilePath + File.separator + queue_id + ".csv";
                 boolean              isColumnsPrint = false;
