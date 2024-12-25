@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Properties;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 
 public class DBConnectionProvider
@@ -93,20 +96,21 @@ public class DBConnectionProvider
         hmConnPool.put(dbID, BasicDataSourceFactory.createDataSource(DB_CP_Props));
     }
 
-    public static Connection getDriectConnection(
-            String DB_TYPE,
-            Properties DB_CFG_val)
+    public static Connection getDriectConnection(String DB_TYPE
+            )
             throws Exception
     {
         Connection dbConn = null;
 
+         final PropertiesConfiguration mProps = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.QUERY_LOG_PROCESSOR_PROPERTIES, true);
+
         if (DB_TYPE.equals(CommonVariables.MARIA_DB))
         {
-            final String MariaDBHost     = DB_CFG_val.getProperty("mysql.host");
-            final String MariaDBPort     = DB_CFG_val.getProperty("mysql.port");
-            final String MariaDBDatabase = DB_CFG_val.getProperty("mysql.db");
-            final String MariaDBUser     = DB_CFG_val.getProperty("mysql.user");
-            final String MysqlPassword   = DB_CFG_val.getProperty("mysql.password");
+            final String MariaDBHost     = mProps.getString("mysql.host");
+            final String MariaDBPort     = mProps.getString("mysql.port");
+            final String MariaDBDatabase = mProps.getString("mysql.db");
+            final String MariaDBUser     = mProps.getString("mysql.user");
+            final String MysqlPassword   = mProps.getString("mysql.password");
 
             final String MariaDBJDBCURL  = "jdbc:mariadb://" + MariaDBHost + ":" + MariaDBPort + "/" + MariaDBDatabase;
             dbConn = DriverManager.getConnection(MariaDBJDBCURL, MariaDBUser, MysqlPassword);
@@ -114,11 +118,11 @@ public class DBConnectionProvider
         else
             if (DB_TYPE.equals(CommonVariables.PG_DB))
             {
-                final String PGDBHost     = DB_CFG_val.getProperty("pgsql.host");
-                final String PGDBPort     = DB_CFG_val.getProperty("pgsql.port");
-                final String PGDBDatabse  = DB_CFG_val.getProperty("pgsql.db");
-                final String PGDBUser     = DB_CFG_val.getProperty("pgsql.user");
-                final String PGDBPassword = DB_CFG_val.getProperty("pgsql.password");
+                final String PGDBHost     = mProps.getString("pgsql.host");
+                final String PGDBPort     = mProps.getString("pgsql.port");
+                final String PGDBDatabse  = mProps.getString("pgsql.db");
+                final String PGDBUser     = mProps.getString("pgsql.user");
+                final String PGDBPassword = mProps.getString("pgsql.password");
 
                 final String PGDBJDBCURL  = "jdbc:postgresql://" + PGDBHost + ":" + PGDBPort + "/" + PGDBDatabse;
                 dbConn = DriverManager.getConnection(PGDBJDBCURL, PGDBUser, PGDBPassword);

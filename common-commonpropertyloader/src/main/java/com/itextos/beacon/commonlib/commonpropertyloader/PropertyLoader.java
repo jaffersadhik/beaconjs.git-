@@ -28,6 +28,7 @@ public class PropertyLoader
     	profileFile.add("/kafka-producer.properties");
     	profileFile.add("/elasticsearch.properties");
     	profileFile.add("/kafka2elasticsearch.properties");
+    	profileFile.add("/querylogprocessor.properties");
 
     }
     private static class SingletonHolder

@@ -30,6 +30,11 @@
         <scope>provided</scope>  <!-- This ensures it's provided by the container, like Tomcat or WildFly -->
 
 	</dependency>
-	</dependencies>
+		 <dependency>
+		 	<groupId>beacon</groupId>
+		 	<artifactId>servlet-apperrorhandler</artifactId>
+		 	<version>1.0</version>
+		 </dependency>
+    </dependencies>
 
 </project>

@@ -3,6 +3,8 @@ package com.itextos.beacon.commonlib.commonpropertyloader;
 public enum PropertiesPath
 {
 
+    JETTY_SERVER_PROPERTIES("jetty.server.properties.key"),
+    QUERY_LOG_PROCESSOR_PROPERTIES("query.log.processor.key"),
     COMMON_K2ES_PROPERTIES("commmon.k2es.properties.key"),
     COMMON_DATABASE_PROPERTIES("commmon.database.properties.key"),
     COMMON_REDIS_PROPERTIES("common.redis.properties.key"),

@@ -14,7 +14,7 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>common-apperrorhandler</artifactId>
+			<artifactId>servlet-apperrorhandler</artifactId>
 			<version>1.0</version>
 		</dependency>
 		 <dependency>

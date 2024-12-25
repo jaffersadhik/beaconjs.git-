@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
 
@@ -69,8 +72,7 @@ public class ConnectionPoolSingleton
     private ConnectionPoolSingleton()
     {}
 
-    public static ConnectionPoolSingleton createInstance(
-            Properties MASTER_DB_CFG)
+    public static ConnectionPoolSingleton createInstance()
             throws Exception
     {
 
@@ -78,19 +80,21 @@ public class ConnectionPoolSingleton
         {
             log.info("Creating Connection Pool Singleton Object");
 
-            final Connection conn = DBConnectionProvider.getDriectConnection(CommonVariables.MARIA_DB, MASTER_DB_CFG);
+            final PropertiesConfiguration mProps = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.QUERY_LOG_PROCESSOR_PROPERTIES, true);
+
+            final Connection conn = DBConnectionProvider.getDriectConnection(CommonVariables.MARIA_DB);
             ConnPoolObj = new ConnectionPoolSingleton();
 
-            final String dbMonthSuffix = Utility.nullCheck(MASTER_DB_CFG.getProperty("db_month_suffix"), true)
+            final String dbMonthSuffix = Utility.nullCheck(mProps.getString("db_month_suffix"), true)
                     .toLowerCase();
             if (dbMonthSuffix.equals("true"))
                 ConnPoolObj.isDBMonthSuffix = true;
 
-            if (MASTER_DB_CFG.containsKey(CommonVariables.CFG_MARIA_DB_BILLNIG_JNDI))
-                ConnPoolObj.CfgMDBBillingJNDI = MASTER_DB_CFG.getProperty(CommonVariables.CFG_MARIA_DB_BILLNIG_JNDI);
+            if (mProps.containsKey(CommonVariables.CFG_MARIA_DB_BILLNIG_JNDI))
+                ConnPoolObj.CfgMDBBillingJNDI = mProps.getString(CommonVariables.CFG_MARIA_DB_BILLNIG_JNDI);
 
-            if (MASTER_DB_CFG.containsKey(CommonVariables.CFG_PG_DB_BILLNIG_JNDI))
-                ConnPoolObj.CfgPGDBBillingJNDI = MASTER_DB_CFG.getProperty(CommonVariables.CFG_PG_DB_BILLNIG_JNDI);
+            if (mProps.containsKey(CommonVariables.CFG_PG_DB_BILLNIG_JNDI))
+                ConnPoolObj.CfgPGDBBillingJNDI = mProps.getString(CommonVariables.CFG_PG_DB_BILLNIG_JNDI);
 
             ConnPoolObj.loadAll(conn);
             conn.close();
@@ -106,8 +110,13 @@ public class ConnectionPoolSingleton
     public static ConnectionPoolSingleton getInstance()
             throws Exception
     {
-        if (ConnPoolObj == null)
-            throw new Exception("ConnectionPoolSingleton is not created");
+        if (ConnPoolObj == null) {
+        	createInstance();
+        	
+        	if (ConnPoolObj == null) {
+        		throw new Exception("ConnectionPoolSingleton is not created");
+        	}
+        }
 
         return ConnPoolObj;
     }

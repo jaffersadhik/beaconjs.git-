@@ -25,7 +25,13 @@
 
 		</dependency>		
 
-	  
+	  <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>servlet-genericapi</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>   
+
+		</dependency>		
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-apperrorhandler</artifactId>

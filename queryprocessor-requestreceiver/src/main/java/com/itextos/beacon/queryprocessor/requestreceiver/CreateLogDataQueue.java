@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,6 +14,8 @@ import org.eclipse.jetty.http.HttpStatus;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
@@ -35,6 +38,10 @@ public class CreateLogDataQueue
 
     private static final QPRLog log           = QPRLog.getInstance();
     public static String                   API_NAME = CommonVariables.LOG_QUEUE_CREATE_API;
+    
+    private static final PropertiesConfiguration mProps = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.QUERY_LOG_PROCESSOR_PROPERTIES, true);
+
+    
     private static ConnectionPoolSingleton connPool = null;
 
     @SuppressWarnings("unchecked")
@@ -96,7 +103,7 @@ public class CreateLogDataQueue
             final LocalDate paramStartDate = paramStartTime.toLocalDate();
             final LocalDate paramEndDate   = paramEndTime.toLocalDate();
 
-            final int       max_past_days  = Utility.getInteger(QueryEngine.mySQL_cfg_val.getProperty("maxPastDays"));
+            final int       max_past_days  = Utility.getInteger(mProps.getString("maxPastDays"));
             final LocalDate ldt_max_old_dt = paramStartDate.plusDays(-max_past_days);
 
             if (ldt_max_old_dt.isAfter(paramStartDate))

@@ -16,14 +16,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.http.HttpStatus;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
+import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.errorlog.QPRLog;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
 import com.itextos.beacon.queryprocessor.commonutils.Utility;
@@ -32,11 +38,6 @@ import com.itextos.beacon.queryprocessor.databaseconnector.DBConnectionProvider;
 import com.itextos.beacon.queryprocessor.databaseconnector.ResultSetConverter;
 import com.itextos.beacon.queryprocessor.databaseconnector.SQLStatementExecutor;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * Get data from MARIADB or POSTGRES
  */
@@ -44,6 +45,7 @@ public class GetData
         extends
         HttpServlet
 {
+    private static final PropertiesConfiguration mProps = PropertyLoader.getInstance().getPropertiesConfiguration(PropertiesPath.QUERY_LOG_PROCESSOR_PROPERTIES, true);
 
     private static final QPRLog log           = QPRLog.getInstance();
     private static ConnectionPoolSingleton connPool = null;
@@ -96,7 +98,7 @@ public class GetData
 
             // add timestamp of the server
 
-            int              maxlimit  = Utility.getInteger(QueryEngine.mySQL_cfg_val.getProperty("recordLimit"));
+            int              maxlimit  = Utility.getInteger(mProps.getString("recordLimit"));
 
             final JSONParser parser    = new JSONParser();
 
@@ -143,7 +145,7 @@ public class GetData
 
             final LocalDate paramStartDate = paramStartTime.toLocalDate();
 
-            final int       max_past_days  = Utility.getInteger(QueryEngine.mySQL_cfg_val.getProperty("maxPastDays"));
+            final int       max_past_days  = Utility.getInteger(mProps.getString("maxPastDays"));
             final LocalDate ldt_max_old_dt = paramStartDate.plusDays(-max_past_days);
 
             if (ldt_max_old_dt.isAfter(paramStartDate))

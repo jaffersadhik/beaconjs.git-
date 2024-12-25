@@ -379,6 +379,26 @@
    	<module>queryprocessor-threadpoolexecutor</module>
    	<module>queryprocessor-requestreceiver</module>
    	<module>siddhu-jar</module>
+   	<module>jettyserver</module>
+   	<module>js-qpr</module>
+   	<module>js-genericapi</module>
+   	<module>js-dnr</module>
+   	<module>servlet-genericapi</module>
+   	<module>servlet-apperrorhandler</module>
+   	<module>servlet-datarefresh</module>
+   	<module>servlet-dnr</module>
+   	<module>servlet-passwordencryption</module>
+   	<module>js-passwordencrption</module>
+   	<module>servlet-clienthandoveracceptor</module>
+   	<module>js-clienthandoveracceptor</module>
+   	<module>servlet-messagetool</module>
+   	<module>js-messagetool</module>
+   	<module>servlet-r3r</module>
+   	<module>js-r3r</module>
+   	<module>servlet-prepaiddata</module>
+   	<module>js-prepaiddata</module>
+   	<module>servlet-dlrquery</module>
+   	<module>js-dlrquery</module>
   </modules>
   
 

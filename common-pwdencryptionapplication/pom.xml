@@ -17,6 +17,13 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>servlet-passwordencryption</artifactId>
+			<version>1.0</version>
+						<scope>provided</scope>
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>common-utility</artifactId>
 			<version>1.0</version>
 						<scope>provided</scope>

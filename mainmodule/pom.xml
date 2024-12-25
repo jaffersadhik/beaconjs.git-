@@ -70,6 +70,24 @@
 	</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>jettyserver</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-qpr</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>queryprocessor-threadpoolexecutor</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>platform-prccore</artifactId>
 			<version>1.0</version>
 	</dependency>

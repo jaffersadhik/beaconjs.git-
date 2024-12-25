@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>beacon</groupId>
+    <artifactId>beacon</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>servlet-r3r</artifactId>
+  <dependencies>
+  
+   <dependency>
+    <groupId>beacon</groupId>
+    <artifactId>thirdpartyjar</artifactId>
+    <version>1.0</version>
+	</dependency>
+
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>servlet-apperrorhandler</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-elasticsearchutil</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-httpclient</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-utility</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>   
+							         
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-appconfigparams</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>inmemory-data</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>common-prometheusmetricsutil</artifactId>
+			<version>1.0</version>
+							         
+
+		</dependency>
+
+	</dependencies>
+	
+</project>

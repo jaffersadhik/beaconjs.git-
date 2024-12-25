@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
+import com.itextos.beacon.queryprocessor.threadpoolexecutor.ProcessQueueThreadPool;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.TimeTakenLog;
 
@@ -391,7 +392,14 @@ public class App {
 			return true;			
 		}else if(module.equals("qpr")) {
 			
-			com.itextos.beacon.queryprocessor.requestreceiver.QueryEngine.main(args);
+			com.itextos.beacon.jettyserver.qpr.QueryEngine.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
+		}else if(module.equals("qplp")) {
+			
+			com.itextos.beacon.queryprocessor.threadpoolexecutor.ProcessQueueThreadPool.main(args);
 
 			IS_START_PROMETHEUS=true;
 

@@ -52,12 +52,12 @@ public class ProcessQueueThreadPool
 
         try
         {
-            final String cfg_fn = args[0];
+            final String cfg_fn ="/task_executor.properties";// args[0];
             log.info("Reading values from config file: " + cfg_fn);
             final FileReader file = new FileReader(args[0]);
             mySQL_cfg_val.load(file);
             file.close();
-            final ConnectionPoolSingleton connPool = ConnectionPoolSingleton.createInstance(mySQL_cfg_val);
+            final ConnectionPoolSingleton connPool = ConnectionPoolSingleton.createInstance();
             masterDBConn = DBConnectionProvider.getMasterDBConnection();
 
             MAX_T        = Utility.getInteger(mySQL_cfg_val.getProperty("maxExecutorThreads").trim());
