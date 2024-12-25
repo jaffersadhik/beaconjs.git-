@@ -52,7 +52,7 @@ RUN rm -rf /opt/tomcat/conf/logging.properties
 COPY logging.properties /opt/tomcat/conf/logging.properties
 COPY logging.properties /opt/tomcat/conf/logging.properties_bkup
 
-COPY server.xml /opt/tomcat/conf/server.xml
+#COPY server.xml /opt/tomcat/conf/server.xml
 
 COPY ./target/fb-campaignfinisher-1.0.war /opt/tomcat/webapps/campaignfinisher.war
 COPY ./target/fb-cronjobs-1.0.war /opt/tomcat/webapps/cronjobs.war
