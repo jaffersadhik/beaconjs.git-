@@ -82,6 +82,7 @@ COPY ./target/profile/digitalocean3/kafka-producer.properties_do3 /kafka-produce
 COPY ./target/profile/digitalocean3/kafka-consumer.properties_do3 /kafka-consumer.properties_do3
 COPY ./target/profile/digitalocean3/common-db.properties_do3 /common-db.properties_do3
 COPY ./target/profile/digitalocean3/elasticsearch.properties_do3 /elasticsearch.properties_do3
+COPY ./target/profile/digitalocean3/querylogprocessor.properties_do3 /querylogprocessor.properties_do3
 
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
 
