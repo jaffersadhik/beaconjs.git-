@@ -11,6 +11,8 @@ import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.queryprocessor.commonutils.CommonVariables;
@@ -27,7 +29,10 @@ public class DBConnectionProvider
     {
         final String masterDBID = CommonVariables.MASTER_DB_JNDI_ID;
 
-        return getDBConnection(masterDBID);
+
+     //   return getDBConnection(masterDBID);
+        
+        return DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
     }
 
     public static Connection getDBConnection(

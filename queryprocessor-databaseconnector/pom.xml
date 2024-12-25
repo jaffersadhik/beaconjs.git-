@@ -15,6 +15,11 @@
 		
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>common-commondbpool</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>queryprocessor-parent</artifactId>
 			<version>1.0</version>
 		</dependency>
