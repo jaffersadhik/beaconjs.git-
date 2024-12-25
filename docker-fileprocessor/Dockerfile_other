@@ -46,7 +46,7 @@ RUN cp -rp /opt/tomcat/webapps/* /opt/tomcat/webappsBKUP/.
 RUN rm -rf /opt/tomcat/webapps/*
 
 
-RUN rm -rf /opt/tomcat/conf/server.xml
+#RUN rm -rf /opt/tomcat/conf/server.xml
 RUN rm -rf /opt/tomcat/conf/logging.properties
 
 COPY logging.properties /opt/tomcat/conf/logging.properties
