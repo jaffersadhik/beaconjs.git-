@@ -3,6 +3,19 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+# Ignore .settings directories
+**/.settings/
+
+# Ignore .vscode directories at any level
+**/.vscode/
+
+# Ignore any .project files at any level
+**/*.project
+
+# Ignore any .classpath files at any level
+**/.classpath
+
+
 # Node artifact files
 node_modules/
 dist/
@@ -49,3 +62,4 @@ Thumbs.db
 *.mov
 *.wmv
 
+/.metadata/
