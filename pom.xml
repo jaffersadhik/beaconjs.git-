@@ -346,8 +346,8 @@
    	<module>fb-dltfileprocessor</module>
    	<module>fb-downloadhandler</module>
    	<module>fb-cronjobs</module>
-   	<module>docker-fb</module>
- <!--  	<module>node-cm</module>
+ <!--  	<module>docker-fb</module>
+   	<module>node-cm</module>
    	<module>node-cm-jobs</module> -->
 
    	<module>applicationproperties</module>

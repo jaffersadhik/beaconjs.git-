@@ -1,6 +1,5 @@
 package com.itextos.beacon.r3r.servlet;
 
-import com.itextos.beacon.commonlib.datarefresher.DataRefresher;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.r3r.process.DataProcessor;
 
