@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore.dlrclienthandover.process;
+package com.itextos.beacon.platform.dnclienthandover.process;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import com.itextos.beacon.commonlib.utility.ItextosClient;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrAdminDelivery;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
-import com.itextos.beacon.platform.dnpcore.log.DNPLog;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DlrClientHandover
 {

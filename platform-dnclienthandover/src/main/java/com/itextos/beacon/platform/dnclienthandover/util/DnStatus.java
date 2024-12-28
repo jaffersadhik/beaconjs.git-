@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore.util;
+package com.itextos.beacon.platform.dnclienthandover.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

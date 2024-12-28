@@ -235,6 +235,10 @@
 		<module>platform-dlrretrycore</module>
 		<module>platform-dnr</module>
 		<module>platform-dnpcore</module>
+				<module>platform-dnsingle</module>
+
+		<module>platform-dnclienthandover</module>
+
 		<module>platform-sbpcore</module>
 		<module>platform-dlrpayloadgen</module>
 		<module>platform-billing</module>

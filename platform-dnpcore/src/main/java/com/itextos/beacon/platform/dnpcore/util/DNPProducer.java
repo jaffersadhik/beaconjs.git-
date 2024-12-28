@@ -16,8 +16,9 @@ import com.itextos.beacon.commonlib.utility.Name;
 import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfig;
 import com.itextos.beacon.inmemory.clidlrpref.ClientDlrConfigUtil;
-import com.itextos.beacon.platform.dnpcore.log.DNPLog;
+import com.itextos.beacon.platform.dnclienthandover.util.DNClientHandoverProducer;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
+import com.itextos.beacon.smslog.DNPLog;
 
 public class DNPProducer
 {
@@ -49,22 +50,13 @@ public class DNPProducer
                         if (log.isDebugEnabled())
                             log.debug("Client Dlr Config : " + lClientDlrConfig);
 
-                        if (lClientDlrConfig.isClientSpecificHttpTopic())
-                        {
-                            if (log.isDebugEnabled())
-                                log.debug("Sending to Http Client Handover specific topic...");
-
-                        	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
-
-                            MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue(), true);
-                        }
-                        else {
-                        	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
-
-                            MessageProcessor.writeMessage(Component.DNP, e.getKey(), e.getValue());
-                        }                    }
+                        DNClientHandoverProducer.sendToHttpDLRHandover(Component.DNP, e.getValue());
+                    }
                     else
                         log.warn("DlrHandover not configure for client : " + e.getValue().getClientId());
+                }else if(Component.SMPP_DLR == e.getKey()) {
+                	
+                	DNClientHandoverProducer.sendToSmppDLRHandover(Component.DNP, e.getValue());
                 }
                 else {
                 	sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" Send to "+ e.getKey());
@@ -73,15 +65,7 @@ public class DNPProducer
                     
                     if(e.getKey()==Component.T2DB_DELIVERIES) {
                     	
-                    	/*
-                    
-                    	if(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.BILLINGBKUP.getKey())!=null) {
-                    		
-                            MessageProcessor.writeMessage(Component.DNP, Component.T2DB_DELIVERIES_BKUP, e.getValue());
-
-                    	}
                     	
-                    	*/
                     }
                 }
             }

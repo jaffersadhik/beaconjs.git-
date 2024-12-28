@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore.process;
+package com.itextos.beacon.platform.dnsingle.process;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +14,8 @@ import com.itextos.beacon.commonlib.kafkaservice.consumer.ConsumerInMemCollectio
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
-import com.itextos.beacon.platform.dnpcore.dlrclienthandover.process.DlrClientHandover;
-import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
+import com.itextos.beacon.platform.dnclienthandover.process.DlrClientHandover;
+import com.itextos.beacon.platform.dnclienthandover.util.DNClientHandoverProducer;
 import com.itextos.beacon.platform.singledn.data.DeliveryInfo;
 import com.itextos.beacon.platform.singledn.data.SingleDnInfo;
 import com.itextos.beacon.platform.singledn.data.SingleDnRequest;
@@ -59,7 +59,15 @@ public class SingleDnProcessor
             {
                 if (log.isDebugEnabled())
                     log.debug(" process() - Sending to " + processSingleDNQ.keySet() + " json:" + lDeliveryObject.toString());
-                DNPProducer.sendToNextComponents(processSingleDNQ,lDeliveryObject.getLogBufferValue(MiddlewareConstant.MW_LOG_BUFFER));
+
+                processSingleDNQ.forEach((toComponent,deliveryObject)->{
+                	
+                	if(toComponent==Component.HTTP_DLR) {
+                		DNClientHandoverProducer.sendToHttpDLRHandover(Component.SDNP, lDeliveryObject);
+                	}else if(toComponent==Component.SMPP_DLR) {
+                		DNClientHandoverProducer.sendToHttpDLRHandover(Component.SDNP, lDeliveryObject);
+                	}
+                });
             }
             if (log.isDebugEnabled())
                 log.debug(" process() no data to be processed json:" + lDeliveryObject.toString());
@@ -67,7 +75,6 @@ public class SingleDnProcessor
         catch (final Exception e)
         {
             log.error("Exception occer while processing the Single DN Dlr : ", e);
-            DNPProducer.sendToErrorLog(lDeliveryObject, e);
         }
     }
 

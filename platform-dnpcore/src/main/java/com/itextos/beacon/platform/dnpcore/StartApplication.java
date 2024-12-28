@@ -8,10 +8,6 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryQReaper;
 import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryUpdateQReaper;
 import com.itextos.beacon.platform.dnpcore.poller.NoPayloadRetryPollerHolder;
-import com.itextos.beacon.platform.singledn.redis.delete.SingleDnDataDelete;
-import com.itextos.beacon.platform.singledn.redis.delete.SingleDnDuplicateCheckRemove;
-import com.itextos.beacon.platform.singledn.redis.delete.SingleDnExpiryProcessor;
-import com.itextos.beacon.platform.singledn.redis.delete.SingleDnOldDuplicateCheckRemove;
 
 public class StartApplication
 {
@@ -53,11 +49,7 @@ public class StartApplication
             final ProcessorInfo lAgingDnProcessor = new ProcessorInfo(Component.ADNP, false);
             lAgingDnProcessor.process();
 
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.SDNP);
-
-            final ProcessorInfo lSingleDnProcessor = new ProcessorInfo(Component.SDNP, false);
-            lSingleDnProcessor.process();
+         
 
             /*
              * if (log.isDebugEnabled())
@@ -80,10 +72,7 @@ public class StartApplication
             NoPayloadRetryPollerHolder.getInstance();
 
       
-            SingleDnExpiryProcessor.getInstance();
-            SingleDnDataDelete.getInstance();
-            SingleDnDuplicateCheckRemove.getInstance();
-            SingleDnOldDuplicateCheckRemove.getInstance();
+           
         }
         catch (final Exception e)
         {

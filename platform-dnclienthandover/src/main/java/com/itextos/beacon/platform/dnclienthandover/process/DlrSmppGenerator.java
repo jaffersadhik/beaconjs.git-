@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore.dlrclienthandover.process;
+package com.itextos.beacon.platform.dnclienthandover.process;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.inmemory.smpp.account.SmppAccInfo;
 import com.itextos.beacon.inmemory.smpp.account.util.SmppAccUtil;
-import com.itextos.beacon.platform.dnpcore.util.DnStatus;
+import com.itextos.beacon.platform.dnclienthandover.util.DnStatus;
 
 public class DlrSmppGenerator
 {
