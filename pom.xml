@@ -399,6 +399,8 @@
    	<module>js-prepaiddata</module>
    	<module>servlet-dlrquery</module>
    	<module>js-dlrquery</module>
+   	<module>servlet-fileupload</module>
+   	<module>js-fileupload</module>
   </modules>
   
 

@@ -31,10 +31,7 @@ public class InitServlet
             ServletConfig config)
             throws ServletException
     {
-        PrometheusMetrics.registerServer();
-        PrometheusMetrics.registerApiMetrics();
-  
-        DataProcessor.getInstance();
+         InitializationSingleton.getInstance();
     }
 
     @Override

@@ -12,5 +12,71 @@
 			<artifactId>queryprocessor-requestreceiver</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
+		  <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-clienthandoveracceptor</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-fileupload</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-dlrquery</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-dnr</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-genericapi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-messagetool</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+				
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-passwordencrption</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+						
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-prepaiddata</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		
+						
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-qpr</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+			
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-r3r</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
   </dependencies>
 </project>

@@ -9,6 +9,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.errorlog.QPRLog;
+import com.itextos.beacon.web.generichttpapi.servlet.InitializationSingleton;
 
 public class QueryEngine
 {
@@ -63,7 +64,8 @@ public class QueryEngine
 		final ServletContextHandler handler = new ServletContextHandler(server2, "/genericapi");
 
         log.info("Preparing api routes");
-        handler.addServlet(com.itextos.beacon.web.generichttpapi.servlet.InitServlet.class.getName(), "/InitServlet");
+    //    handler.addServlet(com.itextos.beacon.web.generichttpapi.servlet.InitServlet.class.getName(), "/InitServlet");
+        InitializationSingleton.getInstance();
 
         handler.addServlet(com.itextos.beacon.web.generichttpapi.servlet.JSONCustomReceiver.class.getName(), "/JSONCustomReceiver");
 

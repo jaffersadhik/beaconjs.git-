@@ -35,10 +35,7 @@ public class InitServlet
             ServletConfig config)
             throws ServletException
     {
-
-        PrometheusMetrics.registerServer();
-        PrometheusMetrics.registerApiMetrics();
-        DlrFallbackQReaper.getInstance();
+    	InitializationSingleton.getInstance();
     }
 
     /**

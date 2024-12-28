@@ -56,6 +56,13 @@ public class CarrierHandoverProcess
 
     private static final Log log = LogFactory.getLog(CarrierHandoverProcess.class);
 
+    static final int TELEMARKETERID_TLV_VALUE_NO=0;
+
+    static final int TELEMARKETERID_TLV_VALUE_HASHED=1;
+    
+    static final int TELEMARKETERID_TLV_VALUE_NONHASHED=2;
+    
+    static final int TELEMARKETERID_TLV_VALUE_TELEMARKETERID=3;
 
     public CarrierHandoverProcess(
             String aThreadName,
@@ -753,58 +760,109 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					
 			        final RouteConfigInfo lRouteConfigInfo = RouteUtil.getRouteConfiguration(aMessageRequest.getRouteId());
 
-			        String ishash=lRouteConfigInfo.getIshash();
+			        String telemarketerTLVOption=lRouteConfigInfo.getTelemarketerTLVOption();
 			        
 					String metadata=null;
 
-
-			        if(ishash==null||ishash.trim().length()<1){
+					/*
+					 * telemarketerTLVOption==0 --> no value passed to 1402 TLV
+						telemarketerTLVOption==1 --> hash value passed to 1402 TLV --Hash Of
+						telemarketerTLVOption==2 --> non hash value passed to 1402 TLV --> example (entityid,TMAID)
+						telemarketerTLVOption==3 --> telemarketerid value alone passed to 1402 TLV --> (telemarketerid)
+						
+						Possible TLV Value 
+							1. novalue
+							2. telemar
+					 */
+			        if(telemarketerTLVOption==null||telemarketerTLVOption.trim().length()<1){
 			        	
-			        	ishash="2";
+			        	telemarketerTLVOption="2";
 			        }
-			        if(ishash.equals("1")||ishash.equals("2"))
-			        {
-			        String telemarketerid=lRouteConfigInfo.getTelemartkerId();
-					
-			        if(telemarketerid==null) {
-			        	
-			        	telemarketerid="";
-			        }
-					String temptelemartkerid=aMessageRequest.getDltTelemarketerId();
-					
-					if(temptelemartkerid==null) {
-						temptelemartkerid="";
-					}
-					if(temptelemartkerid.trim().length()>0) {
-						telemarketerid=temptelemartkerid+","+telemarketerid;
-						KannelURLLog.log("telemarketerid :"+telemarketerid);
-
-					}else {
-					
-						telemarketerid=entityid+","+telemarketerid;
-						KannelURLLog.log("telemarketerid :"+telemarketerid);
-
-					}
-					
 			        
-			        if(ishash!=null&&ishash.equals("1")) {
+			        int intTelemarketerTLVOption=Integer.parseInt(telemarketerTLVOption);
+			        
+			        try {
 			        	
-			        	telemarketerid=getHashValue(telemarketerid);
+			        	intTelemarketerTLVOption=2;
 			        	
-			        }else {
+			        }catch(Exception e) {
 			        	
-						telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
-
 			        }
-			        metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
+			        
+			        if(intTelemarketerTLVOption!=TELEMARKETERID_TLV_VALUE_NO)
+			        {
+						        String telemarketerid=lRouteConfigInfo.getTelemartkerId();
+								
+						        if(telemarketerid==null) {
+						        	
+						        	telemarketerid="1234";
+						        }
+								String temptelemartkerid=aMessageRequest.getDltTelemarketerId();
+								
+								if(temptelemartkerid==null) {
+									temptelemartkerid="";
+								}
+								
+								int clientPassingTelemarketerIdHashed=getTelemarketerIdTLVOption(temptelemartkerid);
+								
+							if(clientPassingTelemarketerIdHashed!=TELEMARKETERID_TLV_VALUE_NO) {
+								
+												switch(clientPassingTelemarketerIdHashed) {
+												
+												case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:
+																telemarketerid=telemarketerid;
+																break;
+												case TELEMARKETERID_TLV_VALUE_HASHED:	
+																temptelemartkerid=temptelemartkerid;
+																break;
+												case TELEMARKETERID_TLV_VALUE_NONHASHED:
+																telemarketerid=entityid+","+telemarketerid;
+																break;
+				
+												}
+								
+								KannelURLLog.log("telemarketerid :"+telemarketerid);
+		
+							}else {
+							
+												switch(intTelemarketerTLVOption) {
+												
+												case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:
+																telemarketerid=telemarketerid;
+																break;
+												case TELEMARKETERID_TLV_VALUE_HASHED:	
+																telemarketerid=entityid+","+telemarketerid;
+																break;
+												case TELEMARKETERID_TLV_VALUE_NONHASHED:
+																telemarketerid=entityid+","+telemarketerid;
+																break;
+				
+												}
+								
+								KannelURLLog.log("telemarketerid :"+telemarketerid);
+		
+							}
+							
+			        
+					        if((telemarketerTLVOption!=null&&telemarketerTLVOption.equals("1")) && clientPassingTelemarketerIdHashed!=TELEMARKETERID_TLV_VALUE_HASHED) {
+					        	
+					        	telemarketerid=getHashValue(telemarketerid);
+					        	
+					        }else {
+					        	
+								telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
+		
+					        }
+					        metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
 
 			    	}else {
 			    		
-					metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
-
-			    	}
+					    		
+							metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
+		
+					}
 					
-					reqmap.put("meta-data", metadata);
+			        		reqmap.put("meta-data", metadata);
 				
 		    	} catch (MalformedURLException e) {
 					
@@ -815,6 +873,67 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					return reqmap;
 
 			
+	}
+
+	private static boolean isClientPassingTelemarketerIdHashed(String telemarketerid) {
+		// TODO Auto-generated method stub
+		
+		
+		return !isNumeric(telemarketerid);
+	}
+	
+	public static boolean isNumeric(String str) {
+        // Check if the string is null or empty
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        // Check if all characters are digits
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+	private static int getTelemarketerIdTLVOption(String temptelemartkerid) {
+		
+		StringTokenizer st=new StringTokenizer(temptelemartkerid,",");
+		
+	
+
+		if(st.hasMoreTokens()) {
+			
+			st.nextToken();
+		}else {
+			
+			return TELEMARKETERID_TLV_VALUE_NO;
+		}
+		
+		if(st.hasMoreTokens()) {
+			
+			return TELEMARKETERID_TLV_VALUE_NONHASHED;
+			
+		}else {
+			
+			if(temptelemartkerid==null||temptelemartkerid.trim().length()<1) {
+				
+				return TELEMARKETERID_TLV_VALUE_NO;
+				
+			}else {
+				
+				if(isClientPassingTelemarketerIdHashed(temptelemartkerid)) {
+				
+				return TELEMARKETERID_TLV_VALUE_HASHED;
+				}else {
+				
+				return TELEMARKETERID_TLV_VALUE_TELEMARKETERID;
+
+				}
+			}
+		}
 	}
 
 	private static String getHashValue(String telemarketerid) {

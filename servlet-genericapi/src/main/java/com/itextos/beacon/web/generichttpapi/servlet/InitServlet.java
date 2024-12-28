@@ -42,42 +42,7 @@ public final class InitServlet
             ServletConfig config)
             throws ServletException
     {
-    	
-    
-
-     
-
-        try
-        {
-            
-            final MessageIdentifier lMsgIdentifier = MessageIdentifier.getInstance();
-            lMsgIdentifier.init(InterfaceType.HTTP_JAPI);
-
-            final String lAppInstanceId = lMsgIdentifier.getAppInstanceId();
-
-         
-            PrometheusMetrics.registerServer();
-            PrometheusMetrics.registerApiMetrics();
-
-            APIConstants.setAppInstanceId(lAppInstanceId);
-
-            if (APIConstants.CLUSTER_INSTANCE == null)
-            {
-              //  System.exit(-1);
-            }
-
-            
-            String module=System.getenv("module");
-            if(module!=null&&(module.equals("japi")||module.equals("all"))) {
-            	
-            	FallbackQReaper.getInstance();
-
-   //         	startConsumers();
-            }
-        }
-        catch (final Exception e)
-        {
-        }
+    	InitializationSingleton.getInstance();
     }
 
     private static void startConsumers()

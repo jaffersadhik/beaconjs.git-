@@ -1,4 +1,4 @@
-package com.itextos.beacon.jettyserver.r3r;
+package com.itextos.beacon.jettyserver;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.eclipse.jetty.server.Server;
@@ -9,7 +9,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.errorlog.QPRLog;
-import com.itextos.beacon.r3r.servlet.InitializationSingleton;
+import com.itextos.beacon.platform.dnr.servlet.InitializationSingleton;
 
 public class QueryEngine
 {
@@ -44,7 +44,7 @@ public class QueryEngine
             connector.setPort(server_port);
             server.addConnector(connector);
 
-            addR3R(server);
+            add(server);
             
             server.start();
 
@@ -59,23 +59,27 @@ public class QueryEngine
         }
     }
 
-	public static void addR3R(Server server2) {
+	public static void add(Server server2) {
 		
-		final ServletContextHandler handler = new ServletContextHandler(server2, "/");
-
-        log.info("Preparing api routes");
-     //   handler.addServlet(com.itextos.beacon.r3r.servlet.InitServlet.class.getName(), "/InitServlet");
-        InitializationSingleton.getInstance();
-
-        handler.addServlet(com.itextos.beacon.r3r.servlet.UrlRequestReceiver.class.getName(), "");
-
-        handler.addServlet(com.itextos.beacon.commonlib.apperrorhandler.servlets.ExceptionServlet.class.getName(), "/exceptionservlet");
-
-        handler.addServlet(com.itextos.beacon.commonlib.apperrorhandler.servlets.ErrorServlet.class.getName(), "/errorservlet");
-
-
-      
-
+		com.itextos.beacon.jettyserver.clienthandoveracceptor.QueryEngine.addClientHandoverAcceptor(server2);
+	
+		com.itextos.beacon.jettyserver.dlrquery.QueryEngine.addDLRQuery(server2);
+		
+		com.itextos.beacon.jettyserver.dnr.QueryEngine.addDNR(server2);
+		
+		com.itextos.beacon.jettyserver.genericapi.QueryEngine.addGenericAPI(server2);
+		
+		com.itextos.beacon.jettyserver.messagetool.QueryEngine.addMessagetool(server2);
+	
+		com.itextos.beacon.jettyserver.passwordencryption.QueryEngine.addPassword(server2);
+		
+		com.itextos.beacon.jettyserver.prepaiddata.QueryEngine.addPrepaidData(server2);
+		
+		com.itextos.beacon.jettyserver.qpr.QueryEngine.addQPR(server2);
+		
+		com.itextos.beacon.jettyserver.r3r.QueryEngine.addR3R(server2);
+		
+		com.itextos.beacon.jettyserver.fileupload.QueryEngine.addFileupload(server2);
 	}
 
 	

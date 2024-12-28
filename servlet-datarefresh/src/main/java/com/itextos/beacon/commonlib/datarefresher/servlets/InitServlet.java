@@ -31,7 +31,7 @@ public class InitServlet
             ServletConfig config)
             throws ServletException
     {
-        DataRefresher.getInstance();
+    	InitializationSingleton.getInstance();
     }
 
 	@Override
