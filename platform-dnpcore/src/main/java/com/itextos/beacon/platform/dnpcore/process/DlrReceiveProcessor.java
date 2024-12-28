@@ -16,9 +16,9 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
-import com.itextos.beacon.platform.dnpcore.inmem.NoPayloadRetryQ;
 import com.itextos.beacon.platform.dnpcore.util.DNPProducer;
-import com.itextos.beacon.platform.dnpcore.util.DNPUtil;
+import com.itextos.beacon.platform.dnutil.util.DNPUtil;
+import com.itextos.beacon.platform.dnutil.util.DlrProcessUtil;
 import com.itextos.beacon.smslog.DNLog;
 
 public class DlrReceiveProcessor
@@ -116,8 +116,11 @@ public class DlrReceiveProcessor
                 processDNQueues.put(Component.T2DB_NO_PAYLOAD_DN, lDeliveryObject);
             }
             else
-                if ("0".equals(lPayloadStatus))
-                    NoPayloadRetryQ.getInstance().addMessage(lDeliveryObject);
+                if ("0".equals(lPayloadStatus)) {
+//                    NoPayloadRetryQ.getInstance().addMessage(lDeliveryObject);
+                    processDNQueues.put(Component.NPR, lDeliveryObject);
+
+                }
 
             if (log.isDebugEnabled())
                 log.debug(" Sending to " + processDNQueues.keySet() + " Message Obj:" + lDeliveryObject);

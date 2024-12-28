@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore;
+package com.itextos.beacon.platform.dninternal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,11 +37,18 @@ public class StartApplication
 
             }
             
-            final ProcessorInfo lDnProcessor = new ProcessorInfo(Component.DNP);
-            lDnProcessor.process();
+        
+       
+            if (log.isDebugEnabled())
+                log.debug("Starting the application " + Component.DLRINTLP);
 
-         
-         
+            final ProcessorInfo lDlrInternalProcessor = new ProcessorInfo(Component.DLRINTLP, false);
+            lDlrInternalProcessor.process();
+
+            
+          
+      
+           
         }
         catch (final Exception e)
         {

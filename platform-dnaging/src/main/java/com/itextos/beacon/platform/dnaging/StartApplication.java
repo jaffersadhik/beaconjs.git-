@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore;
+package com.itextos.beacon.platform.dnaging;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,8 +17,6 @@ public class StartApplication
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.DNP);
             
             final String cluster=System.getProperty("cluster");
             
@@ -37,11 +35,20 @@ public class StartApplication
 
             }
             
-            final ProcessorInfo lDnProcessor = new ProcessorInfo(Component.DNP);
-            lDnProcessor.process();
+    
+            
+
+            if (log.isDebugEnabled())
+                log.debug("Starting the application " + Component.ADNP);
+
+            final ProcessorInfo lAgingDnProcessor = new ProcessorInfo(Component.ADNP, false);
+            lAgingDnProcessor.process();
 
          
-         
+
+      
+      
+           
         }
         catch (final Exception e)
         {

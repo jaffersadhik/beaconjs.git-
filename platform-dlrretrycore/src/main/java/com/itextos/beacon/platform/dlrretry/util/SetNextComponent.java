@@ -11,9 +11,7 @@ import com.itextos.beacon.commonlib.message.DeliveryObject;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.platform.ch.processor.CarrierHandoverProcess;
-import com.itextos.beacon.platform.dnpcore.process.DlrInternalProcessor;
 import com.itextos.beacon.platform.msgflowutil.util.PlatformUtil;
 
 public class SetNextComponent
@@ -42,11 +40,12 @@ public class SetNextComponent
 
         try
         {
+        	/*
             aDeliveryObject.setNextComponent(Component.DLRINTLP.getKey());
             aDeliveryObject.setFromComponent(Component.DLRR.getKey());
         	DlrInternalProcessor.forDLRInternal(aDeliveryObject,SMSLog.getInstance());
-
-         //   MessageProcessor.writeMessage(Component.DLRR, Component.DLRINTLP, aDeliveryObject);
+			*/
+            MessageProcessor.writeMessage(Component.DLRR, Component.DLRINTLP, aDeliveryObject);
         }
         catch (final Exception e)
         {

@@ -407,6 +407,11 @@
    	<module>js-fileupload</module>
    	<module>js-other</module>
    	<module>js-guiapi</module>
+   	<module>platform-dninternal</module>
+   	<module>platform-dnutil</module>
+   	<module>platform-dnaging</module>
+   	<module>platform-dnnopayloadpoller</module>
+   	<module>platform-dnnopayloadreceiver</module>
   </modules>
   
 

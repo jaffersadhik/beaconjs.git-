@@ -1,10 +1,11 @@
-package com.itextos.beacon.platform.dnpcore;
+package com.itextos.beacon.platform.dnnopayloadreceiver;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.componentconsumer.processor.ProcessorInfo;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.platform.dnnopayloadreceiver.inmem.NoPayloadRetryQReaper;
 
 public class StartApplication
 {
@@ -17,9 +18,7 @@ public class StartApplication
 
         try
         {
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.DNP);
-            
+             
             final String cluster=System.getProperty("cluster");
             
             if(cluster==null) {
@@ -37,11 +36,22 @@ public class StartApplication
 
             }
             
-            final ProcessorInfo lDnProcessor = new ProcessorInfo(Component.DNP);
+            final ProcessorInfo lDnProcessor = new ProcessorInfo(Component.NPR);
             lDnProcessor.process();
 
+            if (log.isDebugEnabled())
+                log.debug("Starting the application " + Component.NPR);
+
+    
          
-         
+
+            
+            
+            NoPayloadRetryQReaper.getInstance();
+
+
+      
+           
         }
         catch (final Exception e)
         {

@@ -45,6 +45,8 @@ public enum Component
     DLRR("dlr_retry"),
     DNDP("dlr_del_processor"),
     DNP("dlr_processor"),
+    NPR("dlr_nopayload_receiver"),
+
     DNR("dlr_receiver"),
     FPDN("final_process_dn"),
     HTTP_DLR("http_dlr_handover"),

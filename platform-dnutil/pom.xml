@@ -5,12 +5,8 @@
     <artifactId>beacon</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>platform-dnpcore</artifactId>
-  
-	<properties>
-		<main.class>com.itextos.beacon.platform.dnpcore.StartApplication</main.class>
-	</properties>
-	<dependencies>
+  <artifactId>platform-dnutil</artifactId>
+  <dependencies>
 			<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>common-daemonprocess</artifactId>
@@ -43,10 +39,6 @@
 			<artifactId>platform-dnclienthandover</artifactId>
 			<version>1.0</version>
 		</dependency>
-					<dependency>
-						<groupId>beacon</groupId>
-						<artifactId>platform-dnutil</artifactId>
-						<version>1.0</version>
-					</dependency>
+						
 	</dependencies>
 </project>
