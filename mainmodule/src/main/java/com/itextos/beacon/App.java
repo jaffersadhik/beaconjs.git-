@@ -84,6 +84,9 @@ public class App {
 		
 		DebugLog.log("module : "+module);
 
+		if(!isJettyServer(module,args)) {
+			
+		
 		if(!isMW(module,args)) {
 			
 			
@@ -119,7 +122,7 @@ public class App {
 				}
 			}
 		}
-		
+		}
 		if(IS_START_PROMETHEUS) {
 			
 			startPrometheusServer(true);
@@ -133,7 +136,49 @@ public class App {
 		TimeTakenLog.log("Time Taken for Start : "+(end-start)/1000+" seconds");
 	}
 	
-	 private static boolean isAllSingleTon(String module, String[] args) {
+	 private static boolean isJettyServer(String module, String[] args) {
+
+			
+
+			if(module.equals("customerapi")){
+				
+				
+				com.itextos.beacon.jettyserver.genericapi.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+				return true;
+				
+			}else if(module.equals("dnapi")){
+				
+				com.itextos.beacon.jettyserver.dnr.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
+			}else if(module.equals("otherapi")){
+				
+				com.itextos.beacon.jettyserver.other.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
+			}else if(module.equals("guiapi")){
+				
+				com.itextos.beacon.jettyserver.guiapi.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
+			}
+			
+			return false;
+		
+	}
+
+	private static boolean isAllSingleTon(String module, String[] args) {
 		 
 		 if(module.trim().equals("singleton")) {
 			 DebugLog.log("Start the module : singleton ");

@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>beacon</groupId>
+    <artifactId>beacon</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>js-other</artifactId>
+  
+  <dependencies>
+  <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>queryprocessor-requestreceiver</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		  <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-clienthandoveracceptor</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-fileupload</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-dlrquery</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-dnr</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-genericapi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-messagetool</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+				
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-passwordencrption</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+						
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-prepaiddata</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		
+						
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-qpr</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+			
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-r3r</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+  </dependencies>
+
+
+</project>

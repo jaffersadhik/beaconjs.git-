@@ -74,6 +74,23 @@
 			<version>1.0</version>
 	</dependency>
 	
+	<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-genericapi</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-other</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>js-guiapi</artifactId>
+			<version>1.0</version>
+	</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>js-qpr</artifactId>

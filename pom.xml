@@ -401,6 +401,8 @@
    	<module>js-dlrquery</module>
    	<module>servlet-fileupload</module>
    	<module>js-fileupload</module>
+   	<module>js-other</module>
+   	<module>js-guiapi</module>
   </modules>
   
 
