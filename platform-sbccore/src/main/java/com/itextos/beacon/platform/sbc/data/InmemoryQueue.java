@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.message.MessageRequest;
 
-abstract class InmemoryQueue
+public abstract class InmemoryQueue
 {
 
     private static final Log                    log    = LogFactory.getLog(InmemoryQueue.class);

@@ -60,7 +60,7 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>smpp-concatenate</artifactId>
+			<artifactId>platform-k2r-concatenatesmpp</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

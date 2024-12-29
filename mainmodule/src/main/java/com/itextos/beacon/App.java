@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.kafkabackend.kafka2elasticsearch.start.StartApplication;
-import com.itextos.beacon.queryprocessor.threadpoolexecutor.ProcessQueueThreadPool;
 import com.itextos.beacon.smslog.DebugLog;
 import com.itextos.beacon.smslog.TimeTakenLog;
 
@@ -214,7 +213,7 @@ public class App {
 	private static boolean isAllDNPost(String module, String[] args) {
 		 if(module.trim().equals("dnpost")) {
 			 DebugLog.log("Start the module : dnpost ");
-			 com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			 com.itextos.beacon.platform.k2rdnpostsmpp.StartApplication.main(args);
 			 com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 			IS_START_PROMETHEUS=true;
 			return true;
@@ -267,26 +266,26 @@ public class App {
 			com.itextos.beacon.platform.subbiller.StartApplication.main(args);
 
 	
-			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbsub.StartApplication.main(args);
 
 			
-			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdelivery.StartApplication.main(args);
 
 				
-			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbfullmessage.StartApplication.main(args);
 
 			
-			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dberrorlog.StartApplication.main(args);
 		
-			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostlogsmpp.StartApplication.main(args);
 
-			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnnopayload.StartApplication.main(args);
 
-			com.itextos.beacon.platform.sbc.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbschedule.StartApplication.main(args);
 
 			com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
 				
-			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostloghttpchild.StartApplication.main(args);
 			
 			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
 
@@ -307,7 +306,7 @@ public class App {
 			com.itextos.beacon.platform.dltvc.StartApplication.main(args);
 
 			
-			com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			com.itextos.beacon.platform.k2rdnpostsmpp.StartApplication.main(args);
 
 			com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 
@@ -479,7 +478,7 @@ public class App {
 			return true;			
 		}else if(module.equals("smppdlrhandover")) {
 			
-			com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			com.itextos.beacon.platform.k2rdnpostsmpp.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
@@ -510,14 +509,14 @@ public class App {
 		
 		if(module.equals("biller")) {
 			//
-			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbsub.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdelivery.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbfullmessage.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dberrorlog.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostlogsmpp.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnnopayload.StartApplication.main(args);
 			com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
-			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostloghttpchild.StartApplication.main(args);
 			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
@@ -555,7 +554,7 @@ public class App {
 			return true;			
 		}else if(module.equals("subt2tb")) {
 			
-			com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbsub.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
@@ -569,7 +568,7 @@ public class App {
 			return true;			
 		}else if(module.equals("dnt2tb")) {
 			
-			com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdelivery.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
@@ -583,35 +582,35 @@ public class App {
 			return true;			
 		}else if(module.equals("fullmsgt2tb")) {
 			
-			com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbfullmessage.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
 			return true;			
 		}else if(module.equals("errorlogt2tb")) {
 			
-			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dberrorlog.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
 			return true;			
 		}else if(module.equals("dnpostlogt2tb")) {
 			
-			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostlogsmpp.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
 			return true;			
 		}else if(module.equals("dnnopayloadt2tb")) {
 			
-			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnnopayload.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
 			return true;			
 		}else if(module.equals("sbc")) {
 			
-			com.itextos.beacon.platform.sbc.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbschedule.StartApplication.main(args);
 
 			IS_START_PROMETHEUS=true;
 
@@ -625,7 +624,7 @@ public class App {
 			return true;			
 		}else if(module.equals("clienthandovert2tb")) {
 			
-			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+			com.itextos.beacon.platform.k2dbdnpostloghttpchild.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
 
@@ -822,9 +821,9 @@ public class App {
 	private static void startDigitalT2DB(String[] args) {
 		
 		
-		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbfullmessage.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbdelivery.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbsub.StartApplication.main(args);
 		com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
 		
 	}
@@ -848,23 +847,23 @@ public class App {
 		com.itextos.beacon.platform.rch.StartApplication.main(args);
 		com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
 		com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
-		com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.sbc.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dberrorlog.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbdnnopayload.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbschedule.StartApplication.main(args);
 
 	}
 
 	private static void startDigitalBiller(String args[]) {
 		
-		com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+		com.itextos.beacon.platform.k2rdnpostsmpp.StartApplication.main(args);
 	
 		com.itextos.beacon.smpp.concatehandover.StartApplication.main(args);
 
 		
 		com.itextos.beacon.httpclienthandover.StartApplication.main(args);
 
-		com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbdnpostloghttpchild.StartApplication.main(args);
+		com.itextos.beacon.platform.k2dbdnpostlogsmpp.StartApplication.main(args);
 
 		
 	}

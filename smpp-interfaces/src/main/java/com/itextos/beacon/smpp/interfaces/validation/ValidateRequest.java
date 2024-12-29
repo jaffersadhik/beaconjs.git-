@@ -31,7 +31,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.mobilevalidation.MobileNumberValidator;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
-import com.itextos.beacon.smpp.concatenate.ConcatenateReceiver;
+import com.itextos.beacon.platform.k2rconcatenatesmpp.process.ConcatenateReceiver;
 import com.itextos.beacon.smpp.interfaces.logs.LogWriter;
 import com.itextos.beacon.smpp.interfaces.util.BuildMessageRequest;
 import com.itextos.beacon.smpp.interfaces.util.Communicator;

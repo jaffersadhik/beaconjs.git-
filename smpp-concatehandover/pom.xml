@@ -60,7 +60,17 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
-			<artifactId>smpp-concatenate</artifactId>
+			<artifactId>smpp-concatenate-complete</artifactId>
+			<version>1.0</version>
+		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-concatenate-orphan</artifactId>
+			<version>1.0</version>
+		</dependency>
+					<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-concatenate-expiry</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

@@ -176,6 +176,81 @@
 			<version>1.0</version>
 	</dependency>
 	
+	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-delivery</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-sub</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-dnnopayload</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-dnpostlogsmpp</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-dnpostloghttpchild</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-dnpostloghttpmaster</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-schedule</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-fullmessage</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2db-errorlog</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+					<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2r-dnpostsmpp</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+					<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2r-concatenatesmpp</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>siddhu-k2es</artifactId>

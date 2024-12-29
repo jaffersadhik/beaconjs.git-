@@ -19,18 +19,13 @@ import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
+import com.itextos.beacon.platform.k2dbconcatenatesmpp.db.DbInmemoryCollectionFactory;
 import com.itextos.beacon.platform.smpputil.ISmppInfo;
-import com.itextos.beacon.smpp.concatenate.CompletedMessageChecker;
-import com.itextos.beacon.smpp.concatenate.CompletedMessagePoller;
-import com.itextos.beacon.smpp.concatenate.DbInmemoryCollectionFactory;
-import com.itextos.beacon.smpp.concatenate.ExpiryMessageCollectionFactory;
-import com.itextos.beacon.smpp.concatenate.OrphanExpiryMessageProcessor;
 import com.itextos.beacon.smpp.dboperations.DbBindOperation;
 import com.itextos.beacon.smpp.interfaces.admin.ItextosAdminServer;
 import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoInvalidInmemDrainer;
 import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoValidInmemDrainer;
 import com.itextos.beacon.smpp.interfaces.inmemdrainer.UnbindInfoDbInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.monitor.Monitor;
 import com.itextos.beacon.smpp.interfaces.shutdown.SmppShutdownhook;
 import com.itextos.beacon.smpp.interfaces.timertasks.DisabledAccountCheckTask;
 import com.itextos.beacon.smpp.interfaces.timertasks.IdleSessionRemoverTask;
@@ -248,6 +243,7 @@ public class StartApplication
 
     private static void startCompletedMessageProcessor()
     {
+    	/*
         final int lConcatPoolerConsumerCount = SmppProperties.getInstance().getConcatMessagePoolerRedisConsumerCount();
         if (log.isDebugEnabled())
             log.debug("Concat Pooler Consumer Count : " + lConcatPoolerConsumerCount);
@@ -286,6 +282,7 @@ public class StartApplication
                 }
             }
         }
+        */
     }
 
     public void shutdown()
