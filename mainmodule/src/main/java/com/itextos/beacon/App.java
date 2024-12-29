@@ -284,7 +284,7 @@ public class App {
 
 			com.itextos.beacon.platform.sbc.StartApplication.main(args);
 
-			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+			com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
 				
 			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
 			
@@ -516,7 +516,7 @@ public class App {
 			com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
-			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+			com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
 			com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
 			com.itextos.beacon.platform.dnpcore.StartApplication.main(args);
 
@@ -618,7 +618,7 @@ public class App {
 			return true;			
 		}else if(module.equals("t2e")) {
 			
-			com.itextos.beacon.platform.t2e.StartApplication.main(args);
+			com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
 
@@ -847,7 +847,7 @@ public class App {
 
 		com.itextos.beacon.platform.rch.StartApplication.main(args);
 		com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
-		com.itextos.beacon.platform.t2e.StartApplication.main(args);
+		com.itextos.beacon.platform.k2ednagingupdate.StartApplication.main(args);
 		com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.sbc.StartApplication.main(args);

@@ -243,7 +243,6 @@
 		<module>platform-dlrpayloadgen</module>
 		<module>platform-billing</module>
 		<module>platform-subbiller</module>
-		<module>platform-t2ecore</module>
 		<module>platform-topic2table</module>
 		<module>platform-dnt2tb</module>
 		<module>platform-subt2tb</module>
@@ -412,6 +411,12 @@
    	<module>platform-dnaging</module>
    	<module>platform-dnnopayloadpoller</module>
    	<module>platform-dnnopayloadreceiver</module>
+   	<module>platform-dlrvoiceretry</module>
+   	<module>platform-dnaginggenerator</module>
+   	<module>platform-k2e-mt</module>
+   	<module>platform-k2e-dn</module>
+   	<module>platform-k2e-dnaging</module>
+   	<module>platform-k2e-dnagingupdate</module>
   </modules>
   
 

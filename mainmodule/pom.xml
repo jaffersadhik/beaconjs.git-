@@ -151,6 +151,31 @@
 			<version>1.0</version>
 	</dependency>
 	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2e-mt</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+	
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2e-dn</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2e-dnaging</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>platform-k2e-dnagingupdate</artifactId>
+			<version>1.0</version>
+	</dependency>
+	
 	<dependency>
 			<groupId>beacon</groupId>
 			<artifactId>siddhu-k2es</artifactId>
