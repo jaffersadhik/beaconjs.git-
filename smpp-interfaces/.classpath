@@ -36,5 +36,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="/smpp-bind"/>
+	<classpathentry kind="src" path="/smpp-unbind"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

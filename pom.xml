@@ -425,6 +425,30 @@
    	<module>smpp-concatenate-expiry</module>
    	<module>platform-k2db-concatenatesmpp</module>
    	<module>platform-db2r-concatenatesmpp</module>
+   	<module>smpp-server</module>
+   	<module>smpp-bind</module>
+   	<module>smpp-submitsm</module>
+   	<module>smpp-schedule</module>
+   	<module>smpp-tlv</module>
+   	<module>smpp-throttle</module>
+   	<module>smpp-dto</module>
+   	<module>smpp-messagetype</module>
+   	<module>smpp-messagevalidityperiod</module>
+   	<module>smpp-featurecode</module>
+   	<module>smpp-smsdecode</module>
+   	<module>smpp-sessioninfo</module>
+   	<module>smpp-prometheus</module>
+   	<module>smpp-dnpostloggenerator</module>
+   	<module>smpp-redis</module>
+   	<module>smpp-deliverysm</module>
+   	<module>smpp-timertask</module>
+   	<module>smpp-unbind-expiredsession</module>
+   	<module>smpp-counter</module>
+   	<module>smpp-unbind-inactiveaccount</module>
+   	<module>smpp-shutdown</module>
+   	<module>smpp-unbind</module>
+   	<module>smpp-inmemdrainer</module>
+   	<module>smpp-adminserver</module>
   </modules>
   
 

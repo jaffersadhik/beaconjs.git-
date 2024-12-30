@@ -73,5 +73,35 @@
 			<artifactId>smpp-dboperations</artifactId>
 			<version>1.0</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-server</artifactId>
+			<version>1.0</version>
+		</dependency>
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-shutdown</artifactId>
+			<version>1.0</version>
+		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-unbind-expiredsession</artifactId>
+			<version>1.0</version>
+		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-unbind-inactiveaccount</artifactId>
+			<version>1.0</version>
+		</dependency>
+				<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-timertask</artifactId>
+			<version>1.0</version>
+		</dependency>
+				<dependency>
+					<groupId>beacon</groupId>
+					<artifactId>smpp-unbind</artifactId>
+					<version>1.0</version>
+				</dependency>
+  </dependencies>
 </project>

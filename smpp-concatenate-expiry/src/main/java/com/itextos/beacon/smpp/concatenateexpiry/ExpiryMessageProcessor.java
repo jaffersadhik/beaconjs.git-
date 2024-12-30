@@ -23,7 +23,7 @@ import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.smpp.concatenateutil.ConcatBuildMessageRequest;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
-import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.submitsm.SmppMessageRequest;
 
 class ExpiryMessageProcessor
         implements

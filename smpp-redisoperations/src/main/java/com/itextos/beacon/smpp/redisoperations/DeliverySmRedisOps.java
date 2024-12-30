@@ -1,7 +1,9 @@
 package com.itextos.beacon.smpp.redisoperations;
 
 import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +52,41 @@ public class DeliverySmRedisOps
 
         return null;
     }
+    
+    /*
+    
+    public static Set<String> getKeys()
+    {
 
+    	Set<String> result=new HashSet<String>();
+    	
+        try (
+                Jedis jedis = SmppRedisConnectionProvider.getSmppDlrRedis(aClientId);)
+        {
+        	Set<byte[]> keys=jedis.keys((RedisKeyConstants.SMPP_DN_QUEUE + ".*").getBytes());
+
+        	keys.forEach((lPopString)->{
+        		
+        		   if ((lPopString != null) && (lPopString.length > 0))
+                   {
+                        String strFromRedis = new String(lPopString);
+
+                       result.add(strFromRedis);
+                    
+                   }
+        	});
+
+         
+        }
+        catch (final Exception exp)
+        {
+            log.error("problem popping dlr list...", exp);
+        }
+
+        return result;
+    }
+
+*/
     public static boolean lpushDeliverSm(
             String aClientId,
             String aDliverySmJson)

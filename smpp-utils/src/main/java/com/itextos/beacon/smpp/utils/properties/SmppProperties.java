@@ -83,7 +83,8 @@ public class SmppProperties
 
     public String getInstanceId()
     {
-        return CommonUtility.nullCheck(mSmppProperties.getString(SmppPropertiesConstant.STRING_INSTANCE_ID), true);
+        //return CommonUtility.nullCheck(mSmppProperties.getString(SmppPropertiesConstant.STRING_INSTANCE_ID), true);
+        return     	CommonUtility.getApplicationServerIp();
     }
 
     public List<Object> getInstanceBindType()

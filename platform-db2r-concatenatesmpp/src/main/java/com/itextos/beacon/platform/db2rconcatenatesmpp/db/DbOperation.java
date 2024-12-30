@@ -14,7 +14,7 @@ import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
-import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.submitsm.SmppMessageRequest;
 
 class DbOperation
 {

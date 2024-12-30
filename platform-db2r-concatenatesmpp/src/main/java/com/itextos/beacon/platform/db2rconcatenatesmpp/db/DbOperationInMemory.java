@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.utility.timer.TimedProcessor;
 import com.itextos.beacon.commonlib.utility.tp.ExecutorSheduler;
 import com.itextos.beacon.platform.k2rconcatenatesmpp.process.ConcatenateReceiver;
 import com.itextos.beacon.platform.k2rconcatenatesmpp.redis.RedisOperation;
-import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.submitsm.SmppMessageRequest;
 class DbOperationInMemory
         implements
         ITimedProcess

@@ -13,7 +13,7 @@ import com.itextos.beacon.http.interfaceutil.InterfaceUtil;
 import com.itextos.beacon.platform.k2dbconcatenatesmpp.db.DbInmemoryCollectionFactory;
 import com.itextos.beacon.platform.k2rconcatenatesmpp.redis.RedisOperation;
 import com.itextos.beacon.smpp.objects.SmppUserInfo;
-import com.itextos.beacon.smpp.objects.request.SmppMessageRequest;
+import com.itextos.beacon.smpp.dto.SmppMessageRequest;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 
 public class ConcatenateReceiver

@@ -10,32 +10,26 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.cloudhopper.smpp.type.SmppChannelException;
-import com.itextos.beacon.commonlib.constants.ClusterType;
-import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
-import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 import com.itextos.beacon.platform.k2dbconcatenatesmpp.db.DbInmemoryCollectionFactory;
-import com.itextos.beacon.platform.smpputil.ISmppInfo;
+import com.itextos.beacon.smpp.adminserver.ItextosAdminServer;
+import com.itextos.beacon.smpp.bind.BindInfoInvalidInmemDrainer;
+import com.itextos.beacon.smpp.bind.BindInfoValidInmemDrainer;
 import com.itextos.beacon.smpp.dboperations.DbBindOperation;
-import com.itextos.beacon.smpp.interfaces.admin.ItextosAdminServer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoInvalidInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.BindInfoValidInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.inmemdrainer.UnbindInfoDbInmemDrainer;
-import com.itextos.beacon.smpp.interfaces.shutdown.SmppShutdownhook;
-import com.itextos.beacon.smpp.interfaces.timertasks.DisabledAccountCheckTask;
-import com.itextos.beacon.smpp.interfaces.timertasks.IdleSessionRemoverTask;
-import com.itextos.beacon.smpp.interfaces.timertasks.SessionCountUpdateTask;
-import com.itextos.beacon.smpp.objects.SmppObjectType;
-import com.itextos.beacon.smpp.objects.inmem.InfoCollection;
 import com.itextos.beacon.smpp.redisoperations.RedisBindOperation;
 import com.itextos.beacon.smpp.redisoperations.SessionInfoRedisUpdate;
+import com.itextos.beacon.smpp.server.ItextosSmppServer;
+import com.itextos.beacon.smpp.shutdown.SmppShutdownhook;
+import com.itextos.beacon.smpp.timertask.SessionCountUpdateTask;
+import com.itextos.beacon.smpp.unbind.UnbindInfoDbInmemDrainer;
+import com.itextos.beacon.smpp.unbind.expiredsession.IdleSessionRemoverTask;
+import com.itextos.beacon.smpp.unbind.inactiveaccount.DisabledAccountCheckTask;
 import com.itextos.beacon.smpp.utils.AccountDetails;
-import com.itextos.beacon.smpp.utils.SmppApplicationParams;
 import com.itextos.beacon.smpp.utils.properties.SmppProperties;
 import com.itextos.beacon.smslog.SmppServerLog;
 
@@ -185,8 +179,7 @@ public class StartApplication
         if (log.isDebugEnabled())
             log.debug("Adding Shutdown hook to the application.");
 
-        final String lInstanceId = SmppProperties.getInstance().getInstanceId();
-        Runtime.getRuntime().addShutdownHook(new SmppShutdownhook(this, lInstanceId));
+        Runtime.getRuntime().addShutdownHook(new SmppShutdownhook());
     }
 
     private static void updateRedisSessions(
@@ -285,32 +278,7 @@ public class StartApplication
         */
     }
 
-    public void shutdown()
-    {
-        log.fatal(SmppProperties.getInstance().getInstanceId() + " SMPP Server Instance shutting down....");
-
-        ItextosSmppServer.getInstance().shutdownInitiated();
-        ItextosSmppServer.getInstance().getSmppServer().destroy();
-
-        processUnbindInfo();
-
-        ItextosSmppServer.getInstance().stop();
-
-        // TODO: Already called server stop in above statement. Not require to call
-        // again.
-        // stopOtherThreads();
-
-        // printRunningThreadsInfo();
-
-        while (!ItextosSmppServer.getInstance().isServerStopped())
-        {
-            log.error("shutdown() - Waiting for the Server to Stop.....");
-            CommonUtility.sleepForAWhile();
-        }
-
-        log.fatal("Shutdown completed.");
-    }
-
+   
     private void stopOtherThreads()
     {
         // TODO Need to add all the threads started by us.
@@ -344,27 +312,7 @@ public class StartApplication
         }
     }
 
-    private static void processUnbindInfo()
-    {
-
-        try
-        {
-            final List<ISmppInfo> unbindInfoList = InfoCollection.getInstance().getObjects(SmppObjectType.UNBIND_INFO_REDIS, 1000);
-
-            if (log.isDebugEnabled())
-                log.debug("UnbindInfoRedis Q Size - " + unbindInfoList.size());
-
-            while (!unbindInfoList.isEmpty())
-            {
-                log.error("shutdown() - Updating the unbind redis counts" + unbindInfoList);
-                CommonUtility.sleepForAWhile();
-            }
-        }
-        catch (final Exception e)
-        {
-            log.fatal("Exception while processing the unbind info ", e);
-        }
-    }
+   
 
     private static List<String> getRedisIndices(
             int aConcatRedisPool)

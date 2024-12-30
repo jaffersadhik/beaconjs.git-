@@ -26,6 +26,11 @@
 			<groupId>beacon</groupId>
 			<artifactId>platform-k2db-concatenatesmpp</artifactId>
 			<version>1.0</version>
+		</dependency>	
+			<dependency>
+			<groupId>beacon</groupId>
+			<artifactId>smpp-dto</artifactId>
+			<version>1.0</version>
 		</dependency>				
 	</dependencies>
 </project>
