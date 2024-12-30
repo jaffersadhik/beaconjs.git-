@@ -171,6 +171,14 @@ public class App {
 
 				return true;
 				
+			}else if(module.equals("passwordapi")){
+				
+				com.itextos.beacon.jettyserver.passwordencryption.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
 			}
 			
 			return false;
