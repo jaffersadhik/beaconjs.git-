@@ -10,35 +10,33 @@
  
 
    <dependencies>
-    <!-- Jetty Server -->
+    <!-- Jetty Server
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-server</artifactId>
-        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
+        <version>9.4.51.v20230217</version> <
     </dependency>
 
-    <!-- Jetty Servlet Support -->
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-servlet</artifactId>
-        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
+        <version>9.4.51.v20230217</version> 
     </dependency>
 
-    <!-- Jetty Utilities -->
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-util</artifactId>
-        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
+        <version>9.4.51.v20230217</version> 
     </dependency>
 
-    <!-- javax.servlet API (for Jetty 9/10) -->
     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>4.0.1</version>
     </dependency>
+     -->
 
-<!--   
+
    <dependency>
 <groupId>org.eclipse.jetty</groupId>
 <artifactId>jetty-server</artifactId>
@@ -54,7 +52,13 @@
 <artifactId>jetty-http</artifactId>
 <version>11.0.1</version>
 </dependency>
--->
+
+<dependency>
+<groupId>jakarta.servlet</groupId>
+<artifactId>jakarta.servlet-api</artifactId>
+<version>5.0.0</version>
+</dependency>
+
 			<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
