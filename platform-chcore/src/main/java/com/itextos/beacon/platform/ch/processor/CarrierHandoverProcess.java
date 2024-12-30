@@ -779,88 +779,47 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 			        	telemarketerTLVOption="2";
 			        }
 			        
-			        int intTelemarketerTLVOption=Integer.parseInt(telemarketerTLVOption);
+			        int outgoingCarrierTelemarketerTLVOption=Integer.parseInt(telemarketerTLVOption);
 			        
 			        try {
 			        	
-			        	intTelemarketerTLVOption=2;
+			        	outgoingCarrierTelemarketerTLVOption=TELEMARKETERID_TLV_VALUE_NONHASHED;
 			        	
 			        }catch(Exception e) {
 			        	
 			        }
 			        
-			        if(intTelemarketerTLVOption!=TELEMARKETERID_TLV_VALUE_NO)
-			        {
-						        String telemarketerid=lRouteConfigInfo.getTelemartkerId();
+			    
+						        String platformTelemarkerid=lRouteConfigInfo.getTelemartkerId();
 								
-						        if(telemarketerid==null) {
+						        if(platformTelemarkerid==null) {
 						        	
-						        	telemarketerid="1234";
+						        	platformTelemarkerid="1234";
 						        }
-								String temptelemartkerid=aMessageRequest.getDltTelemarketerId();
+								String customerTelemarketerId=aMessageRequest.getDltTelemarketerId();
 								
-								if(temptelemartkerid==null) {
-									temptelemartkerid="";
+								if(customerTelemarketerId==null) {
+									customerTelemarketerId="";
 								}
 								
-								int clientPassingTelemarketerIdHashed=getTelemarketerIdTLVOption(temptelemartkerid);
+								int incomingCustomerTelemarketerTLVOption=getTelemarketerIdTLVOption(customerTelemarketerId);
 								
-							if(clientPassingTelemarketerIdHashed!=TELEMARKETERID_TLV_VALUE_NO) {
-								
-												switch(clientPassingTelemarketerIdHashed) {
-												
-												case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:
-																telemarketerid=telemarketerid;
-																break;
-												case TELEMARKETERID_TLV_VALUE_HASHED:	
-																temptelemartkerid=temptelemartkerid;
-																break;
-												case TELEMARKETERID_TLV_VALUE_NONHASHED:
-																telemarketerid=entityid+","+telemarketerid;
-																break;
-				
-												}
-								
-								KannelURLLog.log("telemarketerid :"+telemarketerid);
-		
-							}else {
-							
-												switch(intTelemarketerTLVOption) {
-												
-												case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:
-																telemarketerid=telemarketerid;
-																break;
-												case TELEMARKETERID_TLV_VALUE_HASHED:	
-																telemarketerid=entityid+","+telemarketerid;
-																break;
-												case TELEMARKETERID_TLV_VALUE_NONHASHED:
-																telemarketerid=entityid+","+telemarketerid;
-																break;
-				
-												}
-								
-								KannelURLLog.log("telemarketerid :"+telemarketerid);
-		
-							}
-							
-			        
-					        if((telemarketerTLVOption!=null&&telemarketerTLVOption.equals("1")) && clientPassingTelemarketerIdHashed!=TELEMARKETERID_TLV_VALUE_HASHED) {
-					        	
-					        	telemarketerid=getHashValue(telemarketerid);
-					        	
-					        }else {
-					        	
-								telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
-		
-					        }
-					        metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+telemarketerid;
+								String finalOutgoingTelemarkerId=getTelemarketerId( incomingCustomerTelemarketerTLVOption , outgoingCarrierTelemarketerTLVOption , customerTelemarketerId, platformTelemarkerid, entityid);
 
-			    	}else {
-			    		
-					    		
-							metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
-		
-					}
+							
+								KannelURLLog.log("incomingCustomerTelemarketerTLVOption : "+incomingCustomerTelemarketerTLVOption);
+								KannelURLLog.log("outgoingCarrierTelemarketerTLVOption : "+outgoingCarrierTelemarketerTLVOption);
+								KannelURLLog.log("customerTelemarketerId : "+customerTelemarketerId);
+								KannelURLLog.log("platformTelemarkerid : "+platformTelemarkerid);
+								KannelURLLog.log("entityid : "+entityid);
+								KannelURLLog.log("finalOutgoingTelemarkerId : "+finalOutgoingTelemarkerId);
+
+							if(finalOutgoingTelemarkerId!=null) {
+								metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+platformTelemarkerid;
+							}else {			    	
+								metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
+							}
+					
 					
 			        		reqmap.put("meta-data", metadata);
 				
@@ -873,6 +832,86 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					return reqmap;
 
 			
+	}
+
+	private static String getTelemarketerId(int incomingCustomerTelemarketerTLVOption ,int outgoingCarrierTelemarketerTLVOption ,String customertelemartkerid,String platformtelemartkerid,String entityid) throws UnsupportedEncodingException {
+		
+		/*
+		 * telemarketerTLVOption==0 --> no value passed to 1402 TLV
+			telemarketerTLVOption==1 --> hash value passed to 1402 TLV --Hash Of
+			telemarketerTLVOption==2 --> non hash value passed to 1402 TLV --> example (entityid,TMAID)
+			telemarketerTLVOption==3 --> telemarketerid value alone passed to 1402 TLV --> (telemarketerid)
+			
+			Possible TLV Value 
+				1. novalue
+				2. telemar
+		 */
+		String telemarketerid=null;
+		
+		switch(outgoingCarrierTelemarketerTLVOption) {
+		
+		case TELEMARKETERID_TLV_VALUE_NO:{
+			telemarketerid=null; //nothing to pass
+			break;
+		}
+		case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
+						telemarketerid=platformtelemartkerid; //customer telemarketerid will be ignored
+						break;
+		}
+		case TELEMARKETERID_TLV_VALUE_HASHED:{
+			
+			switch(incomingCustomerTelemarketerTLVOption) {
+			
+			case TELEMARKETERID_TLV_VALUE_NO:{
+				telemarketerid=entityid+","+platformtelemartkerid;
+				telemarketerid=getHashValue(telemarketerid);
+			}
+			case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
+				telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
+				telemarketerid=getHashValue(telemarketerid);
+			}
+				break;
+			case TELEMARKETERID_TLV_VALUE_HASHED:{
+				telemarketerid=customertelemartkerid;  //plaform value will be ignored customer value will be passed to carrier
+				break;
+			}
+			case TELEMARKETERID_TLV_VALUE_NONHASHED:{
+				telemarketerid=customertelemartkerid+","+platformtelemartkerid;
+				telemarketerid=getHashValue(telemarketerid);
+				break;
+			}
+				
+		}
+		}
+		case TELEMARKETERID_TLV_VALUE_NONHASHED:
+		{
+					switch(incomingCustomerTelemarketerTLVOption) {
+					
+						case TELEMARKETERID_TLV_VALUE_NO:{
+							telemarketerid=entityid+","+platformtelemartkerid;
+						}
+						case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
+							telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
+							break;
+						}
+						case TELEMARKETERID_TLV_VALUE_HASHED:{
+							telemarketerid=customertelemartkerid; //plaform value will be ignored customer value will be passed to carrier
+							break;
+						}
+						case TELEMARKETERID_TLV_VALUE_NONHASHED:{
+							telemarketerid=customertelemartkerid+","+platformtelemartkerid;
+							break;
+						}
+					}
+		}
+		}
+
+		if(telemarketerid!=null) {
+			
+			telemarketerid=URLEncoder.encode(CommonUtility.nullCheck(telemarketerid, true), Constants.ENCODER_FORMAT);
+		}
+		
+		return telemarketerid;
 	}
 
 	private static boolean isClientPassingTelemarketerIdHashed(String telemarketerid) {
