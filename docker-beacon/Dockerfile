@@ -13,7 +13,9 @@ COPY ./target/common/log4j2-kafka2elastic.xml /log4j2-kafka2elastic.xml
 COPY ./target/common/log4j2-common.xml /log4j2-common.xml
 COPY ./target/common/custom_hosts_production.properties /custom_hosts_production.properties
 COPY ./target/common/smpp-interface.properties /smpp-interface.properties
+COPY ./target/common/jettyserver.properties /jettyserver.properties
 COPY ./target/common/encrypt.properties /encrypt.properties
+
 COPY ./target/common/dnd.properties /dnd.properties
 COPY ./target/common/common-k2es.properties /common-k2es.properties
 COPY ./target/common/dlttemplateconfig.properties /dlttemplateconfig.properties
