@@ -11,8 +11,7 @@
 **/.settings/
 **/.settings/**
 
-./vscode/
-
+./vscode/*
 # Node artifact files
 node_modules/
 dist/
