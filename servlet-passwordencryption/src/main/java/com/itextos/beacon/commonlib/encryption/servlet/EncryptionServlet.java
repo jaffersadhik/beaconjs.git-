@@ -2,123 +2,92 @@ package com.itextos.beacon.commonlib.encryption.servlet;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.itextos.beacon.commonlib.pwdencryption.CryptoType;
+import com.itextos.beacon.commonlib.pwdencryption.Encryptor;
 
-import com.itextos.beacon.commonlib.encryption.process.Processor;
-import com.itextos.beacon.commonlib.pwdencryption.EncryptedObject;
+@WebServlet("/encryption")
+public class EncryptionServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-/**
- * Servlet implementation class EncryptionServlet
- */
-public class EncryptionServlet
-        extends
-        BasicServlet
-{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-    private static final long   serialVersionUID = 1L;
-    private static final Log    log              = LogFactory.getLog(EncryptionServlet.class);
-    private static final String DESTINATION      = "jsp/encryption.jsp";
-    private static final String ENCRYPT          = "encrypt";
-    private static final String DECRYPT          = "decrypt";
-    private static final String ENCODE           = "encode";
-    private static final String DECODE           = "decode";
+        String cryptoType = request.getParameter("cryptotype");
+        session.setAttribute("cryptotype", cryptoType);
 
-    /**
-     * @see BasicServlet#BasicServlet()
-     */
-    public EncryptionServlet()
-    {
-        super();
+        switch (cryptoType) {
+            case "encode":
+                handleEncode(request, session);
+                break;
+            case "decode":
+                handleDecode(request, session);
+                break;
+            case "encrypt":
+			try {
+				handleEncrypt(request, session);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+                break;
+            case "decrypt":
+			try {
+				handleDecrypt(request, session);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+                break;
+        }
+
+        response.sendRedirect("encryption.jsp");
     }
 
-    @Override
-    protected void doGet(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException,
-            IOException
-    {
-        String          lEncodedText     = null;
-        String          lDecodedText     = null;
-        String          lEncryptedText   = null;
-        String          lDecryptedText   = null;
-        String          cryptoType       = null;
-        String          textToEncode     = null;
-        String          textToDecode     = null;
-        String          textToEncrypt    = null;
-        String          textToDecrypt    = null;
-        String          encryptKey       = null;
-        String          decryptKey       = null;
-        EncryptedObject lEncryptedObject = null;
+    private void handleEncode(HttpServletRequest request, HttpSession session) {
+    	/*
+        String encodeText = request.getParameter("encodetext");
+        String encodedText = CommonUtility.base64Encode(encodeText);
 
-        try
-        {
-            cryptoType    = request.getParameter("cryptotype");
-            textToEncode  = request.getParameter("encodetext");
-            textToDecode  = request.getParameter("decodetext");
-            textToEncrypt = request.getParameter("encrypttext");
-            textToDecrypt = request.getParameter("decrypttext");
-            encryptKey    = request.getParameter("ekey");
-            decryptKey    = request.getParameter("dkey");
-
-            if (cryptoType != null)
-                if (cryptoType.equals(ENCRYPT) && (encryptKey != null))
-                {
-                    lEncryptedObject = Processor.encryptProcess("aes256", textToEncrypt, encryptKey);
-                    lEncryptedText   = lEncryptedObject.getEncryptedWithIvAndSalt();
-                }
-                else
-                    if (cryptoType.equals(DECRYPT))
-                        lDecryptedText = Processor.decryptProcess("aes256", textToDecrypt, decryptKey);
-                    else
-                        if (cryptoType.equals(ENCODE))
-                        {
-                            lEncryptedObject = Processor.encodeProcess(ENCODE, textToEncode, null);
-                            lEncodedText     = lEncryptedObject.getEncryptedWithIvAndSalt();
-                        }
-                        else
-                            if (cryptoType.equals(DECODE))
-                                lDecodedText = Processor.decodeProcess(ENCODE, textToDecode, null);
-        }
-        catch (final Exception e)
-        {
-            log.error("Exception while process the request ", e);
-        }
-        finally
-        {
-            final HttpSession lSession = request.getSession(true);
-            lSession.setAttribute("encodeText", textToEncode);
-            lSession.setAttribute("encodedText", lEncodedText);
-            lSession.setAttribute("decodeText", textToDecode);
-            lSession.setAttribute("decodedText", lDecodedText);
-            lSession.setAttribute("enryptedText", lEncryptedText);
-            lSession.setAttribute("decryptedText", lDecryptedText);
-            lSession.setAttribute("cryptotype", cryptoType);
-            lSession.setAttribute("etext", textToEncrypt);
-            lSession.setAttribute("dtext", textToDecrypt);
-            lSession.setAttribute("ekey", encryptKey);
-            lSession.setAttribute("dkey", decryptKey);
-
-            final RequestDispatcher dispatcher = request.getRequestDispatcher(DESTINATION);
-            dispatcher.forward(request, response);
-        }
+        session.setAttribute("encodeText", encodeText);
+        session.setAttribute("encodedText", encodedText);
+        */
     }
 
-    @Override
-    protected void doPost(
-            HttpServletRequest aRequest,
-            HttpServletResponse aResponse)
-            throws ServletException,
-            IOException
-    {
-        doGet(aRequest, aResponse);
+    private void handleDecode(HttpServletRequest request, HttpSession session) {
+    	/*
+        String decodeText = request.getParameter("decodetext");
+        String decodedText = Encryptor.base64Decode(decodeText);
+
+        session.setAttribute("decodeText", decodeText);
+        session.setAttribute("decodedText", decodedText);
+    	*/
     }
 
+    private void handleEncrypt(HttpServletRequest request, HttpSession session) throws Exception {
+        String encryptText = request.getParameter("encrypttext");
+        String encryptKey = request.getParameter("ekey");
+        
+        String encryptedText = Encryptor.encrypt(CryptoType.getCryptoType((String) session.getAttribute("cryptotype")),encryptText, encryptKey).toString();
+
+        session.setAttribute("etext", encryptText);
+        session.setAttribute("ekey", encryptKey);
+        session.setAttribute("enryptedText", encryptedText);
+    }
+
+    private void handleDecrypt(HttpServletRequest request, HttpSession session) throws Exception {
+        String decryptText = request.getParameter("decrypttext");
+        String decryptKey = request.getParameter("dkey");
+        String decryptedText = Encryptor.decrypt(CryptoType.getCryptoType((String) session.getAttribute("cryptotype")),decryptText, decryptKey).toString();
+
+        session.setAttribute("dtext", decryptText);
+        session.setAttribute("dkey", decryptKey);
+        session.setAttribute("decryptedText", decryptedText);
+    }
 }
