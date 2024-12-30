@@ -409,6 +409,8 @@
    	<module>platform-k2e-dnaging</module>
    	<module>platform-k2e-dnagingupdate</module>
    	<module>platform-k2db-errorlog</module>
+   	<module>platform-k2db-fullmessage</module>
+
    	<module>platform-k2db-sub</module>
    	<module>platform-k2db-delivery</module>
    	<module>platform-k2db-dnnopayload</module>
