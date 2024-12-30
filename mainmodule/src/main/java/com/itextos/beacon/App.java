@@ -179,6 +179,14 @@ public class App {
 
 				return true;
 				
+			}else if(module.equals("qprapi")){
+				
+				com.itextos.beacon.jettyserver.qpr.QueryEngine.main(args);
+				
+				IS_START_PROMETHEUS=true;
+
+				return true;
+				
 			}
 			
 			return false;
