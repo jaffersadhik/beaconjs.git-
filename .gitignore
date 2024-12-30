@@ -5,18 +5,13 @@
 
 .project
 
-# Ignore .settings directories
-**/.settings/
-
-# Ignore .vscode directories at any level
-**/.vscode/
-
-# Ignore any .project files at any level
-**/*.project
-
-# Ignore any .classpath files at any level
+# Eclipse project files
+**/.project
 **/.classpath
+**/.settings/
+**/.settings/**
 
+./vscode/
 
 # Node artifact files
 node_modules/
