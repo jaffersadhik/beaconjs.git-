@@ -14,17 +14,24 @@
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-server</artifactId>
-        <version>9.4.51.v20230217</version> <!-- Example version for Jetty 9 -->
+        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
     </dependency>
 
     <!-- Jetty Servlet Support -->
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-servlet</artifactId>
-        <version>9.4.51.v20230217</version> <!-- Example version for Jetty 9 -->
+        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
     </dependency>
 
-    <!-- javax.servlet API -->
+    <!-- Jetty Utilities -->
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-util</artifactId>
+        <version>9.4.51.v20230217</version> <!-- Jetty 9 -->
+    </dependency>
+
+    <!-- javax.servlet API (for Jetty 9/10) -->
     <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
