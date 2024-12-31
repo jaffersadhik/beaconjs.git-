@@ -779,14 +779,16 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 			        	telemarketerTLVOption="2";
 			        }
 			        
-			        int outgoingCarrierTelemarketerTLVOption=Integer.parseInt(telemarketerTLVOption);
+		        	int outgoingCarrierTelemarketerTLVOption=TELEMARKETERID_TLV_VALUE_NONHASHED;
+
 			        
 			        try {
-			        	
-			        	outgoingCarrierTelemarketerTLVOption=TELEMARKETERID_TLV_VALUE_NONHASHED;
+				         outgoingCarrierTelemarketerTLVOption=Integer.parseInt(telemarketerTLVOption);
+
 			        	
 			        }catch(Exception e) {
 			        	
+
 			        }
 			        
 			    
