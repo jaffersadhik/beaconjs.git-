@@ -1,5 +1,6 @@
 package com.itextos.beacon.queryprocessor.requestreceiver;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Properties;
 
@@ -17,6 +18,22 @@ public class QueryEngine
     public static Server     server        = null;
     static final Properties  mySQL_cfg_val = new Properties();
     private static final QPRLog log           = QPRLog.getInstance();
+    
+    static {
+    	
+        final String cfg_fn = "/req_receiver.properties"+"_"+System.getenv("profile");//args[0];
+        log.info("Reading values from config file: " + cfg_fn);
+        FileReader file;
+		try {
+			file = new FileReader(cfg_fn);
+			   mySQL_cfg_val.load(file);
+		        file.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     
+    }
 
     public static void main(
             String[] args)
@@ -24,11 +41,7 @@ public class QueryEngine
 
         try
         {
-            final String cfg_fn = "/req_receiver.properties";//args[0];
-            log.info("Reading values from config file: " + cfg_fn);
-            final FileReader file = new FileReader(cfg_fn);
-            mySQL_cfg_val.load(file);
-            file.close();
+
             final ConnectionPoolSingleton connPool    = ConnectionPoolSingleton.createInstance(mySQL_cfg_val);
 
             final int                     server_port = Integer.parseInt(mySQL_cfg_val.getProperty("server.port"));
