@@ -817,7 +817,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 								KannelURLLog.log("finalOutgoingTelemarkerId : "+finalOutgoingTelemarkerId);
 
 							if(finalOutgoingTelemarkerId!=null) {
-								metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+platformTelemarkerid;
+								metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26telemarketerid="+finalOutgoingTelemarkerId;
 							}else {			    	
 								metadata="%3Fsmpp%3Fentityid="+entityid+"%26templateid="+templateid+"%26";
 							}
