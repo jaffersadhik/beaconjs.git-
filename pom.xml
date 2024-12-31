@@ -383,6 +383,7 @@
    	   	<module>docker-tomacat</module>
 
    	   	<module>platform-dnsingle</module>
+   	   	<module>platform-dnaging</module>
   </modules>
   
 

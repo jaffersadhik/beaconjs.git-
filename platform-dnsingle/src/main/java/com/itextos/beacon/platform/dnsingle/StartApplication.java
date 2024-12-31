@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.dnpcore;
+package com.itextos.beacon.platform.dnsingle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,52 +43,19 @@ public class StartApplication
             	System.setProperty("modvalue", System.getenv("modvalue"));
 
             }
-            
-            final ProcessorInfo lDnProcessor = new ProcessorInfo(Component.DNP);
-            lDnProcessor.process();
-
-            /*
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.ADNP);
-
-            final ProcessorInfo lAgingDnProcessor = new ProcessorInfo(Component.ADNP, false);
-            lAgingDnProcessor.process();
-	
-			*/
-            
-            /*
             if (log.isDebugEnabled())
                 log.debug("Starting the application " + Component.SDNP);
 
             final ProcessorInfo lSingleDnProcessor = new ProcessorInfo(Component.SDNP, false);
             lSingleDnProcessor.process();
-*/
-            /*
-             * if (log.isDebugEnabled())
-             * log.debug("Starting the application " + Component.NPR);
-             * final ProcessorInfo lNoPayloadRetryProcessor = new
-             * ProcessorInfo(Component.NPR, false);
-             * lNoPayloadRetryProcessor.process();
-             */
 
-            /*
-            if (log.isDebugEnabled())
-                log.debug("Starting the application " + Component.DLRINTLP);
-
-            final ProcessorInfo lDlrInternalProcessor = new ProcessorInfo(Component.DLRINTLP, false);
-            lDlrInternalProcessor.process();
-*/
-            
-            NoPayloadRetryQReaper.getInstance();
-            NoPayloadRetryUpdateQReaper.getInstance();
-            NoPayloadRetryPollerHolder.getInstance();
-
-      /*
+          
+      
             SingleDnExpiryProcessor.getInstance();
             SingleDnDataDelete.getInstance();
             SingleDnDuplicateCheckRemove.getInstance();
             SingleDnOldDuplicateCheckRemove.getInstance();
-        */}
+        }
         catch (final Exception e)
         {
             log.error("Exception occer while processing the DLR Services.. Hence stop the service..", e);

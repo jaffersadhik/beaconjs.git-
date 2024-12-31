@@ -445,6 +445,29 @@ public class App {
 			IS_START_PROMETHEUS=true;
 
 			return true;			
+		}else if(module.equals("digitaldnpost")) {
+			
+			com.itextos.beacon.platform.smppdlr.StartApplication.main(args);
+			com.itextos.beacon.httpclienthandover.StartApplication.main(args);
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
+		}else if(module.equals("dbpoller")) {
+			com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);
+
+			com.itextos.beacon.platform.smppdlrpoller.StartApplication.main(args);
+			com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
+			com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
+			com.itextos.beacon.platform.dnrfallbackpoller.StartApplication.main(args);
+			
+			com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication.main(args);
+			com.itextos.beacon.platform.dlrpayloadgen.process.StartApplication.main(args);
+
+
+			IS_START_PROMETHEUS=true;
+
+			return true;			
 		}
 		
 		
@@ -611,6 +634,22 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("billermain")){
+			
+			startBillerMain(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
+		}else if(module.equals("billerother")){
+			
+			startBillerOther(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("digitalt2db")){
 			
 			startDigitalT2DB(args);
@@ -764,6 +803,22 @@ public class App {
 		}
 		
 		return false;
+	}
+
+	private static void startBillerOther(String[] args) {
+
+		
+		com.itextos.beacon.platform.errorlogt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnnopayloadt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.clienthandovert2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnpostlogt2tb.StartApplication.main(args);
+	}
+
+	private static void startBillerMain(String[] args) {
+		
+		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
+		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
 	}
 
 	private static void startDigitalT2DB(String[] args) {
