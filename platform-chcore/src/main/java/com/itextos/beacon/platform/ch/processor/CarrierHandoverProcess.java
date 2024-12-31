@@ -894,6 +894,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 			}
 				
 		}
+			break;
 		}
 		case TELEMARKETERID_TLV_VALUE_NONHASHED:
 		{
@@ -923,6 +924,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 							break;
 						}
 					}
+					break;
 		}
 		}
 
