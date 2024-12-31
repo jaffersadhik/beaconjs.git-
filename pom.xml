@@ -382,6 +382,7 @@
    	<module>python-cron</module>
    	   	<module>docker-tomacat</module>
 
+   	   	<module>platform-dnsingle</module>
   </modules>
   
 

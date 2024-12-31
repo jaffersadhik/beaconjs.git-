@@ -163,24 +163,35 @@ public class Encryptor
               System.out.println(lDecryptedDbPassword);
     
         	}*/
+
+        	  String lDecryptedSmppPassword = getSmppDecryptedPassword("hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3");
+              //  System.out.println(lDecryptedDbPassword);//Pf5X7wpt  //  hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3
+
         	
-      	  final String lDecryptedDbPassword = getSmppDecryptedPassword("hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3");
-        //  System.out.println(lDecryptedDbPassword);//Pf5X7wpt
-          
-        	
-        	  String lApiPassword = getApiDecryptedPassword("i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY");
-          //   System.out.println(lApiPassword);//WPzDMqbaVqG8
+        	  String lApiPassword = getApiDecryptedPassword("u0SE1rkBCPmKvC+5LsiLCnpzOERjSXM0RXY5Gcqxmf/02rqv4MX5mB8H");
+          //   System.out.println(lApiPassword);//WPzDMqbaVqG8  // i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY
              
-             
+
+         	 //pinnacle1
+
+         	  lDecryptedSmppPassword = getSmppDecryptedPassword("34hzf/bclBksfeaV49vtqE1kRjl6Q0VtMDn5z1TxDCOXo2rYapSj3T5j");
+         	
+                System.out.println(lDecryptedSmppPassword);// 7R8es6Dg  //  i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY
+
+                lApiPassword = getApiDecryptedPassword("u0SE1rkBCPmKvC+5LsiLCnpzOERjSXM0RXY5Gcqxmf/02rqv4MX5mB8H");
+                  System.out.println(lApiPassword);// b0vlFpgZ7Pm6  // u0SE1rkBCPmKvC+5LsiLCnpzOERjSXM0RXY5Gcqxmf/02rqv4MX5mB8H
+                  
+                  
             // $2a$10$QZbSGc10EcUdBX9Z00Hmgepw5RK8RFaP4xPbcZX87GEWddoUGHna.
         	// gui ; EncryptedObject [mActualString=HyePFO6oNqNz, mEncryptedWithIvAndSalt=$2a$10$d8jxByZmbR2ZFziViQbSneaGzPJ5rs/R.c8J6n1OyvBm8zrVhrHpa]
 
-             System.out.println(" gui : "+getGuiPassword("test@123"));// $2a$10$bOcAL/Bp4sEeMrZM0IJfVueXiux3UJT5JzmlT1Bx5YPSQDJE8RwFi
+           //  System.out.println(" gui : "+getGuiPassword("test@123"));// $2a$10$bOcAL/Bp4sEeMrZM0IJfVueXiux3UJT5JzmlT1Bx5YPSQDJE8RwFi
          	//
              lApiPassword = getApiDecryptedPassword("O3qFcs1c5VVFk3++2mG3D0FrMUxWdGtkcUplWxQtjQmiXylt8NDgNRj+");
              //
         //     System.out.println(lApiPassword);//LSIqeA3pGMsi
         	
+            
              
 
         	 String lDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
