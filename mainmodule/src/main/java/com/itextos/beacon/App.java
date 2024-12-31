@@ -658,14 +658,6 @@ public class App {
 
 			return true;
 			
-		}else if(module.equals("digitaldnpost")){
-			
-			startDigitalDnpost(args);
-			
-			IS_START_PROMETHEUS=true;
-
-			return true;
-			
 		}else if(module.equals("smppinterface")){
 			
 			com.itextos.beacon.smpp.interfaces.StartApplication.main(args);
@@ -805,6 +797,11 @@ public class App {
 		return false;
 	}
 
+	private static void startDnpost(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private static void startBillerOther(String[] args) {
 
 		
@@ -836,10 +833,7 @@ public class App {
 
 
 		com.itextos.beacon.platform.kannelstatusupdater.StartApplication.main(args);
-		com.itextos.beacon.platform.dnrfallbackpoller.StartApplication.main(args);
-		com.itextos.beacon.http.interfacefallbackpoller.StartApplication.main(args);
-
-		com.itextos.beacon.platform.sbpcore.StartApplication.main(args);
+		
 
 		com.itextos.beacon.platform.smppdlrpoller.StartApplication.main(args);
 		
