@@ -854,10 +854,12 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 		
 		case TELEMARKETERID_TLV_VALUE_NO:{
 			telemarketerid=null; //nothing to pass
+			KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NO "+TELEMARKETERID_TLV_VALUE_NO );
 			break;
 		}
 		case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
 						telemarketerid=platformtelemartkerid; //customer telemarketerid will be ignored
+						KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_TELEMARKETERID "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
 						break;
 		}
 		case TELEMARKETERID_TLV_VALUE_HASHED:{
@@ -867,19 +869,27 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 			case TELEMARKETERID_TLV_VALUE_NO:{
 				telemarketerid=entityid+","+platformtelemartkerid;
 				telemarketerid=getHashValue(telemarketerid);
+				KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_HASHED "+TELEMARKETERID_TLV_VALUE_HASHED +" in TELEMARKETERID_TLV_VALUE_NO : "+TELEMARKETERID_TLV_VALUE_NO );
+
 			}
 			case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
 				telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
 				telemarketerid=getHashValue(telemarketerid);
+				KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_HASHED "+TELEMARKETERID_TLV_VALUE_HASHED +" in TELEMARKETERID_TLV_VALUE_TELEMARKETERID : "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
+
 			}
 				break;
 			case TELEMARKETERID_TLV_VALUE_HASHED:{
 				telemarketerid=customertelemartkerid;  //plaform value will be ignored customer value will be passed to carrier
+				KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_HASHED "+TELEMARKETERID_TLV_VALUE_HASHED +" in TELEMARKETERID_TLV_VALUE_HASHED : "+TELEMARKETERID_TLV_VALUE_HASHED );
+
 				break;
 			}
 			case TELEMARKETERID_TLV_VALUE_NONHASHED:{
 				telemarketerid=customertelemartkerid+","+platformtelemartkerid;
 				telemarketerid=getHashValue(telemarketerid);
+				KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_HASHED "+TELEMARKETERID_TLV_VALUE_HASHED +" in TELEMARKETERID_TLV_VALUE_NONHASHED : "+TELEMARKETERID_TLV_VALUE_NONHASHED );
+
 				break;
 			}
 				
@@ -891,17 +901,25 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 					
 						case TELEMARKETERID_TLV_VALUE_NO:{
 							telemarketerid=entityid+","+platformtelemartkerid;
+							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NO : "+TELEMARKETERID_TLV_VALUE_NO );
+
 						}
 						case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
 							telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
+							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_TELEMARKETERID : "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
+
 							break;
 						}
 						case TELEMARKETERID_TLV_VALUE_HASHED:{
 							telemarketerid=customertelemartkerid; //plaform value will be ignored customer value will be passed to carrier
+							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_HASHED : "+TELEMARKETERID_TLV_VALUE_HASHED );
+
 							break;
 						}
 						case TELEMARKETERID_TLV_VALUE_NONHASHED:{
 							telemarketerid=customertelemartkerid+","+platformtelemartkerid;
+							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NONHASHED : "+TELEMARKETERID_TLV_VALUE_NONHASHED );
+
 							break;
 						}
 					}
@@ -917,7 +935,6 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 	}
 
 	private static boolean isClientPassingTelemarketerIdHashed(String telemarketerid) {
-		// TODO Auto-generated method stub
 		
 		
 		return !isNumeric(telemarketerid);
@@ -977,7 +994,10 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 		}
 	}
 
-	private static String getHashValue(String telemarketerid) {
+	public static String getHashValue(String telemarketerid) {
+		
+		KannelURLLog.log(" do Hash");
+
 		  String hash = ""; 
 		    try { 
 		      MessageDigest digest = MessageDigest.getInstance("SHA-256"); 
@@ -996,6 +1016,9 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 		    }  
 		    catch (Exception e) { 
 		    } 
+		    
+			KannelURLLog.log(" do Hash Telemarketer Id : "+telemarketerid+ " hash : "+ hash);
+
 		    return hash; 
 
 	}
