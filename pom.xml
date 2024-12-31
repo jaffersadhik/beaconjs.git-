@@ -357,7 +357,6 @@
    	<module>wildfly</module>
    	   	<module>beaconlib</module>
 
-   	<module>docker-tomacat</module>
    	<module>tomacatvirtualthreadpool</module>
    	<module>platform-smppdlrpoller</module>
    	<module>platform-smppdlrutil</module>
@@ -381,6 +380,8 @@
    	<module>siddhu-jar</module>
    	<module>queryprocessor-requestreceiver-web</module>
    	<module>python-cron</module>
+   	   	<module>docker-tomacat</module>
+
   </modules>
   
 
