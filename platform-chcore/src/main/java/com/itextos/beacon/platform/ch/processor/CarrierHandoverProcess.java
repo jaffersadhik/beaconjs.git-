@@ -870,7 +870,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 				telemarketerid=entityid+","+platformtelemartkerid;
 				telemarketerid=getHashValue(telemarketerid);
 				KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_HASHED "+TELEMARKETERID_TLV_VALUE_HASHED +" in TELEMARKETERID_TLV_VALUE_NO : "+TELEMARKETERID_TLV_VALUE_NO );
-
+				break;
 			}
 			case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
 				telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
@@ -902,7 +902,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 						case TELEMARKETERID_TLV_VALUE_NO:{
 							telemarketerid=entityid+","+platformtelemartkerid;
 							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NO : "+TELEMARKETERID_TLV_VALUE_NO );
-
+							break;
 						}
 						case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
 							telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
