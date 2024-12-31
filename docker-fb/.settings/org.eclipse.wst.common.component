@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-            
+                
+    
     
     <wb-module deploy-name="docker-fb-1.0">
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
         <dependent-module archiveName="fb-campaignfinisher-1.0.war" deploy-path="/" handle="module:/resource/fb-campaignfinisher/fb-campaignfinisher">
@@ -41,22 +44,22 @@
         <dependent-module archiveName="fb-splitstage-1.0.war" deploy-path="/" handle="module:/resource/fb-splitstage/fb-splitstage">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="fb-handoverstage-1.0.jar" deploy-path="/lib" handle="module:/resource/fb-handoverstage/fb-handoverstage">
+        <dependent-module archiveName="fb-handoverstage-1.0.war" deploy-path="/" handle="module:/resource/fb-handoverstage/fb-handoverstage">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="common-messageidentifier-1.0.jar" deploy-path="/lib" handle="module:/resource/common-messageidentifier/common-messageidentifier">
+        <dependent-module archiveName="fb-utils-1.0.jar" deploy-path="/lib" handle="module:/resource/fb-utils/fb-utils">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/lib" handle="module:/resource/common-constants/common-constants">
+        <dependent-module archiveName="common-utility-1.0.jar" deploy-path="/lib" handle="module:/resource/common-utility/common-utility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commonpropertyloader-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commonpropertyloader/common-commonpropertyloader">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="thirdpartyjar-1.0.jar" deploy-path="/lib" handle="module:/resource/thirdpartyjar/thirdpartyjar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="commons-logging-1.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="javax.servlet-api-4.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="commons-dbcp2-2.8.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-dbcp2/2.8.0/commons-dbcp2-2.8.0.jar">
@@ -74,13 +77,13 @@
         <dependent-module archiveName="commons-lang-2.6.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="log4j-core-2.17.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-core/2.17.0/log4j-core-2.17.0.jar">
+        <dependent-module archiveName="log4j-api-2.20.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-api/2.20.0/log4j-api-2.20.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="log4j-api-2.17.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-api/2.17.0/log4j-api-2.17.0.jar">
+        <dependent-module archiveName="log4j-core-2.20.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-core/2.20.0/log4j-core-2.20.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="log4j-jcl-2.17.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-jcl/2.17.0/log4j-jcl-2.17.0.jar">
+        <dependent-module archiveName="log4j-jcl-2.20.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/logging/log4j/log4j-jcl/2.20.0/log4j-jcl-2.20.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="commons-csv-1.8.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-csv/1.8/commons-csv-1.8.jar">
@@ -267,6 +270,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jetty-server-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-server/9.4.40.v20210413/jetty-server-9.4.40.v20210413.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.servlet-api-3.1.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jetty-http-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-http/9.4.40.v20210413/jetty-http-9.4.40.v20210413.jar">
@@ -581,22 +587,7 @@
         <dependent-module archiveName="annotations-13.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/jetbrains/annotations/13.0/annotations-13.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commondbpool/common-commondbpool">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="common-splog-1.0.jar" deploy-path="/lib" handle="module:/resource/common-splog/common-splog">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="fb-utils-1.0.jar" deploy-path="/lib" handle="module:/resource/fb-utils/fb-utils">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="common-utility-1.0.jar" deploy-path="/lib" handle="module:/resource/common-utility/common-utility">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="common-commonpropertyloader-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commonpropertyloader/common-commonpropertyloader">
+        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/lib" handle="module:/resource/common-constants/common-constants">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="platform-messagetool-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-messagetool/platform-messagetool">
@@ -606,6 +597,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-messageobject-1.0.jar" deploy-path="/lib" handle="module:/resource/common-messageobject/common-messageobject">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-errorlog-1.0.jar" deploy-path="/lib" handle="module:/resource/common-errorlog/common-errorlog">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="inmemory-messageutility-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-messageutility/inmemory-messageutility">
@@ -632,13 +626,16 @@
         <dependent-module archiveName="common-message-1.0.jar" deploy-path="/lib" handle="module:/resource/common-message/common-message">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="common-splog-1.0.jar" deploy-path="/lib" handle="module:/resource/common-splog/common-splog">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-customfeatures-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-customfeatures/inmemory-customfeatures">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="common-daemonprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/common-daemonprocess/common-daemonprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-prometheusmetricsutil-1.0.jar" deploy-path="/lib" handle="module:/resource/common-prometheusmetricsutil/common-prometheusmetricsutil">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="unitia-ejbclient-1.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/beacon/unitia-ejbclient/1.0/unitia-ejbclient-1.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="inmemory-countryinfo-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-countryinfo/inmemory-countryinfo">
@@ -651,6 +648,12 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="inmemory-loader-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-loader/inmemory-loader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-commondbpool-1.0.jar" deploy-path="/lib" handle="module:/resource/common-commondbpool/common-commondbpool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
@@ -692,9 +695,11 @@
         <dependent-module archiveName="curvesapi-1.06.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.06/curvesapi-1.06.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                    
+                            
+    
     
     </wb-module>
-        
+            
+
 
 </project-modules>

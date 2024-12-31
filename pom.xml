@@ -328,7 +328,7 @@
  <module>monitortopics</module>
  <module>dlrquery-dlrqueryprocess</module>
  <module>dlrquery-dlrqueryweb</module>
-   	<module>docker-beaconweb</module>
+ <!--  	<module>docker-beaconweb</module> -->
 
 
  
@@ -346,8 +346,8 @@
    	<module>fb-dltfileprocessor</module>
    	<module>fb-downloadhandler</module>
    	<module>fb-cronjobs</module>
-   	<module>docker-fb</module>
- <!--  	<module>node-cm</module>
+ <!--   	<module>docker-fb</module>
+  	<module>node-cm</module>
    	<module>node-cm-jobs</module> -->
 
    	<module>applicationproperties</module>
@@ -379,6 +379,8 @@
    	<module>queryprocessor-threadpoolexecutor</module>
    	<module>queryprocessor-requestreceiver</module>
    	<module>siddhu-jar</module>
+   	<module>queryprocessor-requestreceiver-web</module>
+   	<module>python-cron</module>
   </modules>
   
 
