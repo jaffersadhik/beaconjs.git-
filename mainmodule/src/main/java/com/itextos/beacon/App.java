@@ -463,6 +463,7 @@ public class App {
 			
 			com.itextos.beacon.platform.duplicatecheckremoval.start.StartApplication.main(args);
 			com.itextos.beacon.platform.dlrpayloadgen.process.StartApplication.main(args);
+			com.itextos.beacon.platform.rch.StartApplication.main(args);
 
 
 			IS_START_PROMETHEUS=true;
