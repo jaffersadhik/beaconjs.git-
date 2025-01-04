@@ -157,6 +157,8 @@ public class FilesSaver extends HttpServlet {
 					}
 				}
 
+				
+				FileUploadLog.getInstance().debug("filesList : "+filesList);
 				List<FutureTask<Map<String, Object>>> taskList = new ArrayList<FutureTask<Map<String, Object>>>();
 				int index = 0;
 				for (Map<String, Object> map : response) {

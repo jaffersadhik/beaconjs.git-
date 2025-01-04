@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
+import com.itextos.beacon.errorlog.FileUploadLog;
 import com.winnovature.fileuploads.utils.Constants;
 import com.winnovature.fileuploads.utils.Utility;
 
@@ -156,6 +157,9 @@ public class XlsFileParser implements FileParser {
 			log.debug(" [XlsFileParser] [parse] rows count:" + fileRowsCount);
 			log.debug(loggerName + " end. Time taken to read "+file.getName()+" is "+ Utility.getTimeDifference(startTime)+" milliseconds.");
 		}
+		FileUploadLog.getInstance().debug(" [XlsFileParser] [parse] rows count:" + fileRowsCount);
+		FileUploadLog.getInstance().debug(" end. Time taken to read "+file.getName()+" is "+ Utility.getTimeDifference(startTime)+" milliseconds.");
+
 		return fileRowsCount;
 	}
 

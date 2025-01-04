@@ -10,6 +10,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.FileUploadLog;
 import com.winnovature.fileuploads.fileparser.CsvReaderFileParser;
 import com.winnovature.fileuploads.fileparser.XlsFileParser;
 import com.winnovature.fileuploads.fileparser.XlsxFileParser;
@@ -35,6 +36,8 @@ public class FileReadService implements Callable<Map<String, Object>> {
 		List<List<String>> columnPreviewList = null;
 		try {
 			String extension = FilenameUtils.getExtension(fileToBeRead);
+			FileUploadLog.getInstance().debug("extension : "+extension);
+
 			switch (extension) {
 			case "csv":
 				CsvReaderFileParser txtParser = new CsvReaderFileParser(new File(fileToBeRead), isTemplate);
@@ -77,6 +80,8 @@ public class FileReadService implements Callable<Map<String, Object>> {
 			}
 		} catch (Exception e) {
 			log.error("[FileReadService] [call] Exception", e);
+			FileUploadLog.getInstance().error("[FileReadService] [call] Exception",e);
+
 			throw e;
 		}
 		return data;
