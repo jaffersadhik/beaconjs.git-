@@ -1,5 +1,6 @@
 package com.itextos.beacon.commonlib.commondbpool.log;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -16,7 +17,9 @@ public class DataSourceLog {
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/aux/datasource.%g.log";
+         String folderName="/opt/jboss/wildfly/logs/aux/";
+         foldercreaton(folderName);
+        String logFileNamePattern =folderName+ "datasource.%g.log";
 
         Level loglevel=Level.INFO;
         
@@ -51,11 +54,8 @@ public class DataSourceLog {
 	        logger.setLevel(loglevel);
 
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+		} catch (Exception e) {
 		}
 
      
@@ -63,6 +63,25 @@ public class DataSourceLog {
         // Set the logging level for the logger
     }
 
+  public static void foldercreaton(String folderPath) {
+        
+
+        // Create a File object representing the directory
+        File folder = new File(folderPath);
+
+        // Check if the directory exists
+        if (!folder.exists()) {
+            // Attempt to create the directory
+            if (folder.mkdirs()) {
+                System.out.println("Directory created successfully: " + folderPath);
+            } else {
+                System.out.println("Failed to create directory: " + folderPath);
+            }
+        } else {
+            System.out.println("Directory already exists: " + folderPath);
+        }
+    }
+    
     public static void log(String string) {
 
     	logger.info(string);

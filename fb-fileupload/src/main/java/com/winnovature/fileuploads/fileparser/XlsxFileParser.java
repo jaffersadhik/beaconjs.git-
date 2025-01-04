@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.itextos.beacon.errorlog.FileUploadLog;
 import com.winnovature.fileuploads.utils.Constants;
 import com.winnovature.fileuploads.utils.Utility;
 
@@ -120,6 +121,10 @@ public class XlsxFileParser implements FileParser {
 			log.debug(" [XlsxFileParser] [parse] Count:" + sourceFileCount);
 			log.debug(loggerName + " end. Time taken to read file "+file.getName()+" is "+ Utility.getTimeDifference(startTime)+" milliseconds.");
 		}
+
+		FileUploadLog.getInstance().debug(" [XlsxFileParser] [parse] Count:" + sourceFileCount);
+		FileUploadLog.getInstance().debug( " end. Time taken to read file "+file.getName()+" is "+ Utility.getTimeDifference(startTime)+" milliseconds.");
+
 
 		return sourceFileCount;
 	}
