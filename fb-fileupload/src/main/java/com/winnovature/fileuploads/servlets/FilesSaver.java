@@ -39,7 +39,6 @@ import com.winnovature.utils.utils.JsonUtility;
 public class FilesSaver extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	static Log log = LogFactory.getLog(Constants.FileUploadLogger);
 	Map<String, String> configMap = null;
 
 	public FilesSaver() {
@@ -48,9 +47,7 @@ public class FilesSaver extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if (log.isDebugEnabled()) {
-			log.debug("[FilesSaver] [doPost] request received.");
-		}
+	
 		
 		FileUploadLog.getInstance().debug("[FilesSaver] [doPost] request received.");
 		List<String> filesList = new ArrayList<String>();
@@ -114,10 +111,7 @@ public class FilesSaver extends HttpServlet {
 						part.write(fileStoreLocation + storedFileName);
 					}
 
-					if (log.isDebugEnabled()) {
-						log.debug("[FilesSaver] [doPost] time taken to save " + originalFileName + " is "
-								+ Utility.getTimeDifference(startTime) + " milliseconds.");
-					}
+				
 					FileUploadLog.getInstance().debug("[FilesSaver] [doPost] time taken to save " + originalFileName + " is "
 							+ Utility.getTimeDifference(startTime) + " milliseconds.");
 
@@ -129,11 +123,7 @@ public class FilesSaver extends HttpServlet {
 						if (zipContent.size() > 0) {
 							response.addAll(zipContent);
 						}
-						if (log.isDebugEnabled()) {
-							log.debug("[FilesSaver] [doPost] time taken to extract " + originalFileName + " is "
-									+ Utility.getTimeDifference(zipExtractStartTime) + " milliseconds.");
-						}
-						
+					
 						FileUploadLog.getInstance().debug("[FilesSaver] [doPost] time taken to extract " + originalFileName + " is "
 								+ Utility.getTimeDifference(zipExtractStartTime) + " milliseconds.");
 						
@@ -174,6 +164,7 @@ public class FilesSaver extends HttpServlet {
 				// push filenames to redis for cleaning purpose
 				sentToTrackingRedis = Utility.sendFilesToTrackingRedis(requestFrom, username, filesList);
 
+				FileUploadLog.getInstance().debug("sentToTrackingRedis : "+sentToTrackingRedis);
 				int completedTasks = 0;
 				while (taskList.size() > completedTasks) {
 					for (FutureTask<Map<String, Object>> futureTask : taskList) {
@@ -220,25 +211,24 @@ public class FilesSaver extends HttpServlet {
 				finalResponse.put("total_human", total_human);
 				finalResponse.put("uploaded_files", nestedResponse);
 				finalResponse.put("statusCode", Constants.SUCCESS_STATUS_CODE);
+				
+				FileUploadLog.getInstance().debug("finalResponse : "+finalResponse);
+
 			}
 
 			String json = new JsonUtility().mapToJson(finalResponse);
 			out.print(json);
 			FileUploadLog.getInstance().debug("[FilesSaver] response json :  "+json);
 
-			if (log.isDebugEnabled()) {
-				log.debug("[FilesSaver] [doPost] time taken to process request " + originalFileName + " is "
-						+ Utility.getTimeDifference(startTime) + " milliseconds.");
-			}
+	
 			FileUploadLog.getInstance().debug("[FilesSaver] [doPost] time taken to process request " + originalFileName + " is "
 					+ Utility.getTimeDifference(startTime) + " milliseconds.");
 	
 			
 		} catch (Exception e) {
-			log.error("[FilesSaver] [doPost] Exception", e);
 			FileUploadLog.getInstance().error("[FilesSaver] [doPost] Exception", e);
 	
-			
+
 			if (!sentToTrackingRedis) {
 				// push filenames to redis for cleaning purpose
 				Utility.sendFilesToTrackingRedis(requestFrom, username, filesList);

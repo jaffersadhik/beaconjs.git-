@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.FileUploadLog;
 import com.winnovature.utils.daos.GenericDao;
 import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.RedisConnectionFactory;
@@ -27,6 +28,7 @@ public class UploadedFilesTrackingUtility {
 		Long count = null;
 		try {
 			RedisServerDetailsBean rBean = new GenericDao().getFileUploadTrackingRedisServerDetails();
+			FileUploadLog.getInstance().debug(" [setUploadedFilesInfo()] rBean : "+rBean);
 			con = RedisConnectionFactory.getInstance().getConnectionForFileUploadTrackingRedis(rBean.getRid());
 			if (con != null) {
 				String key = Utility.getCustomDateAsString("yyyy-MM-dd") + "_Fileuploads";
@@ -38,6 +40,8 @@ public class UploadedFilesTrackingUtility {
 				count = con.sadd(key, arr);
 			}
 		} catch (Exception e) {
+			FileUploadLog.getInstance().error(className + methodName + " Exception ::: ",e);
+
 			log.error(className + methodName + " Exception ::: ", e);
 		} finally {
 			if (con != null) {

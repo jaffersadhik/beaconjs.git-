@@ -64,6 +64,9 @@ public class FileReadService implements Callable<Map<String, Object>> {
 			data.put("count", "" + count);
 			data.put("count_human", Utility.humanReadableNumberFormat(count));
 			
+			FileUploadLog.getInstance().debug("data : "+data);
+
+			
 			// added for preview case where file has only 1 row
 			if(count > 0 && columnPreviewList!=null && columnPreviewList.size() == 1) {
 				List<String> row1 = columnPreviewList.get(0);
@@ -78,6 +81,9 @@ public class FileReadService implements Callable<Map<String, Object>> {
 				data.put("file_contents_index", indexPreviewList);
 				data.put("file_contents_column", columnPreviewList);
 			}
+			
+			FileUploadLog.getInstance().debug("data : "+data);
+
 		} catch (Exception e) {
 			log.error("[FileReadService] [call] Exception", e);
 			FileUploadLog.getInstance().error("[FileReadService] [call] Exception",e);
