@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                
+                                    
+    
     
     
     
@@ -7,7 +8,8 @@
     
     
     <wb-module deploy-name="docker-beaconweb-1.0">
-                                                                
+                                                                        
+        
         
         
         
@@ -15,7 +17,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                                                
+                                                                        
+        
         
         
         
@@ -591,6 +594,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="annotations-13.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/jetbrains/annotations/13.0/annotations-13.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="opencsv-2.3.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-componentconsumer-1.0.jar" deploy-path="/lib" handle="module:/resource/common-componentconsumer/common-componentconsumer">
@@ -1229,7 +1235,8 @@
         <dependent-module archiveName="dlrquery-dlrqueryprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/dlrquery-dlrqueryprocess/dlrquery-dlrqueryprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                            
+                                                                    
+    
     
     
     
@@ -1237,7 +1244,8 @@
     
     
     </wb-module>
-                            
+                                
+
 
 
 
