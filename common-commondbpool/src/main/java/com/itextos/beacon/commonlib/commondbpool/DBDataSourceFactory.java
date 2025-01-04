@@ -22,6 +22,8 @@ public class DBDataSourceFactory
             JndiInfo aDBConID)
             throws Exception
     {
+		System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
+
         waitForJndiLoad();
         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
         con.setAutoCommit(true);
@@ -32,6 +34,8 @@ public class DBDataSourceFactory
             JndiInfo aDBConID)
             throws Exception
     {
+		System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
+
         waitForJndiLoad();
         final Connection con = DataSourceCollection.getInstance().getConnection(aDBConID);
         con.setAutoCommit(true);

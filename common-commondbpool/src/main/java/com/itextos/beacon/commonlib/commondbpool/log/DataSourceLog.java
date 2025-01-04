@@ -14,6 +14,9 @@ public class DataSourceLog {
     private static final  Logger logger = Logger.getLogger(DataSourceLog.class.getName());
     
     static {
+    	
+    			
+    			System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
     	 int limit = 1024 * 1024*5; // 1 MB file size limit
          int count = 1; // N
 

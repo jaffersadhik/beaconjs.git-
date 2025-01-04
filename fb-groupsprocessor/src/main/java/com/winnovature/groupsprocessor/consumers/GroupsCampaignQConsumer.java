@@ -13,10 +13,8 @@ import org.apache.commons.logging.LogFactory;
 import com.winnovature.groupsprocessor.daos.CampaignsDAO;
 import com.winnovature.groupsprocessor.handlers.GroupsCampaignFileGenerator;
 import com.winnovature.groupsprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
-import com.winnovature.utils.singletons.RedisConnectionFactory;
-import com.winnovature.utils.singletons.RedisConnectionTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -27,7 +25,6 @@ public class GroupsCampaignQConsumer extends Thread {
 	static Log log = LogFactory.getLog(Constants.GroupsProcessorLogger);
 	PropertiesConfiguration prop = null;
 
-	private RedisServerDetailsBean bean = null;
 	String className = "[GroupsCampaignQConsumer]";
 	private String instanceId = "";
 	private long sleepTime = 1000;
@@ -35,8 +32,7 @@ public class GroupsCampaignQConsumer extends Thread {
 	String queueName = null;
 	Map<String, String> configMap = null;
 
-	public GroupsCampaignQConsumer(RedisServerDetailsBean bean, String instanceId) {
-		this.bean = bean;
+	public GroupsCampaignQConsumer( String instanceId) {
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
 	}
@@ -63,7 +59,7 @@ public class GroupsCampaignQConsumer extends Thread {
 
 				try {
 
-					con = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+					con = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 
 					if (con != null) {
 
@@ -146,7 +142,7 @@ public class GroupsCampaignQConsumer extends Thread {
 				retryTime = retryTime + 1;
 				map.put("retry_count", String.valueOf(retryTime));
 
-				con = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+				con = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 
 				String json = new JsonUtility().convertMapToJSON(map);
 				con.lpush(queueName, json);

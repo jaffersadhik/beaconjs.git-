@@ -119,6 +119,18 @@ public enum Component
     CLOUD_ACCEPTOR("cloud_acceptor"),
     FTP("ftp"),
 
+    //File Processing 
+    
+    FP_CAMPAIGN("fp_campaign"),
+    FP_GROUP_NORMAL("fp_group_normal"),
+    FP_GROUP_EXCLUDE("fp_group_exclude"),
+    FP_HEART_BEAT("fp_heart_beat"),
+    FP_DLT_FILE("fp_dlt_file"),
+    FP_DUPLICATE_CHECK("fp_duplicate_check"),
+
+    NODE_GENERAL("node_general"),
+    NODE_TELE_METRIC("node_tele_metric"),
+
     ;
 
     private static final Log log = LogFactory.getLog(Component.class);

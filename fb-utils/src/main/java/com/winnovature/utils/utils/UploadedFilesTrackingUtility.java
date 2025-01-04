@@ -9,10 +9,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.errorlog.FileUploadLog;
-import com.winnovature.utils.daos.GenericDao;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
-import com.winnovature.utils.singletons.RedisConnectionFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ScanParams;
@@ -27,9 +27,8 @@ public class UploadedFilesTrackingUtility {
 		Jedis con = null;
 		Long count = null;
 		try {
-			RedisServerDetailsBean rBean = new GenericDao().getFileUploadTrackingRedisServerDetails();
-			FileUploadLog.getInstance().debug(" [setUploadedFilesInfo()] rBean : "+rBean);
-			con = RedisConnectionFactory.getInstance().getConnectionForFileUploadTrackingRedis(rBean.getRid());
+			
+			con = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.FP_DLT_FILE	, 1);
 			if (con != null) {
 				String key = Utility.getCustomDateAsString("yyyy-MM-dd") + "_Fileuploads";
 
@@ -62,8 +61,7 @@ public class UploadedFilesTrackingUtility {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String key = dateFormat.format(calendar.getTime()) + "_Fileuploads";
 
-			RedisServerDetailsBean rBean = new GenericDao().getFileUploadTrackingRedisServerDetails();
-			jedis = RedisConnectionFactory.getInstance().getConnectionForFileUploadTrackingRedis(rBean.getRid());
+			jedis = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.FP_DLT_FILE	, 1);
 
 			if (jedis.exists(key)) {
 				ScanParams scanParams = new ScanParams().count(limit);

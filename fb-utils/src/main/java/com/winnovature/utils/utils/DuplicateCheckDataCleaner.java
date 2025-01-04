@@ -6,8 +6,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
-import com.winnovature.utils.singletons.RedisConnectionFactory;
+import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 
 import redis.clients.jedis.Jedis;
 
@@ -19,10 +20,12 @@ public class DuplicateCheckDataCleaner {
 		String logname = className + " [clearDuplicateCheckData()] ";
 		Jedis con = null;
 		try {
-			List<RedisServerDetailsBean> beansList = RedisConnectionFactory.getInstance().getDupcheckRedisServerDetails();
-			if(beansList != null && beansList.size() > 0) {
-				for (RedisServerDetailsBean redisServerDetailsBean : beansList) {
-					con = RedisConnectionFactory.getInstance().getConnectionForDupcheckRedis(redisServerDetailsBean);
+			if(RedisConnectionProvider.getInstance().getRedisPoolCount(ClusterType.COMMON, Component.FP_DUPLICATE_CHECK) > 0) {
+				int counter=0;
+				
+				if (counter<RedisConnectionProvider.getInstance().getRedisPoolCount(ClusterType.COMMON, Component.FP_DUPLICATE_CHECK)) {
+					counter++;
+					con = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.FP_DUPLICATE_CHECK, counter);
 					if (con != null) {
 						for (Map<String, String> campaign : campaigns) {
 							String hashKey = dupcheckRedisKeyPrefix + "~" + campaign.get("id");

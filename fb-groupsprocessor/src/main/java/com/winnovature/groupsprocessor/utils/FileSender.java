@@ -70,7 +70,7 @@ public class FileSender {
 		boolean succuess = false;
 		Jedis redis = null;
 		try {
-			redis = com.winnovature.utils.singletons.RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+			redis = com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			long count = redis.lpush(statsUpdateStatusQueryQueueName, sql);
 			if(count > 0) {
 				succuess = true;

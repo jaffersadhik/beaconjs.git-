@@ -21,12 +21,6 @@
         <dependent-module archiveName="common-pwdencryption-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-pwdencryption/common-pwdencryption">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="common-messageidentifier-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageidentifier/common-messageidentifier">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-constants/common-constants">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="common-redisconnectionprovider-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-redisconnectionprovider/common-redisconnectionprovider">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -34,6 +28,15 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="common-errorlog-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-errorlog/common-errorlog">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-messageidentifier-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-messageidentifier/common-messageidentifier">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-constants-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/common-constants/common-constants">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="thirdpartyjar-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/thirdpartyjar/thirdpartyjar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
                 

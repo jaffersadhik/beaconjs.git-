@@ -134,22 +134,11 @@ public class InitializePoller extends GenericServlet implements Servlet {
 				
 				// get request from GroupsCampaignQ and create a text file with group numbers
 				int groupsCampaignQConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CAMPAIGN_Q_CONSUMERS_PER_REDIS);
-				List<RedisServerDetailsBean> redisServerDetails = com.winnovature.utils.singletons.RedisConnectionTon.getInstance()
-						.getConfigurationFromconfigParams();
-				Iterator<RedisServerDetailsBean> iterator2 = redisServerDetails.iterator();
-				while (iterator2.hasNext()) {
-					RedisServerDetailsBean bean = iterator2.next();
-					for (int i = 0; i < groupsCampaignQConsumersPerRedisServer; i++) {
-						groupsCampaignQConsumer = new GroupsCampaignQConsumer(bean, instanceId);
-						groupsCampaignQConsumer.setName("Thread" + (i+1) + "-" + "GroupsCampaignQConsumer");
-						groupsCampaignQConsumer.start();
-						if (log.isDebugEnabled())
-							log.debug("[SplitStageServlet.init()] >>>>>> STARTING GroupsCampaignQConsumer[GroupsCampaignQ]  " + (i+1)
-									+ " ThreadName:" + groupsCampaignQConsumer.getName() + " bean:" + bean.getIpAddress());
-					}
-
-				} // end of REDIS servers iteration
-
+				for(int i=0;i<groupsCampaignQConsumersPerRedisServer;i++) {
+				groupsCampaignQConsumer = new GroupsCampaignQConsumer( instanceId);
+				groupsCampaignQConsumer.setName("Thread  -" +(i+1)+ "GroupsCampaignQConsumer");
+				groupsCampaignQConsumer.start();
+				}
 			} catch (Exception e) {
 				log.error(className + " Exception:", e);
 				log.error(className + " RESTART FP-GroupsProcessor MODULE ");

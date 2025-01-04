@@ -12,7 +12,7 @@ import com.winnovature.utils.daos.UnprocessNumbersInsertDAO;
 import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.dtos.UnprocessRow;
 import com.winnovature.utils.singletons.ConfigParamsTon;
-import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForUnProcess;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDuplicateCheck;
 import com.winnovature.utils.singletons.UtilsPropertiesTon;
 
 import redis.clients.jedis.Jedis;
@@ -48,7 +48,7 @@ public class UnProcessListsCollector {
 			try {
 				String unprocessedHandoverQueueName = configParamsTon.get(Constants.EXCLUDE_NUMBERS_INSERT_QUEUE_NAME)
 						.toString();
-				redisCon = RedisConnectionTonRoundRobinForUnProcess.getInstance().getJedisConnectionAsRoundRobin();
+				redisCon = RedisConnectionTonRoundRobinForDuplicateCheck.getInstance().getJedisConnectionAsRoundRobin();
 				ObjectMapper mapper = new ObjectMapper();
 					String lsUnprocessAsJson = mapper.writeValueAsString(lstUnprocess);
 					if(log.isDebugEnabled()) {

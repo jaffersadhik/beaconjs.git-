@@ -6,14 +6,13 @@ import java.util.Date;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
-import com.winnovature.utils.singletons.RedisConnectionFactoryForHeartBeat;
+import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.winnovature.utils.singletons.UtilsPropertiesTon;
 
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 public class HeartBeatMonitoring {
 	private static final String className = "[HeartBeatMonitoring] ";
@@ -31,7 +30,7 @@ public class HeartBeatMonitoring {
 					+ threadName + ", timeStamp:" + timeStamp);
 		}
 
-		JedisPool con = null;
+		//JedisPool con = null;
 		Jedis resource = null;
 		String parentkeyName = null;
 
@@ -40,14 +39,16 @@ public class HeartBeatMonitoring {
 					.getPropertiesConfiguration();
 			parentkeyName = prop
 					.getString(Constants.REDIS_HEART_BEAT_PARENT_KEY);
-			RedisServerDetailsBean redisServerDetailsBean = null;
+		/*	RedisServerDetailsBean redisServerDetailsBean = null;
 			redisServerDetailsBean = RedisConnectionFactoryForHeartBeat
 					.getInstance()
 					.getConfigurationFromconfigParamsForHeartBeat();
-
-			if (redisServerDetailsBean != null) {
-				con = getConnection(redisServerDetailsBean);
-				resource = con.getResource();
+*/
+	//		if (redisServerDetailsBean != null) {
+			//	con = getConnection(redisServerDetailsBean);
+				
+				resource = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.FP_HEART_BEAT, 1);
+						
 
 				String delimeter = ":";
 				String subKey = module + delimeter + consumerName + delimeter
@@ -80,7 +81,7 @@ public class HeartBeatMonitoring {
 					resource.expire(parentkeyName, diffsec);
 				}
 
-			}
+		//	}
 		} catch (Exception e) {
 			logger.error(logName + " Input:  queueName:" + consumerName
 					+ ", instanceId:" + instanceid + ", threadName:"
@@ -89,56 +90,15 @@ public class HeartBeatMonitoring {
 		} finally {
 			if (resource != null)
 				resource.close();
-
+/*
 			if (con != null)
 				con.close();
-		}
+	*/	}
 		if (logger.isDebugEnabled()) {
 			logger.debug(logName + " end.");
 		}
 	}
 
-	private JedisPool getConnection(RedisServerDetailsBean bean)
-			throws Exception {
-		String logName = className + " [getConnection] ";
-
-		if (logger.isDebugEnabled()) {
-			logger.debug(logName + " begin ... ");
-		}
-		JedisPool conPool = null;
-
-		String mDb = bean.getMdb();
-		String mIp = bean.getIpAddress();
-		String mPass = bean.getPassword();
-		mPass = (mPass == null || mPass.isEmpty()) ? null : mPass;
-
-		String mPort = bean.getPort();
-
-		String maxpool = bean.getMaxPool();
-		String maxWait = bean.getMaxWait();
-		String timeout = bean.getTimeout();
-
-		if (logger.isDebugEnabled()) {
-			logger.debug(logName + " mDb:" + mDb + ", mIp:" + mIp + ", mPort:"
-					+ mPort + ", mPass:" + mPass + ", maxpool:" + maxpool
-					+ ", maxWait:" + maxWait + ", timeout:" + timeout);
-		}
-		try {
-			GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-			config.setMaxTotal(Integer.parseInt(maxpool));
-			config.setMaxWaitMillis(Long.parseLong(maxWait) * 1000l);
-
-			conPool = new JedisPool(config, mIp, Integer.parseInt(mPort),
-					Integer.parseInt(timeout) * 1000, mPass,
-					Integer.parseInt(mDb));
-		} catch (Exception e) {
-			logger.error(logName + " Exception occured... \n", e);
-			throw e;
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug(logName + " end.");
-		}
-		return conPool;
-	}
+	
 
 }

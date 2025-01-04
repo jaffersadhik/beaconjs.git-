@@ -29,14 +29,16 @@ final class InitializeConnectionPool
 
     private static class SingletonHolder
     {
-
+    	
         @SuppressWarnings("synthetic-access")
         static final InitializeConnectionPool INSTANCE = new InitializeConnectionPool();
-
+    	
     }
 
     static InitializeConnectionPool getInstance()
     {
+		System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
+
         return SingletonHolder.INSTANCE;
     }
 
