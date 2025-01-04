@@ -80,7 +80,7 @@ public class ConnectionFactoryForCMDB {
 	public Connection getConnection() {
 		
         try {
-			return DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.ACCOUNTS.getKey()));
+			return DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CM.getKey()));
 		} catch (Exception e) {
 			
 			return null;
