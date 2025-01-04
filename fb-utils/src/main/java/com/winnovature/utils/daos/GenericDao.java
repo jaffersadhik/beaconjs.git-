@@ -37,11 +37,14 @@ public class GenericDao {
 
 		Map<String, String> configDetailsMap = null;
 		
+		/*
 		String schema = UtilsPropertiesTon.getInstance()
 		.getPropertiesConfiguration()
 		.getString("database-schema","cm");
-
-		String sql = "select `key`,value from "+schema+".config_params";
+*/
+	//	String sql = "select `key`,value from "+schema+".config_params";
+		String sql = "select `key`,value from config_params";
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
