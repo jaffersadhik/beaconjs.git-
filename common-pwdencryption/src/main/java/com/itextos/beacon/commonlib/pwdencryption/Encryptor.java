@@ -178,7 +178,7 @@ public class Encryptor
          	
                 System.out.println(lDecryptedSmppPassword);// 7R8es6Dg  //  i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY
 
-                lApiPassword = getApiDecryptedPassword("46AsqfI5S3lclHDF4GbXe0YyZkp5SVhWdWeN7Iin9T5APveHY+CtB1ir");
+                lApiPassword = getApiDecryptedPassword("5Ow3tdNRiaS0fyNyul6rDTRwRzJrdmttM3M2TAbWUdmELrjE/ea2hxY7");
                   System.out.println(lApiPassword);// b0vlFpgZ7Pm6 ,7zhFMHs49ziY,ftW0BphOQQtG // u0SE1rkBCPmKvC+5LsiLCnpzOERjSXM0RXY5Gcqxmf/02rqv4MX5mB8H
                   
                   

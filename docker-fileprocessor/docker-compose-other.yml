@@ -5,4 +5,4 @@ services:
     image: dk-reg.mas:5000/fileprocessorother:31dec2024
     build:
       context: .
-      dockerfile: Dockerfile_singleton
+      dockerfile: Dockerfile_other
