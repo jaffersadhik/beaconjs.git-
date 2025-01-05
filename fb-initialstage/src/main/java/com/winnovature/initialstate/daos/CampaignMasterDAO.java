@@ -17,6 +17,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.InitialStageLog;
 import com.itextos.beacon.inmemdata.account.UserInfo;
 import com.winnovature.initialstate.singletons.InitialStagePropertiesTon;
 import com.winnovature.initialstate.utils.Constants;
@@ -36,6 +37,8 @@ public class CampaignMasterDAO {
 	}
 
 	public void pollCampaigns(String maxRetryCount, String fileSplitQueueName) throws Exception {
+
+		InitialStageLog.getInstance().debug(" CampaignMasterDAO : pollCampaigns");
 
 		String methodName = " [pollCampaigns] ";
 		PropertiesConfiguration prop = InitialStagePropertiesTon
@@ -136,6 +139,11 @@ public class CampaignMasterDAO {
 			
 			// No data found let consumer rest for some time
 			if(!foundData) {
+				
+				InitialStageLog.getInstance().debug(" CampaignMasterDAO : pollCampaigns : sql : "+sql);
+
+				InitialStageLog.getInstance().debug(" CampaignMasterDAO : pollCampaigns : "+" No request found with matching criteria, sleeping for "+sleepTime+" milli seconds.");
+
 				if (hrtBtLog.isDebugEnabled())
 					hrtBtLog.debug(className + methodName + " No request found with matching criteria, sleeping for "+sleepTime+" milli seconds.");
 				consumerSleep(sleepTime);
@@ -160,13 +168,19 @@ public class CampaignMasterDAO {
 						}
 						
 						if("otp".equalsIgnoreCase(cluster)) {
+							
+							InitialStageLog.getInstance().debug(" CampaignMasterDAO : pollCampaigns  : "+"File not processed, platform_cluster=otp");
+
 							updateCampaignStatus(campaignFileInfo, Constants.PROCESS_STATUS_FAILED, instanceId, "File not processed, platform_cluster=otp", false);
 						}else {
 							try {
 								// sms with file
+
 								handoverToRedis(campaignFileInfo, fileSplitQueueName, campaignFileInfo.get("cm_id"),
 										"FileSplitQ HO Failed",instanceId);
 							}catch(Exception e) {
+								InitialStageLog.getInstance().debug(" CampaignMasterDAO : pollCampaigns  : "+"FileSplitQ HO Failed");
+
 								updateCampaignStatus(campaignFileInfo, Constants.PROCESS_STATUS_FAILED, instanceId, "FileSplitQ HO Failed", true);
 							}
 						}						
@@ -192,6 +206,8 @@ public class CampaignMasterDAO {
 		updateCampaignStatus(campInfo, Constants.PROCESS_STATUS_INPROGRESS,instanceId,null, true);
 		// HO to FileSplitQ
 		boolean fileSenderStatus = FileSender.sendToFileQueue(campInfo, queueName);
+		
+		InitialStageLog.getInstance().debug(" handoverToRedis :  fileSenderStatus : "+fileSenderStatus);
 		// if HO to redis failed update status=FAILED
 		if (!fileSenderStatus) {
 			updateCampaignStatus(campInfo, Constants.PROCESS_STATUS_FAILED, instanceId, reason, true);
@@ -202,7 +218,7 @@ public class CampaignMasterDAO {
 			throws Exception {
 
 		String methodName = "[updateCampaignStatus]";
-		
+		InitialStageLog.getInstance().debug(" updateCampaignStatus : status "+status+" campInfo : "+campInfo);
 		StringBuilder campaign_master_sql = new StringBuilder("update campaign_master SET status = ? ");
 		if(status.equalsIgnoreCase(Constants.PROCESS_STATUS_FAILED)) {
 			campaign_master_sql.append(", reason=? ");

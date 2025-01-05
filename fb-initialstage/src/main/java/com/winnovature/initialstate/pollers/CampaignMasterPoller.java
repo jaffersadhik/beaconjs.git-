@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.errorlog.InitialStageLog;
 import com.winnovature.initialstate.daos.CampaignMasterDAO;
 import com.winnovature.initialstate.singletons.InitialStagePropertiesTon;
 import com.winnovature.initialstate.utils.Constants;
@@ -35,6 +36,8 @@ public class CampaignMasterPoller extends Thread {
 				new HeartBeatMonitoring().pushConsumersHeartBeat("FP-InitialStage", "CampaignMasterPoller", instanceId, this.getName(), timeStampAsString);
 				poll();
 			} catch (Exception e) {
+				InitialStageLog.getInstance().error(" CampaignMasterPoller : poll",e);
+
 				log.error(className + methodName + " RUNTIME EXCEPTION campaign_master Fetch Thread  \n", e);
 				int threadSleepTime = Utility.getThreadSleepTime();
 				log.error(className + methodName + " : " + threadName + "  will sleep for " + threadSleepTime
@@ -53,13 +56,18 @@ public class CampaignMasterPoller extends Thread {
 	}
 
 	private void poll() throws Exception {
+		
 		Map<String, String> configMap = null;
 		String fileSplitQueueName = null;
 		String maxRetryCount = null;
+		
+		InitialStageLog.getInstance().debug(" CampaignMasterPoller : poll");
 		try {
 			configMap = (HashMap<String, String>) ConfigParamsTon.getInstance().getConfigurationFromconfigParams();
 			fileSplitQueueName = configMap.get(com.winnovature.utils.utils.Constants.FILE_SPLIT_QUEUE_NAME);
 			maxRetryCount = configMap.get(com.winnovature.utils.utils.Constants.MAX_RETRY_COUNT);
+			InitialStageLog.getInstance().debug(" CampaignMasterPoller : poll : fileSplitQueueName : "+fileSplitQueueName);
+
 			if (StringUtils.isBlank(fileSplitQueueName)) {
 				throw new Exception(" FileSplitQ name not found ");
 			}
@@ -70,6 +78,7 @@ public class CampaignMasterPoller extends Thread {
 		if(StringUtils.isBlank(maxRetryCount)) {
 			maxRetryCount = "5";
 		}
+		InitialStageLog.getInstance().debug(" CampaignMasterPoller : poll : maxRetryCount : "+maxRetryCount);
 
 		try {
 			// get campaigns data and send to FileSplitQ
