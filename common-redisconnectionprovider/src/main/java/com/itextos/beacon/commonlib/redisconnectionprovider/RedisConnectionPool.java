@@ -134,7 +134,7 @@ class RedisConnectionPool
                 if (log.isDebugEnabled())
                     log.debug("Creating pool = " + clientId);
 
-                final GenericObjectPoolConfig<?> config = new GenericObjectPoolConfig<>();
+                final GenericObjectPoolConfig config = new GenericObjectPoolConfig();
                 config.setMaxTotal(maxpool);
                 config.setMaxIdle(maxIdle);
                 config.setMinIdle(minIdle);
@@ -143,7 +143,10 @@ class RedisConnectionPool
                 if ((pass != null) && (pass.trim().length() == 0))
                     pass = null;
 
-                return new JedisPool(config, ip, port, connectionTimeout * 1000, readTimeout * 1000, pass, db, clientId);
+                return new JedisPool(config, lHostAddress, port, connectionTimeout, connectionTimeout, readTimeout, lHostAddress, pass, maxpool, clientId);
+                
+                
+    	
             }
             catch (final Exception exp)
             {

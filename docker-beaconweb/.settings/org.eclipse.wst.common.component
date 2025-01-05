@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                    
+                                        
+    
     
     
     
@@ -8,7 +9,8 @@
     
     
     <wb-module deploy-name="docker-beaconweb-1.0">
-                                                                        
+                                                                                
+        
         
         
         
@@ -17,7 +19,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                                                        
+                                                                                
+        
         
         
         
@@ -335,7 +338,7 @@
         <dependent-module archiveName="jbcrypt-0.4.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jedis-3.3.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/redis/clients/jedis/3.3.0/jedis-3.3.0.jar">
+        <dependent-module archiveName="jedis-3.6.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/redis/clients/jedis/3.6.0/jedis-3.6.0.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="quartz-2.3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/quartz-scheduler/quartz/2.3.2/quartz-2.3.2.jar">
@@ -1241,7 +1244,8 @@
         <dependent-module archiveName="dlrquery-dlrqueryprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/dlrquery-dlrqueryprocess/dlrquery-dlrqueryprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                                    
+                                                                            
+    
     
     
     
@@ -1250,7 +1254,8 @@
     
     
     </wb-module>
-                                
+                                    
+
 
 
 

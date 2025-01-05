@@ -135,7 +135,7 @@ class RedisConnectionPool
                 // log.debug("Creating pool = " + clientId);
                 // }
 
-                final GenericObjectPoolConfig<?> config            = new GenericObjectPoolConfig<>();
+                final GenericObjectPoolConfig config            = new GenericObjectPoolConfig();
                 config.setMaxTotal(maxpool);
                 config.setMaxIdle(maxIdle);
                 config.setMinIdle(minIdle);
