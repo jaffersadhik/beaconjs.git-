@@ -2,7 +2,7 @@ package com.winnovature.utils.dtos;
 
 import redis.clients.jedis.JedisPool;
 
-public class RedisServerDetailsBean {
+public class RedisServerDetailsBean2 {
 
 	String ipAddress = "";
 	String mdb = "";

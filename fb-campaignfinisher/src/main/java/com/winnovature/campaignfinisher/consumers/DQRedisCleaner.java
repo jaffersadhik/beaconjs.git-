@@ -1,18 +1,19 @@
 package com.winnovature.campaignfinisher.consumers;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.itextos.beacon.commonlib.constants.ClusterType;
+import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.winnovature.campaignfinisher.singletons.CampaignFinisherPropertiesTon;
-import com.winnovature.campaignfinisher.singletons.RedisConnectionFactory;
 import com.winnovature.campaignfinisher.utils.Constants;
 import com.winnovature.utils.dtos.QueueType;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.DeliveryEngineQueueTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 
 import redis.clients.jedis.Jedis;
@@ -73,21 +74,15 @@ public class DQRedisCleaner extends Thread {
 		long idleThreadSleepTime = 1000;
 		try {
 			idleThreadSleepTime = com.winnovature.utils.utils.Utility.getIdleThreadSleepTime();
-			String rid = CampaignFinisherPropertiesTon.getInstance()
-			.getPropertiesConfiguration()
-			.getString(Constants.REDIS_RID_INFO);
-			
-			conn = RedisConnectionFactory.getInstance().getConnection(rid);
+		
+			conn = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			
 			String campIdWithCount = conn.rpop(CampaignFinisherPropertiesTon.getInstance()
 					.getPropertiesConfiguration()
 					.getString(Constants.DELETE_CAMPID_QUEUE_NAME));
-			if(conn != null) {
-				conn.close();
-			}
 			
-			Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
-					.getInstance().getConfigurationFromconfigParams();
+			
+			
 			long count = 0;
 			if(campIdWithCount!=null && campIdWithCount.trim().length() > 0) {
 				String data[] = campIdWithCount.split(":");
@@ -98,9 +93,10 @@ public class DQRedisCleaner extends Thread {
 						.getInstance()
 						.getQueueNameBasedOnCount(masterTotal);
 				String queueName = queueNameType.getQueueName();
-				
-				for (RedisServerDetailsBean bean : configurationFromconfigParams.values()) {
-					conn1 = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+				int max=RedisConnectionProvider.getInstance().getRedisPoolCount(ClusterType.COMMON, Component.FP_CAMPAIGN);
+				for (int i=0;i<max;i++) {
+					i++;
+					conn1 = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.FP_CAMPAIGN, i);
 					if(conn1!=null) {
 						if(StringUtils.isNotBlank(queueName) && StringUtils.isNotBlank(campId)) {
 							count = conn1.lrem(queueName, 0, campId);
@@ -125,6 +121,10 @@ public class DQRedisCleaner extends Thread {
 		} catch (Exception e) {
 			log.error(className + methodName + " Exception:", e);
 			throw e;
+		}finally {
+			if(conn != null) {
+				conn.close();
+			}
 		}
 
 	}

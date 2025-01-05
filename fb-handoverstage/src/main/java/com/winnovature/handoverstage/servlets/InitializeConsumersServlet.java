@@ -21,9 +21,7 @@ import com.itextos.beacon.commonlib.messageidentifier.MessageIdentifier;
 import com.itextos.beacon.http.interfacefallback.inmem.FallbackQReaper;
 import com.winnovature.handoverstage.consumers.SplitFileConsumer;
 import com.winnovature.handoverstage.singletons.HandoverStagePropertiesTon;
-import com.winnovature.handoverstage.singletons.RedisConnectionFactory;
 import com.winnovature.handoverstage.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
 
 public class InitializeConsumersServlet extends GenericServlet implements Servlet {
@@ -55,8 +53,7 @@ public class InitializeConsumersServlet extends GenericServlet implements Servle
 						.getPropertiesConfiguration();
 				String instanceId = prop
 						.getString(com.winnovature.utils.utils.Constants.MONITORING_INSTANCE_ID);
-				Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory
-						.getInstance().getConfigurationFromconfigParams();
+		
 
 				Map<String, String> configMap = (HashMap<String, String>) ConfigParamsTon
 						.getInstance().getConfigurationFromconfigParams();
@@ -67,8 +64,6 @@ public class InitializeConsumersServlet extends GenericServlet implements Servle
 				List<String> queueNameAndSizeList = Arrays
 						.asList(queueNameAndSizeArray);
 
-				for (RedisServerDetailsBean bean : configurationFromconfigParams
-						.values()) {
 
 					for (String queueNameAndConsumer : queueNameAndSizeList) {
 						String noofconsumer = queueNameAndConsumer.split("~")[1];
@@ -76,17 +71,17 @@ public class InitializeConsumersServlet extends GenericServlet implements Servle
 
 						for (int i = 0; i < Integer.parseInt(noofconsumer); i++) {
 
-							consumer = new SplitFileConsumer(queueName, bean, instanceId);
+							consumer = new SplitFileConsumer(queueName,  instanceId);
 							consumer.setName("Thread" + i + "-" + queueName);
 							consumer.start();
 							if (log.isDebugEnabled())
 								log.debug(className + "[init] >>>>>> STARTING Handover Consumer  " + i + " QUEUE NAME "
-										+ queueName + " bean:" + bean.getIpAddress() + " instanceId:" + instanceId);
+										+ queueName + " bean: instanceId:" + instanceId);
 
 						} // end of for loop
 					}
 
-				}
+				
 			} catch (Exception e) {
 				log.error(className + "[init]  Exception:", e);
 			}

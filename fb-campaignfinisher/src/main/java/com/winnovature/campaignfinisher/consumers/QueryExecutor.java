@@ -10,11 +10,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.campaignfinisher.daos.GenericDAO;
 import com.winnovature.campaignfinisher.singletons.CampaignFinisherPropertiesTon;
-import com.winnovature.campaignfinisher.singletons.RedisConnectionFactory;
-import com.winnovature.campaignfinisher.singletons.RedisConnectionTon;
+
 import com.winnovature.campaignfinisher.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.Utility;
 
@@ -25,11 +24,9 @@ public class QueryExecutor extends Thread {
 	static Log log = LogFactory.getLog(Constants.CampaignFinisherLogger);
 	private static final String className = "[QueryExecutor]";
 	private String threadName = null;
-	RedisServerDetailsBean bean = null;
 	private long sleepTime = 1000;
 
-	public QueryExecutor(RedisServerDetailsBean bean) throws Exception {
-		this.bean = bean;
+	public QueryExecutor() throws Exception {
 		this.sleepTime = com.winnovature.utils.utils.Utility.getIdleThreadSleepTime();
 	}
 
@@ -55,6 +52,7 @@ public class QueryExecutor extends Thread {
 	}
 
 	private void executeQueries() throws Exception {
+		
 		String methodName = " [executeQueries] ";
 		Map<String, String> configMap = null;
 		String updateQueriesQueue = null;
@@ -70,7 +68,7 @@ public class QueryExecutor extends Thread {
 		}
 		Jedis resource = null;
 		try {
-			resource = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+			resource = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			if (resource.exists(updateQueriesQueue)) {
 				String query = resource.rpop(updateQueriesQueue);
 				int result = 0;
@@ -80,16 +78,12 @@ public class QueryExecutor extends Thread {
 						if (result != 1) {
 							resource.lpush(updateQueriesQueue, query);
 						}
-						if (resource != null) {
-							resource.close();
-						}
+						
 					} catch (Exception e) {
 						log.error(className + methodName, e);
 						try {
-							if (resource != null) {
-								resource.close();
-							}
-							repushToUpdateQueryQueue(updateQueriesQueue, query);
+							
+							repushToUpdateQueryQueue(updateQueriesQueue, query,resource);
 						} catch (Exception ex) {
 							log.error(className + methodName, ex);
 							log.error(className + methodName + " : Failed while HO to queue : " + result + ". query : ["
@@ -113,23 +107,21 @@ public class QueryExecutor extends Thread {
 			}
 		} catch (Exception e) {
 			throw e;
-		}
-	}
-
-	public void repushToUpdateQueryQueue(String queue, String query) throws Exception {
-		String methodName = "[repushToUpdateQueryQueue]";
-		Jedis resource = null;
-		try {
-			resource = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
-			resource.lpush(queue, query);
-		} catch (Exception e) {
-			log.error(className + methodName, e);
-			throw e;
-		} finally {
+		}finally {
 			if (resource != null) {
 				resource.close();
 			}
 		}
+	}
+
+	public void repushToUpdateQueryQueue(String queue, String query,Jedis resource) throws Exception {
+		String methodName = "[repushToUpdateQueryQueue]";
+		try {
+			resource.lpush(queue, query);
+		} catch (Exception e) {
+			log.error(className + methodName, e);
+			throw e;
+		} 
 	}
 
 	private void consumerSleep(long sleepTime) {

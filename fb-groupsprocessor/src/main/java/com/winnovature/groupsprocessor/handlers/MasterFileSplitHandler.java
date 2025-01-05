@@ -17,7 +17,6 @@ import com.winnovature.fileparser.handler.FileChopHandler;
 import com.winnovature.fileparser.interfaces.FileParser;
 import com.winnovature.groupsprocessor.daos.GroupsMasterDAO;
 import com.winnovature.groupsprocessor.singletons.GroupsProcessorPropertiesTon;
-import com.winnovature.groupsprocessor.singletons.RedisConnectionTon;
 import com.winnovature.groupsprocessor.singletons.RedisQueueSender;
 import com.winnovature.groupsprocessor.utils.Constants;
 import com.winnovature.utils.dtos.FileDataBean;
@@ -25,6 +24,7 @@ import com.winnovature.utils.dtos.SendSMSTypes;
 import com.winnovature.utils.dtos.SplitFileData;
 import com.winnovature.utils.dtos.TagwiseSplitFiles;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForNormalGroups;
 import com.winnovature.utils.utils.JsonUtility;
 
 import redis.clients.jedis.Jedis;
@@ -224,7 +224,7 @@ public class MasterFileSplitHandler {
 				}
 				requestMap.put("retry_count", String.valueOf(retryTime));
 
-				con = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+				con = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 
 				String json = new JsonUtility().convertMapToJSON(requestMap);
 				con.lpush(fileSplitQueuename, json);

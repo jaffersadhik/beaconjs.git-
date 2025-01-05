@@ -384,6 +384,7 @@
 
    	   	<module>platform-dnsingle</module>
    	   	<module>platform-dnaging</module>
+   	   	<module>samplefile</module>
   </modules>
   
 

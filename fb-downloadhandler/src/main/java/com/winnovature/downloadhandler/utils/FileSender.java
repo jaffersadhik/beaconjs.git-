@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.downloadhandler.singletons.RedisConnectionTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDLTFile;
 import com.winnovature.utils.utils.JsonUtility;
 
 import redis.clients.jedis.Jedis;
@@ -27,7 +27,7 @@ public class FileSender {
 		Jedis con = null;
 		try {
 
-			con = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+			con = RedisConnectionTonRoundRobinForDLTFile.getInstance().getJedisConnectionAsRoundRobin();
 
 			if (con != null) {
 				String json = new JsonUtility().convertMapToJSON(map);

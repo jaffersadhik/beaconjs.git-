@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.winnovature.splitstage.utils.Constants;
 import com.winnovature.utils.dtos.SplitFileData;
 import com.winnovature.utils.dtos.TagwiseSplitFiles;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 
 import redis.clients.jedis.Jedis;
 
@@ -44,8 +45,7 @@ public class RedisQueueSender {
 		}
 		try {
 
-			resource = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			resource = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			if (resource != null) {
 
 				Map<String, String> requestMap = tagwiseData.getRequestMap();

@@ -12,11 +12,9 @@ import org.apache.commons.logging.LogFactory;
 import com.winnovature.groupsprocessor.daos.GroupsMasterDAO;
 import com.winnovature.groupsprocessor.handlers.SplitFileProcessor;
 import com.winnovature.groupsprocessor.singletons.GroupsProcessorPropertiesTon;
-import com.winnovature.groupsprocessor.singletons.RedisConnectionFactory;
-import com.winnovature.groupsprocessor.singletons.RedisConnectionTon;
 import com.winnovature.groupsprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForNormalGroups;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -27,16 +25,14 @@ public class GroupsFileSplitQConsumer extends Thread {
 	static Log log = LogFactory.getLog(Constants.GroupsProcessorLogger);
 	PropertiesConfiguration prop = null;
 
-	private RedisServerDetailsBean bean = null;
-	String className = "[GroupsFileSplitQConsumer]";
+String className = "[GroupsFileSplitQConsumer]";
 	private String instanceId = "";
 	private long sleepTime = 1000;
 	private String batchSize = null;
 	private Map<String, String> requestMap = null;
 	PropertiesConfiguration groupsProperties = null;
 
-	public GroupsFileSplitQConsumer(RedisServerDetailsBean bean, String instanceId, String batchSize) {
-		this.bean = bean;
+	public GroupsFileSplitQConsumer(String instanceId, String batchSize) {
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
 		this.batchSize = batchSize;
@@ -60,8 +56,8 @@ public class GroupsFileSplitQConsumer extends Thread {
 				Jedis con = null;
 
 				try {
+					con = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 
-					con = RedisConnectionFactory.getInstance().getNormalRedisConnection(bean.getRid());
 
 					if (con != null) {
 
@@ -151,7 +147,7 @@ public class GroupsFileSplitQConsumer extends Thread {
 				retryTime = retryTime + 1;
 				requestMap.put("retry_count", String.valueOf(retryTime));
 
-				con = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+				con = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 
 				String json = new JsonUtility().convertMapToJSON(requestMap);
 				con.lpush(queueName, json);

@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.campaignfinisher.singletons.CampaignFinisherPropertiesTon;
-import com.winnovature.campaignfinisher.singletons.RedisConnectionFactory;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 
 import redis.clients.jedis.Jedis;
 
@@ -19,14 +19,10 @@ public class Utility {
 
 		boolean sent = false;
 		Jedis con = null;
-		String rid = null;
 		
 		try {
-			rid = CampaignFinisherPropertiesTon.getInstance()
-					.getPropertiesConfiguration()
-					.getString(Constants.REDIS_RID_INFO);
-			
-			con = RedisConnectionFactory.getInstance().getConnection(rid);
+		
+			con = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			String queueName = CampaignFinisherPropertiesTon.getInstance()
 					.getPropertiesConfiguration()
 					.getString(Constants.DELETE_CAMPID_QUEUE_NAME);

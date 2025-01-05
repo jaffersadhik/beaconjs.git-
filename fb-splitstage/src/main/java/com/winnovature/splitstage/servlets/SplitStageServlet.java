@@ -17,10 +17,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.splitstage.consumers.FileSplitQConsumer;
-import com.winnovature.splitstage.singletons.RedisConnectionTon;
 import com.winnovature.splitstage.singletons.SplitStagePropertiesTon;
 import com.winnovature.splitstage.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
 
 public class SplitStageServlet extends GenericServlet implements Servlet {
@@ -64,25 +62,18 @@ public class SplitStageServlet extends GenericServlet implements Servlet {
 					log.debug(className + methodName + " splitConsumersPerRedisServer = " + splitConsumersPerRedisServer);
 				}
 
-				List<RedisServerDetailsBean> redisServerDetails = RedisConnectionTon.getInstance()
-						.getConfigurationFromconfigParams();
-
-				Iterator<RedisServerDetailsBean> iterator = redisServerDetails.iterator();
-
-				while (iterator.hasNext()) {
-
-					RedisServerDetailsBean bean = iterator.next();
+			
 
 					for (int i = 0; i < splitConsumersPerRedisServer; i++) {
-						fileSplitQConsumer = new FileSplitQConsumer(bean, instanceId);
+						fileSplitQConsumer = new FileSplitQConsumer( instanceId);
 						fileSplitQConsumer.setName("Thread" + (i+1) + "-" + "SplitQConsumer");
 						fileSplitQConsumer.start();
 						if (log.isDebugEnabled())
 							log.debug("[SplitStageServlet.init()] >>>>>> STARTING FileSplitQConsumer[SplitQConsumer]  " + (i+1)
-									+ " ThreadName:" + fileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+									+ " ThreadName:" + fileSplitQConsumer.getName() );
 					}
 
-				} // end of REDIS servers iteration
+			
 
 			} catch (Exception e) {
 				log.error(className + methodName + " >>>> Exception: ", e);

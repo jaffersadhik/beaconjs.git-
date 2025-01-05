@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.winnovature.groupsprocessor.utils.Constants;
 import com.winnovature.utils.dtos.SplitFileData;
 import com.winnovature.utils.dtos.TagwiseSplitFiles;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForNormalGroups;
 import com.winnovature.utils.utils.JsonUtility;
 
 import redis.clients.jedis.Jedis;
@@ -44,8 +45,7 @@ public class RedisQueueSender {
 		JsonUtility jsonUtility = null;
 		try {
 			jsonUtility = new JsonUtility();
-			resource = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			resource = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 			if (resource != null) {
 
 				Map<String, String> requestMap = tagwiseData.getRequestMap();

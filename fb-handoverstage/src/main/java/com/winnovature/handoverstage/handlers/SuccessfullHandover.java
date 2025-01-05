@@ -9,9 +9,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.handoverstage.daos.GenericDAO;
 import com.winnovature.handoverstage.singletons.HandoverStagePropertiesTon;
-import com.winnovature.handoverstage.singletons.RedisConnectionTon;
 import com.winnovature.handoverstage.utils.Constants;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.UnProcessListsCollector;
 
 import redis.clients.jedis.Jedis;
@@ -173,7 +173,7 @@ public class SuccessfullHandover {
 
 		Jedis redis = null;
 		try {
-			redis = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+			redis = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			redis.lpush(statsUpdateStatusQueryQueueName, sql);
 		} catch (Exception e) {
 			log.error(className + methodName + com.winnovature.utils.utils.Constants.FILEID_FOR_LOGGER + id

@@ -20,9 +20,7 @@ import com.winnovature.dltfileprocessor.consumers.DltFileQConsumer;
 import com.winnovature.dltfileprocessor.pollers.DltTemplateRequestCompletionPoller;
 import com.winnovature.dltfileprocessor.pollers.DltTemplateRequestPoller;
 import com.winnovature.dltfileprocessor.singletons.DltFileProcessorPropertiesTon;
-import com.winnovature.dltfileprocessor.singletons.RedisConnectionTon;
 import com.winnovature.dltfileprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 
 @WebServlet(name = "InitializePollers", loadOnStartup = 1)
 public class InitializePollers extends GenericServlet implements Servlet {
@@ -84,21 +82,17 @@ public class InitializePollers extends GenericServlet implements Servlet {
 						log.debug(className + " dltFileConsumersPerRedisServer = " + dltFileConsumersPerRedisServer);
 					}
 
-					List<RedisServerDetailsBean> redisServerDetails = RedisConnectionTon.getInstance()
-							.getConfigurationFromconfigParams();
-					Iterator<RedisServerDetailsBean> iterator = redisServerDetails.iterator();
-					while (iterator.hasNext()) {
-						RedisServerDetailsBean bean = iterator.next();
+
 						for (int i = 0; i < dltFileConsumersPerRedisServer; i++) {
-							dltFileQConsumer = new DltFileQConsumer(bean, instanceId);
+							dltFileQConsumer = new DltFileQConsumer( instanceId);
 							dltFileQConsumer.setName("Thread" + (i+1) + "-" + "DltFileQConsumer");
 							dltFileQConsumer.start();
 							if (log.isDebugEnabled())
 								log.debug("[SplitStageServlet.init()] >>>>>> STARTING DltFileQConsumer  " + (i+1)
-										+ " ThreadName:" + dltFileQConsumer.getName() + " bean:" + bean.getIpAddress());
+										+ " ThreadName:" + dltFileQConsumer.getName() );
 						}
 					}
-				}
+				
 
 			} catch (Exception e) {
 				log.error(className + " Exception:", e);

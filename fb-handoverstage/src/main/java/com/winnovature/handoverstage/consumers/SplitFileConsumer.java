@@ -12,12 +12,11 @@ import com.winnovature.handoverstage.daos.GenericDAO;
 import com.winnovature.handoverstage.processors.ProcessMTM;
 import com.winnovature.handoverstage.processors.ProcessOTM;
 import com.winnovature.handoverstage.processors.ProcessTEM;
-import com.winnovature.handoverstage.singletons.RedisConnectionFactory;
 import com.winnovature.handoverstage.utils.Constants;
 import com.winnovature.handoverstage.utils.Utility;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.dtos.Templates;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 
@@ -27,15 +26,13 @@ public class SplitFileConsumer extends Thread {
 	static Log logger = LogFactory.getLog(Constants.HandoverStageLogger);
 	private static final String className = "[SplitFileConsumer]";
 
-	private RedisServerDetailsBean bean;
 	private String instanceId = "";
 	private String deliveryQ = "";
 	private long sleepTime = 1000;
 	long nextRequestPickDelay = 1000l;
 	
-	public SplitFileConsumer(String queue, RedisServerDetailsBean bean,
+	public SplitFileConsumer(String queue, 
 			String instanceId) {
-		this.bean = bean;
 		this.deliveryQ = queue;
 		this.instanceId = instanceId;
 		this.sleepTime = com.winnovature.utils.utils.Utility
@@ -93,11 +90,7 @@ public class SplitFileConsumer extends Thread {
 
 		try {
 
-			if (logger.isDebugEnabled()) {
-				logger.debug(className + " Looking up DQ " + deliveryQ
-						+ " in redis " + bean.getIpAddress() + ":"
-						+ bean.getPort() + " ");
-			}
+		
 
 			configMap = (HashMap<String, String>) ConfigParamsTon.getInstance()
 					.getConfigurationFromconfigParams();
@@ -114,8 +107,7 @@ public class SplitFileConsumer extends Thread {
 				nextRequestPickDelay = 1000l;
 			}
 
-			jedisConnection = RedisConnectionFactory.getInstance()
-					.getConnection(bean.getRid());
+			jedisConnection =RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 
 			campIdQueue = jedisConnection.rpoplpush(deliveryQ,
 					deliveryQ);
@@ -153,28 +145,21 @@ public class SplitFileConsumer extends Thread {
 
 				}
 
-				// close Jedis con 1 req processed and thread is going to sleep.
-				if (jedisConnection != null) {
-					jedisConnection.close();
-				}
+				
 
 				// request processing done, wait for some time before looking up
 				// for other requests.
 				consumerSleep(nextRequestPickDelay);
 			} else {
 				// close Jedis con since thread is going to sleep.
-				if (jedisConnection != null) {
-					jedisConnection.close();
-				}
+				
 				// No data found let consumer rest for some time
 				consumerSleep(sleepTime);
 			}
 
 		} catch (Exception e) {
 
-			if (jedisConnection != null) {
-				jedisConnection.close();
-			}
+		
 
 			logger.error(className + methodName
 					+ " Exception", e);
@@ -189,24 +174,23 @@ public class SplitFileConsumer extends Thread {
 					String noOfTimesRetry = configMap
 							.get(com.winnovature.utils.utils.Constants.MAX_RETRY_COUNT);
 					String id = map.get("c_f_s_id") == null ? "0" : map.get("c_f_s_id");
-					long retryCount = utility.getRetryCountFromRedis(productName, id, bean.getRid());
+					long retryCount = utility.getRetryCountFromRedis(productName, id, jedisConnection);
 
 					String status = "FAILED";
 
 					if (retryCount <= Integer.parseInt(noOfTimesRetry)) {
 						try {
 							utility.repushSplitRecord(productName, campIdQueue,
-									splitFileMetaData, deliveryQ, bean.getRid());
+									splitFileMetaData, deliveryQ, jedisConnection);
 						} catch (Exception e1) {
 							logger.error(className + methodName
-									+ " Exception while repushing back to deliveryQ:"
-									+ bean.getRid() + " error:", e);
+									+ " Exception while repushing back to deliveryQ : error:", e);
 							try {
 								// second level Redis.
 								utility.repushToRedisQueueInRoundRobin(productName,
 										campIdQueue, splitFileMetaData, 1,
 										Integer.parseInt(noOfTimesRetry), id,
-										status, deliveryQ, bean.getRid());
+										status, deliveryQ, jedisConnection);
 							} catch (Exception ex) {
 								logger.error(className
 												+ methodName
@@ -227,7 +211,7 @@ public class SplitFileConsumer extends Thread {
 											Integer.parseInt(noOfTimesRetry) + 1);
 
 							// Update to DB as failed
-							utility.sendToUpdateSQLQueue(sql, bean.getRid());
+							utility.sendToUpdateSQLQueue(sql, jedisConnection);
 
 							// remove from tempQ
 							utility.removeFromProcessingQueue(productName, campIdQueue,
@@ -270,6 +254,12 @@ public class SplitFileConsumer extends Thread {
 				} // end of campIdQueue and metadata Q not null
 			}
 			throw e;
+		}finally {
+			
+			// close Jedis con 1 req processed and thread is going to sleep.
+			if (jedisConnection != null) {
+				jedisConnection.close();
+			}
 		}
 	}
 

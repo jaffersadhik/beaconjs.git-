@@ -12,8 +12,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.groupsprocessor.singletons.RedisConnectionTon;
 import com.winnovature.groupsprocessor.utils.Constants;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForExcludeGroups;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForNormalGroups;
 import com.winnovature.utils.utils.EmailValidator;
 
 import redis.clients.jedis.Jedis;
@@ -31,10 +32,10 @@ public class GroupRedisDAO {
 		try {
 			if (groupIdentifier.equalsIgnoreCase(Constants.GROUP_IDENTIFIER_NORMAL)) {
 				key = Constants.REDIS_QUEUE_NORMAL_GROUPS;
-				connection = RedisConnectionTon.getInstance().getNormalGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 			} else {
 				key = Constants.REDIS_QUEUE_EXCLUDE_GROUPS;
-				connection = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			}
 			key = key.replace("group_id", groupID);
 			String[] arr = new String[numbers.size()];
@@ -66,10 +67,10 @@ public class GroupRedisDAO {
 		try {
 			if (groupIdentifier.equalsIgnoreCase(Constants.GROUP_IDENTIFIER_NORMAL)) {
 				key = Constants.REDIS_QUEUE_GROUPS_CONTACT_DETAILS;
-				connection = RedisConnectionTon.getInstance().getNormalGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 			} else {
 				key = Constants.REDIS_QUEUE_EXCLUDE_GROUPS_CONTACT_DETAILS;
-				connection = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			}
 			key = key.replace("group_id", groupID);
 			// creating copy of original list
@@ -131,9 +132,9 @@ public class GroupRedisDAO {
 		BufferedReader reader = null;
 		try {
 			if (groupIdentifier.equalsIgnoreCase(Constants.GROUP_IDENTIFIER_NORMAL)) {
-				connection = RedisConnectionTon.getInstance().getNormalGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 			} else {
-				connection = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+				connection = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			}
 			String line = null;
 			reader = new BufferedReader(new FileReader(fileName));
@@ -198,10 +199,10 @@ public class GroupRedisDAO {
 		String redisKey = null;
 		try {
 			if (groupIdentifier.equalsIgnoreCase(Constants.GROUP_IDENTIFIER_NORMAL)) {
-				jedis = RedisConnectionTon.getInstance().getNormalGroupRedisConnection();
+				jedis = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 				redisKey = Constants.REDIS_QUEUE_NORMAL_GROUPS;
 			} else {
-				jedis = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+				jedis = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 				redisKey = Constants.REDIS_QUEUE_EXCLUDE_GROUPS;
 			}
 			String groupKey = redisKey.replace("group_id", groupId);
@@ -226,7 +227,7 @@ public class GroupRedisDAO {
 		String redisKey = null;
 		long total = 0L;
 		try {
-			jedis = RedisConnectionTon.getInstance().getNormalGroupRedisConnection();
+			jedis = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 			redisKey = Constants.REDIS_QUEUE_NORMAL_GROUPS;
 			String key = redisKey.replace("group_id", groupId);
 			if (jedis.exists(key)) {

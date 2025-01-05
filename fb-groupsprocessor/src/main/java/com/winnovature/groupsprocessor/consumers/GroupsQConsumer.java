@@ -9,10 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.groupsprocessor.handlers.MasterFileSplitHandler;
-import com.winnovature.groupsprocessor.singletons.RedisConnectionFactory;
 import com.winnovature.groupsprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForNormalGroups;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -23,13 +22,11 @@ public class GroupsQConsumer extends Thread {
 	static Log log = LogFactory.getLog(Constants.GroupsProcessorLogger);
 	PropertiesConfiguration prop = null;
 
-	private RedisServerDetailsBean bean = null;
 	String className = "[GroupsQConsumer]";
 	private String instanceId = "";
 	private long sleepTime = 1000;
 
-	public GroupsQConsumer(RedisServerDetailsBean bean, String instanceId) {
-		this.bean = bean;
+	public GroupsQConsumer( String instanceId) {
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
 	}
@@ -55,7 +52,7 @@ public class GroupsQConsumer extends Thread {
 
 				try {
 
-					con = RedisConnectionFactory.getInstance().getNormalRedisConnection(bean.getRid());
+					con = RedisConnectionTonRoundRobinForNormalGroups.getInstance().getJedisConnectionAsRoundRobin();
 
 					if (con != null) {
 

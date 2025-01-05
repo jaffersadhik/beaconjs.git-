@@ -12,9 +12,9 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.winnovature.handoverstage.daos.GenericDAO;
-import com.winnovature.handoverstage.singletons.RedisConnectionFactory;
-import com.winnovature.handoverstage.singletons.RedisConnectionTon;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDuplicateCheck;
 
 import redis.clients.jedis.Jedis;
 
@@ -22,31 +22,24 @@ public class Utility {
 	private static final String className = "[Utility]";
 	static Log logger = LogFactory.getLog(Constants.HandoverStageLogger);
 
-	public long getRetryCountFromRedis(String productName, String id, String rid) {
+	public long getRetryCountFromRedis(String productName, String id,Jedis resource) {
 		String methodName = " [getRetryCountFromRedis] ";
 		long retryCount = 0;
-		Jedis resource = null;
 		try {
-			resource = RedisConnectionFactory.getInstance().getConnection(rid);
+			resource = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			retryCount = resource.hincrBy(productName + ":retry", id, 1);
 		} catch (Exception e) {
-			logger.error(className + methodName + " Exception while getting retry count from redis with rid:" + rid, e);
-		} finally {
-			if (resource != null) {
-				resource.close();
-			}
-		}
+			logger.error(className + methodName + " Exception while getting retry count from redis with rid:" , e);
+		} 
 		return retryCount;
 	}
 
-	public void repushSplitRecord(String productName, String campIdQueue, String json, String queue, String rid)
+	public void repushSplitRecord(String productName, String campIdQueue, String json, String queue, Jedis resource)
 			throws Exception {
 
 		String methodName = " [repushSplitRecord] ";
 
-		Jedis resource = null;
 		try {
-			resource = RedisConnectionFactory.getInstance().getConnection(rid);
 			Long lrem = resource.lrem(queue, 0, campIdQueue);
 
 			if (logger.isDebugEnabled()) {
@@ -71,15 +64,15 @@ public class Utility {
 	}
 
 	public void repushToRedisQueueInRoundRobin(String productName, String campIdQueue, String json, int retryCount,
-			int retryLimit, String id, String status, String queue, String rid) throws Exception {
+			int retryLimit, String id, String status, String queue, Jedis resource) throws Exception {
 
 		String methodName = " [repushToRedisQueueInRoundRobin] ";
 
-		Jedis resource = null;
+		 
 		try {
 			if (retryCount <= retryLimit) {
 				try {
-					resource = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+					resource = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 					Long lrem = resource.lrem(queue, 0, campIdQueue);
 
 					if (logger.isDebugEnabled()) {
@@ -90,16 +83,12 @@ public class Utility {
 					resource.lpush(queue, campIdQueue);
 					resource.lpush(campIdQueue, json);
 					resource.lrem(productName + ":processing:" + campIdQueue, 1, json);
-					if (resource != null) {
-						resource.close();
-					}
+					
 				} catch (Exception e) {
 					logger.error(className + methodName + "Exception: ", e);
-					if (resource != null) {
-						resource.close();
-					}
+					
 					repushToRedisQueueInRoundRobin(productName, campIdQueue, json, ++retryCount, retryLimit, id, status,
-							queue, rid);
+							queue, resource);
 				}
 			} else {
 				try {
@@ -107,7 +96,7 @@ public class Utility {
 					String sql = new GenericDAO().updateFailedRequestToQueuedSql(id, status,
 							"Maximum retried in HandoverStage module", retryCount + 1);
 
-					sendToUpdateSQLQueue(sql, rid);
+					sendToUpdateSQLQueue(sql, resource);
 				} catch (Exception e) {
 					logger.error(className + methodName
 							+ " Exception sending campaign_file_splits update query to UPDATE QUEUE, hence trying direct campaign_file_splits update. "
@@ -125,11 +114,17 @@ public class Utility {
 		} catch (Exception e) {
 			logger.error(className + methodName + "Exception: ", e);
 			throw e;
+		}finally {
+			
+			if(resource!=null) {
+				
+				resource.close();
+			}
 		}
 
 	}
 
-	public void sendToUpdateSQLQueue(String sql, String rid) throws Exception {
+	public void sendToUpdateSQLQueue(String sql, Jedis redis) throws Exception {
 
 		String methodName = " [sendToUpdateSQLQueue] ";
 		Map<String, String> configParamsTon = ConfigParamsTon.getInstance().getConfigurationFromconfigParams();
@@ -137,10 +132,8 @@ public class Utility {
 		String statsUpdateStatusQueryQueueName = configParamsTon
 				.get(com.winnovature.utils.utils.Constants.STATS_UPDATE_STATUS_QUERY_QUEUE_NAME).toString();
 
-		Jedis redis = null;
 		try {
 
-			redis = RedisConnectionFactory.getInstance().getConnection(rid);
 			redis.lpush(statsUpdateStatusQueryQueueName, sql);
 
 		} catch (Exception e) {
@@ -157,14 +150,15 @@ public class Utility {
 			String campIdQueue, String json, String queueName, String id) {
 
 		String methodName = " [removeFromProcessingQueue] ";
+
+		
 		Jedis resource = null;
 
 		try {
 			if (logger.isDebugEnabled())
 				logger.debug(className + methodName + " Begin:");
 
-			resource = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			resource = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			resource.lrem(productName + ":processing:" + campIdQueue, 1, json);
 
 		} catch (Exception e) {
@@ -190,8 +184,7 @@ public class Utility {
 		String timePattern = new SimpleDateFormat("ddMMyy").format(new Date());
 
 		try {
-			resource = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			resource = RedisConnectionTonRoundRobinForDuplicateCheck.getInstance().getJedisConnectionAsRoundRobin();
 			resource.lpush(productName + ":duplicatecheck:" + tagidQueue + ":"
 					+ timePattern, json);
 			if (logger.isDebugEnabled())

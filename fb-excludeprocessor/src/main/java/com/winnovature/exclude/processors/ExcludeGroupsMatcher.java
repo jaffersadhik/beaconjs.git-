@@ -7,8 +7,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.winnovature.exclude.singletons.RedisConnectionTon;
 import com.winnovature.exclude.utils.Constants;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForExcludeGroups;
 
 import redis.clients.jedis.Jedis;
 
@@ -29,7 +29,7 @@ public class ExcludeGroupsMatcher {
 				contacts.add(row.get("mobile"));
 			}
 			mobiles = contacts.toArray(mobiles);
-			jedis = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+			jedis = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			redisKey = Constants.REDIS_QUEUE_EXCLUDE_GROUPS;
 			String groupKey = redisKey.replace("group_id", groupId);
 			response = jedis.smismember(groupKey, mobiles);
@@ -53,7 +53,7 @@ public class ExcludeGroupsMatcher {
 		boolean isExclude = false;
 		String redisKey = null;
 		try {
-			jedis = RedisConnectionTon.getInstance().getExcludeGroupRedisConnection();
+			jedis = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			redisKey = Constants.REDIS_QUEUE_EXCLUDE_GROUPS;
 			String groupKey = redisKey.replace("group_id", groupId);
 			isExclude = jedis.sismember(groupKey, mobile);

@@ -12,11 +12,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.exclude.daos.CampaignDAO;
 import com.winnovature.exclude.processors.FileDataExtractor;
-import com.winnovature.exclude.singletons.RedisConnectionFactory;
-import com.winnovature.exclude.singletons.RedisConnectionTon;
 import com.winnovature.exclude.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForExcludeGroups;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -29,7 +28,6 @@ public class ExcludeConsumer extends Thread {
 	
 	private static final String className = "[ExcludeConsumer]";
 	private String queueName = "";
-	private RedisServerDetailsBean bean;
 	PropertiesConfiguration prop = null;
 	public static final String EXCLUDE = "_exclude";
 	private String instanceId = "";
@@ -38,8 +36,7 @@ public class ExcludeConsumer extends Thread {
 	Map<String, String> configMap = null;
 
 	public ExcludeConsumer(String queueName,
-			RedisServerDetailsBean bean, String instanceId) {
-		this.bean = bean;
+			 String instanceId) {
 		this.queueName = queueName;
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
@@ -86,7 +83,7 @@ public class ExcludeConsumer extends Thread {
 
 		try {
 			if (htLogger.isDebugEnabled()) {
-				htLogger.debug(className + " Looking up ExcludeQ "+queueName+" in redis " + bean.getIpAddress()+":"+bean.getPort());
+				htLogger.debug(className + " Looking up ExcludeQ "+queueName+" in redis ");
 			}
 			
 			try {
@@ -99,7 +96,7 @@ public class ExcludeConsumer extends Thread {
 				nextRequestPickDelay = 1000l;
 			}
 
-			conn = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+			conn = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 
 			campIdQueue = conn.rpoplpush(queueName, queueName);
 
@@ -309,7 +306,7 @@ public class ExcludeConsumer extends Thread {
 					.getConfigurationFromconfigParams();
 			excludenumberQ = configMap.get(Constants.EXCLUDE_NUMBER_FILE_QUEUE_NAME);
 			excludenumber_payload = new JsonUtility().convertMapToJSON(excludeNumber);
-			redisConnection = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+			redisConnection = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			redisConnection.lpush(excludenumberQ, excludenumber_payload);
 			return true;
 		}catch(Exception e) {
@@ -331,8 +328,7 @@ public class ExcludeConsumer extends Thread {
 		boolean dqHoSuccess = false;
 		Jedis resource = null;
 		try {
-			resource = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			resource =RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			// remove _exclude from the Q name to send it to DQ
 			String DQName = queueName.replace(EXCLUDE, "");
 			String campIdQ = tagidQueue.replace(EXCLUDE, "");
@@ -389,8 +385,7 @@ public class ExcludeConsumer extends Thread {
 					splitFileDetails.put("retry_count",
 							String.valueOf(retryTime));
 					
-					resource = RedisConnectionFactory.getInstance().getConnection(
-							bean.getRid());
+					resource = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 					Long lrem = resource.lrem(queueName, 0, tagidQueue);
 
 					if (logger.isDebugEnabled()) {
@@ -448,8 +443,7 @@ public class ExcludeConsumer extends Thread {
 				.toString();
 		Jedis redis = null;
 		try {
-			redis = RedisConnectionFactory.getInstance().getConnection(
-					bean.getRid());
+			redis = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 			redis.lpush(statsUpdateStatusQueryQueueName, sql);
 		} catch (Exception e) {
 			logger.error(className + methodName

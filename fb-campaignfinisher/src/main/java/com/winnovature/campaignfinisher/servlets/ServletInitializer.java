@@ -18,9 +18,7 @@ import com.winnovature.campaignfinisher.consumers.PollerCampaignFilesCompleted;
 import com.winnovature.campaignfinisher.consumers.PollerCampaignMasterCompleted;
 import com.winnovature.campaignfinisher.consumers.QueryExecutor;
 import com.winnovature.campaignfinisher.singletons.CampaignFinisherPropertiesTon;
-import com.winnovature.campaignfinisher.singletons.RedisConnectionFactory;
 import com.winnovature.campaignfinisher.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 
 @WebServlet(name = "ServletInitializer", loadOnStartup = 1)
 public class ServletInitializer extends GenericServlet implements Servlet {
@@ -47,20 +45,17 @@ public class ServletInitializer extends GenericServlet implements Servlet {
 				int queryExecutionConsumersCount = CampaignFinisherPropertiesTon.getInstance().getPropertiesConfiguration()
 						.getInt(Constants.QueryExcecutionConsumersCount, 1);
 
-				Map<String, RedisServerDetailsBean> configurationFromconfigParams = RedisConnectionFactory.getInstance()
-						.getConfigurationFromconfigParams();
 
-				for (RedisServerDetailsBean bean : configurationFromconfigParams.values()) {
+	
 					for (int i = 1; i <= queryExecutionConsumersCount; i++) {
-						queryExecutionConsumer = new QueryExecutor(bean);
+						queryExecutionConsumer = new QueryExecutor();
 						queryExecutionConsumer.setName("QueryExecutionConsumer" + i);
 						queryExecutionConsumer.start();
 
 						if (log.isDebugEnabled())
 							log.debug(className + " QueryExecutionConsumer" + i + " started.");
 					}
-				}
-
+				
 				pollerCampaignFilesCompleted = new PollerCampaignFilesCompleted();
 				pollerCampaignFilesCompleted.setName("PollerCampaignFilesCompleted");
 				pollerCampaignFilesCompleted.start();

@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.winnovature.utils.daos.UnprocessNumbersInsertDAO;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.dtos.UnprocessRow;
 import com.winnovature.utils.singletons.ConfigParamsTon;
 import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDuplicateCheck;
@@ -24,7 +23,6 @@ public class UnProcessListsCollector {
 	String methodName = null;
 
 	Map<String, String> configParamsTon = null;
-	RedisServerDetailsBean bean = null;
 
 	public UnProcessListsCollector() {
 		methodName = " [UnProcessListsCollector] ";

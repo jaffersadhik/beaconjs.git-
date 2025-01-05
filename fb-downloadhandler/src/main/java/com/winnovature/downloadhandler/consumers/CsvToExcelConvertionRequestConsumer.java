@@ -8,9 +8,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.downloadhandler.singletons.DownloadHandlerPropertiesTon;
-import com.winnovature.downloadhandler.singletons.RedisConnectionTon;
 import com.winnovature.downloadhandler.utils.Constants;
 import com.winnovature.downloadhandler.utils.CsvToExcelConvertor;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDLTFile;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -49,7 +49,7 @@ public class CsvToExcelConvertionRequestConsumer extends Thread {
 
 				try {
 
-					con = RedisConnectionTon.getInstance().getJedisConnectionAsRoundRobin();
+					con = RedisConnectionTonRoundRobinForDLTFile.getInstance().getJedisConnectionAsRoundRobin();
 
 					if (con != null) {
 

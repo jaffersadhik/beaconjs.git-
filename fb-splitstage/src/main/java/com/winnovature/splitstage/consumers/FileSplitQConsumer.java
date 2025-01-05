@@ -8,10 +8,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.splitstage.handlers.MasterFileSplitHandler;
-import com.winnovature.splitstage.singletons.RedisConnectionFactory;
 import com.winnovature.splitstage.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -22,13 +21,12 @@ public class FileSplitQConsumer extends Thread {
 	static Log log = LogFactory.getLog(Constants.SplitStageLogger);
 	PropertiesConfiguration prop = null;
 
-	private RedisServerDetailsBean bean = null;
 	String className = "[FileSplitQConsumer]";
 	private String instanceId = "";
 	private long sleepTime = 1000;
 
-	public FileSplitQConsumer(RedisServerDetailsBean bean, String instanceId) {
-		this.bean = bean;
+	public FileSplitQConsumer(String instanceId) {
+	
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
 	}
@@ -53,7 +51,7 @@ public class FileSplitQConsumer extends Thread {
 
 				try {
 
-					con = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+					con = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 
 					if (con != null) {
 

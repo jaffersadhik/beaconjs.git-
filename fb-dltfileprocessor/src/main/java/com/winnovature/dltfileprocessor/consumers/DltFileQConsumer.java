@@ -9,10 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.winnovature.dltfileprocessor.services.MasterFileSplitHandler;
-import com.winnovature.dltfileprocessor.singletons.RedisConnectionFactory;
 import com.winnovature.dltfileprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 import com.winnovature.utils.singletons.ConfigParamsTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForDLTFile;
 import com.winnovature.utils.utils.HeartBeatMonitoring;
 import com.winnovature.utils.utils.JsonUtility;
 import com.winnovature.utils.utils.Utility;
@@ -23,13 +22,11 @@ public class DltFileQConsumer extends Thread {
 	static Log log = LogFactory.getLog(Constants.FileUploadLogger);
 	PropertiesConfiguration prop = null;
 
-	private RedisServerDetailsBean bean = null;
 	String className = "[DltFileQConsumer]";
 	private String instanceId = "";
 	private long sleepTime = 1000;
 
-	public DltFileQConsumer(RedisServerDetailsBean bean, String instanceId) {
-		this.bean = bean;
+	public DltFileQConsumer( String instanceId) {
 		this.instanceId = instanceId;
 		this.sleepTime = Utility.getConsumersSleepTime();
 	}
@@ -54,7 +51,7 @@ public class DltFileQConsumer extends Thread {
 
 				try {
 
-					con = RedisConnectionFactory.getInstance().getConnection(bean.getRid());
+					con = RedisConnectionTonRoundRobinForDLTFile.getInstance().getJedisConnectionAsRoundRobin();
 
 					if (con != null) {
 

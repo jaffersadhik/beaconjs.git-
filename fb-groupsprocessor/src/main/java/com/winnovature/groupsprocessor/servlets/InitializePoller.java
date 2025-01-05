@@ -24,9 +24,7 @@ import com.winnovature.groupsprocessor.consumers.PollerGroupFilesCompleted;
 import com.winnovature.groupsprocessor.consumers.PollerGroupMasterCompleted;
 import com.winnovature.groupsprocessor.pollers.GroupsMasterPoller;
 import com.winnovature.groupsprocessor.singletons.GroupsProcessorPropertiesTon;
-import com.winnovature.groupsprocessor.singletons.RedisConnectionTon;
 import com.winnovature.groupsprocessor.utils.Constants;
-import com.winnovature.utils.dtos.RedisServerDetailsBean;
 
 @WebServlet(name = "InitializePoller", loadOnStartup = 1)
 public class InitializePoller extends GenericServlet implements Servlet {
@@ -74,39 +72,29 @@ public class InitializePoller extends GenericServlet implements Servlet {
 
 				// parse/chops user files to one/more txt files
 				int groupFileConsumersPerRedisServer = groupsProperties.getInt(Constants.GROUPS_CONSUMERS_PER_REDIS);
-				List<RedisServerDetailsBean> normalRedisServerDetails = RedisConnectionTon.getInstance()
-						.getConfigurationFromconfigParams();
-
-				Iterator<RedisServerDetailsBean> iterator = normalRedisServerDetails.iterator();
-
-				while (iterator.hasNext()) {
-					RedisServerDetailsBean bean = iterator.next();
+				
 					for (int i = 0; i < groupFileConsumersPerRedisServer; i++) {
-						groupsQConsumer = new GroupsQConsumer(bean, instanceId);
+						groupsQConsumer = new GroupsQConsumer(instanceId);
 						groupsQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsQConsumer");
 						groupsQConsumer.start();
 						if (log.isDebugEnabled())
 							log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsQConsumer" + (i + 1) + " ThreadName:"
-									+ groupsQConsumer.getName() + " bean:" + bean.getIpAddress());
+									+ groupsQConsumer.getName() );
 					}
-				} // end of REDIS servers iteration
 
 				// reads the parsed/choped files and push to redis
 				int groupSplitFileConsumersPerRedisServer = groupsProperties
 						.getInt(Constants.SPLIT_FILE_CONSUMERS_PER_REDIS);
 				String batchSize = groupsProperties.getString(Constants.REDIS_PUSH_BATCH_SIZE);
-				iterator = normalRedisServerDetails.iterator();
-				while (iterator.hasNext()) {
-					RedisServerDetailsBean bean = iterator.next();
+
 					for (int i = 0; i < groupSplitFileConsumersPerRedisServer; i++) {
-						groupsFileSplitQConsumer = new GroupsFileSplitQConsumer(bean, instanceId, batchSize);
+						groupsFileSplitQConsumer = new GroupsFileSplitQConsumer( instanceId, batchSize);
 						groupsFileSplitQConsumer.setName("Thread" + (i + 1) + "-" + "GroupsFileSplitQConsumer");
 						groupsFileSplitQConsumer.start();
 						if (log.isDebugEnabled())
 							log.debug("[InitializePoller.init()] >>>>>> STARTING GroupsFileSplitQConsumer" + (i + 1)
-									+ " ThreadName:" + groupsFileSplitQConsumer.getName() + " bean:" + bean.getIpAddress());
+									+ " ThreadName:" + groupsFileSplitQConsumer.getName());
 					}
-				} // end of REDIS servers iteration
 				
 				// updates group_master, groups_files to be completed
 				if (runGroupsPoller) {

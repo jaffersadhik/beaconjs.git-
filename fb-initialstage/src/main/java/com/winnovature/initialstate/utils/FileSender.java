@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.winnovature.initialstate.singletons.RedisConnectionTon;
+import com.winnovature.utils.singletons.RedisConnectionTonRoundRobinForCampaign;
 
 import redis.clients.jedis.Jedis;
 
@@ -28,8 +28,7 @@ public class FileSender {
 		Jedis con = null;
 		try {
 
-			con = RedisConnectionTon.getInstance()
-					.getJedisConnectionAsRoundRobin();
+			con = RedisConnectionTonRoundRobinForCampaign.getInstance().getJedisConnectionAsRoundRobin();
 
 			if (con != null) {
 				String json = convertToJSON(map);
