@@ -28,8 +28,7 @@ public class InitializePoller extends GenericServlet implements Servlet {
 		super.init();
 		
 		
-		String module=System.getenv("initialstage");
-		if(module!=null&&module.equals("1")) {
+	
 		
 
 			try {
@@ -57,7 +56,7 @@ public class InitializePoller extends GenericServlet implements Servlet {
 				log.error(className + " RESTART FP-InitialStage MODULE ");
 			}
 
-		}
+		
 		
 	}
 
