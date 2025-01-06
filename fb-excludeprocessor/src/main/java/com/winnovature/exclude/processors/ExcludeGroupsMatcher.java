@@ -32,7 +32,7 @@ public class ExcludeGroupsMatcher {
 			jedis = RedisConnectionTonRoundRobinForExcludeGroups.getInstance().getJedisConnectionAsRoundRobin();
 			redisKey = Constants.REDIS_QUEUE_EXCLUDE_GROUPS;
 			String groupKey = redisKey.replace("group_id", groupId);
-			response = jedis.smismember(groupKey, mobiles);
+			response = ((Object) jedis).smismember(groupKey, mobiles);
 		} catch (Exception e) {
 			log.error(logName + "Exception while checking if number is in exclude group", e);
 		} finally {

@@ -338,7 +338,10 @@
         <dependent-module archiveName="jbcrypt-0.4.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jedis-3.6.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/redis/clients/jedis/3.6.0/jedis-3.6.0.jar">
+        <dependent-module archiveName="jedis-4.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/redis/clients/jedis/4.0.0/jedis-4.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-20211205.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/json/json/20211205/json-20211205.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="quartz-2.3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/quartz-scheduler/quartz/2.3.2/quartz-2.3.2.jar">

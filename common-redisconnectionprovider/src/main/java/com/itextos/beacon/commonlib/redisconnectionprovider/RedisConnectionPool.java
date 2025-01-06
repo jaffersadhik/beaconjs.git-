@@ -12,7 +12,10 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.redisconnectionprovider.config.RedisConfig;
 
+import redis.clients.jedis.DefaultJedisClientConfig;
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisClientConfig;
 import redis.clients.jedis.JedisPool;
 
 class RedisConnectionPool
@@ -112,6 +115,7 @@ class RedisConnectionPool
         return null;
     }
 
+    /*
     private JedisPool createRedisPool(
             RedisConfig aRedisConfig)
     {
@@ -134,7 +138,7 @@ class RedisConnectionPool
                 if (log.isDebugEnabled())
                     log.debug("Creating pool = " + clientId);
 
-                final GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+                final GenericObjectPoolConfig<?> config = new GenericObjectPoolConfig<>();
                 config.setMaxTotal(maxpool);
                 config.setMaxIdle(maxIdle);
                 config.setMinIdle(minIdle);
@@ -143,10 +147,7 @@ class RedisConnectionPool
                 if ((pass != null) && (pass.trim().length() == 0))
                     pass = null;
 
-                return new JedisPool(config, lHostAddress, port, connectionTimeout, connectionTimeout, readTimeout, lHostAddress, pass, maxpool, clientId);
-                
-                
-    	
+                return new JedisPool(config, ip, port, connectionTimeout * 1000, readTimeout * 1000, pass, db, clientId);
             }
             catch (final Exception exp)
             {
@@ -154,7 +155,57 @@ class RedisConnectionPool
             }
         return null;
     }
+*/
+    
+    private JedisPool createRedisPool(RedisConfig aRedisConfig) {
+        if (aRedisConfig != null) {
+            try {
+                final int db = aRedisConfig.getDatabase();
+                final String ip = aRedisConfig.getIP();
+                String pass = aRedisConfig.getPassword();
+                final int port = aRedisConfig.getPort();
+                final int readTimeout = aRedisConfig.getReadTimeoutInsec();
+                final int connectionTimeout = aRedisConfig.getConnectionTimeoutInsec();
+                final int maxWaitTime = aRedisConfig.getMaxWaitTimeInsec();
+                final int maxIdle = aRedisConfig.getMaxIdle();
+                final int minIdle = aRedisConfig.getMinIdle();
+                final int maxpool = aRedisConfig.getMaxPoolSize();
+                final String lHostAddress = InetAddress.getLocalHost().getHostAddress();
+                final String clientId = "RCP-" + mType + "-" + aRedisConfig.getRedisId() + "-" + lHostAddress;
 
+                if (log.isDebugEnabled()) {
+                    log.debug("Creating pool = " + clientId);
+                }
+
+                // Create a JedisPoolConfig
+                final GenericObjectPoolConfig<Jedis> config = new GenericObjectPoolConfig<Jedis>();
+                config.setMaxTotal(maxpool);
+                config.setMaxIdle(maxIdle);
+                config.setMinIdle(minIdle);
+                config.setMaxWaitMillis(maxWaitTime * 1000L);
+
+                // Handle empty password
+                if ((pass != null) && (pass.trim().length() == 0)) {
+                    pass = null;
+                }
+
+                // Create JedisClientConfig with client name
+                JedisClientConfig jedisClientConfig = DefaultJedisClientConfig.builder()
+                        .connectionTimeoutMillis(connectionTimeout * 1000)
+                        .socketTimeoutMillis(readTimeout * 1000)
+                        .password(pass)
+                        .database(db)
+                        .clientName(clientId)
+                        .build();
+
+                // Create the JedisPool
+                return new JedisPool(config, new HostAndPort(ip, port), jedisClientConfig);
+            } catch (final Exception exp) {
+                log.error(aRedisConfig.getComponent() + " jedis pool creation problem...", exp);
+            }
+        }
+        return null;
+    }
     int getConnectionPoolCount()
     {
         return mRedisConfigCollection.size();

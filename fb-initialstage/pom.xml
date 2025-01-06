@@ -33,6 +33,8 @@
 			<groupId>beacon</groupId>
 			<artifactId>fb-utils</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>
+
 		</dependency>
 	</dependencies>
 
