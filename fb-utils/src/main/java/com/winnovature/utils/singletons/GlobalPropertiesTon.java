@@ -16,7 +16,7 @@ public class GlobalPropertiesTon {
 
 	private static GlobalPropertiesTon globalProp = new GlobalPropertiesTon();
 	private PropertiesConfiguration globalConfiguration;
-	private Configuration systemConfiguration;
+//	private Configuration systemConfiguration;
 
 	final static String GLOBAL_PROPERTY = "global.properties.loc";
 
@@ -28,8 +28,8 @@ public class GlobalPropertiesTon {
 		if (log.isDebugEnabled())
 			log.debug("LOADING GLOBAL PROPERTIES....");
 
-		systemConfiguration = new SystemConfiguration();
-		String globalPropertiesLocation = (String) systemConfiguration.getProperty(GLOBAL_PROPERTY);
+	//	systemConfiguration = new SystemConfiguration();
+		String globalPropertiesLocation =null;// (String) systemConfiguration.getProperty(GLOBAL_PROPERTY);
 		globalPropertiesLocation="/fileprocessor/global.properties_"+System.getenv("propertyip");
 		if (StringUtils.isNotEmpty(globalPropertiesLocation)) {
 			if (log.isDebugEnabled())
