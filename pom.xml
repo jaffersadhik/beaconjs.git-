@@ -384,6 +384,8 @@
 
    	   	<module>platform-dnsingle</module>
    	   	<module>platform-dnaging</module>
+   	   	<module>smppclient</module>
+   	   	<module>smppclient2</module>
   </modules>
   
 

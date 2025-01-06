@@ -41,7 +41,7 @@ public abstract class AbstractAutoRefreshInMemoryProcessor
     {
     	String module=System.getenv("module");
     	
-    	if(module.equals("dbgwejb")) {
+    	if(module==null||module.equals("dbgwejb")) {
     		
     		 getDataFromDB();
     		 
