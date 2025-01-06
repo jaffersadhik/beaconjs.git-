@@ -1,4 +1,4 @@
-package smppclient2;
+/*package smppclient2;
 
 import java.util.concurrent.TimeUnit;
 
@@ -107,4 +107,4 @@ public class SmppClientExample {
             logger.warn("Channel unexpectedly closed");
         }
     }
-}
+}*/
