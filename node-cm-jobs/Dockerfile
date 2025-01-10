@@ -1,4 +1,6 @@
+
 FROM node:16
+ENV TZ="Asia/Kolkata"
 
 WORKDIR /usr/src/app
 

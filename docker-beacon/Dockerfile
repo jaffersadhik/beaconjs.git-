@@ -24,6 +24,8 @@ COPY ./target/common/midconfig.properties /midconfig.properties
 COPY ./target/common/messageremove.properties /messageremove.properties
 COPY ./target/common/kafka-custom.properties /kafka-custom.properties
 COPY ./target/common/jndi.properties /jndi.properties
+COPY ./target/common/jettyserver.properties /jettyserver.properties
+
 COPY ./target/common/internal-ui.properties /internal-ui.properties
 COPY ./target/common/inmem-refresh-interval.properties /inmem-refresh-interval.properties
 COPY ./target/common/http-connector.properties /http-connector.properties

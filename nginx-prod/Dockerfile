@@ -1,6 +1,7 @@
 FROM nginx:latest
 
 
+ENV TZ="Asia/Kolkata"
 
 COPY ./nginx /usr/share/nginx
 

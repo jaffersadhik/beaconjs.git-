@@ -348,7 +348,7 @@ public abstract class BaseMessage
                     {
                         final String                  s                       = "Middleware constant is not availale for the key '" + key + "'. Check the configuration ...";
                         final ItextosRuntimeException ltextosRuntimeException = new ItextosRuntimeException(s);
-                        log.error(s, ltextosRuntimeException);
+                     //   log.error(s, ltextosRuntimeException);
                     }
                     messageAttributes.put(key, entry.getValue());
                 }

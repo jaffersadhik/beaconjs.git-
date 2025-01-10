@@ -2,6 +2,8 @@ FROM node:16
 
 WORKDIR /usr/src/app
 
+ENV TZ="Asia/Kolkata"
+
 # Copy package.json and yarn.lock to install dependencies
 COPY package.json yarn.lock ./
 
