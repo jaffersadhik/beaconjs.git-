@@ -70,6 +70,7 @@ COPY ./target/profile/digitalocean1/kafka-producer.properties_do1 /kafka-produce
 COPY ./target/profile/digitalocean1/kafka-consumer.properties_do1 /kafka-consumer.properties_do1
 COPY ./target/profile/digitalocean1/common-db.properties_do1 /common-db.properties_do1
 COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.properties_do1
+COPY ./target/profile/digitalocean1/req_receiver.properties_do1 /req_receiver.properties_do1
 
 
 
@@ -77,6 +78,7 @@ COPY ./target/profile/digitalocean2/kafka-producer.properties_do2 /kafka-produce
 COPY ./target/profile/digitalocean2/kafka-consumer.properties_do2 /kafka-consumer.properties_do2
 COPY ./target/profile/digitalocean2/common-db.properties_do2 /common-db.properties_do2
 COPY ./target/profile/digitalocean2/elasticsearch.properties_do2 /elasticsearch.properties_do2
+COPY ./target/profile/digitalocean1/req_receiver.properties_do2 /req_receiver.properties_do2
 
 
 
@@ -84,6 +86,7 @@ COPY ./target/profile/digitalocean3/kafka-producer.properties_do3 /kafka-produce
 COPY ./target/profile/digitalocean3/kafka-consumer.properties_do3 /kafka-consumer.properties_do3
 COPY ./target/profile/digitalocean3/common-db.properties_do3 /common-db.properties_do3
 COPY ./target/profile/digitalocean3/elasticsearch.properties_do3 /elasticsearch.properties_do3
+COPY ./target/profile/digitalocean1/req_receiver.properties_do3 /req_receiver.properties_do3
 
 COPY ./target/mainmodule-1.0-executable.jar /mainmodule-1.0-executable.jar
 
