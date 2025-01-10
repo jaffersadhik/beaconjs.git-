@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                        
+                                            
+    
     
     
     
@@ -9,7 +10,8 @@
     
     
     <wb-module deploy-name="docker-beaconweb-1.0">
-                                                                                
+                                                                                        
+        
         
         
         
@@ -19,7 +21,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                                                                
+                                                                                        
+        
         
         
         
@@ -296,16 +299,25 @@
         <dependent-module archiveName="curvesapi-1.06.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.06/curvesapi-1.06.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jetty-servlet-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-servlet/9.4.40.v20210413/jetty-servlet-9.4.40.v20210413.jar">
+        <dependent-module archiveName="jetty-server-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-server/11.0.1/jetty-server-11.0.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jetty-security-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-security/9.4.40.v20210413/jetty-security-9.4.40.v20210413.jar">
+        <dependent-module archiveName="jetty-jakarta-servlet-api-5.0.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/toolchain/jetty-jakarta-servlet-api/5.0.2/jetty-jakarta-servlet-api-5.0.2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jetty-util-ajax-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-util-ajax/9.4.40.v20210413/jetty-util-ajax-9.4.40.v20210413.jar">
+        <dependent-module archiveName="jetty-io-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-io/11.0.1/jetty-io-11.0.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jetty-util-9.4.40.v20210413.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-util/9.4.40.v20210413/jetty-util-9.4.40.v20210413.jar">
+        <dependent-module archiveName="jetty-servlet-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-servlet/11.0.1/jetty-servlet-11.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jetty-security-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-security/11.0.1/jetty-security-11.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jetty-http-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-http/11.0.1/jetty-http-11.0.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jetty-util-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-util/11.0.1/jetty-util-11.0.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="simpleclient_httpserver-0.9.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/io/prometheus/simpleclient_httpserver/0.9.0/simpleclient_httpserver-0.9.0.jar">
@@ -1094,18 +1106,6 @@
         <dependent-module archiveName="queryprocessor-parent-1.0.jar" deploy-path="/lib" handle="module:/resource/queryprocessor-parent/queryprocessor-parent">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jetty-server-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-server/11.0.1/jetty-server-11.0.1.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jetty-jakarta-servlet-api-5.0.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/toolchain/jetty-jakarta-servlet-api/5.0.2/jetty-jakarta-servlet-api-5.0.2.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jetty-io-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-io/11.0.1/jetty-io-11.0.1.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="jetty-http-11.0.1.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/eclipse/jetty/jetty-http/11.0.1/jetty-http-11.0.1.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="swagger-parser-2.0.26.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/io/swagger/parser/v3/swagger-parser/2.0.26/swagger-parser-2.0.26.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -1244,7 +1244,8 @@
         <dependent-module archiveName="dlrquery-dlrqueryprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/dlrquery-dlrqueryprocess/dlrquery-dlrqueryprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                                            
+                                                                                    
+    
     
     
     
@@ -1254,7 +1255,8 @@
     
     
     </wb-module>
-                                    
+                                        
+
 
 
 
