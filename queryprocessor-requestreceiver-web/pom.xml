@@ -7,4 +7,13 @@
   </parent>
   <artifactId>queryprocessor-requestreceiver-web</artifactId>
   <packaging>war</packaging>
+  <dependencies>
+  
+  <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>queryprocessor-requestreceiver</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+  </dependencies>
 </project>
