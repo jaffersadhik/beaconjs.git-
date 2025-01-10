@@ -32,10 +32,10 @@ import com.itextos.beacon.queryprocessor.databaseconnector.DBConnectionProvider;
 import com.itextos.beacon.queryprocessor.databaseconnector.ResultSetConverter;
 import com.itextos.beacon.queryprocessor.databaseconnector.SQLStatementExecutor;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Get data from MARIADB or POSTGRES
