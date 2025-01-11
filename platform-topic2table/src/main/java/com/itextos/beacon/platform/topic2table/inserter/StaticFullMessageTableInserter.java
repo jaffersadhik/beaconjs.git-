@@ -57,7 +57,7 @@ public class StaticFullMessageTableInserter
         con.setAutoCommit(false);
 
         if (log.isDebugEnabled())
-            log.debug("Creating prepared statment for the Query : '" + mInsertQuery + "'");
+            log.debug("Creating prepared statment for the Query : '" + mFullMessageInsertQuery + "'");
 
         final PreparedStatement pstmt = con.prepareStatement(mFullMessageInsertQuery);
         return new ConnectionAndStatement(tableID, con, pstmt);

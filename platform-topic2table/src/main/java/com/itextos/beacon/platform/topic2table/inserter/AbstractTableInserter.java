@@ -47,16 +47,13 @@ abstract class AbstractTableInserter
     private final boolean             toCheckTableNameFinder;
     protected final List<BaseMessage> mMessagesToInsert;
     protected final List<String>      mAllColumnNames             = new ArrayList<>();
-    protected final List<String>      mFullMessageAllColumnNames             = new ArrayList<>();
 
     protected final List<String>      mAllMiddlewareConstantNames = new ArrayList<>();
     protected final List<Integer>     mAllColumnIndices           = new ArrayList<>();
 
     protected TableInserterInfo       mTableInserterInfo;
-    protected TableInserterInfo       mFullmsgTableInserterInfo;
 
     protected String                  mInsertQuery;
-    protected String                  mFullMessageInsertQuery;
 
     protected ITablenameFinder        mTableNameFinder;
 
@@ -80,11 +77,7 @@ abstract class AbstractTableInserter
         getTableName();
         buildInsertQuery();
         
-        if(mTableInsereterId==Table2DBInserterId.SUBMISSION) {
-            getTableInsertDetailsForFullMessage();
-            getFullMessageTableName();
-            buildFullMessageInsertQuery();
-        }
+       
     }
 
     private void buildInsertQuery()
@@ -100,18 +93,7 @@ abstract class AbstractTableInserter
         mInsertQuery = buildInsertSQL();
     }
 
-    private void buildFullMessageInsertQuery()
-    {
-        final Map<Integer, ColumnInfo>         allColumnInfo           = ColumnInfoHandler.getInstance().getColumnInfo(mFullmsgTableInserterInfo.getDatabaseName(), mFullmsgTableInserterInfo.getTableName());
-        final Map<String, ReplaceIgnoreColumn> lReplaceorIgnoreColumns = mFullmsgTableInserterInfo.getReplaceorIgnoreColumns();
-
-        if (lReplaceorIgnoreColumns.isEmpty())
-            loadStaticColumnInfo(allColumnInfo);
-        else
-            loadDynamicColumnInfo(allColumnInfo, lReplaceorIgnoreColumns);
-
-        mFullMessageInsertQuery = buildFullMessageInsertSQL();
-    }
+  
     private void loadStaticColumnInfo(
             Map<Integer, ColumnInfo> aAllColumnInfo)
     {
@@ -179,30 +161,6 @@ abstract class AbstractTableInserter
     }
 
     
-    private String buildFullMessageInsertSQL()
-    {
-        final String        tableName = getFullMessageTableName();
-        final StringBuilder sbQuery   = new StringBuilder("insert into ");
-        sbQuery.append(tableName);
-
-        final StringBuffer sbColumns = new StringBuffer(" (");
-        final StringBuffer sbCommos  = new StringBuffer(" values (");
-
-        for (int index = 0, size = mFullMessageAllColumnNames.size(); index < size; index++)
-            if ((index + 1) == size)
-            {
-                sbColumns.append(mFullMessageAllColumnNames.get(index)).append(") ");
-                sbCommos.append("?)");
-            }
-            else
-            {
-                sbColumns.append(mFullMessageAllColumnNames.get(index)).append(", ");
-                sbCommos.append("?,");
-            }
-
-        sbQuery.append(sbColumns).append(sbCommos);
-        return sbQuery.toString();
-    }
     
     private String getTableName()
     {
@@ -215,17 +173,7 @@ abstract class AbstractTableInserter
         return TABLE_NAME;
     }
     
-    private String getFullMessageTableName()
-    {
-        final String lTableNameFinderClassName = mFullmsgTableInserterInfo.getTableNameFinderClass();
-
-        if (!toCheckTableNameFinder || lTableNameFinderClassName.equals(""))
-            return mTableInserterInfo.getTableName();
-
-        mTableNameFinder = T2TUtility.getTableNameFinder(mTableInserterInfo.getTableNameFinderClass());
-        return TABLE_NAME;
-    }
-
+   
     private void getTableInsertDetails()
     {
         final TableInserterInfoCollection tiic = (TableInserterInfoCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.TABLE_INSERTER_INFO);
@@ -237,17 +185,7 @@ abstract class AbstractTableInserter
         }
     }
     
-    private void getTableInsertDetailsForFullMessage()
-    {
-        final TableInserterInfoCollection tiic = (TableInserterInfoCollection) InmemoryLoaderCollection.getInstance().getInmemoryCollection(InmemoryId.TABLE_INSERTER_INFO);
-
-        mFullmsgTableInserterInfo = tiic.getTableInserterInfo(Table2DBInserterId.FULL_MESSAGE);
-        if (mFullmsgTableInserterInfo == null) {
-         //   throw new ItextosRuntimeException("Cannot proceed with '" + mTableInsereterId + "' as not data found for it.");
-           log.error("Cannot proceed with '" + Table2DBInserterId.FULL_MESSAGE + "' as not data found for it."); 
-           ErrorLog.log("Cannot proceed with '" + Table2DBInserterId.FULL_MESSAGE + "' as not data found for it.");
-        }
-    }
+    
 
     @Override
     public ExceptionHandlerType handleException(
