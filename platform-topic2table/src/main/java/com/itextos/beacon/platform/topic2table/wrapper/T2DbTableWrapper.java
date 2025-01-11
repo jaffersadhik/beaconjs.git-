@@ -18,6 +18,8 @@ import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollection;
+import com.itextos.beacon.platform.topic2table.es.DeliveriesK2ES;
+import com.itextos.beacon.platform.topic2table.es.SubmissionK2ES;
 import com.itextos.beacon.platform.topic2table.inserter.DynamicFullMessageTableInserter;
 import com.itextos.beacon.platform.topic2table.inserter.DynamicTableInserter;
 import com.itextos.beacon.platform.topic2table.inserter.ITableInserter;
@@ -46,10 +48,14 @@ public class T2DbTableWrapper
 
     private final BlockingQueue<BaseMessage> messagesInmemQueue     = new LinkedBlockingQueue<>(MAX_QUEUE_SIZE);
 
- private final TimedProcessor             timedProcessor;
+    private final TimedProcessor             timedProcessor;
 
     private boolean                          canContinue            = true;
  
+    private final SubmissionK2ES submissionK2ES =new SubmissionK2ES();
+    
+    private final DeliveriesK2ES deliveriesK2ES =new DeliveriesK2ES();
+
     public T2DbTableWrapper(
             Component aComponent,
             Table2DBInserterId aTableInsertId)
@@ -62,6 +68,7 @@ public class T2DbTableWrapper
         loadBasicInfo();
         if(mTableInsertId == Table2DBInserterId.SUBMISSION) {
         	loadFullMessageBasicInfo();
+        	
         }
         timedProcessor = new TimedProcessor("T2DbTableWrapper : "+mComponent.getKey(), this, mSleepTimeSecs);
  
@@ -175,7 +182,12 @@ public class T2DbTableWrapper
                        log.debug("Calling process method in Processor '" + inserter.getClass().getName() + "'");
 
                    fullmessageinserter.process();
+                   
+                   submissionK2ES.pushtoElasticSearch(toProcess);
 
+            }else if(mTableInsertId==Table2DBInserterId.DELIVERIES){
+            	
+            	deliveriesK2ES.pushtoElasticSearch(toProcess);
             }
             if (log.isDebugEnabled())
                 log.debug("Completed processing the records");
