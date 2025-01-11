@@ -11,11 +11,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.InterfaceType;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.ErrorObject;
+import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.messageprocessor.process.MessageProcessor;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.errorlog.ErrorLog;
@@ -32,12 +34,12 @@ import com.itextos.beacon.platform.topic2table.utils.ConnectionAndStatement;
 import com.itextos.beacon.platform.topic2table.utils.ExceptionHandlerType;
 import com.itextos.beacon.platform.topic2table.utils.T2TUtility;
 
-abstract class AbstractTableInserter
+abstract class AbstractFullMessageTableInserter
         implements
         ITableInserter
 {
 
-    private static final Log          log                         = LogFactory.getLog(AbstractTableInserter.class);
+    private static final Log          log                         = LogFactory.getLog(AbstractFullMessageTableInserter.class);
     protected static final String     TABLE_NAME                  = "{0}";
     protected static final int        BATCH_SIZE                  = 1000;
 
@@ -60,7 +62,7 @@ abstract class AbstractTableInserter
 
     protected ITablenameFinder        mTableNameFinder;
 
-    protected AbstractTableInserter(
+    protected AbstractFullMessageTableInserter(
             Component aActualComponent,
             Table2DBInserterId aTableInserterId,
             List<BaseMessage> aMessagesToInsert,
@@ -274,6 +276,8 @@ abstract class AbstractTableInserter
             {
                 if (log.isDebugEnabled())
                     log.debug("Processing current message : '" + currentMessage + "'");
+                
+                if(isFullMessageInsertRecord(currentMessage)) {
 
                 final ConnectionAndStatement connectionAndStatment = getConnectionAndStatement(currentMessage);
                 final PreparedStatement      pstmt                 = connectionAndStatment.getStatement();
@@ -295,6 +299,8 @@ abstract class AbstractTableInserter
 
                     pstmt.executeBatch();
                     pstmt.clearBatch();
+                }
+                
                 }
             } // end of for
 
@@ -346,7 +352,28 @@ abstract class AbstractTableInserter
             log.debug("Completed the process method.");
     }
 
-    @Override
+    protected boolean isFullMessageInsertRecord(BaseMessage currentMessage) {
+    	
+    	 final int retryAttempt = ((SubmissionObject)currentMessage).getRetryAttempt();
+    	 boolean isFirstPart=false;
+    	  
+         final int curPartNo = ((SubmissionObject)currentMessage).getMessagePartNumber();
+
+         boolean  isInterfaceReject = ((SubmissionObject)currentMessage).isInterfaceRejected();
+
+          if (((InterfaceType.SMPP == ((SubmissionObject)currentMessage).getInterfaceType()) && isInterfaceReject) || ((curPartNo == 0) || (curPartNo == 1))) {
+              isFirstPart = true;
+          }
+    	  
+          if (isFirstPart && (retryAttempt <= 0)) {
+             return true;
+          }
+    
+          return false;
+    }
+    
+
+	@Override
     public void processIndividualMessages(
             boolean aTrimIt)
     {

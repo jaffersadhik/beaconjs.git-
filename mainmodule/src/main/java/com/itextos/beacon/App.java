@@ -816,7 +816,7 @@ public class App {
 		
 		com.itextos.beacon.platform.subt2tb.StartApplication.main(args);
 		com.itextos.beacon.platform.dnt2tb.StartApplication.main(args);
-		com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
+	//	com.itextos.beacon.platform.fullmsgt2tb.StartApplication.main(args);
 	}
 
 	private static void startDigitalT2DB(String[] args) {

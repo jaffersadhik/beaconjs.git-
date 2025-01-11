@@ -71,7 +71,7 @@ public class SubmissionProcess
 
         encryptMessageAndMobile();
 
-        sendToFullMessageTopic(sb);
+   //     sendToFullMessageTopic(sb);
 
         updateAlpha();
 
@@ -273,8 +273,9 @@ public class SubmissionProcess
     {
         // Need to send to Full Message only if the message is multipart.
         final int retryAttempt = mSubmissionObject.getRetryAttempt();
-        if (isFirstPart && (retryAttempt <= 0))
+        if (isFirstPart && (retryAttempt <= 0)) {
             sendToOtherTopic(NextTopic.FULL_MESSAGE_INSERT,sb);
+        }
     }
 
     private void encryptMessageAndMobile()

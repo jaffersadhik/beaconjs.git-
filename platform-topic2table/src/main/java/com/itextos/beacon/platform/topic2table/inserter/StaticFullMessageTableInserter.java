@@ -16,16 +16,16 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.platform.topic2table.utils.ConnectionAndStatement;
 
-public class StaticTableInserter
+public class StaticFullMessageTableInserter
         extends
-        AbstractTableInserter
+        AbstractFullMessageTableInserter
 {
 
-    private static final Log       log                   = LogFactory.getLog(StaticTableInserter.class);
+    private static final Log       log                   = LogFactory.getLog(StaticFullMessageTableInserter.class);
 
     private ConnectionAndStatement connectionAndStatment = null;
 
-    public StaticTableInserter(
+    public StaticFullMessageTableInserter(
             Component aActualComponent,
             Table2DBInserterId aTableInserterId,
             List<BaseMessage> aMessagesToInsert)
@@ -46,20 +46,20 @@ public class StaticTableInserter
     private ConnectionAndStatement createConnectionStatement()
             throws Exception
     {
-         String tableID = CommonUtility.combine(mTableInserterInfo.getJndiInfo().getId() + "", mTableInserterInfo.getTableName());
+         String tableID = CommonUtility.combine(mFullmsgTableInserterInfo.getJndiInfo().getId() + "", mFullmsgTableInserterInfo.getTableName());
 
 
          
         if (log.isDebugEnabled())
             log.debug("Creating connection for the JNDIInfoID :'" + tableID + "'");
 
-        final Connection con = DBDataSourceFactory.getConnection(mTableInserterInfo.getJndiInfo());
+        final Connection con = DBDataSourceFactory.getConnection(mFullmsgTableInserterInfo.getJndiInfo());
         con.setAutoCommit(false);
 
         if (log.isDebugEnabled())
             log.debug("Creating prepared statment for the Query : '" + mInsertQuery + "'");
 
-        final PreparedStatement pstmt = con.prepareStatement(mInsertQuery);
+        final PreparedStatement pstmt = con.prepareStatement(mFullMessageInsertQuery);
         return new ConnectionAndStatement(tableID, con, pstmt);
     }
 
