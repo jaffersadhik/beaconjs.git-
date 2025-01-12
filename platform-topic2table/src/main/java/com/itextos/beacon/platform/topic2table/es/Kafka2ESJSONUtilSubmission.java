@@ -15,7 +15,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
 
-public class Kafka2ESJSONUtil
+public class Kafka2ESJSONUtilSubmission
 {
 
     public static int getRecvTimeHour(

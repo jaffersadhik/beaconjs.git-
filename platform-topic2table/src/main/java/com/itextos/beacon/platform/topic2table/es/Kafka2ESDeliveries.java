@@ -108,10 +108,10 @@ public class Kafka2ESDeliveries
             try
             {
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    dataJSON = Kafka2ESJSONUtil.buildSubJSON(iMsg);
+                    dataJSON = Kafka2ESJSONUtilDeliveries.buildSubJSON(iMsg);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        dataJSON = Kafka2ESJSONUtil.buildDelJSON(iMsg);
+                        dataJSON = Kafka2ESJSONUtilDeliveries.buildDelJSON(iMsg);
             }
             catch (final Exception ex)
             {
@@ -144,10 +144,10 @@ public class Kafka2ESDeliveries
             {
                 JSONObject fmsgJSON = null;
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    fmsgJSON = Kafka2ESJSONUtil.buildSubFMSGJSON(dataJSON, baseMsgId);
+                    fmsgJSON = Kafka2ESJSONUtilDeliveries.buildSubFMSGJSON(dataJSON, baseMsgId);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        fmsgJSON = Kafka2ESJSONUtil.buildDelFMSGJSON(dataJSON, baseMsgId);
+                        fmsgJSON = Kafka2ESJSONUtilDeliveries.buildDelFMSGJSON(dataJSON, baseMsgId);
 
                 if (fmsgJSON != null)
                 {
