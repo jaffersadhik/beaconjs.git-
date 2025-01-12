@@ -52,10 +52,7 @@ public class T2DbTableWrapper
 
     private boolean                          canContinue            = true;
  
-    private final SubmissionK2ES submissionK2ES =new SubmissionK2ES();
-    
-    private final DeliveriesK2ES deliveriesK2ES =new DeliveriesK2ES();
-
+  
     public T2DbTableWrapper(
             Component aComponent,
             Table2DBInserterId aTableInsertId)
@@ -183,11 +180,7 @@ public class T2DbTableWrapper
 
                    fullmessageinserter.process();
                    
-                   submissionK2ES.pushtoElasticSearch(toProcess);
 
-            }else if(mTableInsertId==Table2DBInserterId.DELIVERIES){
-            	
-            	deliveriesK2ES.pushtoElasticSearch(toProcess);
             }
             if (log.isDebugEnabled())
                 log.debug("Completed processing the records");
