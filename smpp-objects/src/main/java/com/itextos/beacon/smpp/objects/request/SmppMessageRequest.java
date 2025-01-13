@@ -91,6 +91,8 @@ public class SmppMessageRequest
         mEsmClass           = getStringFromJson(lJsonObject, MiddlewareConstant.MW_SMPP_ESM_CLASS);
         mDltEntityId        = getStringFromJson(lJsonObject, MiddlewareConstant.MW_DLT_ENTITY_ID);
         mDltTemplateId      = getStringFromJson(lJsonObject, MiddlewareConstant.MW_DLT_TEMPLATE_ID);
+        mDltTelemarketerId  = getStringFromJson(lJsonObject, MiddlewareConstant.MW_CLIENT_MESSAGE_ID);
+
         mTotalParts         = getIntFromJson(lJsonObject, MiddlewareConstant.MW_MSG_TOTAL_PARTS);
         mPartNumber         = getIntFromJson(lJsonObject, MiddlewareConstant.MW_MSG_PART_NUMBER);
         mUdhReferenceNumber = getStringFromJson(lJsonObject, MiddlewareConstant.MW_CONCAT_REF_NUM);
@@ -488,6 +490,7 @@ public class SmppMessageRequest
         lJsonObject.addProperty(MiddlewareConstant.MW_SMPP_SYSTEM_ID.getKey(), mSystemId);
         lJsonObject.addProperty(MiddlewareConstant.MW_SMPP_BIND_TYPE.getKey(), mBindType);
         lJsonObject.addProperty(MiddlewareConstant.MW_CLIENT_MESSAGE_ID.getKey(), mCustMid);
+        lJsonObject.addProperty(MiddlewareConstant.MW_DLT_TMA_ID.getKey(), mCustMid);
 
         if (log.isDebugEnabled())
             log.debug("Concat Json String : " + lJsonObject);

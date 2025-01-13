@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.redisconnectionprovider.RedisConnectionProvider;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.errorlog.ConcateRedisLog;
 import com.itextos.beacon.errorlog.ErrorLog;
 
 import redis.clients.jedis.Jedis;
@@ -72,6 +73,8 @@ class RedisOperation
                 Transaction trans = jedis.multi();)
 
         {
+        	
+        	ConcateRedisLog.getInstance().log("aMessage :  "+ aMessage);
             final Response<Long> lHincrBy = trans.hincrBy(REDIS_KEY_RECEIVED, aCliDestRefNumber, 1);
             final Response<Long> lHset    = trans.hsetnx(REDIS_KEY_CONCATE_ALL, aMessageKey, aMessage);
 

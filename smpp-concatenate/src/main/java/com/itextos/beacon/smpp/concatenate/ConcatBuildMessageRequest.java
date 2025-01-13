@@ -71,6 +71,7 @@ public class ConcatBuildMessageRequest
         lMessageRequest.setSmppInstance(aSmppMessageRequest.getSmppInstance());
         lMessageRequest.setClientMessageId(aSmppMessageRequest.getCustMid());
 
+        
         if ((lRouteType != null) && (lRouteType == RouteType.INTERNATIONAL))
             lMessageRequest.setCountry("");
         else
