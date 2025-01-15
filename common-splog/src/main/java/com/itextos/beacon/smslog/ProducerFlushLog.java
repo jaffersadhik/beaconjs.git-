@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import com.itextos.beacon.errorlog.FolderCreation;
+
 
 public class ProducerFlushLog {
 
@@ -18,7 +20,11 @@ public class ProducerFlushLog {
          int count = 1; // N
     	
 
-        String logFileNamePattern = "/opt/jboss/wildfly/logs/producer/producerflush.%g.log";
+         String folder="/opt/jboss/wildfly/logs/producer";
+  
+         FolderCreation.foldercreaton(folder);
+         
+         String logFileNamePattern = folder+"/producerflush.%g.log";
 
         Level loglevel=Level.INFO;
         
