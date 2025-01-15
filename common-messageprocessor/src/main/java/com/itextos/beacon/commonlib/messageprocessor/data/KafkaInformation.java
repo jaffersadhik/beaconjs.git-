@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
+import com.itextos.beacon.commonlib.constants.InterfaceGroup;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
 import com.itextos.beacon.commonlib.kafkaservice.common.KafkaCustomProperties;
 import com.itextos.beacon.commonlib.kafkaservice.consumer.Consumer;
@@ -116,7 +117,12 @@ public class KafkaInformation
             topicName = KafkaDataLoader.getInstance().getDefaultTopicName(aProducerKafkaRequest.getNextComponent(), ClusterType.INTL);
         }else {
         
-        	topicName = KafkaDataLoader.getInstance().getDefaultTopicName(aProducerKafkaRequest.getNextComponent(), aProducerKafkaRequest.getPlatformCluster());
+        	if(aProducerKafkaRequest.getInterfaceGroup()==InterfaceGroup.UI) {
+                topicName = KafkaDataLoader.getInstance().getDefaultTopicName(aProducerKafkaRequest.getNextComponent(), ClusterType.GUI);
+        	}else {
+        		topicName = KafkaDataLoader.getInstance().getDefaultTopicName(aProducerKafkaRequest.getNextComponent(), aProducerKafkaRequest.getPlatformCluster());
+        	}
+        	
         }
 
         topicName = KafkaDataLoaderUtility.updateTopicName(topicName);
@@ -134,12 +140,22 @@ public class KafkaInformation
         String topicName = null;
         
         if (aProducerKafkaRequest.isIntlFlag()) {
+        	
         	topicName = KafkaDataLoader.getInstance().getTopicNameBasedOnPriorityForProducer(aProducerKafkaRequest.getNextComponent(),  ClusterType.INTL,
                     aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());      
         }else {
         
-        	topicName = KafkaDataLoader.getInstance().getTopicNameBasedOnPriorityForProducer(aProducerKafkaRequest.getNextComponent(), aProducerKafkaRequest.getPlatformCluster(),
-                    aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());
+        	if(aProducerKafkaRequest.getInterfaceGroup()==InterfaceGroup.UI) {
+        		
+        		topicName = KafkaDataLoader.getInstance().getTopicNameBasedOnPriorityForProducer(aProducerKafkaRequest.getNextComponent(), ClusterType.GUI,
+        	                        aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());
+          
+        	}else {
+        		topicName = KafkaDataLoader.getInstance().getTopicNameBasedOnPriorityForProducer(aProducerKafkaRequest.getNextComponent(), aProducerKafkaRequest.getPlatformCluster(),
+                        aProducerKafkaRequest.getInterfaceGroup(), aProducerKafkaRequest.getMessageType(), aProducerKafkaRequest.getMessagePriority());
+            		
+        	}
+        	
         }
 
         if(topicName==null) {

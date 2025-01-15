@@ -12,6 +12,7 @@ public enum ClusterType
     TRANSACTION("trans"),
     OTP("otp"),
     INTL("intl"),
+    GUI("gui"),
     COMMON("common");
 
     ClusterType(
