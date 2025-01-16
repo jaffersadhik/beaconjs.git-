@@ -1,7 +1,9 @@
 package com.itextos.beacon.commonlib.pwdencryption;
 
+import java.net.URLEncoder;
 import java.util.Base64;
 
+import com.itextos.beacon.commonlib.constants.Constants;
 import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 
 public class Encryptor
@@ -196,15 +198,16 @@ public class Encryptor
 
         	 String lDbPassword = getDecryptedDbPassword("N5mIleJjtYx2EFg8+cd3uFpGaUgxdEpKQjde+JBw9AjmsAX7iQEVAvlI");
 
-           System.out.println(lDbPassword);//Sy5Cf8@123
+      //     System.out.println(lDbPassword);//Sy5Cf8@123
 
 
      lDbPassword = getDecryptedDbPassword("YSrU1+RIM5hwN+ycQQdy4XhlOGhoU3RrYmtELgjZwSBQBXSHJ8AUHk/I");
 
       //    System.out.println(lDbPassword);//itextos@202110
 
-           
-            
+     final String lEncodedString = URLEncoder.encode(String.valueOf("a"), Constants.ENCODER_FORMAT);
+   
+     System.out.println(lEncodedString);
         }
         catch (final Exception e)
         {
