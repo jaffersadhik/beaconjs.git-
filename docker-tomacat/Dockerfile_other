@@ -57,7 +57,7 @@ COPY server.xml /opt/tomcat/conf/server.xml
 #COPY ./target/platform-dnr-1.0.war /opt/tomcat/webapps/dnr.war
 
 
-COPY ./target/queryprocessor-requestreceiver-web-1.0.war /opt/tomcat/webapps/qpr.war
+#COPY ./target/queryprocessor-requestreceiver-web-1.0.war /opt/tomcat/webapps/qpr.war
 COPY ./target/platform-messagetoolweb-1.0.war /opt/tomcat/webapps/msgtool.war
 COPY ./target/platform-prepaiduIweb-1.0.war /opt/tomcat/webapps/prepaiddata.war
 COPY ./target/dlrquery-dlrqueryweb-1.0.war /opt/tomcat/webapps/dlrquery.war
