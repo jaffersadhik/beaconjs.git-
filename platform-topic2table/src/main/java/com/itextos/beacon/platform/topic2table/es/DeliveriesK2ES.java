@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.errorlog.K2ESLog;
 
-public class DeliveriesK2ES
+public class DeliveriesK2ES implements K2ES
 {
 
     private static final K2ESLog                              log                     = K2ESLog.getInstance();

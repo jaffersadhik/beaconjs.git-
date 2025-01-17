@@ -19,6 +19,7 @@ import com.itextos.beacon.inmemory.loader.process.InmemoryId;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollection;
 import com.itextos.beacon.platform.topic2table.es.DeliveriesK2ES;
+import com.itextos.beacon.platform.topic2table.es.K2ES;
 import com.itextos.beacon.platform.topic2table.es.SubmissionK2ES;
 import com.itextos.beacon.platform.topic2table.inserter.DynamicFullMessageTableInserter;
 import com.itextos.beacon.platform.topic2table.inserter.DynamicTableInserter;
@@ -52,6 +53,7 @@ public class T2DbTableWrapper
 
     private boolean                          canContinue            = true;
  
+    private K2ES k2es=null;
   
     public T2DbTableWrapper(
             Component aComponent,
@@ -64,8 +66,14 @@ public class T2DbTableWrapper
         
         loadBasicInfo();
         if(mTableInsertId == Table2DBInserterId.SUBMISSION) {
+        	
         	loadFullMessageBasicInfo();
         	
+        	k2es=new SubmissionK2ES();
+        	
+        }else if(mTableInsertId == Table2DBInserterId.DELIVERIES) {
+        	
+        	k2es=new DeliveriesK2ES();
         }
         timedProcessor = new TimedProcessor("T2DbTableWrapper : "+mComponent.getKey(), this, mSleepTimeSecs);
  
@@ -180,7 +188,14 @@ public class T2DbTableWrapper
 
                    fullmessageinserter.process();
                    
-
+                   if(k2es!=null) {
+                   k2es.pushtoElasticSearch(toProcess);
+                   }
+            }else if(mTableInsertId==Table2DBInserterId.DELIVERIES) {
+            	
+            	 if(k2es!=null) {
+                     k2es.pushtoElasticSearch(toProcess);
+                     }
             }
             if (log.isDebugEnabled())
                 log.debug("Completed processing the records");
