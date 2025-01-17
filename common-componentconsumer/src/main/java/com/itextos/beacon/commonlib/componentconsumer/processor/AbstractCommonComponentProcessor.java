@@ -130,7 +130,15 @@ public abstract class AbstractCommonComponentProcessor
                 if (isNoRecordAvailable) {
                     TopicLog.getInstance(mTopicName).log("goto sleep mSleepInMillis : "+mSleepInMillis+"  mTopicName : "+mTopicName +" : "+new Date());
 
-                    CommonUtility.sleepForAWhile(mSleepInMillis);
+                    
+                    if(mComponent==Component.IC) {
+                    	
+                        CommonUtility.sleepForAWhile(100);
+
+                    }else {
+                    	
+                        CommonUtility.sleepForAWhile(1000);
+                    }
                 }
             }
            
