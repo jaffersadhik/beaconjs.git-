@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                            
+                                
+    
     
     
     
     
     
     <wb-module deploy-name="docker-fb-1.0">
-                                                        
+                                                                
+        
         
         
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                                        
+                                                                
+        
         
         
         
@@ -650,9 +653,6 @@
         <dependent-module archiveName="common-splog-1.0.jar" deploy-path="/lib" handle="module:/resource/common-splog/common-splog">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="inmemory-customfeatures-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-customfeatures/inmemory-customfeatures">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="common-daemonprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/common-daemonprocess/common-daemonprocess">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -663,6 +663,186 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="http-interfacefallback-1.0.jar" deploy-path="/lib" handle="module:/resource/http-interfacefallback/http-interfacefallback">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-iccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-iccore/platform-iccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-vccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-vccore/platform-vccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-vcprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-vcprocess/platform-vcprocess">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-walletconsumer-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-walletconsumer/platform-walletconsumer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-walletprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-walletprocess/platform-walletprocess">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-walletbase-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-walletbase/platform-walletbase">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-intlrouteinfo-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-intlrouteinfo/inmemory-intlrouteinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-msgtimeboundcheck-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-msgtimeboundcheck/platform-msgtimeboundcheck">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-templatefinder-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-templatefinder/platform-templatefinder">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-cappingcheck-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-cappingcheck/platform-cappingcheck">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-prccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-prccore/platform-prccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-subbiller-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-subbiller/platform-subbiller">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-billing-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-billing/platform-billing">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-dnpayloadutil-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-dnpayloadutil/platform-dnpayloadutil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-dnpayload-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-dnpayload/inmemory-dnpayload">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-encryptinfo-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-encryptinfo/inmemory-encryptinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-dnpcore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-dnpcore/platform-dnpcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-smppaccountdetails-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-smppaccountdetails/inmemory-smppaccountdetails">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-singledn-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-singledn/platform-singledn">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-errorinfo-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-errorinfo/inmemory-errorinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-whitelistnumbers-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-whitelistnumbers/inmemory-whitelistnumbers">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-clientdlrpreferences-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-clientdlrpreferences/inmemory-clientdlrpreferences">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-r3ccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-r3ccore/platform-r3ccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-visualizelink-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-visualizelink/inmemory-visualizelink">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-apperrorhandler-1.0.jar" deploy-path="/lib" handle="module:/resource/common-apperrorhandler/common-apperrorhandler">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jakarta.servlet-api-5.0.0.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-shortcodeprovider-1.0.jar" deploy-path="/lib" handle="module:/resource/common-shortcodeprovider/common-shortcodeprovider">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-duplicatecheckprocessor-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-duplicatecheckprocessor/platform-duplicatecheckprocessor">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-vcdltcore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-vcdltcore/platform-vcdltcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-rccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-rccore/platform-rccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-chcore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-chcore/platform-chcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-carrierhandoverutility-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-carrierhandoverutility/platform-carrierhandoverutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-dchcore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-dchcore/platform-dchcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-kannelstatusupdater-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-kannelstatusupdater/platform-kannelstatusupdater">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-httpclient-1.0.jar" deploy-path="/lib" handle="module:/resource/common-httpclient/common-httpclient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-carrierhandover-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-carrierhandover/inmemory-carrierhandover">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-topic2table-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-topic2table/platform-topic2table">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-faillistutil-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-faillistutil/platform-faillistutil">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-routeinfo-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-routeinfo/inmemory-routeinfo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-promoheaderpool-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-promoheaderpool/inmemory-promoheaderpool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-commonheaders-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-commonheaders/inmemory-commonheaders">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-clientallowedheaders-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-clientallowedheaders/inmemory-clientallowedheaders">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-msgvalidity-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-msgvalidity/inmemory-msgvalidity">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-sbcvcore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-sbcvcore/platform-sbcvcore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-sbccore-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-sbccore/platform-sbccore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-dndchecker-1.0.jar" deploy-path="/lib" handle="module:/resource/common-dndchecker/common-dndchecker">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-blockoutprocess-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-blockoutprocess/platform-blockoutprocess">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-specificblockoutdata-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-specificblockoutdata/inmemory-specificblockoutdata">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="common-pattern-1.0.jar" deploy-path="/lib" handle="module:/resource/common-pattern/common-pattern">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-optout-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-optout/inmemory-optout">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-blocklistnumbers-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-blocklistnumbers/inmemory-blocklistnumbers">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-messageflowutility-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-messageflowutility/platform-messageflowutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-currencyconversion-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-currencyconversion/inmemory-currencyconversion">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-decimalutility-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-decimalutility/platform-decimalutility">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-intlprice-1.0.jar" deploy-path="/lib" handle="module:/resource/platform-intlprice/platform-intlprice">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-intlcredit-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-intlcredit/inmemory-intlcredit">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-spamwordcheck-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-spamwordcheck/inmemory-spamwordcheck">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-userheader-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-userheader/inmemory-userheader">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-governmentheaders-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-governmentheaders/inmemory-governmentheaders">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inmemory-customfeatures-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-customfeatures/inmemory-customfeatures">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="inmemory-data-1.0.jar" deploy-path="/lib" handle="module:/resource/inmemory-data/inmemory-data">
@@ -716,14 +896,16 @@
         <dependent-module archiveName="curvesapi-1.06.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.06/curvesapi-1.06.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                    
+                                                            
+    
     
     
     
     
     
     </wb-module>
-                        
+                            
+
 
 
 

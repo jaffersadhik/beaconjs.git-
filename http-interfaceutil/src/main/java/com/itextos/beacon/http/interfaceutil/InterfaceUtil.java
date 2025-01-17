@@ -20,6 +20,7 @@ import com.itextos.beacon.inmemory.inmemdata.country.CountryInfo;
 import com.itextos.beacon.inmemory.inmemdata.country.CountryInfoCollection;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
+import com.itextos.beacon.platform.ic.process.ICProcessor;
 
 public class InterfaceUtil
 {
@@ -83,8 +84,8 @@ public class InterfaceUtil
     {
     	
     	if(handovergw!=null&&handovergw.equals("unitia")) {
-    		
-    	//	UnitiaHandoverSingleTon.getInstance().getUnitiaHandover().sendtoIC(aMessageRequest.getJsonString());
+
+    		ICProcessor.forIC(aMessageRequest);
     	}else {
     		sendKafkaOriginal(aMessageRequest,sb);
     	}

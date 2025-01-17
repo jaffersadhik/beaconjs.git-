@@ -35,6 +35,11 @@
 		</dependency>
 		<dependency>
 			<groupId>beacon</groupId>
+			<artifactId>platform-iccore</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>beacon</groupId>
 			<artifactId>inmemory-appconfigparams</artifactId>
 			<version>1.0</version>
 		</dependency>
