@@ -3,6 +3,7 @@ package com.itextos.beacon.httpclienthandover.process;
 import java.util.List;
 import java.util.UUID;
 
+import com.itextos.beacon.smslog.DNHttpPostLog;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,14 +38,17 @@ public class SingleDLRProcess
         for (final BaseMessage message : aMessageList)
         {
         	payLoadReceiverLog.log(message.getJsonString());
+            DNHttpPostLog.log(SingleDLRProcess.className + " Payload received - " + message.getJsonString());
 
             final ClientHandoverData clientHandoverData = ClientHandoverUtils.getClientHandoverData(message.getValue(MiddlewareConstant.MW_CLIENT_ID));
+            DNHttpPostLog.log(SingleDLRProcess.className + " client handover data - " + clientHandoverData);
 
             if (clientHandoverData == null)
             {
                 final UUID       uniqueId   = UUID.randomUUID();
 
-                
+                DNHttpPostLog.log(SingleDLRProcess.className + " No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID));
+
                 final HttpResult failResult = ClientHandoverUtils.getCustomResult("No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID), -999);
                 ClientHandoverUtils.setResultInMessage(message, failResult);
 
@@ -66,8 +70,11 @@ public class SingleDLRProcess
             for (final ClientHandoverMaster customerEndPoint : customerEndPointInfos)
             {
             	StringBuffer sb=new StringBuffer();
+                DNHttpPostLog.log(SingleDLRProcess.className + " customer endpoint configured - " + customerEndPoint);
 
                 final String    processedTemplate    = processTemplate(customerEndPoint, message,sb);
+                DNHttpPostLog.log(SingleDLRProcess.className + " processed template - " + processedTemplate);
+
 
                 sb.append("processedTemplate : ").append(processedTemplate).append("\t").append(className).append("\n");
 
