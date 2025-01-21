@@ -7,6 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.exception.ItextosException;
@@ -39,6 +42,7 @@ public abstract class AbstractDLRProcess
 {
 
     private static final Log log = LogFactory.getLog(AbstractDLRProcess.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbstractDLRProcess.class);
 
     public static String processTemplate(
             ClientHandoverMaster aCustomerEndPoint,
@@ -108,6 +112,9 @@ public abstract class AbstractDLRProcess
             ClientHandoverMaster aCustomerEndPoint,
             String aUrl)
     {
+        DNHttpPostLog.log(AbstractDLRProcess.class + " processHTTPRequest() incoming  - " + aTemplate + ", " + aCustomerEndPoint + ", " + aUrl);
+        logger.debug("{} processHTTPRequest() incoming  - {}, {}, {}", AbstractDLRProcess.class, aTemplate, aCustomerEndPoint, aUrl);
+
         final List<ClientHandoverHeaderParams> headerParams = aCustomerEndPoint.getClientHandoverHeaderParams();
         final HttpMethod                       requestType  = aCustomerEndPoint.getHttpMethod();
         final HttpHeader<String, String>       headerMap    = generateHeaderMap(headerParams, aCustomerEndPoint);
@@ -132,11 +139,17 @@ public abstract class AbstractDLRProcess
         {
             case GET:
                 completeUrl = ClientHandoverUtils.getCompleteURL(aUrl, aTemplate);
+                DNHttpPostLog.log(AbstractDLRProcess.class + " hitUrl() GET complete url  - " + completeUrl);
+                logger.debug(AbstractDLRProcess.class + " hitUrl() GET complete url  - " + completeUrl);
+
                 result = HTTPRequestUtility.processGetRequest(aUrl, completeUrl, aHeaderMap);
                 break;
 
             case POST:
                 completeUrl = aTemplate;
+                DNHttpPostLog.log(AbstractDLRProcess.class + " hitUrl() POST complete url  - " + completeUrl);
+                logger.debug(AbstractDLRProcess.class + " hitUrl() POST complete url  - " + completeUrl);
+
                 result = HTTPRequestUtility.doPostRequest(aUrl, aHeaderMap, aTemplate);
                 break;
 

@@ -8,6 +8,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.httpclient.HttpResult;
@@ -27,6 +30,7 @@ public class SingleDLRProcess
 	
 	private static final String className="com.itextos.beacon.httpclienthandover.process.MultipleDLRProcess";
 
+    private static final Logger logger = LoggerFactory.getLogger(SingleDLRProcess.class);
 
     private static final Log log = LogFactory.getLog(SingleDLRProcess.class);
 
@@ -38,16 +42,19 @@ public class SingleDLRProcess
         for (final BaseMessage message : aMessageList)
         {
         	payLoadReceiverLog.log(message.getJsonString());
-            DNHttpPostLog.log(SingleDLRProcess.className + " Payload received - " + message.getJsonString());
+            DNHttpPostLog.log(SingleDLRProcess.class + " Payload received - " + message.getJsonString());
+            logger.debug(SingleDLRProcess.class + " Payload received - " + message.getJsonString());
 
             final ClientHandoverData clientHandoverData = ClientHandoverUtils.getClientHandoverData(message.getValue(MiddlewareConstant.MW_CLIENT_ID));
-            DNHttpPostLog.log(SingleDLRProcess.className + " client handover data - " + clientHandoverData);
+            DNHttpPostLog.log(SingleDLRProcess.class + " client handover data - " + clientHandoverData);
+            logger.debug("{} client handover data - {}", SingleDLRProcess.class, clientHandoverData);
 
             if (clientHandoverData == null)
             {
                 final UUID       uniqueId   = UUID.randomUUID();
 
-                DNHttpPostLog.log(SingleDLRProcess.className + " No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID));
+                DNHttpPostLog.log(SingleDLRProcess.class + " No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID));
+                logger.debug(SingleDLRProcess.class + " No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID));
 
                 final HttpResult failResult = ClientHandoverUtils.getCustomResult("No Client Configuration found for " + message.getValue(MiddlewareConstant.MW_CLIENT_ID), -999);
                 ClientHandoverUtils.setResultInMessage(message, failResult);
@@ -70,10 +77,10 @@ public class SingleDLRProcess
             for (final ClientHandoverMaster customerEndPoint : customerEndPointInfos)
             {
             	StringBuffer sb=new StringBuffer();
-                DNHttpPostLog.log(SingleDLRProcess.className + " customer endpoint configured - " + customerEndPoint);
+                DNHttpPostLog.log(SingleDLRProcess.class + " customer endpoint configured - " + customerEndPoint);
 
                 final String    processedTemplate    = processTemplate(customerEndPoint, message,sb);
-                DNHttpPostLog.log(SingleDLRProcess.className + " processed template - " + processedTemplate);
+                DNHttpPostLog.log(SingleDLRProcess.class + " processed template - " + processedTemplate);
 
 
                 sb.append("processedTemplate : ").append(processedTemplate).append("\t").append(className).append("\n");

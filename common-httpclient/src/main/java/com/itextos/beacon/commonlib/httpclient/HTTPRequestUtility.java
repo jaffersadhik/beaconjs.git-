@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +38,7 @@ public class HTTPRequestUtility
     private static final Log                        log                    = LogFactory.getLog(HTTPRequestUtility.class);
     private static final RequestConfig              DEFAULT_REQUEST_CONFIG = RequestConfig.custom().setSocketTimeout(500).setConnectTimeout(500).build();
     private static final Map<String, RequestConfig> map                    = new ConcurrentHashMap<>();
+    private static final Logger logger = LoggerFactory.getLogger(HTTPRequestUtility.class);
 
     private HTTPRequestUtility()
     {}
@@ -178,6 +182,7 @@ public class HTTPRequestUtility
         }
         catch (final Exception e)
         {
+            logger.error(e.getMessage());
             HttpUtility.handleException(e, result);
             httpGet.releaseConnection();
         }
