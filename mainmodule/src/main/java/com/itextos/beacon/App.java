@@ -6,6 +6,9 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextos.beacon.commonlib.messageidentifier.RedisDataPopulator;
 import com.itextos.beacon.commonlib.prometheusmetricsutil.PrometheusMetrics;
 import com.itextos.beacon.smslog.DebugLog;
@@ -14,6 +17,7 @@ import com.itextos.beacon.smslog.TimeTakenLog;
 public class App {
 
     private static final Log                log                               = LogFactory.getLog(App.class);
+	private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     private static boolean IS_START_PROMETHEUS=false;
     
@@ -28,12 +32,16 @@ public class App {
             // Attempt to create the directory
             if (folder.mkdirs()) {
                 System.out.println("Directory created successfully: " + folderPath);
+				logger.debug("Directory created successfully: " + folderPath);
+
             } else {
                 System.out.println("Failed to create directory: " + folderPath);
             }
         } else {
             System.out.println("Directory already exists: " + folderPath);
-        }
+			logger.debug("Directory already exists: " + folderPath);
+
+		}
     }
     
     public static void createfolder() {
@@ -81,6 +89,8 @@ public class App {
 		System.out.println("module : "+module);
 		
 		DebugLog.log("module : "+module);
+		logger.debug("module : "+module);
+
 
 		if(!isMW(module,args)) {
 			
