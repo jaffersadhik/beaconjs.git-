@@ -254,21 +254,31 @@ abstract class FCSupporter
         int           curMessageLength = 0;
         StringBuilder sb               = new StringBuilder();
 
-        for (final char lElement : lMessageChar)
-        {
-            sb.append(lElement);
+        /** Buggy logic
+         * 1. It does not split the parts at 153 because the split comparison is ==, this does not work if the
+         *      curchar length is 152 and then the immediate char is spl char
+         *      which takes the curlen to 154, which is bypass the == if condition
+         * 2. If the cur length is not exactly 153 and if xceeds 153, then the first
+         *      split should be till the prev char which is length till 152
+         *
+         *  Both these have been fixed in the for loop
+         */
 
-            if (SpecialCharacters.isSpecialCharacter(lElement))
-                curMessageLength = curMessageLength + 2;
-            else
-                curMessageLength = curMessageLength + 1;
+        // BUGFIX: see the comments above
+        for (final char lElement : lMessageChar) {
+            int charLength = SpecialCharacters.isSpecialCharacter(lElement) ? 2 : 1;
 
-            if (curMessageLength == aSplitMessageLength)
-            {
+            // Check if adding this character would exceed the split length
+            if (curMessageLength + charLength > aSplitMessageLength) {
+                // If so, add the current part to the list and reset
                 lSplitMessagePartsList.add(sb.toString());
-                sb               = new StringBuilder();
+                sb = new StringBuilder();
                 curMessageLength = 0;
             }
+
+            // Append the character and update the length
+            sb.append(lElement);
+            curMessageLength += charLength;
         }
 
         if (sb.length() > 0)
