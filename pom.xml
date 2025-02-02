@@ -328,7 +328,7 @@
  <module>monitortopics</module>
  <module>dlrquery-dlrqueryprocess</module>
  <module>dlrquery-dlrqueryweb</module>
- <!--  	<module>docker-beaconweb</module> -->
+ <!--  	<module>docker-beaconweb</module> 
 
 
  
@@ -346,21 +346,24 @@
    	<module>fb-dltfileprocessor</module>
    	<module>fb-downloadhandler</module>
    	<module>fb-cronjobs</module>
- <!--   	<module>docker-fb</module>
+  	<module>docker-fb</module>
   	<module>node-cm</module>
-   	<module>node-cm-jobs</module> -->
+   	<module>node-cm-jobs</module>
+   	   	<module>node-mui</module>
+ -->
 
    	<module>applicationproperties</module>
    	<module>platform-asynprocessor</module>
    	<module>smppsimulator</module>
-<!--   	<module>springbootwarapi</module> -->
-   	<module>wildfly</module>
+<!--   	<module>springbootwarapi</module> 
+   	<module>wildfly</module> 
+   	   	<module>docker-fileprocessor</module>
+-->
    	   	<module>beaconlib</module>
 
    	<module>tomacatvirtualthreadpool</module>
    	<module>platform-smppdlrpoller</module>
    	<module>platform-smppdlrutil</module>
-   	<module>docker-fileprocessor</module>
    	<module>smsc</module>
    	<module>platform-dnt2tbbkup</module>
    	<module>kafka2elasticsearch</module>
@@ -370,7 +373,6 @@
    	<module>platform-topic2elasticsearch</module>
    	<module>inmemory-elasticsearchcolumn</module>
    	<module>common-errorlog</module>
-   	<module>node-mui</module>
    	<module>queryprocessor-databaseconnector</module>
    	<module>queryprocessor-utils</module>
    	<module>queryprocessor-parent</module>
