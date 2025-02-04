@@ -14,9 +14,13 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
+import com.itextos.beacon.errorlog.K2ESLog;
 
 public class Kafka2ESJSONUtilDeliveries
 {
+	
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
+
 
     public static int getRecvTimeHour(
             Date rcvTime)
@@ -29,10 +33,12 @@ public class Kafka2ESJSONUtilDeliveries
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubJSON(
-            IMessage iMsg)
+    		BaseMessage iMsg) throws Exception
     {
+    	
+    	log.debug("Kafka2ESJSONUtilDeliveries");
         boolean                isEmptyJSON = true;
-        final SubmissionObject subObject   = (SubmissionObject) iMsg;
+        final SubmissionObject subObject   =  new SubmissionObject(iMsg.getJsonString());
         final BaseMessage      baseMessage = subObject;
 
         final JSONObject       subJSON     = new JSONObject();
@@ -351,10 +357,10 @@ public class Kafka2ESJSONUtilDeliveries
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildDelJSON(
-            IMessage iMsg)
+    		BaseMessage iMsg) throws Exception
     {
         boolean              isEmptyJSON = true;
-        final DeliveryObject delObject   = (DeliveryObject) iMsg;
+        final DeliveryObject delObject   = new DeliveryObject(iMsg.getJsonString());
         final BaseMessage    baseMessage = delObject;
 
         final JSONObject     delJSON     = new JSONObject();

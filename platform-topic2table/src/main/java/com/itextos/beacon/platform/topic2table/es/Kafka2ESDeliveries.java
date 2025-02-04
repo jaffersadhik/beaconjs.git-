@@ -101,23 +101,22 @@ public class Kafka2ESDeliveries
     	
         for (final BaseMessage data : mMessagesToInsert)
         {
-            final IMessage iMsg     = (IMessage)data;
             JSONObject     dataJSON = null;
 
             try
             {
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    dataJSON = Kafka2ESJSONUtilDeliveries.buildSubJSON(iMsg);
+                    dataJSON = Kafka2ESJSONUtilDeliveries.buildSubJSON(data);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        dataJSON = Kafka2ESJSONUtilDeliveries.buildDelJSON(iMsg);
+                        dataJSON = Kafka2ESJSONUtilDeliveries.buildDelJSON(data);
             }
             catch (final Exception ex)
             {
                 log.error("Error while processing Message Object", ex);
                 ex.printStackTrace(System.err);
                 if (log.isDebugEnabled())
-                    log.debug(iMsg.toString());
+                    log.debug(data.toString());
             }
 
             if (dataJSON == null)
@@ -125,7 +124,7 @@ public class Kafka2ESDeliveries
                 log.error("Unable to build JSON Object from Message Object");
 
                 if (log.isDebugEnabled())
-                    log.debug(iMsg.toString());
+                    log.debug(data.toString());
 
                 continue;
             }

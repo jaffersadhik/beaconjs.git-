@@ -139,23 +139,22 @@ public class Kafka2ESSumission
     	
         for (final BaseMessage data : mMessagesToInsert)
         {
-            final IMessage iMsg     = (IMessage)data;
             JSONObject     dataJSON = null;
 
             try
             {
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    dataJSON = Kafka2ESJSONUtilSubmission.buildSubJSON(iMsg);
+                    dataJSON = Kafka2ESJSONUtilSubmission.buildSubJSON(data);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        dataJSON = Kafka2ESJSONUtilSubmission.buildDelJSON(iMsg);
+                        dataJSON = Kafka2ESJSONUtilSubmission.buildDelJSON(data);
             }
             catch (final Exception ex)
             {
                 log.error("Error while processing Message Object", ex);
                 ex.printStackTrace(System.err);
                 if (log.isDebugEnabled())
-                    log.debug(iMsg.toString());
+                    log.debug(data.toString());
             }
 
             if (dataJSON == null)
@@ -163,7 +162,7 @@ public class Kafka2ESSumission
                 log.error("Unable to build JSON Object from Message Object");
 
                 if (log.isDebugEnabled())
-                    log.debug(iMsg.toString());
+                    log.debug(data.toString());
 
                 continue;
             }

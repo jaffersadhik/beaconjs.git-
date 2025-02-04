@@ -14,9 +14,13 @@ import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
+import com.itextos.beacon.errorlog.K2ESLog;
 
 public class Kafka2ESJSONUtilSubmission
 {
+	
+    private static final K2ESLog                              log                     = K2ESLog.getInstance();
+
 
     public static int getRecvTimeHour(
             Date rcvTime)
@@ -31,6 +35,8 @@ public class Kafka2ESJSONUtilSubmission
     public static JSONObject buildSubJSON(
             IMessage iMsg)
     {
+    	
+    	log.debug("Kafka2ESJSONUtilSubmission ");
         boolean                isEmptyJSON = true;
         final SubmissionObject subObject   = (SubmissionObject) iMsg;
         final BaseMessage      baseMessage = subObject;
