@@ -159,21 +159,17 @@ public class Kafka2ESDeliveries
                 }
             }
 
-            BatchCount++;
 
-            if (BatchCount == FlushLimit)
-            {
-                if (log.isDebugEnabled())
-                    log.debug("Batch Count: " + BatchCount + ", Flusing Data...");
-
-                try {
-					writeData();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
+         
         }
+        
+        
+        try {
+			writeData();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     
     }
 
@@ -181,52 +177,31 @@ public class Kafka2ESDeliveries
             throws Exception
     {
 
-        if (BatchCount == 0)
-        {
-            if (log.isDebugEnabled())
-                log.debug("BulkRequest is empty");
-            return;
-        }
+     
 
         if (log.isDebugEnabled())
             log.debug("Executing ES BulkAsync ...");
 
         // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+        log.debug(" Kafka2ESDeliveries start  bulkRequest size "+bulkRequest.requests().size() );
         final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest, false);
         ESClient.bulkAsync(bulkRequest, RequestOptions.DEFAULT, bal);
         bulkRequest = new BulkRequest();
+        log.debug(" Kafka2ESDeliveries end  bulkRequest size "+bulkRequest.requests().size() );
 
         if (fmsgBulkRequest.requests().size() > 0)
         {
-            if (log.isDebugEnabled())
-                log.debug("Executing ES BulkAsync for Full Message Info...");
             // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+            log.debug(" Kafka2ESDeliveries start  fmsgBulkRequest size "+bulkRequest.requests().size() );
+
             final ESBulkAsyncListener balFmsg = new ESBulkAsyncListener(fmsgBulkRequest, true);
             ESClient.bulkAsync(fmsgBulkRequest, RequestOptions.DEFAULT, balFmsg);
             fmsgBulkRequest = new BulkRequest();
+            log.debug(" Kafka2ESDeliveries end  fmsgBulkRequest size "+fmsgBulkRequest.requests().size() );
+
         }
 
-        if (log.isDebugEnabled())
-            log.debug("Executing Kafka Consumer CommitAsync ...");
 
-   
-
-        ProcCount += BatchCount;
-
-        if (log.isDebugEnabled())
-            log.debug(ProcCount + " records procesed");
-        else
-        {
-            LogProcCount += BatchCount;
-
-            if (LogProcCount >= LogProcLimit)
-            {
-                log.info(ProcCount + " records procesed");
-                LogProcCount = 0;
-            }
-        }
-
-        BatchCount = 0;
     }
 
  

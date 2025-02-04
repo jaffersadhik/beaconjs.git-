@@ -109,50 +109,30 @@ public class Kafka2ESSumission
             throws Exception
     {
 
-        if (BatchCount == 0)
-        {
-            if (log.isDebugEnabled())
-                log.debug("BulkRequest is empty");
-            return;
-        }
+     
 
-        if (log.isDebugEnabled())
-            log.debug("Executing ES BulkAsync ...");
-
+     
         // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+        log.debug(" Kafka2ESSumission start  bulkRequest size "+bulkRequest.requests().size() );
         final ESBulkAsyncListener bal = new ESBulkAsyncListener(bulkRequest, false);
         ESClient.bulkAsync(bulkRequest, RequestOptions.DEFAULT, bal);
         bulkRequest = new BulkRequest();
+        log.debug(" Kafka2ESSumission end  bulkRequest size "+bulkRequest.requests().size() );
 
         if (fmsgBulkRequest.requests().size() > 0)
         {
-            if (log.isDebugEnabled())
-                log.debug("Executing ES BulkAsync for Full Message Info...");
             // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+            log.debug(" Kafka2ESSumission start  fmsgBulkRequest size "+fmsgBulkRequest.requests().size() );
+
             final ESBulkAsyncListener balFmsg = new ESBulkAsyncListener(fmsgBulkRequest, true);
             ESClient.bulkAsync(fmsgBulkRequest, RequestOptions.DEFAULT, balFmsg);
             fmsgBulkRequest = new BulkRequest();
+            log.debug(" Kafka2ESSumission end  fmsgBulkRequest size "+fmsgBulkRequest.requests().size() );
+
         }
 
-      
-        ProcCount += BatchCount;
 
-        if (log.isDebugEnabled())
-            log.debug(ProcCount + " records procesed");
-        else
-        {
-            LogProcCount += BatchCount;
-
-            if (LogProcCount >= LogProcLimit)
-            {
-                log.info(ProcCount + " records procesed");
-                LogProcCount = 0;
-            }
-        }
-
-        BatchCount = 0;
     }
-
  
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     	
