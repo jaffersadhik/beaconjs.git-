@@ -66,6 +66,8 @@ public class Kafka2ESJSONUtilSubmission
 
         for (final ESIndexColMapValue esColMap : SubmissionK2ES.ListESColMap)
         {
+        	log.debug("Kafka2ESJSONUtilSubmission esColMap :  "+esColMap);
+
             final String  colName       = esColMap.ColumnName;
             final String  colType       = esColMap.ColumnType;
             final String  mapColName    = esColMap.MappedName;

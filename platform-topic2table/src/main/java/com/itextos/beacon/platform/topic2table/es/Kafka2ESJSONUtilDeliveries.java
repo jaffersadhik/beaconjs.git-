@@ -384,6 +384,8 @@ public class Kafka2ESJSONUtilDeliveries
 
         for (final ESIndexColMapValue esColMap : DeliveriesK2ES.ListESColMap)
         {
+        	log.debug("Kafka2ESJSONUtilDeliveries esColMap :  "+esColMap);
+
             final String  colName       = esColMap.ColumnName;
             final String  colType       = esColMap.ColumnType;
             final String  mapColName    = esColMap.MappedName;
