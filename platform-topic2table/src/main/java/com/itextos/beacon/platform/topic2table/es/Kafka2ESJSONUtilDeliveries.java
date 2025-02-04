@@ -357,13 +357,13 @@ public class Kafka2ESJSONUtilDeliveries
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildDelJSON(
-    		BaseMessage iMsg) 
+    		BaseMessage baseMessage) 
     {
         boolean              isEmptyJSON = true;
 
         DeliveryObject delObject=null;
 		try {
-			delObject = new DeliveryObject(iMsg.getJsonString());
+			delObject = new DeliveryObject(baseMessage.getJsonString());
 		} catch (Exception e) {
 	    	log.error("Kafka2ESJSONUtilDeliveries after DeliveryObject err",e);
 	    	return null;
@@ -371,11 +371,12 @@ public class Kafka2ESJSONUtilDeliveries
 		}
     	log.debug("Kafka2ESJSONUtilDeliveries after DeliveryObject ");
 
-        final BaseMessage    baseMessage = iMsg;
-
         final JSONObject     delJSON     = new JSONObject();
+    	log.debug("Kafka2ESJSONUtilDeliveries after JSONObject ");
 
         final String         msgId       = delObject.getMessageId();
+    	log.debug("Kafka2ESJSONUtilDeliveries after msgId : "+msgId);
+
         delJSON.put(DeliveriesK2ES.ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);

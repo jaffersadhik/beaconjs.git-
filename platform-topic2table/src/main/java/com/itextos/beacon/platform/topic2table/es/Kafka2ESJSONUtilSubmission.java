@@ -9,12 +9,12 @@ import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.message.DeliveryObject;
-import com.itextos.beacon.commonlib.message.IMessage;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.commonlib.utility.MessageConvertionUtility;
 import com.itextos.beacon.errorlog.K2ESLog;
+import com.itextos.beacon.platform.topic2table.utils.T2EUtility;
 
 public class Kafka2ESJSONUtilSubmission
 {
@@ -33,14 +33,14 @@ public class Kafka2ESJSONUtilSubmission
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubJSON(
-    		BaseMessage iMsg) 
+    		BaseMessage baseMessage) 
     {
     	
     	log.debug("Kafka2ESJSONUtilSubmission ");
         boolean                isEmptyJSON = true;
         SubmissionObject subObject=null;
 		try {
-			subObject = new SubmissionObject(iMsg.getJsonString());
+			subObject = new SubmissionObject(baseMessage.getJsonString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,11 +50,15 @@ public class Kafka2ESJSONUtilSubmission
         
     	log.debug("Kafka2ESJSONUtilSubmission after SubmissionObject ");
 
-        final BaseMessage      baseMessage = iMsg;
 
         final JSONObject       subJSON     = new JSONObject();
+    	log.debug("Kafka2ESJSONUtilSubmission after JSONObject ");
+
 
         final String           msgId       = subObject.getMessageId();
+        
+    	log.debug("Kafka2ESJSONUtilSubmission after msgId : "+msgId);
+
         subJSON.put(SubmissionK2ES.ESIndexUniqueColumn, msgId);
 
         final String dataUpdTime = DateTimeUtility.getFormattedCurrentDateTime(DateTimeFormat.DEFAULT);
