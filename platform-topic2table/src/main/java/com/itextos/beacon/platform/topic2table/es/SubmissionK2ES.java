@@ -277,10 +277,10 @@ public class SubmissionK2ES implements K2ES
 
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     
-    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() start mMessagesToInsert size : "+mMessagesToInsert.size());
+    	log.debug("SubmissionK2ES : pushtoElasticSearch() start mMessagesToInsert size : "+mMessagesToInsert.size());
 
     	kafka2ESSumission.pushtoElasticSearch(mMessagesToInsert);
     	
-    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() end mMessagesToInsert size : "+mMessagesToInsert.size());
+    	log.debug("SubmissionK2ES : pushtoElasticSearch() end mMessagesToInsert size : "+mMessagesToInsert.size());
     }
 }
