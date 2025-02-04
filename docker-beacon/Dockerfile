@@ -71,6 +71,7 @@ COPY ./target/profile/digitalocean1/kafka-consumer.properties_do1 /kafka-consume
 COPY ./target/profile/digitalocean1/common-db.properties_do1 /common-db.properties_do1
 COPY ./target/profile/digitalocean1/elasticsearch.properties_do1 /elasticsearch.properties_do1
 COPY ./target/profile/digitalocean1/req_receiver.properties_do1 /req_receiver.properties_do1
+COPY ./target/profile/digitalocean1/kafka2es.properties_do1 /kafka2es.properties_do1
 
 
 
