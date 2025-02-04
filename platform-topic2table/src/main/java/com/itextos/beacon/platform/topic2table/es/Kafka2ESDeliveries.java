@@ -99,14 +99,17 @@ public class Kafka2ESDeliveries
 
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     	
+        log.info("Kafka2ESDeliveries pushtoElasticSearch: ConsumerMode :" +this.ConsumerMode);
+
         for (final BaseMessage data : mMessagesToInsert)
         {
             JSONObject     dataJSON = null;
 
+
             try
             {
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    dataJSON = Kafka2ESJSONUtilDeliveries.buildSubJSON(data);
+                    dataJSON = Kafka2ESJSONUtilSubmission.buildSubJSON(data);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
                         dataJSON = Kafka2ESJSONUtilDeliveries.buildDelJSON(data);

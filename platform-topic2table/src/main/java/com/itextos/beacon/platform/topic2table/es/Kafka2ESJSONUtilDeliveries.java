@@ -357,11 +357,21 @@ public class Kafka2ESJSONUtilDeliveries
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildDelJSON(
-    		BaseMessage iMsg) throws Exception
+    		BaseMessage iMsg) 
     {
         boolean              isEmptyJSON = true;
-        final DeliveryObject delObject   = new DeliveryObject(iMsg.getJsonString());
-        final BaseMessage    baseMessage = delObject;
+
+        DeliveryObject delObject=null;
+		try {
+			delObject = new DeliveryObject(iMsg.getJsonString());
+		} catch (Exception e) {
+	    	log.error("Kafka2ESJSONUtilDeliveries after DeliveryObject err",e);
+	    	return null;
+
+		}
+    	log.debug("Kafka2ESJSONUtilDeliveries after DeliveryObject ");
+
+        final BaseMessage    baseMessage = iMsg;
 
         final JSONObject     delJSON     = new JSONObject();
 

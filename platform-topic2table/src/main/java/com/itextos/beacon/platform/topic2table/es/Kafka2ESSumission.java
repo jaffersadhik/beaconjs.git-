@@ -137,6 +137,8 @@ public class Kafka2ESSumission
  
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     	
+        log.info("Kafka2ESSumission pushtoElasticSearch: ConsumerMode :" +this.ConsumerMode);
+
         for (final BaseMessage data : mMessagesToInsert)
         {
             JSONObject     dataJSON = null;
@@ -147,7 +149,7 @@ public class Kafka2ESSumission
                     dataJSON = Kafka2ESJSONUtilSubmission.buildSubJSON(data);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        dataJSON = Kafka2ESJSONUtilSubmission.buildDelJSON(data);
+                        dataJSON = Kafka2ESJSONUtilDeliveries.buildDelJSON(data);
             }
             catch (final Exception ex)
             {

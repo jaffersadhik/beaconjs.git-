@@ -33,13 +33,24 @@ public class Kafka2ESJSONUtilSubmission
 
     @SuppressWarnings("unchecked")
     public static JSONObject buildSubJSON(
-    		BaseMessage iMsg) throws Exception
+    		BaseMessage iMsg) 
     {
     	
     	log.debug("Kafka2ESJSONUtilSubmission ");
         boolean                isEmptyJSON = true;
-        final SubmissionObject subObject   = new SubmissionObject(iMsg.getJsonString()) ;
-        final BaseMessage      baseMessage = subObject;
+        SubmissionObject subObject=null;
+		try {
+			subObject = new SubmissionObject(iMsg.getJsonString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	    	log.error("Kafka2ESJSONUtilSubmission after SubmissionObject err",e);
+	    	return null;
+		}
+        
+    	log.debug("Kafka2ESJSONUtilSubmission after SubmissionObject ");
+
+        final BaseMessage      baseMessage = iMsg;
 
         final JSONObject       subJSON     = new JSONObject();
 
@@ -361,7 +372,9 @@ public class Kafka2ESJSONUtilSubmission
     {
         boolean              isEmptyJSON = true;
         final DeliveryObject delObject   = new DeliveryObject(iMsg.getJsonString()) ;
-        final BaseMessage    baseMessage = delObject;
+    	log.debug("Kafka2ESJSONUtilSubmission after DeliveryObject ");
+
+        final BaseMessage    baseMessage = iMsg;
 
         final JSONObject     delJSON     = new JSONObject();
 
