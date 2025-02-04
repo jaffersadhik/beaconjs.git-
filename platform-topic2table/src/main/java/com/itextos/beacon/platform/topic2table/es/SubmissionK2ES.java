@@ -56,6 +56,7 @@ public class SubmissionK2ES implements K2ES
 
     public SubmissionK2ES() {
     	
+    	K2ESLog.getInstance().debug("SubmissionK2ES() constructor");
     	init();
     }
     public static synchronized void logMsg(
@@ -276,8 +277,10 @@ public class SubmissionK2ES implements K2ES
 
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     
+    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() start mMessagesToInsert size : "+mMessagesToInsert.size());
+
     	kafka2ESSumission.pushtoElasticSearch(mMessagesToInsert);
     	
-    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() mMessagesToInsert size : "+mMessagesToInsert.size());
+    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() end mMessagesToInsert size : "+mMessagesToInsert.size());
     }
 }
