@@ -16,6 +16,7 @@ import com.itextos.beacon.commonlib.message.BaseMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.DateTimeUtility;
 import com.itextos.beacon.errorlog.K2ESLog;
+import com.itextos.beacon.smslog.K2EPushLog;
 
 public class SubmissionK2ES implements K2ES
 {
@@ -276,5 +277,7 @@ public class SubmissionK2ES implements K2ES
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     
     	kafka2ESSumission.pushtoElasticSearch(mMessagesToInsert);
+    	
+    	K2EPushLog.log("SubmissionK2ES : pushtoElasticSearch() mMessagesToInsert size : "+mMessagesToInsert.size());
     }
 }
