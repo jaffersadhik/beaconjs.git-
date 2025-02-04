@@ -276,10 +276,13 @@ public class DeliveriesK2ES implements K2ES
 
     public void pushtoElasticSearch( List<BaseMessage> mMessagesToInsert) {
     
-    	log.debug("DeliveriesK2ES : pushtoElasticSearch() start mMessagesToInsert size : "+mMessagesToInsert.size());
+    	if(kafka2ESDeliveries!=null) {
+    	   	log.debug("DeliveriesK2ES : pushtoElasticSearch() start mMessagesToInsert size : "+mMessagesToInsert.size());
 
-    	kafka2ESDeliveries.pushtoElasticSearch(mMessagesToInsert);
-    	log.debug("DeliveriesK2ES : pushtoElasticSearch() end  mMessagesToInsert size : "+mMessagesToInsert.size());
+        	kafka2ESDeliveries.pushtoElasticSearch(mMessagesToInsert);
+        	log.debug("DeliveriesK2ES : pushtoElasticSearch() end  mMessagesToInsert size : "+mMessagesToInsert.size());
 
+    	}
+ 
     }
 }

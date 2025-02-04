@@ -41,7 +41,6 @@ public class Kafka2ESDeliveries
 
     private final int                       ESRetryConflictCount;
 
-    private RestHighLevelClient             ESClient        = null;
     private BulkRequest                     bulkRequest     = null;
     private BulkRequest                     fmsgBulkRequest = null;
 
@@ -176,9 +175,9 @@ public class Kafka2ESDeliveries
     private void writeData()
             throws Exception
     {
+        RestHighLevelClient             ESClient        = esConnect();
 
-     
-
+    
         if (log.isDebugEnabled())
             log.debug("Executing ES BulkAsync ...");
 
@@ -201,7 +200,7 @@ public class Kafka2ESDeliveries
 
         }
 
-
+        ESClient.close();
     }
 
  

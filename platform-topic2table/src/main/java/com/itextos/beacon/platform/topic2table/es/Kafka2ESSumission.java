@@ -47,7 +47,6 @@ public class Kafka2ESSumission
 
     private final int                       ESRetryConflictCount;
 
-    private RestHighLevelClient             ESClient        = null;
     private BulkRequest                     bulkRequest     = null;
     private BulkRequest                     fmsgBulkRequest = null;
 
@@ -109,7 +108,8 @@ public class Kafka2ESSumission
             throws Exception
     {
 
-     
+        RestHighLevelClient             ESClient        = esConnect();
+
 
      
         // ESClient.bulk(bulkRequest, RequestOptions.DEFAULT);
@@ -131,6 +131,7 @@ public class Kafka2ESSumission
 
         }
 
+        ESClient.close();
 
     }
  
