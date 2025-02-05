@@ -39,7 +39,7 @@ public class App {
     public static void createfolder() {
 
     	System.setProperty("common.property.file.location", "/global.properties");
-    	System.setProperty("kafka.2.elasticsearch.config.file", "kafka2es.properties_"+System.getenv("profile"));
+ //   	System.setProperty("kafka.2.elasticsearch.config.file", "kafka2es.properties_"+System.getenv("profile"));
     	
     	
     	System.setProperty("log4j.configurationFile", "file:/log4j2-common.xml");
