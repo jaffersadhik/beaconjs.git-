@@ -264,8 +264,11 @@ public class Kafka2ESJSONUtilSubmission
 	                }
         }
 
+    	log.debug("Kafka2ESJSONUtilSubmission for loop out   ");
+
         if (isEmptyJSON)
             return null;
+    	log.debug("Kafka2ESJSONUtilSubmission isEmptyJSON :   "+isEmptyJSON);
 
         return subJSON;
     }

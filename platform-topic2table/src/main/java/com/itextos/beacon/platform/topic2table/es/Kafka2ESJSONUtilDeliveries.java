@@ -478,9 +478,12 @@ public class Kafka2ESJSONUtilDeliveries
 	                    }
 	                }
         }
+    	log.debug("Kafka2ESJSONUtilDeliveries for loop out :  ");
 
         if (isEmptyJSON)
             return null;
+
+    	log.debug("Kafka2ESJSONUtilDeliveries isEmptyJSON :  "+isEmptyJSON);
 
         return delJSON;
     }

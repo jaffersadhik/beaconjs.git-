@@ -132,6 +132,8 @@ public class Kafka2ESDeliveries
                 continue;
             }
 
+            log.debug("Kafka2ESDeliveries dataJSON : "+dataJSON);
+
             final String        msgId         = CommonUtility.nullCheck(dataJSON.get(this.ESIndexUniqueColumn), true);
             final UpdateRequest updateRequest = new UpdateRequest(this.ESIndexName, msgId)
                     .doc(dataJSON.toJSONString(), XContentType.JSON)

@@ -169,6 +169,8 @@ public class Kafka2ESSumission
                 continue;
             }
 
+            log.debug("Kafka2ESSumission dataJSON : "+dataJSON);
+
             final String        msgId         = CommonUtility.nullCheck(dataJSON.get(this.ESIndexUniqueColumn), true);
             final UpdateRequest updateRequest = new UpdateRequest(this.ESIndexName, msgId)
                     .doc(dataJSON.toJSONString(), XContentType.JSON)
@@ -197,21 +199,16 @@ public class Kafka2ESSumission
                 }
             }
 
-            BatchCount++;
 
-            if (BatchCount == FlushLimit)
-            {
-                if (log.isDebugEnabled())
-                    log.debug("Batch Count: " + BatchCount + ", Flusing Data...");
-
-                try {
-					writeData();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
+           
         }
+        
+        try {
+			writeData();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     
     }
 
