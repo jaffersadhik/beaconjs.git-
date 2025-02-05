@@ -147,7 +147,7 @@ public class Kafka2ESDeliveries
             {
                 JSONObject fmsgJSON = null;
                 if (this.ConsumerMode.equals(Kafka2ESConstants.subMode))
-                    fmsgJSON = Kafka2ESJSONUtilDeliveries.buildSubFMSGJSON(dataJSON, baseMsgId);
+                    fmsgJSON = Kafka2ESJSONUtilSubmission.buildSubFMSGJSON(dataJSON, baseMsgId);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
                         fmsgJSON = Kafka2ESJSONUtilDeliveries.buildDelFMSGJSON(dataJSON, baseMsgId);

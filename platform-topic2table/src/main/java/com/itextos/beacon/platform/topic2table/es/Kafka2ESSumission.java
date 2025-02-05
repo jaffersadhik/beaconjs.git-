@@ -107,6 +107,7 @@ public class Kafka2ESSumission
     private void writeData()
             throws Exception
     {
+        log.debug("Kafka2ESSumission  writeData() ");
 
         RestHighLevelClient             ESClient        = esConnect();
 
@@ -177,6 +178,7 @@ public class Kafka2ESSumission
                     .docAsUpsert(true);
             updateRequest.retryOnConflict(ESRetryConflictCount);
             bulkRequest.add(updateRequest);
+            log.debug("Kafka2ESSumission after add bulkRequest : msgId "+msgId);
 
             final String baseMsgId = CommonUtility.nullCheck(dataJSON.get(this.ESFmsgIndexUniqueColumn), true);
 
@@ -187,7 +189,7 @@ public class Kafka2ESSumission
                     fmsgJSON = Kafka2ESJSONUtilSubmission.buildSubFMSGJSON(dataJSON, baseMsgId);
                 else
                     if (this.ConsumerMode.equals(Kafka2ESConstants.delMode))
-                        fmsgJSON = Kafka2ESJSONUtilSubmission.buildDelFMSGJSON(dataJSON, baseMsgId);
+                        fmsgJSON = Kafka2ESJSONUtilDeliveries.buildDelFMSGJSON(dataJSON, baseMsgId);
 
                 if (fmsgJSON != null)
                 {
@@ -196,14 +198,21 @@ public class Kafka2ESSumission
                             .docAsUpsert(true);
                     fmsgupdateRequest.retryOnConflict(ESRetryConflictCount);
                     fmsgBulkRequest.add(fmsgupdateRequest);
+                    
+                    log.debug("Kafka2ESSumission after add fmsgBulkRequest : baseMsgId "+baseMsgId);
+
                 }
             }
 
+            log.debug("Kafka2ESSumission  single record processs end ");
 
            
         }
         
         try {
+        	
+            log.debug("Kafka2ESSumission  writeData ");
+
 			writeData();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
