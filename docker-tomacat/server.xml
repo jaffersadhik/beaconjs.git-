@@ -165,6 +165,12 @@
                resourceName="UserDatabase"/>
       </Realm>
 
+
+<Valve className="org.apache.catalina.valves.RemoteIpValve"
+           remoteIpHeader="X-Forwarded-For"
+           proxiesHeader="X-Forwarded-By"
+           protocolHeader="X-Forwarded-Proto" />
+
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
 
