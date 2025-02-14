@@ -391,20 +391,6 @@ public class App {
 			IS_START_PROMETHEUS=true;
 
 			return true;			
-		}else if(module.equals("qpr")) {
-			
-			com.itextos.beacon.queryprocessor.requestreceiver.QueryEngine.main(args);
-
-			IS_START_PROMETHEUS=true;
-
-			return true;			
-		}else if(module.equals("qptp")) {
-			
-			com.itextos.beacon.queryprocessor.threadpoolexecutor.ProcessQueueThreadPool.main(args);
-
-			IS_START_PROMETHEUS=true;
-
-			return true;			
 		}else if(module.equals("r3c")) {
 			
 			com.itextos.beacon.platform.r3c.StartApplication.main(args);
