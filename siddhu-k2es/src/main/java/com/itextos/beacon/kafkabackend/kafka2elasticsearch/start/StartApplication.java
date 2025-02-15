@@ -347,7 +347,7 @@ public class StartApplication
                 try
                 {
                     StartApplication.stopConsumerThreads();
-                    StartApplication.mainThread.join();
+            //        StartApplication.mainThread.join();
                 }
                 catch (final Exception ex)
                 {
@@ -356,8 +356,12 @@ public class StartApplication
                 }
             }));
 
+            
+            /*
             for (final Kafka2ESConsumerThread ct : HMConsumerThreads.values())
                 ct.join();
+                
+                */
         }
         catch (final Exception ex)
         {
