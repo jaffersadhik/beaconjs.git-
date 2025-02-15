@@ -306,7 +306,7 @@ public class App {
 
 	
 
-	private static void startPrometheusServer(
+	public static void startPrometheusServer(
 	            boolean aStartJettyServer)
 	    {
 

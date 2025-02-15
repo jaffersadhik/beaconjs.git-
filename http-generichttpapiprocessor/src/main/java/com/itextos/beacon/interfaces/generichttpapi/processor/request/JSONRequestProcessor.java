@@ -215,7 +215,7 @@ public class JSONRequestProcessor
                     lMessage = handleNoDest(lJsonMessage);
                     lMessage.setRouteType(RouteType.DOMESTIC);
                     sb.append("Destination array is empty:  '" + lMultipleDests.size() + "' status '" + InterfaceStatusCode.DESTINATION_EMPTY + "'").append("\n");
-                    send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb);
+                    send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb,true);
                 }
                 else
                     if (lMultipleDests.size() == 1)
@@ -248,7 +248,7 @@ public class JSONRequestProcessor
                 lMessage.setRequestStatus(lRequestStatus);
                 lMessage.setRouteType(RouteType.DOMESTIC);
 
-                send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb);
+                send2Mw(lMessage, InterfaceStatusCode.DESTINATION_EMPTY, false,sb,true);
             }
         }
         catch (final Exception e)
@@ -316,7 +316,7 @@ public class JSONRequestProcessor
                     log.debug("Single message  " + lMessage + " send to kafka ");
         }
 
-        send2Mw(lMessage, lClientStatus, false,sb);
+        send2Mw(lMessage, lClientStatus, false,sb,false);
 
         final InterfaceRequestStatus lRequestStatus = new InterfaceRequestStatus(lClientStatus, null);
 
@@ -434,7 +434,7 @@ public class JSONRequestProcessor
         aMessage.setRouteType(RouteType.DOMESTIC);
         aMessage.setMobileNumber(APIConstants.DEFAULT_DEST);
 
-        send2Mw(aMessage, aMiddlewareStaus, aIsAsync,sb);
+        send2Mw(aMessage, aMiddlewareStaus, aIsAsync,sb,true);
     }
 
     private void handleMultipleMobileNumber(
@@ -507,7 +507,7 @@ public class JSONRequestProcessor
             Utility.setMessageId(aMessage);
 
             final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, destStatus);
-            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
+            middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb,true);
         }
     }
 
@@ -670,7 +670,7 @@ public class JSONRequestProcessor
             InterfaceMessage aMessage,
             InterfaceStatusCode aMiddlewareStaus,
             boolean aIsAsync,
-            StringBuffer sb)
+            StringBuffer sb,boolean isKafka)
             throws Exception
     {
         Utility.setMessageId(aMessage);
@@ -679,7 +679,7 @@ public class JSONRequestProcessor
 
         
         final MiddlewareHandler middlewareHandler = new MiddlewareHandler(aMessage, mBasicInfo, aMiddlewareStaus, InterfaceStatusCode.SUCCESS);
-        middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb);
+        middlewareHandler.middleWareHandover(aIsAsync, mResponseProcessor, mReqType,sb,isKafka);
     }
 
 	

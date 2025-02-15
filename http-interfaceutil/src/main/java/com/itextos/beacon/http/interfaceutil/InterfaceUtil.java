@@ -91,7 +91,7 @@ public class InterfaceUtil
     	}
     }
 
-    private static void sendKafkaOriginal(MessageRequest aMessageRequest, StringBuffer sb) {
+    public static void sendKafkaOriginal(MessageRequest aMessageRequest, StringBuffer sb) {
 		
     	   if (log.isDebugEnabled())
                log.debug(" The MessageRequest object Handover to Kafka........" + aMessageRequest + " Message Request from : '" + aMessageRequest.getInterfaceGroupType() + "'");

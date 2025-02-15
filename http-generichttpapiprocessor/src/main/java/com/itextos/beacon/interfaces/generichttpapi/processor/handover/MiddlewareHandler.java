@@ -108,6 +108,64 @@ public class MiddlewareHandler
 
         InterfaceUtil.sendToKafka(lMessageRequest,sb);
     }
+    
+    
+    public void middleWareHandover(
+            boolean isAsync,
+            IResponseProcessor responseHandler,
+            String aReqType,
+            StringBuffer sb,
+            boolean iskafka)
+            throws Exception
+    {
+        if (log.isDebugEnabled())
+            log.debug("Request Type for response : " + aReqType);
+
+        final MessageRequest    lMessageRequest = generateMessageRequestObj(aReqType);
+        
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" telemarketerid : lMessageRequest "+lMessageRequest.getDltTelemarketerId()).append("\t"); 
+
+
+        final GenericResponse   lGenericResp    = IInterfaceUtil.getGenericResponse();
+        final InterfaceResponse responseObject  = lGenericResp.getInterfaceResponse(lMessageRequest.getClientId(), responseHandler.getRequestType());
+
+        if (log.isDebugEnabled())
+            log.debug("Interface Response : " + responseObject);
+
+        String lHttpStatus = HTTP_STATUS_CODE_SUCCESS;
+        String lStatusCode = HTTP_STATUS_CODE_SUCCESS;
+
+        if (responseObject != null)
+        {
+            final InterfaceResponseCodeMapping lResponseCodeMapping = responseObject.getResponseCodeMapping("200");
+
+            if (lResponseCodeMapping != null)
+            {
+                lStatusCode = lResponseCodeMapping.getClientStatusCode();
+                lHttpStatus = lResponseCodeMapping.getHttpStatus();
+            }
+        }
+
+        lMessageRequest.setSyncRequest((isAsync == false));
+
+        final String status_Id = (lMessageRequest.getSubOriginalStatusCode() != null) ? lMessageRequest.getSubOriginalStatusCode() : lStatusCode;
+
+        // logAndUpdateCounter(aReqType, responseHandler, lMessageRequest, isAsync,
+        // lHttpStatus, lStatusCode, status_Id);
+
+        if (log.isDebugEnabled())
+        {
+            log.debug(" Send to middleware StatusId - " + mMessageValidateStatus.getStatusCode() + " and StatusDesc - " + mMessageValidateStatus.getStatusDesc());
+            log.debug("Object Before sending to Kafka - " + lMessageRequest.toString());
+        }
+
+        if(iskafka) {
+        	InterfaceUtil.sendToKafka(lMessageRequest,sb);
+        }else {
+        
+        	InterfaceUtil.sendKafkaOriginal(lMessageRequest, sb);
+        }
+    }
 
     private static void logAndUpdateCounter(
             InterfaceType aReqType,
