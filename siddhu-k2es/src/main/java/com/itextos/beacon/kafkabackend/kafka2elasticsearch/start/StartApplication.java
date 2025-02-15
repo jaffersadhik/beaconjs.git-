@@ -366,6 +366,8 @@ public class StartApplication
         }
         finally
         {
+        	
+        	/*
 
             try
             {
@@ -387,6 +389,8 @@ public class StartApplication
                 log.error(ex2.getMessage(), ex2);
                 ex2.printStackTrace(System.err);
             }
+            
+            */
         }
     }
 
