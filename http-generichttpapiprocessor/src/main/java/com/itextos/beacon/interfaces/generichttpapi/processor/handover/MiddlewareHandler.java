@@ -124,6 +124,7 @@ public class MiddlewareHandler
         final MessageRequest    lMessageRequest = generateMessageRequestObj(aReqType);
         
         sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" telemarketerid : lMessageRequest "+lMessageRequest.getDltTelemarketerId()).append("\t"); 
+        sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append(" iskafka :  "+iskafka).append("\t"); 
 
 
         final GenericResponse   lGenericResp    = IInterfaceUtil.getGenericResponse();
@@ -160,10 +161,12 @@ public class MiddlewareHandler
         }
 
         if(iskafka) {
-        	InterfaceUtil.sendToKafka(lMessageRequest,sb);
+        	InterfaceUtil.sendKafkaOriginal(lMessageRequest, sb);
+
         }else {
         
-        	InterfaceUtil.sendKafkaOriginal(lMessageRequest, sb);
+        	InterfaceUtil.sendToKafka(lMessageRequest,sb);
+
         }
     }
 
