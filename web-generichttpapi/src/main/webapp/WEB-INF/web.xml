@@ -27,6 +27,12 @@
 		<servlet-name>QSGenericReceiver</servlet-name>
 		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.QSGenericReceiver</servlet-class>
 	</servlet>
+		<servlet>
+		<description></description>
+		<display-name>HealthCheckReceiver</display-name>
+		<servlet-name>HealthCheckReceiver</servlet-name>
+		<servlet-class>com.itextos.beacon.web.generichttpapi.servlet.HealthCheckReceiver</servlet-class>
+	</servlet>
 	<servlet>
 		<description></description>
 		<display-name>XMLReceiver</display-name>
@@ -83,6 +89,10 @@
 	<servlet-mapping>
 		<servlet-name>QSCustomReceiver</servlet-name>
 		<url-pattern>/QSCustomReceiver</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>HealthCheckReceiver</servlet-name>
+		<url-pattern>/HealthCheckReceiver</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>QSGenericReceiver</servlet-name>
