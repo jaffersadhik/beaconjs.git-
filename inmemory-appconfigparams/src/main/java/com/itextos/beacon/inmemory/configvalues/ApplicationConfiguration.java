@@ -51,6 +51,9 @@ public class ApplicationConfiguration
 
         if (loadConfigValues.size() > 0)
             mConfigValues = loadConfigValues;
+        
+        
+        EntryLog.log(new Date()+" : "+mConfigValues.toString()+"\n");
     }
 
     /**
