@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfo;
-import com.itextos.beacon.commonlib.constants.exception.ItextosRuntimeException;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.commonlib.utility.timer.ITimedProcess;
 import com.itextos.beacon.inmemory.loader.process.AbstractAutoRefreshInMemoryProcessor;
@@ -61,6 +61,9 @@ public class InmemoryLoaderCollection
         try
         {
             loadInmemoryInfoFromDB();
+            
+            EntryLog.log(new Date()+" : "+mInMemoryInputCollection.toString()+"\n");
+            
         }
         catch (final Exception e)
         {
@@ -98,8 +101,11 @@ public class InmemoryLoaderCollection
 
         try (
                 Connection con = DBDataSourceFactory.getConnection(JndiInfo.CONFIGURARION_DB);
-                PreparedStatement pstmt = con.prepareStatement(JNDI_INDI_SQL, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-                ResultSet resultSet = pstmt.executeQuery();)
+           //     PreparedStatement pstmt = con.prepareStatement(JNDI_INDI_SQL, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+        	     PreparedStatement pstmt = con.prepareStatement(JNDI_INDI_SQL);
+                
+        		
+        		ResultSet resultSet = pstmt.executeQuery();)
         {
 
             while (resultSet.next())
