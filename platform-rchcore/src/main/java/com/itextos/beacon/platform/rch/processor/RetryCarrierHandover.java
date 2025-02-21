@@ -443,7 +443,7 @@ public class RetryCarrierHandover
             log.info("additionalInfoString===>" + additionalInfoString);
         }
         final String encodedAdditionalInfo = URLEncoder.encode(additionalInfoString, Constants.ENCODER_FORMAT);
-        final String lDlrUrl               = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo);
+        final String lDlrUrl               = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo,aSubmissionObject.getLogBuffer());
         log.info("Kannel dn URL--->" + lDlrUrl);
         aSubmissionObject.setCallBackUrl(lDlrUrl);
     }

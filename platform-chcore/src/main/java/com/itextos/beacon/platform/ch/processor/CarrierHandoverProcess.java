@@ -530,7 +530,7 @@ public class CarrierHandoverProcess
         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: additionalInfoString===>" + additionalInfoString );
 
         final String encodedAdditionalInfo = URLEncoder.encode(additionalInfoString, Constants.ENCODER_FORMAT);
-        lDlrUrl = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo);
+        lDlrUrl = CHUtil.generateCallBackUrl(lClusterDNReceiverInfo, encodedAdditionalInfo,aMessageRequest.getLogBuffer());
        
         aMessageRequest.getLogBuffer().append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(aMessageRequest.getFileId()+" :: Kannel dn URL--->" + lDlrUrl );
 

@@ -15,11 +15,14 @@ import com.itextos.beacon.commonlib.commonpropertyloader.PropertiesPath;
 import com.itextos.beacon.commonlib.commonpropertyloader.PropertyLoader;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.MiddlewareConstant;
 import com.itextos.beacon.commonlib.constants.MsgRetry;
 import com.itextos.beacon.commonlib.message.MessageRequest;
 import com.itextos.beacon.commonlib.message.SubmissionObject;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
+import com.itextos.beacon.commonlib.utility.Name;
+import com.itextos.beacon.errorlog.SMSLog;
 import com.itextos.beacon.inmemory.configvalues.ApplicationConfiguration;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
@@ -83,24 +86,35 @@ public class CHUtil
 
     public static String generateCallBackUrl(
             String aDnIpInfo,
-            String aCallBackParams)
+            String aCallBackParams,
+            SMSLog sb)
     {
 
         try
         {
             if (log.isInfoEnabled())
                 log.info("Attempting Genrate the DN Call back Url ...........");
+            
+
 
             final String lDnUrlTemplate = getAppConfigValueAsString(ConfigParamConstants.DLR_URL_TEMPLATE);
+            
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append(" :: lDnUrlTemplate--->" + lDnUrlTemplate );
+
             final String lDnIPInfo[]    = aDnIpInfo.split(":");
             final String formattedUrl   = MessageFormat.format(lDnUrlTemplate, lDnIPInfo[0], lDnIPInfo[1], aCallBackParams);
             if (log.isInfoEnabled())
                 log.info("encoded URL===>" + formattedUrl);
+            
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("encoded URL===>" + formattedUrl);
+
             return formattedUrl;
         }
         catch (final Exception e)
         {
             log.error("problem framing url generateCallBackUrl()...", e);
+            sb.append("\n").append(Name.getLineNumber()).append("\t").append(Name.getClassName()).append("\t").append(Name.getCurrentMethodName()).append("\t").append("problem framing url generateCallBackUrl()...\n"+ErrorMessage.getStackTraceAsString(e));
+
         }
         return null;
     }
