@@ -167,7 +167,7 @@ public class Encryptor
         	}*/
 
         	  String lDecryptedSmppPassword = getSmppDecryptedPassword("peXPpbZzTtAfEVUwLly42jE5dlpqRzNpZ0U9i6H8vjvYlz31IrGJl7qC");
-               System.out.println("sss: "+lDecryptedSmppPassword);//Pf5X7wpt  //  hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3
+           //    System.out.println("sss: "+lDecryptedSmppPassword);//Pf5X7wpt  //  hs+ItzXLENtN1DfrvK1teWxlYjFhdWpCYkRtdo3iEJ+IRekwl8/G7fn3
 
         	
         	  String lApiPassword = getApiDecryptedPassword("46AsqfI5S3lclHDF4GbXe0YyZkp5SVhWdWeN7Iin9T5APveHY+CtB1ir");
@@ -175,10 +175,10 @@ public class Encryptor
              
 
          	 //pinnacle1
+         	  lDecryptedSmppPassword = getDecryptedDbPassword("YSrU1+RIM5hwN+ycQQdy4XhlOGhoU3RrYmtELgjZwSBQBXSHJ8AUHk/I");
 
-         	  lDecryptedSmppPassword = getSmppDecryptedPassword("jGXYnyp2ns1iv3q5Kl4pEUllaHdWT0ltc0j2TCNtN+L/DbMlWtn93k8c");
          	
-         //       System.out.println(lDecryptedSmppPassword);// 7R8es6Dg  //  i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY
+               System.out.println(lDecryptedSmppPassword);// 7R8es6Dg  //  i1GTPzBhdrTTErUi2F6U629SVVNLNWF3dFZYTXn/pv6C3V77YZLFNXYY
 
                 lApiPassword = getApiDecryptedPassword("2Sdu9dt/vgQ/E5/VkUJtz2w2bmltTFBaUkt4iDJjHQNrj8628IGDVD8c");
              //   System.out.println(lApiPassword);// b0vlFpgZ7Pm6 ,7zhFMHs49ziY,ftW0BphOQQtG // u0SE1rkBCPmKvC+5LsiLCnpzOERjSXM0RXY5Gcqxmf/02rqv4MX5mB8H

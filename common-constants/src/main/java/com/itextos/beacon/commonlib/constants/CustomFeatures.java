@@ -26,7 +26,8 @@ public enum CustomFeatures
     EXPLICIT_URL_SHORTNER_YN("explicit.url.shortner.yn"),
     USE_DEFAULT_INTL_PRICE("use.default.intl.price"),
     UDH_VALIDATE_IN_SMPP("udh.validate.in.smpp"),
-    USER_DEBUG_LOG("user.debug.log");
+    USER_DEBUG_LOG("user.debug.log"),
+    SKIP_TMID_SUFFIX("skip.tmid.suffix");
 
     private String key;
 

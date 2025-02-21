@@ -20,6 +20,7 @@ import com.itextos.beacon.commonlib.constants.ClusterType;
 import com.itextos.beacon.commonlib.constants.Component;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
 import com.itextos.beacon.commonlib.constants.Constants;
+import com.itextos.beacon.commonlib.constants.CustomFeatures;
 import com.itextos.beacon.commonlib.constants.DateTimeFormat;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.PlatformStatusCode;
@@ -46,6 +47,7 @@ import com.itextos.beacon.platform.ch.util.CHProducer;
 import com.itextos.beacon.platform.dnpayloadutil.PayloadProcessor;
 import com.itextos.beacon.platform.kannelstatusupdater.process.response.KannelStatsCollector;
 import com.itextos.beacon.smslog.KannelURLLog;
+import com.itextos.beacon.smslog.util.FeatureData;
 
 import io.prometheus.client.Histogram.Timer;
 
@@ -806,9 +808,11 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 								
 								int incomingCustomerTelemarketerTLVOption=getTelemarketerIdTLVOption(customerTelemarketerId);
 								
-								String finalOutgoingTelemarkerId=getTelemarketerId( incomingCustomerTelemarketerTLVOption , outgoingCarrierTelemarketerTLVOption , customerTelemarketerId, platformTelemarkerid, entityid);
+								 final boolean skiptmidsuffix = CommonUtility.isEnabled(FeatureData.getCutomFeatureValue(aMessageRequest.getClientId(), CustomFeatures.SKIP_TMID_SUFFIX));
+								
+								String finalOutgoingTelemarkerId=getTelemarketerId( incomingCustomerTelemarketerTLVOption , outgoingCarrierTelemarketerTLVOption , customerTelemarketerId, platformTelemarkerid, entityid,skiptmidsuffix);
 
-							
+								KannelURLLog.log("skiptmidsuffix : "+skiptmidsuffix);
 								KannelURLLog.log("incomingCustomerTelemarketerTLVOption : "+incomingCustomerTelemarketerTLVOption);
 								KannelURLLog.log("outgoingCarrierTelemarketerTLVOption : "+outgoingCarrierTelemarketerTLVOption);
 								KannelURLLog.log("customerTelemarketerId : "+customerTelemarketerId);
@@ -836,7 +840,7 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 			
 	}
 
-	private static String getTelemarketerId(int incomingCustomerTelemarketerTLVOption ,int outgoingCarrierTelemarketerTLVOption ,String customertelemartkerid,String platformtelemartkerid,String entityid) throws UnsupportedEncodingException {
+	private static String getTelemarketerId(int incomingCustomerTelemarketerTLVOption ,int outgoingCarrierTelemarketerTLVOption ,String customertelemartkerid,String platformtelemartkerid,String entityid,boolean skiptmidsuffix) throws UnsupportedEncodingException {
 		
 		/*
 		 * telemarketerTLVOption==0 --> no value passed to 1402 TLV
@@ -906,8 +910,18 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 							break;
 						}
 						case TELEMARKETERID_TLV_VALUE_TELEMARKETERID:{
-							telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
-							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_TELEMARKETERID : "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
+							if(skiptmidsuffix) {
+
+								telemarketerid=entityid+","+customertelemartkerid;
+
+								KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_TELEMARKETERID : "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
+	
+							}else {
+								
+								telemarketerid=entityid+","+customertelemartkerid+","+platformtelemartkerid;
+								KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_TELEMARKETERID : "+TELEMARKETERID_TLV_VALUE_TELEMARKETERID );
+
+							}
 
 							break;
 						}
@@ -918,8 +932,17 @@ kannel_url: http://{0}:{1}/cgi-bin/sendsms?user=Net4&password=Netin&smsc={2}&sms
 							break;
 						}
 						case TELEMARKETERID_TLV_VALUE_NONHASHED:{
-							telemarketerid=customertelemartkerid+","+platformtelemartkerid;
-							KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NONHASHED : "+TELEMARKETERID_TLV_VALUE_NONHASHED );
+							if(skiptmidsuffix) {
+								
+								telemarketerid=customertelemartkerid;
+								KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NONHASHED : "+TELEMARKETERID_TLV_VALUE_NONHASHED );
+
+							}else {
+								
+								telemarketerid=customertelemartkerid+","+platformtelemartkerid;
+								KannelURLLog.log(" out: TELEMARKETERID_TLV_VALUE_NONHASHED "+TELEMARKETERID_TLV_VALUE_NONHASHED +" in TELEMARKETERID_TLV_VALUE_NONHASHED : "+TELEMARKETERID_TLV_VALUE_NONHASHED );
+
+							}
 
 							break;
 						}
