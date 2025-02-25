@@ -1,20 +1,17 @@
 package com.itextos.beacon.smpp.interfaces.event.handlers;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.cloudhopper.commons.util.HexUtil;
 import com.cloudhopper.smpp.SmppConstants;
 import com.cloudhopper.smpp.SmppServerHandler;
 import com.cloudhopper.smpp.SmppServerSession;
 import com.cloudhopper.smpp.SmppSessionConfiguration;
 import com.cloudhopper.smpp.SmppSessionHandler;
-import com.cloudhopper.smpp.pdu.BaseBind;
 import com.cloudhopper.smpp.pdu.BaseBindResp;
 import com.cloudhopper.smpp.type.SmppProcessingException;
 import com.itextos.beacon.smpp.interfaces.event.ItextosBindUnbindInterface;
+import com.itextos.beacon.smpp.interfaces.proxy.ProxyBaseBind;
 import com.itextos.beacon.smpp.interfaces.util.Communicator;
 import com.itextos.beacon.smpp.interfaces.validation.ValidateRequest;
 import com.itextos.beacon.smpp.objects.SessionDetail;
@@ -44,7 +41,7 @@ abstract class ItextosSmppServerHelper
     void handleSessionBindRequest(
             Long aSessionId,
             SmppSessionConfiguration aSessionConfiguration,
-            BaseBind aBindRequest)
+            ProxyBaseBind aBindRequest)
             throws SmppProcessingException
     {
         if (log.isInfoEnabled())

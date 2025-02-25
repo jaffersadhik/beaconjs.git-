@@ -12,6 +12,7 @@ import com.cloudhopper.commons.charset.Charset;
 import com.cloudhopper.commons.charset.CharsetUtil;
 import com.cloudhopper.commons.util.HexUtil;
 import com.cloudhopper.smpp.SmppConstants;
+import com.cloudhopper.smpp.SmppServerSession;
 import com.cloudhopper.smpp.pdu.SubmitSm;
 import com.cloudhopper.smpp.pdu.SubmitSmResp;
 import com.itextos.beacon.commonlib.constants.ConfigParamConstants;
@@ -85,7 +86,7 @@ public class SubmitSmRequest
 
         mReceivedTime  = System.currentTimeMillis();
         mServiceType   = mSubmitSm.getServiceType();
-
+      
         mClientIp      = mSessionDetail.getHost();
         mMobileNumber  = CommonUtility.nullCheck(mSubmitSm.getDestAddress().getAddress(), true);
         mHeader        = CommonUtility.nullCheck(mSubmitSm.getSourceAddress().getAddress(), true);

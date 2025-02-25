@@ -89,6 +89,7 @@ public class ItextosSmppServer
         ClientCounter.getInstance().init(lClientId);
 
         this.mDefaultSmppServer.start();
+        
 
         if (log.isInfoEnabled())
             log.info("SMPP server started");
@@ -193,5 +194,8 @@ public class ItextosSmppServer
         if (mSmppServerHandler != null)
             ((ItextosSmppServerHandler) mSmppServerHandler).shutdownInitiated();
     }
+    
+    
+    
 
 }

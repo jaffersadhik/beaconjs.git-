@@ -6,6 +6,7 @@ import com.cloudhopper.smpp.pdu.BaseBind;
 import com.cloudhopper.smpp.pdu.BaseBindResp;
 import com.cloudhopper.smpp.type.SmppProcessingException;
 import com.itextos.beacon.smpp.interfaces.event.ItextosBindUnbindInterface;
+import com.itextos.beacon.smpp.interfaces.proxy.ProxyBaseBind;
 
 public class ItextosSmppServerHandler
         extends
@@ -25,7 +26,7 @@ public class ItextosSmppServerHandler
             final BaseBind aBindRequest)
             throws SmppProcessingException
     {
-        handleSessionBindRequest(aSessionId, aSessionConfiguration, aBindRequest);
+        handleSessionBindRequest(aSessionId, aSessionConfiguration, (ProxyBaseBind)aBindRequest);
     }
 
     @Override
