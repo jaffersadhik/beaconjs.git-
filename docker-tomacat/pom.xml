@@ -28,7 +28,6 @@
                                 </fileset>
                                 <fileset file="../beaconlib/target/beaconlib-1.0-jar-with-dependencies.jar"/>
                                 <fileset file="../web-generichttpapi/target/web-generichttpapi-1.0.war"/>
-                                <fileset file="../queryprocessor-requestreceiver-web/target/queryprocessor-requestreceiver-web-1.0.war"/>
                                 <fileset file="../web-migrationapi/target/web-migrationapi-1.0.war"/>
                                 <fileset file="../platform-dnr/target/platform-dnr-1.0.war"/>
                                 <fileset file="../common-datarefresherweb/target/common-datarefresherweb-1.0.war"/>
