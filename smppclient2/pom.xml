@@ -7,10 +7,12 @@
   </parent>
   <artifactId>smppclient2</artifactId>
   <dependencies>
+  <!--
   <dependency>
     <groupId>com.cloudhopper</groupId>
     <artifactId>ch-smpp</artifactId>
     <version>5.0.4</version>
 </dependency>
+-->
   	</dependencies>
 </project>

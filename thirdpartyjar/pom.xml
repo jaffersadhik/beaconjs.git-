@@ -361,14 +361,14 @@
 			<version>${gson-version}</version>
 		</dependency>
 		
-		<!-- SMPP JAR -->
+		<!-- SMPP JAR 
 
 		<dependency>
 			<groupId>com.cloudhopper</groupId>
 			<artifactId>ch-smpp</artifactId>
 			<version>5.0.0</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

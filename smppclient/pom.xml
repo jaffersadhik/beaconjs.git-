@@ -7,11 +7,13 @@
   </parent>
   <artifactId>smppclient</artifactId>
   <dependencies>
+  
 		<dependency>
-			<groupId>com.cloudhopper</groupId>
-			<artifactId>ch-smpp</artifactId>
-			<version>5.0.0</version>
+			<groupId>beacon</groupId>
+			<artifactId>cloudhopper-smpp</artifactId>
+			<version>1.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
