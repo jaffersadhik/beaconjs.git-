@@ -388,6 +388,7 @@
    	   	<module>platform-dnaging</module>
    	   	<module>smppclient</module>
    	   	<module>smppclient2</module>
+   	   	<module>databasescript</module>
   </modules>
   
 
