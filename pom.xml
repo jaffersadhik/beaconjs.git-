@@ -389,6 +389,8 @@
    	   	<module>smppclient</module>
    	   	<module>smppclient2</module>
    	   	<module>databasescript</module>
+   	   	<module>mysqltabledatadump</module>
+   	   	<module>redisstore</module>
   </modules>
   
 

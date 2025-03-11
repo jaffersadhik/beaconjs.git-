@@ -1,0 +1,58 @@
+package com.itextos.beacon.platform.mysqltabledatadump;
+
+import java.io.*;
+import java.util.*;
+
+public class CollectionToFile {
+    private static final String FILE_PATH = "collection_data.ser"; // Serialized file
+
+    // Method to save collection to file
+    public static void saveCollection(List<Map<String, Object>> data,String filepath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+            oos.writeObject(data);
+            System.out.println("Collection saved to disk.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to load collection from file
+    @SuppressWarnings("unchecked")
+    public static List<Map<String, Object>> loadCollection(String filepath) {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("No data file found.");
+            return new ArrayList<>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
+            return (List<Map<String, Object>>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public static void main(String[] args) {
+        // Sample Data
+        List<Map<String, Object>> data = new ArrayList<>();
+        Map<String, Object> row1 = new HashMap<>();
+        row1.put("id", 1);
+        row1.put("name", "Alice");
+        row1.put("age", 25);
+        data.add(row1);
+
+        Map<String, Object> row2 = new HashMap<>();
+        row2.put("id", 2);
+        row2.put("name", "Bob");
+        row2.put("age", 30);
+        data.add(row2);
+
+        // Save Collection to File
+        saveCollection(data,"");
+
+        // Load Collection from File
+        List<Map<String, Object>> loadedData = loadCollection("");
+        System.out.println("Loaded Data: " + loadedData);
+    }
+}
