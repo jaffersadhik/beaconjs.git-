@@ -51,15 +51,19 @@ public class Dump {
         Connection connection=null;
         try {
         	
+    		connection=getConnection();
+
         	Iterator<String> itr=tableset.iterator();
         	
         	while(itr.hasNext()) {
         		
         		String tablename=itr.next().toString();
         		
+        		MysqlDumpLog.log(schemaname+" : "+tablename + " \t taken start");
+
+        		
         		String filename=foldername+"/"+tablename.trim()+".ser";
         		
-        		connection=getConnection();
         		
         		takedump(connection,filename,schemaname+"."+tablename);
         	}
