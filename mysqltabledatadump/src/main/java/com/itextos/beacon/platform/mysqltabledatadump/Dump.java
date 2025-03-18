@@ -15,6 +15,7 @@ import java.util.Set;
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 
 public class Dump {
 
@@ -65,6 +66,8 @@ public class Dump {
         
         }catch(Exception e) {
         	
+       	 MysqlDumpLog.log(ErrorMessage.getStackTraceAsString(e));
+
         }finally {
         	
         	if(connection!=null) {
@@ -107,6 +110,7 @@ public class Dump {
               CollectionToFile.saveCollection(data, filename);
          }catch(Exception e){
         	 
+        	 MysqlDumpLog.log(ErrorMessage.getStackTraceAsString(e));
          }finally {
         	 
         	 try {
