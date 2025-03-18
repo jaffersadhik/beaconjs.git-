@@ -6,4 +6,13 @@
     <version>1.0</version>
   </parent>
   <artifactId>mysqltabledatadump</artifactId>
-</project>
+  
+<dependencies>
+	
+		
+		<dependency>
+			<groupId>beacon-fileprocessor</groupId>
+			<artifactId>thirtypartyjar</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies></project>

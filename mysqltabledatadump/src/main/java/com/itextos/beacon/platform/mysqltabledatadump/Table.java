@@ -5,20 +5,20 @@ import java.util.Set;
 
 public class Table {
 
-	private static Set<String> ACCOUNTS=new HashSet<String>();
-	private static Set<String> CARRIER_HANDOVER=new HashSet<String>();
-	private static Set<String> CLIENT_HANDOVER=new HashSet<String>();
-	private static Set<String> CM=new HashSet<String>();
-	private static Set<String> CONFIGURATION=new HashSet<String>();
+	public static Set<String> ACCOUNTS=new HashSet<String>();
+	public static Set<String> CARRIER_HANDOVER=new HashSet<String>();
+	public static Set<String> CLIENT_HANDOVER=new HashSet<String>();
+	public static Set<String> CM=new HashSet<String>();
+	public static Set<String> CONFIGURATION=new HashSet<String>();
 
-	private static Set<String> IMP=new HashSet<String>();
-	private static Set<String> LISTING=new HashSet<String>();
-	private static Set<String> LOGGING=new HashSet<String>();
-	private static Set<String> MESSAGING=new HashSet<String>();
-	private static Set<String> PAYLOAD=new HashSet<String>();
+	public static Set<String> IMP=new HashSet<String>();
+	public static Set<String> LISTING=new HashSet<String>();
+	public static Set<String> LOGGING=new HashSet<String>();
+	public static Set<String> MESSAGING=new HashSet<String>();
+	public static Set<String> PAYLOAD=new HashSet<String>();
 	
-	private static Set<String> R3C=new HashSet<String>();
-	private static Set<String> SYSCONFIG=new HashSet<String>();
+	public static Set<String> R3C=new HashSet<String>();
+	public static Set<String> SYSCONFIG=new HashSet<String>();
 	
 	static {
 		loadAccount();

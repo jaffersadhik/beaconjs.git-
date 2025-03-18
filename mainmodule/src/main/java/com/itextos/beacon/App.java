@@ -615,6 +615,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("mysqldump")){
+			
+			com.itextos.beacon.platform.mysqltabledatadump.DumpStartup.main(args);
+			
+			IS_START_PROMETHEUS=true;
+
+			return true;
+			
 		}else if(module.equals("digitalbiller")){
 			
 			startDigitalBiller(args);

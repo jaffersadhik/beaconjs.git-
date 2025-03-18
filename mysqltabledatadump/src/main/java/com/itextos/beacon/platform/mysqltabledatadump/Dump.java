@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
+import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
+
 public class Dump {
 
 	private static String FILE_PATH="/mysqldump/";
@@ -54,9 +58,9 @@ public class Dump {
         		
         		String filename=foldername+"/"+tablename.trim()+".ser";
         		
-        		connection=getConnection(schemaname);
+        		connection=getConnection();
         		
-        		takedump(connection,filename,tablename);
+        		takedump(connection,filename,schemaname+"."+tablename);
         	}
         
         }catch(Exception e) {
@@ -78,6 +82,18 @@ public class Dump {
 	}
 
 	
+
+	private static Connection getConnection() {
+		
+		try {
+			return DBDataSourceFactory.getConnection(JndiInfoHolder.getJndiInfoUsingName(DatabaseSchema.CONFIGURATION.getKey()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
+	}
 
 	private static void takedump(Connection connection, String filename, String tablename) {
 		
@@ -125,4 +141,9 @@ public class Dump {
          return foldername;
 		
 	}
+	
+	
+	
+	
+	
 }

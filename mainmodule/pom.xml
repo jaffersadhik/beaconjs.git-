@@ -882,7 +882,11 @@
 	</dependency>
 	
 	
-
+	 <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>mysqltabledatadump</artifactId>
+			<version>1.0</version>
+	</dependency>
 </dependencies>	
 	
 </project>
