@@ -118,13 +118,17 @@ public class Dump {
          }finally {
         	 
         	 try {
+        		 if(stmt!=null) {
 				stmt.close();
+        		 }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         	 try {
+        		 if(rs!=null) {
 				rs.close();
+        		 }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
