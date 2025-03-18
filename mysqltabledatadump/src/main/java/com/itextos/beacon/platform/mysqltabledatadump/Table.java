@@ -160,7 +160,7 @@ public class Table {
 			LISTING.add("block_list_spam_words");
 			LISTING.add("block_list_spam_words_msgtype");
 			LISTING.add("client_block_list_numbers");
-			LISTING.add("dnd_data");
+	//		LISTING.add("dnd_data");
 			LISTING.add("exceptions_spam_block_list");
 			LISTING.add("interface_sms_template");
 			
