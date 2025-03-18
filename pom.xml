@@ -391,6 +391,7 @@
    	   	<module>databasescript</module>
    	   	<module>mysqltabledatadump</module>
    	   	<module>redisstore</module>
+   	   	<module>redisimport</module>
   </modules>
   
 

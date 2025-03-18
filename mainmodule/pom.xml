@@ -881,7 +881,11 @@
 			<version>1.0</version>
 	</dependency>
 	
-	
+	 <dependency>
+			<groupId>beacon</groupId>
+			<artifactId>redisimport</artifactId>
+			<version>1.0</version>
+	</dependency>
 	 <dependency>
 			<groupId>beacon</groupId>
 			<artifactId>mysqltabledatadump</artifactId>

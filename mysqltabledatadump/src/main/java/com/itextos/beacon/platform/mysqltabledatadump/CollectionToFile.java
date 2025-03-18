@@ -42,6 +42,23 @@ public class CollectionToFile {
         }
         return new ArrayList<>();
     }
+    
+    
+    @SuppressWarnings("unchecked")
+    public static Map<String, String> getWalletDetail(String filepath) {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("No data file found.");
+            return new HashMap<String, String>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
+            return (Map<String, String>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new HashMap<String, String>();
+    }
 
     public static void main(String[] args) {
         // Sample Data

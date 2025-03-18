@@ -623,6 +623,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("redisimport")){
+			
+			com.itextos.beacon.platform.redisimport.RedisImport.main(args);
+			
+			IS_START_PROMETHEUS=false;
+
+			return true;
+			
 		}else if(module.equals("digitalbiller")){
 			
 			startDigitalBiller(args);

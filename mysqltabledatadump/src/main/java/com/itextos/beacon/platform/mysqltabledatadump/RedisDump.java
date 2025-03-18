@@ -18,7 +18,7 @@ while(true) {
 		}
 	}
 	
-private void redisDump() {
+	private void redisDump() {
 		
 		
 		Map<String, String> data=RedisData.getPrepaidData();
@@ -29,7 +29,7 @@ private void redisDump() {
 	}
 
 
-private void gotosleep() {
+	private void gotosleep() {
 
 	try {
 		Thread.sleep(60*1000);
