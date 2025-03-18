@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class CollectionToFile {
-    private static final String FILE_PATH = "collection_data.ser"; // Serialized file
 
     // Method to save collection to file
     public static void saveCollection(List<Map<String, Object>> data,String filepath) {
@@ -29,7 +28,7 @@ public class CollectionToFile {
     // Method to load collection from file
     @SuppressWarnings("unchecked")
     public static List<Map<String, Object>> loadCollection(String filepath) {
-        File file = new File(FILE_PATH);
+        File file = new File(filepath);
         if (!file.exists()) {
             System.out.println("No data file found.");
             return new ArrayList<>();
@@ -46,9 +45,9 @@ public class CollectionToFile {
     
     @SuppressWarnings("unchecked")
     public static Map<String, String> getWalletDetail(String filepath) {
-        File file = new File(FILE_PATH);
+        File file = new File(filepath);
         if (!file.exists()) {
-            System.out.println("No data file found.");
+            System.out.println("No data file found. filepath "+filepath);
             return new HashMap<String, String>();
         }
 
