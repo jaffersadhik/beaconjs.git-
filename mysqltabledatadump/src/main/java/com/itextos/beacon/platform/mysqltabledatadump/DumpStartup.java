@@ -1,7 +1,5 @@
 package com.itextos.beacon.platform.mysqltabledatadump;
 
-import com.itextos.beacon.commonlib.constants.ErrorMessage;
-
 public class DumpStartup extends Thread{
 	
 	
@@ -10,6 +8,9 @@ public class DumpStartup extends Thread{
 		Dump a=new Dump();
 		
 	       Thread.ofVirtual().start(new DumpStartup());
+	       
+	       Thread.ofVirtual().start(new RedisDump());
+
 
 	}
 	
@@ -17,12 +18,14 @@ public class DumpStartup extends Thread{
 		
 		while(true) {
 			
+			
 			mysqlDump();
 			
 			gotosleep();
 		}
 }
 
+	
 	private void mysqlDump() {
 		
 		Dump a=new Dump();

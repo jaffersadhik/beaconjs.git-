@@ -15,6 +15,16 @@ public class CollectionToFile {
             e.printStackTrace();
         }
     }
+    
+    
+    public static void saveCollection(Map<String, String> data,String filepath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+            oos.writeObject(data);
+            System.out.println("Collection saved to disk.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Method to load collection from file
     @SuppressWarnings("unchecked")

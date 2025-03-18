@@ -46,7 +46,6 @@ public class Dump {
 
 		String foldername=getFoldername(schemaname);
 
-        foldercreaton(foldername);
         
         Connection connection=null;
         try {
@@ -138,7 +137,7 @@ public class Dump {
 		
 	}
 
-	private static String getFoldername(String schemaname) {
+	public static String getFoldername(String schemaname) {
 		
 		SimpleDateFormat year = new SimpleDateFormat("yyyy"); // Customize format as needed
 		SimpleDateFormat month = new SimpleDateFormat("MM"); // Customize format as needed
@@ -150,6 +149,8 @@ public class Dump {
         String dayStr = day.format(date);
         
         String foldername=FILE_PATH+"/"+yearStr+"/"+monthStr+"/"+dayStr+"/"+schemaname;
+        foldercreaton(foldername);
+
          return foldername;
 		
 	}
