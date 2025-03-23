@@ -29,6 +29,8 @@ public class DumpStartup extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			GitAutomation.pushMysql();
 			gotosleep();
 		}
 }

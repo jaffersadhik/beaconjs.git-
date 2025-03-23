@@ -33,6 +33,7 @@ while(true) {
 			e.printStackTrace();
 		}
 		
+        GitAutomation.pushRedis();
 	}
 
 
