@@ -27,7 +27,7 @@ while(true) {
         CollectionToFile.saveCollection(data, getFoldername("wallet")+"/wallet.ser");
 
         try {
-			FolderCompressor.compressFolder(getFoldername("wallet"),"/redisdump/technowizardsredisdump.zip");
+			FolderCompressor.compressFolder(getFoldername("wallet"),"/redisdump/technowizardsredisdump/technowizardsredisdump.zip");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

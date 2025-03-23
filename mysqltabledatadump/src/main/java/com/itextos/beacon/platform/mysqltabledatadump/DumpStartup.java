@@ -24,7 +24,7 @@ public class DumpStartup extends Thread{
 			mysqlDump();
 			
 			try {
-				FolderCompressor.compressFolder(Dump.getZipFoldername(),"/mysqldump/technowizardsmysqldump.zip");
+				FolderCompressor.compressFolder(Dump.getZipFoldername(),"/mysqldump/technowizardsmysqldump/technowizardsmysqldump.zip");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
