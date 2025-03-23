@@ -1,5 +1,6 @@
 package com.itextos.beacon.platform.mysqltabledatadump;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -25,6 +26,12 @@ while(true) {
 		
         CollectionToFile.saveCollection(data, getFoldername("wallet")+"/wallet.ser");
 
+        try {
+			FolderCompressor.compressFolder(getFoldername("wallet"),"/redisdump/technowizardsredisdump.zip");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
