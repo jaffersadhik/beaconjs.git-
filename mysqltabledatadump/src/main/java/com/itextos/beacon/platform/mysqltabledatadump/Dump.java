@@ -155,7 +155,23 @@ public class Dump {
 		
 	}
 	
-	
+      public static String getZipFoldername() {
+		
+		SimpleDateFormat year = new SimpleDateFormat("yyyy"); // Customize format as needed
+		SimpleDateFormat month = new SimpleDateFormat("MM"); // Customize format as needed
+		SimpleDateFormat day = new SimpleDateFormat("dd"); // Customize format as needed
+
+        Date date = new Date();
+        String yearStr = year.format(date);
+        String monthStr = month.format(date);
+        String dayStr = day.format(date);
+        
+        String foldername=FILE_PATH+"/"+yearStr+"/"+monthStr+"/"+dayStr;
+        foldercreaton(foldername);
+
+         return foldername;
+		
+	}
 	
 	
 	

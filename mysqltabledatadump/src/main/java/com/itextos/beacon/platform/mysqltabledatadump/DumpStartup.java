@@ -1,5 +1,7 @@
 package com.itextos.beacon.platform.mysqltabledatadump;
 
+import java.io.IOException;
+
 public class DumpStartup extends Thread{
 	
 	
@@ -21,6 +23,12 @@ public class DumpStartup extends Thread{
 			
 			mysqlDump();
 			
+			try {
+				FolderCompressor.compressFolder(Dump.getZipFoldername(),Dump.getZipFoldername()+".zip");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			gotosleep();
 		}
 }
