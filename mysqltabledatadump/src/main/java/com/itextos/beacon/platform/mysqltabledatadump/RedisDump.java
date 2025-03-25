@@ -25,9 +25,23 @@ while(true) {
 		Map<String, String> data=RedisData.getPrepaidData();
 		
         CollectionToFile.saveCollection(data, getFoldername("wallet")+"/wallet.ser");
+        
+		Map<String,Map<String, String>> data1=RedisData.getGeneralData();
+		
+        CollectionToFile.saveCollection(data, getFoldername("general")+"/general.ser");
+
+
 
         try {
-			FolderCompressor.compressFolder(getFoldername("wallet"),"/redisdump/technowizardsredisdump/technowizardsredisdump.zip");
+			FolderCompressor.compressFolder(getFoldername("wallet"),"/redisdump/technowizardsredisdump/technowizardswalletredisdump.zip");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        try {
+			FolderCompressor.compressFolder(getFoldername("general"),"/redisdump/technowizardsredisdump/technowizardsgeneralredisdump.zip");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
