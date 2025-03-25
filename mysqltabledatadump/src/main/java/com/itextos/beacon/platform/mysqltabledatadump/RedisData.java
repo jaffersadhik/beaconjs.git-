@@ -65,7 +65,7 @@ public class RedisData {
 	        {
 	        	
 	        	
-	        	 jedis = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.GENE€RAL, 1);
+	        	 jedis = RedisConnectionProvider.getInstance().getConnection(ClusterType.COMMON, Component.GENERAL, 1);
 	            return jedis.hgetAll(key);
 	        }
 	        catch (final Exception e)

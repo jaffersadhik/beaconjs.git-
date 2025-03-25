@@ -89,7 +89,7 @@ public enum Component
     SHORTCODE_PROVIDER("shortcode_provider"),
     DLR_WAIT_RETRY("dlr_wait_retry"),
     WALLET_CHK("wallet_chk"),
-    GENE€RAL("general"),
+    GENERAL("general"),
     SMPP_CLIENT_DN("smpp_client_dn"),
     PROMO_KANNEL_REDIS_CLEANER("promo_kannel_redis_cleaner"),
     CAPPING_CHK("capping_chk"),
