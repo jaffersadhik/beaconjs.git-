@@ -1,7 +1,15 @@
 package com.itextos.beacon.platform.mysqltabledatadump;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CollectionToFile {
 
@@ -15,6 +23,15 @@ public class CollectionToFile {
         }
     }
     
+    
+    public static void saveCollectionForGeneral(Map<String,Map<String, String>> data,String filepath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+            oos.writeObject(data);
+            System.out.println("Collection saved to disk.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     public static void saveCollection(Map<String, String> data,String filepath) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
@@ -59,6 +76,25 @@ public class CollectionToFile {
         return new HashMap<String, String>();
     }
 
+    
+    
+    @SuppressWarnings("unchecked")
+    public static  Map<String,Map<String, String>> getGeneralDetail(String filepath) {
+        File file = new File(filepath);
+        if (!file.exists()) {
+            System.out.println("No data file found. filepath "+filepath);
+            return new HashMap<String,Map<String, String>>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
+            return (Map<String,Map<String, String>>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new HashMap<String,Map<String, String>>();
+    }
+    
+    
     public static void main(String[] args) {
         // Sample Data
         List<Map<String, Object>> data = new ArrayList<>();

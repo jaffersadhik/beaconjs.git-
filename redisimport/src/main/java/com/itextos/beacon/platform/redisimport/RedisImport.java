@@ -18,13 +18,26 @@ public class RedisImport {
 
 	public static void main(String args[]) {
 		
-		Map<String, String> data=CollectionToFile.getWalletDetail(getFoldername("wallet")+"/wallet_read.ser");
+		Map<String, String> data=CollectionToFile.getWalletDetail("/redisdump/import/wallet.ser");
 
 		putPrepaidData(data);
+		
+		
+		Map<String,Map<String, String>> data1=CollectionToFile.getGeneralDetail("/redisdump/import/general.ser");
+
+		Iterator<String> itr=data1.keySet().iterator();
+		
+		while(itr.hasNext()) {
+			
+			String orgkey=itr.next();
+			
+			putGeneraldData(orgkey, data1.get(orgkey));
+		}
+
 	}
 	
 	
-	 public  static void putPrepaidData( Map<String, String> data)
+	 public  static void putPrepaidData(Map<String, String> data)
 	    {
 
 		  
@@ -65,6 +78,64 @@ public class RedisImport {
 	        		 String key=itr.next();
 	        		 String value=data.get(key);
 		        	 jedis.hset(PREPAID_KEY, key, value);
+
+	        	 }
+	        }
+	        catch (final Exception e)
+	        {
+	        	MysqlDumpLog.log(ErrorMessage.getStackTraceAsString(e));
+	        }finally {
+	        	
+	        	if(jedis!=null) {
+	        	jedis.close();
+	        	}
+	        }
+	    }
+
+	 
+	 
+	 
+	 private  static void putGeneraldData(String orgkey,Map<String, String> data)
+	    {
+
+		  
+		  Jedis jedis =null;
+	        try 
+	        {
+	        	String jedishost=System.getenv("generaljedishost");
+	        	
+	        	if(jedishost==null||jedishost.trim().length()<1) {
+	        		
+	        		MysqlDumpLog.log("Exit jedishost : "+jedishost);
+	        	}
+	        	
+	        	String jedisPort=System.getenv("generaljedisport");
+	        	
+	        	if(jedisPort==null||jedisPort.trim().length()<1) {
+	        		
+	        		MysqlDumpLog.log("Exit jedisPort : "+jedisPort);
+	        	}
+	        	
+	        	
+	        	
+	        	String jedisDB=System.getenv("generaljedisdb");
+	        	
+	        	if(jedisDB==null||jedisDB.trim().length()<1) {
+	        		
+	        		MysqlDumpLog.log("Exit jedisPort : "+jedisDB);
+	        	}
+	        	
+	        	 jedis = new Jedis(jedishost,Integer.parseInt(jedisPort));
+	        	 
+	        	 jedis.select(Integer.parseInt(jedisDB));
+
+	        	 Iterator<String> itr =data.keySet().iterator();
+	        	 
+	        	 while(itr.hasNext()) {
+	        		 
+	        		 String key=itr.next();
+	        		 String value=data.get(key);
+		        	 jedis.hset(orgkey, key, value);
 
 	        	 }
 	        }

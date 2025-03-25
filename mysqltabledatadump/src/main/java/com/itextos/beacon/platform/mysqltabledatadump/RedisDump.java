@@ -28,7 +28,7 @@ while(true) {
         
 		Map<String,Map<String, String>> data1=RedisData.getGeneralData();
 		
-        CollectionToFile.saveCollection(data, getFoldername("general")+"/general.ser");
+        CollectionToFile.saveCollectionForGeneral(data1, getFoldername("general")+"/general.ser");
 
 
 
