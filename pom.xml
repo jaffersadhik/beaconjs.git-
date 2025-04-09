@@ -392,6 +392,7 @@
    	   	<module>mysqltabledatadump</module>
    	   	<module>redisstore</module>
    	   	<module>redisimport</module>
+   	   	<module>mysqlimport</module>
   </modules>
   
 

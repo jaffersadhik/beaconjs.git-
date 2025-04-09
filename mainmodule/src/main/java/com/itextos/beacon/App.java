@@ -615,6 +615,14 @@ public class App {
 
 			return true;
 			
+		}else if(module.equals("importmysql")){
+			
+			com.itextos.beacon.mysqlimport.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=false;
+
+			return true;
+			
 		}else if(module.equals("mysqldump")){
 			
 			com.itextos.beacon.platform.mysqltabledatadump.DumpStartup.main(args);

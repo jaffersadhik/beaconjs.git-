@@ -9,6 +9,23 @@ ENV TZ="Asia/Kolkata"
 EXPOSE 20000/tcp
 
 
+COPY ./target/script /script
+
+
+COPY ./target/importdbconfig/accounts.properties /import_accounts.properties
+COPY ./target/importdbconfig/configuration.properties /import_configuration.properties
+COPY ./target/importdbconfig/cm.properties /import_cm.properties
+COPY ./target/importdbconfig/payload.properties /import_payload.properties
+COPY ./target/importdbconfig/imp.properties /import_imp.properties
+COPY ./target/importdbconfig/carrier_handover.properties /import_carrier_handover.properties
+COPY ./target/importdbconfig/client_handover.properties /import_client_handover.properties
+COPY ./target/importdbconfig/logging.properties /import_logging.properties
+COPY ./target/importdbconfig/messaging.properties /import_messaging.properties
+COPY ./target/importdbconfig/sysconfig.properties /import_sysconfig.properties
+COPY ./target/importdbconfig/r3c.properties /import_r3c.properties
+COPY ./target/importdbconfig/listing.properties /import_listing.properties
+COPY ./target/importdbconfig/billing.properties /import_billing.properties
+
 COPY ./target/common/log4j2-kafka2elastic.xml /log4j2-kafka2elastic.xml
 COPY ./target/common/log4j2-common.xml /log4j2-common.xml
 COPY ./target/common/custom_hosts_production.properties /custom_hosts_production.properties

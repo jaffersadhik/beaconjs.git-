@@ -27,6 +27,10 @@
  								<fileset dir="../properties/">
                                     <include name="**/*"/> <!-- Include all files -->
                                 </fileset>
+                                
+                                <fileset dir="../databasescript/">
+                                    <include name="**/*"/> <!-- Include all files -->
+                                </fileset>
                                 </copy>
 
                 
