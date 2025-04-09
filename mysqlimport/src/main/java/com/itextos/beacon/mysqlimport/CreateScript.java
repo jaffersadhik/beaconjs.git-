@@ -350,9 +350,11 @@ private void createBillingSchematable() {
 			
 			statement=connection.createStatement();
 			
-			statement.execute(createscriptstring);
+			if(statement.execute(createscriptstring)) {
 			
 			tablestatus.put(schema+"~"+tablename, "created");
+			
+			}
 			
 			
 		}catch(Exception e) {
