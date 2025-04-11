@@ -51,7 +51,7 @@ public class CreateTableScript {
         try {
         	
     		connection=getConnection(schemaname);
-
+/*
         	Iterator<String> itr=tableset.iterator();
         	
         	while(itr.hasNext()) {
@@ -66,6 +66,8 @@ public class CreateTableScript {
         		
         		takedump(connection,filename,schemaname+"."+tablename);
         	}
+        	
+        	*/
         
         }catch(Exception e) {
         	
