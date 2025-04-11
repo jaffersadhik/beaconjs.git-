@@ -35,7 +35,9 @@ public class DumpStartup extends Thread{
 		}
 }
 
-	
+	private void mysqlCreateTableScript() {
+		
+	}
 	private void mysqlDump() {
 		
 		Dump a=new Dump();

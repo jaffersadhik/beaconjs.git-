@@ -17,7 +17,7 @@ import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
 import com.itextos.beacon.commonlib.commondbpool.JndiInfoHolder;
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 
-public class Dump {
+public class CreateTableScript {
 
 	private static String FILE_PATH="/mysqldump/";
 	
@@ -40,7 +40,7 @@ public class Dump {
 	        }
 	    }
 	 
-	public static void takedump(String schemaname,Set<String> tableset) {
+	public static void takeCreateScript(String schemaname) {
 		
 		
 

@@ -285,8 +285,11 @@ public class GenerateDnsFromPayloadStore
                     {
                         final String key   = entry.getKey();
                         final String value = entry.getValue();
-                        aJedisCon.hdel(aRedisKey, key);
-                        PushToDlrProcessor.handoverToEngine(mPayloadId, aRedisKey, value);
+                        
+                        if(aJedisCon.hdel(aRedisKey, key)==1) {
+                            PushToDlrProcessor.handoverToEngine(mPayloadId, aRedisKey, value);
+
+                        }
                     }
                     catch (final Exception exp)
                     {
