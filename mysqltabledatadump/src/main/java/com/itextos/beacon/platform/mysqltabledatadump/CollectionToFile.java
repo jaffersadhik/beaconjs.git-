@@ -23,6 +23,14 @@ public class CollectionToFile {
         }
     }
     
+    public static void saveCollectionForCreate(Map<String,Map<String, String>> data,String filepath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+            oos.writeObject(data);
+            System.out.println("Collection saved to disk.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     public static void saveCollectionForGeneral(Map<String,Map<String, String>> data,String filepath) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {

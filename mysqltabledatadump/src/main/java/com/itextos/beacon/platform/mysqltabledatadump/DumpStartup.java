@@ -20,8 +20,18 @@ public class DumpStartup extends Thread{
 		
 		while(true) {
 			
-			
+			Dump a=new Dump();
+
 			mysqlDump();
+			
+			mysqlCreateTableScript();
+			
+			String foldername=a.getFoldername("createtable");
+
+    		String filename=foldername+"/createtable.ser";
+
+            CollectionToFile.saveCollectionForCreate(CreateTableScript.TABLESCRIPT, filename);
+
 			
 			try {
 				FolderCompressor.compressFolder(Dump.getZipFoldername(),"/mysqldump/technowizardsmysqldump/technowizardsmysqldump.zip");
@@ -36,6 +46,33 @@ public class DumpStartup extends Thread{
 }
 
 	private void mysqlCreateTableScript() {
+		
+		CreateTableScript.takeCreateScript("accounts");
+		
+		CreateTableScript.takeCreateScript("configuration");
+
+		CreateTableScript.takeCreateScript("imp");
+
+		CreateTableScript.takeCreateScript("listing");
+
+		CreateTableScript.takeCreateScript("messaging");
+
+		CreateTableScript.takeCreateScript("billing");
+
+		CreateTableScript.takeCreateScript("carrier_handover");
+
+		CreateTableScript.takeCreateScript("client_handover");
+
+		CreateTableScript.takeCreateScript("sysconfig");
+
+		CreateTableScript.takeCreateScript("r3c");
+
+		CreateTableScript.takeCreateScript("logging");
+
+		CreateTableScript.takeCreateScript("cm");
+
+		CreateTableScript.takeCreateScript("payload");
+
 		
 	}
 	private void mysqlDump() {

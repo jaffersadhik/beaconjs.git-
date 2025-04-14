@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
 import com.itextos.beacon.commonlib.commondbpool.DatabaseSchema;
@@ -20,6 +20,9 @@ import com.itextos.beacon.commonlib.constants.ErrorMessage;
 public class CreateTableScript {
 
 	private static String FILE_PATH="/mysqldump/";
+	
+	
+	public static Map<String,Map<String,String>> TABLESCRIPT=new HashMap<String,Map<String,String>>();
 	
 	 public static void foldercreaton(String folderPath) {
 	        
@@ -44,30 +47,17 @@ public class CreateTableScript {
 		
 		
 
-		String foldername=getFoldername(schemaname);
 
         
         Connection connection=null;
         try {
         	
     		connection=getConnection(schemaname);
-/*
-        	Iterator<String> itr=tableset.iterator();
-        	
-        	while(itr.hasNext()) {
-        		
-        		String tablename=itr.next().toString();
-        		
-        		MysqlDumpLog.log(schemaname+" : "+tablename + " \t taken start");
+    		
+    		List<String> tablenamelist=getTableNameList(connection,schemaname);
+    		
+    		createScriptPopulate(connection,schemaname,tablenamelist);
 
-        		
-        		String filename=foldername+"/"+tablename.trim()+".ser";
-        		
-        		
-        		takedump(connection,filename,schemaname+"."+tablename);
-        	}
-        	
-        	*/
         
         }catch(Exception e) {
         	
@@ -90,6 +80,122 @@ public class CreateTableScript {
 	}
 
 	
+
+	private static void createScriptPopulate(final Connection connection,String schemaname, List<String> tablenamelist) {
+		
+		tablenamelist.forEach((tablename)->{
+			
+			Map<String,String> createtablemap=TABLESCRIPT.get(schemaname);
+			
+			if(createtablemap==null) {
+				
+				createtablemap=new HashMap<String,String>();
+				
+				TABLESCRIPT.put(schemaname, createtablemap);
+			}
+			
+			createtablemap.put(tablename, getCreateTableScript(connection,schemaname,tablename));
+		});
+		
+	}
+
+	private static String getCreateTableScript(Connection connection, String schemaname, String tablename) {
+
+	
+		
+		String sql="show create table "+schemaname+"."+tablename;
+		
+		
+		 Statement stmt = null;
+         ResultSet rs = null;
+
+         try {
+        	  stmt = connection.createStatement();
+              rs = stmt.executeQuery(sql);
+              
+            if(rs.next()) {
+            	 
+            	
+            		 return rs.getString(2);
+            	
+             }
+              
+         }catch(Exception e){
+        	 
+        	 MysqlDumpLog.log(ErrorMessage.getStackTraceAsString(e));
+         }finally {
+        	 
+        	 try {
+        		 if(stmt!=null) {
+				stmt.close();
+        		 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	 try {
+        		 if(rs!=null) {
+				rs.close();
+        		 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+         }
+	
+         return null;
+	
+	}
+
+	private static List<String> getTableNameList(Connection connection,String schemaname) {
+	
+		
+		String sql="SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema NOT IN ('information_schema', 'mysql', 'performance_schema', 'sys')";
+		
+		List<String> tablenamelist=new ArrayList<String>();
+		
+		 Statement stmt = null;
+         ResultSet rs = null;
+
+         try {
+        	  stmt = connection.createStatement();
+              rs = stmt.executeQuery(sql);
+              
+             while(rs.next()) {
+            	 
+            	 String schema=rs.getString("table_schema");
+            	 
+            	 if(schema.equals(schemaname)) {
+            		 
+            		 tablenamelist.add(rs.getString("table_name"));
+            	 }
+             }
+              
+         }catch(Exception e){
+        	 
+        	 MysqlDumpLog.log(ErrorMessage.getStackTraceAsString(e));
+         }finally {
+        	 
+        	 try {
+        		 if(stmt!=null) {
+				stmt.close();
+        		 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	 try {
+        		 if(rs!=null) {
+				rs.close();
+        		 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+         }
+	
+         return tablenamelist;
+	}
 
 	private static Connection getConnection(String schemaname) {
 		
