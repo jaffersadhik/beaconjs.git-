@@ -1,10 +1,12 @@
 package com.itextos.beacon.mysqlimport;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -134,7 +136,7 @@ public class CreateScript {
 		Map<String,Map<String, String>> mysqldumpforcreate =	CollectionToFile.getGeneralDetail("/mysqldump/uncompress/createtable/createtable.ser");
 	
 		mysqldumpforcreate.forEach((schema,tablescriptmap)->{
-			
+			foldercreation("/mysqldump/createscript/"+schema);
 			create(schema,tablescriptmap);
 			create(schema,tablescriptmap);
 			create(schema,tablescriptmap);
@@ -144,14 +146,43 @@ public class CreateScript {
 	}
 	
 	
+	private void foldercreation(String folderPath) {
+		
+		 File folder = new File(folderPath);
+
+	        // Check if the folder already exists
+	        if (!folder.exists()) {
+	            // Create the folder
+	            if (folder.mkdirs()) {
+	                System.out.println("Folder created successfully!");
+	            } else {
+	                System.out.println("Failed to create folder.");
+	            }
+	        } else {
+	            System.out.println("Folder already exists.");
+	        }
+	}
+	
 	private void create(String schema,Map<String, String> tablescriptmap) {
 		
 		tablescriptmap.forEach((tablename,createscriptsql)->{
 			
 			create(schema,createscriptsql);
+			write("/mysqldump/createscript/"+schema+"/"+tablename+".txt",createscriptsql);
 		});
 	}
 
+
+	private void write(String filepath, String createscriptsql) {
+		
+		 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+	            writer.write(createscriptsql);
+	            writer.newLine(); // Write a new line if needed
+	            System.out.println("File written successfully!");
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	}
 
 	private void create(String schema, String createscriptsql) {
 		
