@@ -170,7 +170,7 @@ public class CreateScript {
 			
 			createscriptsql=createscriptsql.replaceAll("utf8mb4_uca1400_ai_ci", "utf8mb4_unicode_ci");
 			
-			createscriptsql=createscriptsql.replaceAll("cast(current_timestamp() as date)", "(CURRENT_DATE)");
+			createscriptsql=createscriptsql.replaceAll("cast\\(current_timestamp\\(\\) as date\\)", "\\(CURRENT_DATE\\)");
 
 			
 			create(schema,createscriptsql);
