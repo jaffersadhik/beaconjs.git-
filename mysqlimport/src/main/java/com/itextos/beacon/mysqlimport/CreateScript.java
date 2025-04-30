@@ -166,7 +166,9 @@ public class CreateScript {
 	private void create(String schema,Map<String, String> tablescriptmap) {
 		
 		tablescriptmap.forEach((tablename,createscriptsql)->{
+		//	
 			
+			createscriptsql=createscriptsql.replaceAll("utf8mb4_uca1400_ai_ci", "utf8mb4_unicode_ci");
 			create(schema,createscriptsql);
 			write("/mysqldump/createscript/"+schema+"/"+tablename+".txt",createscriptsql);
 		});
