@@ -16,7 +16,7 @@ public class StartApplication {
 		
 		new CreateScript().createschema();
 		new CreateScript().create();
-
+		CollectionToTableInsert.execute();
 	}
 
 }
