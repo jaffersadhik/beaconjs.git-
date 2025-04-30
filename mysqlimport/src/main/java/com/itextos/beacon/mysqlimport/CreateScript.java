@@ -166,9 +166,13 @@ public class CreateScript {
 	private void create(String schema,Map<String, String> tablescriptmap) {
 		
 		tablescriptmap.forEach((tablename,createscriptsql)->{
-		//	
+	
 			
 			createscriptsql=createscriptsql.replaceAll("utf8mb4_uca1400_ai_ci", "utf8mb4_unicode_ci");
+			
+			createscriptsql=createscriptsql.replaceAll("cast(current_timestamp() as date)", "(CURRENT_DATE)");
+
+			
 			create(schema,createscriptsql);
 			write("/mysqldump/createscript/"+schema+"/"+tablename+".txt",createscriptsql);
 		});
