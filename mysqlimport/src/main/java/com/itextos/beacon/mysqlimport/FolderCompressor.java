@@ -1,4 +1,4 @@
-package com.itextos.beacon.platform.mysqltabledatadump;
+package com.itextos.beacon.mysqlimport;
 
 import java.io.File;
 import java.io.FileInputStream;

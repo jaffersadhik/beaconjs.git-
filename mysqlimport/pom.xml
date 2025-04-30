@@ -6,4 +6,13 @@
     <version>1.0</version>
   </parent>
   <artifactId>mysqlimport</artifactId>
-</project>
+  	<dependencies>
+
+<dependency>
+    <groupId>org.eclipse.jgit</groupId>
+    <artifactId>org.eclipse.jgit</artifactId>
+    <version>6.5.0.202303070854-r</version>
+</dependency>
+
+	</dependencies>
+	</project>
