@@ -29,7 +29,7 @@ public class CollectionToTableInsert {
 				tablelist.forEach((table)->{
 										
 					String tablefilename=table.substring(0,table.lastIndexOf(".")-1);
-					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection(schema);
+					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection("/mysqldump/uncompress/"+schema+"/"+table);
 					insert(schema,tablefilename,rowlist);
 				});
 				
