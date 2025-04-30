@@ -22,6 +22,11 @@ public class PropertyReader {
         return null;
     }
     
+    public static Properties getDefaultProperty() {
+    	
+    	return getProperty("/import_default.properties");
+    }
+    
     
     public static Properties getAccountsProperty() {
     	

@@ -13,7 +13,9 @@ public class StartApplication {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		new CreateScript().create();
+		
+		new CreateScript().createschema();
+		new CreateScript().create();
 
 	}
 

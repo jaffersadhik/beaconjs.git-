@@ -29,7 +29,65 @@ public class DBConnection {
         return conn;
     }
 
+    public static Connection getConnection(String schemaname) {
+    	
+    	
+			if(schemaname.equals("configuration")) {
+				
+				return getConfigurationConnection();
+				
+			}else if(schemaname.equals("accounts")) {
+				
+				return getAccountsConnection();
+
+			}else if(schemaname.equals("default")) {
+				
+				return getDefaultConnection();
+
+			}else if(schemaname.equals("carrier_handover")) {
+				return getCarrierHandoverConnection();
+
+			}else if(schemaname.equals("client_handover")) {
+				return getClientHanoverConnection();
+
+			}else if(schemaname.equals("cm")) {
+				return getCMConnection();
+
+			}else if(schemaname.equals("imp")) {
+				return getIMPConnection();
+
+			}else if(schemaname.equals("listing")) {
+				return getListingConnection();
+
+			}else if(schemaname.equals("messaging")) {
+				return getMessagingConnection();
+
+			}else if(schemaname.equals("logging")) {
+				return getLoggingConnection();
+
+			}else if(schemaname.equals("payload")) {
+				return getPayloadConnection();
+
+			}else if(schemaname.equals("r3c")) {
+				return getR3CConnection();
+
+			}else if(schemaname.equals("sysconfig")) {
+				return getSysconfigConnection();
+
+			}else if(schemaname.equals("billing")) {
+				return getBillingConnection();
+
+			}
+    	
+    	return null;
+    }
    
+    
+    public static Connection getDefaultConnection() {
+    	
+    	return getConnection(PropertyReader.getDefaultProperty());
+    }
+    
     public static Connection getAccountsConnection() {
     	
     	return getConnection(PropertyReader.getAccountsProperty());

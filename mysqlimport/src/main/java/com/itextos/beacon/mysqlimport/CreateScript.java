@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class CreateScript {
 
 	Map<String,String> tablestatus=new HashMap<String,String>();
-	
+	/*
 	public void create() {
 		
 		createAccountsSchematable();
@@ -31,6 +32,158 @@ public class CreateScript {
 		createSysconfigSchematable();
 
 	}
+*/
+	
+	public void createschema() {
+		
+		Connection connection=null;
+		
+		try {
+			connection=DBConnection.getDefaultConnection();
+			
+			createschema(connection,"configuration");
+			createschema(connection,"accounts");
+			createschema(connection,"carrier_handover");
+			createschema(connection,"client_handover");
+			createschema(connection,"cm");
+			createschema(connection,"imp");
+			createschema(connection,"listing");
+			createschema(connection,"messaging");
+			createschema(connection,"logging");
+			createschema(connection,"payload");
+			createschema(connection,"r3c");
+			createschema(connection,"sysconfig");
+			createschema(connection,"billing");
+			
+			executeQuery(connection,"CREATE USER 'appuser'@'%' IDENTIFIED BY 'appuser@123'");
+			executeQuery(connection,"GRANT ALL PRIVILEGES ON *.* TO 'appuser'@'%'");
+			executeQuery(connection,"ALTER USER 'appuser'@'%' IDENTIFIED WITH mysql_native_password BY 'appuser@123'");
+			
+			
+			executeQuery(connection,"CREATE USER 'cfguser'@'%' IDENTIFIED BY 'Sy5Cf8@123'");
+			executeQuery(connection,"GRANT ALL PRIVILEGES ON *.* TO 'cfguser'@'%'");
+			executeQuery(connection,"ALTER USER 'cfguser'@'%' IDENTIFIED WITH mysql_native_password BY 'Sy5Cf8@123'");
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+			if(connection!=null) {
+			
+				try {
+					connection.close();
+				}catch(Exception e) {
+					
+				}
+			}
+		}
+	
+	}
+	
+	private void executeQuery(Connection connection, String sql) {
+		
+		Statement statment=null;
+		
+		try {
+			statment=connection.createStatement();
+			
+			statment.execute(sql);
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+			if(statment!=null) {
+			try {
+				statment.close();
+			}catch(Exception e) {
+				
+			}
+			}
+		}
+		
+	}
+
+	private void createschema(Connection connection, String schemaname) {
+		
+		Statement statment=null;
+		
+		try {
+			statment=connection.createStatement();
+			
+			statment.execute("create database "+schemaname);
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+			if(statment!=null) {
+			try {
+				statment.close();
+			}catch(Exception e) {
+				
+			}
+			}
+		}
+		
+	}
+
+	public void create() {
+		
+		
+		Map<String,Map<String, String>> mysqldumpforcreate =	CollectionToFile.getGeneralDetail("/mysqldump/uncompress/createtable/createtable.ser");
+	
+		mysqldumpforcreate.forEach((schema,tablescriptmap)->{
+			
+			create(schema,tablescriptmap);
+			create(schema,tablescriptmap);
+			create(schema,tablescriptmap);
+		}
+		
+		);
+	}
+	
+	
+	private void create(String schema,Map<String, String> tablescriptmap) {
+		
+		tablescriptmap.forEach((tablename,createscriptsql)->{
+			
+			create(schema,createscriptsql);
+		});
+	}
+
+
+	private void create(String schema, String createscriptsql) {
+		
+		Connection connection=null;
+		Statement stat=null;
+		try {
+			connection=DBConnection.getConnection(schema);
+			stat=connection.createStatement();
+			stat.execute(createscriptsql);
+		}catch(Exception e) {
+			
+		}finally {
+			
+			try {
+				if(stat==null) {
+					stat.close();
+				}
+			}catch(Exception e) {
+				
+			}
+			
+			try {
+				if(connection==null) {
+					connection.close();
+				}
+			}catch(Exception e) {
+				
+			}
+		}
+		
+	}
+
 
 	private void createAccountsSchematable() {
 		
