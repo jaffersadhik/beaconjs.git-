@@ -30,8 +30,9 @@ public class CollectionToTableInsert {
 				
 				tablelist.forEach((table)->{
 					
+					MysqlImportLog.log(table+" table location");
 										
-					String tablefilename=table.substring(0,table.lastIndexOf(".")-1);
+					String tablefilename=table.substring(0,table.lastIndexOf("."));
 					MysqlImportLog.log(tablefilename+" import taken");
 
 					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection("/mysqldump/uncompress/"+schema+"/"+table);
