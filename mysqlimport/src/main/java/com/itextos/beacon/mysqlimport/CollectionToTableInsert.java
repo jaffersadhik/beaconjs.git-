@@ -33,9 +33,11 @@ public class CollectionToTableInsert {
 					MysqlImportLog.log(table+" table location");
 										
 					String tablefilename=table.substring(0,table.lastIndexOf("."));
-					MysqlImportLog.log(tablefilename+" import taken");
+					 tablefilename=tablefilename.substring(tablefilename.lastIndexOf("///"));
 
-					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection("/mysqldump/uncompress/"+schema+"/"+table);
+					MysqlImportLog.log(tablefilename+" import taken on schema : "+schema);
+
+					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection(table);
 					MysqlImportLog.log(rowlist.size()-1+" rows going to  import to "+tablefilename);
 
 					insert(schema,tablefilename,rowlist);
