@@ -1,6 +1,7 @@
 package com.itextos.beacon.mysqlimport;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class CollectionToTableInsert {
 					MysqlImportLog.log(table+" table location");
 										
 					String tablefilename=table.substring(0,table.lastIndexOf("."));
-					 tablefilename=tablefilename.substring(tablefilename.lastIndexOf("///"));
+			         tablefilename = Paths.get(tablefilename).getFileName().toString();
 
 					MysqlImportLog.log(tablefilename+" import taken on schema : "+schema);
 
