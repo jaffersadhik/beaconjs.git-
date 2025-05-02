@@ -144,7 +144,11 @@ public class CollectionToTableInsert {
                 }
                 ps.addBatch();
             }
-            ps.executeBatch();
+            int result[]=ps.executeBatch();
+            int count=getCount(result);
+            
+           MysqlImportLog.log(sql.toString()+"  inserted count : "+count);
+
         }catch(Exception e) {
         	
         	MysqlImportLog.log(ErrorMessage.getStackTraceAsString(e));
@@ -160,4 +164,13 @@ public class CollectionToTableInsert {
         	}
         }
     }
+	private static int getCount(int[] result) {
+		int resultInt=0;		
+		
+		for(int i=0;i<result.length;i++) {
+			
+			resultInt+=result[i];
+		}
+		return resultInt;
+	}
 }

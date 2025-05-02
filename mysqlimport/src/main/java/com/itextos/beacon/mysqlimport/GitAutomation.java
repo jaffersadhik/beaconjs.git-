@@ -113,7 +113,9 @@ public static void pull(String repoPath,String remoteRepoUrl,String fileName) {
         Git git = Git.open(new File(repoPath));
 
      // Perform the pull operation
-        PullResult result = git.pull().call();
+        PullResult result = git.pull()   
+        		.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, personalAccessToken))
+        		.call();
 
         if (result.isSuccessful()) {
             System.out.println("Git pull successful.");
