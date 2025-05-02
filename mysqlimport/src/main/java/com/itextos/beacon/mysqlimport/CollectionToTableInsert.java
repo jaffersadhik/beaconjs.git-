@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.itextos.beacon.commonlib.constants.ErrorMessage;
 
@@ -127,8 +129,12 @@ public class CollectionToTableInsert {
         Map<String, Object> firstRow = rows.get(0);
         String[] columns = firstRow.keySet().toArray(new String[0]);
 
+        String columnList = Arrays.stream(columns)
+        	    .map(col -> "`" + col + "`")
+        	    .collect(Collectors.joining(", "));
+        
         StringBuilder sql = new StringBuilder("INSERT INTO " + tableName + " (");
-        sql.append(String.join(", ", columns));
+        sql.append(columnList);
         sql.append(") VALUES (");
         sql.append("?,".repeat(columns.length));
         sql.setLength(sql.length() - 1); // Remove trailing comma
