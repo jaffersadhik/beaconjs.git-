@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
+
 public class CollectionToTableInsert {
 
 	
@@ -27,9 +29,14 @@ public class CollectionToTableInsert {
 				List<String> tablelist=getList(schema);
 				
 				tablelist.forEach((table)->{
+					
 										
 					String tablefilename=table.substring(0,table.lastIndexOf(".")-1);
+					MysqlImportLog.log(tablefilename+" import taken");
+
 					List<Map<String, Object>> rowlist=CollectionToFile.loadCollection("/mysqldump/uncompress/"+schema+"/"+table);
+					MysqlImportLog.log(rowlist.size()-1+" rows going to  import to "+tablefilename);
+
 					insert(schema,tablefilename,rowlist);
 				});
 				
@@ -46,12 +53,22 @@ public class CollectionToTableInsert {
 			
 			connection=DBConnection.getConnection(schema);
 			
+			MysqlImportLog.log(schema+" db connection getting");
 			insertIntoTable(connection, rowlist, tablefilename);
 			
 		}catch(Exception e) {
-			
+        	MysqlImportLog.log(ErrorMessage.getStackTraceAsString(e));
+
 		}finally {
 			
+			try {
+				if(connection!=null) {
+					
+					connection.close();
+				}
+			}catch(Exception e) {
+				
+			}
 		}
 		
 	}
@@ -113,7 +130,10 @@ public class CollectionToTableInsert {
         sql.setLength(sql.length() - 1); // Remove trailing comma
         sql.append(")");
 
-        try (PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+        MysqlImportLog.log(sql.toString());
+        PreparedStatement ps=null;
+        try  {
+        	ps= conn.prepareStatement(sql.toString());
             for (Map<String, Object> row : rows) {
                 for (int i = 0; i < columns.length; i++) {
                     ps.setObject(i + 1, row.get(columns[i]));
@@ -121,6 +141,19 @@ public class CollectionToTableInsert {
                 ps.addBatch();
             }
             ps.executeBatch();
+        }catch(Exception e) {
+        	
+        	MysqlImportLog.log(ErrorMessage.getStackTraceAsString(e));
+        }finally {
+        	try {
+        		if(ps!=null) {
+        			ps.close();
+        		}
+        	}catch(Exception e) {
+        		
+        	}finally {
+        		
+        	}
         }
     }
 }
