@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.utility.CommonUtility;
 import com.itextos.beacon.mysqlimport.DBConnection;
 
@@ -64,7 +65,7 @@ public class HourlyInsert {
 			con.commit();
 			
 		}catch(Exception e) {
-			e.printStackTrace();
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
 		}finally {
             CommonUtility.closeConnection(con);
      
@@ -89,16 +90,28 @@ public class HourlyInsert {
     		
     		pstmt=con.prepareStatement(sql);
     		add(cli_id_infomap,carrier_infomap,hourlyStatisticsdata,pstmt);
-    		pstmt.executeBatch();
-    		
+    		int [] result=pstmt.executeBatch();
+    		int count =getCount(result);
+    		StatisticsLog.log("inserted : "+count);
+
     	}catch(Exception e) {
-    		
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
     	}finally {
             CommonUtility.closeResultSet(rs);	
             CommonUtility.closeStatement(pstmt);
      
         }
 		
+	}
+
+	private static int getCount(int[] result) {
+		int count=0;
+		for(int i=0;i<result.length;i++){
+			
+			count+=result[i];
+		}
+		return count;
 	}
 
 	private static void add(Map<String, Map<String, String>> cli_id_infomap, Map<String, String> carrier_infomap,
@@ -180,7 +193,8 @@ public class HourlyInsert {
     		pstmt.executeBatch();
     		
     	}catch(Exception e) {
-    		
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
     	}finally {
             CommonUtility.closeStatement(pstmt);
      
@@ -197,8 +211,8 @@ public class HourlyInsert {
 				pstmt.setDate(1,new Date(sdf.parse(datestrng).getTime()));
 				pstmt.addBatch();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
 			}
 		});
 		
