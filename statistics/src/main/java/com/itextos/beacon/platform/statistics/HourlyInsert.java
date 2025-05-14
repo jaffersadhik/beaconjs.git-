@@ -122,7 +122,7 @@ public class HourlyInsert {
 
 		hourlyStatisticsdata.forEach((key,datedata)->{
 			
-			StringTokenizer st=new StringTokenizer(key,"key");
+			StringTokenizer st=new StringTokenizer(key,"~");
 			String cli_id=st.nextToken();
 			String smscid=st.nextToken();
 			
