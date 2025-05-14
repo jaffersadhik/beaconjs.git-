@@ -183,9 +183,16 @@ public class HourlyInsert {
 								pstmt.setLong(17, Long.parseLong(data.get("platformreject")));
 								pstmt.setLong(18, Long.parseLong(data.get("nulldn")));
 								double value =  Double.parseDouble(data.get("dnpercentage"));
-								BigDecimal rounded = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
-								double result = rounded.doubleValue();
-								pstmt.setDouble(19,result)	;						
+								if(value==0) {
+									
+									pstmt.setDouble(19,0D)	;
+
+								}else {
+									
+									BigDecimal rounded = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+									double result = rounded.doubleValue();
+									pstmt.setDouble(19,result)	;
+								}
 								pstmt.addBatch();
 
 							} catch (Exception e) {
