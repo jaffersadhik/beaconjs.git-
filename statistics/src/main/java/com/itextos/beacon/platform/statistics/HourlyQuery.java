@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.itextos.beacon.commonlib.commondbpool.DBDataSourceFactory;
+import com.itextos.beacon.commonlib.constants.ErrorMessage;
 import com.itextos.beacon.commonlib.constants.Table2DBInserterId;
 import com.itextos.beacon.inmemory.loader.InmemoryLoaderCollection;
 import com.itextos.beacon.inmemory.loader.process.InmemoryId;
@@ -138,6 +139,8 @@ public class HourlyQuery {
 			
 		}catch(Exception e) {
 			
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
 			
 		}finally {
 			
