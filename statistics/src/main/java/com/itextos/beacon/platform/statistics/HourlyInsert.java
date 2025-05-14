@@ -152,7 +152,7 @@ public class HourlyInsert {
 
 			}
 			
-			final String smsidfinal=smscid;
+			final String carriername=carrier_infomap.get(smscid)==null?"":carrier_infomap.get(smscid);
 				datedata.forEach((datestring,hourdata)->{
 					
 					try {
@@ -172,7 +172,7 @@ public class HourlyInsert {
 								pstmt.setLong(8, Long.parseLong(cli_id_infomap.get(cli_id).get("su_id")));
 								pstmt.setString(9, cli_id_infomap.get(cli_id).get("su_user"));
 								pstmt.setString(10, cli_id_infomap.get(cli_id).get("company"));
-								pstmt.setString(11,carrier_infomap.get(smsidfinal) );
+								pstmt.setString(11, carriername);
 
 								
 								pstmt.setLong(12, Long.parseLong(data.get("received")));								
