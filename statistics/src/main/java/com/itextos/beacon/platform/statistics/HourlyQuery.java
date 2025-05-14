@@ -272,12 +272,12 @@ public class HourlyQuery {
 
 		double lDelivery=Long.parseLong(delivery);
 		double lFailed=Long.parseLong(failed);
-		double lSubmit=Long.parseLong(failed);
+		double lSubmit=Long.parseLong(submit);
 
 		double totalDN=lDelivery+lFailed;
 		
 		double dnPercentage=0D;
-		if(totalDN==0) {
+		if(totalDN==0||lSubmit==0) {
 			
 		}else {
 			dnPercentage=(totalDN/lSubmit)*100;
