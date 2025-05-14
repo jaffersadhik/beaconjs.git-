@@ -370,7 +370,7 @@ public class HourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(sub_cli_sts_code.equals("400")&& !msg_type.equals("0")) {
+		 if(sub_cli_sts_code.equals("400")&& (msg_type!=null&&!msg_type.equals("0"))) {
 		 tablerecord.put("nonpromosubmit			", ""+(++lReceived));
 		 }
 	
