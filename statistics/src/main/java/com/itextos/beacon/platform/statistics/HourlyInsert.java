@@ -1,9 +1,13 @@
 package com.itextos.beacon.platform.statistics;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.BatchUpdateException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Set;
@@ -96,12 +100,27 @@ public class HourlyInsert {
 
     	}catch(Exception e) {
 			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+			
+			if(e instanceof BatchUpdateException ) {
+				nextExceptionLog((BatchUpdateException)e);
+			}
 
     	}finally {
             CommonUtility.closeResultSet(rs);	
             CommonUtility.closeStatement(pstmt);
      
         }
+		
+	}
+
+	private static void nextExceptionLog(BatchUpdateException bue) {
+		
+		    SQLException nextEx = bue.getNextException();
+		    while (nextEx != null) {
+		        nextEx = nextEx.getNextException();
+				StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(nextEx));
+
+		    }
 		
 	}
 
@@ -164,17 +183,20 @@ public class HourlyInsert {
 								pstmt.setLong(16, Long.parseLong(data.get("failed")));								
 								pstmt.setLong(17, Long.parseLong(data.get("platformreject")));
 								pstmt.setLong(18, Long.parseLong(data.get("nulldn")));
-								pstmt.setDouble(19, Double.parseDouble(data.get("dnpercentage")))	;						
+								double value =  Double.parseDouble(data.get("dnpercentage"));
+								BigDecimal rounded = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+								double result = rounded.doubleValue();
+								pstmt.setDouble(19,result)	;						
 								pstmt.addBatch();
 
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
 							}
 						});
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+
 					}
 				});
 				
