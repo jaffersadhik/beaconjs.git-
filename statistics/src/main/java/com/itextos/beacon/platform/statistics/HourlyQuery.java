@@ -27,7 +27,7 @@ public class HourlyQuery {
 	
 	static String SQL="select a.cli_id cli_id,a.smsc_id smsc_id ,DATE(a.recv_date) recv_date ,HOUR(a.recv_time) recv_hour,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.msg_type msg_type,count(*) from billing_{0}.submission_{1} a  LEFT OUTER JOIN "
 			+ "  billing_{2}.deliveries_{3} b "
-			+ " ON a.msg_id=b.msg_id group by a.cli_id,a.smsc_id,DATE(a.recv_date),HOUR(a.recv_time),a.sub_cli_sts_code,b.dn_ori_sts_code,a.msg_type,";
+			+ " ON a.msg_id=b.msg_id group by a.cli_id,a.smsc_id,DATE(a.recv_date),HOUR(a.recv_time),a.sub_cli_sts_code,b.dn_ori_sts_code,a.msg_type";
 	
 	
 	
