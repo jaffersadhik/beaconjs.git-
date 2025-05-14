@@ -82,7 +82,7 @@ public class HourlyInsert {
     	String sql="insert into summary.hourly_traffic_report(id,recv_date,recv_hour,cli_id,username,"
     			+ "pu_id,pu_username,su_id,su_username,company,"
     			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
-    			+ ",delivery_count,failed_count,platform_reject,nulldn"
+    			+ ",delivery_count,failed_count,platform_reject,nulldn,"
     			+ "delivery_pct) values(?,?,?,?,?,?,?,?,?,?,"
     			+ "?,?,?,?"
     			+ ",?,?,?,?,?)";
