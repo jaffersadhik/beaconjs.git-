@@ -147,9 +147,6 @@ public class HourlyInsert {
 			if(smscid.equals("dontdid")) {
 				smscid="";
 						
-			}else {
-				smscid=carrier_infomap.get(smscid);
-
 			}
 			
 			final String carriername=carrier_infomap.get(smscid)==null?"":carrier_infomap.get(smscid);
