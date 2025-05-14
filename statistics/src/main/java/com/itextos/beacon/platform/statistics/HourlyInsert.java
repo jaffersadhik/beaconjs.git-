@@ -116,8 +116,7 @@ public class HourlyInsert {
 	private static void nextExceptionLog(BatchUpdateException bue) {
 		
 		    SQLException nextEx = bue.getNextException();
-		    while (nextEx != null) {
-		        nextEx = nextEx.getNextException();
+		    if (nextEx != null) {
 				StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(nextEx));
 
 		    }
