@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Set;
@@ -18,15 +17,35 @@ public class HourlyInsert {
 
 	public static void doProcess() {
 		
+		long start=System.currentTimeMillis();
+		
 		Map<String,Map<String,Map<String,Map<String,String>>>> hourlyStatisticsdata=HourlyQuery.getHourlyData();
 		
+		long end=System.currentTimeMillis();
+		
+		StatisticsLog.log("Total Time Query : "+((end-start)/1000)+" seconds");
+
 		Set<String> dateset=HourlyQuery.getAvailableDays(hourlyStatisticsdata);
+		
+		StatisticsLog.log("dateset : "+dateset);
+
 		
 		Map<String,Map<String,String>> cli_id_infomap=MasterData.getCli_idInfoMap(); 
 		
+		StatisticsLog.log("cli_id_infomap : size "+cli_id_infomap.size());
+
+		
 		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
 		
+		StatisticsLog.log("carrier_infomap : size "+carrier_infomap.size());
+
+		start=System.currentTimeMillis();
 		doHourlyInsert(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+		
+		end=System.currentTimeMillis();
+		
+		StatisticsLog.log("Total Time Insert : "+((end-start)/1000)+" seconds");
+
 		
 	}
 

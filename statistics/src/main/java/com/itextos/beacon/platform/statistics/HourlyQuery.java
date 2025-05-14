@@ -178,10 +178,12 @@ public class HourlyQuery {
 		
 		for(int i=0;i<statisticsdays;i++) {
 			
+			StatisticsLog.log(getYesterdayQuery(i));
 			setHourlyData(result,getYesterdayQuery(i));
 
 		}
 		
+		StatisticsLog.log("result : "+result.size());
 
 		return result;
 	}
@@ -189,6 +191,8 @@ public class HourlyQuery {
 	private static void setHourlyData(Map<String, Map<String, Map<String, Map<String, String>>>> result, String sql) {
 
 		List<Map<String,String>> datalist=getResult( sql);
+		
+		StatisticsLog.log("datalist : "+datalist.size());
 		
 		for(int i=0;i<datalist.size();i++) {
 			
