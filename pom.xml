@@ -393,6 +393,7 @@
    	   	<module>redisstore</module>
    	   	<module>redisimport</module>
    	   	<module>mysqlimport</module>
+   	   	<module>statistics</module>
   </modules>
   
 

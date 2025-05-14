@@ -76,6 +76,11 @@ public class PropertyReader {
    }
    
    
+   public static Properties getPostgresStatisticsProperty() {
+	   	
+	   	return getProperty("/postgresstatistics.properties");
+	   }
+   
    public static Properties getClientHandoverProperty() {
    	
    	return getProperty("/import_client_handover.properties");

@@ -11,6 +11,9 @@ EXPOSE 20000/tcp
 
 COPY ./target/script /script
 
+COPY ./target/postgresstatistics/postgresstatistics.properties /postgresstatistics.properties
+
+
 COPY ./target/importdbconfig/default.properties /import_default.properties
 COPY ./target/importdbconfig/accounts.properties /import_accounts.properties
 COPY ./target/importdbconfig/configuration.properties /import_configuration.properties

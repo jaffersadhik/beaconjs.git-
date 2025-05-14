@@ -612,7 +612,14 @@ public class App {
 			com.itextos.beacon.platform.aysnprocessor.StartApplication.main(args);
 			
 			IS_START_PROMETHEUS=true;
-
+			return true;
+			
+		}else if(module.equals("statistics")){
+			
+			com.itextos.beacon.platform.statistics.StartApplication.main(args);
+			
+			IS_START_PROMETHEUS=true;
+			
 			return true;
 			
 		}else if(module.equals("importmysql")){

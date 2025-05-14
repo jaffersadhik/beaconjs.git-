@@ -8,7 +8,8 @@ import java.util.Properties;
 public class DBConnection {
 
     // Database credentials
-   
+
+	
 
     private static Connection getConnection(Properties prop) {
         Connection conn = null;
@@ -127,6 +128,12 @@ public class DBConnection {
    	
    	return getConnection(PropertyReader.getConfigurationProperty());
    }
+   
+   public static Connection getConnectionPostgresStatistics() {
+		
+	   	return getConnection(PropertyReader.getPostgresStatisticsProperty());
+
+	}
    
    public static Connection getIMPConnection() {
    	
