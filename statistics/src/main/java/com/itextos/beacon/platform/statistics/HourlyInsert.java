@@ -149,9 +149,9 @@ public class HourlyInsert {
 								pstmt.setInt(3, hour);
 								pstmt.setLong(4, Long.parseLong(cli_id));								
 								pstmt.setString(5, cli_id_infomap.get(cli_id).get("user"));
-								pstmt.setString(6, cli_id_infomap.get(cli_id).get("pu_id"));
+								pstmt.setLong(6, Long.parseLong(cli_id_infomap.get(cli_id).get("pu_id")));
 								pstmt.setString(7, cli_id_infomap.get(cli_id).get("pu_user"));
-								pstmt.setString(8, cli_id_infomap.get(cli_id).get("su_id"));
+								pstmt.setLong(8, Long.parseLong(cli_id_infomap.get(cli_id).get("su_id")));
 								pstmt.setString(9, cli_id_infomap.get(cli_id).get("su_user"));
 								pstmt.setString(10, cli_id_infomap.get(cli_id).get("company"));
 								pstmt.setString(11,carrier_infomap.get(smsidfinal) );
