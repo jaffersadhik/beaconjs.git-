@@ -25,7 +25,7 @@ public class HourlyQuery {
 
 	
 	
-	static String SQL="select a.cli_id cli_id,a.smsc_id smsc_id ,DATE(a.recv_date) recv_date ,HOUR(a.recv_time) recv_hour,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.msg_type msg_type,count(*) from billing_{0}.submission_{1} a  LEFT OUTER JOIN "
+	static String SQL="select a.cli_id cli_id,a.smsc_id smsc_id ,DATE(a.recv_date) recv_date ,HOUR(a.recv_time) recv_hour,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.msg_type msg_type,count(*) cnt from billing_{0}.submission_{1} a  LEFT OUTER JOIN "
 			+ "  billing_{2}.deliveries_{3} b "
 			+ " ON a.msg_id=b.msg_id group by a.cli_id,a.smsc_id,DATE(a.recv_date),HOUR(a.recv_time),a.sub_cli_sts_code,b.dn_ori_sts_code,a.msg_type";
 	
@@ -118,7 +118,8 @@ public class HourlyQuery {
 				 String recv_hour=rs.getString("recv_hour");
 				 String sub_cli_sts_code=rs.getString("sub_cli_sts_code");
 				 String dn_ori_sts_code=rs.getString("dn_ori_sts_code");
-				 
+				 String cnt=rs.getString("cnt");
+
 				 Map<String,String> data=new HashMap<String,String>();
 				 
 				 data.put("cli_id", cli_id);
@@ -127,6 +128,7 @@ public class HourlyQuery {
 				 data.put("recv_hour", recv_hour);
 				 data.put("sub_cli_sts_code", sub_cli_sts_code);
 				 data.put("dn_ori_sts_code", dn_ori_sts_code);
+				 data.put("cnt", cnt);
 
 				 result.add(data);
 
@@ -250,14 +252,15 @@ public class HourlyQuery {
 
 				 String sub_cli_sts_code=data.get("sub_cli_sts_code");
 				 String dn_ori_sts_code=data.get("dn_ori_sts_code");
+				 long cnt=Long.parseLong(data.get("cnt"));
 
-			incrementReceived(tablerecord);
-			incrementSubmit(tablerecord,sub_cli_sts_code);
-			incrementPlatformReject(tablerecord,sub_cli_sts_code);
-			incrementnonPromoSubCount(tablerecord,sub_cli_sts_code,msg_type);
-			incrementdelivery(tablerecord,dn_ori_sts_code);
-			incrementfailed(tablerecord,dn_ori_sts_code);
-			incrementnulldn(tablerecord,dn_ori_sts_code);
+			incrementReceived(tablerecord,cnt);
+			incrementSubmit(tablerecord,sub_cli_sts_code,cnt);
+			incrementPlatformReject(tablerecord,sub_cli_sts_code,cnt);
+			incrementnonPromoSubCount(tablerecord,sub_cli_sts_code,msg_type,cnt);
+			incrementdelivery(tablerecord,dn_ori_sts_code,cnt);
+			incrementfailed(tablerecord,dn_ori_sts_code,cnt);
+			incrementnulldn(tablerecord,dn_ori_sts_code,cnt);
 			resetdnpercentage(tablerecord);
 			
 	 
@@ -288,7 +291,7 @@ public class HourlyQuery {
 		
 	}
 
-	private static  void incrementnulldn(Map<String, String> tablerecord, String dn_ori_sts_code) {
+	private static  void incrementnulldn(Map<String, String> tablerecord, String dn_ori_sts_code,long cnt) {
 
 
 
@@ -305,13 +308,13 @@ public class HourlyQuery {
 		 long lReceived=Long.parseLong(received);
 		 
 		 if(dn_ori_sts_code==null ){
-		 tablerecord.put("nulldn", ""+(++lReceived));
+		 tablerecord.put("nulldn", ""+(cnt+lReceived));
 		 }
 			
 			
 	}
 
-	private static  void incrementfailed(Map<String, String> tablerecord, String dn_ori_sts_code) {
+	private static  void incrementfailed(Map<String, String> tablerecord, String dn_ori_sts_code,long cnt) {
 
 
 
@@ -332,14 +335,14 @@ public class HourlyQuery {
 			 int d=Integer.parseInt(dn_ori_sts_code);
 			 
 			 if(d>600) {
-				 	tablerecord.put("failed", ""+(++lReceived));
+				 	tablerecord.put("failed", ""+(cnt+lReceived));
 			 }
 		 }
 			
 			
 	}
 
-	private static  void incrementdelivery(Map<String, String> tablerecord, String dn_ori_sts_code) {
+	private static  void incrementdelivery(Map<String, String> tablerecord, String dn_ori_sts_code,long cnt) {
 
 
 
@@ -355,12 +358,12 @@ public class HourlyQuery {
 		 long lReceived=Long.parseLong(received);
 		 
 		 if(dn_ori_sts_code!=null&&!dn_ori_sts_code.equals("600")) {
-		 tablerecord.put("delivery", ""+(++lReceived));
+		 tablerecord.put("delivery", ""+(cnt+lReceived));
 		 }
 			
 	}
 
-	private  static void incrementnonPromoSubCount(Map<String, String> tablerecord, String sub_cli_sts_code, String msg_type) {
+	private  static void incrementnonPromoSubCount(Map<String, String> tablerecord, String sub_cli_sts_code, String msg_type,long cnt) {
 
 
 
@@ -377,12 +380,12 @@ public class HourlyQuery {
 		 long lReceived=Long.parseLong(received);
 		 
 		 if(sub_cli_sts_code.equals("400")&& (msg_type!=null&&!msg_type.equals("0"))) {
-		 tablerecord.put("nonpromosubmit			", ""+(++lReceived));
+		 tablerecord.put("nonpromosubmit			", ""+(cnt+lReceived));
 		 }
 	
 	}
 
-	private  static void incrementPlatformReject(Map<String, String> tablerecord, String sub_cli_sts_code) {
+	private  static void incrementPlatformReject(Map<String, String> tablerecord, String sub_cli_sts_code,long cnt) {
 
 
 		
@@ -397,11 +400,11 @@ public class HourlyQuery {
 		 long lReceived=Long.parseLong(received);
 		 
 		 if(!sub_cli_sts_code.equals("400")) {
-		 tablerecord.put("platformreject", ""+(++lReceived));
+		 tablerecord.put("platformreject", ""+(cnt+lReceived));
 		 }
 	}
 
-	private static  void incrementSubmit(Map<String, String> tablerecord, String sub_cli_sts_code) {
+	private static  void incrementSubmit(Map<String, String> tablerecord, String sub_cli_sts_code,long cnt) {
 
 
 		
@@ -416,11 +419,11 @@ public class HourlyQuery {
 		 long lReceived=Long.parseLong(received);
 		 
 		 if(sub_cli_sts_code.equals("400")) {
-		 tablerecord.put("submit", ""+(++lReceived));
+		 tablerecord.put("submit", ""+(cnt+lReceived));
 		 }
 	}
 
-	private static  void incrementReceived(Map<String, String> tablerecord) {
+	private static  void incrementReceived(Map<String, String> tablerecord,long cnt) {
 		
 		
 		 String received= tablerecord.get("received");
@@ -432,7 +435,7 @@ public class HourlyQuery {
 		 }
 		 
 		 long lReceived=Long.parseLong(received);
-		 tablerecord.put("received", ""+(++lReceived));
+		 tablerecord.put("received", ""+(cnt+lReceived));
 
 		
 	}
