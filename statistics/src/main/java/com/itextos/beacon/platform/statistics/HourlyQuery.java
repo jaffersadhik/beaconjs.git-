@@ -129,6 +129,7 @@ public class HourlyQuery {
 				 data.put("sub_cli_sts_code", sub_cli_sts_code);
 				 data.put("dn_ori_sts_code", dn_ori_sts_code);
 				 data.put("cnt", cnt);
+				 data.put("msg_type", msg_type);
 
 				 result.add(data);
 
@@ -357,7 +358,7 @@ public class HourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(dn_ori_sts_code!=null&&!dn_ori_sts_code.equals("600")) {
+		 if(dn_ori_sts_code!=null&&dn_ori_sts_code.equals("600")) {
 		 tablerecord.put("delivery", ""+(cnt+lReceived));
 		 }
 			
