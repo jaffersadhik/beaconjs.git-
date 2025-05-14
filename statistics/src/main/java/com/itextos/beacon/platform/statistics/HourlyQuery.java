@@ -176,6 +176,8 @@ public class HourlyQuery {
 	
 		int statisticsdays=Integer.parseInt(System.getenv("statisticdays"));
 		
+		StatisticsLog.log("statisticsdays : "+statisticsdays);
+
 		for(int i=0;i<statisticsdays;i++) {
 			
 			StatisticsLog.log(getYesterdayQuery(i));
