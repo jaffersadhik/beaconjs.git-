@@ -276,7 +276,10 @@ public class HourlyQuery {
 
 		double totalDN=lDelivery+lFailed;
 		
-		double dnPercentage=(totalDN/lSubmit)*100;
+		double dnPercentage=0D;
+		if(totalDN!=0) {
+			dnPercentage=(totalDN/lSubmit)*100;
+		}
 		
 		tablerecord.put("dnpercentage",""+dnPercentage);
 		
