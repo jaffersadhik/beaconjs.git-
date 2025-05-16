@@ -282,7 +282,7 @@ public class HourlyInsert {
 		try {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
-			delete(con,dateset,"summary.daily_traffic_report");
+			delete(con,dateset,"summary.hourly_traffic_report");
 			insert(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
 			con.commit();
 			
