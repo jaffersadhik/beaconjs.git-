@@ -268,7 +268,7 @@ public class HourlyQuery {
 		}
 	}
 
-	private static void resetdnpercentage(Map<String, String> tablerecord) {
+	public static void resetdnpercentage(Map<String, String> tablerecord) {
 		
 		String delivery=tablerecord.get("delivery")==null?"0":tablerecord.get("delivery");
 		String failed=tablerecord.get("failed")==null?"0":tablerecord.get("failed");
