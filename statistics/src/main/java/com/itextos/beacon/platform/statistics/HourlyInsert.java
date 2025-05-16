@@ -46,14 +46,16 @@ public class HourlyInsert {
 		
 		StatisticsLog.log("carrier_infomap : size "+carrier_infomap.size());
 		
-		Map<String,Map<String,Map<String,String>>> daywiseStatisticsdata = getDaywiseStatisticsdata(hourlyStatisticsdata,carrier_infomap);
 
-		StatisticsLog.log("daywiseStatisticsdata : size "+daywiseStatisticsdata.size());
 
 		start=System.currentTimeMillis();
 		
 		doHourWiseInsert(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
 		
+		Map<String,Map<String,Map<String,String>>> daywiseStatisticsdata = getDaywiseStatisticsdata(hourlyStatisticsdata,carrier_infomap);
+
+		StatisticsLog.log("daywiseStatisticsdata : size "+daywiseStatisticsdata.size());
+
 		doDateWiseInsert(cli_id_infomap,dateset,daywiseStatisticsdata);
 		
 		end=System.currentTimeMillis();
@@ -75,7 +77,7 @@ public class HourlyInsert {
 		try {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
-			delete(con,dateset,"summary.hourly_traffic_report");
+			delete(con,dateset,"summary.daily_traffic_report");
 			insert(con,cli_id_infomap,daywiseStatisticsdata);
 			con.commit();
 			
