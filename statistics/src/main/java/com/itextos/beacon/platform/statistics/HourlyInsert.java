@@ -48,6 +48,7 @@ public class HourlyInsert {
 		
 		Map<String,Map<String,Map<String,String>>> daywiseStatisticsdata = getDaywiseStatisticsdata(hourlyStatisticsdata,carrier_infomap);
 
+		StatisticsLog.log("daywiseStatisticsdata : size "+daywiseStatisticsdata.size());
 
 		start=System.currentTimeMillis();
 		
@@ -224,7 +225,7 @@ public class HourlyInsert {
 				
 				final Map<String, String> data=resultreceivedatedata.get(receivedate)==null?new HashMap<String,String>():resultreceivedatedata.get(receivedate);
 			
-				resultreceivedatedata.put(key, data);
+				resultreceivedatedata.put(receivedate, data);
 				
 				hourlydata.forEach((hour,hourdata)->{
 					
