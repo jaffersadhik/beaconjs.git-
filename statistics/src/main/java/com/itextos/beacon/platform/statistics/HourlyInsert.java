@@ -75,7 +75,7 @@ public class HourlyInsert {
 		try {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
-			delete(con,dateset);
+			delete(con,dateset,"summary.hourly_traffic_report");
 			insert(con,daywiseStatisticsdata);
 			con.commit();
 			
@@ -201,6 +201,7 @@ public class HourlyInsert {
 
 	private static Map<String, Map<String, Map<String, String>>> getDaywiseStatisticsdata(
 			Map<String, Map<String, Map<String, Map<String, String>>>> hourlyStatisticsdata,Map<String,String> carrier_infomap) {
+		
 		Map<String, Map<String, Map<String, String>>> result=new HashMap<String, Map<String, Map<String, String>>>();
 		
 		hourlyStatisticsdata.forEach((key,receivedatedata)->{
@@ -235,7 +236,7 @@ public class HourlyInsert {
 			});
 
 		});
-		return null;
+		return result;
 	}
 
 	private static void add(String carriername, Map<String, String> hourdata, Map<String, String> data) {
@@ -279,7 +280,7 @@ public class HourlyInsert {
 		try {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
-			delete(con,dateset);
+			delete(con,dateset,"summary.daily_traffic_report");
 			insert(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
 			con.commit();
 			
@@ -422,10 +423,10 @@ public class HourlyInsert {
 		});
 	}
 
-	private static void delete(Connection con, Set<String> dateset) {
+	private static void delete(Connection con, Set<String> dateset,String tablename) {
     	PreparedStatement pstmt = null;
 
-    	String sql="delete from summary.hourly_traffic_report where recv_date=?";
+    	String sql="delete from "+tablename+" where recv_date=?";
     	try {
     		
     		pstmt=con.prepareStatement(sql);
