@@ -54,7 +54,7 @@ public class HourlyInsert {
 		
 		doHourWiseInsert(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
 		
-		doDateWiseInsert(dateset,daywiseStatisticsdata);
+		doDateWiseInsert(cli_id_infomap,dateset,daywiseStatisticsdata);
 		
 		end=System.currentTimeMillis();
 		
@@ -63,7 +63,7 @@ public class HourlyInsert {
 		
 	}
 
-	private static void doDateWiseInsert(Set<String> dateset,
+	private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
 			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
@@ -76,7 +76,7 @@ public class HourlyInsert {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.hourly_traffic_report");
-			insert(con,daywiseStatisticsdata);
+			insert(con,cli_id_infomap,daywiseStatisticsdata);
 			con.commit();
 			
 		}catch(Exception e) {
@@ -90,7 +90,7 @@ public class HourlyInsert {
 		
 	}
 
-	private static void insert(Connection con, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
+	private static void insert(Connection con, Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
 
@@ -107,7 +107,7 @@ public class HourlyInsert {
     	try {
     		
     		pstmt=con.prepareStatement(sql);
-    		add(daywiseStatisticsdata,pstmt);
+    		add(cli_id_infomap,daywiseStatisticsdata,pstmt);
     		int [] result=pstmt.executeBatch();
     		int count =getCount(result);
     		StatisticsLog.log("Daywise inserted : "+count);
@@ -129,7 +129,7 @@ public class HourlyInsert {
 		
 	}
 
-	private static void add(Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata,
+	private static void add(Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata,
 			PreparedStatement pstmt) {
 		
 		
@@ -152,16 +152,16 @@ public class HourlyInsert {
 							try {
 								pstmt.setString(1, UUID.randomUUID().toString());
 								pstmt.setDate(2, receiveDate);
+
 								pstmt.setLong(3, Long.parseLong(cli_id));								
-								pstmt.setString(4, data.get("user"));
-								pstmt.setLong(5, Long.parseLong(data.get("pu_id")));
-								pstmt.setString(6, data.get("pu_user"));
-								pstmt.setLong(7, Long.parseLong(data.get("su_id")));
-								pstmt.setString(8, data.get("su_user"));
-								pstmt.setString(9, data.get("company"));
+								pstmt.setString(4, cli_id_infomap.get(cli_id).get("user"));
+								pstmt.setLong(5, Long.parseLong(cli_id_infomap.get(cli_id).get("pu_id")));
+								pstmt.setString(6, cli_id_infomap.get(cli_id).get("pu_user"));
+								pstmt.setLong(7, Long.parseLong(cli_id_infomap.get(cli_id).get("su_id")));
+								pstmt.setString(8, cli_id_infomap.get(cli_id).get("su_user"));
+								pstmt.setString(9, cli_id_infomap.get(cli_id).get("company"));
 								pstmt.setString(10, data.get("carriername"));
 
-								
 								pstmt.setLong(11, Long.parseLong(data.get("received")));								
 								pstmt.setLong(12, Long.parseLong(data.get("submit")));								
 								pstmt.setLong(13, Long.parseLong(data.get("nonpromosubmit")));								
