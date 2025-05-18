@@ -216,7 +216,7 @@ public class HourlyQuery {
 
 				
 				
-				final String carriername=carrier_infomap.get(smsc_id)==null?"":carrier_infomap.get(smsc_id);
+				final String carriername=carrier_infomap.get(smsc_id)==null?" ":carrier_infomap.get(smsc_id);
 
 			 String msg_type=data.get("msg_type");
 
