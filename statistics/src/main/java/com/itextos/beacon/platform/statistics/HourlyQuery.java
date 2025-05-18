@@ -175,7 +175,7 @@ public class HourlyQuery {
 
 	
 	
-	public static  Map<String,Map<String,Map<String,Map<String,String>>>> getHourlyData(){
+	public static  Map<String,Map<String,Map<String,Map<String,String>>>> getHourlyData(Map<String,String> carrier_infomap){
 		
 		Map<String,Map<String,Map<String,Map<String,String>>>> result=new HashMap<String,Map<String,Map<String,Map<String,String>>>>();
 	
@@ -187,7 +187,7 @@ public class HourlyQuery {
 		for(int i=0;i<statisticsdays;i++) {
 			
 			StatisticsLog.log(getYesterdayQuery(i));
-			setHourlyData(result,getYesterdayQuery(i));
+			setHourlyData(result,carrier_infomap,getYesterdayQuery(i));
 
 		}
 		
@@ -196,7 +196,7 @@ public class HourlyQuery {
 		return result;
 	}
 	
-	private static void setHourlyData(Map<String, Map<String, Map<String, Map<String, String>>>> result, String sql) {
+	private static void setHourlyData(Map<String, Map<String, Map<String, Map<String, String>>>> result,Map<String,String> carrier_infomap, String sql) {
 
 		List<Map<String,String>> datalist=getResult( sql);
 		
@@ -214,16 +214,20 @@ public class HourlyQuery {
 				 smsc_id="dontdid";
 			 }
 
+				
+				
+				final String carriername=carrier_infomap.get(smsc_id)==null?"":carrier_infomap.get(smsc_id);
+
 			 String msg_type=data.get("msg_type");
 
 			 
-			 Map<String, Map<String, Map<String, String>>> datewisereport= result.get(cli_id+"~"+smsc_id);
+			 Map<String, Map<String, Map<String, String>>> datewisereport= result.get(cli_id+"~"+carriername);
 			 
 			 if(datewisereport==null) {
 				 
 				 datewisereport=new HashMap<String, Map<String, Map<String, String>>>();
 				 
-				 result.put(cli_id+"~"+smsc_id, datewisereport);
+				 result.put(cli_id+"~"+carriername, datewisereport);
 			 }
 
 			 

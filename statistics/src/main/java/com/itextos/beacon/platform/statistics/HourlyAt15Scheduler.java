@@ -14,7 +14,7 @@ public class HourlyAt15Scheduler {
             public void run() {
                 System.out.println("Task running at: " + new Date());
                 
-                HourlyInsert.doProcess();
+          //      HourlyInsert.doProcess();
                 // Your task logic here
             }
         };

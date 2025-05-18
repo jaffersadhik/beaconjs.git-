@@ -21,11 +21,11 @@ import com.itextos.beacon.mysqlimport.DBConnection;
 
 public class HourlyInsert {
 
-	public static void doProcess() {
+	public static void doProcess(Map<String,Map<String,String>> cli_id_infomap,Map<String,String> carrier_infomap) {
 		
 		long start=System.currentTimeMillis();
 		
-		Map<String,Map<String,Map<String,Map<String,String>>>> hourlyStatisticsdata=HourlyQuery.getHourlyData();
+		Map<String,Map<String,Map<String,Map<String,String>>>> hourlyStatisticsdata=HourlyQuery.getHourlyData(carrier_infomap);
 		
 		
 		long end=System.currentTimeMillis();
@@ -36,16 +36,6 @@ public class HourlyInsert {
 		
 		StatisticsLog.log("dateset : "+dateset);
 
-		
-		Map<String,Map<String,String>> cli_id_infomap=MasterData.getCli_idInfoMap(); 
-		
-		StatisticsLog.log("cli_id_infomap : size "+cli_id_infomap.size());
-
-		
-		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
-		
-		StatisticsLog.log("carrier_infomap : size "+carrier_infomap.size());
-		
 
 
 		start=System.currentTimeMillis();
@@ -210,15 +200,9 @@ public class HourlyInsert {
 			
 			StringTokenizer st=new StringTokenizer(key,"~");
 			String cli_id=st.nextToken();
-			String smscid=st.nextToken();
+			String carriername=st.nextToken();
 			
-			if(smscid.equals("dontdid")) {
-				smscid="";
-						
-			}
-			
-			final String carriername=carrier_infomap.get(smscid)==null?"":carrier_infomap.get(smscid);
-			
+				
 			final Map<String, Map<String, String>> resultreceivedatedata=result.get(key)==null?new HashMap<String, Map<String, String>>():result.get(key);
 			
 			result.put(key, resultreceivedatedata);
@@ -360,14 +344,10 @@ public class HourlyInsert {
 			
 			StringTokenizer st=new StringTokenizer(key,"~");
 			String cli_id=st.nextToken();
-			String smscid=st.nextToken();
+			String carriername=st.nextToken();
 			
-			if(smscid.equals("dontdid")) {
-				smscid="";
-						
-			}
+		
 			
-			final String carriername=carrier_infomap.get(smscid)==null?"":carrier_infomap.get(smscid);
 				datedata.forEach((datestring,hourdata)->{
 					
 					try {
