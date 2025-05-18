@@ -1,16 +1,14 @@
 package com.itextos.beacon.platform.statistics;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.BatchUpdateException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -122,7 +120,6 @@ private static String getYesterdayQuery(int days) {
 				 
 				 
 				 String cli_id=rs.getString("cli_id");
-				 String smsc_id=rs.getString("smsc_id");
 				 String cli_hdr=rs.getString("cli_hdr");
 
 				 String recv_date=rs.getString("recv_date");
