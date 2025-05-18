@@ -472,8 +472,8 @@ private static void add(Map<String, Map<String, String>> cli_id_infomap,Map<Stri
 							pstmt.setLong(9, Long.parseLong(data.get("LTE_15_SECOND")));
 							pstmt.setLong(10, Long.parseLong(data.get("LTE_30_SECOND")));
 							pstmt.setLong(11, Long.parseLong(data.get("LTE_45_SECOND")));								
-							pstmt.setLong(12, Long.parseLong(data.get("LTE_60_MINUTE")));								
-							pstmt.setLong(13, Long.parseLong(data.get("LTE_120_MINUTE")));	
+							pstmt.setLong(12, Long.parseLong(data.get("LTE_60_SECOND")));								
+							pstmt.setLong(13, Long.parseLong(data.get("LTE_120_SECOND")));	
 							pstmt.setLong(14, Long.parseLong(data.get("GT_2_MINUTE")));
 
 						
