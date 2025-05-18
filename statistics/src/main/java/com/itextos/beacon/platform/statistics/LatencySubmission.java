@@ -480,7 +480,7 @@ private static void add(Map<String, Map<String, String>> cli_id_infomap,Map<Stri
 							pstmt.addBatch();
 
 						} catch (Exception e) {
-							StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+							StatisticsLog.log("error : "+data.toString()+"\t"+ErrorMessage.getStackTraceAsString(e));
 
 						}
 				
