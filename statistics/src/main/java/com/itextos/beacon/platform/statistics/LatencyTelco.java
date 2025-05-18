@@ -27,18 +27,18 @@ import com.itextos.beacon.mysqlimport.DBConnection;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfo;
 import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollection;
 
-public class LatencySubmission {
+public class LatencyTelco {
 
 	private static String SQL="select date(recv_date) recv_date,cli_id,cli_hdr,country,count(*) cnt,"
-			+ "SUM(case when sub_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >10000 and sub_lat_sla_in_millis <= 15000 then 1 else 0 end) as LTE_15_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >15000 and sub_lat_sla_in_millis <= 30000 then 1 else 0 end) as LTE_30_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >30000 and sub_lat_sla_in_millis <= 45000 then 1 else 0 end) as LTE_45_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >45000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_60_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_120_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
-			+ "from billing_{0}.submission_{1} group by recv_date,cli_id,cli_hdr,country";
+			+ "SUM(case when delv_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >10000 and sub_lat_sla_in_millis <= 15000 then 1 else 0 end) as LTE_15_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >15000 and sub_lat_sla_in_millis <= 30000 then 1 else 0 end) as LTE_30_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >30000 and sub_lat_sla_in_millis <= 45000 then 1 else 0 end) as LTE_45_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >45000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_60_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_120_SECOND,"
+			+ "SUM(case when delv_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
+			+ "from billing_{0}.deliveries_{1} group by recv_date,cli_id,cli_hdr,country";
 
 
 private static String getYesterdayQuery(int days) {
@@ -331,7 +331,7 @@ private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_inf
 	try {
 		con=DBConnection.getConnectionPostgresStatistics();
 		con.setAutoCommit(false);
-		delete(con,dateset,"summary.ui_platform_latency_report");
+		delete(con,dateset,"summary.ui_telco_latency_report");
 		insert(con,cli_id_infomap,carrier_infomap,daywiseStatisticsdata);
 		con.commit();
 		
@@ -393,7 +393,7 @@ private static void insert(Connection con, Map<String, Map<String, String>> cli_
 	PreparedStatement pstmt = null;
 	ResultSet rs=null;
 
-	String sql="insert into summary.ui_platform_latency_report(id,recv_date,cli_id,cli_hdr,"
+	String sql="insert into summary.ui_telco_latency_report(id,recv_date,cli_id,cli_hdr,"
 			+ "country,tot_cnt,lat_0_5_sec_cnt,lat_6_10_sec_cnt,"
 			+ "lat_11_15_sec_cnt,lat_16_30_sec_cnt,lat_31_45_sec_cnt,lat_46_60_sec_cnt,"
 			+ "lat_61_120_sec_cnt,lat_gt_120_sec_cnt) values(?,?,?,?,?,?,?,?,?,?,"

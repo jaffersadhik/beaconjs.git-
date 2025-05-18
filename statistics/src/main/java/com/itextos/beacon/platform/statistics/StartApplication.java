@@ -11,6 +11,7 @@ public class StartApplication {
 		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
         HourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
         LatencySubmission.doProcess(cli_id_infomap, carrier_infomap);
+        LatencyTelco.doProcess(cli_id_infomap, carrier_infomap);
 
 	}
 }
