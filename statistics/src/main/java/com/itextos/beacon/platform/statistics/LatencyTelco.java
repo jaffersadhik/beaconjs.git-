@@ -29,7 +29,7 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 
 public class LatencyTelco {
 
-	private static String SQL="select date(recv_date) recv_date,cli_id,dn_hdr,country,count(*) cnt,"
+	private static String SQL="select date(a.recv_date) recv_date,a.cli_id cli_id,cli_hdr,country,count(*) cnt,"
 			+ "SUM(case when delv_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >10000 and sub_lat_sla_in_millis <= 15000 then 1 else 0 end) as LTE_15_SECOND,"
@@ -38,7 +38,9 @@ public class LatencyTelco {
 			+ "SUM(case when delv_lat_sla_in_millis >45000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_60_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_120_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
-			+ "from billing_{0}.deliveries_{1} group by recv_date,cli_id,dn_hdr,country";
+			+ "from  billing_{0}.submission_{1} a  LEFT OUTER JOIN "
+			+ "billing_{2}.deliveries_{3} b "
+			+ "ON a.msg_id=b.msg_id WHERE delv_lat_sla_in_millis IS NOT NULL group by recv_date,cli_id,cli_hdr,country";
 
 
 private static String getYesterdayQuery(int days) {
