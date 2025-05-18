@@ -40,7 +40,7 @@ public class LatencyTelco {
 			+ "SUM(case when delv_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
 			+ "from  billing_{0}.submission_{1} a  LEFT OUTER JOIN "
 			+ "billing_{2}.deliveries_{3} b "
-			+ "ON a.msg_id=b.msg_id WHERE delv_lat_sla_in_millis IS NOT NULL group by recv_date,cli_id,cli_hdr,country";
+			+ "ON a.msg_id=b.msg_id WHERE delv_lat_sla_in_millis IS NOT NULL group by date(a.recv_date),a.cli_id,cli_hdr,country";
 
 
 private static String getYesterdayQuery(int days) {
@@ -122,7 +122,7 @@ private static String getYesterdayQuery(int days) {
 				 
 				 
 				 String cli_id=rs.getString("cli_id");
-				 String cli_hdr=rs.getString("dn_hdr");
+				 String cli_hdr=rs.getString("cli_hdr");
 
 				 String recv_date=rs.getString("recv_date");
 				 String country=rs.getString("country");
