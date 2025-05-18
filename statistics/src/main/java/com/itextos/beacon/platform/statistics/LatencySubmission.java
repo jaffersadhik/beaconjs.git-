@@ -141,7 +141,6 @@ private static String getYesterdayQuery(int days) {
 				 
 				 data.put("cli_id", cli_id);
 				 data.put("cli_hdr", cli_hdr);
-				 data.put("smsc_id", smsc_id);
 				 data.put("recv_date", recv_date);
 				 data.put("country", country);
 				 data.put("cnt", cnt);
