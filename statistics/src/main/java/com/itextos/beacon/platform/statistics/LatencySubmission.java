@@ -233,28 +233,20 @@ public static  Map<String,Map<String,Map<String,String>>> getHourlyData(Map<Stri
 			
 			 String cli_id=data.get("cli_id");
 			 
-			 String smsc_id=data.get("smsc_id");
 			 
-			 String cli_hdr=data.get("cli_hdr")==null?"":data.get("cli_hdr");
+			 String cli_hdr=data.get("cli_hdr")==null?" ":data.get("cli_hdr");
 
-			 String country=data.get("country")==null?"":data.get("country");
+			 String country=data.get("country")==null?" ":data.get("country");
 
-
-			 if(smsc_id==null) {
-				 
-				 smsc_id="dontdid";
-			 }
-
-				final String carriername=carrier_infomap.get(smsc_id)==null?"":carrier_infomap.get(smsc_id);
 
 			 
-			 Map<String, Map<String,  String>> datewisereport= result.get(cli_id+"~"+carriername+"~"+cli_hdr+"~"+country);
+			 Map<String, Map<String,  String>> datewisereport= result.get(cli_id+"~"+cli_hdr+"~"+country);
 			 
 			 if(datewisereport==null) {
 				 
 				 datewisereport=new HashMap<String, Map<String, String>>();
 				 
-				 result.put(cli_id+"~"+carriername+"~"+cli_hdr+"~"+country, datewisereport);
+				 result.put(cli_id+"~"+cli_hdr+"~"+country, datewisereport);
 			 }
 
 			 
@@ -273,22 +265,17 @@ public static  Map<String,Map<String,Map<String,String>>> getHourlyData(Map<Stri
 			 report.put("cnt", data.get("cnt"));
 			
 
-			 report.put("LTE_1_SECOND", data.get("LTE_1_SECOND"));
-			 report.put("LTE_2_SECOND", data.get("LTE_2_SECOND"));
-			 report.put("LTE_3_SECOND", data.get("LTE_3_SECOND"));
-			 report.put("LTE_4_SECOND", data.get("LTE_4_SECOND"));
 			 report.put("LTE_5_SECOND", data.get("LTE_5_SECOND"));
 
 			 report.put("LTE_10_SECOND", data.get("LTE_10_SECOND"));
 			 report.put("LTE_15_SECOND", data.get("LTE_15_SECOND"));
 			 report.put("LTE_30_SECOND", data.get("LTE_30_SECOND"));
+			 report.put("LTE_45_SECOND", data.get("LTE_45_SECOND"));
+			 report.put("LTE_60_SECOND", data.get("LTE_60_SECOND"));
+			 report.put("LTE_120_SECOND", data.get("LTE_120_SECOND"));
 
-			 report.put("LTE_1_MINUTE", data.get("LTE_1_MINUTE"));
-			 report.put("LTE_2_MINUTE", data.get("LTE_2_MINUTE"));
-			 report.put("LTE_5_MINUTE", data.get("LTE_5_MINUTE"));
-			 report.put("LTE_10_MINUTE", data.get("LTE_10_MINUTE"));
 
-			 report.put("GT_10_MINUTE", data.get("GT_10_MINUTE"));
+			 report.put("GT_2_MINUTE", data.get("GT_2_MINUTE"));
 
 			
 			
@@ -462,7 +449,6 @@ private static void add(Map<String, Map<String, String>> cli_id_infomap,Map<Stri
 
 		StringTokenizer st=new StringTokenizer(key,"~");
 		String cli_id=st.nextToken();
-		String carriername=st.nextToken();
 		String cli_hdr=st.nextToken();
 		String country=st.nextToken();
 
@@ -472,37 +458,23 @@ private static void add(Map<String, Map<String, String>> cli_id_infomap,Map<Stri
 				
 				try {
 					Date receiveDate=new Date(sdf.parse(datestring).getTime());
-					
-					String sql="insert into summary.platform_latency_summary(id,recv_date,cli_id,cli_hdr,"
-							+ "country,sub_carrier,tot_cnt,lte_1_second,lte_2_second,"
-							+ "lte_3_second,lte_4_second,lte_5_second,lte_10_second"
-							+ ",lte_15_second,lte_30_second,lte_1_minute,lte_2_minute,"
-							+ "lte_5_minute,lte_10_minute,gt_10_minute) values(?,?,?,?,?,?,?,?,?,?,"
-							+ "?,?,?,?"
-							+ ",?,?,?,?,?,?)";
-						try {
+							try {
 							pstmt.setString(1, UUID.randomUUID().toString());
 							pstmt.setDate(2, receiveDate);
 
 							pstmt.setLong(3, Long.parseLong(cli_id));								
 							pstmt.setString(4,cli_hdr);
 							pstmt.setString(5, country);
-							pstmt.setString(6, carriername);
 							
-							pstmt.setLong(7, Long.parseLong(data.get("cnt")));								
-							pstmt.setLong(8, Long.parseLong(data.get("LTE_1_SECOND")));								
-							pstmt.setLong(9, Long.parseLong(data.get("LTE_2_SECOND")));								
-							pstmt.setLong(10, Long.parseLong(data.get("LTE_3_SECOND")));								
-							pstmt.setLong(11, Long.parseLong(data.get("LTE_4_SECOND")));								
-							pstmt.setLong(12, Long.parseLong(data.get("LTE_5_SECOND")));								
-							pstmt.setLong(13, Long.parseLong(data.get("LTE_10_SECOND")));
-							pstmt.setLong(14, Long.parseLong(data.get("LTE_15_SECOND")));
-							pstmt.setLong(15, Long.parseLong(data.get("LTE_30_SECOND")));								
-							pstmt.setLong(16, Long.parseLong(data.get("LTE_1_MINUTE")));								
-							pstmt.setLong(17, Long.parseLong(data.get("LTE_2_MINUTE")));								
-							pstmt.setLong(18, Long.parseLong(data.get("LTE_5_MINUTE")));
-							pstmt.setLong(19, Long.parseLong(data.get("LTE_10_MINUTE")));
-							pstmt.setLong(20, Long.parseLong(data.get("GT_10_MINUTE")));
+							pstmt.setLong(6, Long.parseLong(data.get("cnt")));										
+							pstmt.setLong(7, Long.parseLong(data.get("LTE_5_SECOND")));								
+							pstmt.setLong(8, Long.parseLong(data.get("LTE_10_SECOND")));
+							pstmt.setLong(9, Long.parseLong(data.get("LTE_15_SECOND")));
+							pstmt.setLong(10, Long.parseLong(data.get("LTE_30_SECOND")));
+							pstmt.setLong(11, Long.parseLong(data.get("LTE_45_SECOND")));								
+							pstmt.setLong(12, Long.parseLong(data.get("LTE_60_MINUTE")));								
+							pstmt.setLong(13, Long.parseLong(data.get("LTE_120_MINUTE")));	
+							pstmt.setLong(14, Long.parseLong(data.get("GT_2_MINUTE")));
 
 						
 							pstmt.addBatch();
