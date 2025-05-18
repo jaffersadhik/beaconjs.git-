@@ -29,7 +29,7 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 
 public class LatencyTelco {
 
-	private static String SQL="select date(recv_date) recv_date,cli_id,cli_hdr,country,count(*) cnt,"
+	private static String SQL="select date(recv_date) recv_date,cli_id,dn_hdr,country,count(*) cnt,"
 			+ "SUM(case when delv_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >10000 and sub_lat_sla_in_millis <= 15000 then 1 else 0 end) as LTE_15_SECOND,"
@@ -38,7 +38,7 @@ public class LatencyTelco {
 			+ "SUM(case when delv_lat_sla_in_millis >45000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_60_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_120_SECOND,"
 			+ "SUM(case when delv_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
-			+ "from billing_{0}.deliveries_{1} group by recv_date,cli_id,cli_hdr,country";
+			+ "from billing_{0}.deliveries_{1} group by recv_date,cli_id,dn_hdr,country";
 
 
 private static String getYesterdayQuery(int days) {
@@ -120,7 +120,7 @@ private static String getYesterdayQuery(int days) {
 				 
 				 
 				 String cli_id=rs.getString("cli_id");
-				 String cli_hdr=rs.getString("cli_hdr");
+				 String cli_hdr=rs.getString("dn_hdr");
 
 				 String recv_date=rs.getString("recv_date");
 				 String country=rs.getString("country");
