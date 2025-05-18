@@ -31,27 +31,22 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 
 public class LatencySubmission {
 
-	private static String SQL="select date(recv_date) recv_date,cli_id,cli_hdr,country,smsc_id,count(*) cnt,"
-			+ "SUM(case when sub_lat_sla_in_millis <= 1000 then 1 else 0 end) as LTE_1_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >1000 and sub_lat_sla_in_millis <= 2000 then 1 else 0 end) as LTE_2_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >2000 and sub_lat_sla_in_millis <= 3000 then 1 else 0 end) as LTE_3_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >3000 and sub_lat_sla_in_millis <= 4000 then 1 else 0 end) as LTE_4_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >4000 and sub_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
+	private static String SQL="select date(recv_date) recv_date,cli_id,cli_hdr,country,count(*) cnt,"
+			+ "SUM(case when sub_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
 			+ "SUM(case when sub_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
 			+ "SUM(case when sub_lat_sla_in_millis >10000 and sub_lat_sla_in_millis <= 15000 then 1 else 0 end) as LTE_15_SECOND,"
 			+ "SUM(case when sub_lat_sla_in_millis >15000 and sub_lat_sla_in_millis <= 30000 then 1 else 0 end) as LTE_30_SECOND,"
-			+ "SUM(case when sub_lat_sla_in_millis >30000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_1_MINUTE,"
-			+ "SUM(case when sub_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_2_MINUTE,"
-			+ "SUM(case when sub_lat_sla_in_millis >120000 and sub_lat_sla_in_millis <= 300000 then 1 else 0 end) as LTE_5_MINUTE,"
-			+ "SUM(case when sub_lat_sla_in_millis >300000 and sub_lat_sla_in_millis <= 600000 then 1 else 0 end) as LTE_10_MINUTE,"
-			+ "SUM(case when sub_lat_sla_in_millis > 600000 then 1 else 0 end) as GT_10_MINUTE "
-			+ "from submission_20250514 group by  recv_date,cli_id,cli_hdr,country,smsc_id";
+			+ "SUM(case when sub_lat_sla_in_millis >30000 and sub_lat_sla_in_millis <= 45000 then 1 else 0 end) as LTE_45_SECOND,"
+			+ "SUM(case when sub_lat_sla_in_millis >45000 and sub_lat_sla_in_millis <= 60000 then 1 else 0 end) as LTE_60_SECOND,"
+			+ "SUM(case when sub_lat_sla_in_millis >60000 and sub_lat_sla_in_millis <= 120000 then 1 else 0 end) as LTE_120_SECOND,"
+			+ "SUM(case when sub_lat_sla_in_millis > 120000 then 1 else 0 end) as GT_2_MINUTE "
+			+ "from billing_{0}.submission_{1} group by recv_date,cli_id,cli_hdr,country";
 
 
 private static String getYesterdayQuery(int days) {
 		
 		
-		String formattedSQL2 = MessageFormat.format(SQL, getYesderdayMonthString(days), getYesderdayString(days), getYesderdayMonthString(days), getYesderdayString(days));
+		String formattedSQL2 = MessageFormat.format(SQL, getYesderdayMonthString(days), getYesderdayString(days));
 
 	    return formattedSQL2;
 	}
@@ -134,21 +129,16 @@ private static String getYesterdayQuery(int days) {
 				 String country=rs.getString("country");
 				 String cnt=rs.getString("cnt");
 
-				 String LTE_1_SECOND=rs.getString("LTE_1_SECOND");
-				 String LTE_2_SECOND=rs.getString("LTE_2_SECOND");
-				 String LTE_3_SECOND=rs.getString("LTE_3_SECOND");
-				 String LTE_4_SECOND=rs.getString("LTE_4_SECOND");
 				 String LTE_5_SECOND=rs.getString("LTE_5_SECOND");
-				 
 				 String LTE_10_SECOND=rs.getString("LTE_10_SECOND");
 				 String LTE_15_SECOND=rs.getString("LTE_15_SECOND");
 				 String LTE_30_SECOND=rs.getString("LTE_30_SECOND");
+				 String LTE_45_SECOND=rs.getString("LTE_45_SECOND");
+				 
 
-				 String LTE_1_MINUTE=rs.getString("LTE_1_MINUTE");
-				 String LTE_2_MINUTE=rs.getString("LTE_2_MINUTE");
-				 String LTE_5_MINUTE=rs.getString("LTE_5_MINUTE");
-				 String LTE_10_MINUTE=rs.getString("LTE_10_MINUTE");
-				 String GT_10_MINUTE=rs.getString("GT_10_MINUTE");
+				 String LTE_60_SECOND=rs.getString("LTE_60_SECOND");
+				 String LTE_120_SECOND=rs.getString("LTE_120_SECOND");
+				 String GT_2_MINUTE=rs.getString("GT_2_MINUTE");
 
 				 Map<String,String> data=new HashMap<String,String>();
 				 
@@ -159,17 +149,16 @@ private static String getYesterdayQuery(int days) {
 				 data.put("country", country);
 				 data.put("cnt", cnt);
 
-				 data.put("LTE_1_SECOND", LTE_1_SECOND);
-				 data.put("LTE_2_SECOND", LTE_2_SECOND);
-				 data.put("LTE_3_SECOND", LTE_3_SECOND);
-				 data.put("LTE_4_SECOND", LTE_4_SECOND);
 				 data.put("LTE_5_SECOND", LTE_5_SECOND);
+				 data.put("LTE_10_SECOND", LTE_10_SECOND);
+				 data.put("LTE_15_SECOND", LTE_15_SECOND);
+				 data.put("LTE_30_SECOND", LTE_30_SECOND);
+				 data.put("LTE_45_SECOND", LTE_45_SECOND);
 
-				 data.put("LTE_1_MINUTE", LTE_1_MINUTE);
-				 data.put("LTE_2_MINUTE", LTE_2_MINUTE);
-				 data.put("LTE_5_MINUTE", LTE_5_MINUTE);
-				 data.put("LTE_10_MINUTE", LTE_10_MINUTE);
-				 data.put("GT_10_MINUTE", GT_10_MINUTE);
+				 data.put("LTE_60_SECOND", LTE_60_SECOND);
+				 data.put("LTE_120_SECOND", LTE_120_SECOND);
+				 data.put("GT_2_MINUTE", GT_2_MINUTE);
+				 
 
 				 result.add(data);
 
@@ -421,20 +410,18 @@ private static void insert(Connection con, Map<String, Map<String, String>> cli_
 	PreparedStatement pstmt = null;
 	ResultSet rs=null;
 
-	String sql="insert into summary.platform_latency_summary(id,recv_date,cli_id,cli_hdr,"
-			+ "country,sub_carrier,tot_cnt,lte_1_second,lte_2_second,"
-			+ "lte_3_second,lte_4_second,lte_5_second,lte_10_second"
-			+ ",lte_15_second,lte_30_second,lte_1_minute,lte_2_minute,"
-			+ "lte_5_minute,lte_10_minute,gt_10_minute) values(?,?,?,?,?,?,?,?,?,?,"
-			+ "?,?,?,?"
-			+ ",?,?,?,?,?,?)";
+	String sql="insert into summary.ui_platform_latency_report(id,recv_date,cli_id,cli_hdr,"
+			+ "country,tot_cnt,lat_0_5_sec_cnt,lat_6_10_sec_cnt,"
+			+ "lat_11_15_sec_cnt,lat_16_30_sec_cnt,lat_31_45_sec_cnt,lat_46_60_sec_cnt,"
+			+ "lat_61_120_sec_cnt,lat_gt_120_sec_cnt) values(?,?,?,?,?,?,?,?,?,?,"
+			+ "?,?,?,?)";
 	try {
 		
 		pstmt=con.prepareStatement(sql);
 		add(cli_id_infomap,carrier_infomap,daywiseStatisticsdata,pstmt);
 		int [] result=pstmt.executeBatch();
 		int count =getCount(result);
-		StatisticsLog.log("Daywise inserted : "+count);
+		StatisticsLog.log("ui_platform_latency_report inserted : "+count);
 
 	}catch(Exception e) {
 		StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
