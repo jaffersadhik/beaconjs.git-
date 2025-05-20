@@ -406,7 +406,7 @@ private static void insert(Connection con, Map<String, Map<String, String>> cli_
 		add(cli_id_infomap,carrier_infomap,daywiseStatisticsdata,pstmt);
 		int [] result=pstmt.executeBatch();
 		int count =getCount(result);
-		StatisticsLog.log("ui_platform_latency_report inserted : "+count);
+		StatisticsLog.log("summary.ui_telco_latency_report inserted : "+count);
 
 	}catch(Exception e) {
 		StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
