@@ -242,10 +242,7 @@ public class UIHourlyInsert {
 
     	}catch(Exception e) {
 			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
-			if(pstmt!=null) {
-				
-				pstmt
-			}
+			
 			if(e instanceof BatchUpdateException ) {
 				nextExceptionLog((BatchUpdateException)e);
 			}
