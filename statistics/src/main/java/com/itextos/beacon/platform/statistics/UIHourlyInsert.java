@@ -220,7 +220,6 @@ public class UIHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String,  String>>> hourlyStatisticsdata) {
     	PreparedStatement pstmt = null;
-    	ResultSet rs=null;
 
     	String sql="insert into summary.ui_traffic_mix_report(id,recv_date,cli_id,cli_hdr,"
     			+ "campaign_id,campaign_name,intf_type,country,sms_rate,"
@@ -228,7 +227,7 @@ public class UIHourlyInsert {
     			+ "tot_cnt,submitted_cnt,delivered_cnt,dn_failed_cnt,"
     			+ "dn_expired_cnt,rejected_cnt,out_of_credits_cnt,dn_pending_cnt)values("
     			+ "?,?,?,?,"
-    			+ "?,?,?,?,?"
+    			+ "?,?,?,?,?,"
     			+ "?,?,?,?,"
     			+ "?,?,?,?,"
     			+ "?,?,?,?)";
@@ -243,13 +242,15 @@ public class UIHourlyInsert {
 
     	}catch(Exception e) {
 			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
-			
+			if(pstmt!=null) {
+				
+				pstmt
+			}
 			if(e instanceof BatchUpdateException ) {
 				nextExceptionLog((BatchUpdateException)e);
 			}
 
     	}finally {
-            CommonUtility.closeResultSet(rs);	
             CommonUtility.closeStatement(pstmt);
      
         }
