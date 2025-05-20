@@ -180,15 +180,17 @@ public class UIHourlyInsert {
 		long dnexpired=data.get("dnexpired")==null?0L:Long.parseLong(data.get("dnexpired"));
 		long outofcredit=data.get("outofcredit")==null?0L:Long.parseLong(data.get("outofcredit"));
 
-		data.put("received", ""+(lReceived+Long.parseLong(hourdata.get("received"))));
-		data.put("submit", ""+(lSubmit+Long.parseLong(hourdata.get("submit"))));
-		data.put("nonpromosubmit", ""+(lNonpromosubmit+Long.parseLong(hourdata.get("nonpromosubmit"))));
-		data.put("delivery", ""+(lDelivery+Long.parseLong(hourdata.get("delivery"))));
-		data.put("failed", ""+(lFailed+Long.parseLong(hourdata.get("failed"))));
-		data.put("platformreject", ""+(lPlatformreject+Long.parseLong(hourdata.get("platformreject"))));
-		data.put("nulldn", ""+(lNulldn+Long.parseLong(hourdata.get("nulldn"))));
-		data.put("dnexpired", ""+(dnexpired+Long.parseLong(hourdata.get("dnexpired"))));
-		data.put("outofcredit", ""+(outofcredit+Long.parseLong(hourdata.get("outofcredit"))));
+		data.put("received", ""+(lReceived+Long.parseLong(hourdata.get("received")==null?"0":hourdata.get("received"))));
+		data.put("submit", ""+(lSubmit+Long.parseLong(hourdata.get("submit")==null?"0":hourdata.get("submit"))));
+		data.put("delivery", ""+(lDelivery+Long.parseLong(hourdata.get("delivery")==null?"0":hourdata.get("delivery"))));
+		data.put("nonpromosubmit", ""+(lNonpromosubmit+Long.parseLong(hourdata.get("nonpromosubmit")==null?"0":hourdata.get("nonpromosubmit"))));
+		data.put("failed", ""+(lFailed+Long.parseLong(hourdata.get("failed")==null?"0":hourdata.get("failed"))));
+		data.put("platformreject", ""+(lPlatformreject+Long.parseLong(hourdata.get("platformreject")==null?"0":hourdata.get("platformreject"))));
+		data.put("nulldn", ""+(lNulldn+Long.parseLong(hourdata.get("nulldn")==null?"0":hourdata.get("nulldn"))));
+		data.put("dnexpired", ""+(dnexpired+Long.parseLong(hourdata.get("dnexpired")==null?"0":hourdata.get("dnexpired"))));
+		data.put("outofcredit", ""+(outofcredit+Long.parseLong(hourdata.get("outofcredit")==null?"0":hourdata.get("outofcredit"))));
+
+		
 
 		HourlyQuery.resetdnpercentage(data);
 	}
