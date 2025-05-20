@@ -86,13 +86,11 @@ public class UIHourlyInsert {
 		
 	  	String sql="insert into summary.ui_traffic_report(id,recv_date,cli_id,cli_hdr,"
     			+ "intf_type,country,sms_rate,"
-    			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
-    			+ ",dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
+    			+ "dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
     			+ "tot_cnt,submitted_cnt,delivered_cnt,dn_failed_cnt,"
     			+ "dn_expired_cnt,rejected_cnt,out_of_credits_cnt,dn_pending_cnt)values("
     			+ "?,?,?,?,"
     			+ "?,?,?,"
-    			+ "?,?,?,?,"
     			+ "?,?,?,?,"
     			+ "?,?,?,?,"
     			+ "?,?,?,?)";
@@ -226,13 +224,11 @@ public class UIHourlyInsert {
 
     	String sql="insert into summary.ui_traffic_mix_report(id,recv_date,cli_id,cli_hdr,"
     			+ "campaign_id,campaign_name,intf_type,country,sms_rate,"
-    			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
-    			+ ",dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
+    			+ "dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
     			+ "tot_cnt,submitted_cnt,delivered_cnt,dn_failed_cnt,"
     			+ "dn_expired_cnt,rejected_cnt,out_of_credits_cnt,dn_pending_cnt)values("
     			+ "?,?,?,?,"
-    			+ "?,?,?,?,"
-    			+ "?,?,?,?,"
+    			+ "?,?,?,?,?"
     			+ "?,?,?,?,"
     			+ "?,?,?,?,"
     			+ "?,?,?,?)";
