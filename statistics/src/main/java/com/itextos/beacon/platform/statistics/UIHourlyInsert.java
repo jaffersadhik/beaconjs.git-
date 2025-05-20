@@ -68,7 +68,7 @@ public class UIHourlyInsert {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_report");
-			insert(con,cli_id_infomap,daywiseStatisticsdata);
+			insertTraffic(con,cli_id_infomap,daywiseStatisticsdata);
 			con.commit();
 			
 		}catch(Exception e) {
@@ -82,9 +82,9 @@ public class UIHourlyInsert {
 		
 	}
 
-	private static void insert(Connection con, Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
+	private static void insertTraffic(Connection con, Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
-	  	String sql="insert into summary.ui_traffic_mix_report(id,recv_date,cli_id,cli_hdr,"
+	  	String sql="insert into summary.ui_traffic_report(id,recv_date,cli_id,cli_hdr,"
     			+ "intf_type,country,sms_rate,"
     			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
     			+ ",dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
@@ -206,7 +206,7 @@ public class UIHourlyInsert {
 			con=DBConnection.getConnectionPostgresStatistics();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_mix_report");
-			insert(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
 			con.commit();
 			
 		}catch(Exception e) {
@@ -218,13 +218,13 @@ public class UIHourlyInsert {
 		
 	}
 
-	private static void insert(Connection con, Map<String, Map<String, String>> cli_id_infomap,
+	private static void insertMixTraffic(Connection con, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String,  String>>> hourlyStatisticsdata) {
     	PreparedStatement pstmt = null;
     	ResultSet rs=null;
 
-    	String sql="insert into summary.hourly_traffic_report(id,recv_date,cli_id,cli_hdr,"
+    	String sql="insert into summary.ui_traffic_mix_report(id,recv_date,cli_id,cli_hdr,"
     			+ "campaign_id,campaign_name,intf_type,country,sms_rate,"
     			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
     			+ ",dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
@@ -300,19 +300,6 @@ public class UIHourlyInsert {
 			String billing_add_fixed_rate=st.nextToken();
 			String campaign_id=st.nextToken();
 			String campaign_name=st.nextToken();
-
-	    	String sql="insert into summary.ui_traffic_mix_report(id,recv_date,cli_id,cli_hdr,"
-	    			+ "campaign_id,campaign_name,intf_type,country,sms_rate,"
-	    			+ "carrier_name,total_received,total_submitted,non_promo_sub_count"
-	    			+ ",dlt_rate,billing_currency,billing_sms_rate,billing_add_fixed_rate,"
-	    			+ "tot_cnt,submitted_cnt,delivered_cnt,dn_failed_cnt,"
-	    			+ "dn_expired_cnt,rejected_cnt,out_of_credits_cnt,dn_pending_cnt)values("
-	    			+ "?,?,?,?,"
-	    			+ "?,?,?,?,"
-	    			+ "?,?,?,?,"
-	    			+ "?,?,?,?,"
-	    			+ "?,?,?,?,"
-	    			+ "?,?,?,?)";
 
 			
 				datedata.forEach((datestring,data)->{
