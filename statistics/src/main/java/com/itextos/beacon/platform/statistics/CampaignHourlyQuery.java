@@ -24,7 +24,8 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 public class CampaignHourlyQuery {
 
 	
-	
+	static String NULL="##NULL##";
+
 	static String SQL="select a.cli_id cli_id,a.cli_hdr,DATE(a.recv_date) recv_date ,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.intf_type intf_type,a.country country,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5,count(*) cnt from billing_{0}.submission_{1} a  LEFT OUTER JOIN   billing_{2}.deliveries_{3} b  ON a.msg_id=b.msg_id where campaign_name is not null group by a.cli_id,a.cli_hdr,DATE(a.recv_date) ,a.sub_cli_sts_code  ,b.dn_ori_sts_code  ,a.intf_type ,a.country ,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5";
 	
 	
@@ -244,29 +245,29 @@ public class CampaignHourlyQuery {
 			Map<String,String> data=datalist.get(i);
 			
 			 String cli_id=data.get("cli_id");	
-			 String cli_hdr=data.get("cli_hdr");			
+			 String cli_hdr=data.get("cli_hdr")==null?NULL:data.get("cli_hdr");			
 			 String recv_date=data.get("recv_date");		 
 			 String sub_cli_sts_code=data.get("sub_cli_sts_code");			 
-			 String dn_ori_sts_code=data.get("dn_ori_sts_code")==null?" ":data.get("dn_ori_sts_code");			 
-			 String intf_type=data.get("intf_type")==null?" ":data.get("intf_type");			 
-			 String country=data.get("country")==null?" ":data.get("country");			 
-			 String sms_rate=data.get("sms_rate")==null?" ":data.get("sms_rate");			 
-			 String dlt_rate=data.get("dlt_rate")==null?" ":data.get("dlt_rate");			 
-			 String billing_currency=data.get("billing_currency")==null?" ":data.get("billing_currency");			 
-			 String billing_sms_rate=data.get("billing_sms_rate")==null?" ":data.get("billing_sms_rate");			 
-			 String billing_add_fixed_rate=data.get("billing_add_fixed_rate")==null?" ":data.get("billing_add_fixed_rate");			 
-			 String campaign_id=data.get("campaign_id")==null?" ":data.get("campaign_id");			 
-			 String campaign_name=data.get("campaign_name")==null?" ":data.get("campaign_name");			 
+			 String dn_ori_sts_code=data.get("dn_ori_sts_code")==null?NULL:data.get("dn_ori_sts_code");			 
+			 String intf_type=data.get("intf_type")==null?NULL:data.get("intf_type");			 
+			 String country=data.get("country")==null?NULL:data.get("country");			 
+			 String sms_rate=data.get("sms_rate")==null?NULL:data.get("sms_rate");			 
+			 String dlt_rate=data.get("dlt_rate")==null?NULL:data.get("dlt_rate");			 
+			 String billing_currency=data.get("billing_currency")==null?NULL:data.get("billing_currency");			 
+			 String billing_sms_rate=data.get("billing_sms_rate")==null?NULL:data.get("billing_sms_rate");			 
+			 String billing_add_fixed_rate=data.get("billing_add_fixed_rate")==null?NULL:data.get("billing_add_fixed_rate");			 
+			 String campaign_id=data.get("campaign_id")==null?NULL:data.get("campaign_id");			 
+			 String campaign_name=data.get("campaign_name")==null?NULL:data.get("campaign_name");			 
 		
-			 String msg_tag=data.get("msg_tag")==null?" ":data.get("msg_tag");			 
-			 String msg_tag1=data.get("msg_tag1")==null?" ":data.get("msg_tag1");			 
-			 String msg_tag2=data.get("msg_tag2")==null?" ":data.get("msg_tag2");			 
-			 String msg_tag3=data.get("msg_tag3")==null?" ":data.get("msg_tag3");			 
-			 String msg_tag4=data.get("msg_tag4")==null?" ":data.get("msg_tag4");			 
-			 String msg_tag5=data.get("msg_tag5")==null?" ":data.get("msg_tag5");			 
+			 String msg_tag=data.get("msg_tag")==null?NULL:data.get("msg_tag");			 
+			 String msg_tag1=data.get("msg_tag1")==null?NULL:data.get("msg_tag1");			 
+			 String msg_tag2=data.get("msg_tag2")==null?NULL:data.get("msg_tag2");			 
+			 String msg_tag3=data.get("msg_tag3")==null?NULL:data.get("msg_tag3");			 
+			 String msg_tag4=data.get("msg_tag4")==null?NULL:data.get("msg_tag4");			 
+			 String msg_tag5=data.get("msg_tag5")==null?NULL:data.get("msg_tag5");			 
 
-			 String file_id=data.get("file_id")==null?" ":data.get("file_id");			 
-			 String file_name=data.get("file_name")==null?" ":data.get("file_name");			 
+			 String file_id=data.get("file_id")==null?NULL:data.get("file_id");			 
+			 String file_name=data.get("file_name")==null?NULL:data.get("file_name");			 
 		
 			 
 			 String key=cli_id+"~"+cli_hdr+"~"+intf_type+"~"+country+"~"+sms_rate+"~"+dlt_rate+"~"+billing_currency+"~"+billing_sms_rate+"~"+billing_add_fixed_rate+"~"+campaign_id+"~"+campaign_name+"~"+msg_tag+"~"+msg_tag1+"~"+msg_tag2+"~"+msg_tag3+"~"+msg_tag4+"~"+msg_tag5+"~"+file_id+"~"+file_name;

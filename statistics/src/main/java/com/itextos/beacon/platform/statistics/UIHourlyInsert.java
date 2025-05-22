@@ -21,6 +21,8 @@ import com.itextos.beacon.mysqlimport.DBConnection;
 
 public class UIHourlyInsert {
 
+	static String NULL="##NULL##";
+
 	public static void doProcess(Map<String,Map<String,String>> cli_id_infomap,Map<String,String> carrier_infomap) {
 		
 		long start=System.currentTimeMillis();
@@ -279,23 +281,41 @@ public class UIHourlyInsert {
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata, final PreparedStatement pstmt) {
 
     	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-    
+
 
 		hourlyStatisticsdata.forEach((key,datedata)->{
 			
 			StringTokenizer st=new StringTokenizer(key,"~");
 
 			String cli_id=st.nextToken();
-			String cli_hdr=st.nextToken();
-			String intf_type=st.nextToken();
-			String country=st.nextToken();
-			String sms_rate=st.nextToken();
-			String dlt_rate=st.nextToken();
-			String billing_currency=st.nextToken();
-			String billing_sms_rate=st.nextToken();
-			String billing_add_fixed_rate=st.nextToken();
-			String campaign_id=st.nextToken();
-			String campaign_name=st.nextToken();
+			String temp=st.nextToken();
+			String cli_hdr=temp.equals(NULL)?null:temp;
+			temp=st.nextToken();
+			String intf_type=temp.equals(NULL)?null:temp;
+
+			temp=st.nextToken();
+			String country=temp.equals(NULL)?null:temp;
+
+			temp=st.nextToken();
+			 String sms_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String dlt_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_currency=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_sms_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_add_fixed_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String campaign_id=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String campaign_name=temp.equals(NULL)?null:temp;
 
 			
 				datedata.forEach((datestring,data)->{
@@ -410,15 +430,30 @@ public class UIHourlyInsert {
 			StringTokenizer st=new StringTokenizer(key,"~");
 
 			String cli_id=st.nextToken();
-			String cli_hdr=st.nextToken();
-			String intf_type=st.nextToken();
-			String country=st.nextToken();
-			String sms_rate=st.nextToken();
-			String dlt_rate=st.nextToken();
-			String billing_currency=st.nextToken();
-			String billing_sms_rate=st.nextToken();
-			String billing_add_fixed_rate=st.nextToken();
-		
+			String temp=st.nextToken();
+			String cli_hdr=temp.equals(NULL)?null:temp;
+			temp=st.nextToken();
+			String intf_type=temp.equals(NULL)?null:temp;
+
+			temp=st.nextToken();
+			String country=temp.equals(NULL)?null:temp;
+
+			temp=st.nextToken();
+			 String sms_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String dlt_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_currency=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_sms_rate=temp.equals(NULL)?null:temp;
+
+			 temp=st.nextToken();
+			 String billing_add_fixed_rate=temp.equals(NULL)?null:temp;
+
+			
 	    	
 			
 				datedata.forEach((datestring,data)->{

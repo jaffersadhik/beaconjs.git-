@@ -29,6 +29,8 @@ import com.itextos.beacon.platform.topic2table.dbinfo.TableInserterInfoCollectio
 
 public class LatencySubmission {
 
+	static String NULL="##NULL##";
+
 	private static String SQL="select date(recv_date) recv_date,cli_id,cli_hdr,country,count(*) cnt,"
 			+ "SUM(case when sub_lat_sla_in_millis <= 5000 then 1 else 0 end) as LTE_5_SECOND,"
 			+ "SUM(case when sub_lat_sla_in_millis >5000 and sub_lat_sla_in_millis <= 10000 then 1 else 0 end) as LTE_10_SECOND,"
@@ -234,9 +236,9 @@ public static  Map<String,Map<String,Map<String,String>>> getHourlyData(Map<Stri
 			 String cli_id=data.get("cli_id");
 			 
 			 
-			 String cli_hdr=data.get("cli_hdr")==null?" ":data.get("cli_hdr");
+			 String cli_hdr=data.get("cli_hdr")==null?NULL:data.get("cli_hdr");
 
-			 String country=data.get("country")==null?" ":data.get("country");
+			 String country=data.get("country")==null?NULL:data.get("country");
 
 
 			 
@@ -463,7 +465,13 @@ private static void add(Map<String, Map<String, String>> cli_id_infomap,Map<Stri
 							pstmt.setDate(2, receiveDate);
 
 							pstmt.setLong(3, Long.parseLong(cli_id));								
-							pstmt.setString(4,cli_hdr);
+							if(NULL.equals(cli_hdr)) {
+								pstmt.setString(4,null);
+
+							}else {
+								pstmt.setString(4,cli_hdr);
+
+							}
 							pstmt.setString(5, country);
 							
 							pstmt.setLong(6, Long.parseLong(data.get("cnt")));										
