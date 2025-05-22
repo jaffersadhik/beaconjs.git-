@@ -25,7 +25,7 @@ public class CampaignHourlyQuery {
 
 	
 	
-	static String SQL="select a.cli_id cli_id,a.cli_hdr,DATE(a.recv_date) recv_date ,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.intf_type intf_type,a.country country,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5,count(*) cnt from billing_202505.submission_20250505 a  LEFT OUTER JOIN   billing_202505.deliveries_20250505 b  ON a.msg_id=b.msg_id where campaign_name is not null group by a.cli_id,a.cli_hdr,DATE(a.recv_date) ,a.sub_cli_sts_code  ,b.dn_ori_sts_code  ,a.intf_type ,a.country ,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5";
+	static String SQL="select a.cli_id cli_id,a.cli_hdr,DATE(a.recv_date) recv_date ,a.sub_cli_sts_code sub_cli_sts_code ,b.dn_ori_sts_code dn_ori_sts_code ,a.intf_type intf_type,a.country country,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5,count(*) cnt from billing_{0}.submission_{1} a  LEFT OUTER JOIN   billing_{2}.deliveries_{3} b  ON a.msg_id=b.msg_id where campaign_name is not null group by a.cli_id,a.cli_hdr,DATE(a.recv_date) ,a.sub_cli_sts_code  ,b.dn_ori_sts_code  ,a.intf_type ,a.country ,a.sms_rate,a.dlt_rate,a.billing_currency,a.billing_sms_rate,a.billing_add_fixed_rate,campaign_id,campaign_name,a.file_id,a.file_name,msg_tag,msg_tag1,msg_tag2,msg_tag3,msg_tag4,msg_tag5";
 	
 	
 	
