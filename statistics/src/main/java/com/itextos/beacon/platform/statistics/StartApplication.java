@@ -13,6 +13,7 @@ public class StartApplication {
         LatencySubmission.doProcess(cli_id_infomap, carrier_infomap);
         LatencyTelco.doProcess(cli_id_infomap, carrier_infomap);
         UIHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+        CampaignHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
 
 	}
 }
