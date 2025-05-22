@@ -240,7 +240,7 @@ public static  Map<String,Map<String,Map<String,String>>> getHourlyData(Map<Stri
 			 
 			 String cli_hdr=data.get("cli_hdr")==null?NULL:data.get("cli_hdr");
 
-			 String country=data.get("country")==null?NULL:data.get("country");
+			 String country=data.get("country")==null||data.get("country").trim().length()<1?NULL:data.get("country");
 
 
 			 
