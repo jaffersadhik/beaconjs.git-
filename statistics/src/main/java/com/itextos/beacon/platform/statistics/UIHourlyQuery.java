@@ -473,7 +473,7 @@ public class UIHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(!sub_cli_sts_code.equals("400")) {
+		 if(sub_cli_sts_code==null||!sub_cli_sts_code.equals("400")) {
 		 tablerecord.put("platformreject", ""+(cnt+lReceived));
 		 }
 	}

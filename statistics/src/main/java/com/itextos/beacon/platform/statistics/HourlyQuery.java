@@ -404,9 +404,9 @@ public class HourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(!sub_cli_sts_code.equals("400")) {
-		 tablerecord.put("platformreject", ""+(cnt+lReceived));
-		 }
+		 if(sub_cli_sts_code==null||!sub_cli_sts_code.equals("400")) {
+			 tablerecord.put("platformreject", ""+(cnt+lReceived));
+			 }
 	}
 
 	private static  void incrementSubmit(Map<String, String> tablerecord, String sub_cli_sts_code,long cnt) {
