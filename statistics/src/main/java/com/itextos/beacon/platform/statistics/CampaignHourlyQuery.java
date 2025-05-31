@@ -522,9 +522,10 @@ public class CampaignHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(sub_cli_sts_code.equals("400")) {
-		 tablerecord.put("submit", ""+(cnt+lReceived));
-		 }
+		 if(sub_cli_sts_code!=null&&sub_cli_sts_code.equals("400")) {
+			 tablerecord.put("submit", ""+(cnt+lReceived));
+			 }
+		
 	}
 
 	private static  void incrementReceived(Map<String, String> tablerecord,long cnt) {
