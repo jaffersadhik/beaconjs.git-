@@ -411,7 +411,7 @@ public class CampaignHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(dn_ori_sts_code==null ||dn_ori_sts_code.trim().length()<1){
+		 if(dn_ori_sts_code==null ||dn_ori_sts_code.trim().length()<1||"##NULL##".equals(dn_ori_sts_code)){
 		 tablerecord.put("nulldn", ""+(cnt+lReceived));
 		 }
 			
@@ -434,14 +434,19 @@ public class CampaignHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(dn_ori_sts_code!=null&&dn_ori_sts_code.trim().length()>0) {
+ if(dn_ori_sts_code!=null&&dn_ori_sts_code.trim().length()>0) {
 			 
+			 if("##NULL##".equals(dn_ori_sts_code)) {
+				 
+			 }else {
 			 int d=Integer.parseInt(dn_ori_sts_code);
 			 
 			 if(d>600) {
 				 	tablerecord.put("failed", ""+(cnt+lReceived));
 			 }
+			 }
 		 }
+		 
 			
 			
 	}
