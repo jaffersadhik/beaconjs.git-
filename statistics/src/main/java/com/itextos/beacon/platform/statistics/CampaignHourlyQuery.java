@@ -360,9 +360,9 @@ public class CampaignHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(!sub_cli_sts_code.equals("445")) {
-		 tablerecord.put("outofcredit", ""+(cnt+lReceived));
-		 }
+		 if(sub_cli_sts_code!=null&&sub_cli_sts_code.equals("445")) {
+			 tablerecord.put("outofcredit", ""+(cnt+lReceived));
+			 }
 	
 		
 	}
