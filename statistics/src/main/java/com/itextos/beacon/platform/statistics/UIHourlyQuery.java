@@ -476,7 +476,7 @@ public class UIHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-	 if(sub_cli_sts_code!=null||!sub_cli_sts_code.equals("400")||!sub_cli_sts_code.equals("600")) {
+		 if(sub_cli_sts_code!=null&&!sub_cli_sts_code.equals("400")&&!sub_cli_sts_code.equals("600")) {
 			 
 			 
 			 int d=Integer.parseInt(sub_cli_sts_code);
@@ -485,6 +485,7 @@ public class UIHourlyQuery {
 				 	tablerecord.put("platformreject", ""+(cnt+lReceived));
 			 }
 			 }
+
 	}
 
 	private static  void incrementSubmit(Map<String, String> tablerecord, String sub_cli_sts_code,long cnt) {

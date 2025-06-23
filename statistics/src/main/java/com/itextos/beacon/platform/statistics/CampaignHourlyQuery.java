@@ -508,7 +508,7 @@ public class CampaignHourlyQuery {
 		 
 		 long lReceived=Long.parseLong(received);
 		 
-		 if(sub_cli_sts_code!=null||!sub_cli_sts_code.equals("400")||!sub_cli_sts_code.equals("600")) {
+		 if(sub_cli_sts_code!=null&&!sub_cli_sts_code.equals("400")&&!sub_cli_sts_code.equals("600")) {
 			 
 			 
 			 int d=Integer.parseInt(sub_cli_sts_code);
