@@ -11,7 +11,8 @@ EXPOSE 20000/tcp
 
 COPY ./target/script /script
 
-COPY ./target/postgresstatistics/postgresstatistics.properties /postgresstatistics.properties
+COPY ./target/postgresstatistics/do1/postgresstatistics_primary.properties /do1_postgresstatistics_primary.properties
+COPY ./target/postgresstatistics/do1/postgresstatistics_secondary.properties /do1_postgresstatistics_secondary.properties
 
 
 COPY ./target/importdbconfig/default.properties /import_default.properties

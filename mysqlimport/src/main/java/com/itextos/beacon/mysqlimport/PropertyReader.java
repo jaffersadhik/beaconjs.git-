@@ -76,10 +76,17 @@ public class PropertyReader {
    }
    
    
-   public static Properties getPostgresStatisticsProperty() {
+   public static Properties getPostgresStatisticsPropertyPrimary() {
 	   	
-	   	return getProperty("/postgresstatistics.properties");
+	   	return getProperty("/"+System.getenv("")+"_postgresstatistics_primary.properties");
+   }
+   
+   
+   public static Properties getPostgresStatisticsPropertySecondary() {
+	   	
+	   	return getProperty("/"+System.getenv("")+"_postgresstatistics_secondary.properties");
 	   }
+  
    
    public static Properties getClientHandoverProperty() {
    	

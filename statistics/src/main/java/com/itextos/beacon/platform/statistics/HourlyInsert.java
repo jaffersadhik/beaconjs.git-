@@ -40,14 +40,19 @@ public class HourlyInsert {
 
 		start=System.currentTimeMillis();
 		
-		doHourWiseInsert(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+		doHourWiseInsertPrimary(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+		
+		doHourWiseInsertSecondary(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+
 		
 		Map<String,Map<String,Map<String,String>>> daywiseStatisticsdata = getDaywiseStatisticsdata(hourlyStatisticsdata,carrier_infomap);
 
 		StatisticsLog.log("daywiseStatisticsdata : size "+daywiseStatisticsdata.size());
 
-		doDateWiseInsert(cli_id_infomap,dateset,daywiseStatisticsdata);
+		doDateWiseInsertPrimary(cli_id_infomap,dateset,daywiseStatisticsdata);
 		
+		doDateWiseInsertSecondary(cli_id_infomap,dateset,daywiseStatisticsdata);
+
 		end=System.currentTimeMillis();
 		
 		StatisticsLog.log("Total Time Insert : "+((end-start)/1000)+" seconds");
@@ -55,7 +60,7 @@ public class HourlyInsert {
 		
 	}
 
-	private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
+	private static void doDateWiseInsertPrimary(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
 			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
@@ -65,7 +70,7 @@ public class HourlyInsert {
        	Connection con =null;
 		
 		try {
-			con=DBConnection.getConnectionPostgresStatistics();
+			con=DBConnection.getConnectionPostgresStatisticsPrimary();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.daily_traffic_report");
 			insert(con,cli_id_infomap,daywiseStatisticsdata);
@@ -82,6 +87,34 @@ public class HourlyInsert {
 		
 	}
 
+	
+	private static void doDateWiseInsertSecondary(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
+			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
+		
+		
+
+		
+		
+       	Connection con =null;
+		
+		try {
+			con=DBConnection.getConnectionPostgresStatisticsSecondary();
+			con.setAutoCommit(false);
+			delete(con,dateset,"summary.daily_traffic_report");
+			insert(con,cli_id_infomap,daywiseStatisticsdata);
+			con.commit();
+			
+		}catch(Exception e) {
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+		}finally {
+            CommonUtility.closeConnection(con);
+     
+        }
+		
+	
+		
+	}
+	
 	private static void insert(Connection con, Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
@@ -258,7 +291,7 @@ public class HourlyInsert {
 		HourlyQuery.resetdnpercentage(data);
 	}
 
-	private static void doHourWiseInsert(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
+	private static void doHourWiseInsertPrimary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, Map<String, String>>>> hourlyStatisticsdata) {
 		
@@ -266,7 +299,7 @@ public class HourlyInsert {
        	Connection con =null;
 		
 		try {
-			con=DBConnection.getConnectionPostgresStatistics();
+			con=DBConnection.getConnectionPostgresStatisticsPrimary();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.hourly_traffic_report");
 			insert(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
@@ -281,6 +314,29 @@ public class HourlyInsert {
 		
 	}
 
+	private static void doHourWiseInsertSecondary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
+			Map<String, String> carrier_infomap,
+			Map<String, Map<String, Map<String, Map<String, String>>>> hourlyStatisticsdata) {
+		
+		
+       	Connection con =null;
+		
+		try {
+			con=DBConnection.getConnectionPostgresStatisticsSecondary();
+			con.setAutoCommit(false);
+			delete(con,dateset,"summary.hourly_traffic_report");
+			insert(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			con.commit();
+			
+		}catch(Exception e) {
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+		}finally {
+            CommonUtility.closeConnection(con);
+     
+        }
+		
+	}
+	
 	private static void insert(Connection con, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, Map<String, String>>>> hourlyStatisticsdata) {

@@ -313,8 +313,9 @@ public static void doProcess(Map<String,Map<String,String>> cli_id_infomap,Map<S
 
 		StatisticsLog.log("datewiseStatisticsdata : size "+datewiseStatisticsdata.size());
 
-		doDateWiseInsert(cli_id_infomap,carrier_infomap,dateset,datewiseStatisticsdata);
-		
+		doDateWiseInsertPrimary(cli_id_infomap,carrier_infomap,dateset,datewiseStatisticsdata);
+		doDateWiseInsertSecondary(cli_id_infomap,carrier_infomap,dateset,datewiseStatisticsdata);
+
 		end=System.currentTimeMillis();
 		
 		StatisticsLog.log("Total Time Insert : "+((end-start)/1000)+" seconds");
@@ -323,7 +324,7 @@ public static void doProcess(Map<String,Map<String,String>> cli_id_infomap,Map<S
 	}
 
 
-private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_infomap,Map<String,String> carrier_infomap, Set<String> dateset,
+private static void doDateWiseInsertPrimary(Map<String, Map<String, String>> cli_id_infomap,Map<String,String> carrier_infomap, Set<String> dateset,
 		Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 	
 	
@@ -333,7 +334,7 @@ private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_inf
    	Connection con =null;
 	
 	try {
-		con=DBConnection.getConnectionPostgresStatistics();
+		con=DBConnection.getConnectionPostgresStatisticsPrimary();
 		con.setAutoCommit(false);
 		delete(con,dateset,"summary.ui_telco_latency_report");
 		insert(con,cli_id_infomap,carrier_infomap,daywiseStatisticsdata);
@@ -349,6 +350,34 @@ private static void doDateWiseInsert(Map<String, Map<String, String>> cli_id_inf
 
 	
 }
+
+private static void doDateWiseInsertSecondary(Map<String, Map<String, String>> cli_id_infomap,Map<String,String> carrier_infomap, Set<String> dateset,
+		Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
+	
+	
+
+	
+	
+   	Connection con =null;
+	
+	try {
+		con=DBConnection.getConnectionPostgresStatisticsSecondary();
+		con.setAutoCommit(false);
+		delete(con,dateset,"summary.ui_telco_latency_report");
+		insert(con,cli_id_infomap,carrier_infomap,daywiseStatisticsdata);
+		con.commit();
+		
+	}catch(Exception e) {
+		StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+	}finally {
+        CommonUtility.closeConnection(con);
+ 
+    }
+	
+
+	
+}
+
 
 
 private static void delete(Connection con, Set<String> dateset,String tablename) {

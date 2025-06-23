@@ -129,9 +129,15 @@ public class DBConnection {
    	return getConnection(PropertyReader.getConfigurationProperty());
    }
    
-   public static Connection getConnectionPostgresStatistics() {
+   public static Connection getConnectionPostgresStatisticsPrimary() {
 		
-	   	return getConnection(PropertyReader.getPostgresStatisticsProperty());
+	   	return getConnection(PropertyReader.getPostgresStatisticsPropertyPrimary());
+
+	}
+   
+   public static Connection getConnectionPostgresStatisticsSecondary() {
+		
+	   	return getConnection(PropertyReader.getPostgresStatisticsPropertySecondary());
 
 	}
    

@@ -42,14 +42,16 @@ public class UIHourlyInsert {
 
 		start=System.currentTimeMillis();
 		
-		doMixTrafficInsert(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
-		
+		doMixTrafficInsertPrimary(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+		doMixTrafficInsertSecondary(dateset,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+
 		Map<String,Map<String,Map<String,String>>> daywiseStatisticsdata = getTraffic(hourlyStatisticsdata,carrier_infomap);
 
 		StatisticsLog.log("daywiseStatisticsdata : size "+daywiseStatisticsdata.size());
 
-		doTrafficInsert(cli_id_infomap,dateset,daywiseStatisticsdata);
-		
+		doTrafficInsertPrimary(cli_id_infomap,dateset,daywiseStatisticsdata);
+		doTrafficInsertSecondary(cli_id_infomap,dateset,daywiseStatisticsdata);
+
 		end=System.currentTimeMillis();
 		
 		StatisticsLog.log("Total Time Insert : "+((end-start)/1000)+" seconds");
@@ -57,7 +59,7 @@ public class UIHourlyInsert {
 		
 	}
 
-	private static void doTrafficInsert(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
+	private static void doTrafficInsertPrimary(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
 			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
@@ -67,7 +69,7 @@ public class UIHourlyInsert {
        	Connection con =null;
 		
 		try {
-			con=DBConnection.getConnectionPostgresStatistics();
+			con=DBConnection.getConnectionPostgresStatisticsPrimary();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_report");
 			insertTraffic(con,cli_id_infomap,daywiseStatisticsdata);
@@ -84,6 +86,35 @@ public class UIHourlyInsert {
 		
 	}
 
+	
+	private static void doTrafficInsertSecondary(Map<String, Map<String, String>> cli_id_infomap, Set<String> dateset,
+			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
+		
+		
+
+		
+		
+       	Connection con =null;
+		
+		try {
+			con=DBConnection.getConnectionPostgresStatisticsSecondary();
+			con.setAutoCommit(false);
+			delete(con,dateset,"summary.ui_traffic_report");
+			insertTraffic(con,cli_id_infomap,daywiseStatisticsdata);
+			con.commit();
+			
+		}catch(Exception e) {
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+		}finally {
+            CommonUtility.closeConnection(con);
+     
+        }
+		
+	
+		
+	}
+	
+	
 	private static void insertTraffic(Connection con, Map<String, Map<String, String>> cli_id_infomap, Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 	  	String sql="insert into summary.ui_traffic_report(id,recv_date,cli_id,cli_hdr,"
@@ -197,7 +228,7 @@ public class UIHourlyInsert {
 		HourlyQuery.resetdnpercentage(data);
 	}
 
-	private static void doMixTrafficInsert(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
+	private static void doMixTrafficInsertPrimary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		
@@ -205,7 +236,54 @@ public class UIHourlyInsert {
        	Connection con =null;
 		
 		try {
-			con=DBConnection.getConnectionPostgresStatistics();
+			con=DBConnection.getConnectionPostgresStatisticsPrimary();
+			con.setAutoCommit(false);
+			delete(con,dateset,"summary.ui_traffic_mix_report");
+			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			con.commit();
+			
+		}catch(Exception e) {
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+		}finally {
+            CommonUtility.closeConnection(con);
+     
+        }
+		
+	}
+	
+	
+	private static void doMixTrafficInsertSecondary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
+			Map<String, String> carrier_infomap,
+			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
+		
+		
+       	Connection con =null;
+		
+		try {
+			con=DBConnection.getConnectionPostgresStatisticsSecondary();
+			con.setAutoCommit(false);
+			delete(con,dateset,"summary.ui_traffic_mix_report");
+			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			con.commit();
+			
+		}catch(Exception e) {
+			StatisticsLog.log("error : "+ErrorMessage.getStackTraceAsString(e));
+		}finally {
+            CommonUtility.closeConnection(con);
+     
+        }
+		
+	}
+	
+	private static void doMixTrafficInsertS(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
+			Map<String, String> carrier_infomap,
+			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
+		
+		
+       	Connection con =null;
+		
+		try {
+			con=DBConnection.getConnectionPostgresStatisticsSecondary();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_mix_report");
 			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
