@@ -78,13 +78,13 @@ public class PropertyReader {
    
    public static Properties getPostgresStatisticsPropertyPrimary() {
 	   	
-	   	return getProperty("/"+System.getenv("")+"_postgresstatistics_primary.properties");
+	   	return getProperty("/"+System.getenv("profile")+"_postgresstatistics_primary.properties");
    }
    
    
    public static Properties getPostgresStatisticsPropertySecondary() {
 	   	
-	   	return getProperty("/"+System.getenv("")+"_postgresstatistics_secondary.properties");
+	   	return getProperty("/"+System.getenv("profile")+"_postgresstatistics_secondary.properties");
 	   }
   
    
