@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -197,6 +198,8 @@ public class CampaignHourlyInsert {
 	private static void doMixTrafficInsertPrimary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
 		
        	Connection con =null;
@@ -206,6 +209,8 @@ public class CampaignHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_camp_report");
 			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			delete(con,todayset,"summary.ui_camp_report");
+
 			con.commit();
 			
 		}catch(Exception e) {
@@ -221,6 +226,8 @@ public class CampaignHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
        	Connection con =null;
 		
@@ -229,6 +236,8 @@ public class CampaignHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_camp_report");
 			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			delete(con,todayset,"summary.ui_camp_report");
+
 			con.commit();
 			
 		}catch(Exception e) {

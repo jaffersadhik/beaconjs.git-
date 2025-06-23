@@ -31,7 +31,7 @@ public class HourlyQuery {
 	
 	
 	
-	private static String getYesterdayQuery(int days) {
+	public static String getYesterdayQuery(int days) {
 		
 		
 		String formattedSQL2 = MessageFormat.format(SQL, getYesderdayMonthString(days), getYesderdayString(days), getYesderdayMonthString(days), getYesderdayString(days));

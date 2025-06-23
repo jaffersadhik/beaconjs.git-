@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -65,15 +66,17 @@ public class HourlyInsert {
 		
 		
 
-		
-		
-       	Connection con =null;
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		Connection con =null;
 		
 		try {
 			con=DBConnection.getConnectionPostgresStatisticsPrimary();
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.daily_traffic_report");
 			insert(con,cli_id_infomap,daywiseStatisticsdata);
+			delete(con,todayset,"summary.daily_traffic_report");
+
 			con.commit();
 			
 		}catch(Exception e) {
@@ -93,7 +96,8 @@ public class HourlyInsert {
 		
 		
 
-		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
        	Connection con =null;
 		
@@ -102,6 +106,8 @@ public class HourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.daily_traffic_report");
 			insert(con,cli_id_infomap,daywiseStatisticsdata);
+			delete(con,todayset,"summary.daily_traffic_report");
+
 			con.commit();
 			
 		}catch(Exception e) {

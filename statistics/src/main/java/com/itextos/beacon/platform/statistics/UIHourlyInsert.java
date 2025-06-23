@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -63,7 +64,8 @@ public class UIHourlyInsert {
 			Map<String, Map<String, Map<String, String>>> daywiseStatisticsdata) {
 		
 		
-
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
 		
        	Connection con =null;
@@ -73,6 +75,8 @@ public class UIHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_report");
 			insertTraffic(con,cli_id_infomap,daywiseStatisticsdata);
+			delete(con,todayset,"summary.ui_traffic_report");
+
 			con.commit();
 			
 		}catch(Exception e) {
@@ -92,7 +96,8 @@ public class UIHourlyInsert {
 		
 		
 
-		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
        	Connection con =null;
 		
@@ -101,6 +106,8 @@ public class UIHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_report");
 			insertTraffic(con,cli_id_infomap,daywiseStatisticsdata);
+			delete(con,todayset,"summary.ui_traffic_report");
+
 			con.commit();
 			
 		}catch(Exception e) {
@@ -232,7 +239,8 @@ public class UIHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		
-		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
        	Connection con =null;
 		
 		try {
@@ -240,6 +248,8 @@ public class UIHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_mix_report");
 			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			delete(con,todayset,"summary.ui_traffic_mix_report");
+
 			con.commit();
 			
 		}catch(Exception e) {
@@ -255,7 +265,8 @@ public class UIHourlyInsert {
 	private static void doMixTrafficInsertSecondary(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
-		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
        	Connection con =null;
 		
@@ -278,7 +289,8 @@ public class UIHourlyInsert {
 	private static void doMixTrafficInsertS(Set<String> dateset, Map<String, Map<String, String>> cli_id_infomap,
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
-		
+		Set todayset=new HashSet();
+		todayset.add(HourlyQuery.getYesterdayQuery(0));
 		
        	Connection con =null;
 		
@@ -287,6 +299,8 @@ public class UIHourlyInsert {
 			con.setAutoCommit(false);
 			delete(con,dateset,"summary.ui_traffic_mix_report");
 			insertMixTraffic(con,cli_id_infomap,carrier_infomap,hourlyStatisticsdata);
+			delete(con,todayset,"summary.ui_traffic_mix_report");
+
 			con.commit();
 			
 		}catch(Exception e) {

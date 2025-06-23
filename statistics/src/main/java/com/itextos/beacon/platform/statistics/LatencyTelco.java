@@ -329,7 +329,8 @@ private static void doDateWiseInsertPrimary(Map<String, Map<String, String>> cli
 	
 	
 
-	
+	Set todayset=new HashSet();
+	todayset.add(HourlyQuery.getYesterdayQuery(0));
 	
    	Connection con =null;
 	
@@ -338,6 +339,8 @@ private static void doDateWiseInsertPrimary(Map<String, Map<String, String>> cli
 		con.setAutoCommit(false);
 		delete(con,dateset,"summary.ui_telco_latency_report");
 		insert(con,cli_id_infomap,carrier_infomap,daywiseStatisticsdata);
+		delete(con,todayset,"summary.ui_telco_latency_report");
+
 		con.commit();
 		
 	}catch(Exception e) {
@@ -357,7 +360,8 @@ private static void doDateWiseInsertSecondary(Map<String, Map<String, String>> c
 	
 
 	
-	
+	Set todayset=new HashSet();
+	todayset.add(HourlyQuery.getYesterdayQuery(0));
    	Connection con =null;
 	
 	try {
@@ -365,6 +369,8 @@ private static void doDateWiseInsertSecondary(Map<String, Map<String, String>> c
 		con.setAutoCommit(false);
 		delete(con,dateset,"summary.ui_telco_latency_report");
 		insert(con,cli_id_infomap,carrier_infomap,daywiseStatisticsdata);
+		delete(con,todayset,"summary.ui_telco_latency_report");
+
 		con.commit();
 		
 	}catch(Exception e) {
