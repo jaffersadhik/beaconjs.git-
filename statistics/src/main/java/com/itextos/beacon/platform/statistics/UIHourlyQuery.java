@@ -226,7 +226,7 @@ public class UIHourlyQuery {
 			 String cli_id=data.get("cli_id");	
 			 String cli_hdr=data.get("cli_hdr")==null?NULL:data.get("cli_hdr");			
 			 String recv_date=data.get("recv_date");		 
-			 String sub_cli_sts_code=data.get("sub_cli_sts_code")==null?"0":data.get("dn_ori_sts_code");			 
+			 String sub_cli_sts_code=data.get("sub_cli_sts_code")==null?"0":data.get("sub_cli_sts_code");			 
 			 String dn_ori_sts_code=data.get("dn_ori_sts_code")==null?NULL:data.get("dn_ori_sts_code");			 
 			 String intf_type=data.get("intf_type")==null?NULL:data.get("intf_type");			 
 			 String country=data.get("country")==null?NULL:data.get("country");			 
