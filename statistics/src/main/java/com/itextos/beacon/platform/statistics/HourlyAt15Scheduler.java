@@ -2,6 +2,7 @@ package com.itextos.beacon.platform.statistics;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,9 +14,18 @@ public class HourlyAt15Scheduler {
         TimerTask task = new TimerTask() {
             public void run() {
                 System.out.println("Task running at: " + new Date());
+                long start=System.currentTimeMillis();
+            	Map<String,Map<String,String>> cli_id_infomap=MasterData.getCli_idInfoMap();
+        		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
+                HourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+                LatencySubmission.doProcess(cli_id_infomap, carrier_infomap);
+                LatencyTelco.doProcess(cli_id_infomap, carrier_infomap);
+                UIHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+                CampaignHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+
+                long end=System.currentTimeMillis();
                 
-          //      HourlyInsert.doProcess();
-                // Your task logic here
+                StatisticsTimeLog.log(new Date()+ "Total time Taken : "+(end-start)+" ms");
             }
         };
 
