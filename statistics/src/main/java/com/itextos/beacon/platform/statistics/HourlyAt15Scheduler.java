@@ -10,23 +10,14 @@ public class HourlyAt15Scheduler {
 
     public static void start() {
         Timer timer = new Timer();
-
+        startDataPopulate();
         TimerTask task = new TimerTask() {
             public void run() {
                 System.out.println("Task running at: " + new Date());
-                long start=System.currentTimeMillis();
-            	Map<String,Map<String,String>> cli_id_infomap=MasterData.getCli_idInfoMap();
-        		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
-                HourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
-                LatencySubmission.doProcess(cli_id_infomap, carrier_infomap);
-                LatencyTelco.doProcess(cli_id_infomap, carrier_infomap);
-                UIHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
-                CampaignHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
-
-                long end=System.currentTimeMillis();
-                
-                StatisticsTimeLog.log(new Date()+ "Total time Taken : "+(end-start)+" ms");
+               startDataPopulate();
             }
+
+		
         };
 
         long delay = getInitialDelayToNext15thMinute();
@@ -34,7 +25,21 @@ public class HourlyAt15Scheduler {
 
         timer.scheduleAtFixedRate(task, delay, period);
     }
+	private static void startDataPopulate() {
+		 long start=System.currentTimeMillis();
+       	Map<String,Map<String,String>> cli_id_infomap=MasterData.getCli_idInfoMap();
+   		Map<String,String> carrier_infomap=MasterData.getCarrierInfoMap();
+           HourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+           LatencySubmission.doProcess(cli_id_infomap, carrier_infomap);
+           LatencyTelco.doProcess(cli_id_infomap, carrier_infomap);
+           UIHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
+           CampaignHourlyInsert.doProcess(cli_id_infomap,carrier_infomap);
 
+           long end=System.currentTimeMillis();
+           
+           StatisticsTimeLog.log(new Date()+ "Total time Taken : "+(end-start)+" ms");
+		
+	}
     // Calculate delay until the next hh:15:00
     private static long getInitialDelayToNext15thMinute() {
         Calendar nextRun = Calendar.getInstance();
