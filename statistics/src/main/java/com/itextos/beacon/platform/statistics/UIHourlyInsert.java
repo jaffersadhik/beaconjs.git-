@@ -65,7 +65,7 @@ public class UIHourlyInsert {
 		
 		
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
 		
        	Connection con =null;
@@ -97,7 +97,7 @@ public class UIHourlyInsert {
 		
 
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
        	Connection con =null;
 		
@@ -240,7 +240,7 @@ public class UIHourlyInsert {
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
        	Connection con =null;
 		
 		try {
@@ -266,7 +266,7 @@ public class UIHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
        	Connection con =null;
 		
@@ -290,7 +290,7 @@ public class UIHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
        	Connection con =null;
 		

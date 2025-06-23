@@ -330,7 +330,7 @@ private static void doDateWiseInsertPrimary(Map<String, Map<String, String>> cli
 	
 
 	Set todayset=new HashSet();
-	todayset.add(HourlyQuery.getYesterdayQuery(0));
+	todayset.add(HourlyQuery.getTodayStringDate());
 	
    	Connection con =null;
 	
@@ -361,7 +361,7 @@ private static void doDateWiseInsertSecondary(Map<String, Map<String, String>> c
 
 	
 	Set todayset=new HashSet();
-	todayset.add(HourlyQuery.getYesterdayQuery(0));
+	todayset.add(HourlyQuery.getTodayStringDate());
    	Connection con =null;
 	
 	try {

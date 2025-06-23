@@ -199,7 +199,7 @@ public class CampaignHourlyInsert {
 			Map<String, String> carrier_infomap,
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
 		
        	Connection con =null;
@@ -227,7 +227,7 @@ public class CampaignHourlyInsert {
 			Map<String, Map<String, Map<String, String>>> hourlyStatisticsdata) {
 		
 		Set todayset=new HashSet();
-		todayset.add(HourlyQuery.getYesterdayQuery(0));
+		todayset.add(HourlyQuery.getTodayStringDate());
 		
        	Connection con =null;
 		
