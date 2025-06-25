@@ -213,7 +213,7 @@ public static  Map<String,Map<String,Map<String,String>>> getHourlyData(Map<Stri
 		
 		StatisticsLog.log("statisticsdays : "+statisticsdays);
 
-		for(int i=0;i<statisticsdays;i++) {
+		for(int i=1;i<statisticsdays;i++) {
 			
 			StatisticsLog.log(getYesterdayQuery(i));
 			setHourlyData(result,carrier_infomap,getYesterdayQuery(i));
