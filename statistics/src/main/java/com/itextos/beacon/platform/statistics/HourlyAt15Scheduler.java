@@ -1,5 +1,6 @@
 package com.itextos.beacon.platform.statistics;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -13,8 +14,13 @@ public class HourlyAt15Scheduler {
         startDataPopulate();
         TimerTask task = new TimerTask() {
             public void run() {
+                int currentHour = LocalDateTime.now().getHour();
+
+                if(currentHour<6) {
                 System.out.println("Task running at: " + new Date());
-               startDataPopulate();
+
+                	startDataPopulate();
+                }
             }
 
 		
