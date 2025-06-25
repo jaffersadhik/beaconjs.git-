@@ -482,10 +482,18 @@ public class Kafka2ESJSONUtil
 
         if (!"".equals(colValue))
         {
-            if (colValue.equals(Kafka2ESConstants.delStsCodeSuccess))
+            if (colValue.equals(Kafka2ESConstants.delStsCodeSuccess)) {
                 fmsgJSON.put("dn_success", "1");
-            else
-                fmsgJSON.put("dn_failed", "1");
+            }else {
+            	try {
+            		int errorcode=Integer.parseInt(colValue);
+            		if(errorcode>600) {
+            			fmsgJSON.put("dn_failed", "1");
+            		}
+            	}catch(Exception e) {
+            		
+            	}
+            }
             isEmptyJSON = false;
         }
 
